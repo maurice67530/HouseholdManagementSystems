@@ -45,6 +45,9 @@ Partial Class GroceryItemvb
         Me.btnDashboard = New System.Windows.Forms.Button()
         Me.Label10 = New System.Windows.Forms.Label()
         Me.btnClear = New System.Windows.Forms.Button()
+        Me.Button1 = New System.Windows.Forms.Button()
+        Me.Button2 = New System.Windows.Forms.Button()
+        Me.Button3 = New System.Windows.Forms.Button()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -194,7 +197,7 @@ Partial Class GroceryItemvb
         '
         'btnSubmit
         '
-        Me.btnSubmit.Location = New System.Drawing.Point(136, 539)
+        Me.btnSubmit.Location = New System.Drawing.Point(145, 667)
         Me.btnSubmit.Name = "btnSubmit"
         Me.btnSubmit.Size = New System.Drawing.Size(93, 42)
         Me.btnSubmit.TabIndex = 18
@@ -204,14 +207,14 @@ Partial Class GroceryItemvb
         'DataGridView1
         '
         Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DataGridView1.Location = New System.Drawing.Point(7, 396)
+        Me.DataGridView1.Location = New System.Drawing.Point(7, 420)
         Me.DataGridView1.Name = "DataGridView1"
-        Me.DataGridView1.Size = New System.Drawing.Size(454, 127)
+        Me.DataGridView1.Size = New System.Drawing.Size(826, 241)
         Me.DataGridView1.TabIndex = 19
         '
         'btnDashboard
         '
-        Me.btnDashboard.Location = New System.Drawing.Point(15, 539)
+        Me.btnDashboard.Location = New System.Drawing.Point(7, 667)
         Me.btnDashboard.Name = "btnDashboard"
         Me.btnDashboard.Size = New System.Drawing.Size(101, 42)
         Me.btnDashboard.TabIndex = 20
@@ -230,18 +233,48 @@ Partial Class GroceryItemvb
         '
         'btnClear
         '
-        Me.btnClear.Location = New System.Drawing.Point(262, 539)
+        Me.btnClear.Location = New System.Drawing.Point(277, 667)
         Me.btnClear.Name = "btnClear"
         Me.btnClear.Size = New System.Drawing.Size(88, 42)
         Me.btnClear.TabIndex = 22
         Me.btnClear.Text = "Clear"
         Me.btnClear.UseVisualStyleBackColor = True
         '
+        'Button1
+        '
+        Me.Button1.Location = New System.Drawing.Point(393, 667)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(88, 42)
+        Me.Button1.TabIndex = 23
+        Me.Button1.Text = "Edit"
+        Me.Button1.UseVisualStyleBackColor = True
+        '
+        'Button2
+        '
+        Me.Button2.Location = New System.Drawing.Point(525, 667)
+        Me.Button2.Name = "Button2"
+        Me.Button2.Size = New System.Drawing.Size(88, 42)
+        Me.Button2.TabIndex = 24
+        Me.Button2.Text = "Delete"
+        Me.Button2.UseVisualStyleBackColor = True
+        '
+        'Button3
+        '
+        Me.Button3.Location = New System.Drawing.Point(652, 667)
+        Me.Button3.Name = "Button3"
+        Me.Button3.Size = New System.Drawing.Size(88, 42)
+        Me.Button3.TabIndex = 25
+        Me.Button3.Text = "Delete"
+        Me.Button3.UseVisualStyleBackColor = True
+        '
         'GroceryItemvb
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(466, 583)
+        Me.ClientSize = New System.Drawing.Size(845, 721)
+        Me.Controls.Add(Me.Button3)
+        Me.Controls.Add(Me.Button2)
+        Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.btnClear)
         Me.Controls.Add(Me.Label10)
         Me.Controls.Add(Me.btnDashboard)
@@ -266,6 +299,7 @@ Partial Class GroceryItemvb
         Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.Label1)
         Me.Name = "GroceryItemvb"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "GroceryItemvb"
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
@@ -295,4 +329,7 @@ Partial Class GroceryItemvb
     Friend WithEvents btnDashboard As System.Windows.Forms.Button
     Friend WithEvents Label10 As System.Windows.Forms.Label
     Friend WithEvents btnClear As System.Windows.Forms.Button
+    Friend WithEvents Button1 As Windows.Forms.Button
+    Friend WithEvents Button2 As Windows.Forms.Button
+    Friend WithEvents Button3 As Windows.Forms.Button
 End Class

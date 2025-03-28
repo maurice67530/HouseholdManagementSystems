@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
@@ -12,8 +12,8 @@
     <RootNamespace>HOUSEHOLD_MANAGEMENT_SYSTEM.vb</RootNamespace>
     <AssemblyName>HOUSEHOLD MANAGEMENT SYSTEM.vb1</AssemblyName>
     <FileAlignment>512</FileAlignment>
-    <MyType>WindowsFormsWithCustomSubMain</MyType>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <MyType>WindowsForms</MyType>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
@@ -29,6 +29,7 @@
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -38,6 +39,7 @@
     <OutputPath>bin\Debug\</OutputPath>
     <DocumentationFile>HOUSEHOLD MANAGEMENT SYSTEM.vb1.xml</DocumentationFile>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -47,6 +49,7 @@
     <OutputPath>bin\Release\</OutputPath>
     <DocumentationFile>HOUSEHOLD MANAGEMENT SYSTEM.vb1.xml</DocumentationFile>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup>
     <OptionExplicit>On</OptionExplicit>
@@ -61,7 +64,7 @@
     <OptionInfer>On</OptionInfer>
   </PropertyGroup>
   <PropertyGroup>
-    <StartupObject>HOUSEHOLD_MANAGEMENT_SYSTEM.vb.DashBoard</StartupObject>
+    <StartupObject>HOUSEHOLD_MANAGEMENT_SYSTEM.vb.My.MyApplication</StartupObject>
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationManifest>My Project\app.manifest</ApplicationManifest>
@@ -72,13 +75,20 @@
     <Reference Include="System.Data.Entity" />
     <Reference Include="System.Deployment" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Drawing.Design" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Runtime.Caching" />
     <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Runtime.Serialization.Formatters.Soap" />
     <Reference Include="System.Security" />
     <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Windows.Forms.DataVisualization" />
+    <Reference Include="System.Windows.Forms.DataVisualization.Design" />
+    <Reference Include="System.Workflow.Runtime" />
     <Reference Include="System.Xml" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="WindowsFormsIntegration" />
   </ItemGroup>
   <ItemGroup>
     <Import Include="Microsoft.VisualBasic" />
@@ -94,9 +104,6 @@
     <Compile Include="AustinDataSet.Designer.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>AustinDataSet.xsd</DependentUpon>
-    </Compile>
-    <Compile Include="AustinDataSet.vb">
       <DependentUpon>AustinDataSet.xsd</DependentUpon>
     </Compile>
     <Compile Include="Budjet.Designer.vb">
@@ -126,22 +133,28 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="DateTimePicker.vb" />
+    <Compile Include="EmailForm.Designer.vb">
+      <DependentUpon>EmailForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="EmailForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Expenses.Designer.vb">
       <DependentUpon>Expenses.vb</DependentUpon>
     </Compile>
     <Compile Include="Expenses.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Expenseses.Designer.vb">
-      <DependentUpon>Expenseses.vb</DependentUpon>
+    <Compile Include="GroceryItem.Designer.vb">
+      <DependentUpon>GroceryItem.vb</DependentUpon>
     </Compile>
-    <Compile Include="Expenseses.vb">
+    <Compile Include="GroceryItem.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="GroceryItemvb.Designer.vb">
-      <DependentUpon>GroceryItemvb.vb</DependentUpon>
+    <Compile Include="InternetForm.Designer.vb">
+      <DependentUpon>InternetForm.vb</DependentUpon>
     </Compile>
-    <Compile Include="GroceryItemvb.vb">
+    <Compile Include="InternetForm.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Inventory.Designer.vb">
@@ -157,7 +170,27 @@
     <Compile Include="MealPlan.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="MealRecipes.Designer.vb">
+      <DependentUpon>MealRecipes.vb</DependentUpon>
+    </Compile>
+    <Compile Include="MealRecipes.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Module1.vb" />
+    <Compile Include="My Names.Designer.vb">
+      <DependentUpon>My Names.vb</DependentUpon>
+    </Compile>
+    <Compile Include="My Names.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="My Project\Application1.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Application.myapp</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\Application2.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Application.myapp</DependentUpon>
+    </Compile>
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
@@ -173,10 +206,10 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="MY USER VALIDATION.Designer.vb">
-      <DependentUpon>MY USER VALIDATION.vb</DependentUpon>
+    <Compile Include="log in.Designer.vb">
+      <DependentUpon>log in.vb</DependentUpon>
     </Compile>
-    <Compile Include="MY USER VALIDATION.vb">
+    <Compile Include="log in.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="person.Designer.vb">
@@ -197,6 +230,7 @@
     <Compile Include="REGISTER.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="REGISTER1.vb" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Budjet.resx">
@@ -211,14 +245,17 @@
     <EmbeddedResource Include="DashBoard.resx">
       <DependentUpon>DashBoard.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="EmailForm.resx">
+      <DependentUpon>EmailForm.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Expenses.resx">
       <DependentUpon>Expenses.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Expenseses.resx">
-      <DependentUpon>Expenseses.vb</DependentUpon>
+    <EmbeddedResource Include="GroceryItem.resx">
+      <DependentUpon>GroceryItem.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="GroceryItemvb.resx">
-      <DependentUpon>GroceryItemvb.vb</DependentUpon>
+    <EmbeddedResource Include="InternetForm.resx">
+      <DependentUpon>InternetForm.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Inventory.resx">
       <DependentUpon>Inventory.vb</DependentUpon>
@@ -226,14 +263,20 @@
     <EmbeddedResource Include="MealPlan.resx">
       <DependentUpon>MealPlan.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="MealRecipes.resx">
+      <DependentUpon>MealRecipes.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="My Names.resx">
+      <DependentUpon>My Names.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="MY USER VALIDATION.resx">
-      <DependentUpon>MY USER VALIDATION.vb</DependentUpon>
+    <EmbeddedResource Include="log in.resx">
+      <DependentUpon>log in.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="person.resx">
       <DependentUpon>person.vb</DependentUpon>
@@ -261,7 +304,7 @@
     <None Include="My Project\app.manifest" />
     <None Include="My Project\Application.myapp">
       <Generator>MyApplicationCodeGenerator</Generator>
-      <LastGenOutput>Application.Designer.vb</LastGenOutput>
+      <LastGenOutput>Application2.Designer.vb</LastGenOutput>
     </None>
     <None Include="My Project\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -308,6 +351,8 @@
     <Content Include="Austin.accdb">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <None Include="Resources\WhatsApp Image 2025-02-19 at 09.02.52.jpeg" />
+    <None Include="Resources\1717941987371.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

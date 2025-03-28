@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-Partial Class REGISTER
+Partial Class regis
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
@@ -22,201 +22,145 @@ Partial Class REGISTER
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.Label1 = New System.Windows.Forms.Label()
-        Me.TextBox1 = New System.Windows.Forms.TextBox()
-        Me.Label2 = New System.Windows.Forms.Label()
-        Me.Label3 = New System.Windows.Forms.Label()
-        Me.TextBox2 = New System.Windows.Forms.TextBox()
-        Me.Label4 = New System.Windows.Forms.Label()
-        Me.TextBox3 = New System.Windows.Forms.TextBox()
-        Me.Label5 = New System.Windows.Forms.Label()
-        Me.DateTimePicker1 = New System.Windows.Forms.DateTimePicker()
-        Me.Label6 = New System.Windows.Forms.Label()
-        Me.ComboBox1 = New System.Windows.Forms.ComboBox()
-        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
-        Me.TextBox4 = New System.Windows.Forms.TextBox()
-        Me.Label7 = New System.Windows.Forms.Label()
+        Me.components = New System.ComponentModel.Container()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(regis))
         Me.Button1 = New System.Windows.Forms.Button()
-        Me.GroupBox1.SuspendLayout()
+        Me.btnLogin = New System.Windows.Forms.Button()
+        Me.Btnupdate = New System.Windows.Forms.Button()
+        Me.Label4 = New System.Windows.Forms.Label()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.BtnCancel = New System.Windows.Forms.Button()
+        Me.DataGridView1 = New System.Windows.Forms.DataGridView()
+        Me.Button2 = New System.Windows.Forms.Button()
+        Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
+        CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
-        'Label1
+        'Button1
         '
-        Me.Label1.AutoSize = True
-        Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.Location = New System.Drawing.Point(10, 129)
-        Me.Label1.Margin = New System.Windows.Forms.Padding(7, 0, 7, 0)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(117, 24)
-        Me.Label1.TabIndex = 0
-        Me.Label1.Text = "USERNAME"
+        Me.Button1.BackgroundImage = CType(resources.GetObject("Button1.BackgroundImage"), System.Drawing.Image)
+        Me.Button1.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Button1.ForeColor = System.Drawing.SystemColors.ButtonHighlight
+        Me.Button1.Location = New System.Drawing.Point(66, 652)
+        Me.Button1.Margin = New System.Windows.Forms.Padding(2)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(91, 104)
+        Me.Button1.TabIndex = 13
+        Me.Button1.TextAlign = System.Drawing.ContentAlignment.BottomCenter
+        Me.Button1.UseVisualStyleBackColor = True
         '
-        'TextBox1
+        'btnLogin
         '
-        Me.TextBox1.Location = New System.Drawing.Point(135, 118)
-        Me.TextBox1.Margin = New System.Windows.Forms.Padding(7)
-        Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.Size = New System.Drawing.Size(337, 35)
-        Me.TextBox1.TabIndex = 1
+        Me.btnLogin.BackgroundImage = CType(resources.GetObject("btnLogin.BackgroundImage"), System.Drawing.Image)
+        Me.btnLogin.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnLogin.ForeColor = System.Drawing.SystemColors.ButtonHighlight
+        Me.btnLogin.Location = New System.Drawing.Point(211, 652)
+        Me.btnLogin.Margin = New System.Windows.Forms.Padding(2)
+        Me.btnLogin.Name = "btnLogin"
+        Me.btnLogin.Size = New System.Drawing.Size(91, 104)
+        Me.btnLogin.TabIndex = 14
+        Me.btnLogin.TextAlign = System.Drawing.ContentAlignment.BottomCenter
+        Me.btnLogin.UseVisualStyleBackColor = True
         '
-        'Label2
+        'Btnupdate
         '
-        Me.Label2.AutoSize = True
-        Me.Label2.Font = New System.Drawing.Font("Modern No. 20", 24.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label2.Location = New System.Drawing.Point(163, 9)
-        Me.Label2.Margin = New System.Windows.Forms.Padding(7, 0, 7, 0)
-        Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(175, 34)
-        Me.Label2.TabIndex = 2
-        Me.Label2.Text = "REGISTER"
-        '
-        'Label3
-        '
-        Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(9, 243)
-        Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(120, 29)
-        Me.Label3.TabIndex = 3
-        Me.Label3.Text = "Password"
-        '
-        'TextBox2
-        '
-        Me.TextBox2.Location = New System.Drawing.Point(135, 180)
-        Me.TextBox2.Name = "TextBox2"
-        Me.TextBox2.Size = New System.Drawing.Size(337, 35)
-        Me.TextBox2.TabIndex = 4
+        Me.Btnupdate.BackgroundImage = CType(resources.GetObject("Btnupdate.BackgroundImage"), System.Drawing.Image)
+        Me.Btnupdate.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Btnupdate.ForeColor = System.Drawing.SystemColors.ButtonHighlight
+        Me.Btnupdate.Location = New System.Drawing.Point(332, 652)
+        Me.Btnupdate.Margin = New System.Windows.Forms.Padding(2)
+        Me.Btnupdate.Name = "Btnupdate"
+        Me.Btnupdate.Size = New System.Drawing.Size(91, 104)
+        Me.Btnupdate.TabIndex = 21
+        Me.Btnupdate.TextAlign = System.Drawing.ContentAlignment.BottomCenter
+        Me.Btnupdate.UseVisualStyleBackColor = True
         '
         'Label4
         '
         Me.Label4.AutoSize = True
-        Me.Label4.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label4.Location = New System.Drawing.Point(10, 191)
+        Me.Label4.Font = New System.Drawing.Font("Modern No. 20", 20.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label4.Location = New System.Drawing.Point(8, 9)
+        Me.Label4.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(104, 24)
-        Me.Label4.TabIndex = 5
-        Me.Label4.Text = "SURNAME"
+        Me.Label4.Size = New System.Drawing.Size(148, 29)
+        Me.Label4.TabIndex = 19
+        Me.Label4.Text = "REGISTER"
         '
-        'TextBox3
+        'Label1
         '
-        Me.TextBox3.Location = New System.Drawing.Point(135, 237)
-        Me.TextBox3.Name = "TextBox3"
-        Me.TextBox3.Size = New System.Drawing.Size(337, 35)
-        Me.TextBox3.TabIndex = 6
+        Me.Label1.AutoSize = True
+        Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label1.Location = New System.Drawing.Point(238, -21)
+        Me.Label1.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(57, 20)
+        Me.Label1.TabIndex = 24
+        Me.Label1.Text = "Label1"
         '
-        'Label5
+        'BtnCancel
         '
-        Me.Label5.AutoSize = True
-        Me.Label5.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label5.Location = New System.Drawing.Point(34, 299)
-        Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(61, 24)
-        Me.Label5.TabIndex = 7
-        Me.Label5.Text = "DATE"
+        Me.BtnCancel.BackgroundImage = CType(resources.GetObject("BtnCancel.BackgroundImage"), System.Drawing.Image)
+        Me.BtnCancel.ForeColor = System.Drawing.SystemColors.ButtonHighlight
+        Me.BtnCancel.Location = New System.Drawing.Point(468, 652)
+        Me.BtnCancel.Name = "BtnCancel"
+        Me.BtnCancel.Size = New System.Drawing.Size(97, 104)
+        Me.BtnCancel.TabIndex = 26
+        Me.BtnCancel.TextAlign = System.Drawing.ContentAlignment.BottomCenter
+        Me.BtnCancel.UseVisualStyleBackColor = True
         '
-        'DateTimePicker1
+        'DataGridView1
         '
-        Me.DateTimePicker1.Location = New System.Drawing.Point(102, 290)
-        Me.DateTimePicker1.Name = "DateTimePicker1"
-        Me.DateTimePicker1.Size = New System.Drawing.Size(370, 35)
-        Me.DateTimePicker1.TabIndex = 8
+        Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.DataGridView1.Location = New System.Drawing.Point(2, 466)
+        Me.DataGridView1.Margin = New System.Windows.Forms.Padding(2)
+        Me.DataGridView1.Name = "DataGridView1"
+        Me.DataGridView1.Size = New System.Drawing.Size(676, 169)
+        Me.DataGridView1.TabIndex = 27
         '
-        'Label6
+        'Button2
         '
-        Me.Label6.AutoSize = True
-        Me.Label6.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label6.Location = New System.Drawing.Point(34, 349)
-        Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(61, 24)
-        Me.Label6.TabIndex = 9
-        Me.Label6.Text = "YEAR"
+        Me.Button2.BackgroundImage = CType(resources.GetObject("Button2.BackgroundImage"), System.Drawing.Image)
+        Me.Button2.ForeColor = System.Drawing.SystemColors.ButtonHighlight
+        Me.Button2.Location = New System.Drawing.Point(595, 652)
+        Me.Button2.Name = "Button2"
+        Me.Button2.Size = New System.Drawing.Size(91, 104)
+        Me.Button2.TabIndex = 28
+        Me.Button2.TextAlign = System.Drawing.ContentAlignment.BottomCenter
+        Me.Button2.UseVisualStyleBackColor = True
         '
-        'ComboBox1
+        'regis
         '
-        Me.ComboBox1.FormattingEnabled = True
-        Me.ComboBox1.Location = New System.Drawing.Point(102, 342)
-        Me.ComboBox1.Name = "ComboBox1"
-        Me.ComboBox1.Size = New System.Drawing.Size(117, 37)
-        Me.ComboBox1.TabIndex = 10
-        '
-        'GroupBox1
-        '
-        Me.GroupBox1.Controls.Add(Me.Button1)
-        Me.GroupBox1.Controls.Add(Me.TextBox4)
-        Me.GroupBox1.Controls.Add(Me.Label7)
-        Me.GroupBox1.Controls.Add(Me.Label1)
-        Me.GroupBox1.Controls.Add(Me.ComboBox1)
-        Me.GroupBox1.Controls.Add(Me.TextBox1)
-        Me.GroupBox1.Controls.Add(Me.Label6)
-        Me.GroupBox1.Controls.Add(Me.Label4)
-        Me.GroupBox1.Controls.Add(Me.DateTimePicker1)
-        Me.GroupBox1.Controls.Add(Me.TextBox2)
-        Me.GroupBox1.Controls.Add(Me.Label5)
-        Me.GroupBox1.Controls.Add(Me.Label3)
-        Me.GroupBox1.Controls.Add(Me.TextBox3)
-        Me.GroupBox1.Location = New System.Drawing.Point(67, 67)
-        Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(670, 665)
-        Me.GroupBox1.TabIndex = 11
-        Me.GroupBox1.TabStop = False
-        Me.GroupBox1.Text = "GroupBox1"
-        '
-        'TextBox4
-        '
-        Me.TextBox4.Location = New System.Drawing.Point(137, 65)
-        Me.TextBox4.Name = "TextBox4"
-        Me.TextBox4.Size = New System.Drawing.Size(335, 35)
-        Me.TextBox4.TabIndex = 12
-        '
-        'Label7
-        '
-        Me.Label7.AutoSize = True
-        Me.Label7.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label7.Location = New System.Drawing.Point(18, 65)
-        Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(113, 24)
-        Me.Label7.TabIndex = 11
-        Me.Label7.Text = "IDNUMBER "
-        '
-        'Button1
-        '
-        Me.Button1.Location = New System.Drawing.Point(14, 621)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(139, 38)
-        Me.Button1.TabIndex = 13
-        Me.Button1.Text = "dashboard"
-        Me.Button1.UseVisualStyleBackColor = True
-        '
-        'REGISTER
-        '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(14.0!, 29.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(652, 753)
-        Me.Controls.Add(Me.GroupBox1)
-        Me.Controls.Add(Me.Label2)
-        Me.Font = New System.Drawing.Font("Microsoft Sans Serif", 18.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Margin = New System.Windows.Forms.Padding(7)
-        Me.Name = "REGISTER"
+        Me.BackColor = System.Drawing.SystemColors.Control
+        Me.BackgroundImage = CType(resources.GetObject("$this.BackgroundImage"), System.Drawing.Image)
+        Me.ClientSize = New System.Drawing.Size(711, 770)
+        Me.Controls.Add(Me.Button2)
+        Me.Controls.Add(Me.DataGridView1)
+        Me.Controls.Add(Me.BtnCancel)
+        Me.Controls.Add(Me.Label1)
+        Me.Controls.Add(Me.Btnupdate)
+        Me.Controls.Add(Me.btnLogin)
+        Me.Controls.Add(Me.Button1)
+        Me.Controls.Add(Me.Label4)
+        Me.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D
+        Me.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.Name = "regis"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "REGISTER"
-        Me.GroupBox1.ResumeLayout(False)
-        Me.GroupBox1.PerformLayout()
+        CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
     End Sub
-    Friend WithEvents Label1 As System.Windows.Forms.Label
-    Friend WithEvents TextBox1 As System.Windows.Forms.TextBox
-    Friend WithEvents Label2 As System.Windows.Forms.Label
-    Friend WithEvents Label3 As System.Windows.Forms.Label
-    Friend WithEvents TextBox2 As System.Windows.Forms.TextBox
-    Friend WithEvents Label4 As System.Windows.Forms.Label
-    Friend WithEvents TextBox3 As System.Windows.Forms.TextBox
-    Friend WithEvents Label5 As System.Windows.Forms.Label
-    Friend WithEvents DateTimePicker1 As System.Windows.Forms.DateTimePicker
-    Friend WithEvents Label6 As System.Windows.Forms.Label
-    Friend WithEvents ComboBox1 As System.Windows.Forms.ComboBox
-    Friend WithEvents GroupBox1 As System.Windows.Forms.GroupBox
-    Friend WithEvents Label7 As System.Windows.Forms.Label
-    Friend WithEvents TextBox4 As System.Windows.Forms.TextBox
-    Friend WithEvents Button1 As System.Windows.Forms.Button
+    Friend WithEvents Button1 As Windows.Forms.Button
+    Friend WithEvents btnLogin As Windows.Forms.Button
+    Friend WithEvents Label4 As Windows.Forms.Label
+    Friend WithEvents Btnupdate As Windows.Forms.Button
+    Friend WithEvents Label1 As Windows.Forms.Label
+    Friend WithEvents BtnCancel As Windows.Forms.Button
+    Friend WithEvents DataGridView1 As Windows.Forms.DataGridView
+    Friend WithEvents Button2 As Windows.Forms.Button
+    Friend WithEvents ToolTip1 As Windows.Forms.ToolTip
 End Class

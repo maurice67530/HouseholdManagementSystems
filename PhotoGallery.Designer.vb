@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class PHOTO_GALLERY
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,8 +20,9 @@ Partial Class PHOTO_GALLERY
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(PHOTO_GALLERY))
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
@@ -29,14 +30,9 @@ Partial Class PHOTO_GALLERY
         Me.Label4 = New System.Windows.Forms.Label()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.DateTimePicker1 = New System.Windows.Forms.DateTimePicker()
-        Me.TextBox1 = New System.Windows.Forms.TextBox()
         Me.TextBox2 = New System.Windows.Forms.TextBox()
         Me.TextBox3 = New System.Windows.Forms.TextBox()
         Me.Label6 = New System.Windows.Forms.Label()
-        Me.PictureBox2 = New System.Windows.Forms.PictureBox()
-        Me.PictureBox4 = New System.Windows.Forms.PictureBox()
-        Me.PictureBox5 = New System.Windows.Forms.PictureBox()
-        Me.PictureBox6 = New System.Windows.Forms.PictureBox()
         Me.TextBox4 = New System.Windows.Forms.TextBox()
         Me.Label7 = New System.Windows.Forms.Label()
         Me.Label8 = New System.Windows.Forms.Label()
@@ -48,20 +44,39 @@ Partial Class PHOTO_GALLERY
         Me.TextBox8 = New System.Windows.Forms.TextBox()
         Me.Label11 = New System.Windows.Forms.Label()
         Me.Button1 = New System.Windows.Forms.Button()
-        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.PictureBox4, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.PictureBox5, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.PictureBox6, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.DataGridView1 = New System.Windows.Forms.DataGridView()
+        Me.ComboBox1 = New System.Windows.Forms.ComboBox()
+        Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
+        Me.SaveToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.SaveToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.EditToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.DeleteToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.SortToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.FilterToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.HighlightToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.DisplayToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.SavePhotoFromFileToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
+        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
+        Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
+        Me.ListBox1 = New System.Windows.Forms.ListBox()
+        Me.Label13 = New System.Windows.Forms.Label()
+        Me.ComboBox4 = New System.Windows.Forms.ComboBox()
+        Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
+        Me.Label12 = New System.Windows.Forms.Label()
+        CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.MenuStrip1.SuspendLayout()
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'Label1
         '
         Me.Label1.Font = New System.Drawing.Font("Modern No. 20", 20.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.Location = New System.Drawing.Point(72, 21)
+        Me.Label1.Location = New System.Drawing.Point(151, 44)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(303, 51)
+        Me.Label1.Size = New System.Drawing.Size(221, 28)
         Me.Label1.TabIndex = 0
-        Me.Label1.Text = "PHOTO GALLERY"
+        Me.Label1.Text = "PHOTO ALBUM"
         '
         'Label2
         '
@@ -93,7 +108,7 @@ Partial Class PHOTO_GALLERY
         'Label5
         '
         Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(25, 221)
+        Me.Label5.Location = New System.Drawing.Point(12, 217)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(113, 13)
         Me.Label5.TabIndex = 4
@@ -105,13 +120,6 @@ Partial Class PHOTO_GALLERY
         Me.DateTimePicker1.Name = "DateTimePicker1"
         Me.DateTimePicker1.Size = New System.Drawing.Size(248, 20)
         Me.DateTimePicker1.TabIndex = 5
-        '
-        'TextBox1
-        '
-        Me.TextBox1.Location = New System.Drawing.Point(137, 136)
-        Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.Size = New System.Drawing.Size(253, 20)
-        Me.TextBox1.TabIndex = 6
         '
         'TextBox2
         '
@@ -131,45 +139,11 @@ Partial Class PHOTO_GALLERY
         '
         Me.Label6.AutoSize = True
         Me.Label6.Font = New System.Drawing.Font("Modern No. 20", 18.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label6.Location = New System.Drawing.Point(295, 484)
+        Me.Label6.Location = New System.Drawing.Point(580, 47)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(246, 25)
         Me.Label6.TabIndex = 9
         Me.Label6.Text = "PHOTOS OF FAMILY"
-        '
-        'PictureBox2
-        '
-        Me.PictureBox2.Image = CType(resources.GetObject("PictureBox2.Image"), System.Drawing.Image)
-        Me.PictureBox2.Location = New System.Drawing.Point(53, 511)
-        Me.PictureBox2.Name = "PictureBox2"
-        Me.PictureBox2.Size = New System.Drawing.Size(160, 153)
-        Me.PictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
-        Me.PictureBox2.TabIndex = 11
-        Me.PictureBox2.TabStop = False
-        '
-        'PictureBox4
-        '
-        Me.PictureBox4.Location = New System.Drawing.Point(300, 565)
-        Me.PictureBox4.Name = "PictureBox4"
-        Me.PictureBox4.Size = New System.Drawing.Size(161, 153)
-        Me.PictureBox4.TabIndex = 13
-        Me.PictureBox4.TabStop = False
-        '
-        'PictureBox5
-        '
-        Me.PictureBox5.Location = New System.Drawing.Point(756, 558)
-        Me.PictureBox5.Name = "PictureBox5"
-        Me.PictureBox5.Size = New System.Drawing.Size(181, 160)
-        Me.PictureBox5.TabIndex = 14
-        Me.PictureBox5.TabStop = False
-        '
-        'PictureBox6
-        '
-        Me.PictureBox6.Location = New System.Drawing.Point(518, 565)
-        Me.PictureBox6.Name = "PictureBox6"
-        Me.PictureBox6.Size = New System.Drawing.Size(179, 153)
-        Me.PictureBox6.TabIndex = 15
-        Me.PictureBox6.TabStop = False
         '
         'TextBox4
         '
@@ -253,18 +227,157 @@ Partial Class PHOTO_GALLERY
         '
         'Button1
         '
-        Me.Button1.Location = New System.Drawing.Point(28, 689)
+        Me.Button1.BackgroundImage = CType(resources.GetObject("Button1.BackgroundImage"), System.Drawing.Image)
+        Me.Button1.Location = New System.Drawing.Point(28, 644)
         Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(105, 40)
+        Me.Button1.Size = New System.Drawing.Size(105, 85)
         Me.Button1.TabIndex = 27
-        Me.Button1.Text = "Dashboard"
         Me.Button1.UseVisualStyleBackColor = True
+        '
+        'DataGridView1
+        '
+        Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.DataGridView1.Location = New System.Drawing.Point(29, 494)
+        Me.DataGridView1.Name = "DataGridView1"
+        Me.DataGridView1.Size = New System.Drawing.Size(962, 144)
+        Me.DataGridView1.TabIndex = 28
+        '
+        'ComboBox1
+        '
+        Me.ComboBox1.FormattingEnabled = True
+        Me.ComboBox1.Location = New System.Drawing.Point(137, 140)
+        Me.ComboBox1.Name = "ComboBox1"
+        Me.ComboBox1.Size = New System.Drawing.Size(253, 21)
+        Me.ComboBox1.TabIndex = 38
+        '
+        'MenuStrip1
+        '
+        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.SaveToolStripMenuItem})
+        Me.MenuStrip1.Location = New System.Drawing.Point(0, 0)
+        Me.MenuStrip1.Name = "MenuStrip1"
+        Me.MenuStrip1.Size = New System.Drawing.Size(1002, 24)
+        Me.MenuStrip1.TabIndex = 41
+        Me.MenuStrip1.Text = "MenuStrip1"
+        '
+        'SaveToolStripMenuItem
+        '
+        Me.SaveToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.SaveToolStripMenuItem1, Me.EditToolStripMenuItem, Me.DeleteToolStripMenuItem, Me.SortToolStripMenuItem, Me.FilterToolStripMenuItem, Me.HighlightToolStripMenuItem, Me.DisplayToolStripMenuItem, Me.SavePhotoFromFileToolStripMenuItem})
+        Me.SaveToolStripMenuItem.Name = "SaveToolStripMenuItem"
+        Me.SaveToolStripMenuItem.Size = New System.Drawing.Size(46, 20)
+        Me.SaveToolStripMenuItem.Text = "open"
+        '
+        'SaveToolStripMenuItem1
+        '
+        Me.SaveToolStripMenuItem1.Name = "SaveToolStripMenuItem1"
+        Me.SaveToolStripMenuItem1.Size = New System.Drawing.Size(181, 22)
+        Me.SaveToolStripMenuItem1.Text = "save"
+        '
+        'EditToolStripMenuItem
+        '
+        Me.EditToolStripMenuItem.Name = "EditToolStripMenuItem"
+        Me.EditToolStripMenuItem.Size = New System.Drawing.Size(181, 22)
+        Me.EditToolStripMenuItem.Text = "edit"
+        '
+        'DeleteToolStripMenuItem
+        '
+        Me.DeleteToolStripMenuItem.Name = "DeleteToolStripMenuItem"
+        Me.DeleteToolStripMenuItem.Size = New System.Drawing.Size(181, 22)
+        Me.DeleteToolStripMenuItem.Text = "delete"
+        '
+        'SortToolStripMenuItem
+        '
+        Me.SortToolStripMenuItem.Name = "SortToolStripMenuItem"
+        Me.SortToolStripMenuItem.Size = New System.Drawing.Size(181, 22)
+        Me.SortToolStripMenuItem.Text = "sort"
+        '
+        'FilterToolStripMenuItem
+        '
+        Me.FilterToolStripMenuItem.Name = "FilterToolStripMenuItem"
+        Me.FilterToolStripMenuItem.Size = New System.Drawing.Size(181, 22)
+        Me.FilterToolStripMenuItem.Text = "filter"
+        '
+        'HighlightToolStripMenuItem
+        '
+        Me.HighlightToolStripMenuItem.Name = "HighlightToolStripMenuItem"
+        Me.HighlightToolStripMenuItem.Size = New System.Drawing.Size(181, 22)
+        Me.HighlightToolStripMenuItem.Text = "highlight"
+        '
+        'DisplayToolStripMenuItem
+        '
+        Me.DisplayToolStripMenuItem.Name = "DisplayToolStripMenuItem"
+        Me.DisplayToolStripMenuItem.Size = New System.Drawing.Size(181, 22)
+        Me.DisplayToolStripMenuItem.Text = "Display"
+        '
+        'SavePhotoFromFileToolStripMenuItem
+        '
+        Me.SavePhotoFromFileToolStripMenuItem.Name = "SavePhotoFromFileToolStripMenuItem"
+        Me.SavePhotoFromFileToolStripMenuItem.Size = New System.Drawing.Size(181, 22)
+        Me.SavePhotoFromFileToolStripMenuItem.Text = "Save Photo from file"
+        '
+        'PictureBox1
+        '
+        Me.PictureBox1.Location = New System.Drawing.Point(616, 103)
+        Me.PictureBox1.Name = "PictureBox1"
+        Me.PictureBox1.Size = New System.Drawing.Size(196, 251)
+        Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
+        Me.PictureBox1.TabIndex = 37
+        Me.PictureBox1.TabStop = False
+        '
+        'Timer1
+        '
+        '
+        'ListBox1
+        '
+        Me.ListBox1.FormattingEnabled = True
+        Me.ListBox1.Location = New System.Drawing.Point(467, 109)
+        Me.ListBox1.Name = "ListBox1"
+        Me.ListBox1.Size = New System.Drawing.Size(120, 95)
+        Me.ListBox1.TabIndex = 45
+        '
+        'Label13
+        '
+        Me.Label13.AutoSize = True
+        Me.Label13.Location = New System.Drawing.Point(538, 379)
+        Me.Label13.Name = "Label13"
+        Me.Label13.Size = New System.Drawing.Size(49, 13)
+        Me.Label13.TabIndex = 47
+        Me.Label13.Text = "Category"
+        '
+        'ComboBox4
+        '
+        Me.ComboBox4.FormattingEnabled = True
+        Me.ComboBox4.Items.AddRange(New Object() {"Family", "Vacation", "Events", "Outing", "Indoor", "Party"})
+        Me.ComboBox4.Location = New System.Drawing.Point(605, 375)
+        Me.ComboBox4.Name = "ComboBox4"
+        Me.ComboBox4.Size = New System.Drawing.Size(207, 21)
+        Me.ComboBox4.TabIndex = 48
+        '
+        'OpenFileDialog1
+        '
+        Me.OpenFileDialog1.FileName = "OpenFileDialog1"
+        '
+        'Label12
+        '
+        Me.Label12.AutoSize = True
+        Me.Label12.Location = New System.Drawing.Point(555, 438)
+        Me.Label12.Name = "Label12"
+        Me.Label12.Size = New System.Drawing.Size(45, 13)
+        Me.Label12.TabIndex = 49
+        Me.Label12.Text = "Label12"
         '
         'PHOTO_GALLERY
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.BackgroundImage = CType(resources.GetObject("$this.BackgroundImage"), System.Drawing.Image)
         Me.ClientSize = New System.Drawing.Size(1002, 730)
+        Me.Controls.Add(Me.Label12)
+        Me.Controls.Add(Me.ComboBox4)
+        Me.Controls.Add(Me.Label13)
+        Me.Controls.Add(Me.ListBox1)
+        Me.Controls.Add(Me.ComboBox1)
+        Me.Controls.Add(Me.PictureBox1)
+        Me.Controls.Add(Me.DataGridView1)
         Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.Label11)
         Me.Controls.Add(Me.TextBox8)
@@ -276,27 +389,24 @@ Partial Class PHOTO_GALLERY
         Me.Controls.Add(Me.Label8)
         Me.Controls.Add(Me.Label7)
         Me.Controls.Add(Me.TextBox4)
-        Me.Controls.Add(Me.PictureBox6)
-        Me.Controls.Add(Me.PictureBox5)
-        Me.Controls.Add(Me.PictureBox4)
-        Me.Controls.Add(Me.PictureBox2)
         Me.Controls.Add(Me.Label6)
         Me.Controls.Add(Me.TextBox3)
         Me.Controls.Add(Me.TextBox2)
-        Me.Controls.Add(Me.TextBox1)
         Me.Controls.Add(Me.DateTimePicker1)
         Me.Controls.Add(Me.Label5)
         Me.Controls.Add(Me.Label4)
         Me.Controls.Add(Me.Label3)
         Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.Label1)
+        Me.Controls.Add(Me.MenuStrip1)
+        Me.MainMenuStrip = Me.MenuStrip1
         Me.Name = "PHOTO_GALLERY"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "PHOTO_GALLERY"
-        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.PictureBox4, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.PictureBox5, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.PictureBox6, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.MenuStrip1.ResumeLayout(False)
+        Me.MenuStrip1.PerformLayout()
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -307,14 +417,9 @@ Partial Class PHOTO_GALLERY
     Friend WithEvents Label4 As System.Windows.Forms.Label
     Friend WithEvents Label5 As System.Windows.Forms.Label
     Friend WithEvents DateTimePicker1 As System.Windows.Forms.DateTimePicker
-    Friend WithEvents TextBox1 As System.Windows.Forms.TextBox
     Friend WithEvents TextBox2 As System.Windows.Forms.TextBox
     Friend WithEvents TextBox3 As System.Windows.Forms.TextBox
     Friend WithEvents Label6 As System.Windows.Forms.Label
-    Friend WithEvents PictureBox2 As System.Windows.Forms.PictureBox
-    Friend WithEvents PictureBox4 As System.Windows.Forms.PictureBox
-    Friend WithEvents PictureBox5 As System.Windows.Forms.PictureBox
-    Friend WithEvents PictureBox6 As System.Windows.Forms.PictureBox
     Friend WithEvents TextBox4 As System.Windows.Forms.TextBox
     Friend WithEvents Label7 As System.Windows.Forms.Label
     Friend WithEvents Label8 As System.Windows.Forms.Label
@@ -326,4 +431,24 @@ Partial Class PHOTO_GALLERY
     Friend WithEvents TextBox8 As System.Windows.Forms.TextBox
     Friend WithEvents Label11 As System.Windows.Forms.Label
     Friend WithEvents Button1 As System.Windows.Forms.Button
+    Friend WithEvents DataGridView1 As Windows.Forms.DataGridView
+    Friend WithEvents ComboBox1 As Windows.Forms.ComboBox
+    Friend WithEvents MenuStrip1 As Windows.Forms.MenuStrip
+    Friend WithEvents SaveToolStripMenuItem As Windows.Forms.ToolStripMenuItem
+    Friend WithEvents SaveToolStripMenuItem1 As Windows.Forms.ToolStripMenuItem
+    Friend WithEvents EditToolStripMenuItem As Windows.Forms.ToolStripMenuItem
+    Friend WithEvents DeleteToolStripMenuItem As Windows.Forms.ToolStripMenuItem
+    Friend WithEvents SortToolStripMenuItem As Windows.Forms.ToolStripMenuItem
+    Friend WithEvents FilterToolStripMenuItem As Windows.Forms.ToolStripMenuItem
+    Friend WithEvents HighlightToolStripMenuItem As Windows.Forms.ToolStripMenuItem
+    Friend WithEvents DisplayToolStripMenuItem As Windows.Forms.ToolStripMenuItem
+    Friend WithEvents ToolTip1 As Windows.Forms.ToolTip
+    Friend WithEvents PictureBox1 As Windows.Forms.PictureBox
+    Friend WithEvents Timer1 As Windows.Forms.Timer
+    Friend WithEvents ListBox1 As Windows.Forms.ListBox
+    Friend WithEvents Label13 As Windows.Forms.Label
+    Friend WithEvents ComboBox4 As Windows.Forms.ComboBox
+    Friend WithEvents SavePhotoFromFileToolStripMenuItem As Windows.Forms.ToolStripMenuItem
+    Friend WithEvents OpenFileDialog1 As Windows.Forms.OpenFileDialog
+    Friend WithEvents Label12 As Windows.Forms.Label
 End Class

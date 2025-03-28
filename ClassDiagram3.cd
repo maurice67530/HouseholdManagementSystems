@@ -1,0 +1,194 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="HOUSEHOLD_MANAGEMENT_SYSTEM.vb.AustinDataSet" Collapsed="true">
+    <Position X="0.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAAAAAAAAwAAAAJABAAAQAAAgAgSQBgAAQAAAAGABBE=</HashCode>
+      <FileName>AustinDataSet.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HOUSEHOLD_MANAGEMENT_SYSTEM.vb.Budjet" Collapsed="true">
+    <Position X="4" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABEAAgECAAAAAAAECgAAgCAAAQQAAJAAAAAAAAAAA=</HashCode>
+      <FileName>Budjet.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HOUSEHOLD_MANAGEMENT_SYSTEM.vb.Chores" Collapsed="true">
+    <Position X="5.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAIAAAAAAAAAAAAEAAQACAAAAAAAAAAACAAAAAAAAA=</HashCode>
+      <FileName>Class2.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HOUSEHOLD_MANAGEMENT_SYSTEM.vb.Class2" Collapsed="true">
+    <Position X="7.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Class2.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HOUSEHOLD_MANAGEMENT_SYSTEM.vb.person" Collapsed="true">
+    <Position X="7.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAIBAFBgFCAgACCIEECgUjACAQQQcAkJAEUBAEQAAAA=</HashCode>
+      <FileName>Class2.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HOUSEHOLD_MANAGEMENT_SYSTEM.vb.GroceryItem" Collapsed="true">
+    <Position X="4" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAEAAAAAQAAAAACIAAAAAAAEAAAAAAAAAAAgAAgCAA=</HashCode>
+      <FileName>Class2.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HOUSEHOLD_MANAGEMENT_SYSTEM.vb.Dailytask" Collapsed="true">
+    <Position X="2.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQBAAAgEKQgAEAAAECgAAgCAAgQQAAJAAAAAAAAAgA=</HashCode>
+      <FileName>Class2.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HOUSEHOLD_MANAGEMENT_SYSTEM.vb.Expenses" Collapsed="true">
+    <Position X="7.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAgAAgXCAgwIBIIkCAEgiCCAXwYEmKAQUJAGQSAwQ=</HashCode>
+      <FileName>Class2.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HOUSEHOLD_MANAGEMENT_SYSTEM.vb.Budget" Collapsed="true">
+    <Position X="2.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAIAACAAAAAAAAAAAAIgAAAAQA=</HashCode>
+      <FileName>Class2.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HOUSEHOLD_MANAGEMENT_SYSTEM.vb.Inventory" Collapsed="true">
+    <Position X="7.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CUgBgEBgEKIAAIAAAkSgwTgiAAD/QAAJBAAIEAAAAAA=</HashCode>
+      <FileName>Class2.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HOUSEHOLD_MANAGEMENT_SYSTEM.vb.photogallery" Collapsed="true">
+    <Position X="4" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAIAAEAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAQA=</HashCode>
+      <FileName>Class2.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HOUSEHOLD_MANAGEMENT_SYSTEM.vb.MealPlan" Collapsed="true">
+    <Position X="2.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQABgEgiEKAgAAAAKECgEgwiAABwQAAJAAAIAEAAAAA=</HashCode>
+      <FileName>Class2.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HOUSEHOLD_MANAGEMENT_SYSTEM.vb.LOGIN" Collapsed="true">
+    <Position X="0.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAgAAAAA=</HashCode>
+      <FileName>Class2.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HOUSEHOLD_MANAGEMENT_SYSTEM.vb.REGISTER" Collapsed="true">
+    <Position X="5.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAgFCAAQAAAAECgEgkCBAAQaAAABAAAAABCAAA=</HashCode>
+      <FileName>Class2.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HOUSEHOLD_MANAGEMENT_SYSTEM.vb.ComboBox" Collapsed="true">
+    <Position X="0.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ComboBox.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HOUSEHOLD_MANAGEMENT_SYSTEM.vb.DashBoard" Collapsed="true">
+    <Position X="4" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AABAAAAAECMAgAAAAACAzDsCAADAcB8AAAAAAAAAAAA=</HashCode>
+      <FileName>DashBoard.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HOUSEHOLD_MANAGEMENT_SYSTEM.vb.DateTimePicker" Collapsed="true">
+    <Position X="5.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>DateTimePicker.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HOUSEHOLD_MANAGEMENT_SYSTEM.vb.Expenseses" Collapsed="true">
+    <Position X="0.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAgECAAAAAAAACAEhgCAAAQQAAIAAAAAABAAAA=</HashCode>
+      <FileName>Expenseses.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HOUSEHOLD_MANAGEMENT_SYSTEM.vb.GroceryItemvb" Collapsed="true">
+    <Position X="5.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABgEAgEKCAAAQAAECgAhACAAAQAAEIAABBAEAAIAA=</HashCode>
+      <FileName>GroceryItemvb.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HOUSEHOLD_MANAGEMENT_SYSTEM.vb.MY_USER_VALIDATION" Collapsed="true">
+    <Position X="4" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAECAAAAAAAgCAAAgCAAAAYAAAAEAAAAAAAAA=</HashCode>
+      <FileName>MY USER VALIDATION.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HOUSEHOLD_MANAGEMENT_SYSTEM.vb.PHOTO_GALLERY" Collapsed="true">
+    <Position X="2.25" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABgEAgEKIAAABAIECgAggCgEAwQAAIAAAAAAAAACA=</HashCode>
+      <FileName>PhotoGallery.vb</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HOUSEHOLD_MANAGEMENT_SYSTEM.vb.AustinDataSetTableAdapters.ExpensesTableAdapter" Collapsed="true">
+    <Position X="2.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EASAAGAAEAAAAAcAIAAAAAAAACEICAAAAAAAAAAABBA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HOUSEHOLD_MANAGEMENT_SYSTEM.vb.AustinDataSetTableAdapters.personTableAdapter" Collapsed="true">
+    <Position X="0.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EASAAGAAEAAAAAcAIAAAAAAAACEICAAAAAAAAAAABBA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HOUSEHOLD_MANAGEMENT_SYSTEM.vb.AustinDataSetTableAdapters.TableAdapterManager" Collapsed="true">
+    <Position X="7.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQAAACAAAAhABAEBAAACMIAgCAACgAAAAAQAAAAABAQ=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HOUSEHOLD_MANAGEMENT_SYSTEM.vb.My.MySettings" Collapsed="true">
+    <Position X="5.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAgAAAAAAAAAAEAAAAEAAAAAAAABABAAAAAEAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Module Name="HOUSEHOLD_MANAGEMENT_SYSTEM.vb.Module1" Collapsed="true">
+    <Position X="0.5" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAIAAAAAAgAAAAAAAAAAAAAAAAAAAQAAAAAAAA=</HashCode>
+      <FileName>Module1.vb</FileName>
+    </TypeIdentifier>
+  </Module>
+  <Module Name="HOUSEHOLD_MANAGEMENT_SYSTEM.vb.My.Resources.Resources" Collapsed="true">
+    <Position X="4" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAFEAAAAQAAAAAAAAAAAAAAAIA=</HashCode>
+    </TypeIdentifier>
+  </Module>
+  <Module Name="HOUSEHOLD_MANAGEMENT_SYSTEM.vb.My.MySettingsProperty" Collapsed="true">
+    <Position X="2.25" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Module>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

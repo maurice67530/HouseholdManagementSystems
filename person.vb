@@ -2,51 +2,35 @@
 Imports System.Windows.Forms
 Imports System.Data.OleDb
 Public Class person
-    Dim conn As New OleDb.OleDbConnection(Module1.connectionString)
+    Dim connection As New OleDb.OleDbConnection(Module1.connectionString)
     Private personal As New List(Of person)
     Private Sub btnSubmit_Click(sender As System.Object, e As System.EventArgs) Handles btnSubmit.Click
-        Dim str As String
-        'Create Instance of person Information  
-        Dim person As New person()
-
-        ' Assign values from textBoxes to the ExpenseInfomation  
-        person.FirstName = TextBox1.Text
-        person.Lastname = TextBox2.Text
-        person.DateOfBirth = DateTimePicker1.Value.ToShortDateString()
-        person.Gender = ComboBox1.Text
-        person.ContactNumber = TextBox4.Text
-        person.Email = TextBox5.Text
-        person.Role = ComboBox2.Text
-        person.MaritalStatus = ComboBox3.Text
-        person.Interest = TextBox3.Text
-
-        'Add the person to the List  
-        'personal.Add(person)
-
-        '' Display a confirmation messageBox  
-        'MsgBox("personal Information added!" & vbCrLf & "FirstName:" & person.FirstName & vbCrLf &
-        '"Lastname:" & person.Lastname & vbCrLf &
-        '"BirthDate:" & person.DateOfBirth & vbCrLf &
-        '"Gender:" & person.Gender & vbCrLf &
-        '"ContactNumber:" & person.ContactNumber & vbCrLf &
-        '"Email:" & person.Email & vbCrLf &
-        '"Role:" & person.Role & vbCrLf &
-        '"Maritalstatus:" & person.MaritalStatus & vbCrLf &
-        '"Interest:" & person.Interest, vbInformation, "Personal confirmation")
-
-        'populatedDataGridview()
-        'Module1.LoadPersonDataFromFile("C:\Users\user\Desktop\My Project\My hello\HOUSEHOLD MANAGEMENT SYSTEM.vb1\HOUSEHOLD MANAGEMENT SYSTEM.vb1\Austin.accdb")
-
-
+        'Dim str As String
+        'Create Instance of person Information 
 
         Try
+
+            Dim person As New person()
+
+            ' Assign values from textBoxes to the   PersonInfomation  
+            person.FirstName = TextBox1.Text
+            person.Lastname = TextBox2.Text
+            person.DateOfBirth = DateTimePicker1.Value.ToShortDateString()
+            person.Gender = ComboBox1.Text
+            person.ContactNumber = TextBox4.Text
+            person.Email = TextBox5.Text
+            person.Role = ComboBox2.Text
+            person.MaritalStatus = ComboBox3.Text
+            person.Interest = TextBox3.Text
+
+
             Using conn As New OleDbConnection(Module1.connectionString)
                 conn.Open()
 
                 Dim tableName As String = "personaldetails"
 
                 ' Create an OleDbCommand to insert the personn data into the database  
-                Dim cmd As New OleDbCommand($"INSERT INTO {tableName} ([First Name],[Lastname],[DateOfbirth],[Gender],[ContactNumber],[MaritalStatus],[Role],[Interest]) VALUES (?, ?, ?, ?, ?, ?, ?, ?)", conn)
+                Dim cmd As New OleDbCommand($"INSERT INTO [personaldetails] ([FirstName],[Lastname],[DateOfbirth],[Gender],[ContactNumber],[MaritalStatus],[Role],[Interest]) VALUES (?, ?, ?, ?, ?, ?, ?, ?)", conn)
 
 
 
@@ -54,17 +38,32 @@ Public Class person
                 ' Set the parameter values from the UI controls  
                 For Each persons As person In personal
                     cmd.Parameters.Clear()
-                    cmd.Parameters.AddWithValue("@First Name", persons.FirstName)
+                    cmd.Parameters.AddWithValue("@FirstName", persons.FirstName)
                     cmd.Parameters.AddWithValue("@Last name", persons.Lastname)
                     cmd.Parameters.AddWithValue("@DateOfbirth", persons.DateOfBirth)
                     cmd.Parameters.AddWithValue("@Gender", persons.Gender)
                     cmd.Parameters.AddWithValue("@ContactNumber", persons.ContactNumber)
+                    cmd.Parameters.AddWithValue("@Email", persons.Email)
                     cmd.Parameters.AddWithValue("@MaritalStatus", persons.MaritalStatus)
                     cmd.Parameters.AddWithValue("@Role", persons.Role)
                     cmd.Parameters.AddWithValue("@Interest", persons.Interest)
-
+                    conn.Close()
                     ' Execute the SQL command to insert the data  
                     cmd.ExecuteNonQuery()
+
+
+                    ' Display a confirmation messageBox  
+                    MsgBox("personal Information added!" & vbCrLf & "FirstName:" & person.FirstName & vbCrLf &
+                    "Lastname:" & person.Lastname & vbCrLf &
+                    "BirthDate:" & person.DateOfBirth & vbCrLf &
+                    "Gender:" & person.Gender & vbCrLf &
+                    "ContactNumber:" & person.ContactNumber & vbCrLf &
+                    "Email:" & person.Email & vbCrLf &
+                    "Role:" & person.Role & vbCrLf &
+                    "Maritalstatus:" & person.MaritalStatus & vbCrLf &
+                    "Interest:" & person.Interest, vbInformation, "Personal confirmation")
+
+
                 Next
             End Using
         Catch ex As OleDbException
@@ -72,9 +71,12 @@ Public Class person
         Catch ex As Exception
             MessageBox.Show("Unexpected Error: " & ex.Message & vbNewLine & ex.StackTrace, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
-        conn.Close()
+
     End Sub
 
+    ''' <summary>
+    ''' 
+    ''' </summary>
     Public Sub loadPersonaldataFromDatabase()
         Try
             Using conn As New OleDbConnection(Module1.connectionString)
@@ -93,6 +95,17 @@ Public Class person
             'MessageBox.Show("Error Loading personnel data from database: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
             MessageBox.Show("Error Loading personnel data from database: " & ex.Message & vbNewLine & ex.StackTrace, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
+
+        ' Set tooltips For buttons
+        ToolTip1.SetToolTip(Button4, "Dashboard")
+        ToolTip1.SetToolTip(btnSubmit, "Save")
+        ToolTip1.SetToolTip(BtnEdit, "Edit")
+        ToolTip1.SetToolTip(btnClear, "Clear")
+        ToolTip1.SetToolTip(btnGetInput, "Input")
+        ToolTip1.SetToolTip(Button1, "Refresh")
+        ToolTip1.SetToolTip(Button2, "Filter")
+        ToolTip1.SetToolTip(Button3, "Delete")
+
     End Sub
 
     Private Sub populatedDataGridview()
@@ -118,7 +131,7 @@ Public Class person
         Dim connections As New OleDb.OleDbConnection(connectionString)
         'PopulateComboBox()
 
-        connections.Open()
+        conn.Open()
 
         Try
             ' Display the connection status on a button with a green background  
@@ -137,7 +150,7 @@ Public Class person
             loadPersonaldataFromDatabase()
 
             ' Close the database connection  
-            connections.Close()
+            conn.Close()
         End Try
 
         ' Disable certain buttons if the connection is not established  
@@ -276,12 +289,12 @@ Public Class person
         If DataGridView1.SelectedRows.Count > 0 Then
             Dim selectedRow As DataGridViewRow = DataGridView1.SelectedRows(0)
             'Load the data from  the selected row into UI controls 
-            TextBox1.Text = selectedRow.Cells("FirstName").Value.ToString()
-            TextBox2.Text = selectedRow.Cells("LastName").Value.ToString()
-            DateTimePicker1.Text = selectedRow.Cells("Dates").Value.ToString()
-            ComboBox1.Text = selectedRow.Cells("Gender").Value.ToString()
+            'TextBox1.Text = selectedRow.Cells("FirstName").Value.ToString()
+            'TextBox2.Text = selectedRow.Cells("LastName").Value.ToString()
+            'DateTimePicker1.Text = selectedRow.Cells("Dates").Value.ToString()
+            'ComboBox1.Text = selectedRow.Cells("Gender").Value.ToString()
             TextBox4.Text = selectedRow.Cells("ContactNumber").Value.ToString()
-            TextBox5.Text = selectedRow.Cells("Email").Value.ToString()
+            'TextBox5.Text = selectedRow.Cells("Email").Value.ToString()
             ComboBox2.Text = selectedRow.Cells("Role").Value.ToString()
             ComboBox3.Text = selectedRow.Cells("MaritalStatus").Value.ToString()
             TextBox3.Text = selectedRow.Cells("Interest").Value.ToString()
@@ -307,7 +320,7 @@ Public Class person
 
     End Sub
 
-    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
+    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles BtnEdit.Click
         If DataGridView1.SelectedRows.Count = 0 Then
             MessageBox.Show("Please select a record to update.", "No Selection", MessageBoxButtons.OK, MessageBoxIcon.Warning)
             Return
@@ -330,11 +343,11 @@ Public Class person
 
                 ' Get the ID of the selected row (assuming your table has a primary key named "ID")  
                 Dim selectedRow As DataGridViewRow = DataGridView1.SelectedRows(0)
-                Dim ID As Integer = Convert.ToInt32(selectedRow.Cells("ID").Value) ' Change "ID" to your primary key column name  
+                'Dim ID As Integer = Convert.ToInt32(selectedRow.Cells("ID").Value) ' Change "ID" to your primary key column name  
 
-                ' Create an OleDbCommand to update the expense data in the database  
-                Dim cmd As New OleDbCommand("UPDATE peresonaldetails] SET [FirstName] = ?, [LastName]  = ?, [DateOfBirth] = ?, [Gender] = ?, [ContactNumber] = ?, [Email] = ?, [Role] = ?[MaritalStatus]=?[Interest]=?WHERE [ID] = ?", conn)
+                '' Create an OleDbCommand to update the expense data in the database  
 
+                Dim cmd As New OleDbCommand("UPDATE personaldetails SET [FirstName] = ?, [LastName]  = ?, [DateOfBirth] = ?, [Gender] = ?, [ContactNumber] = ?, [MaritalStatus] = ?, [Interest] = ? WHERE [ID] = ?", conn)
                 ' Set the parameter values from the UI controls  
 
                 cmd.Parameters.AddWithValue("@FirstName", TextBox1.Text)
@@ -346,9 +359,9 @@ Public Class person
                 cmd.Parameters.AddWithValue("@Role", ComboBox2.SelectedItem.ToString)
                 cmd.Parameters.AddWithValue("@ MaritalStatus", ComboBox3.SelectedItem.ToString)
                 cmd.Parameters.AddWithValue("@Interest", TextBox3.Text)
+                'cmd.Parameters.AddWithValue("@ID", personsID) ' Primary key for matching record  
+                'cmd.ExecuteNonQuery()
 
-                'cmd.Parameters.AddWithValue("@ID", ExpenseID) ' Primary key for matching record  
-                cmd.ExecuteNonQuery()
 
 
                 MsgBox("Expense Updated Successfuly!", vbInformation, "Update Confirmation")
@@ -373,7 +386,7 @@ Public Class person
             Dim selectedRow As DataGridViewRow = DataGridView1.SelectedRows(0)
 
             ' Assuming there is an "ID" column which is the primary key in the database  
-            Dim expenseId As Integer = Convert.ToInt32(selectedRow.Cells("ID").Value) ' Replace "ID" with your actual column name  
+            Dim personaldetailsId As Integer = Convert.ToInt32(selectedRow.Cells("ID").Value) ' Replace "ID" with your actual column name  
 
             ' Confirm deletion  
             Dim confirmationResult As DialogResult = MessageBox.Show("Are you sure you want to delete this expense?", "Confirm Deletion", MessageBoxButtons.YesNo, MessageBoxIcon.Warning)
@@ -384,8 +397,8 @@ Public Class person
                         conn.Open()
 
                         ' Create the delete command  
-                        Dim cmd As New OleDbCommand("DELETE FROM [Expenses] WHERE [ID] = ?", conn)
-                        cmd.Parameters.AddWithValue("@ID", expenseId) ' Primary key for matching record  
+                        Dim cmd As New OleDbCommand("DELETE FROM [personaldetails] WHERE [ID] = ?", conn)
+                        cmd.Parameters.AddWithValue("@ID", personaldetailsId) ' Primary key for matching record  
 
                         ' Execute the delete command  
                         Dim rowsAffected As Integer = cmd.ExecuteNonQuery()
@@ -395,20 +408,32 @@ Public Class person
                             ' Optionally refresh DataGridView or reload from database  
                             'PopulateDataGridView()
                         Else
-                            MessageBox.Show("No expense was deleted. Please check if the ID exists.", "Deletion Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                            MessageBox.Show("No  personaldetails  was deleted. Please check if the ID exists.", "Deletion Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
                         End If
                     End Using
 
                 Catch ex As Exception
-                    MessageBox.Show($"An error occurred while deleting the expense: {ex.Message}", "Deletion Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                    MessageBox.Show($"An error occurred while deleting the personaldetails: {ex.Message}", "Deletion Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
                 End Try
             End If
         Else
-            MessageBox.Show("Please select an expense to delete.", "Deletion Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            MessageBox.Show("Please select an personaldetails to delete.", "Deletion Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
         End If
     End Sub
 
     Private Sub DataGridView1_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridView1.CellContentClick
+
+    End Sub
+
+    Private Sub Button1_Click_1(sender As Object, e As EventArgs) Handles Button1.Click
+
+    End Sub
+
+    Private Sub Panel1_Paint(sender As Object, e As PaintEventArgs)
+
+    End Sub
+
+    Private Sub TextBox4_TextChanged(sender As Object, e As EventArgs) Handles TextBox4.TextChanged
 
     End Sub
 End Class
