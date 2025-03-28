@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25123.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "House hold management", "HouseHoldManagement\House hold management.vbproj", "{1A4CB29B-C7B2-4151-B290-CDBBE182ACBC}"
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "Murangi M", "HouseHoldManagement\Murangi M.vbproj", "{1A4CB29B-C7B2-4151-B290-CDBBE182ACBC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
