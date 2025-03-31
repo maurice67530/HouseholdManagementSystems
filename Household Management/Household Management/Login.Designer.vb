@@ -33,16 +33,18 @@ Partial Class Login
         '
         'Button1
         '
-        Me.Button1.Location = New System.Drawing.Point(210, 197)
+        Me.Button1.BackColor = System.Drawing.SystemColors.InactiveCaption
+        Me.Button1.Location = New System.Drawing.Point(210, 198)
         Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(98, 26)
+        Me.Button1.Size = New System.Drawing.Size(98, 25)
         Me.Button1.TabIndex = 0
-        Me.Button1.Text = "Log-In"
-        Me.Button1.UseVisualStyleBackColor = True
+        Me.Button1.Text = "Log- in"
+        Me.Button1.UseVisualStyleBackColor = False
         '
         'Label1
         '
         Me.Label1.AutoSize = True
+        Me.Label1.BackColor = System.Drawing.SystemColors.GradientInactiveCaption
         Me.Label1.Font = New System.Drawing.Font("MingLiU-ExtB", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label1.Location = New System.Drawing.Point(118, 29)
         Me.Label1.Name = "Label1"
@@ -86,12 +88,13 @@ Partial Class Login
         '
         'Button2
         '
+        Me.Button2.BackColor = System.Drawing.SystemColors.InactiveCaption
         Me.Button2.Location = New System.Drawing.Point(211, 229)
         Me.Button2.Name = "Button2"
         Me.Button2.Size = New System.Drawing.Size(97, 23)
         Me.Button2.TabIndex = 6
         Me.Button2.Text = "Register"
-        Me.Button2.UseVisualStyleBackColor = True
+        Me.Button2.UseVisualStyleBackColor = False
         '
         'Login
         '

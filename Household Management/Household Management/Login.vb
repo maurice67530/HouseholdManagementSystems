@@ -4,38 +4,48 @@ Public Class Login
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
 
         Try
-            'conn.Open()
+            conn.Open()
+
             Dim cmd As New OleDbCommand("SELECT Role FROM Users WHERE Username = ? AND Password = ?", conn)
+
             cmd.Parameters.AddWithValue("?", TextBox1.Text)
-            cmd.Parameters.AddWithValue("?", TextBox2.Text) ' Ideally, hash and compare passwords
+            cmd.Parameters.AddWithValue("?", TextBox2.Text)
 
-            Dim role As Object = cmd.ExecuteScalar()
+            Dim Role As Object = cmd.ExecuteScalar()
 
-            If role IsNot Nothing Then
+            If Role IsNot Nothing Then
+
                 MessageBox.Show("Login Successful!", "Welcome", MessageBoxButtons.OK, MessageBoxIcon.Information)
 
-                '' Redirect based on role
-                'Select Case role.ToString()
-                '    Case "Admin"
-                '        AdminDashboard.Show()
-                '    Case "User"
-                '        UserDashboard.Show()
-                '    Case Else
-                '        MessageBox.Show("Unknown role.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-                'End Select
+                Select Case Role.ToString()
+                    Case "Admin"
+                        'Dashboard.Show()
+                    Case "Members"
+                       ' Dashboard.Show()
+                    Case "Finance"
+                        'Dashboard.Show()
+                    Case "Chef"
+                        'Dashboard.Show()
+                    Case Else
+                        MessageBox.Show("Unknown role.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                End Select
 
-                Me.Hide() ' Hide Login Form
+                Me.Hide()
             Else
                 MessageBox.Show("Invalid Username or Password.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
             End If
 
         Catch ex As Exception
+
             MessageBox.Show("Error: " & ex.Message)
         Finally
-            ' conn.Close()
+            conn.Close()
         End Try
     End Sub
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
+        'Registration.showDialog()
+    End Sub
+    Private Sub Login_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
     End Sub
 End Class
