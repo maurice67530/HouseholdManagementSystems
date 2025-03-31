@@ -1,0 +1,11 @@
+C:\Users\Muhanelwa\Source\Repos\HouseholdManagementSystems\Household2\Household2\bin\Debug\Household2.exe.config
+C:\Users\Muhanelwa\Source\Repos\HouseholdManagementSystems\Household2\Household2\bin\Debug\Household2.exe
+C:\Users\Muhanelwa\Source\Repos\HouseholdManagementSystems\Household2\Household2\bin\Debug\Household2.pdb
+C:\Users\Muhanelwa\Source\Repos\HouseholdManagementSystems\Household2\Household2\bin\Debug\Household2.xml
+C:\Users\Muhanelwa\Source\Repos\HouseholdManagementSystems\Household2\Household2\obj\Debug\Household2.vbprojResolveAssemblyReference.cache
+C:\Users\Muhanelwa\Source\Repos\HouseholdManagementSystems\Household2\Household2\obj\Debug\Household2.Form1.resources
+C:\Users\Muhanelwa\Source\Repos\HouseholdManagementSystems\Household2\Household2\obj\Debug\Household2.Resources.resources
+C:\Users\Muhanelwa\Source\Repos\HouseholdManagementSystems\Household2\Household2\obj\Debug\Household2.vbproj.GenerateResource.Cache
+C:\Users\Muhanelwa\Source\Repos\HouseholdManagementSystems\Household2\Household2\obj\Debug\Household2.exe
+C:\Users\Muhanelwa\Source\Repos\HouseholdManagementSystems\Household2\Household2\obj\Debug\Household2.xml
+C:\Users\Muhanelwa\Source\Repos\HouseholdManagementSystems\Household2\Household2\obj\Debug\Household2.pdb
