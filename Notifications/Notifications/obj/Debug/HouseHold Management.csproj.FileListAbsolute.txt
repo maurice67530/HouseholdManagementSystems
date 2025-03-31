@@ -1,0 +1,9 @@
+C:\Users\Rotondwa\Source\Repos\HouseholdManagementSystems\Notifications\Notifications\bin\Debug\Notifications.exe.config
+C:\Users\Rotondwa\Source\Repos\HouseholdManagementSystems\Notifications\Notifications\bin\Debug\Notifications.exe
+C:\Users\Rotondwa\Source\Repos\HouseholdManagementSystems\Notifications\Notifications\bin\Debug\Notifications.pdb
+C:\Users\Rotondwa\Source\Repos\HouseholdManagementSystems\Notifications\Notifications\obj\Debug\HouseHold Management.csprojResolveAssemblyReference.cache
+C:\Users\Rotondwa\Source\Repos\HouseholdManagementSystems\Notifications\Notifications\obj\Debug\Notifications.Notifications.resources
+C:\Users\Rotondwa\Source\Repos\HouseholdManagementSystems\Notifications\Notifications\obj\Debug\Notifications.Properties.Resources.resources
+C:\Users\Rotondwa\Source\Repos\HouseholdManagementSystems\Notifications\Notifications\obj\Debug\HouseHold Management.csproj.GenerateResource.Cache
+C:\Users\Rotondwa\Source\Repos\HouseholdManagementSystems\Notifications\Notifications\obj\Debug\Notifications.exe
+C:\Users\Rotondwa\Source\Repos\HouseholdManagementSystems\Notifications\Notifications\obj\Debug\Notifications.pdb
