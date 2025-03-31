@@ -5,11 +5,6 @@ VisualStudioVersion = 14.0.25123.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "Notification", "Notification\Notification.vbproj", "{4EEC1C85-0DBA-47A9-912F-E4522BF656CE}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{CD29BE2B-7117-41E2-A7C1-2B7FDD12CC12}"
-	ProjectSection(SolutionItems) = preProject
-		..\HMS.accdb = ..\HMS.accdb
-	EndProjectSection
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

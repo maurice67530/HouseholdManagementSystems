@@ -22,19 +22,17 @@ Partial Class Form1
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.components = New System.ComponentModel.Container()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.ListBox1 = New System.Windows.Forms.ListBox()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Button2 = New System.Windows.Forms.Button()
         Me.Button1 = New System.Windows.Forms.Button()
-        Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
         Me.SuspendLayout()
         '
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(12, 317)
+        Me.Label2.Location = New System.Drawing.Point(30, 303)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(103, 13)
         Me.Label2.TabIndex = 10
@@ -43,16 +41,16 @@ Partial Class Form1
         'ListBox1
         '
         Me.ListBox1.FormattingEnabled = True
-        Me.ListBox1.Location = New System.Drawing.Point(12, 44)
+        Me.ListBox1.Location = New System.Drawing.Point(33, 72)
         Me.ListBox1.Name = "ListBox1"
-        Me.ListBox1.Size = New System.Drawing.Size(242, 212)
+        Me.ListBox1.Size = New System.Drawing.Size(242, 199)
         Me.ListBox1.TabIndex = 9
         '
         'Label1
         '
         Me.Label1.AutoSize = True
         Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 20.25!, CType((System.Drawing.FontStyle.Bold Or System.Drawing.FontStyle.Italic), System.Drawing.FontStyle), System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.Location = New System.Drawing.Point(6, 10)
+        Me.Label1.Location = New System.Drawing.Point(27, 16)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(248, 31)
         Me.Label1.TabIndex = 8
@@ -60,18 +58,18 @@ Partial Class Form1
         '
         'Button2
         '
-        Me.Button2.Location = New System.Drawing.Point(145, 271)
+        Me.Button2.Location = New System.Drawing.Point(166, 277)
         Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(109, 43)
+        Me.Button2.Size = New System.Drawing.Size(109, 23)
         Me.Button2.TabIndex = 7
         Me.Button2.Text = "Clear Notification"
         Me.Button2.UseVisualStyleBackColor = True
         '
         'Button1
         '
-        Me.Button1.Location = New System.Drawing.Point(12, 271)
+        Me.Button1.Location = New System.Drawing.Point(33, 277)
         Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(109, 43)
+        Me.Button1.Size = New System.Drawing.Size(109, 23)
         Me.Button1.TabIndex = 6
         Me.Button1.Text = "Mark As Read"
         Me.Button1.UseVisualStyleBackColor = True
@@ -80,7 +78,7 @@ Partial Class Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(284, 336)
+        Me.ClientSize = New System.Drawing.Size(336, 342)
         Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.ListBox1)
         Me.Controls.Add(Me.Label1)
@@ -98,5 +96,4 @@ Partial Class Form1
     Friend WithEvents Label1 As Label
     Friend WithEvents Button2 As Button
     Friend WithEvents Button1 As Button
-    Friend WithEvents Timer1 As Timer
 End Class
