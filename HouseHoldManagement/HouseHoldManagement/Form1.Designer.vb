@@ -30,14 +30,13 @@ Partial Class Form1
         Me.Label6 = New System.Windows.Forms.Label()
         Me.Label7 = New System.Windows.Forms.Label()
         Me.Label8 = New System.Windows.Forms.Label()
-        Me.TextBox1 = New System.Windows.Forms.TextBox()
-        Me.TextBox6 = New System.Windows.Forms.TextBox()
-        Me.TextBox7 = New System.Windows.Forms.TextBox()
+        Me.TXTtitle = New System.Windows.Forms.TextBox()
+        Me.txtdes = New System.Windows.Forms.TextBox()
         Me.DateTimePicker1 = New System.Windows.Forms.DateTimePicker()
-        Me.ComboBox1 = New System.Windows.Forms.ComboBox()
-        Me.ComboBox2 = New System.Windows.Forms.ComboBox()
-        Me.ComboBox3 = New System.Windows.Forms.ComboBox()
-        Me.ComboBox4 = New System.Windows.Forms.ComboBox()
+        Me.cmbassi = New System.Windows.Forms.ComboBox()
+        Me.cmbpri = New System.Windows.Forms.ComboBox()
+        Me.cmbstatus = New System.Windows.Forms.ComboBox()
+        Me.cmbfre = New System.Windows.Forms.ComboBox()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.Panel2 = New System.Windows.Forms.Panel()
         Me.Button1 = New System.Windows.Forms.Button()
@@ -46,8 +45,10 @@ Partial Class Form1
         Me.Button4 = New System.Windows.Forms.Button()
         Me.Button5 = New System.Windows.Forms.Button()
         Me.Button6 = New System.Windows.Forms.Button()
+        Me.NumericUpDown1 = New System.Windows.Forms.NumericUpDown()
         Me.Panel1.SuspendLayout()
         Me.Panel2.SuspendLayout()
+        CType(Me.NumericUpDown1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'Label1
@@ -122,26 +123,19 @@ Partial Class Form1
         Me.Label8.TabIndex = 7
         Me.Label8.Text = "Description:"
         '
-        'TextBox1
+        'TXTtitle
         '
-        Me.TextBox1.Location = New System.Drawing.Point(83, 14)
-        Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.Size = New System.Drawing.Size(149, 20)
-        Me.TextBox1.TabIndex = 8
+        Me.TXTtitle.Location = New System.Drawing.Point(83, 14)
+        Me.TXTtitle.Name = "TXTtitle"
+        Me.TXTtitle.Size = New System.Drawing.Size(149, 20)
+        Me.TXTtitle.TabIndex = 8
         '
-        'TextBox6
+        'txtdes
         '
-        Me.TextBox6.Location = New System.Drawing.Point(83, 52)
-        Me.TextBox6.Name = "TextBox6"
-        Me.TextBox6.Size = New System.Drawing.Size(149, 20)
-        Me.TextBox6.TabIndex = 13
-        '
-        'TextBox7
-        '
-        Me.TextBox7.Location = New System.Drawing.Point(83, 86)
-        Me.TextBox7.Name = "TextBox7"
-        Me.TextBox7.Size = New System.Drawing.Size(149, 20)
-        Me.TextBox7.TabIndex = 14
+        Me.txtdes.Location = New System.Drawing.Point(83, 86)
+        Me.txtdes.Name = "txtdes"
+        Me.txtdes.Size = New System.Drawing.Size(149, 20)
+        Me.txtdes.TabIndex = 14
         '
         'DateTimePicker1
         '
@@ -150,49 +144,49 @@ Partial Class Form1
         Me.DateTimePicker1.Size = New System.Drawing.Size(203, 20)
         Me.DateTimePicker1.TabIndex = 15
         '
-        'ComboBox1
+        'cmbassi
         '
-        Me.ComboBox1.FormattingEnabled = True
-        Me.ComboBox1.Location = New System.Drawing.Point(141, 9)
-        Me.ComboBox1.Name = "ComboBox1"
-        Me.ComboBox1.Size = New System.Drawing.Size(121, 21)
-        Me.ComboBox1.TabIndex = 16
+        Me.cmbassi.FormattingEnabled = True
+        Me.cmbassi.Location = New System.Drawing.Point(141, 9)
+        Me.cmbassi.Name = "cmbassi"
+        Me.cmbassi.Size = New System.Drawing.Size(121, 21)
+        Me.cmbassi.TabIndex = 16
         '
-        'ComboBox2
+        'cmbpri
         '
-        Me.ComboBox2.FormattingEnabled = True
-        Me.ComboBox2.Location = New System.Drawing.Point(141, 47)
-        Me.ComboBox2.Name = "ComboBox2"
-        Me.ComboBox2.Size = New System.Drawing.Size(121, 21)
-        Me.ComboBox2.TabIndex = 17
+        Me.cmbpri.FormattingEnabled = True
+        Me.cmbpri.Location = New System.Drawing.Point(141, 47)
+        Me.cmbpri.Name = "cmbpri"
+        Me.cmbpri.Size = New System.Drawing.Size(121, 21)
+        Me.cmbpri.TabIndex = 17
         '
-        'ComboBox3
+        'cmbstatus
         '
-        Me.ComboBox3.FormattingEnabled = True
-        Me.ComboBox3.Location = New System.Drawing.Point(141, 80)
-        Me.ComboBox3.Name = "ComboBox3"
-        Me.ComboBox3.Size = New System.Drawing.Size(121, 21)
-        Me.ComboBox3.TabIndex = 18
+        Me.cmbstatus.FormattingEnabled = True
+        Me.cmbstatus.Location = New System.Drawing.Point(141, 80)
+        Me.cmbstatus.Name = "cmbstatus"
+        Me.cmbstatus.Size = New System.Drawing.Size(121, 21)
+        Me.cmbstatus.TabIndex = 18
         '
-        'ComboBox4
+        'cmbfre
         '
-        Me.ComboBox4.FormattingEnabled = True
-        Me.ComboBox4.Location = New System.Drawing.Point(141, 115)
-        Me.ComboBox4.Name = "ComboBox4"
-        Me.ComboBox4.Size = New System.Drawing.Size(121, 21)
-        Me.ComboBox4.TabIndex = 19
+        Me.cmbfre.FormattingEnabled = True
+        Me.cmbfre.Location = New System.Drawing.Point(141, 115)
+        Me.cmbfre.Name = "cmbfre"
+        Me.cmbfre.Size = New System.Drawing.Size(121, 21)
+        Me.cmbfre.TabIndex = 19
         '
         'Panel1
         '
         Me.Panel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.Panel1.Controls.Add(Me.NumericUpDown1)
         Me.Panel1.Controls.Add(Me.Label2)
         Me.Panel1.Controls.Add(Me.Label1)
         Me.Panel1.Controls.Add(Me.Label7)
         Me.Panel1.Controls.Add(Me.Label8)
-        Me.Panel1.Controls.Add(Me.TextBox1)
+        Me.Panel1.Controls.Add(Me.TXTtitle)
         Me.Panel1.Controls.Add(Me.DateTimePicker1)
-        Me.Panel1.Controls.Add(Me.TextBox6)
-        Me.Panel1.Controls.Add(Me.TextBox7)
+        Me.Panel1.Controls.Add(Me.txtdes)
         Me.Panel1.Location = New System.Drawing.Point(12, 95)
         Me.Panel1.Name = "Panel1"
         Me.Panel1.Size = New System.Drawing.Size(293, 181)
@@ -203,12 +197,12 @@ Partial Class Form1
         Me.Panel2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         Me.Panel2.Controls.Add(Me.Label3)
         Me.Panel2.Controls.Add(Me.Label4)
-        Me.Panel2.Controls.Add(Me.ComboBox4)
+        Me.Panel2.Controls.Add(Me.cmbfre)
         Me.Panel2.Controls.Add(Me.Label5)
-        Me.Panel2.Controls.Add(Me.ComboBox3)
+        Me.Panel2.Controls.Add(Me.cmbstatus)
         Me.Panel2.Controls.Add(Me.Label6)
-        Me.Panel2.Controls.Add(Me.ComboBox2)
-        Me.Panel2.Controls.Add(Me.ComboBox1)
+        Me.Panel2.Controls.Add(Me.cmbpri)
+        Me.Panel2.Controls.Add(Me.cmbassi)
         Me.Panel2.Location = New System.Drawing.Point(306, 95)
         Me.Panel2.Name = "Panel2"
         Me.Panel2.Size = New System.Drawing.Size(291, 181)
@@ -268,6 +262,13 @@ Partial Class Form1
         Me.Button6.Text = "Save"
         Me.Button6.UseVisualStyleBackColor = True
         '
+        'NumericUpDown1
+        '
+        Me.NumericUpDown1.Location = New System.Drawing.Point(83, 50)
+        Me.NumericUpDown1.Name = "NumericUpDown1"
+        Me.NumericUpDown1.Size = New System.Drawing.Size(149, 20)
+        Me.NumericUpDown1.TabIndex = 16
+        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -288,6 +289,7 @@ Partial Class Form1
         Me.Panel1.PerformLayout()
         Me.Panel2.ResumeLayout(False)
         Me.Panel2.PerformLayout()
+        CType(Me.NumericUpDown1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -300,14 +302,13 @@ Partial Class Form1
     Friend WithEvents Label6 As Label
     Friend WithEvents Label7 As Label
     Friend WithEvents Label8 As Label
-    Friend WithEvents TextBox1 As TextBox
-    Friend WithEvents TextBox6 As TextBox
-    Friend WithEvents TextBox7 As TextBox
+    Friend WithEvents TXTtitle As TextBox
+    Friend WithEvents txtdes As TextBox
     Friend WithEvents DateTimePicker1 As DateTimePicker
-    Friend WithEvents ComboBox1 As ComboBox
-    Friend WithEvents ComboBox2 As ComboBox
-    Friend WithEvents ComboBox3 As ComboBox
-    Friend WithEvents ComboBox4 As ComboBox
+    Friend WithEvents cmbassi As ComboBox
+    Friend WithEvents cmbpri As ComboBox
+    Friend WithEvents cmbstatus As ComboBox
+    Friend WithEvents cmbfre As ComboBox
     Friend WithEvents Panel1 As Panel
     Friend WithEvents Panel2 As Panel
     Friend WithEvents Button1 As Button
@@ -316,4 +317,5 @@ Partial Class Form1
     Friend WithEvents Button4 As Button
     Friend WithEvents Button5 As Button
     Friend WithEvents Button6 As Button
+    Friend WithEvents NumericUpDown1 As NumericUpDown
 End Class

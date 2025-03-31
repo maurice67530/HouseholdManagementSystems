@@ -5,6 +5,11 @@ VisualStudioVersion = 14.0.25123.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "Murangi M", "HouseHoldManagement\Murangi M.vbproj", "{1A4CB29B-C7B2-4151-B290-CDBBE182ACBC}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{D2BD09C8-6F53-492E-9BBD-43F139CEF4AA}"
+	ProjectSection(SolutionItems) = preProject
+		..\HMS.accdb = ..\HMS.accdb
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
