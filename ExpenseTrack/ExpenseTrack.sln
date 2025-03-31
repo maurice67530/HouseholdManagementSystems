@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25123.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "ExpenseTrack", "ExpenseTrack\ExpenseTrack.vbproj", "{7110EE4A-53B4-4104-BB4B-E1E9C9895527}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7110EE4A-53B4-4104-BB4B-E1E9C9895527}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7110EE4A-53B4-4104-BB4B-E1E9C9895527}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7110EE4A-53B4-4104-BB4B-E1E9C9895527}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7110EE4A-53B4-4104-BB4B-E1E9C9895527}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
