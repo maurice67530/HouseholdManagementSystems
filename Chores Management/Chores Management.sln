@@ -1,0 +1,27 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25123.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "Chores Management", "Chores Management\Chores Management.vbproj", "{FC4660B8-1BBB-429C-9F7F-9EA9D7033E8B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{767C675C-D1F4-47A2-9F49-6C13E5F83E0B}"
+	ProjectSection(SolutionItems) = preProject
+		..\HMS.accdb = ..\HMS.accdb
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FC4660B8-1BBB-429C-9F7F-9EA9D7033E8B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FC4660B8-1BBB-429C-9F7F-9EA9D7033E8B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FC4660B8-1BBB-429C-9F7F-9EA9D7033E8B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FC4660B8-1BBB-429C-9F7F-9EA9D7033E8B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
