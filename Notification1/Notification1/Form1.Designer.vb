@@ -39,7 +39,7 @@ Partial Class Form1
         '
         Me.Label1.AutoSize = True
         Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, CType((System.Drawing.FontStyle.Bold Or System.Drawing.FontStyle.Italic), System.Drawing.FontStyle), System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.Location = New System.Drawing.Point(63, 21)
+        Me.Label1.Location = New System.Drawing.Point(84, 26)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(152, 20)
         Me.Label1.TabIndex = 0
@@ -84,7 +84,7 @@ Partial Class Form1
         'ListBox1
         '
         Me.ListBox1.FormattingEnabled = True
-        Me.ListBox1.Location = New System.Drawing.Point(13, 172)
+        Me.ListBox1.Location = New System.Drawing.Point(12, 172)
         Me.ListBox1.Name = "ListBox1"
         Me.ListBox1.Size = New System.Drawing.Size(199, 69)
         Me.ListBox1.TabIndex = 5

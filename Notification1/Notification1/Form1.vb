@@ -166,32 +166,6 @@ Public Class Form1
     ' Function to check for overdue tasks and send a notification
     Private Sub CheckOverdueTasks()
         Dim conn As New OleDbConnection(NotificationModule.connectionString)
-        'Dim query As String = "SELECT TaskName, DueDate, AssignedTo FROM Tasks WHERE DueDate < @CurrentDate AND Status <> 'Completed'"
-
-        'Using connection As New OleDbConnection(connectionString)
-        '    Dim command As New OleDbCommand(query, connection)
-        '    command.Parameters.AddWithValue("@CurrentDate", DateTime.Now) ' Current Date
-
-        '    connection.Open()
-
-        '    Dim reader As OleDbDataReader = command.ExecuteReader()
-
-        '    ' Check if there are any overdue tasks
-        '    If reader.HasRows Then
-        '        While reader.Read()
-        '            Dim taskName As String = reader("TaskName").ToString()
-        '            Dim dueDate As DateTime = Convert.ToDateTime(reader("DueDate"))
-        '            Dim assignedTo As Integer = Convert.ToInt32(reader("AssignedTo"))
-
-        '            ' Trigger overdue notification
-        '            Dim message As String = $"Overdue Task: {taskName} was due on {dueDate.ToShortDateString()}."
-        '            SendNotification(message, "Task", assignedTo)
-        '        End While
-        '    End If
-
-        '    reader.Close()
-        'End Using
-
         Try
             Dim query As String = "SELECT TaskName FROM Tasks WHERE DueDate < Date() AND Status <> 'Completed'"
             Dim adapter As New OleDbDataAdapter(query, conn)
