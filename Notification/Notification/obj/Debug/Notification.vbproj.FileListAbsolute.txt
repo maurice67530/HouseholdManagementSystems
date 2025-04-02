@@ -1,1 +1,10 @@
-C:\Users\Rotondwa\Source\Repos\HouseholdManagementSystems\Notification\Notification\bin\Debug\Notification.exe.config
+C:\Users\Rotondwa\Source\Repos\HouseholdManagementSystems\Notification\Notification\bin\Debug\Notification.exe
+C:\Users\Rotondwa\Source\Repos\HouseholdManagementSystems\Notification\Notification\bin\Debug\Notification.pdb
+C:\Users\Rotondwa\Source\Repos\HouseholdManagementSystems\Notification\Notification\bin\Debug\Notification.xml
+C:\Users\Rotondwa\Source\Repos\HouseholdManagementSystems\Notification\Notification\obj\Debug\Notification.vbprojResolveAssemblyReference.cache
+C:\Users\Rotondwa\Source\Repos\HouseholdManagementSystems\Notification\Notification\obj\Debug\Notification.Form1.resources
+C:\Users\Rotondwa\Source\Repos\HouseholdManagementSystems\Notification\Notification\obj\Debug\Notification.Resources.resources
+C:\Users\Rotondwa\Source\Repos\HouseholdManagementSystems\Notification\Notification\obj\Debug\Notification.vbproj.GenerateResource.Cache
+C:\Users\Rotondwa\Source\Repos\HouseholdManagementSystems\Notification\Notification\obj\Debug\Notification.exe
+C:\Users\Rotondwa\Source\Repos\HouseholdManagementSystems\Notification\Notification\obj\Debug\Notification.xml
+C:\Users\Rotondwa\Source\Repos\HouseholdManagementSystems\Notification\Notification\obj\Debug\Notification.pdb
