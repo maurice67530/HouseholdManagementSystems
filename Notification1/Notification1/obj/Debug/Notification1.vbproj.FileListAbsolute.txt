@@ -1,1 +1,11 @@
 C:\Users\Muhanelwa\Source\Repos\HouseholdManagementSystems\Notification1\Notification1\bin\Debug\Notification1.exe.config
+C:\Users\Muhanelwa\Source\Repos\HouseholdManagementSystems\Notification1\Notification1\bin\Debug\Notification1.exe
+C:\Users\Muhanelwa\Source\Repos\HouseholdManagementSystems\Notification1\Notification1\bin\Debug\Notification1.pdb
+C:\Users\Muhanelwa\Source\Repos\HouseholdManagementSystems\Notification1\Notification1\bin\Debug\Notification1.xml
+C:\Users\Muhanelwa\Source\Repos\HouseholdManagementSystems\Notification1\Notification1\obj\Debug\Notification1.vbprojResolveAssemblyReference.cache
+C:\Users\Muhanelwa\Source\Repos\HouseholdManagementSystems\Notification1\Notification1\obj\Debug\Notification1.Form1.resources
+C:\Users\Muhanelwa\Source\Repos\HouseholdManagementSystems\Notification1\Notification1\obj\Debug\Notification1.Resources.resources
+C:\Users\Muhanelwa\Source\Repos\HouseholdManagementSystems\Notification1\Notification1\obj\Debug\Notification1.vbproj.GenerateResource.Cache
+C:\Users\Muhanelwa\Source\Repos\HouseholdManagementSystems\Notification1\Notification1\obj\Debug\Notification1.exe
+C:\Users\Muhanelwa\Source\Repos\HouseholdManagementSystems\Notification1\Notification1\obj\Debug\Notification1.xml
+C:\Users\Muhanelwa\Source\Repos\HouseholdManagementSystems\Notification1\Notification1\obj\Debug\Notification1.pdb
