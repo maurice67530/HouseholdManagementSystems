@@ -3,7 +3,8 @@ Imports System.Data.OleDb
 
 Public Class Form1
 
-    Dim Conn As New OleDbConnection(Notificationns.connectionString)
+    Dim Conn As New OleDbConnection(Notifications.connectionString)
+
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         ' Run all checks And then load notifications
         CheckDueTasks()
@@ -20,11 +21,11 @@ Public Class Form1
                 Dim notificationID As Integer = Integer.Parse(selectedText.Split(" - ")(0))
 
                 Dim query As String = "UPDATE Notifications SET IsRead = True WHERE ID = @id"
-                Dim cmd As New OleDbCommand(query, conn)
+                Dim cmd As New OleDbCommand(query, Conn)
                 cmd.Parameters.AddWithValue("@id", notificationID)
-                conn.Open()
+                Conn.Open()
                 cmd.ExecuteNonQuery()
-                conn.Close()
+                Conn.Close()
 
                 LoadNotifications()
             Else
