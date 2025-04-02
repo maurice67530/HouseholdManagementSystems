@@ -4,21 +4,6 @@ Public Class Form1
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         Dim Conn As New OleDbConnection(NotificationModule.connectionString)
 
-        'If ListBox1.SelectedIndex <> -1 Then
-        '    Dim selectedText As String = ListBox1.SelectedItem.ToString()
-        '    Dim ID As Integer = Convert.ToInt32(selectedText.Split(" - ")(0)) ' Extract ID
-
-        '    Dim query As String = "UPDATE Notifications SET IsRead=True WHERE NotificationID=@ID"
-        '    Dim cmd As New OleDbCommand(query, Conn)
-        '    cmd.Parameters.AddWithValue("@ID", ID)
-        '    cmd.ExecuteNonQuery()
-
-        '    LoadNotifications()
-        'Else
-        '    MessageBox.Show("Select a notification to mark as read.")
-        'End If
-
-        ''''
         If DataGridView1.SelectedRows.Count = 0 Then
             MsgBox("Please select a notification to mark as read.", MsgBoxStyle.Exclamation, "No Selection")
             Return
@@ -181,32 +166,46 @@ Public Class Form1
     ' Function to check for overdue tasks and send a notification
     Private Sub CheckOverdueTasks()
         Dim conn As New OleDbConnection(NotificationModule.connectionString)
-        Dim query As String = "SELECT TaskName, DueDate, AssignedTo FROM Tasks WHERE DueDate < @CurrentDate AND Status <> 'Completed'"
+        'Dim query As String = "SELECT TaskName, DueDate, AssignedTo FROM Tasks WHERE DueDate < @CurrentDate AND Status <> 'Completed'"
 
-        Using connection As New OleDbConnection(connectionString)
-            Dim command As New OleDbCommand(query, connection)
-            command.Parameters.AddWithValue("@CurrentDate", DateTime.Now) ' Current Date
+        'Using connection As New OleDbConnection(connectionString)
+        '    Dim command As New OleDbCommand(query, connection)
+        '    command.Parameters.AddWithValue("@CurrentDate", DateTime.Now) ' Current Date
 
-            connection.Open()
+        '    connection.Open()
 
-            Dim reader As OleDbDataReader = command.ExecuteReader()
+        '    Dim reader As OleDbDataReader = command.ExecuteReader()
 
-            ' Check if there are any overdue tasks
-            If reader.HasRows Then
-                While reader.Read()
-                    Dim taskName As String = reader("TaskName").ToString()
-                    Dim dueDate As DateTime = Convert.ToDateTime(reader("DueDate"))
-                    Dim assignedTo As Integer = Convert.ToInt32(reader("AssignedTo"))
+        '    ' Check if there are any overdue tasks
+        '    If reader.HasRows Then
+        '        While reader.Read()
+        '            Dim taskName As String = reader("TaskName").ToString()
+        '            Dim dueDate As DateTime = Convert.ToDateTime(reader("DueDate"))
+        '            Dim assignedTo As Integer = Convert.ToInt32(reader("AssignedTo"))
 
-                    ' Trigger overdue notification
-                    Dim message As String = $"Overdue Task: {taskName} was due on {dueDate.ToShortDateString()}."
-                    SendNotification(message, "Task", assignedTo)
-                End While
-            End If
+        '            ' Trigger overdue notification
+        '            Dim message As String = $"Overdue Task: {taskName} was due on {dueDate.ToShortDateString()}."
+        '            SendNotification(message, "Task", assignedTo)
+        '        End While
+        '    End If
 
-            reader.Close()
-        End Using
+        '    reader.Close()
+        'End Using
+
+        Try
+            Dim query As String = "SELECT TaskName FROM Tasks WHERE DueDate < Date() AND Status <> 'Completed'"
+            Dim adapter As New OleDbDataAdapter(query, conn)
+            Dim dt As New DataTable()
+            adapter.Fill(dt)
+
+            For Each row As DataRow In dt.Rows
+                AddNotification($"Task '{row("TaskName")}' is overdue!", "Task")
+            Next
+        Catch ex As Exception
+            Debug.WriteLine("Error checking overdue tasks: " & ex.Message)
+        End Try
     End Sub
+
 
     ' Function to add a notification to the database
     Private Sub SendNotification(message As String, category As String, userId As Integer)
