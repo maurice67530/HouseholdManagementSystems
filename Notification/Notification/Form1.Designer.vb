@@ -60,18 +60,18 @@ Partial Class Form1
         '
         'Button2
         '
-        Me.Button2.Location = New System.Drawing.Point(136, 299)
+        Me.Button2.Location = New System.Drawing.Point(136, 287)
         Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(112, 23)
+        Me.Button2.Size = New System.Drawing.Size(112, 35)
         Me.Button2.TabIndex = 7
         Me.Button2.Text = "Clear Notification"
         Me.Button2.UseVisualStyleBackColor = True
         '
         'Button1
         '
-        Me.Button1.Location = New System.Drawing.Point(6, 299)
+        Me.Button1.Location = New System.Drawing.Point(6, 287)
         Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(107, 23)
+        Me.Button1.Size = New System.Drawing.Size(107, 35)
         Me.Button1.TabIndex = 6
         Me.Button1.Text = "Mark As Read"
         Me.Button1.UseVisualStyleBackColor = True
