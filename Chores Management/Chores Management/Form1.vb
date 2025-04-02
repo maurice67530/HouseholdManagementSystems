@@ -1,16 +1,4 @@
 ﻿Public Class Form1
-    Private Sub TextBox1_TextChanged(sender As Object, e As EventArgs) Handles TXTtitle.TextChanged
-
-    End Sub
-
-    Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-
-    End Sub
-
-    Private Sub Panel2_Paint(sender As Object, e As PaintEventArgs) Handles Panel2.Paint
-
-    End Sub
-
     Private Sub Button6_Click(sender As Object, e As EventArgs) Handles Button6.Click
         'Try
         Dim chores As New chores_() With {
@@ -24,32 +12,32 @@
             .Description = txtdes.Text}
 
 
-            Dim tablename As String = "Chores"
-            Dim Cmd As New OleDbCommand($"INSERT INTO {tablename} ([Title], [AssignedTo], [Priority], [Status], [Frequency], [DueDate], [Recurring], [Description]) VALUES (?, ?, ?, ?, ?, ?, ?, ?)", conn)
+        Dim tablename As String = "Chores"
+        Dim Cmd As New OleDbCommand($"INSERT INTO {tablename} ([Title], [AssignedTo], [Priority], [Status], [Frequency], [DueDate], [Recurring], [Description]) VALUES (?, ?, ?, ?, ?, ?, ?, ?)", conn)
 
-            Cmd.Parameters.Clear()
+        Cmd.Parameters.Clear()
 
-            Cmd.Parameters.AddWithValue("@Title", chores.Title)
-            Cmd.Parameters.AddWithValue("@AssignedTo", chores.AssignedTo)
-            Cmd.Parameters.AddWithValue("@Priority", chores.Priority)
-            Cmd.Parameters.AddWithValue("@Status", chores.Status)
-            Cmd.Parameters.AddWithValue("@Frequency", chores.Frequency)
-            Cmd.Parameters.AddWithValue("@DueDate", chores.DueDate)
-            Cmd.Parameters.AddWithValue("@Recurring", chores.Recurring)
-            Cmd.Parameters.AddWithValue("@Description", chores.Description)
+        Cmd.Parameters.AddWithValue("@Title", chores.Title)
+        Cmd.Parameters.AddWithValue("@AssignedTo", chores.AssignedTo)
+        Cmd.Parameters.AddWithValue("@Priority", chores.Priority)
+        Cmd.Parameters.AddWithValue("@Status", chores.Status)
+        Cmd.Parameters.AddWithValue("@Frequency", chores.Frequency)
+        Cmd.Parameters.AddWithValue("@DueDate", chores.DueDate)
+        Cmd.Parameters.AddWithValue("@Recurring", chores.Recurring)
+        Cmd.Parameters.AddWithValue("@Description", chores.Description)
 
-            MsgBox("chores Information Addded!" & vbCrLf &
+        MsgBox("chores Information Addded!" & vbCrLf &
               "Title: " & chores.Title & vbCrLf &
               "AssignedTo:" & chores.Description & vbCrLf &
               "Priority: " & chores.Priority & vbCrLf &
               "Status : " & chores.Status & vbCrLf &
               "Frequency: " & chores.AssignedTo & vbCrLf &
-                "Recurring: " & chores.Recurring & vbCrLf &
+              "Recurring: " & chores.Recurring & vbCrLf &
               "Description: " & chores.Description & vbCrLf &
               "DueDate: " & chores.DueDate & vbCrLf & vbCrLf, vbInformation, "Chores confirmation")
 
-            MessageBox.Show("Chores Information saved to Database successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
-            Cmd.ExecuteNonQuery()
+        MessageBox.Show("Chores Information saved to Database successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
+        Cmd.ExecuteNonQuery()
 
         'Catch ex As OleDbException
         '    Debug.WriteLine($"General error in button Save: {ex.Message}")
@@ -66,4 +54,7 @@
 
     End Sub
 
+    Private Sub Button5_Click(sender As Object, e As EventArgs) Handles Button5.Click
+
+    End Sub
 End Class

@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{1A4CB29B-C7B2-4151-B290-CDBBE182ACBC}</ProjectGuid>
+    <ProjectGuid>{FC4660B8-1BBB-429C-9F7F-9EA9D7033E8B}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <StartupObject>HouseHoldManagement.My.MyApplication</StartupObject>
-    <RootNamespace>HouseHoldManagement</RootNamespace>
-    <AssemblyName>HouseHoldManagement</AssemblyName>
+    <StartupObject>Chores_Management.My.MyApplication</StartupObject>
+    <RootNamespace>Chores_Management</RootNamespace>
+    <AssemblyName>Chores Management</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <MyType>WindowsForms</MyType>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
@@ -21,7 +21,7 @@
     <DefineDebug>true</DefineDebug>
     <DefineTrace>true</DefineTrace>
     <OutputPath>bin\Debug\</OutputPath>
-    <DocumentationFile>HouseHoldManagement.xml</DocumentationFile>
+    <DocumentationFile>Chores Management.xml</DocumentationFile>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
@@ -31,7 +31,7 @@
     <DefineTrace>true</DefineTrace>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
-    <DocumentationFile>HouseHoldManagement.xml</DocumentationFile>
+    <DocumentationFile>Chores Management.xml</DocumentationFile>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
   </PropertyGroup>
   <PropertyGroup>
