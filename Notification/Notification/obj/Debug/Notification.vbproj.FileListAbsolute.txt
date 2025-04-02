@@ -8,3 +8,6 @@ C:\Users\Rotondwa\Source\Repos\HouseholdManagementSystems\Notification\Notificat
 C:\Users\Rotondwa\Source\Repos\HouseholdManagementSystems\Notification\Notification\obj\Debug\Notification.exe
 C:\Users\Rotondwa\Source\Repos\HouseholdManagementSystems\Notification\Notification\obj\Debug\Notification.xml
 C:\Users\Rotondwa\Source\Repos\HouseholdManagementSystems\Notification\Notification\obj\Debug\Notification.pdb
+C:\Users\Rotondwa\Desktop\HouseholdManagementSystems\Notification\Notification\obj\Debug\Notification.exe
+C:\Users\Rotondwa\Desktop\HouseholdManagementSystems\Notification\Notification\obj\Debug\Notification.xml
+C:\Users\Rotondwa\Desktop\HouseholdManagementSystems\Notification\Notification\obj\Debug\Notification.pdb
