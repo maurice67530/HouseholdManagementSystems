@@ -118,6 +118,33 @@
       <LastGenOutput>Settings.Designer.vb</LastGenOutput>
     </None>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-notification.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-notification-32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-received-32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-notification-96.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-received-50.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-received-32 %281%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-received-40.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-received-96.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-received-96 %281%29.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
