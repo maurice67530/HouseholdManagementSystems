@@ -142,6 +142,7 @@ Partial Class Form1
         'cmbfre
         '
         Me.cmbfre.FormattingEnabled = True
+        Me.cmbfre.Items.AddRange(New Object() {"daily"})
         Me.cmbfre.Location = New System.Drawing.Point(141, 115)
         Me.cmbfre.Name = "cmbfre"
         Me.cmbfre.Size = New System.Drawing.Size(121, 21)
@@ -159,6 +160,7 @@ Partial Class Form1
         'cmbstatus
         '
         Me.cmbstatus.FormattingEnabled = True
+        Me.cmbstatus.Items.AddRange(New Object() {"pending"})
         Me.cmbstatus.Location = New System.Drawing.Point(141, 80)
         Me.cmbstatus.Name = "cmbstatus"
         Me.cmbstatus.Size = New System.Drawing.Size(121, 21)
@@ -176,6 +178,7 @@ Partial Class Form1
         'cmbpri
         '
         Me.cmbpri.FormattingEnabled = True
+        Me.cmbpri.Items.AddRange(New Object() {"high"})
         Me.cmbpri.Location = New System.Drawing.Point(141, 47)
         Me.cmbpri.Name = "cmbpri"
         Me.cmbpri.Size = New System.Drawing.Size(121, 21)
@@ -184,6 +187,7 @@ Partial Class Form1
         'cmbassi
         '
         Me.cmbassi.FormattingEnabled = True
+        Me.cmbassi.Items.AddRange(New Object() {"murangi"})
         Me.cmbassi.Location = New System.Drawing.Point(141, 9)
         Me.cmbassi.Name = "cmbassi"
         Me.cmbassi.Size = New System.Drawing.Size(121, 21)
@@ -273,7 +277,7 @@ Partial Class Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(629, 424)
+        Me.ClientSize = New System.Drawing.Size(629, 345)
         Me.Controls.Add(Me.Button6)
         Me.Controls.Add(Me.Button5)
         Me.Controls.Add(Me.Button4)

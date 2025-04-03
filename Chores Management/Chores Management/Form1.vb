@@ -1,6 +1,9 @@
-﻿Public Class Form1
+﻿
+Imports System.Data.OleDb
+Public Class Form1
     Private Sub Button6_Click(sender As Object, e As EventArgs) Handles Button6.Click
         'Try
+        conn.Open()
         Dim chores As New chores_() With {
            .Title = TXTtitle.Text,
            .AssignedTo = cmbassi.SelectedItem,
@@ -50,6 +53,7 @@
         '    MessageBox.Show($"Unexpected error: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         'End Try
         'Debug.WriteLine("Existing button Save")
+        conn.Close()
 
 
     End Sub
