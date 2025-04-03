@@ -120,7 +120,29 @@ Public Class Form1
 
     End Sub
 
-    Private Sub btnClear_Click(sender As Object, e As EventArgs) Handles btnClear.Click
+    Private Sub btnClear_Click(sender As Object, e As EventArgs)
+
+    End Sub
+
+
+    Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
+        TrackExpenses()
+        TrackOverdueChores()
+        TrackPendingTasks()
+        TrackLowInventory()
+        Timer1.Interval = 500
+        Timer1.Enabled = False
+    End Sub
+    Private Sub CountUnreadNotifications()
+        Dim query As String = "SELECT COUNT(*) FROM Notifications WHERE IsRead = False"
+        Using conn As New OleDbConnection(Notifications.connectionString), cmd As New OleDbCommand(query, conn)
+            conn.Open()
+            Dim count As Integer = Convert.ToInt32(cmd.ExecuteScalar())
+            Label2.Text = "Unread Notifications: " & count.ToString()
+        End Using
+    End Sub
+
+    Private Sub btnClear_Click_1(sender As Object, e As EventArgs) Handles btnClear.Click
         If DataGridView1.SelectedRows.Count = 0 Then
             MsgBox("Please select a notification to delete.", MsgBoxStyle.Exclamation, "No Selection")
             Return
@@ -146,24 +168,6 @@ Public Class Form1
 
         MsgBox("Selected notifications cleared!", MsgBoxStyle.Information, "Deleted")
         CountUnreadNotifications()
-    End Sub
-
-
-    Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
-        TrackExpenses()
-        TrackOverdueChores()
-        TrackPendingTasks()
-        TrackLowInventory()
-        Timer1.Interval = 500
-        Timer1.Enabled = False
-    End Sub
-    Private Sub CountUnreadNotifications()
-        Dim query As String = "SELECT COUNT(*) FROM Notifications WHERE IsRead = False"
-        Using conn As New OleDbConnection(Notifications.connectionString), cmd As New OleDbCommand(query, conn)
-            conn.Open()
-            Dim count As Integer = Convert.ToInt32(cmd.ExecuteScalar())
-            Label2.Text = "Unread Notifications: " & count.ToString()
-        End Using
     End Sub
 End Class
 
