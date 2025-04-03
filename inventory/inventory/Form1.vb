@@ -10,15 +10,14 @@ Public Class Form1
 
             'Create an instance of Inventoryinformation 
             Dim inventory As New Inventory With {
-                 .Name = TextBox1.Text,
+                 .ItemName = TextBox1.Text,
                 .Description = TextBox6.Text,
                 .Quantity = TextBox3.Text,
                 .Unit = TextBox2.Text,
                 .Category = TextBox8.Text,
                 .ReorderLevel = TextBox7.Text,
                 .PricePerUnit = TextBox5.Text,
-                 .Total = TextBox4.Text,
-                 .ExpiryDate = DateTimePicker1.Value,
+                .ExpiryDate = DateTimePicker1.Value,
                  .DateAdded = DateTimePicker2.Value}
 
             Using conn As New OleDbConnection(Module1.connectionString)
@@ -29,21 +28,20 @@ Public Class Form1
                 'Dim ID As Integer = Convert.ToInt32(selectedRow.Cells("ID").Value) ' Change "ID" to your primary key column name  
 
                 ' Update the table name if necessary  
-                Dim tableName As String = "HMS"
-                Dim query As String = "INSERT INTO HMS(Name, Description, Quantity, Unit, Category, ReorderLevel, PricePerUnit, Total, ExpiryDate, DateAdded,) VALUES (@Name, @Description, @Quantity, @Unit, @Category, @ReorderLevel, @PricePerUnit, @Total, @ExpiryDate, @DateAdded)"
+                Dim tableName As String = "Inventory"
+                Dim query As String = "INSERT INTO Inventory(ItemName, Description, Quantity, Unit, Category, ReorderLevel, PricePerUnit, ExpiryDate, DateAdded) VALUES (@ItemName, @Description, @Quantity, @Unit, @Category, @ReorderLevel, @PricePerUnit, @ExpiryDate, @DateAdded)"
                 Dim cmd As New OleDbCommand(query, conn)
 
                 'params
                 'cmd.Parameters.AddWithValue("@itemID", inventory.ItemID)
                 'cmd.Parameters.AddWithValue("@ID", inventory.ID)
-                cmd.Parameters.AddWithValue("@Name", inventory.Name)
+                cmd.Parameters.AddWithValue("@ItemName", inventory.ItemName)
                 cmd.Parameters.AddWithValue("@Description", inventory.Description)
                 cmd.Parameters.AddWithValue("@Quantity", inventory.Quantity)
                 cmd.Parameters.AddWithValue("@Unit", inventory.Unit)
                 cmd.Parameters.AddWithValue("@Category", inventory.Category)
                 cmd.Parameters.AddWithValue("@ReorderLevel", inventory.ReorderLevel)
                 cmd.Parameters.AddWithValue("@PricePerUnit", inventory.PricePerUnit)
-                cmd.Parameters.AddWithValue("@Total", inventory.Total)
                 cmd.Parameters.AddWithValue("@expirydate", inventory.ExpiryDate)
                 cmd.Parameters.AddWithValue("@DateAdded", inventory.DateAdded)
 

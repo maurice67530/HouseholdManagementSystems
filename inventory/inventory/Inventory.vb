@@ -1,6 +1,6 @@
 ﻿Public Class Inventory
 
-    Public Property Name As String
+    Public Property ItemName As String
     Public Property Description As String
     Public Property Quantity As Integer
     Public Property Unit As String
