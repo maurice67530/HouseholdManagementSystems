@@ -8,6 +8,8 @@ Public Class Form1
     Private Sub NotificationForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         LoadNotifications()
         CountUnreadNotifications()
+        ToolTip1.SetToolTip(Button1, "Mark As Read")
+        ToolTip1.SetToolTip(btnClear, "Clear Notification")
         Timer1.Interval = 500
         Timer1.Enabled = False
     End Sub
@@ -117,6 +119,7 @@ Public Class Form1
         ' Refresh unread count after marking as read
         'CountUnreadNotifications()
 
+        ToolTip1.SetToolTip(Button1, "Mark As Read")
 
     End Sub
 
@@ -168,6 +171,7 @@ Public Class Form1
 
         MsgBox("Selected notifications cleared!", MsgBoxStyle.Information, "Deleted")
         CountUnreadNotifications()
+        ToolTip1.SetToolTip(btnClear, "Clear Notification")
     End Sub
 End Class
 
