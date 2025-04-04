@@ -13,7 +13,7 @@ Public Class Form1
             .Description = txtdes.Text}
 
 
-        'Dim tablename As String = "Chores"
+        Dim tablename As String = "Chores"
         Dim Cmd As New OleDbCommand($"INSERT INTO {tablename} ([Title], [AssignedTo], [Priority], [Status], [Frequency], [DueDate], [Recurring], [Description]) VALUES (?, ?, ?, ?, ?, ?, ?, ?)", conn)
 
         Cmd.Parameters.Clear()
