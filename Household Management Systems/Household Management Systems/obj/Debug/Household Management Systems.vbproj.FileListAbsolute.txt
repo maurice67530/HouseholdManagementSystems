@@ -1,0 +1,13 @@
+C:\Users\Zwivhuya\Source\Repos\HouseholdManagementSystems\Household Management Systems\Household Management Systems\bin\Debug\Household Management Systems.exe.config
+C:\Users\Zwivhuya\Desktop\HouseholdManagementSystems\Household Management Systems\Household Management Systems\bin\Debug\Household Management Systems.exe.config
+C:\Users\Zwivhuya\Desktop\HouseholdManagementSystems\Household Management Systems\Household Management Systems\bin\Debug\HMS.accdb
+C:\Users\Zwivhuya\Desktop\HouseholdManagementSystems\Household Management Systems\Household Management Systems\bin\Debug\Household Management Systems.exe
+C:\Users\Zwivhuya\Desktop\HouseholdManagementSystems\Household Management Systems\Household Management Systems\bin\Debug\Household Management Systems.pdb
+C:\Users\Zwivhuya\Desktop\HouseholdManagementSystems\Household Management Systems\Household Management Systems\bin\Debug\Household Management Systems.xml
+C:\Users\Zwivhuya\Desktop\HouseholdManagementSystems\Household Management Systems\Household Management Systems\obj\Debug\Household Management Systems.vbprojResolveAssemblyReference.cache
+C:\Users\Zwivhuya\Desktop\HouseholdManagementSystems\Household Management Systems\Household Management Systems\obj\Debug\Household_Management_Systems.Form1.resources
+C:\Users\Zwivhuya\Desktop\HouseholdManagementSystems\Household Management Systems\Household Management Systems\obj\Debug\Household_Management_Systems.Resources.resources
+C:\Users\Zwivhuya\Desktop\HouseholdManagementSystems\Household Management Systems\Household Management Systems\obj\Debug\Household Management Systems.vbproj.GenerateResource.Cache
+C:\Users\Zwivhuya\Desktop\HouseholdManagementSystems\Household Management Systems\Household Management Systems\obj\Debug\Household Management Systems.exe
+C:\Users\Zwivhuya\Desktop\HouseholdManagementSystems\Household Management Systems\Household Management Systems\obj\Debug\Household Management Systems.xml
+C:\Users\Zwivhuya\Desktop\HouseholdManagementSystems\Household Management Systems\Household Management Systems\obj\Debug\Household Management Systems.pdb
