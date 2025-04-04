@@ -71,7 +71,6 @@ Partial Class Form1
         Me.Button8.Name = "Button8"
         Me.Button8.Size = New System.Drawing.Size(75, 51)
         Me.Button8.TabIndex = 92
-        Me.Button8.Text = "Button8"
         Me.Button8.UseVisualStyleBackColor = False
         '
         'Button7
@@ -81,17 +80,16 @@ Partial Class Form1
         Me.Button7.Name = "Button7"
         Me.Button7.Size = New System.Drawing.Size(75, 51)
         Me.Button7.TabIndex = 91
-        Me.Button7.Text = "Button7"
         Me.Button7.UseVisualStyleBackColor = False
         '
         'Button6
         '
         Me.Button6.BackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.Button6.Image = CType(resources.GetObject("Button6.Image"), System.Drawing.Image)
         Me.Button6.Location = New System.Drawing.Point(217, 350)
         Me.Button6.Name = "Button6"
         Me.Button6.Size = New System.Drawing.Size(75, 51)
         Me.Button6.TabIndex = 90
-        Me.Button6.Text = "calculate"
         Me.Button6.UseVisualStyleBackColor = False
         '
         'Button5
@@ -102,7 +100,6 @@ Partial Class Form1
         Me.Button5.Name = "Button5"
         Me.Button5.Size = New System.Drawing.Size(75, 51)
         Me.Button5.TabIndex = 89
-        Me.Button5.Text = "Refresh"
         Me.Button5.UseVisualStyleBackColor = False
         '
         'Panel1
@@ -384,7 +381,6 @@ Partial Class Form1
         Me.Button4.Name = "Button4"
         Me.Button4.Size = New System.Drawing.Size(75, 51)
         Me.Button4.TabIndex = 87
-        Me.Button4.Text = "Delete"
         Me.Button4.UseVisualStyleBackColor = False
         '
         'Button3
@@ -395,7 +391,6 @@ Partial Class Form1
         Me.Button3.Name = "Button3"
         Me.Button3.Size = New System.Drawing.Size(75, 51)
         Me.Button3.TabIndex = 86
-        Me.Button3.Text = "Edit"
         Me.Button3.UseVisualStyleBackColor = False
         '
         'Button2
