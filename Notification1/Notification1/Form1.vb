@@ -46,6 +46,9 @@ Public Class Form1
 
         Timer1.Interval = 500
         Timer1.Enabled = False
+
+        ToolTip1.SetToolTip(Button1, "Mark As Read")
+        ToolTip1.SetToolTip(Button2, "Clear Notification")
     End Sub
 
     Private Sub LoadNotifications()
