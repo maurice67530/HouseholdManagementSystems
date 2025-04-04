@@ -13,7 +13,7 @@ Public Class Form1
             .Description = txtdes.Text}
 
 
-        Dim tablename As String = "Chores"
+        'Dim tablename As String = "Chores"
         Dim Cmd As New OleDbCommand($"INSERT INTO {tablename} ([Title], [AssignedTo], [Priority], [Status], [Frequency], [DueDate], [Recurring], [Description]) VALUES (?, ?, ?, ?, ?, ?, ?, ?)", conn)
 
         Cmd.Parameters.Clear()
@@ -60,6 +60,10 @@ Public Class Form1
     End Sub
 
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
+
+    End Sub
+
+    Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
     End Sub
 End Class

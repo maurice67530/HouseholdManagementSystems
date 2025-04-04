@@ -111,6 +111,7 @@ Partial Class Form1
         '
         'Panel2
         '
+        Me.Panel2.BackColor = System.Drawing.Color.Transparent
         Me.Panel2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         Me.Panel2.Controls.Add(Me.Label3)
         Me.Panel2.Controls.Add(Me.Label4)
@@ -128,6 +129,7 @@ Partial Class Form1
         'Label3
         '
         Me.Label3.AutoSize = True
+        Me.Label3.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.Label3.Location = New System.Drawing.Point(3, 14)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(69, 13)
@@ -137,6 +139,7 @@ Partial Class Form1
         'Label4
         '
         Me.Label4.AutoSize = True
+        Me.Label4.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.Label4.Location = New System.Drawing.Point(3, 52)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(41, 13)
@@ -154,6 +157,7 @@ Partial Class Form1
         'Label5
         '
         Me.Label5.AutoSize = True
+        Me.Label5.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.Label5.Location = New System.Drawing.Point(3, 86)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(40, 13)
@@ -171,6 +175,7 @@ Partial Class Form1
         'Label6
         '
         Me.Label6.AutoSize = True
+        Me.Label6.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.Label6.Location = New System.Drawing.Point(3, 123)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(60, 13)
@@ -195,6 +200,7 @@ Partial Class Form1
         '
         'Panel1
         '
+        Me.Panel1.BackColor = System.Drawing.Color.Transparent
         Me.Panel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         Me.Panel1.Controls.Add(Me.NumericUpDown1)
         Me.Panel1.Controls.Add(Me.Label2)
@@ -219,6 +225,7 @@ Partial Class Form1
         'Label2
         '
         Me.Label2.AutoSize = True
+        Me.Label2.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.Label2.Location = New System.Drawing.Point(3, 14)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(30, 13)
@@ -228,6 +235,7 @@ Partial Class Form1
         'Label1
         '
         Me.Label1.AutoSize = True
+        Me.Label1.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.Label1.Location = New System.Drawing.Point(3, 123)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(56, 13)
@@ -237,6 +245,7 @@ Partial Class Form1
         'Label7
         '
         Me.Label7.AutoSize = True
+        Me.Label7.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.Label7.Location = New System.Drawing.Point(3, 52)
         Me.Label7.Name = "Label7"
         Me.Label7.Size = New System.Drawing.Size(56, 13)
@@ -246,6 +255,7 @@ Partial Class Form1
         'Label8
         '
         Me.Label8.AutoSize = True
+        Me.Label8.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.Label8.Location = New System.Drawing.Point(3, 86)
         Me.Label8.Name = "Label8"
         Me.Label8.Size = New System.Drawing.Size(63, 13)
@@ -275,6 +285,7 @@ Partial Class Form1
         '
         'DataGridView1
         '
+        Me.DataGridView1.BackgroundColor = System.Drawing.SystemColors.ControlDark
         Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DataGridView1.Location = New System.Drawing.Point(5, 199)
         Me.DataGridView1.Name = "DataGridView1"
@@ -285,6 +296,9 @@ Partial Class Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.BackColor = System.Drawing.SystemColors.ControlDark
+        Me.BackgroundImage = CType(resources.GetObject("$this.BackgroundImage"), System.Drawing.Image)
+        Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.ClientSize = New System.Drawing.Size(599, 371)
         Me.Controls.Add(Me.DataGridView1)
         Me.Controls.Add(Me.Button6)
