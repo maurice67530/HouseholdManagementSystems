@@ -23,7 +23,6 @@ Partial Class Form1
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Form1))
-        Me.Button8 = New System.Windows.Forms.Button()
         Me.Button7 = New System.Windows.Forms.Button()
         Me.Button6 = New System.Windows.Forms.Button()
         Me.Button5 = New System.Windows.Forms.Button()
@@ -60,23 +59,17 @@ Partial Class Form1
         Me.Button2 = New System.Windows.Forms.Button()
         Me.Button1 = New System.Windows.Forms.Button()
         Me.Label11 = New System.Windows.Forms.Label()
+        Me.DataGridView1 = New System.Windows.Forms.DataGridView()
         Me.Panel1.SuspendLayout()
         Me.Panel2.SuspendLayout()
+        CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
-        '
-        'Button8
-        '
-        Me.Button8.BackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.Button8.Location = New System.Drawing.Point(43, 350)
-        Me.Button8.Name = "Button8"
-        Me.Button8.Size = New System.Drawing.Size(75, 51)
-        Me.Button8.TabIndex = 92
-        Me.Button8.UseVisualStyleBackColor = False
         '
         'Button7
         '
         Me.Button7.BackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.Button7.Location = New System.Drawing.Point(136, 350)
+        Me.Button7.Image = CType(resources.GetObject("Button7.Image"), System.Drawing.Image)
+        Me.Button7.Location = New System.Drawing.Point(118, 501)
         Me.Button7.Name = "Button7"
         Me.Button7.Size = New System.Drawing.Size(75, 51)
         Me.Button7.TabIndex = 91
@@ -86,7 +79,7 @@ Partial Class Form1
         '
         Me.Button6.BackColor = System.Drawing.SystemColors.ActiveCaption
         Me.Button6.Image = CType(resources.GetObject("Button6.Image"), System.Drawing.Image)
-        Me.Button6.Location = New System.Drawing.Point(217, 350)
+        Me.Button6.Location = New System.Drawing.Point(213, 501)
         Me.Button6.Name = "Button6"
         Me.Button6.Size = New System.Drawing.Size(75, 51)
         Me.Button6.TabIndex = 90
@@ -96,7 +89,7 @@ Partial Class Form1
         '
         Me.Button5.BackColor = System.Drawing.SystemColors.ActiveCaption
         Me.Button5.Image = CType(resources.GetObject("Button5.Image"), System.Drawing.Image)
-        Me.Button5.Location = New System.Drawing.Point(310, 350)
+        Me.Button5.Location = New System.Drawing.Point(310, 501)
         Me.Button5.Name = "Button5"
         Me.Button5.Size = New System.Drawing.Size(75, 51)
         Me.Button5.TabIndex = 89
@@ -377,7 +370,7 @@ Partial Class Form1
         '
         Me.Button4.BackColor = System.Drawing.SystemColors.ActiveCaption
         Me.Button4.Image = CType(resources.GetObject("Button4.Image"), System.Drawing.Image)
-        Me.Button4.Location = New System.Drawing.Point(404, 350)
+        Me.Button4.Location = New System.Drawing.Point(401, 501)
         Me.Button4.Name = "Button4"
         Me.Button4.Size = New System.Drawing.Size(75, 51)
         Me.Button4.TabIndex = 87
@@ -387,7 +380,7 @@ Partial Class Form1
         '
         Me.Button3.BackColor = System.Drawing.SystemColors.ActiveCaption
         Me.Button3.Image = CType(resources.GetObject("Button3.Image"), System.Drawing.Image)
-        Me.Button3.Location = New System.Drawing.Point(499, 350)
+        Me.Button3.Location = New System.Drawing.Point(489, 501)
         Me.Button3.Name = "Button3"
         Me.Button3.Size = New System.Drawing.Size(75, 51)
         Me.Button3.TabIndex = 86
@@ -406,7 +399,7 @@ Partial Class Form1
         '
         Me.Button1.BackColor = System.Drawing.SystemColors.ActiveCaption
         Me.Button1.Image = CType(resources.GetObject("Button1.Image"), System.Drawing.Image)
-        Me.Button1.Location = New System.Drawing.Point(580, 350)
+        Me.Button1.Location = New System.Drawing.Point(580, 501)
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(75, 51)
         Me.Button1.TabIndex = 84
@@ -422,12 +415,20 @@ Partial Class Form1
         Me.Label11.TabIndex = 83
         Me.Label11.Text = "Expenses"
         '
+        'DataGridView1
+        '
+        Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.DataGridView1.Location = New System.Drawing.Point(12, 336)
+        Me.DataGridView1.Name = "DataGridView1"
+        Me.DataGridView1.Size = New System.Drawing.Size(643, 159)
+        Me.DataGridView1.TabIndex = 93
+        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(658, 411)
-        Me.Controls.Add(Me.Button8)
+        Me.ClientSize = New System.Drawing.Size(658, 552)
+        Me.Controls.Add(Me.DataGridView1)
         Me.Controls.Add(Me.Button7)
         Me.Controls.Add(Me.Button6)
         Me.Controls.Add(Me.Button5)
@@ -444,12 +445,11 @@ Partial Class Form1
         Me.Panel1.PerformLayout()
         Me.Panel2.ResumeLayout(False)
         Me.Panel2.PerformLayout()
+        CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
     End Sub
-
-    Friend WithEvents Button8 As Button
     Friend WithEvents Button7 As Button
     Friend WithEvents Button6 As Button
     Friend WithEvents Button5 As Button
@@ -486,4 +486,5 @@ Partial Class Form1
     Friend WithEvents Button2 As Button
     Friend WithEvents Button1 As Button
     Friend WithEvents Label11 As Label
+    Friend WithEvents DataGridView1 As DataGridView
 End Class
