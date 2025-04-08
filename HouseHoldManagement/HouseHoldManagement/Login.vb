@@ -45,7 +45,14 @@ Public Class Login
         End Using
     End Sub
 
-    Private Sub Panel1_Paint(sender As Object, e As PaintEventArgs) Handles Panel1.Paint
 
+    Private Sub Login_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        Dim tooltip As New ToolTip()
+        tooltip.SetToolTip(Button1, "Login")
+        tooltip.SetToolTip(Button2, "Register")
+    End Sub
+
+    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
+        'Register
     End Sub
 End Class
