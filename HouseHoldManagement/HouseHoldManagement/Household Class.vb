@@ -63,3 +63,16 @@ Public Class MealPlan
     Public Property MealPlanPrint As String
 
 End Class
+Public Class Inventory1
+
+    Public Property ItemName As String
+    Public Property Description As String
+    Public Property Quantity As String
+    Public Property Category As String
+    Public Property ReoderLevel As String
+    Public Property PricePerUnit As String
+    Public Property DateAdded As DateTime
+    Public Property ExpiryDate As DateTime
+    Public Property Unit As String
+
+End Class
