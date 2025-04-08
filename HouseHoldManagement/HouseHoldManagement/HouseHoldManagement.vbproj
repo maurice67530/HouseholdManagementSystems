@@ -91,6 +91,8 @@
       <DependentUpon>Form1.vb</DependentUpon>
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Household Class.vb" />
+    <Compile Include="HouseHoldManagment Module.vb" />
     <Compile Include="Inventory.Designer.vb">
       <DependentUpon>Inventory.vb</DependentUpon>
     </Compile>
