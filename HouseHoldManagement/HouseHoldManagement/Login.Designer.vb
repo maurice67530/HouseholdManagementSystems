@@ -107,7 +107,7 @@ Partial Class Login
         Me.Panel1.Controls.Add(Me.TextBox1)
         Me.Panel1.Location = New System.Drawing.Point(12, 12)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(289, 237)
+        Me.Panel1.Size = New System.Drawing.Size(289, 226)
         Me.Panel1.TabIndex = 7
         '
         'Login
