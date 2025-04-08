@@ -45,6 +45,7 @@ Partial Class Login
         '
         'Button2
         '
+        Me.Button2.Image = CType(resources.GetObject("Button2.Image"), System.Drawing.Image)
         Me.Button2.Location = New System.Drawing.Point(205, 161)
         Me.Button2.Name = "Button2"
         Me.Button2.Size = New System.Drawing.Size(62, 50)
