@@ -37,19 +37,20 @@ Partial Class Notifications
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.Location = New System.Drawing.Point(78, 9)
+        Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 20.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label1.Location = New System.Drawing.Point(41, 9)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(175, 24)
+        Me.Label1.Size = New System.Drawing.Size(248, 31)
         Me.Label1.TabIndex = 0
         Me.Label1.Text = "View Notifications"
         '
         'Panel1
         '
+        Me.Panel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         Me.Panel1.Controls.Add(Me.Button3)
         Me.Panel1.Controls.Add(Me.Button1)
         Me.Panel1.Controls.Add(Me.Button2)
-        Me.Panel1.Location = New System.Drawing.Point(12, 194)
+        Me.Panel1.Location = New System.Drawing.Point(12, 227)
         Me.Panel1.Name = "Panel1"
         Me.Panel1.Size = New System.Drawing.Size(332, 93)
         Me.Panel1.TabIndex = 1
@@ -84,7 +85,7 @@ Partial Class Notifications
         'DataGridView1
         '
         Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DataGridView1.Location = New System.Drawing.Point(12, 69)
+        Me.DataGridView1.Location = New System.Drawing.Point(12, 93)
         Me.DataGridView1.Name = "DataGridView1"
         Me.DataGridView1.Size = New System.Drawing.Size(332, 119)
         Me.DataGridView1.TabIndex = 2
@@ -93,7 +94,7 @@ Partial Class Notifications
         '
         Me.Label2.AutoSize = True
         Me.Label2.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label2.Location = New System.Drawing.Point(12, 48)
+        Me.Label2.Location = New System.Drawing.Point(9, 62)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(186, 18)
         Me.Label2.TabIndex = 3
@@ -104,7 +105,7 @@ Partial Class Notifications
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.ClientSize = New System.Drawing.Size(356, 317)
+        Me.ClientSize = New System.Drawing.Size(356, 332)
         Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.DataGridView1)
         Me.Controls.Add(Me.Panel1)
