@@ -1,5 +1,5 @@
 ﻿Public Class Household_Class
-    Public Class expenses
+    Public Class Expensetrack
 
         Public Property ExpenseID As Integer
         Public Property Amount As Integer
