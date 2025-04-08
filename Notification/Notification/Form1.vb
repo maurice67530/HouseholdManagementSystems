@@ -152,29 +152,29 @@ Public Class Form1
     Private Sub TrackExpenses()
 
         Dim query As String = "INSERT INTO Notifications (UserID, Message, DateCreated, Category, IsRead) " &
-                   "SELECT 'Expense', 'Recent expense recorded: ' & Amount, Date(), False FROM Expenses WHERE Date >= Date()-7"
+                   "SELECT 'Expense', 'Recent expense recorded: ' & Amount, DateOfexpense(), False FROM Expense WHERE DateOfexpense >= Date()-7"
 
         ExecuteQuery(query)
 
     End Sub
 
-    Private Sub TrackOverdueChores()
+    'Private Sub TrackOverdueChores()
 
-        Dim query As String = "INSERT INTO Notifications (UserID, Message, DateCreated, Category, IsRead) " &
-                                  "SELECT 'Chores', 'Overdue chore: ' & ChoreName, DueDate, False FROM Chores WHERE Completed = False AND DueDate < Date()"
+    '    Dim query As String = "INSERT INTO Notifications (UserID, Message, DateCreated, Category, IsRead) " &
+    '                              "SELECT 'Chores', 'Overdue chore: ' & ChoreName, DueDate, False FROM Chores WHERE Completed = False AND DueDate < Date()"
 
-        ExecuteQuery(query)
+    '    ExecuteQuery(query)
 
-    End Sub
+    'End Sub
 
-    Private Sub TrackPendingTasks()
+    'Private Sub TrackPendingTasks()
 
-        Dim query As String = "INSERT INTO Notifications (UserID, Message, DateCreated, Category, IsRead) " &
-                                  "SELECT 'Task', 'Pending task: ' & TaskName, DueDate, False FROM Tasks WHERE Completed = False"
+    '    Dim query As String = "INSERT INTO Notifications (UserID, Message, DateCreated, Category, IsRead) " &
+    '                              "SELECT 'Task', 'Pending task: ' & TaskName, DueDate, False FROM Tasks WHERE Completed = False"
 
-        ExecuteQuery(query)
+    '    ExecuteQuery(query)
 
-    End Sub
+    'End Sub
 
 
 
@@ -194,39 +194,39 @@ Public Class Form1
 
             ' Use 'Using' to manage the command and reader
 
-            Using cmd As New OleDbCommand("SELECT ItemName, Quantity FROM Inventory WHERE LEN(Quantity) > 0 AND IsNumeric(Quantity) = True", localConn)
+            Using cmd As New OleDbCommand("SELECT Amount, Payment, DateOfexpense FROM Expense WHERE LEN(Totalincome) > 0 AND IsNumeric(Quantity) = True", localConn)
 
                 Using reader As OleDbDataReader = cmd.ExecuteReader()
 
                     While reader.Read()
 
-                        Dim itemName As String = reader("ItemName").ToString()
+                        Dim Amount As Integer = reader("Amount").ToString()
 
                         ' Get the Quantity value as a string
 
-                        If Not IsDBNull(reader("Quantity")) Then
+                        If Not IsDBNull(reader("Totalincome")) Then
 
-                            Dim quantityString As String = reader("Quantity").ToString().Trim()
+                            Dim TotalincomeString As String = reader("Totalincome").ToString().Trim()
 
                             ' Attempt to convert the Quantity string to Integer if it's numeric
 
-                            Dim quantity As Integer
+                            Dim TotalIncome As Integer
 
-                            If Integer.TryParse(quantityString, quantity) Then
+                            If Integer.TryParse(TotalincomeString, Totalincome) Then
 
                                 ' If the quantity is less than or equal to 60, send a notification
 
-                                If quantity <= 60 Then
+                                If TotalIncome <= 60 Then
 
-                                    AddNotification("System", itemName, quantity)
+                                    AddNotification("System", Amount, TotalIncome)
 
                                 End If
 
                             Else
 
-                                ' Handle case where Quantity is not numeric
+                                ' Handle case where Totalincome is not numeric
 
-                                MessageBox.Show("Non-numeric quantity found for item: " & itemName)
+                                MessageBox.Show("Non-numeric Totalincome found for item: " & Amount)
 
                             End If
 
@@ -260,15 +260,15 @@ Public Class Form1
 
     End Sub
 
-    Private Sub AddNotification(userID As String, itemName As String, quantity As Integer)
+    Private Sub AddNotification(userID As String, Amount As Integer, Totalincome As Integer)
 
-        Dim message As String = "Low inventory: " & itemName & " only has " & quantity.ToString()
+        Dim message As String = "Expense: " & Amount & " only has " & Totalincome.ToString()
 
         ' Convert Date.Now to a string (make sure the format is correct)
 
         Dim dateCreated As String = Date.Now.ToString("yyyy-MM-dd HH:mm:ss")
 
-        Dim category As String = "Inventory"
+        Dim category As String = "Expense"
 
         Dim isRead As String = "No"
 
@@ -368,7 +368,6 @@ Public Class Form1
 
         End If
 
-        TrackLowInventory()
 
         LoadNotifications()
 
@@ -420,11 +419,6 @@ Public Class Form1
 
         TrackExpenses()
 
-        TrackOverdueChores()
-
-        TrackPendingTasks()
-
-        TrackLowInventory()
 
         Timer1.Stop()
 
