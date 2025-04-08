@@ -22,8 +22,16 @@ Partial Class MealPlan
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        components = New System.ComponentModel.Container
+        Me.SuspendLayout()
+        '
+        'MealPlan
+        '
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.ClientSize = New System.Drawing.Size(358, 320)
+        Me.Name = "MealPlan"
         Me.Text = "MealPlan"
+        Me.ResumeLayout(False)
+
     End Sub
 End Class
