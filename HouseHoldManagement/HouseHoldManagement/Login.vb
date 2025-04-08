@@ -44,8 +44,6 @@ Public Class Login
             End Try
         End Using
     End Sub
-
-
     Private Sub Login_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Dim tooltip As New ToolTip()
         tooltip.SetToolTip(Button1, "Login")
