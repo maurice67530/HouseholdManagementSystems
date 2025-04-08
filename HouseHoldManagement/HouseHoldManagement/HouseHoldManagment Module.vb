@@ -1,8 +1,6 @@
 ﻿
 Imports System.IO
 Imports System.Data.OleDb
-
-
 Module HouseHoldManagment_Module
 
     ' Connection string using relative path to the database
@@ -12,8 +10,5 @@ Module HouseHoldManagment_Module
     Public Function GetConnection() As OleDbConnection
         Return New OleDbConnection(connectionString)
     End Function
-
-
-
 
 End Module
