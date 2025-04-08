@@ -72,6 +72,12 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Chores.Designer.vb">
+      <DependentUpon>Chores.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Chores.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Expense.Designer.vb">
       <DependentUpon>Expense.vb</DependentUpon>
     </Compile>
@@ -83,6 +89,12 @@
     </Compile>
     <Compile Include="Form1.Designer.vb">
       <DependentUpon>Form1.vb</DependentUpon>
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Inventory.Designer.vb">
+      <DependentUpon>Inventory.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Inventory.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="My Project\AssemblyInfo.vb" />
@@ -108,6 +120,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Chores.resx">
+      <DependentUpon>Chores.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Expense.resx">
       <DependentUpon>Expense.vb</DependentUpon>
     </EmbeddedResource>
