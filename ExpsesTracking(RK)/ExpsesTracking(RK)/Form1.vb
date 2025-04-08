@@ -7,6 +7,7 @@ Imports System.Data.OleDb
 Public Class Form1
 
     Private mealPlanData As DataTable
+    Dim conn As New OleDbConnection(Module1.connectionString)
 
     ' Create a ToolTip object
     Private toolTip As New ToolTip()
@@ -28,7 +29,7 @@ Public Class Form1
         toolTip1.SetToolTip(Button6, "Print as Document")
         toolTip1.SetToolTip(Button7, "Save")
 
-
+        LoadExpenseDataFromDatabase()
     End Sub
 
 
@@ -68,18 +69,18 @@ Public Class Form1
 
                 ' Get the ID of the selected row (assuming your table has a primary key named "ID")  
 
-                Dim ExpenseID As String = TextBox1.Text
+                'Dim ExpenseID As String = TextBox1.Text
                 Dim Amount As String = TextBox2.Text
-                Dim TotalBudget As String = TextBox3.Text
+                Dim TotalIncome As String = TextBox3.Text
                 Dim Description As String = TextBox4.Text
                 Dim Tags As String = TextBox5.Text
                 Dim Currency As String = ComboBox1.SelectedItem.ToString
                 Dim Category As String = TextBox6.Text
-                Dim PaymentMethod As String = ComboBox2.SelectedItem.ToString
+                Dim Paymentmethod As String = ComboBox2.SelectedItem.ToString
                 Dim Frequency As String = ComboBox3.SelectedItem.ToString()
                 Dim ApprovalStatus As String = ComboBox4.SelectedItem.ToString()
-                Dim Receiver As String = ComboBox5.SelectedItem.ToString()
-                Dim DateOfExpense As String = DateTimePicker1.Value
+                'Dim Receiver As String = ComboBox5.SelectedItem.ToString()
+                Dim DateOfexpenses As String = DateTimePicker1.Value
 
 
                 ' Get the ID of the selected row (assuming your table has a primary key named "ID")  
@@ -87,22 +88,22 @@ Public Class Form1
                 Dim ID As Integer = Convert.ToInt32(selectedRow.Cells("ID").Value) ' Change "ID" to your primary key column name  
 
                 ' Create an OleDbCommand to update the Expense data in the database  
-                Dim cmd As New OleDbCommand("UPDATE [Expense] SET [ExpenseID] = ?, [Amount] = ?, [TotalBudget] = ?, [Description] = ?, [Tags] = ?, [Currency] =?, [Category] = ?, [PaymentMethod] = ?, [Frequency] = ?, [ApprovalStatus] = ?, [Receiver] = ?, [DateOfExpense] = ? WHERE [ID] = ?", connect)
+                Dim cmd As New OleDbCommand("UPDATE [Expense] SET [Amount] = ?, [TotalIncome] = ?, [Description] = ?, [Tags] = ?, [Currency] =?, [Category] = ?, [Paymentmethod] = ?, [Frequency] = ?, [ApprovalStatus] = ?, [DateOfexpenses] = ? WHERE [ID] = ?", connect)
 
                 ' Set the parameter values from the UI controls  
 
-                cmd.Parameters.AddWithValue("@ExpenseID", ExpenseID)
+                'cmd.Parameters.AddWithValue("@ExpenseID", ExpenseID)
                 cmd.Parameters.AddWithValue("@Amount", Amount)
-                cmd.Parameters.AddWithValue("@TotalBudget", TotalBudget)
+                cmd.Parameters.AddWithValue("@TotalIncome", TotalIncome)
                 cmd.Parameters.AddWithValue("@Description", Description)
                 cmd.Parameters.AddWithValue("@Tags", Tags)
                 cmd.Parameters.AddWithValue("@Currency", Currency)
                 cmd.Parameters.AddWithValue("@Category", Category)
-                cmd.Parameters.AddWithValue("@PaymentMethod", PaymentMethod)
+                cmd.Parameters.AddWithValue("@PaymentMethod", Paymentmethod)
                 cmd.Parameters.AddWithValue("Frequency", Frequency)
                 cmd.Parameters.AddWithValue("ApprovalStatus", ApprovalStatus)
-                cmd.Parameters.AddWithValue("Receiver", Receiver)
-                cmd.Parameters.AddWithValue("DateOfExpense", DateOfExpense)
+                'cmd.Parameters.AddWithValue("Receiver", Receiver)
+                cmd.Parameters.AddWithValue("DateOfexpense", DateOfexpenses)
                 cmd.Parameters.AddWithValue("ID", ID)
 
 
@@ -129,7 +130,7 @@ Public Class Form1
             Debug.WriteLine($"Stack Trace : {ex.StackTrace}")
             Debug.WriteLine($"An  Error has occured when Editing data from Database")
         End Try
-
+        LoadExpenseDataFromDatabase()
         Debug.WriteLine("Exited btnEdit")
     End Sub
 
@@ -147,40 +148,38 @@ Public Class Form1
             'Me.Controls.Add(txtRecentUpdate)
 
             Debug.WriteLine("User confirmed btnSubmit")
-            Using connect As New OleDbConnection(connectionString)
-                connect.Open()
+            Using conn As New OleDbConnection(connectionString)
+                conn.Open()
 
                 ' Update the table name if necessary  
                 Dim tableName As String = "Expense"
 
                 ' Create an OleDbCommand to insert the Expense data into the database 
-                Dim cmd As New OleDbCommand("INSERT INTO [Expense] ([ExpenseID], [Amount], [TotalBudget], [Description], [Tags], [Currency], [Category], [PaymentMethod], [Frequency], [ApprovalStatus], [Receiver], [DateOfExpense]) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", connect)
+                Dim cmd As New OleDbCommand("INSERT INTO [Expense] ( [Amount], [TotalIncome], [Description], [Tags], [Currency], [Category], [Paymentmethod], [Frequency], [ApprovalStatus], [DateOfexpenses]) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", conn)
 
                 ' Set the parameter values from the UI controls 
                 'Class declaretions
 
                 Dim expense As New expenses With {
-                    .ExpenseID = TextBox1.Text,
                     .Amount = TextBox2.Text,
-                    .TotalBudget = TextBox3.Text,
+                    .TotalIncome = TextBox3.Text,
                     .Description = TextBox4.Text,
                     .Tags = TextBox5.Text,
                     .Currency = ComboBox1.SelectedItem.ToString,
                     .Category = TextBox6.Text,
-                    .PaymentMethod = ComboBox2.SelectedItem.ToString,
+                    .Paymentmethod = ComboBox2.SelectedItem.ToString,
                 .Frequency = ComboBox3.SelectedItem.ToString(),
                     .ApprovalStatus = ComboBox4.SelectedItem.ToString(),
-                    .Receiver = ComboBox5.SelectedItem.ToString(),
-                    .DateOfExpense = DateTimePicker1.Value}
+                    .DateOfexpenses = DateTimePicker1.Value}
 
                 'txtRecentUpdate.Text = $" Expense updated at {DateTime.Now:HH:MM}"
 
                 cmd.Parameters.Clear()
 
 
-                cmd.Parameters.AddWithValue("@ExpenseID", expense.ExpenseID)
+                'cmd.Parameters.AddWithValue("@ExpenseID", expense.ExpenseID)
                 cmd.Parameters.AddWithValue("@Amount", expense.Amount)
-                cmd.Parameters.AddWithValue("@TotalBudget", expense.TotalBudget)
+                cmd.Parameters.AddWithValue("@TotalBudget", expense.TotalIncome)
                 cmd.Parameters.AddWithValue("@Description", expense.Description)
                 cmd.Parameters.AddWithValue("@Tags", expense.Tags)
                 cmd.Parameters.AddWithValue("@Currency", expense.Currency)
@@ -188,23 +187,23 @@ Public Class Form1
                 cmd.Parameters.AddWithValue("@PaymentMethod", expense.PaymentMethod)
                 cmd.Parameters.AddWithValue("@Frequency", expense.Frequency)
                 cmd.Parameters.AddWithValue("@ApprovalStatus", expense.ApprovalStatus)
-                cmd.Parameters.AddWithValue("@Receiver", expense.Receiver)
-                cmd.Parameters.AddWithValue("@DateOfExpense", expense.DateOfExpense)
+                'cmd.Parameters.AddWithValue("@Receiver", expense.Receiver)
+                cmd.Parameters.AddWithValue("@DateOfexpense", expense.DateOfexpenses)
 
 
                 MsgBox("Expense Information Saved!" & vbCrLf &
                         "ExpenseID: " & expense.ExpenseID & vbCrLf &
                         "Amount: " & expense.Amount & vbCrLf &
-                        "TotalBudget: " & expense.TotalBudget & vbCrLf &
+                        "TotalBudget: " & expense.TotalIncome & vbCrLf &
                         "Description: " & expense.Description & vbCrLf &
                         "Tags: " & expense.Tags & vbCrLf &
                         "Currency: " & expense.Currency & vbCrLf &
                         "Category: " & expense.Category & vbCrLf &
-                        "PaymentMethod: " & expense.PaymentMethod & vbCrLf &
+                        "PaymentMethod: " & expense.Paymentmethod & vbCrLf &
                          "Frequency: " & expense.Frequency & vbCrLf &
                          "ApprovalStatus: " & expense.ApprovalStatus & vbCrLf &
                           "Receiver: " & expense.Receiver & vbCrLf &
-                          "DateOfExpense: " & expense.DateOfExpense.ToString, vbInformation, "Expense Confirmation")
+                          "DateOfExpense: " & expense.DateOfexpenses.ToString, vbInformation, "Expense Confirmation")
 
                 ' Execute the SQL command to insert the data 
                 ' Log the SQL statement and parameter values  
@@ -231,7 +230,7 @@ Public Class Form1
             Debug.WriteLine(" Failed to save")
             MessageBox.Show("An Unexpected error occured.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
-        connect.Close()
+        conn.Close()
         Debug.WriteLine("Exiting btnSubmit")
     End Sub
 
@@ -295,6 +294,8 @@ Public Class Form1
             Debug.WriteLine($" No row  selected, exiting btnDelete")
             MessageBox.Show("Please select an expense to delete.", "Deletion Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
         End If
+        LoadExpenseDataFromDatabase()
+
         Debug.WriteLine("Exiting deletion")
 
     End Sub
@@ -363,22 +364,74 @@ Public Class Form1
 
     Private Sub Button8_Click(sender As Object, e As EventArgs) Handles Button8.Click
         DataGridView1.Sort(DataGridView1.Columns("Amount"), System.ComponentModel.ListSortDirection.Descending)
-        DataGridView1.Sort(DataGridView1.Columns("DateOfExpense"), System.ComponentModel.ListSortDirection.Ascending)
+        DataGridView1.Sort(DataGridView1.Columns("DateOfexpenses"), System.ComponentModel.ListSortDirection.Ascending)
+    End Sub
+    Public Sub LoadExpenseDataFromDatabase()
+
+        Debug.WriteLine("LoadMealPlansDataFromDatabase")
+        Using connect As New OleDbConnection(Module1.connectionString)
+            connect.Open()
+
+            ' Update the table name if necessary  
+            Dim tableName As String = "Expense"
+
+            ' Create an OleDbCommand to select the data from the database  
+            Dim cmd As New OleDbCommand($"SELECT * FROM {tableName}", connect)
+
+            ' Create a DataAdapter and fill a DataTable  
+            Dim da As New OleDbDataAdapter(cmd)
+            Dim dt As New DataTable()
+            da.Fill(dt)
+
+            ' Bind the DataTable to the DataGridView  
+            DataGridView1.DataSource = dt
+            'HighlightExpiredItemss()
+        End Using
+
+    End Sub
+
+    Private Sub DataGridView1_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridView1.CellContentClick
+
+    End Sub
+
+    Private Sub DataGridView1_SelectionChanged(sender As Object, e As EventArgs) Handles DataGridView1.SelectionChanged
+        If DataGridView1.SelectedRows.Count > 0 Then
+            Debug.WriteLine("A row is selected in DataGridView")
+
+            Dim selectedRow As DataGridViewRow = DataGridView1.SelectedRows(0)
+
+            ' Load the data from the selected row into UI controls  
+
+            TextBox2.Text = selectedRow.Cells("Amount").Value.ToString()
+            DateTimePicker1.Value = selectedRow.Cells("DateOfexpenses").Value.ToString()
+            TextBox3.Text = selectedRow.Cells("TotalIncome").Value.ToString()
+            TextBox4.Text = selectedRow.Cells("Description").Value.ToString()
+            TextBox5.Text = selectedRow.Cells("Tags").Value.ToString()
+            ComboBox1.Text = selectedRow.Cells("Currency").Value.ToString()
+            TextBox6.Text = selectedRow.Cells("Category").Value.ToString()
+            ComboBox2.Text = selectedRow.Cells("Paymentmethod").Value.ToString
+            ComboBox3.Text = selectedRow.Cells("Frequency").Value.ToString()
+            ComboBox4.Text = selectedRow.Cells("ApprovalStatus").Value.ToString()
+            DateTimePicker1.Value = selectedRow.Cells("DateOfexpenses").Value.ToString()
+
+            'Button1.Enabled = False
+        End If
     End Sub
 End Class
+
 Public Class expenses
 
     Public Property ExpenseID As Integer
     Public Property Amount As Integer
-    Public Property TotalBudget As Integer
+    Public Property TotalIncome As Integer
     Public Property Description As String
     Public Property Tags As String
     Public Property Currency As String
     Public Property Category As String
-    Public Property PaymentMethod As String
+    Public Property Paymentmethod As String
     Public Property Frequency As String
     Public Property ApprovalStatus As String
     Public Property Receiver As String
-    Public Property DateOfExpense As DateTime
+    Public Property DateOfexpenses As DateTime
 
 End Class
