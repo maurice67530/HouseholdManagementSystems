@@ -4,8 +4,8 @@ Imports System.Net.Mail
 Imports System.Net
 Imports System.Data.OleDb
 Public Class Expense
-    Private mealPlanData As DataTable
-    Dim conn As New OleDbConnection(HouseHoldManagementModule.connectionString)
+
+    Dim conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
 
     ' Create a ToolTip object
     Private toolTip As New ToolTip()
