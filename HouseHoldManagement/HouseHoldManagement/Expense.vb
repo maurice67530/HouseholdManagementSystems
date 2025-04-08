@@ -30,12 +30,12 @@ Public Class Expense
                 Dim tableName As String = "Expense"
 
                 ' Create an OleDbCommand to insert the Expense data into the database 
-                Dim cmd As New OleDbCommand("INSERT INTO [Expense] ( [Amount], [TotalIncome], [Description], [Tags], [Currency], [Category], [Paymentmethod], [Frequency], [ApprovalStatus], [DateOfexpenses]) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", conn)
+                Dim cmd As New OleDbCommand("INSERT INTO [Expense] ([Amount], [TotalIncome], [Description], [Tags], [Currency], [Category], [Paymentmethod], [Frequency], [ApprovalStatus], [DateOfexpenses]) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", conn)
 
                 ' Set the parameter values from the UI controls 
                 'Class declaretions
 
-                Dim expense As New Expensetrack With {
+                Dim expense As New Expensetracking With {
                     .Amount = TextBox2.Text,
                     .TotalIncome = TextBox3.Text,
                     .Description = TextBox6.Text,
