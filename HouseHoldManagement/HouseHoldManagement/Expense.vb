@@ -63,7 +63,7 @@ Public Class Expense
                 cmd.Parameters.AddWithValue("@Frequency", expense.Frequency)
                 cmd.Parameters.AddWithValue("@ApprovalStatus", expense.ApprovalStatus)
                 'cmd.Parameters.AddWithValue("@Receiver", expense.Receiver)
-                cmd.Parameters.AddWithValue("@DateOfexpense", expense.DateOfexpenses)
+                cmd.Parameters.AddWithValue("@DateOfexpenses", expense.DateOfexpenses)
 
 
                 MsgBox("Expense Information Saved!" & vbCrLf &
