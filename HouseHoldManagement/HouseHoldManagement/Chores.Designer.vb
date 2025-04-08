@@ -72,7 +72,7 @@ Partial Class Chores
         'Button6
         '
         Me.Button6.Image = CType(resources.GetObject("Button6.Image"), System.Drawing.Image)
-        Me.Button6.Location = New System.Drawing.Point(416, 367)
+        Me.Button6.Location = New System.Drawing.Point(349, 366)
         Me.Button6.Name = "Button6"
         Me.Button6.Size = New System.Drawing.Size(61, 32)
         Me.Button6.TabIndex = 44
@@ -82,7 +82,7 @@ Partial Class Chores
         'Button5
         '
         Me.Button5.Image = CType(resources.GetObject("Button5.Image"), System.Drawing.Image)
-        Me.Button5.Location = New System.Drawing.Point(349, 367)
+        Me.Button5.Location = New System.Drawing.Point(282, 366)
         Me.Button5.Name = "Button5"
         Me.Button5.Size = New System.Drawing.Size(61, 32)
         Me.Button5.TabIndex = 43
@@ -91,7 +91,7 @@ Partial Class Chores
         'Button4
         '
         Me.Button4.Image = CType(resources.GetObject("Button4.Image"), System.Drawing.Image)
-        Me.Button4.Location = New System.Drawing.Point(282, 367)
+        Me.Button4.Location = New System.Drawing.Point(215, 366)
         Me.Button4.Name = "Button4"
         Me.Button4.Size = New System.Drawing.Size(61, 32)
         Me.Button4.TabIndex = 42
@@ -316,7 +316,7 @@ Partial Class Chores
         '
         Me.Button7.BackgroundImage = CType(resources.GetObject("Button7.BackgroundImage"), System.Drawing.Image)
         Me.Button7.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
-        Me.Button7.Location = New System.Drawing.Point(550, 367)
+        Me.Button7.Location = New System.Drawing.Point(416, 366)
         Me.Button7.Name = "Button7"
         Me.Button7.Size = New System.Drawing.Size(61, 32)
         Me.Button7.TabIndex = 46
@@ -336,7 +336,7 @@ Partial Class Chores
         '
         Me.Button9.BackgroundImage = CType(resources.GetObject("Button9.BackgroundImage"), System.Drawing.Image)
         Me.Button9.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
-        Me.Button9.Location = New System.Drawing.Point(215, 367)
+        Me.Button9.Location = New System.Drawing.Point(550, 366)
         Me.Button9.Name = "Button9"
         Me.Button9.Size = New System.Drawing.Size(61, 32)
         Me.Button9.TabIndex = 48
