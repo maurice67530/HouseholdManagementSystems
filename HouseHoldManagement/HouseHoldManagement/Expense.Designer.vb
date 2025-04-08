@@ -22,8 +22,16 @@ Partial Class Expense
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        components = New System.ComponentModel.Container
+        Me.SuspendLayout()
+        '
+        'Expense
+        '
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.Text = "Expense"
+        Me.ClientSize = New System.Drawing.Size(284, 261)
+        Me.Name = "Expense"
+        Me.Text = " "
+        Me.ResumeLayout(False)
+
     End Sub
 End Class
