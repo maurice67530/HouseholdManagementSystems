@@ -1,10 +1,9 @@
-﻿Imports System.Windows.Forms
-Imports System.IO
+﻿Imports System.IO
 Imports System.Net.Mail
 Imports System.Net
 Imports System.Data.OleDb
 Public Class Expense
-
+    Public Const connectionString As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\khodani\Source\Repos\maurice67530\HouseholdManagementSystems\HMS.accdb"
     Dim conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
 
     ' Create a ToolTip object
@@ -31,20 +30,20 @@ Public Class Expense
                 Dim tableName As String = "Expense"
 
                 ' Create an OleDbCommand to insert the Expense data into the database 
-                Dim cmd As New OleDbCommand("INSERT INTO [Expense] ( [Amount], [TotalIncome], [Description], [Tags], [Currency], [Category], [Paymentmethod], [Frequency], [ApprovalStatus], [DateOfexpenses]) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", conn)
+                Dim cmd As New OleDbCommand("INSERT INTO [Expense] ([Amount], [TotalIncome], [Description], [Tags], [Currency], [Category], [Paymentmethod], [Frequency], [ApprovalStatus], [DateOfexpenses]) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", conn)
 
                 ' Set the parameter values from the UI controls 
                 'Class declaretions
 
-                Dim expense As New Expenses With {
+                Dim expense As New Expensetracking With {
                     .Amount = TextBox2.Text,
                     .TotalIncome = TextBox3.Text,
-                    .Description = TextBox4.Text,
-                    .Tags = TextBox5.Text,
-                    .Currency = ComboBox1.SelectedItem.ToString,
-                    .Category = TextBox6.Text,
-                    .Paymentmethod = ComboBox2.SelectedItem.ToString,
-                .Frequency = ComboBox3.SelectedItem.ToString(),
+                    .Description = TextBox6.Text,
+                    .Tags = TextBox4.Text,
+                    .Currency = ComboBox2.SelectedItem.ToString,
+                    .Category = TextBox5.Text,
+                    .Paymentmethod = ComboBox1.SelectedItem.ToString,
+                .Frequency = ComboBox5.SelectedItem.ToString(),
                     .ApprovalStatus = ComboBox4.SelectedItem.ToString(),
                     .DateOfexpenses = DateTimePicker1.Value}
 
@@ -55,7 +54,7 @@ Public Class Expense
 
                 'cmd.Parameters.AddWithValue("@ExpenseID", expense.ExpenseID)
                 cmd.Parameters.AddWithValue("@Amount", expense.Amount)
-                cmd.Parameters.AddWithValue("@TotalBudget", expense.TotalIncome)
+                cmd.Parameters.AddWithValue("@TotalIncome", expense.TotalIncome)
                 cmd.Parameters.AddWithValue("@Description", expense.Description)
                 cmd.Parameters.AddWithValue("@Tags", expense.Tags)
                 cmd.Parameters.AddWithValue("@Currency", expense.Currency)
@@ -64,7 +63,7 @@ Public Class Expense
                 cmd.Parameters.AddWithValue("@Frequency", expense.Frequency)
                 cmd.Parameters.AddWithValue("@ApprovalStatus", expense.ApprovalStatus)
                 'cmd.Parameters.AddWithValue("@Receiver", expense.Receiver)
-                cmd.Parameters.AddWithValue("@DateOfexpense", expense.DateOfexpenses)
+                cmd.Parameters.AddWithValue("@DateOfexpenses", expense.DateOfexpenses)
 
 
                 MsgBox("Expense Information Saved!" & vbCrLf &

@@ -150,8 +150,14 @@
     <EmbeddedResource Include="Expense.resx">
       <DependentUpon>Expense.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Inventory.resx">
+      <DependentUpon>Inventory.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Login.resx">
       <DependentUpon>Login.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MealPlan.resx">
+      <DependentUpon>MealPlan.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
