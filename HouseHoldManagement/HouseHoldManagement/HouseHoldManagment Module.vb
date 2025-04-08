@@ -1,8 +1,6 @@
 ﻿
 Imports System.IO
 Imports System.Data.OleDb
-
-
 Module HouseHoldManagment_Module
 
     Public currentUser As String ' Global variable for logged-in user
@@ -14,8 +12,5 @@ Module HouseHoldManagment_Module
     Public Function GetConnection() As OleDbConnection
         Return New OleDbConnection(connectionString)
     End Function
-
-
-
 
 End Module
