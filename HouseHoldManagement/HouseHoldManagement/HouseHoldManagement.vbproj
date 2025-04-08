@@ -100,6 +100,12 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="Notifications.Designer.vb">
+      <DependentUpon>Notifications.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Notifications.vb">
+      <SubType>Form</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="My Project\Resources.resx">
