@@ -36,21 +36,23 @@ Partial Class Login
         '
         'Button1
         '
+        Me.Button1.BackColor = System.Drawing.SystemColors.GradientActiveCaption
         Me.Button1.Image = CType(resources.GetObject("Button1.Image"), System.Drawing.Image)
         Me.Button1.Location = New System.Drawing.Point(25, 161)
         Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(62, 50)
+        Me.Button1.Size = New System.Drawing.Size(80, 50)
         Me.Button1.TabIndex = 0
-        Me.Button1.UseVisualStyleBackColor = True
+        Me.Button1.UseVisualStyleBackColor = False
         '
         'Button2
         '
+        Me.Button2.BackColor = System.Drawing.SystemColors.GradientActiveCaption
         Me.Button2.Image = CType(resources.GetObject("Button2.Image"), System.Drawing.Image)
-        Me.Button2.Location = New System.Drawing.Point(205, 161)
+        Me.Button2.Location = New System.Drawing.Point(194, 161)
         Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(62, 50)
+        Me.Button2.Size = New System.Drawing.Size(80, 50)
         Me.Button2.TabIndex = 1
-        Me.Button2.UseVisualStyleBackColor = True
+        Me.Button2.UseVisualStyleBackColor = False
         '
         'Label1
         '
@@ -76,7 +78,7 @@ Partial Class Login
         '
         Me.Label3.AutoSize = True
         Me.Label3.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label3.Location = New System.Drawing.Point(105, 13)
+        Me.Label3.Location = New System.Drawing.Point(115, 12)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(49, 13)
         Me.Label3.TabIndex = 4
@@ -115,7 +117,7 @@ Partial Class Login
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(318, 261)
+        Me.ClientSize = New System.Drawing.Size(313, 255)
         Me.Controls.Add(Me.Panel1)
         Me.Name = "Login"
         Me.Text = "Login"
