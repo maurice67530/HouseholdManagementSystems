@@ -35,7 +35,7 @@ Public Class Expense
                 ' Set the parameter values from the UI controls 
                 'Class declaretions
 
-                Dim expense As New Expensetrack With {
+                Dim expense As New Expensetracking With {
                     .Amount = TextBox2.Text,
                     .TotalIncome = TextBox3.Text,
                     .Description = TextBox6.Text,
