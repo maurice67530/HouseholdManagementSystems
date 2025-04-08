@@ -178,7 +178,7 @@ Public Class Form1
 
 
 
-    Private Sub TrackLowInventory()
+    Private Sub TrackExpense()
 
         ' Create a new connection for this method to avoid issues with global connections.
 
@@ -212,7 +212,7 @@ Public Class Form1
 
                             Dim TotalIncome As Integer
 
-                            If Integer.TryParse(TotalincomeString, Totalincome) Then
+                            If Integer.TryParse(TotalincomeString, TotalIncome) Then
 
                                 ' If the quantity is less than or equal to 60, send a notification
 
@@ -242,7 +242,7 @@ Public Class Form1
 
             ' Show error message in case of failure
 
-            MessageBox.Show("Error checking inventory: " & ex.Message)
+            MessageBox.Show("Error checking Expense: " & ex.Message)
 
         Finally
 
@@ -419,6 +419,7 @@ Public Class Form1
 
         TrackExpenses()
 
+        Timer1.Interval = 60000 ' Check every 60 seconds
 
         Timer1.Stop()
 
