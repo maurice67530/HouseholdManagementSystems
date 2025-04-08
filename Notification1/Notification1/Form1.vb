@@ -49,6 +49,7 @@ Public Class Form1
 
         ToolTip1.SetToolTip(Button1, "Mark As Read")
         ToolTip1.SetToolTip(Button2, "Clear Notification")
+        ToolTip1.SetToolTip(Button3, "Refresh")
     End Sub
 
     Private Sub LoadNotifications()
@@ -61,28 +62,41 @@ Public Class Form1
         End Using
     End Sub
 
-    Private Sub TrackExpenses()
-        Dim query As String = "INSERT INTO Notifications (Type, Message, DateCreated, IsRead) " &
-                          "SELECT 'Expense', 'Recent expense recorded: ' & Amount, Date(), False FROM Expenses WHERE Date >= Date()-7"
-        ExecuteQuery(query)
-    End Sub
+    'Private Sub TrackExpenses()
+    '    Dim query As String = "INSERT INTO Notifications (Category, Message, DateCreated, IsRead) " &
+    '                      "SELECT 'Expenses', 'Recent expense recorded: ' & Amount, Date(), False FROM Expenses WHERE Date >= Date()-7"
+    '    ExecuteQuery(query)
+    'End Sub
 
     Private Sub TrackOverdueChores()
-        Dim query As String = "INSERT INTO Notifications (Type, Message, DateCreated, IsRead) " &
-                          "SELECT 'Chore', 'Overdue chore: ' & ChoreName, DueDate, False FROM Chores WHERE Completed = False AND DueDate < Date()"
-        ExecuteQuery(query)
+        Try
+            Dim query As String = "INSERT INTO Notifications (Category, Message, DateCreated, IsRead) " &
+                          "SELECT 'Chores', 'Overdue chore: ' & Title, DueDate, False FROM Chores WHERE Completed = False AND DueDate < Date()"
+            ExecuteQuery(query)
+        Catch ex As Exception
+            MessageBox.Show("Error tracking chores: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
     End Sub
 
     Private Sub TrackPendingTasks()
-        Dim query As String = "INSERT INTO Notifications (Type, Message, DateCreated, IsRead) " &
-                          "SELECT 'Task', 'Pending task: ' & TaskName, DueDate, False FROM Tasks WHERE Completed = False"
-        ExecuteQuery(query)
+        Try
+            Dim query As String = "INSERT INTO Notifications (Category, Message, DateCreated, IsRead) " &
+                          "SELECT 'Tasks', 'Pending task: ' & Title, DueDate, False FROM Tasks WHERE Completed = False"
+            ExecuteQuery(query)
+
+        Catch ex As Exception
+            MessageBox.Show("Error tracking tasks: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
     End Sub
 
     Private Sub TrackLowInventory()
-        Dim query As String = "INSERT INTO Notifications (Type, Message, DateCreated, IsRead) " &
-                          "SELECT 'Inventory', 'Low inventory: ' & ItemName, Date(), False FROM Inventory WHERE Quantity < 5"
-        ExecuteQuery(query)
+        Try
+            Dim query As String = "INSERT INTO Notifications (Category, Message, DateCreated, IsRead) " &
+                          "SELECT 'Inventory', 'Low inventory: ' & ItemName, DateAdded, False FROM Inventory WHERE Quantity < 65"
+            ExecuteQuery(query)
+        Catch ex As Exception
+            MessageBox.Show("Error tracking chores: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
     End Sub
 
     Private Sub ExecuteQuery(query As String)
@@ -124,12 +138,7 @@ Public Class Form1
     End Sub
 
 
-    'Private Sub btnRefresh_Click(sender As Object, e As EventArgs) Handles btnRefresh.Click
-    '    TrackExpenses()
-    '    TrackOverdueChores()
-    '    TrackPendingTasks()
-    '    TrackLowInventory()
-    'End Sub
+
 
     Private Sub DataGridView1_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridView1.CellContentClick
         If e.RowIndex >= 0 Then
@@ -138,8 +147,9 @@ Public Class Form1
             ExecuteQuery(query)
             CountUnreadNotifications()
 
-            Timer1.Stop()
+            'Timer1.Stop()
             'Label3.Visible = False
+
         End If
     End Sub
 
@@ -190,5 +200,25 @@ Public Class Form1
 
 
     End Sub
+
+    Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
+        'TrackExpenses()
+        TrackOverdueChores()
+        TrackPendingTasks()
+        TrackLowInventory()
+    End Sub
+
+    Private Sub AddNotification(Category As String, message As String)
+        Dim query As String = "INSERT INTO Notifications (Category, Message, DateCreated, IsRead) VALUES (@Category, @Message, Date(), False)"
+        Using conn As New OleDbConnection(NotificationModule.connectionString), cmd As New OleDbCommand(query, conn)
+            cmd.Parameters.AddWithValue("@Category", Category)
+            cmd.Parameters.AddWithValue("@Message", message)
+            conn.Open()
+            cmd.ExecuteNonQuery()
+        End Using
+        LoadNotifications()
+    End Sub
+
+
 End Class
 
