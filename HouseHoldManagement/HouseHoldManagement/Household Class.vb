@@ -46,7 +46,7 @@ Public Class chores_
 
 
 End Class
-Public Class MealPlan
+Public Class MealPlans
 
     'properties of the mealplan class
     Public Property MealPlanId As String
