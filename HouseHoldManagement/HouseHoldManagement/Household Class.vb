@@ -1,5 +1,20 @@
 ﻿Public Class Household_Class
+    Public Class expenses
 
+        Public Property ExpenseID As Integer
+        Public Property Amount As Integer
+        Public Property TotalIncome As Integer
+        Public Property Description As String
+        Public Property Tags As String
+        Public Property Currency As String
+        Public Property Category As String
+        Public Property Paymentmethod As String
+        Public Property Frequency As String
+        Public Property ApprovalStatus As String
+        Public Property Receiver As String
+        Public Property DateOfexpenses As DateTime
+
+    End Class
 End Class
 Public Class Register
     'properties of the Register class
