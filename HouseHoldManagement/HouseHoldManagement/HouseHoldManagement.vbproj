@@ -111,6 +111,12 @@
     <Compile Include="Login.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="MealPlan.Designer.vb">
+      <DependentUpon>MealPlan.vb</DependentUpon>
+    </Compile>
+    <Compile Include="MealPlan.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
