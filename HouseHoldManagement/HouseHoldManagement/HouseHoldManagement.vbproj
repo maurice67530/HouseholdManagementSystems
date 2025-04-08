@@ -78,6 +78,12 @@
     <Compile Include="Chores.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Dashboard.Designer.vb">
+      <DependentUpon>Dashboard.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Dashboard.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Expense.Designer.vb">
       <DependentUpon>Expense.vb</DependentUpon>
     </Compile>
