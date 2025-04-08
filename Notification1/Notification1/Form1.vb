@@ -205,7 +205,7 @@ Public Class Form1
             conn.Open()
             cmd.ExecuteNonQuery()
         End Using
-        'LoadNotifications()
+        LoadNotifications()
 
     End Sub
 
@@ -230,9 +230,7 @@ Public Class Form1
             Dim query As String = "UPDATE Notifications SET IsRead = True WHERE ID = " & notificationId
             ExecuteQuery(query)
         End If
-        'TrackLowInventory()
-        'LoadNotifications()
-        'CountUnreadNotifications()
+
     End Sub
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
@@ -274,9 +272,7 @@ Public Class Form1
         Else
             IbINotification.ForeColor = Color.Red
         End If
-        'TrackExpenses()
-        'TrackOverdueChores()
-        'TrackPendingTasks()
+
         TrackLowInventory()
         CountUnreadNotifications()
 
