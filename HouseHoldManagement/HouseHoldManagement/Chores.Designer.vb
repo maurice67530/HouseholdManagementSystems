@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-Partial Class Expense
+Partial Class Chores
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
@@ -24,13 +24,13 @@ Partial Class Expense
     Private Sub InitializeComponent()
         Me.SuspendLayout()
         '
-        'Expense
+        'Chores
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(284, 261)
-        Me.Name = "Expense"
-        Me.Text = " "
+        Me.ClientSize = New System.Drawing.Size(578, 362)
+        Me.Name = "Chores"
+        Me.Text = "Chores"
         Me.ResumeLayout(False)
 
     End Sub
