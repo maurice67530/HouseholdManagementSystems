@@ -103,6 +103,9 @@ Partial Class Notifications
         Me.Label2.TabIndex = 3
         Me.Label2.Text = "Count Unread Notifications"
         '
+        'Timer1
+        '
+        '
         'Notifications
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
