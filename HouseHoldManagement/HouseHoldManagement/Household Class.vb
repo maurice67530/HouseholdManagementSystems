@@ -1,5 +1,5 @@
 ﻿Public Class Household_Class
-    Public Class expenses
+    Public Class Expensetrack
 
         Public Property ExpenseID As Integer
         Public Property Amount As Integer
@@ -46,7 +46,7 @@ Public Class chores_
 
 
 End Class
-Public Class MealPlan
+Public Class MealPlans
 
     'properties of the mealplan class
     Public Property MealPlanId As String
@@ -61,5 +61,18 @@ Public Class MealPlan
     Public Property Calories As String
     Public Property Ingredient As String
     Public Property MealPlanPrint As String
+
+End Class
+Public Class Inventory1
+
+    Public Property ItemName As String
+    Public Property Description As String
+    Public Property Quantity As String
+    Public Property Category As String
+    Public Property ReoderLevel As String
+    Public Property PricePerUnit As String
+    Public Property DateAdded As DateTime
+    Public Property ExpiryDate As DateTime
+    Public Property Unit As String
 
 End Class
