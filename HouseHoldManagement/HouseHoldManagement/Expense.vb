@@ -9,6 +9,9 @@ Public Class Expense
     ' Create a ToolTip object
     Private toolTip As New ToolTip()
     Private toolTip1 As New ToolTip()
+
+    Private mealPlanData As DataTable
+
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         Debug.WriteLine("Entering btnSubmit")
 
@@ -273,5 +276,43 @@ Public Class Expense
         DataGridView1.Sort(DataGridView1.Columns("Amount"), System.ComponentModel.ListSortDirection.Descending)
         DataGridView1.Sort(DataGridView1.Columns("Currency"), System.ComponentModel.ListSortDirection.Ascending)
 
+    End Sub
+
+    Private Sub Button6_Click(sender As Object, e As EventArgs) Handles Button6.Click
+        PrintDialog1.Document = PrintDocument1
+        If PrintDialog1.ShowDialog() = DialogResult.OK Then
+            'LoadFilteredMealPlan() ' Load filtered data based on selected frequency
+            If mealPlanData.Rows.Count > 0 Then
+                PrintDocument1.Print()
+            Else
+                MessageBox.Show("No meal plans found for the selected period.", "Print Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            End If
+        End If
+    End Sub
+    Public Sub LoadMealPlansDataFromDatabase()
+
+        Debug.WriteLine("LoadMealPlansDataFromDatabase")
+        Using connect As New OleDbConnection(connectionString)
+            connect.Open()
+
+            ' Update the table name if necessary  
+            Dim tableName As String = "Expense"
+
+            ' Create an OleDbCommand to select the data from the database  
+            Dim cmd As New OleDbCommand($"SELECT * FROM {tableName}", connect)
+
+            ' Create a DataAdapter and fill a DataTable  
+            Dim da As New OleDbDataAdapter(cmd)
+            Dim dt As New DataTable()
+            da.Fill(dt)
+
+            ' Bind the DataTable to the DataGridView  
+            DataGridView1.DataSource = dt
+            'HighlightExpiredItemss()
+        End Using
+
+    End Sub
+    Private Sub Expense_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        LoadMealPlansDataFromDatabase()
     End Sub
 End Class

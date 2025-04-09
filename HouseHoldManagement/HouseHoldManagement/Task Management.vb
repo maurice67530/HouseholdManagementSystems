@@ -41,7 +41,6 @@ Public Class Task_Management
         Catch ex As Exception
             Debug.WriteLine($"form loaded unsuccessful")
             Debug.WriteLine($"Stack Trace: {ex.StackTrace}")
-            MessageBox.Show("An unexpected error occurred while populating the data.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         Finally
             ' Close the database connection  
             If conn.State = ConnectionState.Open Then
@@ -49,4 +48,5 @@ Public Class Task_Management
             End If
         End Try
     End Sub
+
 End Class
