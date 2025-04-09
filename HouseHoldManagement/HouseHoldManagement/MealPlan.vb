@@ -49,4 +49,63 @@ Public Class MealPlan
         ComboBox2.Items.AddRange(New String() {"Noodles", "Chicken", "Bread"})
         ListBox1.Items.AddRange(New String() {"Noodles", "Chicken Curry", "Kota"})
     End Sub
+
+    Private Sub DataGridView1_SelectionChanged(sender As Object, e As EventArgs) Handles DataGridView1.SelectionChanged
+        Try
+            If DataGridView1.SelectedRows.Count > 0 Then
+                Dim selectedRow As DataGridViewRow = DataGridView1.SelectedRows(0)
+
+                ' Load the data from the selected row into UI controls  
+
+                TextBox3.Text = selectedRow.Cells("Description").Value.ToString()
+                NumericUpDown1.Text = selectedRow.Cells("TotalCalories").Value.ToString()
+                DateTimePicker1.Text = selectedRow.Cells("StartDate").Value.ToString()
+                DateTimePicker2.Text = selectedRow.Cells("EndDate").Value.ToString()
+                TextBox5.Text = selectedRow.Cells("Picturepath").Value.ToString()
+                ComboBox1.SelectedItem = selectedRow.Cells("Items").Value.ToString()
+                ComboBox1.SelectedItem = selectedRow.Cells("Calories").Value.ToString()
+                ComboBox4.SelectedItem = selectedRow.Cells("MealPlanPrint").Value.ToString()
+                ListBox2.SelectedItem = selectedRow.Cells("Meals").Value.ToString()
+                TextBox4.Text = selectedRow.Cells("MealName").Value.ToString()
+
+                ' Enable/ disable the buttons based on the selected person  
+                btnSubmit.Enabled = False
+                btnDelete.Enabled = True
+                btnEdit.Enabled = True
+            End If
+
+            Debug.WriteLine("DataGridView populated successfully")
+
+
+            'Calculation logic here...
+        Catch ex As FormatException
+            Debug.WriteLine("Select the datagridview.")
+            Debug.WriteLine($"Stack Trace: {ex.StackTrace}")
+            MessageBox.Show("Please Select the datagridview.", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+        Catch ex As Exception
+            Debug.WriteLine($"Unexpected error Selecting the datagridview {ex.Message}")
+            Debug.WriteLine($"Stack Trace: {ex.StackTrace}")
+            MessageBox.Show("An unexpected error occured Selecting the datagridview.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
+        Debug.WriteLine("The DataGridView selected unsuccessful.")
+
+    End Sub
+    Private Sub PopulateDataGridView()
+
+        'Add each expense to the DataGridView
+        For Each meal As MealPlan In meals()
+
+            DataGridView1.Rows.Add(meal.MealPlanId, meal.MealName, meal.StartDate.ToShortDateString(), meal.picturePath, meal.Description, meal.EndDate.ToShortDateString(), meal.Meals,
+                                  meal.TotalCalories, meal.Calories, meal.MealPlanPrint, meal.Items)
+            Try
+                Debug.WriteLine("PopulateDataGridView: DataGridView populated successfully.")
+
+            Catch ex As Exception
+                Debug.WriteLine($"Error in PopulateDataGridView: {ex.Message}")
+                Debug.WriteLine($"Stack Trace: {ex.StackTrace}")
+                MessageBox.Show("An error occurred while loading data into the grid.", "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            End Try
+        Next
+
+    End Sub
 End Class
