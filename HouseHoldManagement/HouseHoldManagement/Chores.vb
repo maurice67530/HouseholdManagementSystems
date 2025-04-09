@@ -2,7 +2,7 @@
 Public Class Chores
     Public Property conn As New OleDbConnection(connectionString)
     ' Connection string using relative path to the database
-    Public Const connectionString As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Masindi\Source\Repos\HouseholdManagementSystems\HMS.accdb"
+    Public Const connectionString As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Murangi\Source\Repos\maurice67530\HouseholdManagementSystems\HMS.accdb"
     Private Sub Chores_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
         cmbpri.Items.AddRange(New String() {"Low", "Medium", "High"})
@@ -83,70 +83,33 @@ Public Class Chores
 
     Private Sub Button7_Click(sender As Object, e As EventArgs) Handles Button7.Click
         Try
+            For Each row As DataGridViewRow In DataGridView1.Rows
+                If row.Cells("DueDate").Value IsNot Nothing Then
+                    Dim DueDate As DateTime = Convert.ToDateTime(row.Cells("DueDate").Value)
+                    Dim Status As String = row.Cells("Status").Value.ToString
+
+                    If DueDate < DateTime.Now AndAlso Status <> "Completed" Then
+                        row.DefaultCellStyle.BackColor = Color.Gray
+
+                    Else
+                        row.DefaultCellStyle.BackColor = Color.WhiteSmoke
 
 
-            Debug.WriteLine("entering button update")
+                    End If
+                End If
+            Next
+            Dim InclompletedCount As Integer = 0
 
-            If DataGridView1.SelectedRows.Count = 0 Then
-                MessageBox.Show("Please select a record to update.", "No Selection", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-                Return
-            End If
+            For Each row As DataGridViewRow In DataGridView1.Rows
+                If row.Cells("Status").Value IsNot Nothing AndAlso row.Cells("Status").Value.ToString() <> "Completed " Then
 
-            If DataGridView1.SelectedRows.Count > 0 Then
-                Debug.WriteLine("A row is selected for update")
+                    InclompletedCount += 1
 
-            Else
-                MessageBox.Show("Please select a Chore to update.", "update Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-                Debug.WriteLine("No row selected, exiting Button Update")
-            End If
-            Debug.WriteLine("Exiting Button Update")
-
-            Dim Title As String = TXTtitle.Text
-            Dim AssignedTo As String = cmbassi.SelectedItem
-            Dim Priority As String = cmbpri.SelectedItem
-            Dim Status As String = cmbstatus.SelectedItem
-            Dim Frequency As String = cmbfre.SelectedItem
-            Dim DueDate As String = DateTimePicker1.Value
-            Dim Recurring As String = NumericUpDown1.Value
-            Dim Description As String = txtdes.Text
-
-            Using conn As New OleDbConnection(connectionString)
-                conn.Open()
-
-                'Get the ID of the selected row (assuming your table has a primary key named "ID")  
-                Dim selectedRow As DataGridViewRow = DataGridView1.SelectedRows(0)
-                Dim ID As Integer = Convert.ToInt32(selectedRow.Cells("ID").Value) ' Change "ID" to your primary key column name  
-
-                'Create an OleDbCommand to update the personnel data in the database  
-                Dim cmd As New OleDbCommand("UPDATE Chores SET [Title] = ?, [AssignedTo] = ?, [Priority] = ?, [Status] = ?, [Frequency] = ?, [DueDate] = ?, [Recurring]= ?, [Description] = ? WHERE [ID] = ?", conn)
-
-                'Set the parameter values from the UI controls  
-
-
-                cmd.Parameters.AddWithValue("@Title", TXTtitle.Text)
-                cmd.Parameters.AddWithValue("@AssignedTo", cmbassi.SelectedItem)
-                cmd.Parameters.AddWithValue("@Priority", cmbpri.SelectedItem)
-                cmd.Parameters.AddWithValue("@Status", cmbstatus.SelectedItem)
-                cmd.Parameters.AddWithValue("@Frequency", cmbfre.SelectedItem)
-                cmd.Parameters.AddWithValue("@DueDate", DateTimePicker1.Value)
-                cmd.Parameters.AddWithValue("@Recurring", NumericUpDown1.Value)
-                cmd.Parameters.AddWithValue("@Description", txtdes.Text)
-                cmd.Parameters.AddWithValue("@ID", ID)
-                MsgBox("Chores Updated Successfuly!", vbInformation, "Update Confirmation")
-
-                cmd.ExecuteNonQuery()
-
-            End Using
-        Catch ex As FormatException
-            Debug.WriteLine($"Format Error in Button Update: {ex.Message}")
-            Debug.WriteLine($"Stack Trace: {ex.StackTrace}")
-            MessageBox.Show($"Error updating Tasks in database: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-            MessageBox.Show("Error saving inventory to database: " & ex.Message & vbNewLine & ex.StackTrace, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                End If
+            Next
+            Label10.Text = "Incompleted chores: " & InclompletedCount.ToString
         Catch ex As Exception
-            Debug.WriteLine($"unexpected error Button Update: {ex.Message}")
-            Debug.WriteLine($"Stack Trace: {ex.StackTrace}")
-            MessageBox.Show($"Unexpected error: {ex.Message}", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-            MessageBox.Show("Error saving inventory to database: " & ex.Message & vbNewLine & ex.StackTrace, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            MessageBox.Show("Error highligting overdue chores")
         End Try
     End Sub
 
@@ -251,5 +214,82 @@ Public Class Chores
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         Close()
+    End Sub
+
+    Private Sub Button5_Click(sender As Object, e As EventArgs) Handles Button5.Click
+        Try
+
+
+            Debug.WriteLine("entering button update")
+
+            If DataGridView1.SelectedRows.Count = 0 Then
+                MessageBox.Show("Please select a record to update.", "No Selection", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                Return
+            End If
+
+            If DataGridView1.SelectedRows.Count > 0 Then
+                Debug.WriteLine("A row is selected for update")
+
+            Else
+                MessageBox.Show("Please select a Chore to update.", "update Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                Debug.WriteLine("No row selected, exiting Button Update")
+            End If
+            Debug.WriteLine("Exiting Button Update")
+
+            Dim Title As String = TXTtitle.Text
+            Dim AssignedTo As String = cmbassi.SelectedItem
+            Dim Priority As String = cmbpri.SelectedItem
+            Dim Status As String = cmbstatus.SelectedItem
+            Dim Frequency As String = cmbfre.SelectedItem
+            Dim DueDate As String = DateTimePicker1.Value
+            Dim Recurring As String = NumericUpDown1.Value
+            Dim Description As String = txtdes.Text
+
+            Using conn As New OleDbConnection(connectionString)
+                conn.Open()
+
+                'Get the ID of the selected row (assuming your table has a primary key named "ID")  
+                Dim selectedRow As DataGridViewRow = DataGridView1.SelectedRows(0)
+                Dim ID As Integer = Convert.ToInt32(selectedRow.Cells("ID").Value) ' Change "ID" to your primary key column name  
+
+                'Create an OleDbCommand to update the personnel data in the database  
+                Dim cmd As New OleDbCommand("UPDATE Chores SET [Title] = ?, [AssignedTo] = ?, [Priority] = ?, [Status] = ?, [Frequency] = ?, [DueDate] = ?, [Recurring]= ?, [Description] = ? WHERE [ID] = ?", conn)
+
+                'Set the parameter values from the UI controls  
+
+
+                cmd.Parameters.AddWithValue("@Title", TXTtitle.Text)
+                cmd.Parameters.AddWithValue("@AssignedTo", cmbassi.SelectedItem)
+                cmd.Parameters.AddWithValue("@Priority", cmbpri.SelectedItem)
+                cmd.Parameters.AddWithValue("@Status", cmbstatus.SelectedItem)
+                cmd.Parameters.AddWithValue("@Frequency", cmbfre.SelectedItem)
+                cmd.Parameters.AddWithValue("@DueDate", DateTimePicker1.Value)
+                cmd.Parameters.AddWithValue("@Recurring", NumericUpDown1.Value)
+                cmd.Parameters.AddWithValue("@Description", txtdes.Text)
+                cmd.Parameters.AddWithValue("@ID", ID)
+                MsgBox("Chores Updated Successfuly!", vbInformation, "Update Confirmation")
+
+                cmd.ExecuteNonQuery()
+
+            End Using
+        Catch ex As FormatException
+            Debug.WriteLine($"Format Error in Button Update: {ex.Message}")
+            Debug.WriteLine($"Stack Trace: {ex.StackTrace}")
+            MessageBox.Show($"Error updating Tasks in database: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            MessageBox.Show("Error saving inventory to database: " & ex.Message & vbNewLine & ex.StackTrace, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        Catch ex As Exception
+            Debug.WriteLine($"unexpected error Button Update: {ex.Message}")
+            Debug.WriteLine($"Stack Trace: {ex.StackTrace}")
+            MessageBox.Show($"Unexpected error: {ex.Message}", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            MessageBox.Show("Error saving inventory to database: " & ex.Message & vbNewLine & ex.StackTrace, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
+    End Sub
+
+    Private Sub Button8_Click(sender As Object, e As EventArgs) Handles Button8.Click
+
+    End Sub
+
+    Private Sub Button9_Click(sender As Object, e As EventArgs) Handles Button9.Click
+        DataGridView1.Sort(DataGridView1.Columns("DueDate"), System.ComponentModel.ListSortDirection.Ascending)
     End Sub
 End Class

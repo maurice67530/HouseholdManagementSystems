@@ -217,4 +217,62 @@ Public Class Task_Management
     Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
 
     End Sub
+
+    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
+        'Ensure a row Is selected in the DataGridView  
+        If DataGridView1.SelectedRows.Count = 0 Then
+            MessageBox.Show("Please select a record to update.", "No Selection", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            Return
+        End If
+
+        Try
+
+            Dim Title As String = TextBox1.Text
+            Dim Description As String = TextBox2.Text
+            Dim Duedate As String = DateTimePicker1.Value
+            Dim priority As String = ComboBox1.SelectedItem.ToString()
+            Dim status As String = ComboBox2.SelectedItem.ToString()
+            Dim AssignedTo As String = ComboBox3.SelectedItem.ToString()
+
+
+            Using conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
+                conn.Open()
+
+                ' Get the ID of the selected row (assuming your table has a primary key named "ID")  
+                Dim selectedRow As DataGridViewRow = DataGridView1.SelectedRows(0)
+                Dim id As Integer = Convert.ToInt32(selectedRow.Cells("ID").Value) ' Change "ID" to your primary key column name  
+
+
+                Dim cmd As New OleDbCommand("UPDATE [Tasks] SET [Title] = ?, [Description] = ?, [Duedate] = ?, [priority] = ?, [status] = ?, [AssigneTod] = ? WHERE ID = ?", conn)
+                cmd.Parameters.AddWithValue("@Title", TextBox1.Text)
+                cmd.Parameters.AddWithValue("@Description", TextBox2.Text)
+                cmd.Parameters.AddWithValue("Duedate", DateTimePicker1.Value)
+                cmd.Parameters.AddWithValue("@priority", ComboBox1.SelectedItem.ToString)
+                cmd.Parameters.AddWithValue("@status", ComboBox2.SelectedItem.ToString)
+                cmd.Parameters.AddWithValue("@AssignedTo", ComboBox3.SelectedItem.ToString)
+                cmd.Parameters.AddWithValue("@ID", id)
+
+
+                'cmd.Parameters.AddWithValue("@ID", personalid) ' Primary key for matching record  
+
+
+                'Execute the SQL command to update the data  
+                cmd.ExecuteNonQuery()
+
+
+                'Display a message box indicating the update was successful 
+
+
+                MsgBox("Task Information Updated!", vbInformation, "Update Confirmation")
+
+
+            End Using
+        Catch ex As OleDbException
+            MessageBox.Show($"Error updating Task in database: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        Catch ex As Exception
+            MessageBox.Show($"Unexpected error: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
+
+
+    End Sub
 End Class

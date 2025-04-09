@@ -54,6 +54,7 @@ Partial Class Chores
         Me.Button8 = New System.Windows.Forms.Button()
         Me.Button9 = New System.Windows.Forms.Button()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
+        Me.Label10 = New System.Windows.Forms.Label()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel2.SuspendLayout()
         Me.Panel1.SuspendLayout()
@@ -342,11 +343,21 @@ Partial Class Chores
         Me.Button9.TabIndex = 48
         Me.Button9.UseVisualStyleBackColor = True
         '
+        'Label10
+        '
+        Me.Label10.AutoSize = True
+        Me.Label10.ForeColor = System.Drawing.Color.Maroon
+        Me.Label10.Location = New System.Drawing.Point(9, 270)
+        Me.Label10.Name = "Label10"
+        Me.Label10.Size = New System.Drawing.Size(0, 13)
+        Me.Label10.TabIndex = 49
+        '
         'Chores
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(698, 458)
+        Me.Controls.Add(Me.Label10)
         Me.Controls.Add(Me.Button9)
         Me.Controls.Add(Me.Button8)
         Me.Controls.Add(Me.Button7)
@@ -403,4 +414,5 @@ Partial Class Chores
     Friend WithEvents Button8 As Button
     Friend WithEvents Button9 As Button
     Friend WithEvents ToolTip1 As ToolTip
+    Friend WithEvents Label10 As Label
 End Class
