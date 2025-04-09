@@ -164,6 +164,7 @@ Public Class Task_Management
 
     End Sub
 
+
     Private Sub Button5_Click(sender As Object, e As EventArgs) Handles Button5.Click
         Dim conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
         Dim TasksTable As New DataTable()
@@ -212,5 +213,55 @@ Public Class Task_Management
     Private Sub Button8_Click(sender As Object, e As EventArgs) Handles Button8.Click
         Dashboard.Show()
         Me.Close()
+    End Sub
+
+    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
+        If DataGridView1.SelectedRows.Count = 0 Then
+            MessageBox.Show("Please select a record to update.", "No Selection", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            Return
+        End If
+        Try
+            Dim Title As String = TextBox1.Text
+            Dim Description As String = TextBox2.Text
+            Dim DueDate As String = DateTimePicker1.Text
+            Dim Priority As String = ComboBox1.Text
+            Dim Status As String = ComboBox2.Text
+            Dim Assignedto As String = ComboBox3.Text
+
+
+            Using conn As New OleDbConnection(connectionString)
+                conn.Open()
+
+                ' Get the ID of the selected row (assuming your table has a primary key named "ID")  
+                Dim selectedRow As DataGridViewRow = DataGridView1.SelectedRows(0)
+                Dim ID As Integer = Convert.ToInt32(selectedRow.Cells("ID").Value) ' Change "ID" to your primary key column name  
+
+                ' Create an OleDbCommand to update the personnel data in the database  
+                Dim cmd As New OleDbCommand("UPDATE [Tasks] SET [Title] = ?, [Description] = ?, [DueDate] = ?, [Priority] = ?, [Status] = ?, [AssignedTo] = ? WHERE [ID] = ?", conn)
+
+                ' Set the parameter values from the UI controls  
+
+                cmd.Parameters.AddWithValue("@Title", TextBox1.Text)
+                cmd.Parameters.AddWithValue("@Description", TextBox2.Text)
+                cmd.Parameters.AddWithValue("@DueDate", DateTimePicker1.Text)
+                cmd.Parameters.AddWithValue("@Priority", ComboBox1.Text)
+                cmd.Parameters.AddWithValue("@Status", ComboBox2.Text)
+                cmd.Parameters.AddWithValue("@Assignedto", ComboBox3.Text)
+                cmd.Parameters.AddWithValue("@ID", ID)
+
+                'cmd.Parameters.AddWithValue("@ID", ID) ' Primary key for matching record  
+                cmd.ExecuteNonQuery()
+
+
+                MsgBox("Taskmanagement Updated Successfuly!", vbInformation, "Update Confirmation")
+
+
+
+            End Using
+        Catch ex As OleDbException
+            MessageBox.Show($"Error updating Taskmanagement in database: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        Catch ex As Exception
+            MessageBox.Show($"Unexpected error: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
     End Sub
 End Class
