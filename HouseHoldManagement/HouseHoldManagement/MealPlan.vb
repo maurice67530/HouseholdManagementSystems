@@ -58,7 +58,25 @@ Public Class MealPlan
         tooltip.SetToolTip(btnSuggest, "Suggest")
         tooltip.SetToolTip(btnFilter, "Filter")
     End Sub
+    Public Property meals As New List(Of MealPlans)
+    Private Sub PopulateDataGridView()
 
+        'Add each expense to the DataGridView
+        For Each meal As MealPlans In meals()
+
+            DataGridView1.Rows.Add(meal.MealName, meal.StartDate.ToShortDateString(), meal.FilePath, meal.Description, meal.EndDate.ToShortDateString(), meal.Meals,
+                                  meal.TotalCalories, meal.Calories, meal.Frequency, meal.Items)
+            Try
+                Debug.WriteLine("PopulateDataGridView: DataGridView populated successfully.")
+
+            Catch ex As Exception
+                Debug.WriteLine($"Error in PopulateDataGridView: {ex.Message}")
+                Debug.WriteLine($"Stack Trace: {ex.StackTrace}")
+                MessageBox.Show("An error occurred while loading data into the grid.", "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            End Try
+        Next
+
+    End Sub
     Private Sub DataGridView1_SelectionChanged(sender As Object, e As EventArgs) Handles DataGridView1.SelectionChanged
         Try
             If DataGridView1.SelectedRows.Count > 0 Then
