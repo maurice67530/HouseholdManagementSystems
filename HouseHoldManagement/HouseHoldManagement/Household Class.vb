@@ -96,7 +96,17 @@ Public Class DailyTask
         Public Property PricePerUnit As Integer
         Public Property Ispurchased As String
 
-
-
+        Public Class personell
+            Public Property FistName As String
+            Public Property LastName As String
+            Public Property Gender As String
+            Public Property Email As String
+            Public Property DateOfBirth As DateTime
+            Public Property Role As String
+            Public Property HealthStatus As String
+            Public Property postalcode As String
+            Public Property Age As Integer
+            Public Property Contact As Integer
+        End Class
     End Class
 End Class

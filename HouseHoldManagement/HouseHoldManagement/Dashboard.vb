@@ -4,7 +4,7 @@
     End Sub
 
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
-        ' Task.showdialog
+        DailyTask.ShowDialog()
     End Sub
 
     Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
@@ -18,4 +18,19 @@
     Private Sub Button5_Click(sender As Object, e As EventArgs) Handles Button5.Click
         Login.ShowDialog()
     End Sub
+    Private Sub Button7_Click(sender As Object, e As EventArgs) Handles Button7.Click
+        Personnel.ShowDialog()
+    End Sub
+    Private Sub Button8_Click(sender As Object, e As EventArgs) Handles Button8.Click
+        Grocery.ShowDialog()
+    End Sub
+
+    Private Sub Button9_Click(sender As Object, e As EventArgs) Handles Button9.Click
+        'gallery.showdialog
+    End Sub
+
+    Private Sub Button10_Click(sender As Object, e As EventArgs) Handles Button10.Click
+        Notifications.ShowDialog()
+    End Sub
+
 End Class
