@@ -53,7 +53,9 @@ Public Class MealPlan
         tooltip.SetToolTip(btnEdit, "Edit")
         tooltip.SetToolTip(btnDelete, "Delete")
         tooltip.SetToolTip(btnFilter, "Filter")
-        tooltip.SetToolTip()
-        tooltip.SetToolTip()
+        tooltip.SetToolTip(btnSort, "Sort")
+        tooltip.SetToolTip(btnSuggest, "Suggest")
+        tooltip.SetToolTip(btnPrint, "Print")
+        tooltip.SetToolTip(btnHighlight, "Highlight")
     End Sub
 End Class

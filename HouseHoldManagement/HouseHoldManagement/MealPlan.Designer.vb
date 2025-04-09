@@ -317,7 +317,6 @@ Partial Class MealPlan
         Me.btnSuggest.Name = "btnSuggest"
         Me.btnSuggest.Size = New System.Drawing.Size(41, 37)
         Me.btnSuggest.TabIndex = 45
-        Me.btnSuggest.Text = "Suggest"
         Me.btnSuggest.UseVisualStyleBackColor = True
         '
         'btnPrint
@@ -328,7 +327,6 @@ Partial Class MealPlan
         Me.btnPrint.Name = "btnPrint"
         Me.btnPrint.Size = New System.Drawing.Size(41, 37)
         Me.btnPrint.TabIndex = 44
-        Me.btnPrint.Text = "Print"
         Me.btnPrint.UseVisualStyleBackColor = True
         '
         'btnDelete
@@ -339,7 +337,6 @@ Partial Class MealPlan
         Me.btnDelete.Name = "btnDelete"
         Me.btnDelete.Size = New System.Drawing.Size(41, 37)
         Me.btnDelete.TabIndex = 43
-        Me.btnDelete.Text = "Delete"
         Me.btnDelete.UseVisualStyleBackColor = True
         '
         'btnEdit
@@ -350,7 +347,6 @@ Partial Class MealPlan
         Me.btnEdit.Name = "btnEdit"
         Me.btnEdit.Size = New System.Drawing.Size(41, 37)
         Me.btnEdit.TabIndex = 42
-        Me.btnEdit.Text = "Edit"
         Me.btnEdit.UseVisualStyleBackColor = True
         '
         'btnSave
@@ -361,7 +357,6 @@ Partial Class MealPlan
         Me.btnSave.Name = "btnSave"
         Me.btnSave.Size = New System.Drawing.Size(41, 37)
         Me.btnSave.TabIndex = 41
-        Me.btnSave.Text = "Save"
         Me.btnSave.UseVisualStyleBackColor = True
         '
         'btnHighlight
@@ -372,7 +367,6 @@ Partial Class MealPlan
         Me.btnHighlight.Name = "btnHighlight"
         Me.btnHighlight.Size = New System.Drawing.Size(41, 37)
         Me.btnHighlight.TabIndex = 40
-        Me.btnHighlight.Text = "Highlight"
         Me.btnHighlight.UseVisualStyleBackColor = True
         '
         'btnRefresh
@@ -383,7 +377,6 @@ Partial Class MealPlan
         Me.btnRefresh.Name = "btnRefresh"
         Me.btnRefresh.Size = New System.Drawing.Size(41, 37)
         Me.btnRefresh.TabIndex = 39
-        Me.btnRefresh.Text = "Refresh"
         Me.btnRefresh.UseVisualStyleBackColor = True
         '
         'btnFilter
@@ -394,7 +387,6 @@ Partial Class MealPlan
         Me.btnFilter.Name = "btnFilter"
         Me.btnFilter.Size = New System.Drawing.Size(41, 37)
         Me.btnFilter.TabIndex = 38
-        Me.btnFilter.Text = "Filter"
         Me.btnFilter.UseVisualStyleBackColor = True
         '
         'btnSort
@@ -405,7 +397,6 @@ Partial Class MealPlan
         Me.btnSort.Name = "btnSort"
         Me.btnSort.Size = New System.Drawing.Size(41, 37)
         Me.btnSort.TabIndex = 37
-        Me.btnSort.Text = "Sort"
         Me.btnSort.UseVisualStyleBackColor = True
         '
         'MealPlan
