@@ -275,4 +275,33 @@ Public Class Task_Management
 
 
     End Sub
+
+    Private Sub DataGridView1_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridView1.CellContentClick
+
+    End Sub
+
+    Private Sub DataGridView1_SelectionChanged(sender As Object, e As EventArgs) Handles DataGridView1.SelectionChanged
+        Try
+
+
+            Debug.WriteLine("selecting data in the datagridview")
+            If DataGridView1.SelectedRows.Count > 0 Then
+                Dim selectedRow As DataGridViewRow = DataGridView1.SelectedRows(0)
+
+                ' Load the data from the selected row into UI controls  
+                TextBox1.Text = selectedRow.Cells("Title").Value.ToString()
+                TextBox2.Text = selectedRow.Cells("Description").Value.ToString()
+                DateTimePicker1.Text = selectedRow.Cells("DueDate").Value.ToString()
+                ComboBox1.Text = selectedRow.Cells("Priority").Value.ToString()
+                ComboBox2.Text = selectedRow.Cells("Status").Value.ToString()
+                ComboBox3.Text = selectedRow.Cells("AssignedTo").Value.ToString()
+
+
+            End If
+        Catch ex As Exception
+            Debug.WriteLine("error selection data in the database")
+            Debug.WriteLine($"Stack Trace: {ex.StackTrace}")
+        End Try
+
+    End Sub
 End Class
