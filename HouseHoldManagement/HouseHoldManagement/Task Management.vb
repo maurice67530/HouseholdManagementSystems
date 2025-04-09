@@ -49,4 +49,46 @@ Public Class Task_Management
             End If
         End Try
     End Sub
+
+    Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
+        ' Check if there are any selected rows in the DataGridView for personal  
+        If DataGridView1.SelectedRows.Count > 0 Then
+            ' Get the selected row  
+            Dim selectedRow As DataGridViewRow = DataGridView1.SelectedRows(0)
+
+            ' Assuming there is an "ID" column which is the primary key in the database  
+            Dim ID As Integer = Convert.ToInt32(selectedRow.Cells("ID").Value) ' Replace "ID" with your actual column name  
+
+            ' Confirm deletion  
+            Dim confirmationResult As DialogResult = MessageBox.Show("Are you sure you want to delete this ?", "Confirm Deletion", MessageBoxButtons.YesNo, MessageBoxIcon.Warning)
+            If confirmationResult = DialogResult.Yes Then
+                ' Proceed with deletion  
+                Try
+                    Using conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
+                        conn.Open()
+
+                        ' Create the delete command  
+                        Dim cmd As New OleDbCommand("DELETE FROM [Tasks] WHERE [ID] = ?", conn)
+                        cmd.Parameters.AddWithValue("@ID", ID) ' Primary key for matching record  
+
+                        ' Execute the delete command  
+                        Dim rowsAffected As Integer = cmd.ExecuteNonQuery()
+
+                        If rowsAffected > 0 Then
+                            MessageBox.Show("task deleted successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                            ' Optionally refresh DataGridView or reload from database  
+                            'PopulateDataGridView1()
+                        Else
+                            MessageBox.Show("No Task was deleted. Please check if the ID exists.", "Deletion Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                        End If
+                    End Using
+
+                Catch ex As Exception
+                    MessageBox.Show($"An error occurred while deleting the Task:  {ex.Message}", "Deletion Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                End Try
+            End If
+        Else
+            MessageBox.Show("Please select an Task to delete.", "Deletion Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+        End If
+    End Sub
 End Class
