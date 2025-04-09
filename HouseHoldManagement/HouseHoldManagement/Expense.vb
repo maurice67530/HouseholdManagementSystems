@@ -204,4 +204,74 @@ Public Class Expense
         'LoadExpenseDataFromDatabase()
         Debug.WriteLine("Exited btnEdit")
     End Sub
+
+    Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
+        Debug.WriteLine("Entering btnDelete_")
+
+        ' Check if there are any selected rows in the DataGridView for expenses  
+        If DataGridView1.SelectedRows.Count > 0 Then
+
+
+
+            ' Get the selected row  
+            Dim selectedRow As DataGridViewRow = DataGridView1.SelectedRows(0)
+
+            ' Assuming there is an "ID" column which is the primary key in the database  
+            Dim ID As Integer = Convert.ToInt32(selectedRow.Cells("ID").Value) ' Replace "ID" with your actual column name  
+
+            ' Confirm deletion  
+            Dim confirmationResult As DialogResult = MessageBox.Show("Are you sure you want to delete this expense?", "Confirm Deletion", MessageBoxButtons.YesNo, MessageBoxIcon.Warning)
+            If confirmationResult = DialogResult.Yes Then
+                ' Proceed with deletion  
+                Try
+                    TextBox7.Text = $" Expense updated at {DateTime.Now:HH:MM}"
+
+                    Using connect As New OleDbConnection(connectionString)
+                        connect.Open()
+                        Debug.WriteLine("User confirmed deletion")
+                        ' Create the delete command  
+                        Dim cmd As New OleDbCommand("DELETE FROM [Expense] WHERE [ID] = ?", connect)
+                        cmd.Parameters.AddWithValue("@ID", ID) ' Primary key for matching record  
+
+                        ' Execute the delete command  
+                        Dim rowsAffected As Integer = cmd.ExecuteNonQuery()
+
+                        If rowsAffected > 0 Then
+                            MessageBox.Show("Expense deleted successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                            ' Optionally refresh DataGridView or reload from database  
+
+                            'LoadExpenseDataFromDatabase()
+
+                            TextBox7.Text = $" Expense Delete at {DateTime.Now:HH:MM}"
+
+                        Else
+                            Debug.WriteLine(" User canceled deletion")
+                            MessageBox.Show("No expense was deleted. Please check if the ID exists.", "Deletion Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                        End If
+                    End Using
+
+                Catch ex As FormatException
+                    Debug.WriteLine($"Format error in btnDelete: {ex.Message}")
+                    Debug.WriteLine($"Stack Trace : {ex.StackTrace}")
+                    MessageBox.Show("Ensure you have selected a row correctly")
+                Catch ex As Exception
+                    MessageBox.Show($"An error occurred while deleting the expense: {ex.Message}", "Deletion Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                    Debug.WriteLine($"An error has occured when deleteing from database")
+                    Debug.WriteLine($"Stack Trace : {ex.StackTrace}")
+                End Try
+            End If
+        Else
+            Debug.WriteLine($" No row  selected, exiting btnDelete")
+            MessageBox.Show("Please select an expense to delete.", "Deletion Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+        End If
+        'LoadExpenseDataFromDatabase()
+
+        Debug.WriteLine("Exiting deletion")
+    End Sub
+
+    Private Sub Button5_Click(sender As Object, e As EventArgs) Handles Button5.Click
+        DataGridView1.Sort(DataGridView1.Columns("Amount"), System.ComponentModel.ListSortDirection.Descending)
+        DataGridView1.Sort(DataGridView1.Columns("Currency"), System.ComponentModel.ListSortDirection.Ascending)
+
+    End Sub
 End Class
