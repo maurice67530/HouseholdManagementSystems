@@ -1,20 +1,5 @@
-﻿Imports System.IO
-Imports System.Data.OleDb
-Public Class Register
-    Private Sub Register_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+﻿Public Class Register
+    Private Sub TextBox4_TextChanged(sender As Object, e As EventArgs) Handles TextBox4.TextChanged
 
-        ComboBox1.Items.AddRange(New String() {"Admin", "Member", "Finance", "Chef"})
-
-        Dim tooltip As New ToolTip()
-        tooltip.SetToolTip(Button1, "Register")
-        tooltip.SetToolTip(Button2, "Cancel")
-
-    End Sub
-    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
-
-
-    End Sub
-    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
-        End
     End Sub
 End Class

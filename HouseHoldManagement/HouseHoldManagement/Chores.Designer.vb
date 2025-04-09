@@ -54,6 +54,7 @@ Partial Class Chores
         Me.Button8 = New System.Windows.Forms.Button()
         Me.Button9 = New System.Windows.Forms.Button()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
+        Me.Label10 = New System.Windows.Forms.Label()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel2.SuspendLayout()
         Me.Panel1.SuspendLayout()
@@ -62,71 +63,77 @@ Partial Class Chores
         '
         'DataGridView1
         '
-        Me.DataGridView1.BackgroundColor = System.Drawing.SystemColors.ControlDark
+        Me.DataGridView1.BackgroundColor = System.Drawing.SystemColors.ActiveCaption
         Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DataGridView1.Location = New System.Drawing.Point(12, 251)
+        Me.DataGridView1.Location = New System.Drawing.Point(12, 289)
         Me.DataGridView1.Name = "DataGridView1"
-        Me.DataGridView1.Size = New System.Drawing.Size(597, 110)
+        Me.DataGridView1.Size = New System.Drawing.Size(657, 119)
         Me.DataGridView1.TabIndex = 45
         '
         'Button6
         '
+        Me.Button6.BackColor = System.Drawing.SystemColors.ActiveCaption
         Me.Button6.Image = CType(resources.GetObject("Button6.Image"), System.Drawing.Image)
-        Me.Button6.Location = New System.Drawing.Point(349, 366)
+        Me.Button6.Location = New System.Drawing.Point(582, 414)
         Me.Button6.Name = "Button6"
-        Me.Button6.Size = New System.Drawing.Size(61, 32)
+        Me.Button6.Size = New System.Drawing.Size(87, 32)
         Me.Button6.TabIndex = 44
         Me.Button6.Text = " "
-        Me.Button6.UseVisualStyleBackColor = True
+        Me.Button6.UseVisualStyleBackColor = False
         '
         'Button5
         '
+        Me.Button5.BackColor = System.Drawing.SystemColors.ActiveCaption
         Me.Button5.Image = CType(resources.GetObject("Button5.Image"), System.Drawing.Image)
-        Me.Button5.Location = New System.Drawing.Point(282, 366)
+        Me.Button5.Location = New System.Drawing.Point(489, 414)
         Me.Button5.Name = "Button5"
-        Me.Button5.Size = New System.Drawing.Size(61, 32)
+        Me.Button5.Size = New System.Drawing.Size(87, 32)
         Me.Button5.TabIndex = 43
-        Me.Button5.UseVisualStyleBackColor = True
+        Me.Button5.UseVisualStyleBackColor = False
         '
         'Button4
         '
+        Me.Button4.BackColor = System.Drawing.SystemColors.ActiveCaption
         Me.Button4.Image = CType(resources.GetObject("Button4.Image"), System.Drawing.Image)
-        Me.Button4.Location = New System.Drawing.Point(215, 366)
+        Me.Button4.Location = New System.Drawing.Point(396, 414)
         Me.Button4.Name = "Button4"
-        Me.Button4.Size = New System.Drawing.Size(61, 32)
+        Me.Button4.Size = New System.Drawing.Size(87, 32)
         Me.Button4.TabIndex = 42
-        Me.Button4.UseVisualStyleBackColor = True
+        Me.Button4.UseVisualStyleBackColor = False
         '
         'Button3
         '
+        Me.Button3.BackColor = System.Drawing.SystemColors.ActiveCaption
         Me.Button3.Image = CType(resources.GetObject("Button3.Image"), System.Drawing.Image)
-        Me.Button3.Location = New System.Drawing.Point(148, 367)
+        Me.Button3.Location = New System.Drawing.Point(199, 414)
         Me.Button3.Name = "Button3"
-        Me.Button3.Size = New System.Drawing.Size(61, 32)
+        Me.Button3.Size = New System.Drawing.Size(87, 32)
         Me.Button3.TabIndex = 41
-        Me.Button3.UseVisualStyleBackColor = True
+        Me.Button3.UseVisualStyleBackColor = False
         '
         'Button2
         '
+        Me.Button2.BackColor = System.Drawing.SystemColors.ActiveCaption
         Me.Button2.Image = CType(resources.GetObject("Button2.Image"), System.Drawing.Image)
-        Me.Button2.Location = New System.Drawing.Point(81, 367)
+        Me.Button2.Location = New System.Drawing.Point(106, 414)
         Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(61, 32)
+        Me.Button2.Size = New System.Drawing.Size(87, 32)
         Me.Button2.TabIndex = 40
-        Me.Button2.UseVisualStyleBackColor = True
+        Me.Button2.UseVisualStyleBackColor = False
         '
         'Button1
         '
+        Me.Button1.BackColor = System.Drawing.SystemColors.ActiveCaption
         Me.Button1.Image = CType(resources.GetObject("Button1.Image"), System.Drawing.Image)
-        Me.Button1.Location = New System.Drawing.Point(14, 367)
+        Me.Button1.Location = New System.Drawing.Point(12, 414)
         Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(61, 32)
+        Me.Button1.Size = New System.Drawing.Size(88, 32)
         Me.Button1.TabIndex = 39
-        Me.Button1.UseVisualStyleBackColor = True
+        Me.Button1.UseVisualStyleBackColor = False
         '
         'Panel2
         '
-        Me.Panel2.BackColor = System.Drawing.SystemColors.GradientInactiveCaption
+        Me.Panel2.BackColor = System.Drawing.SystemColors.ActiveCaption
         Me.Panel2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         Me.Panel2.Controls.Add(Me.Label3)
         Me.Panel2.Controls.Add(Me.Label4)
@@ -136,9 +143,9 @@ Partial Class Chores
         Me.Panel2.Controls.Add(Me.Label6)
         Me.Panel2.Controls.Add(Me.cmbpri)
         Me.Panel2.Controls.Add(Me.cmbassi)
-        Me.Panel2.Location = New System.Drawing.Point(318, 64)
+        Me.Panel2.Location = New System.Drawing.Point(353, 64)
         Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(291, 181)
+        Me.Panel2.Size = New System.Drawing.Size(314, 181)
         Me.Panel2.TabIndex = 38
         '
         'Label3
@@ -165,9 +172,9 @@ Partial Class Chores
         '
         Me.cmbfre.FormattingEnabled = True
         Me.cmbfre.Items.AddRange(New Object() {"fggf"})
-        Me.cmbfre.Location = New System.Drawing.Point(141, 115)
+        Me.cmbfre.Location = New System.Drawing.Point(119, 117)
         Me.cmbfre.Name = "cmbfre"
-        Me.cmbfre.Size = New System.Drawing.Size(121, 21)
+        Me.cmbfre.Size = New System.Drawing.Size(170, 21)
         Me.cmbfre.TabIndex = 19
         '
         'Label5
@@ -184,9 +191,9 @@ Partial Class Chores
         '
         Me.cmbstatus.FormattingEnabled = True
         Me.cmbstatus.Items.AddRange(New Object() {"fggf"})
-        Me.cmbstatus.Location = New System.Drawing.Point(141, 80)
+        Me.cmbstatus.Location = New System.Drawing.Point(119, 82)
         Me.cmbstatus.Name = "cmbstatus"
-        Me.cmbstatus.Size = New System.Drawing.Size(121, 21)
+        Me.cmbstatus.Size = New System.Drawing.Size(170, 21)
         Me.cmbstatus.TabIndex = 18
         '
         'Label6
@@ -203,23 +210,23 @@ Partial Class Chores
         '
         Me.cmbpri.FormattingEnabled = True
         Me.cmbpri.Items.AddRange(New Object() {"fgfg"})
-        Me.cmbpri.Location = New System.Drawing.Point(141, 47)
+        Me.cmbpri.Location = New System.Drawing.Point(119, 49)
         Me.cmbpri.Name = "cmbpri"
-        Me.cmbpri.Size = New System.Drawing.Size(121, 21)
+        Me.cmbpri.Size = New System.Drawing.Size(170, 21)
         Me.cmbpri.TabIndex = 17
         '
         'cmbassi
         '
         Me.cmbassi.FormattingEnabled = True
-        Me.cmbassi.Items.AddRange(New Object() {"fh"})
-        Me.cmbassi.Location = New System.Drawing.Point(141, 9)
+        Me.cmbassi.Items.AddRange(New Object() {"Ndivhuwo", "Masindi", "Murangi"})
+        Me.cmbassi.Location = New System.Drawing.Point(119, 11)
         Me.cmbassi.Name = "cmbassi"
-        Me.cmbassi.Size = New System.Drawing.Size(121, 21)
+        Me.cmbassi.Size = New System.Drawing.Size(170, 21)
         Me.cmbassi.TabIndex = 16
         '
         'Panel1
         '
-        Me.Panel1.BackColor = System.Drawing.SystemColors.GradientInactiveCaption
+        Me.Panel1.BackColor = System.Drawing.SystemColors.ActiveCaption
         Me.Panel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         Me.Panel1.Controls.Add(Me.NumericUpDown1)
         Me.Panel1.Controls.Add(Me.Label2)
@@ -231,14 +238,14 @@ Partial Class Chores
         Me.Panel1.Controls.Add(Me.txtdes)
         Me.Panel1.Location = New System.Drawing.Point(12, 64)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(300, 181)
+        Me.Panel1.Size = New System.Drawing.Size(335, 181)
         Me.Panel1.TabIndex = 37
         '
         'NumericUpDown1
         '
         Me.NumericUpDown1.Location = New System.Drawing.Point(83, 50)
         Me.NumericUpDown1.Name = "NumericUpDown1"
-        Me.NumericUpDown1.Size = New System.Drawing.Size(149, 20)
+        Me.NumericUpDown1.Size = New System.Drawing.Size(176, 20)
         Me.NumericUpDown1.TabIndex = 16
         '
         'Label2
@@ -285,7 +292,7 @@ Partial Class Chores
         '
         Me.TXTtitle.Location = New System.Drawing.Point(83, 14)
         Me.TXTtitle.Name = "TXTtitle"
-        Me.TXTtitle.Size = New System.Drawing.Size(149, 20)
+        Me.TXTtitle.Size = New System.Drawing.Size(176, 20)
         Me.TXTtitle.TabIndex = 8
         '
         'DateTimePicker1
@@ -299,7 +306,7 @@ Partial Class Chores
         '
         Me.txtdes.Location = New System.Drawing.Point(83, 86)
         Me.txtdes.Name = "txtdes"
-        Me.txtdes.Size = New System.Drawing.Size(149, 20)
+        Me.txtdes.Size = New System.Drawing.Size(176, 20)
         Me.txtdes.TabIndex = 14
         '
         'Label9
@@ -314,39 +321,52 @@ Partial Class Chores
         '
         'Button7
         '
+        Me.Button7.BackColor = System.Drawing.SystemColors.ActiveCaption
         Me.Button7.BackgroundImage = CType(resources.GetObject("Button7.BackgroundImage"), System.Drawing.Image)
         Me.Button7.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
-        Me.Button7.Location = New System.Drawing.Point(416, 366)
+        Me.Button7.Location = New System.Drawing.Point(306, 251)
         Me.Button7.Name = "Button7"
-        Me.Button7.Size = New System.Drawing.Size(61, 32)
+        Me.Button7.Size = New System.Drawing.Size(98, 32)
         Me.Button7.TabIndex = 46
-        Me.Button7.UseVisualStyleBackColor = True
+        Me.Button7.UseVisualStyleBackColor = False
         '
         'Button8
         '
+        Me.Button8.BackColor = System.Drawing.SystemColors.ActiveCaption
         Me.Button8.BackgroundImage = CType(resources.GetObject("Button8.BackgroundImage"), System.Drawing.Image)
         Me.Button8.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
-        Me.Button8.Location = New System.Drawing.Point(483, 367)
+        Me.Button8.Location = New System.Drawing.Point(410, 251)
         Me.Button8.Name = "Button8"
-        Me.Button8.Size = New System.Drawing.Size(61, 32)
+        Me.Button8.Size = New System.Drawing.Size(98, 32)
         Me.Button8.TabIndex = 47
-        Me.Button8.UseVisualStyleBackColor = True
+        Me.Button8.UseVisualStyleBackColor = False
         '
         'Button9
         '
+        Me.Button9.BackColor = System.Drawing.SystemColors.ActiveCaption
         Me.Button9.BackgroundImage = CType(resources.GetObject("Button9.BackgroundImage"), System.Drawing.Image)
         Me.Button9.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
-        Me.Button9.Location = New System.Drawing.Point(550, 366)
+        Me.Button9.Location = New System.Drawing.Point(202, 251)
         Me.Button9.Name = "Button9"
-        Me.Button9.Size = New System.Drawing.Size(61, 32)
+        Me.Button9.Size = New System.Drawing.Size(98, 32)
         Me.Button9.TabIndex = 48
-        Me.Button9.UseVisualStyleBackColor = True
+        Me.Button9.UseVisualStyleBackColor = False
+        '
+        'Label10
+        '
+        Me.Label10.AutoSize = True
+        Me.Label10.ForeColor = System.Drawing.Color.Maroon
+        Me.Label10.Location = New System.Drawing.Point(9, 270)
+        Me.Label10.Name = "Label10"
+        Me.Label10.Size = New System.Drawing.Size(0, 13)
+        Me.Label10.TabIndex = 49
         '
         'Chores
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(625, 410)
+        Me.ClientSize = New System.Drawing.Size(698, 458)
+        Me.Controls.Add(Me.Label10)
         Me.Controls.Add(Me.Button9)
         Me.Controls.Add(Me.Button8)
         Me.Controls.Add(Me.Button7)
@@ -403,4 +423,5 @@ Partial Class Chores
     Friend WithEvents Button8 As Button
     Friend WithEvents Button9 As Button
     Friend WithEvents ToolTip1 As ToolTip
+    Friend WithEvents Label10 As Label
 End Class
