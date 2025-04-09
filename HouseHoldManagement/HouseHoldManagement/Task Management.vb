@@ -4,6 +4,7 @@ Public Class Task_Management
     Public Const connectionString As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\khodani\Source\Repos\maurice67530\HouseholdManagementSystems\HMS.accdb"
     Dim conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
     Private Sub Task_Management_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        LoadTaskDataFromDatabase()
         Dim tooltip As New ToolTip
         tooltip.SetToolTip(Button1, "Submit")
         tooltip.SetToolTip(Button4, "Refresh")
@@ -159,5 +160,27 @@ Public Class Task_Management
         End Try
 
     End Sub
+    Public Sub LoadTaskDataFromDatabase()
 
+        Debug.WriteLine("LoadTaskDataFromDatabase")
+        Using connect As New OleDbConnection(connectionString)
+            connect.Open()
+
+            ' Update the table name if necessary  
+            Dim tableName As String = "Tasks"
+
+            ' Create an OleDbCommand to select the data from the database  
+            Dim cmd As New OleDbCommand($"SELECT * FROM {tableName}", connect)
+
+            ' Create a DataAdapter and fill a DataTable  
+            Dim da As New OleDbDataAdapter(cmd)
+            Dim dt As New DataTable()
+            da.Fill(dt)
+
+            ' Bind the DataTable to the DataGridView  
+            DataGridView1.DataSource = dt
+            'HighlightExpiredItemss()
+        End Using
+
+    End Sub
 End Class
