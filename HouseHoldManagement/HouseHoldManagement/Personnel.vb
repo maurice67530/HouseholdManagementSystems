@@ -6,7 +6,7 @@ Public Class Personnel
     Private toolTip As New ToolTip()
     Private toolTip1 As New ToolTip()
     Private Sub Personnel_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-
+        LoadData()
         ' Initialize ToolTip properties (optional)
         toolTip.AutoPopDelay = 5000
         toolTip.InitialDelay = 500
@@ -94,7 +94,22 @@ Public Class Personnel
             End Try
         End Sub
 
+    ' Method to load data into the DataGridView
+    Private Sub LoadData()
+        Try
+            conn.Open()
+            Dim query As String = "SELECT * FROM PersonalDetails"
+            Dim cmd As New OleDbCommand(query, conn)
+            Dim adapter As New OleDbDataAdapter(cmd)
+            Dim dt As New DataTable()
+            adapter.Fill(dt)
+            DataGridView1.DataSource = dt
+        Catch ex As Exception
+            MessageBox.Show("Failed to load data: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        Finally
+            conn.Close()
+        End Try
+    End Sub
 
 
-
-    End Class
+End Class
