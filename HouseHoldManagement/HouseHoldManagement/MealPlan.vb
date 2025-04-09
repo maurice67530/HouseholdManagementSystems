@@ -57,6 +57,8 @@ Public Class MealPlan
         tooltip.SetToolTip(btnPrint, "Print")
         tooltip.SetToolTip(btnSuggest, "Suggest")
         tooltip.SetToolTip(btnFilter, "Filter")
+
+        PopulateDataGridView()
     End Sub
     Public Property meals As New List(Of MealPlans)
     Private Sub PopulateDataGridView()
