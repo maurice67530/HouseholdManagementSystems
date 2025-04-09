@@ -34,12 +34,20 @@ Partial Class Grocery
         Me.Label8 = New System.Windows.Forms.Label()
         Me.DataGridView1 = New System.Windows.Forms.DataGridView()
         Me.Label1 = New System.Windows.Forms.Label()
-        Me.Button1 = New System.Windows.Forms.Button()
-        Me.Button2 = New System.Windows.Forms.Button()
-        Me.Button3 = New System.Windows.Forms.Button()
         Me.Button4 = New System.Windows.Forms.Button()
         Me.Button5 = New System.Windows.Forms.Button()
         Me.Button6 = New System.Windows.Forms.Button()
+        Me.TextBox2 = New System.Windows.Forms.TextBox()
+        Me.TextBox3 = New System.Windows.Forms.TextBox()
+        Me.TextBox4 = New System.Windows.Forms.TextBox()
+        Me.TextBox5 = New System.Windows.Forms.TextBox()
+        Me.TextBox6 = New System.Windows.Forms.TextBox()
+        Me.TextBox7 = New System.Windows.Forms.TextBox()
+        Me.TextBox8 = New System.Windows.Forms.TextBox()
+        Me.DateTimePicker1 = New System.Windows.Forms.DateTimePicker()
+        Me.Button3 = New System.Windows.Forms.Button()
+        Me.Button2 = New System.Windows.Forms.Button()
+        Me.Button1 = New System.Windows.Forms.Button()
         Me.Panel1.SuspendLayout()
         Me.Panel2.SuspendLayout()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -48,7 +56,11 @@ Partial Class Grocery
         'Panel1
         '
         Me.Panel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.Panel1.Controls.Add(Me.DateTimePicker1)
         Me.Panel1.Controls.Add(Me.Label9)
+        Me.Panel1.Controls.Add(Me.TextBox2)
+        Me.Panel1.Controls.Add(Me.TextBox3)
+        Me.Panel1.Controls.Add(Me.TextBox4)
         Me.Panel1.Controls.Add(Me.Label2)
         Me.Panel1.Controls.Add(Me.Label3)
         Me.Panel1.Controls.Add(Me.Label4)
@@ -61,7 +73,7 @@ Partial Class Grocery
         '
         Me.Label9.AutoSize = True
         Me.Label9.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        Me.Label9.Location = New System.Drawing.Point(21, 52)
+        Me.Label9.Location = New System.Drawing.Point(3, 54)
         Me.Label9.Name = "Label9"
         Me.Label9.Size = New System.Drawing.Size(60, 15)
         Me.Label9.TabIndex = 10
@@ -71,7 +83,7 @@ Partial Class Grocery
         '
         Me.Label2.AutoSize = True
         Me.Label2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        Me.Label2.Location = New System.Drawing.Point(21, 93)
+        Me.Label2.Location = New System.Drawing.Point(3, 93)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(48, 15)
         Me.Label2.TabIndex = 7
@@ -81,7 +93,7 @@ Partial Class Grocery
         '
         Me.Label3.AutoSize = True
         Me.Label3.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        Me.Label3.Location = New System.Drawing.Point(21, 129)
+        Me.Label3.Location = New System.Drawing.Point(3, 131)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(28, 15)
         Me.Label3.TabIndex = 8
@@ -91,7 +103,7 @@ Partial Class Grocery
         '
         Me.Label4.AutoSize = True
         Me.Label4.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        Me.Label4.Location = New System.Drawing.Point(21, 171)
+        Me.Label4.Location = New System.Drawing.Point(3, 171)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(60, 15)
         Me.Label4.TabIndex = 9
@@ -100,6 +112,10 @@ Partial Class Grocery
         'Panel2
         '
         Me.Panel2.Controls.Add(Me.Label5)
+        Me.Panel2.Controls.Add(Me.TextBox5)
+        Me.Panel2.Controls.Add(Me.TextBox6)
+        Me.Panel2.Controls.Add(Me.TextBox7)
+        Me.Panel2.Controls.Add(Me.TextBox8)
         Me.Panel2.Controls.Add(Me.Label6)
         Me.Panel2.Controls.Add(Me.Label7)
         Me.Panel2.Controls.Add(Me.Label8)
@@ -151,10 +167,12 @@ Partial Class Grocery
         '
         'DataGridView1
         '
+        Me.DataGridView1.BackgroundColor = System.Drawing.SystemColors.GradientActiveCaption
         Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DataGridView1.Location = New System.Drawing.Point(21, 399)
+        Me.DataGridView1.GridColor = System.Drawing.SystemColors.ActiveCaption
+        Me.DataGridView1.Location = New System.Drawing.Point(21, 356)
         Me.DataGridView1.Name = "DataGridView1"
-        Me.DataGridView1.Size = New System.Drawing.Size(649, 150)
+        Me.DataGridView1.Size = New System.Drawing.Size(649, 193)
         Me.DataGridView1.TabIndex = 0
         '
         'Label1
@@ -167,64 +185,130 @@ Partial Class Grocery
         Me.Label1.TabIndex = 0
         Me.Label1.Text = "GROCERY ITEM"
         '
-        'Button1
-        '
-        Me.Button1.Location = New System.Drawing.Point(713, 121)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(75, 61)
-        Me.Button1.TabIndex = 1
-        Me.Button1.Text = "Button1"
-        Me.Button1.UseVisualStyleBackColor = True
-        '
-        'Button2
-        '
-        Me.Button2.Location = New System.Drawing.Point(713, 197)
-        Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(75, 62)
-        Me.Button2.TabIndex = 2
-        Me.Button2.Text = "Button2"
-        Me.Button2.UseVisualStyleBackColor = True
-        '
-        'Button3
-        '
-        Me.Button3.Location = New System.Drawing.Point(713, 265)
-        Me.Button3.Name = "Button3"
-        Me.Button3.Size = New System.Drawing.Size(75, 58)
-        Me.Button3.TabIndex = 3
-        Me.Button3.Text = "Button3"
-        Me.Button3.UseVisualStyleBackColor = True
-        '
         'Button4
         '
+        Me.Button4.BackColor = System.Drawing.SystemColors.GradientActiveCaption
         Me.Button4.Location = New System.Drawing.Point(713, 329)
         Me.Button4.Name = "Button4"
         Me.Button4.Size = New System.Drawing.Size(75, 65)
         Me.Button4.TabIndex = 4
         Me.Button4.Text = "Button4"
-        Me.Button4.UseVisualStyleBackColor = True
+        Me.Button4.UseVisualStyleBackColor = False
         '
         'Button5
         '
+        Me.Button5.BackColor = System.Drawing.SystemColors.GradientActiveCaption
         Me.Button5.Location = New System.Drawing.Point(713, 402)
         Me.Button5.Name = "Button5"
         Me.Button5.Size = New System.Drawing.Size(75, 65)
         Me.Button5.TabIndex = 5
         Me.Button5.Text = "Button5"
-        Me.Button5.UseVisualStyleBackColor = True
+        Me.Button5.UseVisualStyleBackColor = False
         '
         'Button6
         '
+        Me.Button6.BackColor = System.Drawing.SystemColors.GradientActiveCaption
         Me.Button6.Location = New System.Drawing.Point(713, 485)
         Me.Button6.Name = "Button6"
         Me.Button6.Size = New System.Drawing.Size(75, 64)
         Me.Button6.TabIndex = 6
         Me.Button6.Text = "Button6"
-        Me.Button6.UseVisualStyleBackColor = True
+        Me.Button6.UseVisualStyleBackColor = False
+        '
+        'TextBox2
+        '
+        Me.TextBox2.Location = New System.Drawing.Point(133, 49)
+        Me.TextBox2.Name = "TextBox2"
+        Me.TextBox2.Size = New System.Drawing.Size(136, 20)
+        Me.TextBox2.TabIndex = 8
+        '
+        'TextBox3
+        '
+        Me.TextBox3.Location = New System.Drawing.Point(133, 88)
+        Me.TextBox3.Name = "TextBox3"
+        Me.TextBox3.Size = New System.Drawing.Size(136, 20)
+        Me.TextBox3.TabIndex = 9
+        '
+        'TextBox4
+        '
+        Me.TextBox4.Location = New System.Drawing.Point(133, 126)
+        Me.TextBox4.Name = "TextBox4"
+        Me.TextBox4.Size = New System.Drawing.Size(136, 20)
+        Me.TextBox4.TabIndex = 10
+        '
+        'TextBox5
+        '
+        Me.TextBox5.Location = New System.Drawing.Point(150, 47)
+        Me.TextBox5.Name = "TextBox5"
+        Me.TextBox5.Size = New System.Drawing.Size(145, 20)
+        Me.TextBox5.TabIndex = 11
+        '
+        'TextBox6
+        '
+        Me.TextBox6.Location = New System.Drawing.Point(150, 92)
+        Me.TextBox6.Name = "TextBox6"
+        Me.TextBox6.Size = New System.Drawing.Size(145, 20)
+        Me.TextBox6.TabIndex = 12
+        '
+        'TextBox7
+        '
+        Me.TextBox7.Location = New System.Drawing.Point(150, 128)
+        Me.TextBox7.Name = "TextBox7"
+        Me.TextBox7.Size = New System.Drawing.Size(145, 20)
+        Me.TextBox7.TabIndex = 13
+        '
+        'TextBox8
+        '
+        Me.TextBox8.Location = New System.Drawing.Point(150, 166)
+        Me.TextBox8.Name = "TextBox8"
+        Me.TextBox8.Size = New System.Drawing.Size(145, 20)
+        Me.TextBox8.TabIndex = 14
+        '
+        'DateTimePicker1
+        '
+        Me.DateTimePicker1.Location = New System.Drawing.Point(133, 166)
+        Me.DateTimePicker1.Name = "DateTimePicker1"
+        Me.DateTimePicker1.Size = New System.Drawing.Size(136, 20)
+        Me.DateTimePicker1.TabIndex = 7
+        '
+        'Button3
+        '
+        Me.Button3.BackColor = System.Drawing.SystemColors.GradientActiveCaption
+        Me.Button3.Image = Global.HouseHoldManagement.My.Resources.Resources.icons8_delete_321
+        Me.Button3.Location = New System.Drawing.Point(713, 265)
+        Me.Button3.Name = "Button3"
+        Me.Button3.Size = New System.Drawing.Size(75, 58)
+        Me.Button3.TabIndex = 3
+        Me.Button3.Text = "Button3"
+        Me.Button3.UseVisualStyleBackColor = False
+        '
+        'Button2
+        '
+        Me.Button2.BackColor = System.Drawing.SystemColors.GradientActiveCaption
+        Me.Button2.Image = Global.HouseHoldManagement.My.Resources.Resources.icons8_submit_32
+        Me.Button2.Location = New System.Drawing.Point(713, 122)
+        Me.Button2.Name = "Button2"
+        Me.Button2.Size = New System.Drawing.Size(75, 62)
+        Me.Button2.TabIndex = 2
+        Me.Button2.Text = "Button2"
+        Me.Button2.UseVisualStyleBackColor = False
+        '
+        'Button1
+        '
+        Me.Button1.BackColor = System.Drawing.SystemColors.GradientActiveCaption
+        Me.Button1.Image = Global.HouseHoldManagement.My.Resources.Resources.icons8_update_32__2_
+        Me.Button1.Location = New System.Drawing.Point(713, 198)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(75, 61)
+        Me.Button1.TabIndex = 1
+        Me.Button1.Text = "Button1"
+        Me.Button1.UseVisualStyleBackColor = False
         '
         'Grocery
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.BackColor = System.Drawing.SystemColors.ActiveCaption
         Me.ClientSize = New System.Drawing.Size(864, 561)
         Me.Controls.Add(Me.Button6)
         Me.Controls.Add(Me.Button5)
@@ -266,4 +350,12 @@ Partial Class Grocery
     Friend WithEvents Button4 As Button
     Friend WithEvents Button5 As Button
     Friend WithEvents Button6 As Button
+    Friend WithEvents DateTimePicker1 As DateTimePicker
+    Friend WithEvents TextBox2 As TextBox
+    Friend WithEvents TextBox3 As TextBox
+    Friend WithEvents TextBox4 As TextBox
+    Friend WithEvents TextBox5 As TextBox
+    Friend WithEvents TextBox6 As TextBox
+    Friend WithEvents TextBox7 As TextBox
+    Friend WithEvents TextBox8 As TextBox
 End Class
