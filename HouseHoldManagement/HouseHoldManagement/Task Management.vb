@@ -144,7 +144,7 @@ Public Class Task_Management
                    "DueDate: " & Task.DueDate & vbCrLf &
                    "Priority: " & Task.Priority & vbCrLf &
                    "Status: " & Task.Status & vbCrLf &
-                   "Assignedto: " & Task.Assignedto, vbInformation, "inventory Confirmation")
+                   "Assignedto: " & Task.AssignedTo, vbInformation, "inventory Confirmation")
 
 
             End Using
@@ -159,5 +159,7 @@ Public Class Task_Management
         End Try
 
     End Sub
+    Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
 
+    End Sub
 End Class
