@@ -1,6 +1,12 @@
 ﻿Imports System.Data.OleDb
 Public Class Chores
+    Public Property conn As New OleDbConnection(connectionString)
+    ' Connection string using relative path to the database
+    Public Const connectionString As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Murangi\Source\Repos\maurice67530\HouseholdManagementSystems\HMS.accdb"
     Private Sub Chores_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
+
+
         Dim tooltip As New ToolTip
         tooltip.SetToolTip(Button1, "Dashboard")
         tooltip.SetToolTip(Button2, "Mark All as Complete")
