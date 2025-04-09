@@ -24,5 +24,77 @@ Public Class Personnel
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
 
-    End Sub
-End Class
+        ' Connection to the database
+        Dim conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
+
+        ' Variables to hold user inputs
+        Dim FirstName As String
+        Dim LastName As String
+        Dim DateOfBirth As Date
+        Dim Email As String
+        Dim Contact As String
+        Dim Age As String
+        Dim Role As String
+        Dim Gender As String
+        Dim PostalCode As String
+        Dim HealthStatus As String
+        Dim Deleter As String
+
+
+        ' Get user input from TextBoxes
+        FirstName = TextBox1.Text
+        LastName = TextBox2.Text
+        DateOfBirth = DateTimePicker1.Value
+        Email = TextBox4.Text
+        Contact = TextBox3.Text
+        Age = TextBox5.Text
+        Role = ComboBox1.Text
+        Gender = ComboBox3.Text
+        PostalCode = TextBox6.Text
+        HealthStatus = TextBox9.Text
+        Deleter = TextBox7.Text
+        ' Open the connection
+        Try
+                conn.Open()
+
+            ' SQL query to insert the data
+            Dim query As String = "INSERT INTO PersonalDetails (FirstName, LastName, DateOfBirth, Email, Contact, Age, Role, Gender, PostalCode, HealthStatus, Deleter) " &
+                                  "VALUES (@FirstName, @LastName, @DateOfBirth, @Email, @Contact, @Age, @Role, @Gender, @PostalCode, @HealthStatus, @Deleter)"
+
+            ' Create the command and add parameters
+            Dim cmd As New OleDbCommand(query, conn)
+            cmd.Parameters.AddWithValue("@FirstName", FirstName)
+            cmd.Parameters.AddWithValue("@LastName", LastName)
+            cmd.Parameters.AddWithValue("@DateOfBirth", DateOfBirth)
+            cmd.Parameters.AddWithValue("@Email", Email)
+            cmd.Parameters.AddWithValue("@Contact", Contact)
+            cmd.Parameters.AddWithValue("@Age", Age)
+            cmd.Parameters.AddWithValue("@Role", Role)
+            cmd.Parameters.AddWithValue("@Gender", Gender)
+            cmd.Parameters.AddWithValue("@PostalCode", PostalCode)
+            cmd.Parameters.AddWithValue("@HealthStatus", HealthStatus)
+            cmd.Parameters.AddWithValue("@Deleter", Deleter)
+            ' Execute the query
+            Dim rowsAffected As Integer = cmd.ExecuteNonQuery()
+
+                ' Show confirmation message
+                If rowsAffected > 0 Then
+                    MessageBox.Show(rowsAffected.ToString() & " record inserted successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                Else
+                    MessageBox.Show("No records were inserted.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                End If
+            Catch ex As Exception
+                ' Handle any errors
+                MessageBox.Show("An error occurred: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Finally
+                ' Ensure the connection is closed even if an error occurs
+                If conn.State = ConnectionState.Open Then
+                    conn.Close()
+                End If
+            End Try
+        End Sub
+
+
+
+
+    End Class
