@@ -108,4 +108,8 @@ Public Class Expense
         conn.Close()
         Debug.WriteLine("Exiting btnSubmit")
     End Sub
+
+    Private Sub Button5_Click(sender As Object, e As EventArgs) Handles Button5.Click
+
+    End Sub
 End Class
