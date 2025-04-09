@@ -17,6 +17,8 @@ Public Class Chores
         tooltip.SetToolTip(Button7, "Highlight")
         tooltip.SetToolTip(Button8, "Filter")
         tooltip.SetToolTip(Button9, "Sort")
+
+        loadChoresFromDatabase()
     End Sub
 
     Private Sub Button6_Click(sender As Object, e As EventArgs) Handles Button6.Click
