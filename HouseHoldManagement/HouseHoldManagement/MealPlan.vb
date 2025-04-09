@@ -2,6 +2,7 @@
 Imports System.Data.OleDb
 
 Public Class MealPlan
+    Dim conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
     Private Sub btnEdit_Click(sender As Object, e As EventArgs) Handles btnEdit.Click
         Try
             Debug.WriteLine("Entering btnEdit_Click")
@@ -67,19 +68,19 @@ Public Class MealPlan
 
                 ' Load the data from the selected row into UI controls  
 
-                TextBox3.Text = selectedRow.Cells("Description").Value.ToString()
+                TextBox2.Text = selectedRow.Cells("Description").Value.ToString()
                 NumericUpDown1.Text = selectedRow.Cells("TotalCalories").Value.ToString()
                 DateTimePicker1.Text = selectedRow.Cells("StartDate").Value.ToString()
                 DateTimePicker2.Text = selectedRow.Cells("EndDate").Value.ToString()
-                TextBox5.Text = selectedRow.Cells("Picturepath").Value.ToString()
-                ComboBox1.SelectedItem = selectedRow.Cells("Items").Value.ToString()
+                TextBox3.Text = selectedRow.Cells("FilePath").Value.ToString()
+                ComboBox3.SelectedItem = selectedRow.Cells("Items").Value.ToString()
                 ComboBox1.SelectedItem = selectedRow.Cells("Calories").Value.ToString()
-                ComboBox4.SelectedItem = selectedRow.Cells("MealPlanPrint").Value.ToString()
-                ListBox2.SelectedItem = selectedRow.Cells("Meals").Value.ToString()
+                ComboBox2.SelectedItem = selectedRow.Cells("Frequency").Value.ToString()
+                ListBox1.SelectedItem = selectedRow.Cells("Meals").Value.ToString()
                 TextBox4.Text = selectedRow.Cells("MealName").Value.ToString()
 
                 ' Enable/ disable the buttons based on the selected person  
-                btnSubmit.Enabled = False
+                btnSave.Enabled = False
                 btnDelete.Enabled = True
                 btnEdit.Enabled = True
             End If
@@ -100,24 +101,7 @@ Public Class MealPlan
         Debug.WriteLine("The DataGridView selected unsuccessful.")
 
     End Sub
-    Private Sub PopulateDataGridView()
 
-        'Add each expense to the DataGridView
-        For Each meal As MealPlan In meals()
-
-            DataGridView1.Rows.Add(meal.MealPlanId, meal.MealName, meal.StartDate.ToShortDateString(), meal.picturePath, meal.Description, meal.EndDate.ToShortDateString(), meal.Meals,
-                                  meal.TotalCalories, meal.Calories, meal.MealPlanPrint, meal.Items)
-            Try
-                Debug.WriteLine("PopulateDataGridView: DataGridView populated successfully.")
-
-            Catch ex As Exception
-                Debug.WriteLine($"Error in PopulateDataGridView: {ex.Message}")
-                Debug.WriteLine($"Stack Trace: {ex.StackTrace}")
-                MessageBox.Show("An error occurred while loading data into the grid.", "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-            End Try
-        Next
-
-    End Sub
     '    Public Function SuggestMeals() As List(Of String)
     '        Dim suggestedMeals As New List(Of String)
 
