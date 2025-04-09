@@ -6,7 +6,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{DEC8BF09-6D70-450D-B49C-BFCF4DBBB6B8}</ProjectGuid>
     <OutputType>WinExe</OutputType>
+<<<<<<< HEAD
     <StartupObject>HouseHoldManagement.Form1</StartupObject>
+=======
+    <StartupObject>HouseHoldManagement.MealPlan</StartupObject>
+>>>>>>> a27200e2163262dd61b0bef911097b518d423193
     <RootNamespace>HouseHoldManagement</RootNamespace>
     <AssemblyName>HouseHoldManagement</AssemblyName>
     <FileAlignment>512</FileAlignment>
