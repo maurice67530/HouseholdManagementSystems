@@ -47,5 +47,13 @@ Public Class MealPlan
         ComboBox3.Items.AddRange(New String() {"<500", "500-1000", ">1000"})
         ComboBox1.Items.AddRange(New String() {"Day", "Week", "Month"})
 
+        Dim tooltip As New ToolTip
+        tooltip.SetToolTip(btnSave, "Save")
+        tooltip.SetToolTip(btnRefresh, "Refresh")
+        tooltip.SetToolTip(btnEdit, "Edit")
+        tooltip.SetToolTip(btnDelete, "Delete")
+        tooltip.SetToolTip(btnFilter, "Filter")
+        tooltip.SetToolTip()
+        tooltip.SetToolTip()
     End Sub
 End Class
