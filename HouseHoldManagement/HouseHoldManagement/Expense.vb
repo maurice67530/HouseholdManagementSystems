@@ -109,6 +109,7 @@ Public Class Expense
             MessageBox.Show("An Unexpected error occured.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
         conn.Close()
+        LoadExpenseDataFromDatabase()
         Debug.WriteLine("Exiting btnSubmit")
     End Sub
 
@@ -204,7 +205,7 @@ Public Class Expense
             Debug.WriteLine($"Stack Trace : {ex.StackTrace}")
             Debug.WriteLine($"An  Error has occured when Editing data from Database")
         End Try
-        'LoadExpenseDataFromDatabase()
+        LoadExpenseDataFromDatabase()
         Debug.WriteLine("Exited btnEdit")
     End Sub
 
@@ -267,7 +268,7 @@ Public Class Expense
             Debug.WriteLine($" No row  selected, exiting btnDelete")
             MessageBox.Show("Please select an expense to delete.", "Deletion Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
         End If
-        'LoadExpenseDataFromDatabase()
+        LoadExpenseDataFromDatabase()
 
         Debug.WriteLine("Exiting deletion")
     End Sub
@@ -289,7 +290,7 @@ Public Class Expense
         '    End If
         'End If
     End Sub
-    Public Sub LoadMealPlansDataFromDatabase()
+    Public Sub LoadExpenseDataFromDatabase()
 
         Debug.WriteLine("LoadMealPlansDataFromDatabase")
         Using connect As New OleDbConnection(connectionString)
@@ -313,7 +314,21 @@ Public Class Expense
 
     End Sub
     Private Sub Expense_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        LoadMealPlansDataFromDatabase()
+
+        ' Initialize ToolTip properties (optional)
+        toolTip.AutoPopDelay = 5000
+        toolTip.InitialDelay = 500
+        toolTip.ReshowDelay = 200
+        toolTip.ShowAlways = True
+
+        toolTip1.SetToolTip(Button5, "Sort")
+        toolTip1.SetToolTip(Button6, "Print to Doc")
+        toolTip1.SetToolTip(Button3, "Edit")
+        toolTip1.SetToolTip(Button4, "Delete")
+        toolTip1.SetToolTip(Button7, "Calculate Budget")
+        'toolTip1.SetToolTip(Button7, "Daily tasks")
+        toolTip1.SetToolTip(Button1, "Save")
+        LoadExpenseDataFromDatabase()
     End Sub
 
     Private Sub Button7_Click(sender As Object, e As EventArgs) Handles Button7.Click

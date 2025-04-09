@@ -110,7 +110,7 @@ Partial Class Expense
         '
         'Panel1
         '
-        Me.Panel1.BackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.Panel1.BackColor = System.Drawing.SystemColors.GradientActiveCaption
         Me.Panel1.Controls.Add(Me.TextBox3)
         Me.Panel1.Controls.Add(Me.TextBox2)
         Me.Panel1.Controls.Add(Me.Label14)
@@ -263,7 +263,7 @@ Partial Class Expense
         '
         'Panel2
         '
-        Me.Panel2.BackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.Panel2.BackColor = System.Drawing.SystemColors.GradientActiveCaption
         Me.Panel2.Controls.Add(Me.Label16)
         Me.Panel2.Controls.Add(Me.Label15)
         Me.Panel2.Controls.Add(Me.TextBox7)
@@ -286,11 +286,11 @@ Partial Class Expense
         '
         Me.Label16.AutoSize = True
         Me.Label16.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label16.Location = New System.Drawing.Point(3, 200)
+        Me.Label16.Location = New System.Drawing.Point(3, 197)
         Me.Label16.Name = "Label16"
-        Me.Label16.Size = New System.Drawing.Size(56, 16)
+        Me.Label16.Size = New System.Drawing.Size(149, 16)
         Me.Label16.TabIndex = 86
-        Me.Label16.Text = "Label16"
+        Me.Label16.Text = "Average Expenses : R0"
         '
         'Label15
         '
@@ -298,9 +298,9 @@ Partial Class Expense
         Me.Label15.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label15.Location = New System.Drawing.Point(3, 172)
         Me.Label15.Name = "Label15"
-        Me.Label15.Size = New System.Drawing.Size(56, 16)
+        Me.Label15.Size = New System.Drawing.Size(125, 16)
         Me.Label15.TabIndex = 85
-        Me.Label15.Text = "Label15"
+        Me.Label15.Text = "Total Expenses: R0"
         '
         'TextBox7
         '
