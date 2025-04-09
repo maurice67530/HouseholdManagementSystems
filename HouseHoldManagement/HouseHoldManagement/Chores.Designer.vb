@@ -211,7 +211,7 @@ Partial Class Chores
         'cmbassi
         '
         Me.cmbassi.FormattingEnabled = True
-        Me.cmbassi.Items.AddRange(New Object() {"fh"})
+        Me.cmbassi.Items.AddRange(New Object() {"Ndivhuwo", "Masindi", "Murangi"})
         Me.cmbassi.Location = New System.Drawing.Point(119, 11)
         Me.cmbassi.Name = "cmbassi"
         Me.cmbassi.Size = New System.Drawing.Size(170, 21)

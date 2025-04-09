@@ -5,6 +5,9 @@ Public Class Chores
     Public Const connectionString As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Murangi\Source\Repos\maurice67530\HouseholdManagementSystems\HMS.accdb"
     Private Sub Chores_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
+        cmbpri.Items.AddRange(New String() {"Low", "Medium", "High"})
+        cmbstatus.Items.AddRange(New String() {"Not started", "In progress", "Completed"})
+        cmbfre.Items.AddRange(New String() {"Daily", "Weekly", "Monthly"})
 
 
         Dim tooltip As New ToolTip
