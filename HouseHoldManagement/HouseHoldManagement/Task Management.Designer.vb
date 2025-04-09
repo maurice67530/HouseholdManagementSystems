@@ -285,7 +285,7 @@ Partial Class Task_Management
         Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.Label1)
         Me.Name = "Task_Management"
-        Me.Text = "Task_Management"
+        Me.Text = "combobox"
         Me.Panel2.ResumeLayout(False)
         Me.Panel2.PerformLayout()
         Me.Panel1.ResumeLayout(False)
