@@ -45,9 +45,9 @@ Public Class MealPlan
     End Sub
 
     Private Sub MealPlan_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        ComboBox3.Items.AddRange(New String() {"<500", "500-1000", ">1000"})
-        ComboBox1.Items.AddRange(New String() {"Day", "Week", "Month"})
-        ComboBox2.Items.AddRange(New String() {"Noodles", "Chicken", "Bread"})
+        ComboBox1.Items.AddRange(New String() {"<500", "500-1000", ">1000"})
+        ComboBox2.Items.AddRange(New String() {"Day", "Week", "Month"})
+        ComboBox3.Items.AddRange(New String() {"Noodles", "Chicken", "Bread"})
         ListBox1.Items.AddRange(New String() {"Noodles", "Chicken Curry", "Kota"})
         Dim tooltip As New ToolTip
         tooltip.SetToolTip(btnSave, "Save")
