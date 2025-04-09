@@ -34,7 +34,7 @@ End Class
 Public Class MealPlans
 
     'properties of the mealplan class
-    Public Property MealPlanId As String
+
     Public Property StartDate As DateTime
     Public Property EndDate As DateTime
     Public Property Meals As String
