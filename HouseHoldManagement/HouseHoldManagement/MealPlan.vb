@@ -42,4 +42,10 @@ Public Class MealPlan
 
         Debug.WriteLine("Existing btnEdit_Click")
     End Sub
+
+    Private Sub MealPlan_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        ComboBox3.Items.AddRange(New String() {"<500", "500-1000", ">1000"})
+        ComboBox1.Items.AddRange(New String() {"Day", "Week", "Month"})
+
+    End Sub
 End Class

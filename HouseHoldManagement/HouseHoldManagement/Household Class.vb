@@ -77,3 +77,12 @@ Public Class Expensetracking
     Public Property DateOfexpenses As DateTime
 
 End Class
+Public Class DailyTask
+    Public Property TaskID As String
+    Public Property Title As String
+    Public Property Description As String
+    Public Property DueDate As DateTime
+    Public Property Priority As String
+    Public Property Status As String
+    Public Property AssignedTo As String
+End Class

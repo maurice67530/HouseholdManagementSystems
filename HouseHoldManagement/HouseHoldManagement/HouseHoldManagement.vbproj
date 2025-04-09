@@ -98,6 +98,12 @@
       <DependentUpon>Form1.vb</DependentUpon>
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Grocery.Designer.vb">
+      <DependentUpon>Grocery.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Grocery.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Household Class.vb" />
     <Compile Include="HouseHoldManagment Module.vb" />
     <Compile Include="Inventory.Designer.vb">
@@ -139,6 +145,18 @@
     <Compile Include="Notifications.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Personnel.Designer.vb">
+      <DependentUpon>Personnel.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Personnel.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Task Management.Designer.vb">
+      <DependentUpon>Task Management.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Task Management.vb">
+      <SubType>Form</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Chores.resx">
@@ -167,6 +185,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Notifications.resx">
       <DependentUpon>Notifications.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Task Management.resx">
+      <DependentUpon>Task Management.vb</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
