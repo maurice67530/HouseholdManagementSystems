@@ -46,6 +46,17 @@ Public Class MealPlan
     Private Sub MealPlan_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         ComboBox3.Items.AddRange(New String() {"<500", "500-1000", ">1000"})
         ComboBox1.Items.AddRange(New String() {"Day", "Week", "Month"})
-
+        ComboBox2.Items.AddRange(New String() {"Noodles", "Chicken", "Bread"})
+        ListBox1.Items.AddRange(New String() {"Noodles", "Chicken Curry", "Kota"})
+        Dim tooltip As New ToolTip
+        tooltip.SetToolTip(btnSave, "Save")
+        tooltip.SetToolTip(btnEdit, "Edit")
+        tooltip.SetToolTip(btnDelete, "Delete")
+        tooltip.SetToolTip(btnRefresh, "Refresh")
+        tooltip.SetToolTip(btnSort, "Sort")
+        tooltip.SetToolTip(btnHighlight, "Highlight")
+        tooltip.SetToolTip(btnPrint, "Print")
+        tooltip.SetToolTip(btnSuggest, "Suggest")
+        tooltip.SetToolTip(btnFilter, "Filter")
     End Sub
 End Class
