@@ -63,7 +63,7 @@ Partial Class Chores
         '
         'DataGridView1
         '
-        Me.DataGridView1.BackgroundColor = System.Drawing.SystemColors.ControlDark
+        Me.DataGridView1.BackgroundColor = System.Drawing.SystemColors.ActiveCaption
         Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DataGridView1.Location = New System.Drawing.Point(12, 289)
         Me.DataGridView1.Name = "DataGridView1"
@@ -72,62 +72,68 @@ Partial Class Chores
         '
         'Button6
         '
+        Me.Button6.BackColor = System.Drawing.SystemColors.ActiveCaption
         Me.Button6.Image = CType(resources.GetObject("Button6.Image"), System.Drawing.Image)
         Me.Button6.Location = New System.Drawing.Point(582, 414)
         Me.Button6.Name = "Button6"
         Me.Button6.Size = New System.Drawing.Size(87, 32)
         Me.Button6.TabIndex = 44
         Me.Button6.Text = " "
-        Me.Button6.UseVisualStyleBackColor = True
+        Me.Button6.UseVisualStyleBackColor = False
         '
         'Button5
         '
+        Me.Button5.BackColor = System.Drawing.SystemColors.ActiveCaption
         Me.Button5.Image = CType(resources.GetObject("Button5.Image"), System.Drawing.Image)
         Me.Button5.Location = New System.Drawing.Point(489, 414)
         Me.Button5.Name = "Button5"
         Me.Button5.Size = New System.Drawing.Size(87, 32)
         Me.Button5.TabIndex = 43
-        Me.Button5.UseVisualStyleBackColor = True
+        Me.Button5.UseVisualStyleBackColor = False
         '
         'Button4
         '
+        Me.Button4.BackColor = System.Drawing.SystemColors.ActiveCaption
         Me.Button4.Image = CType(resources.GetObject("Button4.Image"), System.Drawing.Image)
         Me.Button4.Location = New System.Drawing.Point(396, 414)
         Me.Button4.Name = "Button4"
         Me.Button4.Size = New System.Drawing.Size(87, 32)
         Me.Button4.TabIndex = 42
-        Me.Button4.UseVisualStyleBackColor = True
+        Me.Button4.UseVisualStyleBackColor = False
         '
         'Button3
         '
+        Me.Button3.BackColor = System.Drawing.SystemColors.ActiveCaption
         Me.Button3.Image = CType(resources.GetObject("Button3.Image"), System.Drawing.Image)
         Me.Button3.Location = New System.Drawing.Point(199, 414)
         Me.Button3.Name = "Button3"
         Me.Button3.Size = New System.Drawing.Size(87, 32)
         Me.Button3.TabIndex = 41
-        Me.Button3.UseVisualStyleBackColor = True
+        Me.Button3.UseVisualStyleBackColor = False
         '
         'Button2
         '
+        Me.Button2.BackColor = System.Drawing.SystemColors.ActiveCaption
         Me.Button2.Image = CType(resources.GetObject("Button2.Image"), System.Drawing.Image)
         Me.Button2.Location = New System.Drawing.Point(106, 414)
         Me.Button2.Name = "Button2"
         Me.Button2.Size = New System.Drawing.Size(87, 32)
         Me.Button2.TabIndex = 40
-        Me.Button2.UseVisualStyleBackColor = True
+        Me.Button2.UseVisualStyleBackColor = False
         '
         'Button1
         '
+        Me.Button1.BackColor = System.Drawing.SystemColors.ActiveCaption
         Me.Button1.Image = CType(resources.GetObject("Button1.Image"), System.Drawing.Image)
         Me.Button1.Location = New System.Drawing.Point(12, 414)
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(88, 32)
         Me.Button1.TabIndex = 39
-        Me.Button1.UseVisualStyleBackColor = True
+        Me.Button1.UseVisualStyleBackColor = False
         '
         'Panel2
         '
-        Me.Panel2.BackColor = System.Drawing.SystemColors.GradientInactiveCaption
+        Me.Panel2.BackColor = System.Drawing.SystemColors.ActiveCaption
         Me.Panel2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         Me.Panel2.Controls.Add(Me.Label3)
         Me.Panel2.Controls.Add(Me.Label4)
@@ -220,7 +226,7 @@ Partial Class Chores
         '
         'Panel1
         '
-        Me.Panel1.BackColor = System.Drawing.SystemColors.GradientInactiveCaption
+        Me.Panel1.BackColor = System.Drawing.SystemColors.ActiveCaption
         Me.Panel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         Me.Panel1.Controls.Add(Me.NumericUpDown1)
         Me.Panel1.Controls.Add(Me.Label2)
@@ -315,33 +321,36 @@ Partial Class Chores
         '
         'Button7
         '
+        Me.Button7.BackColor = System.Drawing.SystemColors.ActiveCaption
         Me.Button7.BackgroundImage = CType(resources.GetObject("Button7.BackgroundImage"), System.Drawing.Image)
         Me.Button7.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
         Me.Button7.Location = New System.Drawing.Point(306, 251)
         Me.Button7.Name = "Button7"
         Me.Button7.Size = New System.Drawing.Size(98, 32)
         Me.Button7.TabIndex = 46
-        Me.Button7.UseVisualStyleBackColor = True
+        Me.Button7.UseVisualStyleBackColor = False
         '
         'Button8
         '
+        Me.Button8.BackColor = System.Drawing.SystemColors.ActiveCaption
         Me.Button8.BackgroundImage = CType(resources.GetObject("Button8.BackgroundImage"), System.Drawing.Image)
         Me.Button8.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
         Me.Button8.Location = New System.Drawing.Point(410, 251)
         Me.Button8.Name = "Button8"
         Me.Button8.Size = New System.Drawing.Size(98, 32)
         Me.Button8.TabIndex = 47
-        Me.Button8.UseVisualStyleBackColor = True
+        Me.Button8.UseVisualStyleBackColor = False
         '
         'Button9
         '
+        Me.Button9.BackColor = System.Drawing.SystemColors.ActiveCaption
         Me.Button9.BackgroundImage = CType(resources.GetObject("Button9.BackgroundImage"), System.Drawing.Image)
         Me.Button9.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
         Me.Button9.Location = New System.Drawing.Point(202, 251)
         Me.Button9.Name = "Button9"
         Me.Button9.Size = New System.Drawing.Size(98, 32)
         Me.Button9.TabIndex = 48
-        Me.Button9.UseVisualStyleBackColor = True
+        Me.Button9.UseVisualStyleBackColor = False
         '
         'Label10
         '
