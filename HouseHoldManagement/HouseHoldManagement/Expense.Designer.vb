@@ -71,6 +71,7 @@ Partial Class Expense
         '
         'DataGridView1
         '
+        Me.DataGridView1.BackgroundColor = System.Drawing.SystemColors.ActiveCaption
         Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DataGridView1.Location = New System.Drawing.Point(8, 336)
         Me.DataGridView1.Name = "DataGridView1"
@@ -122,6 +123,8 @@ Partial Class Expense
         Me.Panel1.Controls.Add(Me.TextBox4)
         Me.Panel1.Controls.Add(Me.Label10)
         Me.Panel1.Controls.Add(Me.Label7)
+        Me.Panel1.Controls.Add(Me.ComboBox2)
+        Me.Panel1.Controls.Add(Me.Label5)
         Me.Panel1.Controls.Add(Me.Label8)
         Me.Panel1.Controls.Add(Me.Label4)
         Me.Panel1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -133,7 +136,7 @@ Partial Class Expense
         'TextBox3
         '
         Me.TextBox3.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox3.Location = New System.Drawing.Point(113, 81)
+        Me.TextBox3.Location = New System.Drawing.Point(113, 72)
         Me.TextBox3.Name = "TextBox3"
         Me.TextBox3.Size = New System.Drawing.Size(198, 22)
         Me.TextBox3.TabIndex = 54
@@ -141,7 +144,7 @@ Partial Class Expense
         'TextBox2
         '
         Me.TextBox2.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox2.Location = New System.Drawing.Point(113, 45)
+        Me.TextBox2.Location = New System.Drawing.Point(113, 41)
         Me.TextBox2.Name = "TextBox2"
         Me.TextBox2.Size = New System.Drawing.Size(198, 22)
         Me.TextBox2.TabIndex = 87
@@ -150,7 +153,7 @@ Partial Class Expense
         '
         Me.Label14.AutoSize = True
         Me.Label14.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label14.Location = New System.Drawing.Point(7, 79)
+        Me.Label14.Location = New System.Drawing.Point(7, 70)
         Me.Label14.Name = "Label14"
         Me.Label14.Size = New System.Drawing.Size(86, 16)
         Me.Label14.TabIndex = 81
@@ -161,7 +164,7 @@ Partial Class Expense
         Me.ComboBox1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ComboBox1.FormattingEnabled = True
         Me.ComboBox1.Items.AddRange(New Object() {"", "cash", "card", "online payment"})
-        Me.ComboBox1.Location = New System.Drawing.Point(113, 234)
+        Me.ComboBox1.Location = New System.Drawing.Point(113, 197)
         Me.ComboBox1.Name = "ComboBox1"
         Me.ComboBox1.Size = New System.Drawing.Size(198, 24)
         Me.ComboBox1.TabIndex = 67
@@ -169,7 +172,7 @@ Partial Class Expense
         'TextBox6
         '
         Me.TextBox6.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox6.Location = New System.Drawing.Point(113, 193)
+        Me.TextBox6.Location = New System.Drawing.Point(113, 166)
         Me.TextBox6.Name = "TextBox6"
         Me.TextBox6.Size = New System.Drawing.Size(198, 22)
         Me.TextBox6.TabIndex = 83
@@ -185,7 +188,7 @@ Partial Class Expense
         'TextBox5
         '
         Me.TextBox5.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox5.Location = New System.Drawing.Point(113, 157)
+        Me.TextBox5.Location = New System.Drawing.Point(113, 135)
         Me.TextBox5.Name = "TextBox5"
         Me.TextBox5.Size = New System.Drawing.Size(198, 22)
         Me.TextBox5.TabIndex = 82
@@ -194,7 +197,7 @@ Partial Class Expense
         '
         Me.Label12.AutoSize = True
         Me.Label12.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label12.Location = New System.Drawing.Point(7, 191)
+        Me.Label12.Location = New System.Drawing.Point(7, 164)
         Me.Label12.Name = "Label12"
         Me.Label12.Size = New System.Drawing.Size(76, 16)
         Me.Label12.TabIndex = 79
@@ -204,7 +207,7 @@ Partial Class Expense
         '
         Me.Label2.AutoSize = True
         Me.Label2.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label2.Location = New System.Drawing.Point(8, 233)
+        Me.Label2.Location = New System.Drawing.Point(8, 196)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(109, 16)
         Me.Label2.TabIndex = 63
@@ -213,7 +216,7 @@ Partial Class Expense
         'TextBox4
         '
         Me.TextBox4.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox4.Location = New System.Drawing.Point(113, 120)
+        Me.TextBox4.Location = New System.Drawing.Point(113, 103)
         Me.TextBox4.Name = "TextBox4"
         Me.TextBox4.Size = New System.Drawing.Size(198, 22)
         Me.TextBox4.TabIndex = 82
@@ -222,7 +225,7 @@ Partial Class Expense
         '
         Me.Label10.AutoSize = True
         Me.Label10.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label10.Location = New System.Drawing.Point(7, 155)
+        Me.Label10.Location = New System.Drawing.Point(7, 133)
         Me.Label10.Name = "Label10"
         Me.Label10.Size = New System.Drawing.Size(63, 16)
         Me.Label10.TabIndex = 78
@@ -232,7 +235,7 @@ Partial Class Expense
         '
         Me.Label7.AutoSize = True
         Me.Label7.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label7.Location = New System.Drawing.Point(8, 44)
+        Me.Label7.Location = New System.Drawing.Point(8, 40)
         Me.Label7.Name = "Label7"
         Me.Label7.Size = New System.Drawing.Size(53, 16)
         Me.Label7.TabIndex = 51
@@ -252,7 +255,7 @@ Partial Class Expense
         '
         Me.Label4.AutoSize = True
         Me.Label4.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label4.Location = New System.Drawing.Point(8, 119)
+        Me.Label4.Location = New System.Drawing.Point(8, 102)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(33, 16)
         Me.Label4.TabIndex = 71
@@ -273,8 +276,6 @@ Partial Class Expense
         Me.Panel2.Controls.Add(Me.ComboBox4)
         Me.Panel2.Controls.Add(Me.Label1)
         Me.Panel2.Controls.Add(Me.Label6)
-        Me.Panel2.Controls.Add(Me.ComboBox2)
-        Me.Panel2.Controls.Add(Me.Label5)
         Me.Panel2.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Panel2.Location = New System.Drawing.Point(334, 60)
         Me.Panel2.Name = "Panel2"
@@ -285,7 +286,7 @@ Partial Class Expense
         '
         Me.Label16.AutoSize = True
         Me.Label16.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label16.Location = New System.Drawing.Point(8, 242)
+        Me.Label16.Location = New System.Drawing.Point(3, 200)
         Me.Label16.Name = "Label16"
         Me.Label16.Size = New System.Drawing.Size(56, 16)
         Me.Label16.TabIndex = 86
@@ -295,7 +296,7 @@ Partial Class Expense
         '
         Me.Label15.AutoSize = True
         Me.Label15.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label15.Location = New System.Drawing.Point(8, 226)
+        Me.Label15.Location = New System.Drawing.Point(3, 172)
         Me.Label15.Name = "Label15"
         Me.Label15.Size = New System.Drawing.Size(56, 16)
         Me.Label15.TabIndex = 85
@@ -304,7 +305,7 @@ Partial Class Expense
         'TextBox7
         '
         Me.TextBox7.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox7.Location = New System.Drawing.Point(122, 196)
+        Me.TextBox7.Location = New System.Drawing.Point(122, 141)
         Me.TextBox7.Name = "TextBox7"
         Me.TextBox7.Size = New System.Drawing.Size(188, 22)
         Me.TextBox7.TabIndex = 84
@@ -313,7 +314,7 @@ Partial Class Expense
         '
         Me.Label13.AutoSize = True
         Me.Label13.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label13.Location = New System.Drawing.Point(3, 191)
+        Me.Label13.Location = New System.Drawing.Point(3, 141)
         Me.Label13.Name = "Label13"
         Me.Label13.Size = New System.Drawing.Size(94, 16)
         Me.Label13.TabIndex = 80
@@ -324,7 +325,7 @@ Partial Class Expense
         Me.ComboBox5.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ComboBox5.FormattingEnabled = True
         Me.ComboBox5.Items.AddRange(New Object() {"daily", "weekly", "monthly", "yearly"})
-        Me.ComboBox5.Location = New System.Drawing.Point(122, 50)
+        Me.ComboBox5.Location = New System.Drawing.Point(122, 15)
         Me.ComboBox5.Name = "ComboBox5"
         Me.ComboBox5.Size = New System.Drawing.Size(188, 24)
         Me.ComboBox5.TabIndex = 84
@@ -333,7 +334,7 @@ Partial Class Expense
         '
         Me.Label3.AutoSize = True
         Me.Label3.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label3.Location = New System.Drawing.Point(3, 159)
+        Me.Label3.Location = New System.Drawing.Point(3, 112)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(51, 16)
         Me.Label3.TabIndex = 66
@@ -343,7 +344,7 @@ Partial Class Expense
         '
         Me.Label9.AutoSize = True
         Me.Label9.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label9.Location = New System.Drawing.Point(2, 120)
+        Me.Label9.Location = New System.Drawing.Point(3, 78)
         Me.Label9.Name = "Label9"
         Me.Label9.Size = New System.Drawing.Size(114, 16)
         Me.Label9.TabIndex = 52
@@ -352,7 +353,7 @@ Partial Class Expense
         'DateTimePicker1
         '
         Me.DateTimePicker1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.DateTimePicker1.Location = New System.Drawing.Point(122, 120)
+        Me.DateTimePicker1.Location = New System.Drawing.Point(122, 78)
         Me.DateTimePicker1.Name = "DateTimePicker1"
         Me.DateTimePicker1.Size = New System.Drawing.Size(188, 22)
         Me.DateTimePicker1.TabIndex = 56
@@ -361,7 +362,7 @@ Partial Class Expense
         '
         Me.ComboBox3.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ComboBox3.FormattingEnabled = True
-        Me.ComboBox3.Location = New System.Drawing.Point(122, 157)
+        Me.ComboBox3.Location = New System.Drawing.Point(122, 109)
         Me.ComboBox3.Name = "ComboBox3"
         Me.ComboBox3.Size = New System.Drawing.Size(188, 24)
         Me.ComboBox3.TabIndex = 69
@@ -371,7 +372,7 @@ Partial Class Expense
         Me.ComboBox4.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ComboBox4.FormattingEnabled = True
         Me.ComboBox4.Items.AddRange(New Object() {"pending", "approved", "declined"})
-        Me.ComboBox4.Location = New System.Drawing.Point(122, 83)
+        Me.ComboBox4.Location = New System.Drawing.Point(122, 47)
         Me.ComboBox4.Name = "ComboBox4"
         Me.ComboBox4.Size = New System.Drawing.Size(188, 24)
         Me.ComboBox4.TabIndex = 83
@@ -380,7 +381,7 @@ Partial Class Expense
         '
         Me.Label1.AutoSize = True
         Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.Location = New System.Drawing.Point(3, 82)
+        Me.Label1.Location = New System.Drawing.Point(3, 47)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(103, 16)
         Me.Label1.TabIndex = 64
@@ -390,7 +391,7 @@ Partial Class Expense
         '
         Me.Label6.AutoSize = True
         Me.Label6.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label6.Location = New System.Drawing.Point(4, 50)
+        Me.Label6.Location = New System.Drawing.Point(2, 15)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(72, 16)
         Me.Label6.TabIndex = 62
@@ -401,16 +402,16 @@ Partial Class Expense
         Me.ComboBox2.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ComboBox2.FormattingEnabled = True
         Me.ComboBox2.Items.AddRange(New Object() {"", "usd", "zar", "eur", "jpy", "aur"})
-        Me.ComboBox2.Location = New System.Drawing.Point(122, 16)
+        Me.ComboBox2.Location = New System.Drawing.Point(113, 227)
         Me.ComboBox2.Name = "ComboBox2"
-        Me.ComboBox2.Size = New System.Drawing.Size(188, 24)
+        Me.ComboBox2.Size = New System.Drawing.Size(198, 24)
         Me.ComboBox2.TabIndex = 68
         '
         'Label5
         '
         Me.Label5.AutoSize = True
         Me.Label5.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label5.Location = New System.Drawing.Point(3, 19)
+        Me.Label5.Location = New System.Drawing.Point(11, 229)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(61, 16)
         Me.Label5.TabIndex = 61
@@ -458,10 +459,10 @@ Partial Class Expense
         'Label11
         '
         Me.Label11.AutoSize = True
-        Me.Label11.Font = New System.Drawing.Font("Microsoft Sans Serif", 24.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label11.Location = New System.Drawing.Point(236, 9)
+        Me.Label11.Font = New System.Drawing.Font("Kristen ITC", 24.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label11.Location = New System.Drawing.Point(227, 9)
         Me.Label11.Name = "Label11"
-        Me.Label11.Size = New System.Drawing.Size(155, 37)
+        Me.Label11.Size = New System.Drawing.Size(166, 44)
         Me.Label11.TabIndex = 95
         Me.Label11.Text = "Expenses"
         '
