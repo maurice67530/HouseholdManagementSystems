@@ -6,7 +6,7 @@ Public Class Register
     Public Property FullNames As String
     Public Property Password As Integer
     Public Property Username As String
-    Public Property ID As Integer
+
     Public Property Email As String
     Public Property Role As String
     Public Property DateCreated As String
@@ -44,8 +44,8 @@ Public Class MealPlans
     Public Property Description As String
     Public Property FilePath As String
     Public Property Calories As String
-    Public Property Ingredient As String
-    Public Property MealPlanPrint As String
+
+    Public Property Frequency As String
 
 End Class
 Public Class Inventory1
