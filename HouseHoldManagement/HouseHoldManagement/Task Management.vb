@@ -3,8 +3,11 @@
 Public Class Task_Management
     Public Const connectionString As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\khodani\Source\Repos\maurice67530\HouseholdManagementSystems\HMS.accdb"
     Dim conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
+    Private Status As String
+    Private Tasks As Object
+    Public Property Priority As String
+
     Private Sub Task_Management_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        LoadTaskDataFromDatabase()
         Dim tooltip As New ToolTip
         tooltip.SetToolTip(Button1, "Submit")
         tooltip.SetToolTip(Button4, "Refresh")
@@ -145,7 +148,7 @@ Public Class Task_Management
                    "DueDate: " & Task.DueDate & vbCrLf &
                    "Priority: " & Task.Priority & vbCrLf &
                    "Status: " & Task.Status & vbCrLf &
-                   "Assignedto: " & Task.Assignedto, vbInformation, "inventory Confirmation")
+                   "Assignedto: " & Task.AssignedTo, vbInformation, "inventory Confirmation")
 
 
             End Using
@@ -160,27 +163,45 @@ Public Class Task_Management
         End Try
 
     End Sub
-    Public Sub LoadTaskDataFromDatabase()
 
-        Debug.WriteLine("LoadTaskDataFromDatabase")
-        Using connect As New OleDbConnection(connectionString)
-            connect.Open()
+    Private Sub Button5_Click(sender As Object, e As EventArgs) Handles Button5.Click
+        Dim conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
+        Dim TasksTable As New DataTable()
+        Try
+            conn.Open()
+            Dim query As String = "SELECT * FROM Tasks WHERE 1=1"
 
-            ' Update the table name if necessary  
-            Dim tableName As String = "Tasks"
+            ' Only add conditions if filters are selected  
+            If Not String.IsNullOrEmpty(Status) Then
+                query &= " AND Status = @Status"
+            End If
 
-            ' Create an OleDbCommand to select the data from the database  
-            Dim cmd As New OleDbCommand($"SELECT * FROM {tableName}", connect)
+            If Not String.IsNullOrEmpty(Priority) Then
+                query &= " AND Priority = @Priority"
+            End If
 
-            ' Create a DataAdapter and fill a DataTable  
-            Dim da As New OleDbDataAdapter(cmd)
-            Dim dt As New DataTable()
-            da.Fill(dt)
+            Dim command As New OleDb.OleDbCommand(query, conn)
 
-            ' Bind the DataTable to the DataGridView  
-            DataGridView1.DataSource = dt
-            'HighlightExpiredItemss()
-        End Using
+            ' Only add parameters if filters are selected  
+            If Not String.IsNullOrEmpty(Status) Then
+                command.Parameters.AddWithValue("@Status", Status)
+            End If
+
+            If Not String.IsNullOrEmpty(Priority) Then
+                command.Parameters.AddWithValue("@Priority", Priority)
+            End If
+
+            Dim adapter As New OleDb.OleDbDataAdapter(command)
+            adapter.Fill(TasksTable)
+            Tasks.DataGridView1.DataSource = TasksTable
+        Catch ex As Exception
+            MsgBox("Error filtering tasks: " & ex.Message, MsgBoxStyle.Critical, "Database Error")
+        Finally
+            conn.Close()
+        End Try
+        'get selected values from combobox
+        Dim selectedStatus As String = If(ComboBox2.SelectedItem IsNot Nothing, ComboBox2.SelectedItem.ToString(), "")
+        Dim selectedPriority As String = If(ComboBox1.SelectedItem IsNot Nothing, ComboBox1.SelectedItem.ToString(), "")
 
     End Sub
 End Class
