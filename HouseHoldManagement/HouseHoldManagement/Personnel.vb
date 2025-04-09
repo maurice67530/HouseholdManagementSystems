@@ -111,5 +111,27 @@ Public Class Personnel
         End Try
     End Sub
 
+    Private Sub DataGridView1_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridView1.CellContentClick
+        ' When a row is clicked in the DataGridView
+
+        ' Check if a valid row is clicked (not header)
+        If e.RowIndex >= 0 Then
+            Dim row As DataGridViewRow = DataGridView1.Rows(e.RowIndex)
+
+            ' Fill the form fields with the values from the selected row
+            TextBox1.Text = row.Cells("FirstName").Value.ToString()
+            TextBox2.Text = row.Cells("LastName").Value.ToString()
+            DateTimePicker1.Value = Convert.ToDateTime(row.Cells("DateOfBirth").Value)
+            TextBox4.Text = row.Cells("Email").Value.ToString()
+            TextBox3.Text = row.Cells("Contact").Value.ToString()
+            TextBox5.Text = row.Cells("Age").Value.ToString()
+            ComboBox1.Text = row.Cells("Role").Value.ToString()
+            ComboBox3.Text = row.Cells("Gender").Value.ToString()
+            TextBox6.Text = row.Cells("PostalCode").Value.ToString()
+            TextBox9.Text = row.Cells("HealthStatus").Value.ToString()
+            TextBox7.Text = row.Cells("Deleter").Value.ToString()
+        End If
+
+    End Sub
 
 End Class
