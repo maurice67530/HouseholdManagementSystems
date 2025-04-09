@@ -3,6 +3,7 @@
 Public Class Task_Management
     Private ReadOnly Priority As String
     Public Property Status As String
+    Public Property Tasks As Object
 
     Private Sub Task_Management_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Dim tooltip As New ToolTip
@@ -123,7 +124,7 @@ Public Class Task_Management
 
             Dim adapter As New OleDb.OleDbDataAdapter(command)
             adapter.Fill(TasksTable)
-            tasks.DataGridView1.DataSource = TasksTable
+            Tasks.DataGridView1.DataSource = TasksTable
         Catch ex As Exception
             MsgBox("Error filtering tasks: " & ex.Message, MsgBoxStyle.Critical, "Database Error")
         Finally
