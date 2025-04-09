@@ -3,6 +3,10 @@
 Public Class Task_Management
     Public Const connectionString As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\khodani\Source\Repos\maurice67530\HouseholdManagementSystems\HMS.accdb"
     Dim conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
+    Private Status As String
+    Private Tasks As Object
+    Public Property Priority As String
+
     Private Sub Task_Management_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Dim tooltip As New ToolTip
         tooltip.SetToolTip(Button1, "Submit")
@@ -159,7 +163,62 @@ Public Class Task_Management
         End Try
 
     End Sub
+
+    Private Sub Button5_Click(sender As Object, e As EventArgs) Handles Button5.Click
+        Dim conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
+        Dim TasksTable As New DataTable()
+        Try
+            conn.Open()
+            Dim query As String = "SELECT * FROM Tasks WHERE 1=1"
+
+            ' Only add conditions if filters are selected  
+            If Not String.IsNullOrEmpty(Status) Then
+                query &= " AND Status = @Status"
+            End If
+
+            If Not String.IsNullOrEmpty(Priority) Then
+                query &= " AND Priority = @Priority"
+            End If
+
+            Dim command As New OleDb.OleDbCommand(query, conn)
+
+            ' Only add parameters if filters are selected  
+            If Not String.IsNullOrEmpty(Status) Then
+                command.Parameters.AddWithValue("@Status", Status)
+            End If
+
+            If Not String.IsNullOrEmpty(Priority) Then
+                command.Parameters.AddWithValue("@Priority", Priority)
+            End If
+
+            Dim adapter As New OleDb.OleDbDataAdapter(command)
+            adapter.Fill(TasksTable)
+            Tasks.DataGridView1.DataSource = TasksTable
+        Catch ex As Exception
+            MsgBox("Error filtering tasks: " & ex.Message, MsgBoxStyle.Critical, "Database Error")
+        Finally
+            conn.Close()
+        End Try
+        'get selected values from combobox
+        Dim selectedStatus As String = If(ComboBox2.SelectedItem IsNot Nothing, ComboBox2.SelectedItem.ToString(), "")
+        Dim selectedPriority As String = If(ComboBox1.SelectedItem IsNot Nothing, ComboBox1.SelectedItem.ToString(), "")
+
+    End Sub
+
+    Private Sub Button6_Click(sender As Object, e As EventArgs) Handles Button6.Click
+        DataGridView1.Sort(DataGridView1.Columns("DueDate"), System.ComponentModel.ListSortDirection.Ascending)
+    End Sub
+
+    Private Sub Button8_Click(sender As Object, e As EventArgs) Handles Button8.Click
+        Dashboard.Show()
+        Me.Close()
+    End Sub
+
     Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
+
+    End Sub
+
+    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
 
     End Sub
 End Class
