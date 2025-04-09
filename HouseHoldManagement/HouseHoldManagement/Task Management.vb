@@ -144,7 +144,7 @@ Public Class Task_Management
                    "DueDate: " & Task.DueDate & vbCrLf &
                    "Priority: " & Task.Priority & vbCrLf &
                    "Status: " & Task.Status & vbCrLf &
-                   "Assignedto: " & Task.Assignedto, vbInformation, "inventory Confirmation")
+                   "Assignedto: " & Task.AssignedTo, vbInformation, "inventory Confirmation")
 
 
             End Using
