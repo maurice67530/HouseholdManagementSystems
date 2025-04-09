@@ -186,6 +186,9 @@
     <EmbeddedResource Include="Notifications.resx">
       <DependentUpon>Notifications.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Personnel.resx">
+      <DependentUpon>Personnel.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Task Management.resx">
       <DependentUpon>Task Management.vb</DependentUpon>
     </EmbeddedResource>
