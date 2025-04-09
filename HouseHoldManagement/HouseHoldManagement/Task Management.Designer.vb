@@ -37,7 +37,6 @@ Partial Class Task_Management
         Me.ComboBox3 = New System.Windows.Forms.ComboBox()
         Me.TextBox2 = New System.Windows.Forms.TextBox()
         Me.Label4 = New System.Windows.Forms.Label()
-        Me.Button7 = New System.Windows.Forms.Button()
         Me.Button6 = New System.Windows.Forms.Button()
         Me.Button5 = New System.Windows.Forms.Button()
         Me.Button4 = New System.Windows.Forms.Button()
@@ -46,6 +45,7 @@ Partial Class Task_Management
         Me.Button2 = New System.Windows.Forms.Button()
         Me.Button1 = New System.Windows.Forms.Button()
         Me.Label1 = New System.Windows.Forms.Label()
+        Me.Button8 = New System.Windows.Forms.Button()
         Me.Panel2.SuspendLayout()
         Me.Panel1.SuspendLayout()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -180,18 +180,10 @@ Partial Class Task_Management
         Me.Label4.TabIndex = 15
         Me.Label4.Text = "Assigned to"
         '
-        'Button7
-        '
-        Me.Button7.Image = CType(resources.GetObject("Button7.Image"), System.Drawing.Image)
-        Me.Button7.Location = New System.Drawing.Point(506, 293)
-        Me.Button7.Name = "Button7"
-        Me.Button7.Size = New System.Drawing.Size(75, 35)
-        Me.Button7.TabIndex = 53
-        Me.Button7.UseVisualStyleBackColor = True
-        '
         'Button6
         '
-        Me.Button6.Image = CType(resources.GetObject("Button6.Image"), System.Drawing.Image)
+        Me.Button6.BackgroundImage = CType(resources.GetObject("Button6.BackgroundImage"), System.Drawing.Image)
+        Me.Button6.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
         Me.Button6.Location = New System.Drawing.Point(425, 293)
         Me.Button6.Name = "Button6"
         Me.Button6.Size = New System.Drawing.Size(75, 35)
@@ -200,7 +192,8 @@ Partial Class Task_Management
         '
         'Button5
         '
-        Me.Button5.Image = CType(resources.GetObject("Button5.Image"), System.Drawing.Image)
+        Me.Button5.BackgroundImage = CType(resources.GetObject("Button5.BackgroundImage"), System.Drawing.Image)
+        Me.Button5.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
         Me.Button5.Location = New System.Drawing.Point(344, 293)
         Me.Button5.Name = "Button5"
         Me.Button5.Size = New System.Drawing.Size(75, 35)
@@ -209,7 +202,8 @@ Partial Class Task_Management
         '
         'Button4
         '
-        Me.Button4.Image = CType(resources.GetObject("Button4.Image"), System.Drawing.Image)
+        Me.Button4.BackgroundImage = CType(resources.GetObject("Button4.BackgroundImage"), System.Drawing.Image)
+        Me.Button4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
         Me.Button4.Location = New System.Drawing.Point(265, 293)
         Me.Button4.Name = "Button4"
         Me.Button4.Size = New System.Drawing.Size(75, 35)
@@ -227,7 +221,8 @@ Partial Class Task_Management
         '
         'Button3
         '
-        Me.Button3.Image = CType(resources.GetObject("Button3.Image"), System.Drawing.Image)
+        Me.Button3.BackgroundImage = CType(resources.GetObject("Button3.BackgroundImage"), System.Drawing.Image)
+        Me.Button3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
         Me.Button3.Location = New System.Drawing.Point(184, 293)
         Me.Button3.Name = "Button3"
         Me.Button3.Size = New System.Drawing.Size(75, 35)
@@ -236,7 +231,8 @@ Partial Class Task_Management
         '
         'Button2
         '
-        Me.Button2.Image = CType(resources.GetObject("Button2.Image"), System.Drawing.Image)
+        Me.Button2.BackgroundImage = CType(resources.GetObject("Button2.BackgroundImage"), System.Drawing.Image)
+        Me.Button2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
         Me.Button2.Location = New System.Drawing.Point(103, 293)
         Me.Button2.Name = "Button2"
         Me.Button2.Size = New System.Drawing.Size(75, 35)
@@ -245,7 +241,8 @@ Partial Class Task_Management
         '
         'Button1
         '
-        Me.Button1.Image = CType(resources.GetObject("Button1.Image"), System.Drawing.Image)
+        Me.Button1.BackgroundImage = CType(resources.GetObject("Button1.BackgroundImage"), System.Drawing.Image)
+        Me.Button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
         Me.Button1.Location = New System.Drawing.Point(22, 293)
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(75, 35)
@@ -262,14 +259,23 @@ Partial Class Task_Management
         Me.Label1.TabIndex = 45
         Me.Label1.Text = " Tasks"
         '
+        'Button8
+        '
+        Me.Button8.Image = CType(resources.GetObject("Button8.Image"), System.Drawing.Image)
+        Me.Button8.Location = New System.Drawing.Point(507, 293)
+        Me.Button8.Name = "Button8"
+        Me.Button8.Size = New System.Drawing.Size(74, 35)
+        Me.Button8.TabIndex = 55
+        Me.Button8.UseVisualStyleBackColor = True
+        '
         'Task_Management
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(589, 330)
+        Me.ClientSize = New System.Drawing.Size(589, 338)
+        Me.Controls.Add(Me.Button8)
         Me.Controls.Add(Me.Panel2)
         Me.Controls.Add(Me.Panel1)
-        Me.Controls.Add(Me.Button7)
         Me.Controls.Add(Me.Button6)
         Me.Controls.Add(Me.Button5)
         Me.Controls.Add(Me.Button4)
@@ -279,7 +285,7 @@ Partial Class Task_Management
         Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.Label1)
         Me.Name = "Task_Management"
-        Me.Text = "Task_Management"
+        Me.Text = "Task Manangement"
         Me.Panel2.ResumeLayout(False)
         Me.Panel2.PerformLayout()
         Me.Panel1.ResumeLayout(False)
@@ -304,7 +310,6 @@ Partial Class Task_Management
     Friend WithEvents ComboBox3 As ComboBox
     Friend WithEvents TextBox2 As TextBox
     Friend WithEvents Label4 As Label
-    Friend WithEvents Button7 As Button
     Friend WithEvents Button6 As Button
     Friend WithEvents Button5 As Button
     Friend WithEvents Button4 As Button
@@ -313,4 +318,5 @@ Partial Class Task_Management
     Friend WithEvents Button2 As Button
     Friend WithEvents Button1 As Button
     Friend WithEvents Label1 As Label
+    Friend WithEvents Button8 As Button
 End Class

@@ -34,7 +34,7 @@ End Class
 Public Class MealPlans
 
     'properties of the mealplan class
-    Public Property MealPlanId As String
+
     Public Property StartDate As DateTime
     Public Property EndDate As DateTime
     Public Property Meals As String
@@ -85,4 +85,18 @@ Public Class DailyTask
     Public Property Priority As String
     Public Property Status As String
     Public Property AssignedTo As String
+
+    Public Class Grocery
+        Public Property ItemID As String
+        Public Property ItemName As String
+        Public Property Unit As String
+        Public Property Quantity As String
+        Public Property ExpiryDate As DateTime
+        Public Property Category As String
+        Public Property PricePerUnit As Integer
+        Public Property Ispurchased As String
+
+
+
+    End Class
 End Class

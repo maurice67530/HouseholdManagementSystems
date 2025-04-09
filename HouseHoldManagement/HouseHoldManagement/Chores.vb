@@ -1,6 +1,15 @@
 ﻿Imports System.Data.OleDb
 Public Class Chores
+    Public Property conn As New OleDbConnection(connectionString)
+    ' Connection string using relative path to the database
+    Public Const connectionString As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Masindi\Source\Repos\HouseholdManagementSystems\HMS.accdb"
     Private Sub Chores_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
+        cmbpri.Items.AddRange(New String() {"Low", "Medium", "High"})
+        cmbstatus.Items.AddRange(New String() {"Not started", "In progress", "Completed"})
+        cmbfre.Items.AddRange(New String() {"Daily", "Weekly", "Monthly"})
+
+
         Dim tooltip As New ToolTip
         tooltip.SetToolTip(Button1, "Dashboard")
         tooltip.SetToolTip(Button2, "Mark All as Complete")
@@ -11,6 +20,8 @@ Public Class Chores
         tooltip.SetToolTip(Button7, "Highlight")
         tooltip.SetToolTip(Button8, "Filter")
         tooltip.SetToolTip(Button9, "Sort")
+
+        loadChoresFromDatabase()
     End Sub
 
     Private Sub Button6_Click(sender As Object, e As EventArgs) Handles Button6.Click
