@@ -40,6 +40,8 @@ Partial Class Expense
         Me.TextBox4 = New System.Windows.Forms.TextBox()
         Me.Label10 = New System.Windows.Forms.Label()
         Me.Label7 = New System.Windows.Forms.Label()
+        Me.ComboBox2 = New System.Windows.Forms.ComboBox()
+        Me.Label5 = New System.Windows.Forms.Label()
         Me.Label8 = New System.Windows.Forms.Label()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.Panel2 = New System.Windows.Forms.Panel()
@@ -55,8 +57,6 @@ Partial Class Expense
         Me.ComboBox4 = New System.Windows.Forms.ComboBox()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Label6 = New System.Windows.Forms.Label()
-        Me.ComboBox2 = New System.Windows.Forms.ComboBox()
-        Me.Label5 = New System.Windows.Forms.Label()
         Me.Button4 = New System.Windows.Forms.Button()
         Me.Button3 = New System.Windows.Forms.Button()
         Me.Button2 = New System.Windows.Forms.Button()
@@ -241,6 +241,26 @@ Partial Class Expense
         Me.Label7.TabIndex = 51
         Me.Label7.Text = "Amount"
         '
+        'ComboBox2
+        '
+        Me.ComboBox2.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ComboBox2.FormattingEnabled = True
+        Me.ComboBox2.Items.AddRange(New Object() {"", "usd", "zar", "eur", "jpy", "aur"})
+        Me.ComboBox2.Location = New System.Drawing.Point(113, 227)
+        Me.ComboBox2.Name = "ComboBox2"
+        Me.ComboBox2.Size = New System.Drawing.Size(198, 24)
+        Me.ComboBox2.TabIndex = 68
+        '
+        'Label5
+        '
+        Me.Label5.AutoSize = True
+        Me.Label5.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label5.Location = New System.Drawing.Point(11, 229)
+        Me.Label5.Name = "Label5"
+        Me.Label5.Size = New System.Drawing.Size(61, 16)
+        Me.Label5.TabIndex = 61
+        Me.Label5.Text = "Currency"
+        '
         'Label8
         '
         Me.Label8.AutoSize = True
@@ -397,26 +417,6 @@ Partial Class Expense
         Me.Label6.TabIndex = 62
         Me.Label6.Text = "Frequency"
         '
-        'ComboBox2
-        '
-        Me.ComboBox2.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.ComboBox2.FormattingEnabled = True
-        Me.ComboBox2.Items.AddRange(New Object() {"", "usd", "zar", "eur", "jpy", "aur"})
-        Me.ComboBox2.Location = New System.Drawing.Point(113, 227)
-        Me.ComboBox2.Name = "ComboBox2"
-        Me.ComboBox2.Size = New System.Drawing.Size(198, 24)
-        Me.ComboBox2.TabIndex = 68
-        '
-        'Label5
-        '
-        Me.Label5.AutoSize = True
-        Me.Label5.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label5.Location = New System.Drawing.Point(11, 229)
-        Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(61, 16)
-        Me.Label5.TabIndex = 61
-        Me.Label5.Text = "Currency"
-        '
         'Button4
         '
         Me.Button4.BackColor = System.Drawing.SystemColors.ActiveCaption
@@ -474,7 +474,7 @@ Partial Class Expense
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(657, 556)
+        Me.ClientSize = New System.Drawing.Size(656, 556)
         Me.Controls.Add(Me.DataGridView1)
         Me.Controls.Add(Me.Button7)
         Me.Controls.Add(Me.Button6)
