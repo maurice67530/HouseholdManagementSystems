@@ -1,10 +1,8 @@
 ﻿Imports System.Data.OleDb
 
 Public Class Task_Management
-    Private ReadOnly Priority As String
-    Public Property Status As String
-    Public Property Tasks As Object
-
+    Public Const connectionString As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\khodani\Source\Repos\maurice67530\HouseholdManagementSystems\HMS.accdb"
+    Dim conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
     Private Sub Task_Management_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Dim tooltip As New ToolTip
         tooltip.SetToolTip(Button1, "Submit")
@@ -95,45 +93,71 @@ Public Class Task_Management
         End If
     End Sub
 
-    Private Sub Button5_Click(sender As Object, e As EventArgs) Handles Button5.Click
-        Dim conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
-        Dim TasksTable As New DataTable()
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         Try
-            conn.Open()
-            Dim query As String = "SELECT * FROM Tasks WHERE 1=1"
+            Debug.WriteLine("entering btnsave")
 
-            ' Only add conditions if filters are selected  
-            If Not String.IsNullOrEmpty(Status) Then
-                query &= " AND Status = @Status"
+            If TextBox2.Text = " " Then
+                MsgBox("please enter a value")
+                TextBox2.Focus()
+
             End If
+            If ComboBox1.Text = "" Then
+                MsgBox("please enter a value")
+                ComboBox1.Focus()
 
-            If Not String.IsNullOrEmpty(Priority) Then
-                query &= " AND Priority = @Priority"
             End If
+            If DateTimePicker1.Text = "" Then
+                MsgBox("please enter a value")
+                DateTimePicker1.Focus()
 
-            Dim command As New OleDb.OleDbCommand(query, conn)
-
-            ' Only add parameters if filters are selected  
-            If Not String.IsNullOrEmpty(Status) Then
-                command.Parameters.AddWithValue("@Status", Status)
             End If
+            Using conn As New OleDbConnection(connectionString)
+                conn.Open()
 
-            If Not String.IsNullOrEmpty(Priority) Then
-                command.Parameters.AddWithValue("@Priority", Priority)
-            End If
+                Dim tableName As String = "Tasks"
+                Dim cmd As New OleDbCommand("INSERT INTO Tasks ([Title],[Description],[DueDate],[Priority],[Status],[AssignedTo]) VALUES (@Title, @Description, @DueDate, @Priority, @Status, @AssignedTo)", conn)
 
-            Dim adapter As New OleDb.OleDbDataAdapter(command)
-            adapter.Fill(TasksTable)
-            Tasks.DataGridView1.DataSource = TasksTable
+                Dim Task As New DailyTask() With {
+             .Title = TextBox1.Text,
+              .Description = TextBox2.Text,
+            .DueDate = DateTimePicker1.Text,
+            .Priority = ComboBox1.Text,
+            .Status = ComboBox2.Text,
+            .AssignedTo = ComboBox3.Text}
+
+
+                'parameters
+
+                cmd.Parameters.AddWithValue("@Title", Task.Title)
+                cmd.Parameters.AddWithValue("@Description", Task.Description)
+                cmd.Parameters.AddWithValue("@DueDate", Task.DueDate)
+                cmd.Parameters.AddWithValue("@Priority", Task.Priority)
+                cmd.Parameters.AddWithValue("@Status", Task.Status)
+                cmd.Parameters.AddWithValue("@AssignedTo", Task.AssignedTo)
+
+                cmd.ExecuteNonQuery()
+
+                MsgBox("tasks Added!" & vbCrLf &
+                   "Title: " & Task.Title.ToString() & vbCrLf &
+                   "Description: " & Task.Description & vbCrLf &
+                   "DueDate: " & Task.DueDate & vbCrLf &
+                   "Priority: " & Task.Priority & vbCrLf &
+                   "Status: " & Task.Status & vbCrLf &
+                   "Assignedto: " & Task.Assignedto, vbInformation, "inventory Confirmation")
+
+
+            End Using
+        Catch ex As OleDbException
+            Debug.WriteLine($"database error: {ex.Message}")
+            MessageBox.Show("error saving test to database. please check the connection.", "Database error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+
         Catch ex As Exception
-            MsgBox("Error filtering tasks: " & ex.Message, MsgBoxStyle.Critical, "Database Error")
-        Finally
-            conn.Close()
+            Debug.WriteLine($"general error in btnsave:{ex.Message}")
+            MessageBox.Show("An unexpected error occurred.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+
         End Try
 
-        'get selected values from combobox
-        Dim selectedStatus As String = If(ComboBox2.SelectedItem IsNot Nothing, ComboBox2.SelectedItem.ToString(), "")
-        Dim selectedPriority As String = If(ComboBox1.SelectedItem IsNot Nothing, ComboBox1.SelectedItem.ToString(), "")
-
     End Sub
+
 End Class
