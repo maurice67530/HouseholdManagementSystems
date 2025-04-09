@@ -98,6 +98,12 @@
       <DependentUpon>Form1.vb</DependentUpon>
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Grocery.Designer.vb">
+      <DependentUpon>Grocery.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Grocery.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Household Class.vb" />
     <Compile Include="HouseHoldManagment Module.vb" />
     <Compile Include="Inventory.Designer.vb">
@@ -137,6 +143,12 @@
       <DependentUpon>Notifications.vb</DependentUpon>
     </Compile>
     <Compile Include="Notifications.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Personnel.Designer.vb">
+      <DependentUpon>Personnel.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Personnel.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Task Management.Designer.vb">
