@@ -9,19 +9,20 @@ Public Class MealPlan
                 conn.Open()
 
                 Dim tablename As String = "MealPlans"
-                Using cmd As New OleDbCommand("INSERT INTO MealPlan ([MealPlanId], [Description], [TotalCalories], [StartDate], [EndDate], [Meals], [MealName], [PicturePath], [Items], [Calories], [MealPlanPrint]) VALUES (@MealPlanId, @Description, @TotalCalories, @StartDate, @EndDate, @PicturePath, @Items, @Calories, @MealPlanPrint, @Meals, @MealName)", conn)
+                Using cmd As New OleDbCommand("INSERT INTO MealPlans ([StartDate], [EndDate], [Meals], [MealName], [Items], [TotalCalories], [Description], [FilePath], [Calories], [Frequency]) VALUES (@StartDate, @EndDate, @Meals, @MealName, @Items, @TotalCalories@Description, @FilePath, @Calories, @Frequency)", conn)
 
-                    cmd.Parameters.AddWithValue("@MealPlanId", HouseHoldManagment_Module.MealPlanForm1())
-                    cmd.Parameters.AddWithValue("@Description", TextBox3.Text)
-                    cmd.Parameters.AddWithValue("@TotalCalories", TextBox3.Text)
                     cmd.Parameters.AddWithValue("@StartDate", DateTimePicker1.Text)
                     cmd.Parameters.AddWithValue("@EndDate", DateTimePicker2.Text)
-                    ' cmd.Parameters.AddWithValue("@Picturepath", TextBox5.Text)
-                    cmd.Parameters.AddWithValue("@Items", ComboBox2.SelectedItem.ToString)
-                    cmd.Parameters.AddWithValue("@Calories", ComboBox1.SelectedItem.ToString)
-                    'cmd.Parameters.AddWithValue("@Frequency", ComboBox4.SelectedItem.ToString)
-                    ' cmd.Parameters.AddWithValue("@Meals", ListBox2.SelectedItem.ToString)
+                    cmd.Parameters.AddWithValue("@Meals", ListBox1.SelectedItem.ToString)
                     cmd.Parameters.AddWithValue("@MealName", TextBox4.Text)
+                    cmd.Parameters.AddWithValue("@Items", ComboBox2.SelectedItem.ToString)
+                    cmd.Parameters.AddWithValue("@TotalCalories", NumericUpDown1.Text)
+                    cmd.Parameters.AddWithValue("@Description", TextBox2.Text)
+                    cmd.Parameters.AddWithValue("@FilePath", TextBox3.Text)
+                    cmd.Parameters.AddWithValue("@Calories", ComboBox3.SelectedItem.ToString)
+                    cmd.Parameters.AddWithValue("@Frequency", ComboBox1.SelectedItem.ToString)
+
+
                     cmd.ExecuteNonQuery()
                 End Using
                 MessageBox.Show("Edited successfully")

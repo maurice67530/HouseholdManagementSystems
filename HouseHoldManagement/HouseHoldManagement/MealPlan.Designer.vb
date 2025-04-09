@@ -373,11 +373,11 @@ Partial Class MealPlan
         'Label10
         '
         Me.Label10.AutoSize = True
-        Me.Label10.Location = New System.Drawing.Point(5, 101)
+        Me.Label10.Location = New System.Drawing.Point(37, 101)
         Me.Label10.Name = "Label10"
-        Me.Label10.Size = New System.Drawing.Size(89, 15)
+        Me.Label10.Size = New System.Drawing.Size(55, 15)
         Me.Label10.TabIndex = 11
-        Me.Label10.Text = "Calorie Range:"
+        Me.Label10.Text = "Calories:"
         '
         'Label11
         '
@@ -426,6 +426,7 @@ Partial Class MealPlan
         Me.Controls.Add(Me.Panel2)
         Me.Controls.Add(Me.Panel1)
         Me.Name = "MealPlan"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "MealPlan"
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel2.ResumeLayout(False)

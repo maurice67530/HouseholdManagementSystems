@@ -12,14 +12,5 @@ Module HouseHoldManagment_Module
     Public Function GetConnection() As OleDbConnection
         Return New OleDbConnection(connectionString)
     End Function
-    Public MealPlanId As Integer = 1
 
-    Public Function MealPlanForm1() As String
-        Dim formattedItemNumber As String = "ITM-" & MealPlanId.ToString("D3")
-        MealPlanId += 1
-        Return formattedItemNumber
-
-
-
-    End Function
 End Module
