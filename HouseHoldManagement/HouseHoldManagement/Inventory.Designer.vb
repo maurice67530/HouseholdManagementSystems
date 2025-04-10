@@ -216,33 +216,37 @@ Partial Class Inventory
         'Button1
         '
         Me.Button1.BackgroundImage = CType(resources.GetObject("Button1.BackgroundImage"), System.Drawing.Image)
+        Me.Button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
         Me.Button1.Location = New System.Drawing.Point(15, 356)
         Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(75, 50)
+        Me.Button1.Size = New System.Drawing.Size(56, 51)
         Me.Button1.TabIndex = 20
         Me.Button1.UseVisualStyleBackColor = True
         '
         'Button2
         '
         Me.Button2.BackgroundImage = CType(resources.GetObject("Button2.BackgroundImage"), System.Drawing.Image)
-        Me.Button2.Location = New System.Drawing.Point(96, 355)
+        Me.Button2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
+        Me.Button2.Location = New System.Drawing.Point(82, 355)
         Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(75, 50)
+        Me.Button2.Size = New System.Drawing.Size(56, 51)
         Me.Button2.TabIndex = 21
         Me.Button2.UseVisualStyleBackColor = True
         '
         'Button3
         '
         Me.Button3.BackgroundImage = CType(resources.GetObject("Button3.BackgroundImage"), System.Drawing.Image)
-        Me.Button3.Location = New System.Drawing.Point(177, 356)
+        Me.Button3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
+        Me.Button3.Location = New System.Drawing.Point(149, 355)
         Me.Button3.Name = "Button3"
-        Me.Button3.Size = New System.Drawing.Size(75, 50)
+        Me.Button3.Size = New System.Drawing.Size(56, 51)
         Me.Button3.TabIndex = 22
         Me.Button3.UseVisualStyleBackColor = True
         '
         'ComboBox1
         '
         Me.ComboBox1.FormattingEnabled = True
+        Me.ComboBox1.Items.AddRange(New Object() {"Vegetables", "Fruits", "Meat"})
         Me.ComboBox1.Location = New System.Drawing.Point(399, 87)
         Me.ComboBox1.Name = "ComboBox1"
         Me.ComboBox1.Size = New System.Drawing.Size(100, 21)
@@ -251,6 +255,7 @@ Partial Class Inventory
         'ComboBox2
         '
         Me.ComboBox2.FormattingEnabled = True
+        Me.ComboBox2.Items.AddRange(New Object() {"Gram", "Kg", "Ltr"})
         Me.ComboBox2.Location = New System.Drawing.Point(168, 171)
         Me.ComboBox2.Name = "ComboBox2"
         Me.ComboBox2.Size = New System.Drawing.Size(100, 21)
@@ -259,7 +264,7 @@ Partial Class Inventory
         'Button8
         '
         Me.Button8.Image = CType(resources.GetObject("Button8.Image"), System.Drawing.Image)
-        Me.Button8.Location = New System.Drawing.Point(254, 356)
+        Me.Button8.Location = New System.Drawing.Point(216, 356)
         Me.Button8.Name = "Button8"
         Me.Button8.Size = New System.Drawing.Size(56, 51)
         Me.Button8.TabIndex = 90
@@ -279,7 +284,7 @@ Partial Class Inventory
         'Button6
         '
         Me.Button6.Image = CType(resources.GetObject("Button6.Image"), System.Drawing.Image)
-        Me.Button6.Location = New System.Drawing.Point(427, 355)
+        Me.Button6.Location = New System.Drawing.Point(417, 355)
         Me.Button6.Name = "Button6"
         Me.Button6.Size = New System.Drawing.Size(56, 51)
         Me.Button6.TabIndex = 88
@@ -289,7 +294,7 @@ Partial Class Inventory
         'Button5
         '
         Me.Button5.Image = CType(resources.GetObject("Button5.Image"), System.Drawing.Image)
-        Me.Button5.Location = New System.Drawing.Point(370, 355)
+        Me.Button5.Location = New System.Drawing.Point(350, 355)
         Me.Button5.Name = "Button5"
         Me.Button5.Size = New System.Drawing.Size(56, 51)
         Me.Button5.TabIndex = 87
@@ -299,7 +304,7 @@ Partial Class Inventory
         'Button4
         '
         Me.Button4.Image = CType(resources.GetObject("Button4.Image"), System.Drawing.Image)
-        Me.Button4.Location = New System.Drawing.Point(308, 356)
+        Me.Button4.Location = New System.Drawing.Point(283, 356)
         Me.Button4.Name = "Button4"
         Me.Button4.Size = New System.Drawing.Size(56, 51)
         Me.Button4.TabIndex = 86
