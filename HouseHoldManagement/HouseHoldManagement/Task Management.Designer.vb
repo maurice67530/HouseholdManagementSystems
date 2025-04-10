@@ -159,6 +159,7 @@ Partial Class Task_Management
         'ComboBox3
         '
         Me.ComboBox3.FormattingEnabled = True
+        Me.ComboBox3.Items.AddRange(New Object() {"Khodani", "Faith", "Ndivhuwo"})
         Me.ComboBox3.Location = New System.Drawing.Point(90, 90)
         Me.ComboBox3.Name = "ComboBox3"
         Me.ComboBox3.Size = New System.Drawing.Size(121, 21)
