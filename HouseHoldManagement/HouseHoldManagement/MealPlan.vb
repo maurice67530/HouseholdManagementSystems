@@ -292,6 +292,7 @@ Public Class MealPlan
     End Sub
     Private Sub btnRefresh_Click(sender As Object, e As EventArgs) Handles btnRefresh.Click
         LoadMealPlanfromDatabase1()
+        Module1.ClearControls(Me)
     End Sub
 
     Private Sub btnSort_Click(sender As Object, e As EventArgs) Handles btnSort.Click
