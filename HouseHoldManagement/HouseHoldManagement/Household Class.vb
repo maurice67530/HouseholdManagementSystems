@@ -1,7 +1,8 @@
 ﻿Public Class Household_Class
 
 End Class
-Public Class Register
+Public Class Registration
+
     'properties of the Register class
     Public Property FullNames As String
     Public Property Password As Integer
