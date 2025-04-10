@@ -414,6 +414,7 @@ Partial Class Personnel
         'ComboBox2
         '
         Me.ComboBox2.FormattingEnabled = True
+        Me.ComboBox2.Items.AddRange(New Object() {"Single", "Married"})
         Me.ComboBox2.Location = New System.Drawing.Point(92, 235)
         Me.ComboBox2.Name = "ComboBox2"
         Me.ComboBox2.Size = New System.Drawing.Size(121, 21)
