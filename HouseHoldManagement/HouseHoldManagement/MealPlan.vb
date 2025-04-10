@@ -198,88 +198,84 @@ Public Class MealPlan
             MessageBox.Show("Please select an meals to delete.", "deletetion error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
         End If
     End Sub
+    Public Function SuggestMeals() As List(Of String)
+        Dim suggestedMeals As New List(Of String)
 
+        Try
+            Using connect As New OleDbConnection(connectionString)
+
+            End Using
+            conn.Open()
+
+            ' Get all meal recipes
+            Dim mealQuery As String = "SELECT MealName, Ingredients FROM MealRecipes"
+            Dim mealCommand As New OleDb.OleDbCommand(mealQuery, conn)
+            Dim mealReader As OleDb.OleDbDataReader = mealCommand.ExecuteReader()
+
+            While mealReader.Read()
+                Dim mealName As String = mealReader("MealName").ToString()
+                Dim requiredIngredients As String() = mealReader("Ingredients").ToString().Split(",")
+
+                Dim allIngredientsAvailable As Boolean = True
+
+                ' Check if all required ingredients exist in GroceryInventory and are not expired
+                For Each ingredient In requiredIngredients
+                    Dim trimmedIngredient As String = ingredient.Trim()
+                    Dim checkQuery As String = "SELECT ExpiryDate FROM GroceryItemss WHERE ItemName=@Ingredients AND Quantity > 0"
+                    Dim checkCommand As New OleDb.OleDbCommand(checkQuery, conn)
+                    checkCommand.Parameters.AddWithValue("@Ingredients", trimmedIngredient)
+
+                    Dim expirationDate As Object = checkCommand.ExecuteScalar()
+
+                    ' Check if the ingredient exists and its expiration date
+                    If expirationDate Is Nothing Then
+                        allIngredientsAvailable = False
+                    Else
+                        ' Validate that the ingredient is not expired
+                        If Convert.ToDateTime(expirationDate) < DateTime.Now Then
+                            allIngredientsAvailable = False
+                        End If
+                    End If
+
+                    If Not allIngredientsAvailable Then
+                        Exit For
+                    End If
+                Next
+
+                ' If all ingredients are available and not expired, add the meal to suggested list
+                If allIngredientsAvailable Then
+                    suggestedMeals.Add(mealName)
+                End If
+            End While
+            mealReader.Close()
+
+
+        Catch ex As Exception
+            MsgBox("Error suggesting meals: " & ex.Message, MsgBoxStyle.Critical, "Database Error")
+        Finally
+            conn.Close()
+        End Try
+
+        Return suggestedMeals
+    End Function
     Private Sub btnSuggest_Click(sender As Object, e As EventArgs) Handles btnSuggest.Click
-        'Public Function SuggestMeals() As List(Of String)
-        '        Dim suggestedMeals As New List(Of String)
+        'Module1.Mains()
 
-        '        Try
-        '            Using connect As New OleDbConnection(connectionString)
-        '                connect.Open()
+        ListBox1.Items.Clear()
+        TextBox2.ReadOnly = True
+        Dim meals As List(Of String) = SuggestMeals()
 
-        '                ' Get all meal recipes
-        '                Dim mealQuery As String = "SELECT MealName, Ingredients FROM MealRecipes"
-        '                Dim mealCommand As New OleDb.OleDbCommand(mealQuery, connect)
-        '                Dim mealReader As OleDb.OleDbDataReader = mealCommand.ExecuteReader()
+        If meals.Count > 0 Then
+            For Each meal In meals
+                ListBox1.Items.Add(meals)
 
-        '                While mealReader.Read()
-        '                    Dim mealName As String = mealReader("MealName").ToString()
-        '                    Dim requiredIngredients As String() = mealReader("Ingredients").ToString().Split(",")
-
-        '                    Dim allIngredientsAvailable As Boolean = True
-
-        '                    ' Check if all required ingredients exist in GroceryInventory and are not expired
-        '                    For Each ingredient In requiredIngredients
-        '                        Dim trimmedIngredient As String = ingredient.Trim()
-        '                        Dim checkQuery As String = "SELECT ExpiryDate FROM GroceryItemss WHERE ItemName=@Ingredients AND Quantity > 0"
-        '                        Dim checkCommand As New OleDb.OleDbCommand(checkQuery, connect)
-        '                        checkCommand.Parameters.AddWithValue("@Ingredients", trimmedIngredient)
-
-        '                        Dim expirationDate As Object = checkCommand.ExecuteScalar()
-
-        '                        ' Check if the ingredient exists and its expiration date
-        '                        If expirationDate Is Nothing Then
-        '                            allIngredientsAvailable = False
-        '                        Else
-        '                            ' Validate that the ingredient is not expired
-        '                            If Convert.ToDateTime(expirationDate) < DateTime.Now Then
-        '                                allIngredientsAvailable = False
-        '                            End If
-        '                        End If
-
-        '                        If Not allIngredientsAvailable Then
-        '                            Exit For
-        '                        End If
-        '                    Next
-
-        '                    ' If all ingredients are available and not expired, add the meal to suggested list
-        '                    If allIngredientsAvailable Then
-        '                        suggestedMeals.Add(mealName)
-        '                    End If
-        '                End While
-        '                mealReader.Close()
-        '                EndUsing
-
-        '      Catch ex As Exception
-        '            MsgBox("Error suggesting meals: " & ex.Message, MsgBoxStyle.Critical, "Database Error")
-        '        Finally
-        '            connect.Close()
-        '        End Try
-
-        '        Return suggestedMeals
-        '    End Function
-
-        '    Private Sub Button11_Click(sender As Object, e As EventArgs) Handles Button11.Click
-        '        'Module1.Mains()
-
-        '        ListBox1.Items.Clear()
-        '        TextBox2.ReadOnly = True
-        '        Dim meals As List(Of String) = SuggestMeals()
-
-        '        If meals.Count > 0 Then
-        '            ForEach meal In meals
-        '               ListBox2.Items.Add(meal)
-
-        '            Next
-        '            MsgBox("Meal Suggestions have been prepared with current Greocery Items.", MsgBoxStyle.Information, "No Available Meals")
-        '            'FetchAlternativeMeals(SuggestMeals)
-        '        Else
-        '            MsgBox("No meals can be prepared with current inventory.", MsgBoxStyle.Exclamation, "No Available Meals")
-        '        End If
+            Next
+            MsgBox("Meal Suggestions have been prepared with current Greocery Items.", MsgBoxStyle.Information, "No Available Meals")
+            'FetchAlternativeMeals(SuggestMeals)
+        Else
+            MsgBox("No meals can be prepared with current inventory.", MsgBoxStyle.Exclamation, "No Available Meals")
+        End If
         '    End Sub
     End Sub
 
-    Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
-
-    End Sub
 End Class
