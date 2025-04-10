@@ -10,14 +10,14 @@ Public Class MealPlan
                 conn.Open()
 
                 Dim tablename As String = "MealPlans"
-                Using cmd As New OleDbCommand("INSERT INTO MealPlans ([StartDate], [EndDate], [Meals], [MealName], [Items], [TotalCalories], [Description], [FilePath], [Calories], [Frequency]) VALUES (@StartDate, @EndDate, @Meals, @MealName, @Items, @TotalCalories@Description, @FilePath, @Calories, @Frequency)", conn)
+                Using cmd As New OleDbCommand("INSERT INTO MealPlans ([StartDate], [EndDate], [Meals], [MealName], [Items], [TotalCalories], [Description], [FilePath], [Calories], [Frequency]) VALUES (@StartDate, @EndDate, @Meals, @MealName, @Items, @TotalCalories, @Description, @FilePath, @Calories, @Frequency)", conn)
 
                     cmd.Parameters.AddWithValue("@StartDate", DateTimePicker1.Text)
                     cmd.Parameters.AddWithValue("@EndDate", DateTimePicker2.Text)
                     cmd.Parameters.AddWithValue("@Meals", ListBox1.SelectedItem.ToString)
                     cmd.Parameters.AddWithValue("@MealName", TextBox4.Text)
                     cmd.Parameters.AddWithValue("@Items", ComboBox2.SelectedItem.ToString)
-                    cmd.Parameters.AddWithValue("@TotalCalories", NumericUpDown1.Text)
+                    cmd.Parameters.AddWithValue("@TotalCalories", NumericUpDown1.Value)
                     cmd.Parameters.AddWithValue("@Description", TextBox2.Text)
                     cmd.Parameters.AddWithValue("@FilePath", TextBox3.Text)
                     cmd.Parameters.AddWithValue("@Calories", ComboBox3.SelectedItem.ToString)
@@ -277,5 +277,9 @@ Public Class MealPlan
         '            MsgBox("No meals can be prepared with current inventory.", MsgBoxStyle.Exclamation, "No Available Meals")
         '        End If
         '    End Sub
+    End Sub
+
+    Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
+
     End Sub
 End Class
