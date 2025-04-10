@@ -146,10 +146,6 @@
     <Compile Include="Personnel.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Photo.Designer.vb">
-      <DependentUpon>Photo.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Photo.vb" />
     <Compile Include="Register.Designer.vb">
       <DependentUpon>Register.vb</DependentUpon>
     </Compile>
@@ -193,9 +189,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Personnel.resx">
       <DependentUpon>Personnel.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Photo.resx">
-      <DependentUpon>Photo.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Register.resx">
       <DependentUpon>Register.vb</DependentUpon>
