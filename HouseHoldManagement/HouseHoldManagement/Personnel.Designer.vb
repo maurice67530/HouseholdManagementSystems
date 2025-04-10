@@ -22,11 +22,9 @@ Partial Class Personnel
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Personnel))
         Me.Label14 = New System.Windows.Forms.Label()
         Me.TextBox7 = New System.Windows.Forms.TextBox()
         Me.Label12 = New System.Windows.Forms.Label()
-        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.Label13 = New System.Windows.Forms.Label()
         Me.TextBox9 = New System.Windows.Forms.TextBox()
         Me.DateTimePicker1 = New System.Windows.Forms.DateTimePicker()
@@ -49,17 +47,16 @@ Partial Class Personnel
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.DataGridView1 = New System.Windows.Forms.DataGridView()
-        Me.BtnDailyTasks = New System.Windows.Forms.Button()
-        Me.BtnClear = New System.Windows.Forms.Button()
-        Me.BtnDelete = New System.Windows.Forms.Button()
-        Me.BtnAddpicture = New System.Windows.Forms.Button()
-        Me.BtnBack = New System.Windows.Forms.Button()
-        Me.BtnEdit = New System.Windows.Forms.Button()
-        Me.BtnSave = New System.Windows.Forms.Button()
-        Me.Label10 = New System.Windows.Forms.Label()
-        Me.TextBox8 = New System.Windows.Forms.TextBox()
-        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.Button7 = New System.Windows.Forms.Button()
+        Me.Button6 = New System.Windows.Forms.Button()
+        Me.Button5 = New System.Windows.Forms.Button()
+        Me.Button4 = New System.Windows.Forms.Button()
+        Me.Button3 = New System.Windows.Forms.Button()
+        Me.Button2 = New System.Windows.Forms.Button()
+        Me.Button1 = New System.Windows.Forms.Button()
+        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'Label14
@@ -90,16 +87,6 @@ Partial Class Personnel
         Me.Label12.Size = New System.Drawing.Size(55, 17)
         Me.Label12.TabIndex = 64
         Me.Label12.Text = "Deleter :"
-        '
-        'PictureBox1
-        '
-        Me.PictureBox1.BackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.PictureBox1.Location = New System.Drawing.Point(393, 85)
-        Me.PictureBox1.Name = "PictureBox1"
-        Me.PictureBox1.Size = New System.Drawing.Size(327, 211)
-        Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
-        Me.PictureBox1.TabIndex = 63
-        Me.PictureBox1.TabStop = False
         '
         'Label13
         '
@@ -316,121 +303,106 @@ Partial Class Personnel
         Me.DataGridView1.Size = New System.Drawing.Size(705, 150)
         Me.DataGridView1.TabIndex = 67
         '
-        'BtnDailyTasks
+        'Button7
         '
-        Me.BtnDailyTasks.BackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.BtnDailyTasks.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.BtnDailyTasks.Image = CType(resources.GetObject("BtnDailyTasks.Image"), System.Drawing.Image)
-        Me.BtnDailyTasks.Location = New System.Drawing.Point(539, 529)
-        Me.BtnDailyTasks.Name = "BtnDailyTasks"
-        Me.BtnDailyTasks.Size = New System.Drawing.Size(66, 60)
-        Me.BtnDailyTasks.TabIndex = 74
-        Me.BtnDailyTasks.TextAlign = System.Drawing.ContentAlignment.BottomCenter
-        Me.BtnDailyTasks.UseVisualStyleBackColor = False
+        Me.Button7.BackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.Button7.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Button7.Location = New System.Drawing.Point(539, 529)
+        Me.Button7.Name = "Button7"
+        Me.Button7.Size = New System.Drawing.Size(66, 60)
+        Me.Button7.TabIndex = 74
+        Me.Button7.TextAlign = System.Drawing.ContentAlignment.BottomCenter
+        Me.Button7.UseVisualStyleBackColor = False
         '
-        'BtnClear
+        'Button6
         '
-        Me.BtnClear.BackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.BtnClear.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.BtnClear.Image = CType(resources.GetObject("BtnClear.Image"), System.Drawing.Image)
-        Me.BtnClear.Location = New System.Drawing.Point(432, 530)
-        Me.BtnClear.Name = "BtnClear"
-        Me.BtnClear.Size = New System.Drawing.Size(61, 60)
-        Me.BtnClear.TabIndex = 73
-        Me.BtnClear.TextAlign = System.Drawing.ContentAlignment.BottomCenter
-        Me.BtnClear.UseVisualStyleBackColor = False
+        Me.Button6.BackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.Button6.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Button6.Location = New System.Drawing.Point(432, 530)
+        Me.Button6.Name = "Button6"
+        Me.Button6.Size = New System.Drawing.Size(61, 60)
+        Me.Button6.TabIndex = 73
+        Me.Button6.TextAlign = System.Drawing.ContentAlignment.BottomCenter
+        Me.Button6.UseVisualStyleBackColor = False
         '
-        'BtnDelete
+        'Button5
         '
-        Me.BtnDelete.BackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.BtnDelete.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.BtnDelete.Image = CType(resources.GetObject("BtnDelete.Image"), System.Drawing.Image)
-        Me.BtnDelete.Location = New System.Drawing.Point(331, 530)
-        Me.BtnDelete.Name = "BtnDelete"
-        Me.BtnDelete.Size = New System.Drawing.Size(65, 60)
-        Me.BtnDelete.TabIndex = 72
-        Me.BtnDelete.TextAlign = System.Drawing.ContentAlignment.BottomCenter
-        Me.BtnDelete.UseVisualStyleBackColor = False
+        Me.Button5.BackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.Button5.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Button5.Location = New System.Drawing.Point(331, 530)
+        Me.Button5.Name = "Button5"
+        Me.Button5.Size = New System.Drawing.Size(65, 60)
+        Me.Button5.TabIndex = 72
+        Me.Button5.TextAlign = System.Drawing.ContentAlignment.BottomCenter
+        Me.Button5.UseVisualStyleBackColor = False
         '
-        'BtnAddpicture
+        'Button4
         '
-        Me.BtnAddpicture.BackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.BtnAddpicture.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.BtnAddpicture.ForeColor = System.Drawing.SystemColors.ControlText
-        Me.BtnAddpicture.Image = CType(resources.GetObject("BtnAddpicture.Image"), System.Drawing.Image)
-        Me.BtnAddpicture.Location = New System.Drawing.Point(118, 527)
-        Me.BtnAddpicture.Name = "BtnAddpicture"
-        Me.BtnAddpicture.Size = New System.Drawing.Size(71, 60)
-        Me.BtnAddpicture.TabIndex = 71
-        Me.BtnAddpicture.TextAlign = System.Drawing.ContentAlignment.BottomCenter
-        Me.BtnAddpicture.UseVisualStyleBackColor = False
+        Me.Button4.BackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.Button4.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Button4.ForeColor = System.Drawing.SystemColors.ControlText
+        Me.Button4.Location = New System.Drawing.Point(118, 527)
+        Me.Button4.Name = "Button4"
+        Me.Button4.Size = New System.Drawing.Size(71, 60)
+        Me.Button4.TabIndex = 71
+        Me.Button4.TextAlign = System.Drawing.ContentAlignment.BottomCenter
+        Me.Button4.UseVisualStyleBackColor = False
         '
-        'BtnBack
+        'Button3
         '
-        Me.BtnBack.BackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.BtnBack.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.BtnBack.Image = CType(resources.GetObject("BtnBack.Image"), System.Drawing.Image)
-        Me.BtnBack.Location = New System.Drawing.Point(13, 527)
-        Me.BtnBack.Name = "BtnBack"
-        Me.BtnBack.Size = New System.Drawing.Size(68, 60)
-        Me.BtnBack.TabIndex = 70
-        Me.BtnBack.TextAlign = System.Drawing.ContentAlignment.BottomCenter
-        Me.BtnBack.UseVisualStyleBackColor = False
+        Me.Button3.BackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.Button3.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Button3.Location = New System.Drawing.Point(13, 527)
+        Me.Button3.Name = "Button3"
+        Me.Button3.Size = New System.Drawing.Size(68, 60)
+        Me.Button3.TabIndex = 70
+        Me.Button3.TextAlign = System.Drawing.ContentAlignment.BottomCenter
+        Me.Button3.UseVisualStyleBackColor = False
         '
-        'BtnEdit
+        'Button2
         '
-        Me.BtnEdit.BackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.BtnEdit.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.BtnEdit.Image = CType(resources.GetObject("BtnEdit.Image"), System.Drawing.Image)
-        Me.BtnEdit.Location = New System.Drawing.Point(235, 529)
-        Me.BtnEdit.Name = "BtnEdit"
-        Me.BtnEdit.Size = New System.Drawing.Size(62, 58)
-        Me.BtnEdit.TabIndex = 69
-        Me.BtnEdit.TextAlign = System.Drawing.ContentAlignment.BottomCenter
-        Me.BtnEdit.UseVisualStyleBackColor = False
+        Me.Button2.BackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.Button2.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Button2.Location = New System.Drawing.Point(235, 529)
+        Me.Button2.Name = "Button2"
+        Me.Button2.Size = New System.Drawing.Size(62, 58)
+        Me.Button2.TabIndex = 69
+        Me.Button2.TextAlign = System.Drawing.ContentAlignment.BottomCenter
+        Me.Button2.UseVisualStyleBackColor = False
         '
-        'BtnSave
+        'Button1
         '
-        Me.BtnSave.BackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.BtnSave.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.BtnSave.Image = CType(resources.GetObject("BtnSave.Image"), System.Drawing.Image)
-        Me.BtnSave.Location = New System.Drawing.Point(645, 529)
-        Me.BtnSave.Name = "BtnSave"
-        Me.BtnSave.Size = New System.Drawing.Size(75, 59)
-        Me.BtnSave.TabIndex = 68
-        Me.BtnSave.TextAlign = System.Drawing.ContentAlignment.BottomCenter
-        Me.BtnSave.UseVisualStyleBackColor = False
+        Me.Button1.BackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.Button1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Button1.Location = New System.Drawing.Point(645, 529)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(75, 59)
+        Me.Button1.TabIndex = 68
+        Me.Button1.TextAlign = System.Drawing.ContentAlignment.BottomCenter
+        Me.Button1.UseVisualStyleBackColor = False
         '
-        'Label10
+        'PictureBox1
         '
-        Me.Label10.AutoSize = True
-        Me.Label10.Location = New System.Drawing.Point(12, 52)
-        Me.Label10.Name = "Label10"
-        Me.Label10.Size = New System.Drawing.Size(18, 13)
-        Me.Label10.TabIndex = 75
-        Me.Label10.Text = "ID"
-        '
-        'TextBox8
-        '
-        Me.TextBox8.Location = New System.Drawing.Point(92, 49)
-        Me.TextBox8.Name = "TextBox8"
-        Me.TextBox8.Size = New System.Drawing.Size(100, 20)
-        Me.TextBox8.TabIndex = 76
+        Me.PictureBox1.BackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.PictureBox1.Location = New System.Drawing.Point(393, 85)
+        Me.PictureBox1.Name = "PictureBox1"
+        Me.PictureBox1.Size = New System.Drawing.Size(327, 211)
+        Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
+        Me.PictureBox1.TabIndex = 63
+        Me.PictureBox1.TabStop = False
         '
         'Personnel
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(725, 592)
-        Me.Controls.Add(Me.TextBox8)
-        Me.Controls.Add(Me.Label10)
-        Me.Controls.Add(Me.BtnDailyTasks)
-        Me.Controls.Add(Me.BtnClear)
-        Me.Controls.Add(Me.BtnDelete)
-        Me.Controls.Add(Me.BtnAddpicture)
-        Me.Controls.Add(Me.BtnBack)
-        Me.Controls.Add(Me.BtnEdit)
-        Me.Controls.Add(Me.BtnSave)
+        Me.Controls.Add(Me.Button7)
+        Me.Controls.Add(Me.Button6)
+        Me.Controls.Add(Me.Button5)
+        Me.Controls.Add(Me.Button4)
+        Me.Controls.Add(Me.Button3)
+        Me.Controls.Add(Me.Button2)
+        Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.DataGridView1)
         Me.Controls.Add(Me.Label14)
         Me.Controls.Add(Me.TextBox7)
@@ -460,8 +432,8 @@ Partial Class Personnel
         Me.Name = "Personnel"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Personnel"
-        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -493,13 +465,11 @@ Partial Class Personnel
     Friend WithEvents Label2 As Label
     Friend WithEvents Label1 As Label
     Friend WithEvents DataGridView1 As DataGridView
-    Friend WithEvents BtnDailyTasks As Button
-    Friend WithEvents BtnClear As Button
-    Friend WithEvents BtnDelete As Button
-    Friend WithEvents BtnAddpicture As Button
-    Friend WithEvents BtnBack As Button
-    Friend WithEvents BtnEdit As Button
-    Friend WithEvents BtnSave As Button
-    Friend WithEvents Label10 As Label
-    Friend WithEvents TextBox8 As TextBox
+    Friend WithEvents Button7 As Button
+    Friend WithEvents Button6 As Button
+    Friend WithEvents Button5 As Button
+    Friend WithEvents Button4 As Button
+    Friend WithEvents Button3 As Button
+    Friend WithEvents Button2 As Button
+    Friend WithEvents Button1 As Button
 End Class

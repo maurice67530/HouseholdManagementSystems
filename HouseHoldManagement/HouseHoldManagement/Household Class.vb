@@ -1,11 +1,12 @@
 ﻿Public Class Household_Class
 
 End Class
-Public Class Registration
+Public Class Register
     'properties of the Register class
     Public Property FullNames As String
     Public Property Password As Integer
     Public Property Username As String
+
     Public Property Email As String
     Public Property Role As String
     Public Property DateCreated As String
@@ -28,6 +29,7 @@ Public Class chores_
     Public Property Recurring As String
     Public Property Description As String
 
+
 End Class
 Public Class MealPlans
 
@@ -42,6 +44,7 @@ Public Class MealPlans
     Public Property Description As String
     Public Property FilePath As String
     Public Property Calories As String
+
     Public Property Frequency As String
 
 End Class
@@ -51,7 +54,7 @@ Public Class Inventory1
     Public Property Description As String
     Public Property Quantity As String
     Public Property Category As String
-    Public Property ReorderLevel As String
+    Public Property ReoderLevel As String
     Public Property PricePerUnit As String
     Public Property DateAdded As DateTime
     Public Property ExpiryDate As DateTime
@@ -83,7 +86,7 @@ Public Class DailyTask
     Public Property Status As String
     Public Property AssignedTo As String
 
-    Public Class GroceryItem
+    Public Class Grocery
         Public Property ItemID As String
         Public Property ItemName As String
         Public Property Unit As String
@@ -93,5 +96,17 @@ Public Class DailyTask
         Public Property PricePerUnit As Integer
         Public Property Ispurchased As String
 
+        Public Class personell
+            Public Property FistName As String
+            Public Property LastName As String
+            Public Property Gender As String
+            Public Property Email As String
+            Public Property DateOfBirth As DateTime
+            Public Property Role As String
+            Public Property HealthStatus As String
+            Public Property postalcode As String
+            Public Property Age As Integer
+            Public Property Contact As Integer
+        End Class
     End Class
 End Class
