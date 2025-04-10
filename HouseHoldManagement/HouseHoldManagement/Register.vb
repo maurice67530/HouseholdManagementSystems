@@ -45,4 +45,7 @@ Public Class Register
         ComboBox1.Items.AddRange(New String() {"Admin", "Member", "Finance", "Chef"})
     End Sub
 
+    Private Sub DateTimePicker1_ValueChanged(sender As Object, e As EventArgs) Handles DateTimePicker1.ValueChanged
+
+    End Sub
 End Class
