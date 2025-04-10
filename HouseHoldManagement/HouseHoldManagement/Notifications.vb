@@ -6,7 +6,7 @@ Public Class Notifications
         Dim Conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
 
         If DataGridView1.SelectedRows.Count = 0 Then
-            MsgBox("Please select a notification to mark as read.", MsgBoxStyle.Exclamation, "No Selection")
+            MsgBox("Please select a notification.", MsgBoxStyle.Exclamation, "No Selection")
             Return
         End If
 
@@ -14,23 +14,42 @@ Public Class Notifications
 
         For Each row As DataGridViewRow In DataGridView1.SelectedRows
             Dim notificationID As Integer = Convert.ToInt32(row.Cells("ID").Value)
-            Dim query As String = "UPDATE Notifications SET IsRead = True WHERE ID = @ID"
+            Dim currentStatus As String = row.Cells("IsRead").Value.ToString()
+            Dim newStatus As String = If(currentStatus = "Yes", "No", "Yes") ' Toggle status
+            Dim query As String = "UPDATE Notifications SET IsRead = @IsRead WHERE ID = @ID"
 
             Using cmd As New OleDbCommand(query, Conn)
+                cmd.Parameters.AddWithValue("@IsRead", newStatus)
                 cmd.Parameters.AddWithValue("@ID", notificationID)
                 cmd.ExecuteNonQuery()
             End Using
 
-            row.DefaultCellStyle.ForeColor = Color.Black ' Change UI for read status
+            row.Cells("IsRead").Value = newStatus ' Update UI cell value
+            row.DefaultCellStyle.ForeColor = If(newStatus = "Yes", Color.Black, Color.Red)
         Next
 
         Conn.Close()
-        MsgBox("Selected notifications marked as read!", MsgBoxStyle.Information, "Updated")
 
-        ' Refresh unread count after marking as read
-        'CountUnreadNotifications()
+        MsgBox("Selected notifications updated!", MsgBoxStyle.Information, "Updated")
+
+        ' Update unread count in Label2
+        UpdateUnreadCount()
     End Sub
-
+    ' You can define this sub to update the label
+    Sub UpdateUnreadCount()
+        Try
+            Using Conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
+                Conn.Open()
+                Dim query As String = "SELECT COUNT(*) FROM Notifications WHERE IsRead = 'No'"
+                Using cmd As New OleDbCommand(query, Conn)
+                    Dim count As Integer = Convert.ToInt32(cmd.ExecuteScalar())
+                    Label2.Text = "Unread: " & count.ToString()
+                End Using
+            End Using
+        Catch ex As Exception
+            Debug.WriteLine("Error counting unread notifications: " & ex.Message)
+        End Try
+    End Sub
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
         If DataGridView1.SelectedRows.Count = 0 Then
             MsgBox("Please select a notification to delete.", MsgBoxStyle.Exclamation, "No Selection")
@@ -67,7 +86,7 @@ Public Class Notifications
         ToolTip1.SetToolTip(Button2, "Clear Notification")
         ToolTip1.SetToolTip(Button3, "Refresh")
         LoadNotifications()
-
+        'TrackExpenses()
     End Sub
 
     Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
@@ -109,6 +128,7 @@ Public Class Notifications
 
     Private Sub CheckLowInventory()
         Dim localConn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
+        Dim lowItems As New List(Of String) ' Store low stock items
 
         Try
             localConn.Open()
@@ -118,22 +138,28 @@ Public Class Notifications
                 Using reader As OleDbDataReader = cmd.ExecuteReader()
                     While reader.Read()
                         Dim itemName As String = reader("ItemName").ToString()
+                        Dim quantityString As String = reader("Quantity").ToString().Trim()
+                        Dim quantity As Integer
 
-                        If Not IsDBNull(reader("Quantity")) Then
-                            Dim quantityString As String = reader("Quantity").ToString().Trim()
-                            Dim quantity As Integer
-
-                            If Integer.TryParse(quantityString, quantity) Then
-                                If quantity <= 60 Then
-                                    AddNotification(currentUser, itemName, quantity)
-                                End If
+                        If Integer.TryParse(quantityString, quantity) Then
+                            If quantity <= 60 Then
+                                Debug.WriteLine(itemName & ": Yes")
+                                lowItems.Add(itemName & " (" & quantity & ")")
+                                AddNotification(currentUser, itemName, quantity)
                             Else
-                                MessageBox.Show("Non-numeric quantity found for item: " & itemName)
+                                Debug.WriteLine(itemName & ": No")
                             End If
+                        Else
+                            Debug.WriteLine("Invalid quantity for: " & itemName)
                         End If
                     End While
                 End Using
             End Using
+
+            ' Show message only with low inventory items
+            If lowItems.Count > 0 Then
+                MessageBox.Show("Low Inventory Items:" & vbCrLf & String.Join(vbCrLf, lowItems), "Low Inventory", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            End If
 
         Catch ex As Exception
             MessageBox.Show("Error checking inventory: " & ex.Message)
@@ -146,34 +172,55 @@ Public Class Notifications
     End Sub
 
     Private Sub AddNotification(userID As String, itemName As String, quantity As Integer)
+        ' Message to be sent
         Dim message As String = "Low inventory: " & itemName & " only has " & quantity.ToString()
 
         ' Convert Date.Now to a string (make sure the format is correct)
         Dim dateCreated As String = Date.Now.ToString("yyyy-MM-dd HH:mm:ss")
-
         Dim category As String = "Inventory"
         Dim isRead As String = "No"
 
-        ' Open connection before executing the insert command
-        conn.Open()
+        ' Check if the notification already exists in the DataGridView
+        For Each row As DataGridViewRow In DataGridView1.Rows
+            If row.Cells("Message").Value.ToString() = message Then
+                ' If it already exists, show a message box with details of the existing notification
+                Dim existingItem As String = row.Cells("Message").Value.ToString()
+                'MessageBox.Show("The following notification is already in the DataGridView: " & vbCrLf & existingItem, "Notification Exists", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                Exit Sub
+            End If
+        Next
 
-        Dim insertCmd As New OleDbCommand("INSERT INTO Notifications ([UserID], [Message], [DateCreated], [Category], [IsRead]) VALUES (?, ?, ?, ?, ?)", conn)
-
-        ' Set parameter values explicitly for better clarity
-        insertCmd.Parameters.AddWithValue("@UserID", userID)
-        insertCmd.Parameters.AddWithValue("@Message", message)
-        insertCmd.Parameters.AddWithValue("@DateCreated", dateCreated)
-        insertCmd.Parameters.AddWithValue("@Category", category)
-        insertCmd.Parameters.AddWithValue("@IsRead", isRead)
+        ' Create a new connection for inserting the notification
+        Dim conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
 
         Try
+            ' Open connection before executing the insert command
+            conn.Open()
+
+            ' Prepare the insert command
+            Dim insertCmd As New OleDbCommand("INSERT INTO Notifications ([UserID], [Message], [DateCreated], [Category], [IsRead]) VALUES (?, ?, ?, ?, ?)", conn)
+
+            ' Set parameter values explicitly for better clarity
+            insertCmd.Parameters.AddWithValue("@UserID", userID)
+            insertCmd.Parameters.AddWithValue("@Message", message)
+            insertCmd.Parameters.AddWithValue("@DateCreated", dateCreated)
+            insertCmd.Parameters.AddWithValue("@Category", category)
+            insertCmd.Parameters.AddWithValue("@IsRead", isRead)
+
+            ' Execute the insert command
             insertCmd.ExecuteNonQuery()
+
         Catch ex As OleDbException
-            MessageBox.Show("Database error occurred: " & ex.Message)
+            ' Handle database error
+            MessageBox.Show("Database error occurred: " & ex.Message, "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         Catch ex As Exception
-            MessageBox.Show("An unexpected error occurred: " & ex.Message)
+            ' Handle unexpected error
+            MessageBox.Show("An unexpected error occurred: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         Finally
-            conn.Close()
+            ' Ensure the connection is closed after the operation
+            If conn.State = ConnectionState.Open Then
+                conn.Close()
+            End If
         End Try
     End Sub
 

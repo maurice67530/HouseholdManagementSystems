@@ -53,7 +53,7 @@ Public Class MealPlan
 
     Private Sub MealPlan_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         ComboBox1.Items.AddRange(New String() {"<500", "500-1000", ">1000"})
-        ComboBox2.Items.AddRange(New String() {"Day", "Week", "Month"})
+        ComboBox2.Items.AddRange(New String() {"Daily", "Weekly", "Monthly"})
         ComboBox3.Items.AddRange(New String() {"Noodles", "Chicken", "Bread"})
         ListBox1.Items.AddRange(New String() {"Noodles", "Chicken Curry", "Kota"})
         Dim tooltip As New ToolTip
@@ -69,6 +69,8 @@ Public Class MealPlan
 
         LoadMealPlanfromDatabase1()
         PopulateDataGridView()
+
+        Module1.ClearControls(Me)
     End Sub
 
     Public Sub LoadMealPlanfromDatabase1()
@@ -339,4 +341,38 @@ Public Class MealPlan
         Debug.WriteLine("Exiting btnEdit_Click")
     End Sub
 
+    Private Sub btnHighlight_Click(sender As Object, e As EventArgs) Handles btnHighlight.Click
+        Try
+            For Each row As DataGridViewRow In DataGridView1.Rows
+                If row.Cells("StartDate").Value IsNot Nothing Then
+                    Dim StartDate As DateTime = Convert.ToDateTime(row.Cells("StartDate").Value)
+                    Dim EndDate As DateTime = Convert.ToDateTime(row.Cells("EndDate").Value)
+                    If StartDate <= DateTimePicker1.Value AndAlso EndDate >= DateTimePicker2.Value Then
+                        row.DefaultCellStyle.BackColor = Color.Red
+
+                    Else
+                        row.DefaultCellStyle.BackColor = Color.White
+                    End If
+                End If
+            Next
+            Dim incmpleteCount As Integer = 0
+            'For Each row As DataGridViewRow In DataGridView1.Rows
+            '    If row.Cells("StartDate").Value IsNot Nothing AndAlso row.Cells("EndDate").Value.ToString() <> ">27, 1, 2025" Then
+            incmpleteCount += 1
+            '    End If
+            'Next
+            Label11.Text = "Incomplete MealPlan:" & incmpleteCount.ToString
+        Catch ex As Exception
+            MessageBox.Show("Error highlighting overdue meals")
+
+        End Try
+    End Sub
+
+    Private Sub btnFilter_Click(sender As Object, e As EventArgs) Handles btnFilter.Click
+
+        Dim SelectedCalories As String = If(ComboBox1.SelectedItem IsNot Nothing, ComboBox1.SelectedItem.ToString(), "")
+
+        'Dim StartDate As DateTime = If(DateTimePicker1.Text IsNot Nothing, DateTimePicker1.Value.ToString(), "")
+        Module1.FilterMealPlan(SelectedCalories)
+    End Sub
 End Class

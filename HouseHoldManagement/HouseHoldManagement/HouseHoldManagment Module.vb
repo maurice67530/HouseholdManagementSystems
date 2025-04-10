@@ -6,7 +6,7 @@ Module HouseHoldManagment_Module
     Public currentUser As String ' Global variable for logged-in user
     Public Property conn As New OleDbConnection(connectionString)
     ' Connection string using relative path to the database
-    Public Const connectionString As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Rotondwa\Source\Repos\maurice67530\HouseholdManagementSystems\HMS.accdb;Persist Security Info=False;"
+    Public Const connectionString As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Mudzunga\Source\Repos\maurice67530\HouseholdManagementSystems\HMS.accdb;Persist Security Info=False;"
 
 
     ' Function to create and return a connection object
@@ -17,8 +17,7 @@ Module HouseHoldManagment_Module
 End Module
 Module Xiluva
     Public Property conn As New OleDbConnection(connectionString)
-    ' Connection string using relative path to the database
-    Public Const connectionString As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source= Public Const connectionString As String = Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Xiluva\Source\Repos\maurice67530\HouseholdManagementSystems\HMS.accdb;Persist Security Info=False;"
+    Public Const connectionString As String = " Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Xiluva\Source\Repos\maurice67530\HouseholdManagementSystems\HMS.accdb;Persist Security Info=False;"
 
 End Module
 
@@ -52,6 +51,44 @@ Module Module1
         Next
 
     End Sub
+
+    Public Sub FilterMealPlan(Calories As String)
+        Dim Mealtable As New DataTable()
+
+
+        Try
+            conn.Open()
+            Dim query As String = "Select * FROM MealPlans WHERE 1=1"
+
+            If Not String.IsNullOrEmpty(Calories) Then
+                query &= " AND Calories = @Calories"
+            End If
+
+            'If Not String.IsNullOrEmpty(StartDate) Then
+            '    query &= " AND StartDate = @StartDate"
+            'End If
+
+            Dim command As New OleDb.OleDbCommand(query, conn)
+
+            If Not String.IsNullOrEmpty(Calories) Then
+                command.Parameters.AddWithValue("@Calories", Calories)
+            End If
+
+            'If Not String.IsNullOrEmpty(Calories) Then
+            '    command.Parameters.AddWithValue("@StartDate", StartDate)
+            'End If
+
+            Dim adapter As New OleDb.OleDbDataAdapter(command)
+            adapter.Fill(Mealtable)
+            MealPlan.DataGridView1.DataSource = Mealtable
+
+        Catch ex As Exception
+            MsgBox("Error filtering tasks: " & ex.Message, MsgBoxStyle.Critical, "Database Error")
+        Finally
+            conn.Close()
+        End Try
+    End Sub
+
 End Module
 
 
