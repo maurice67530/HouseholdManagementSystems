@@ -210,6 +210,7 @@ Partial Class Register
         Me.Controls.Add(Me.Panel2)
         Me.Controls.Add(Me.Panel1)
         Me.Name = "Register"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Register"
         Me.Panel1.ResumeLayout(False)
         Me.Panel1.PerformLayout()
