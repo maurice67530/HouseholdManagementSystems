@@ -311,9 +311,6 @@ Partial Class Inventory
         Me.Button4.Text = " "
         Me.Button4.UseVisualStyleBackColor = True
         '
-        'Timer1
-        '
-        '
         'Inventory
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -386,4 +383,6 @@ Partial Class Inventory
     Friend WithEvents Button5 As Button
     Friend WithEvents Button4 As Button
     Friend WithEvents Timer1 As Timer
+
+
 End Class
