@@ -279,6 +279,7 @@ Public Class Expense
 
     Private Sub Button6_Click(sender As Object, e As EventArgs) Handles Button6.Click
 
+        TextBox1.Text = ""
         TextBox2.Text = ""
         TextBox3.Text = ""
         TextBox6.Text = ""
@@ -288,7 +289,9 @@ Public Class Expense
         ComboBox1.SelectedItem = ""
         ComboBox5.SelectedItem = ""
         ComboBox4.SelectedItem = ""
-        'DateTimePicker1.Text = ""
+        TextBox7.Text = ""
+        ComboBox3.SelectedItem = ""
+
     End Sub
 
     Public Sub LoadExpenseDataFromDatabase()

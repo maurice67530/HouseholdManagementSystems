@@ -6,7 +6,7 @@ Public Class Notifications
         Dim Conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
 
         If DataGridView1.SelectedRows.Count = 0 Then
-            MsgBox("Please select a notification to mark as read.", MsgBoxStyle.Exclamation, "No Selection")
+            MsgBox("Please select a notification.", MsgBoxStyle.Exclamation, "No Selection")
             Return
         End If
 
@@ -14,22 +14,42 @@ Public Class Notifications
 
         For Each row As DataGridViewRow In DataGridView1.SelectedRows
             Dim notificationID As Integer = Convert.ToInt32(row.Cells("ID").Value)
-            Dim query As String = "UPDATE Notifications SET IsRead = 'Yes' WHERE ID = @ID"
+            Dim currentStatus As String = row.Cells("IsRead").Value.ToString()
+            Dim newStatus As String = If(currentStatus = "Yes", "No", "Yes") ' Toggle status
+            Dim query As String = "UPDATE Notifications SET IsRead = @IsRead WHERE ID = @ID"
+
             Using cmd As New OleDbCommand(query, Conn)
+                cmd.Parameters.AddWithValue("@IsRead", newStatus)
                 cmd.Parameters.AddWithValue("@ID", notificationID)
                 cmd.ExecuteNonQuery()
             End Using
-            row.DefaultCellStyle.ForeColor = Color.Black ' Change UI for read status
+
+            row.Cells("IsRead").Value = newStatus ' Update UI cell value
+            row.DefaultCellStyle.ForeColor = If(newStatus = "Yes", Color.Black, Color.Red)
         Next
 
         Conn.Close()
 
-        MsgBox("Selected notifications marked as read!", MsgBoxStyle.Information, "Updated")
+        MsgBox("Selected notifications updated!", MsgBoxStyle.Information, "Updated")
 
-        ' Refresh unread count after marking as read
-        'CountUnreadNotifications()
+        ' Update unread count in Label2
+        UpdateUnreadCount()
     End Sub
-
+    ' You can define this sub to update the label
+    Sub UpdateUnreadCount()
+        Try
+            Using Conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
+                Conn.Open()
+                Dim query As String = "SELECT COUNT(*) FROM Notifications WHERE IsRead = 'No'"
+                Using cmd As New OleDbCommand(query, Conn)
+                    Dim count As Integer = Convert.ToInt32(cmd.ExecuteScalar())
+                    Label2.Text = "Unread: " & count.ToString()
+                End Using
+            End Using
+        Catch ex As Exception
+            Debug.WriteLine("Error counting unread notifications: " & ex.Message)
+        End Try
+    End Sub
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
         If DataGridView1.SelectedRows.Count = 0 Then
             MsgBox("Please select a notification to delete.", MsgBoxStyle.Exclamation, "No Selection")
@@ -61,12 +81,13 @@ Public Class Notifications
     Private Sub Notifications_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Timer1.Start()
         Timer1.Interval = 2000
-
+        Timer1.Start()
+        Timer1.Interval = 4000
         ToolTip1.SetToolTip(Button1, "Mark As Read")
         ToolTip1.SetToolTip(Button2, "Clear Notification")
         ToolTip1.SetToolTip(Button3, "Refresh")
         LoadNotifications()
-        'TrackExpenses()
+        'CheckOverdueChores()
     End Sub
 
     Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
@@ -207,6 +228,7 @@ Public Class Notifications
     Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
         Timer1.Stop()
         CheckLowInventory()
+        CheckOverdueChores()
     End Sub
 
     Private Sub DataGridView1_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridView1.CellContentClick
@@ -250,6 +272,98 @@ Public Class Notifications
             End Using
         End Using
     End Sub
+
+
+
+
+
+    Private Sub CheckOverdueChores()
+        Dim localConn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
+        Dim overdueChores As New List(Of String)
+
+        Try
+            localConn.Open()
+            Debug.WriteLine("Connection opened.")
+
+            Dim query As String = "SELECT Title, DueDate, Status FROM Chores WHERE Status = 'In Progress'"
+            Using cmd As New OleDbCommand(query, localConn)
+                Using reader As OleDbDataReader = cmd.ExecuteReader()
+                    While reader.Read()
+                        Dim title As String = reader("Title").ToString()
+                        Dim dueDateStr As String = reader("DueDate").ToString()
+                        Dim dueDate As Date
+
+                        If Not String.IsNullOrEmpty(dueDateStr) AndAlso Date.TryParse(dueDateStr, dueDate) Then
+                            If dueDate < Date.Today Then
+                                Debug.WriteLine(title & ": Overdue")
+                                overdueChores.Add(title & " (Due: " & dueDate.ToShortDateString() & ")")
+                                AddChoreNotification(currentUser, title, dueDate)
+                            Else
+                                Debug.WriteLine(title & ": Not Overdue")
+                            End If
+                        Else
+                            Debug.WriteLine(title & ": Invalid or missing DueDate")
+                        End If
+                    End While
+                End Using
+            End Using
+
+            If overdueChores.Count > 0 Then
+                MessageBox.Show("Overdue Chores:" & vbCrLf & String.Join(vbCrLf, overdueChores), "Overdue Chores", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            End If
+
+        Catch ex As Exception
+            MessageBox.Show("Error checking chores: " & ex.Message)
+            Debug.WriteLine("Error: " & ex.ToString())
+        Finally
+            If localConn.State = ConnectionState.Open Then
+                localConn.Close()
+                Debug.WriteLine("Connection closed.")
+            End If
+        End Try
+    End Sub
+
+    Private Sub AddChoreNotification(userID As String, title As String, dueDate As Date)
+        Dim message As String = "Reminder: '" & title & "' chore is overdue (was due on " & dueDate.ToShortDateString() & ")."
+        Dim dateCreated As String = Date.Now.ToString("yyyy-MM-dd HH:mm:ss")
+        Dim category As String = "Chore"
+        Dim isRead As String = "No"
+
+        ' Prevent duplicate notifications
+        For Each row As DataGridViewRow In DataGridView1.Rows
+            If row.IsNewRow Then Continue For
+            If Not IsDBNull(row.Cells("Message").Value) AndAlso row.Cells("Message").Value.ToString() = message Then
+                Debug.WriteLine("Notification already exists.")
+                Exit Sub
+            End If
+        Next
+
+        Dim conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
+
+        Try
+            conn.Open()
+            Dim insertCmd As New OleDbCommand("INSERT INTO Notifications ([UserID], [Message], [DateCreated], [Category], [IsRead]) VALUES (?, ?, ?, ?, ?)", conn)
+            insertCmd.Parameters.AddWithValue("@UserID", userID)
+            insertCmd.Parameters.AddWithValue("@Message", message)
+            insertCmd.Parameters.AddWithValue("@DateCreated", dateCreated)
+            insertCmd.Parameters.AddWithValue("@Category", category)
+            insertCmd.Parameters.AddWithValue("@IsRead", isRead)
+            insertCmd.ExecuteNonQuery()
+            Debug.WriteLine("Notification added.")
+        Catch ex As Exception
+            MessageBox.Show("Error saving notification: " & ex.Message)
+            Debug.WriteLine("Insert error: " & ex.ToString())
+        Finally
+            If conn.State = ConnectionState.Open Then
+                conn.Close()
+            End If
+        End Try
+    End Sub
+
+
+
+
+
 
 
 End Class
