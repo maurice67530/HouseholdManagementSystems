@@ -280,16 +280,9 @@ Public Class Expense
     End Sub
 
     Private Sub Button6_Click(sender As Object, e As EventArgs) Handles Button6.Click
-        'PrintDialog1.Document = PrintDocument1
-        'If PrintDialog1.ShowDialog() = DialogResult.OK Then
-        '    'LoadFilteredMealPlan() ' Load filtered data based on selected frequency
-        '    If mealPlanData.Rows.Count > 0 Then
-        '        PrintDocument1.Print()
-        '    Else
-        '        MessageBox.Show("No meal plans found for the selected period.", "Print Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-        '    End If
-        'End If
+        ClearControls(Me)
     End Sub
+
     Public Sub LoadExpenseDataFromDatabase()
 
         Debug.WriteLine("LoadMealPlansDataFromDatabase")
@@ -322,7 +315,7 @@ Public Class Expense
         toolTip.ShowAlways = True
 
         toolTip1.SetToolTip(Button5, "Sort")
-        toolTip1.SetToolTip(Button6, "Print to Doc")
+        toolTip1.SetToolTip(Button6, "Clear controls")
         toolTip1.SetToolTip(Button3, "Edit")
         toolTip1.SetToolTip(Button4, "Delete")
         toolTip1.SetToolTip(Button7, "Calculate Budget")

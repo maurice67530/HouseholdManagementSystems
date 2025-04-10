@@ -28,7 +28,6 @@ Partial Class Personnel
         Me.Label12 = New System.Windows.Forms.Label()
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.Label13 = New System.Windows.Forms.Label()
-        Me.TextBox9 = New System.Windows.Forms.TextBox()
         Me.DateTimePicker1 = New System.Windows.Forms.DateTimePicker()
         Me.ComboBox3 = New System.Windows.Forms.ComboBox()
         Me.ComboBox1 = New System.Windows.Forms.ComboBox()
@@ -58,6 +57,7 @@ Partial Class Personnel
         Me.BtnSave = New System.Windows.Forms.Button()
         Me.Label10 = New System.Windows.Forms.Label()
         Me.TextBox8 = New System.Windows.Forms.TextBox()
+        Me.ComboBox2 = New System.Windows.Forms.ComboBox()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -114,14 +114,6 @@ Partial Class Personnel
         Me.Label13.Text = "Personnel"
         Me.Label13.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
-        'TextBox9
-        '
-        Me.TextBox9.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox9.Location = New System.Drawing.Point(92, 239)
-        Me.TextBox9.Name = "TextBox9"
-        Me.TextBox9.Size = New System.Drawing.Size(267, 21)
-        Me.TextBox9.TabIndex = 61
-        '
         'DateTimePicker1
         '
         Me.DateTimePicker1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -135,7 +127,7 @@ Partial Class Personnel
         Me.ComboBox3.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ComboBox3.FormattingEnabled = True
         Me.ComboBox3.Items.AddRange(New Object() {"Male", "Female"})
-        Me.ComboBox3.Location = New System.Drawing.Point(92, 333)
+        Me.ComboBox3.Location = New System.Drawing.Point(99, 333)
         Me.ComboBox3.Name = "ComboBox3"
         Me.ComboBox3.Size = New System.Drawing.Size(267, 23)
         Me.ComboBox3.TabIndex = 59
@@ -145,7 +137,7 @@ Partial Class Personnel
         Me.ComboBox1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ComboBox1.FormattingEnabled = True
         Me.ComboBox1.Items.AddRange(New Object() {"User", "Mother", "Father", "Child", "Nanny", "Book Editor", "Administrator", ""})
-        Me.ComboBox1.Location = New System.Drawing.Point(92, 301)
+        Me.ComboBox1.Location = New System.Drawing.Point(99, 301)
         Me.ComboBox1.Name = "ComboBox1"
         Me.ComboBox1.Size = New System.Drawing.Size(267, 23)
         Me.ComboBox1.TabIndex = 58
@@ -153,7 +145,7 @@ Partial Class Personnel
         'TextBox6
         '
         Me.TextBox6.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox6.Location = New System.Drawing.Point(92, 269)
+        Me.TextBox6.Location = New System.Drawing.Point(99, 269)
         Me.TextBox6.Name = "TextBox6"
         Me.TextBox6.Size = New System.Drawing.Size(267, 21)
         Me.TextBox6.TabIndex = 57
@@ -161,7 +153,7 @@ Partial Class Personnel
         'TextBox5
         '
         Me.TextBox5.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox5.Location = New System.Drawing.Point(92, 209)
+        Me.TextBox5.Location = New System.Drawing.Point(99, 209)
         Me.TextBox5.Name = "TextBox5"
         Me.TextBox5.Size = New System.Drawing.Size(267, 21)
         Me.TextBox5.TabIndex = 56
@@ -169,7 +161,7 @@ Partial Class Personnel
         'TextBox4
         '
         Me.TextBox4.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox4.Location = New System.Drawing.Point(92, 179)
+        Me.TextBox4.Location = New System.Drawing.Point(99, 179)
         Me.TextBox4.Name = "TextBox4"
         Me.TextBox4.Size = New System.Drawing.Size(267, 21)
         Me.TextBox4.TabIndex = 55
@@ -177,7 +169,7 @@ Partial Class Personnel
         'TextBox3
         '
         Me.TextBox3.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox3.Location = New System.Drawing.Point(92, 149)
+        Me.TextBox3.Location = New System.Drawing.Point(99, 149)
         Me.TextBox3.Name = "TextBox3"
         Me.TextBox3.Size = New System.Drawing.Size(267, 21)
         Me.TextBox3.TabIndex = 54
@@ -185,7 +177,7 @@ Partial Class Personnel
         'TextBox2
         '
         Me.TextBox2.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox2.Location = New System.Drawing.Point(92, 120)
+        Me.TextBox2.Location = New System.Drawing.Point(99, 120)
         Me.TextBox2.Name = "TextBox2"
         Me.TextBox2.Size = New System.Drawing.Size(267, 21)
         Me.TextBox2.TabIndex = 53
@@ -193,7 +185,7 @@ Partial Class Personnel
         'TextBox1
         '
         Me.TextBox1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox1.Location = New System.Drawing.Point(92, 90)
+        Me.TextBox1.Location = New System.Drawing.Point(99, 90)
         Me.TextBox1.Name = "TextBox1"
         Me.TextBox1.Size = New System.Drawing.Size(267, 21)
         Me.TextBox1.TabIndex = 52
@@ -205,9 +197,9 @@ Partial Class Personnel
         Me.Label11.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label11.Location = New System.Drawing.Point(13, 239)
         Me.Label11.Name = "Label11"
-        Me.Label11.Size = New System.Drawing.Size(79, 17)
+        Me.Label11.Size = New System.Drawing.Size(81, 17)
         Me.Label11.TabIndex = 51
-        Me.Label11.Text = "HealthStatus"
+        Me.Label11.Text = "MaritalStatus"
         '
         'Label9
         '
@@ -414,16 +406,26 @@ Partial Class Personnel
         '
         'TextBox8
         '
-        Me.TextBox8.Location = New System.Drawing.Point(92, 60)
+        Me.TextBox8.Location = New System.Drawing.Point(99, 60)
         Me.TextBox8.Name = "TextBox8"
         Me.TextBox8.Size = New System.Drawing.Size(267, 20)
         Me.TextBox8.TabIndex = 76
+        '
+        'ComboBox2
+        '
+        Me.ComboBox2.FormattingEnabled = True
+        Me.ComboBox2.Items.AddRange(New Object() {"Single", "Married"})
+        Me.ComboBox2.Location = New System.Drawing.Point(99, 235)
+        Me.ComboBox2.Name = "ComboBox2"
+        Me.ComboBox2.Size = New System.Drawing.Size(267, 21)
+        Me.ComboBox2.TabIndex = 77
         '
         'Personnel
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(725, 592)
+        Me.Controls.Add(Me.ComboBox2)
         Me.Controls.Add(Me.TextBox8)
         Me.Controls.Add(Me.Label10)
         Me.Controls.Add(Me.BtnDailyTasks)
@@ -439,7 +441,6 @@ Partial Class Personnel
         Me.Controls.Add(Me.Label12)
         Me.Controls.Add(Me.PictureBox1)
         Me.Controls.Add(Me.Label13)
-        Me.Controls.Add(Me.TextBox9)
         Me.Controls.Add(Me.DateTimePicker1)
         Me.Controls.Add(Me.ComboBox3)
         Me.Controls.Add(Me.ComboBox1)
@@ -474,7 +475,6 @@ Partial Class Personnel
     Friend WithEvents Label12 As Label
     Friend WithEvents PictureBox1 As PictureBox
     Friend WithEvents Label13 As Label
-    Friend WithEvents TextBox9 As TextBox
     Friend WithEvents DateTimePicker1 As DateTimePicker
     Friend WithEvents ComboBox3 As ComboBox
     Friend WithEvents ComboBox1 As ComboBox
@@ -504,4 +504,5 @@ Partial Class Personnel
     Friend WithEvents BtnSave As Button
     Friend WithEvents Label10 As Label
     Friend WithEvents TextBox8 As TextBox
+    Friend WithEvents ComboBox2 As ComboBox
 End Class

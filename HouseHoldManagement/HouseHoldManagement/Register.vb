@@ -46,7 +46,4 @@ Public Class Register
         ComboBox1.Items.AddRange(New String() {"Admin", "Member", "Finance", "Chef"})
     End Sub
 
-    Private Sub Button1_Click(sender As Object, e As EventArgs)
-
-    End Sub
 End Class
