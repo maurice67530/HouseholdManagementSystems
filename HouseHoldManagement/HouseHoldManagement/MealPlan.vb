@@ -2,16 +2,21 @@
 Imports System.Data.OleDb
 
 Public Class MealPlan
-    Dim conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
+    ' Dim conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
+    Public Property conn As New OleDbConnection(connectionString)
+    ' Connection string using relative path to the databas
+    Public Const connectionString As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Mudzunga\Source\Repos\maurice67530\HouseholdManagementSystems\HMS.accdb;Persist Security Info=False;"
+
     Private Sub btnEdit_Click(sender As Object, e As EventArgs) Handles btnEdit.Click
         Try
             Debug.WriteLine("Entering btnEdit_Click")
-            Using conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
+
+            Using conn As New OleDbConnection(Module1.connectionString)
                 conn.Open()
 
-                Dim tablename As String = "MealPlans"
-                Using cmd As New OleDbCommand("INSERT INTO MealPlans ([StartDate], [EndDate], [Meals], [MealName], [Items], [TotalCalories], [Description], [FilePath], [Calories], [Frequency]) VALUES (@StartDate, @EndDate, @Meals, @MealName, @Items, @TotalCalories, @Description, @FilePath, @Calories, @Frequency)", conn)
+                Dim query As String = "UPDATE MealPlans SET [StartDate] = @StartDate, [EndDate] = @EndDate, [Meals] = @Meals, [MealName] = @MealName, [Items] = @Items, [TotalCalories] = @TotalCalories, [Description] = @Description, [FilePath] = @FilePath, [Calories] = @Calories, [Frequency] = @Frequency WHERE [MealName] = @MealName"
 
+                Using cmd As New OleDbCommand(query, conn)
                     cmd.Parameters.AddWithValue("@StartDate", DateTimePicker1.Text)
                     cmd.Parameters.AddWithValue("@EndDate", DateTimePicker2.Text)
                     cmd.Parameters.AddWithValue("@Meals", ListBox1.SelectedItem.ToString)
@@ -22,24 +27,26 @@ Public Class MealPlan
                     cmd.Parameters.AddWithValue("@FilePath", TextBox3.Text)
                     cmd.Parameters.AddWithValue("@Calories", ComboBox3.SelectedItem.ToString)
                     cmd.Parameters.AddWithValue("@Frequency", ComboBox1.SelectedItem.ToString)
+
                     cmd.ExecuteNonQuery()
                 End Using
-                MessageBox.Show("Edited successfully")
-
             End Using
 
+            MessageBox.Show("Edited successfully")
             Debug.WriteLine("The data has been edited successfully")
+
         Catch ex As OleDbException
-            Debug.WriteLine($"Database saving in btnEdit_Click: {ex.Message}")
-            Debug.WriteLine($"Stack Trace: {ex.StackTrace}")
-            ' MessageBox.Show("error saving expense to database. please check the connection.", "Database error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Debug.WriteLine($"Database error in btnEdit_Click: {ex.Message}")
+            Debug.WriteLine($"Stack Trace: {ex.StackTrace}")
+            ' MessageBox.Show("Database error. Please check the connection.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+
         Catch ex As Exception
             MessageBox.Show($"Unexpected error: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
             Debug.WriteLine($"General error in btnEdit_Click: {ex.Message}")
-            Debug.WriteLine($"Stack Trace: {ex.StackTrace}")
+            Debug.WriteLine($"Stack Trace: {ex.StackTrace}")
         End Try
 
-        Debug.WriteLine("Existing btnEdit_Click")
+        Debug.WriteLine("Exiting btnEdit_Click")
     End Sub
 
     Private Sub MealPlan_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -67,7 +74,7 @@ Public Class MealPlan
             Debug.WriteLine("Form loading the data")
             Debug.WriteLine("Form loading  data failed")
 
-            Using conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
+            Using conn As New OleDbConnection(Module1.connectionString)
                 conn.Open()
 
                 'Update the table name if neccessary
@@ -171,7 +178,7 @@ Public Class MealPlan
             If confirmationResult = DialogResult.Yes Then
                 ' Proceed with deletion  
                 Try
-                    Using conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
+                    Using conn As New OleDbConnection(Module1.connectionString)
                         conn.Open()
 
                         ' Create the delete command  
@@ -198,84 +205,132 @@ Public Class MealPlan
             MessageBox.Show("Please select an meals to delete.", "deletetion error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
         End If
     End Sub
-    Public Function SuggestMeals() As List(Of String)
-        Dim suggestedMeals As New List(Of String)
 
-        Try
-            Using connect As New OleDbConnection(connectionString)
-
-            End Using
-            conn.Open()
-
-            ' Get all meal recipes
-            Dim mealQuery As String = "SELECT MealName, Ingredients FROM MealRecipes"
-            Dim mealCommand As New OleDb.OleDbCommand(mealQuery, conn)
-            Dim mealReader As OleDb.OleDbDataReader = mealCommand.ExecuteReader()
-
-            While mealReader.Read()
-                Dim mealName As String = mealReader("MealName").ToString()
-                Dim requiredIngredients As String() = mealReader("Ingredients").ToString().Split(",")
-
-                Dim allIngredientsAvailable As Boolean = True
-
-                ' Check if all required ingredients exist in GroceryInventory and are not expired
-                For Each ingredient In requiredIngredients
-                    Dim trimmedIngredient As String = ingredient.Trim()
-                    Dim checkQuery As String = "SELECT ExpiryDate FROM GroceryItemss WHERE ItemName=@Ingredients AND Quantity > 0"
-                    Dim checkCommand As New OleDb.OleDbCommand(checkQuery, conn)
-                    checkCommand.Parameters.AddWithValue("@Ingredients", trimmedIngredient)
-
-                    Dim expirationDate As Object = checkCommand.ExecuteScalar()
-
-                    ' Check if the ingredient exists and its expiration date
-                    If expirationDate Is Nothing Then
-                        allIngredientsAvailable = False
-                    Else
-                        ' Validate that the ingredient is not expired
-                        If Convert.ToDateTime(expirationDate) < DateTime.Now Then
-                            allIngredientsAvailable = False
-                        End If
-                    End If
-
-                    If Not allIngredientsAvailable Then
-                        Exit For
-                    End If
-                Next
-
-                ' If all ingredients are available and not expired, add the meal to suggested list
-                If allIngredientsAvailable Then
-                    suggestedMeals.Add(mealName)
-                End If
-            End While
-            mealReader.Close()
-
-
-        Catch ex As Exception
-            MsgBox("Error suggesting meals: " & ex.Message, MsgBoxStyle.Critical, "Database Error")
-        Finally
-            conn.Close()
-        End Try
-
-        Return suggestedMeals
-    End Function
     Private Sub btnSuggest_Click(sender As Object, e As EventArgs) Handles btnSuggest.Click
-        'Module1.Mains()
+        'Public Function SuggestMeals() As List(Of String)
+        '        Dim suggestedMeals As New List(Of String)
 
-        ListBox1.Items.Clear()
-        TextBox2.ReadOnly = True
-        Dim meals As List(Of String) = SuggestMeals()
+        '        Try
+        '            Using connect As New OleDbConnection(connectionString)
+        '                connect.Open()
 
-        If meals.Count > 0 Then
-            For Each meal In meals
-                ListBox1.Items.Add(meals)
+        '                ' Get all meal recipes
+        '                Dim mealQuery As String = "SELECT MealName, Ingredients FROM MealRecipes"
+        '                Dim mealCommand As New OleDb.OleDbCommand(mealQuery, connect)
+        '                Dim mealReader As OleDb.OleDbDataReader = mealCommand.ExecuteReader()
 
-            Next
-            MsgBox("Meal Suggestions have been prepared with current Greocery Items.", MsgBoxStyle.Information, "No Available Meals")
-            'FetchAlternativeMeals(SuggestMeals)
-        Else
-            MsgBox("No meals can be prepared with current inventory.", MsgBoxStyle.Exclamation, "No Available Meals")
-        End If
+        '                While mealReader.Read()
+        '                    Dim mealName As String = mealReader("MealName").ToString()
+        '                    Dim requiredIngredients As String() = mealReader("Ingredients").ToString().Split(",")
+
+        '                    Dim allIngredientsAvailable As Boolean = True
+
+        '                    ' Check if all required ingredients exist in GroceryInventory and are not expired
+        '                    For Each ingredient In requiredIngredients
+        '                        Dim trimmedIngredient As String = ingredient.Trim()
+        '                        Dim checkQuery As String = "SELECT ExpiryDate FROM GroceryItemss WHERE ItemName=@Ingredients AND Quantity > 0"
+        '                        Dim checkCommand As New OleDb.OleDbCommand(checkQuery, connect)
+        '                        checkCommand.Parameters.AddWithValue("@Ingredients", trimmedIngredient)
+
+        '                        Dim expirationDate As Object = checkCommand.ExecuteScalar()
+
+        '                        ' Check if the ingredient exists and its expiration date
+        '                        If expirationDate Is Nothing Then
+        '                            allIngredientsAvailable = False
+        '                        Else
+        '                            ' Validate that the ingredient is not expired
+        '                            If Convert.ToDateTime(expirationDate) < DateTime.Now Then
+        '                                allIngredientsAvailable = False
+        '                            End If
+        '                        End If
+
+        '                        If Not allIngredientsAvailable Then
+        '                            Exit For
+        '                        End If
+        '                    Next
+
+        '                    ' If all ingredients are available and not expired, add the meal to suggested list
+        '                    If allIngredientsAvailable Then
+        '                        suggestedMeals.Add(mealName)
+        '                    End If
+        '                End While
+        '                mealReader.Close()
+        '                EndUsing
+
+        '      Catch ex As Exception
+        '            MsgBox("Error suggesting meals: " & ex.Message, MsgBoxStyle.Critical, "Database Error")
+        '        Finally
+        '            connect.Close()
+        '        End Try
+
+        '        Return suggestedMeals
+        '    End Function
+
+        '    Private Sub Button11_Click(sender As Object, e As EventArgs) Handles Button11.Click
+        '        'Module1.Mains()
+
+        '        ListBox1.Items.Clear()
+        '        TextBox2.ReadOnly = True
+        '        Dim meals As List(Of String) = SuggestMeals()
+
+        '        If meals.Count > 0 Then
+        '            ForEach meal In meals
+        '               ListBox2.Items.Add(meal)
+
+        '            Next
+        '            MsgBox("Meal Suggestions have been prepared with current Greocery Items.", MsgBoxStyle.Information, "No Available Meals")
+        '            'FetchAlternativeMeals(SuggestMeals)
+        '        Else
+        '            MsgBox("No meals can be prepared with current inventory.", MsgBoxStyle.Exclamation, "No Available Meals")
+        '        End If
         '    End Sub
     End Sub
 
+    Private Sub btnRefresh_Click(sender As Object, e As EventArgs) Handles btnRefresh.Click
+        LoadMealPlanfromDatabase1()
+    End Sub
+
+    Private Sub btnSort_Click(sender As Object, e As EventArgs) Handles btnSort.Click
+        DataGridView1.Sort(DataGridView1.Columns("TotalCalories"), System.ComponentModel.ListSortDirection.Ascending)
+        DataGridView1.Sort(DataGridView1.Columns("StartDate"), System.ComponentModel.ListSortDirection.Ascending)
+    End Sub
+
+    Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
+        Try
+            Debug.WriteLine("Entering btnEdit_Click")
+            Using conn As New OleDbConnection(connectionString)
+                conn.Open()
+
+                Dim tablename As String = "MealPlans"
+                Using cmd As New OleDbCommand("INSERT INTO MealPlans ([StartDate], [EndDate], [Meals], [MealName], [Items], [TotalCalories], [Description], [FilePath], [Calories], [Frequency]) VALUES (@StartDate, @EndDate, @Meals, @MealName, @Items, @TotalCalories, @Description, @FilePath, @Calories, @Frequency)", conn)
+
+                    cmd.Parameters.AddWithValue("@StartDate", DateTimePicker1.Text)
+                    cmd.Parameters.AddWithValue("@EndDate", DateTimePicker2.Text)
+                    cmd.Parameters.AddWithValue("@Meals", ListBox1.SelectedItem.ToString)
+                    cmd.Parameters.AddWithValue("@MealName", TextBox4.Text)
+                    cmd.Parameters.AddWithValue("@Items", ComboBox2.SelectedItem.ToString)
+                    cmd.Parameters.AddWithValue("@TotalCalories", NumericUpDown1.Value)
+                    cmd.Parameters.AddWithValue("@Description", TextBox2.Text)
+                    cmd.Parameters.AddWithValue("@FilePath", TextBox3.Text)
+                    cmd.Parameters.AddWithValue("@Calories", ComboBox3.SelectedItem.ToString)
+                    cmd.Parameters.AddWithValue("@Frequency", ComboBox1.SelectedItem.ToString)
+                    cmd.ExecuteNonQuery()
+                End Using
+                MessageBox.Show("Edited successfully")
+
+            End Using
+
+            Debug.WriteLine("The data has been edited successfully")
+        Catch ex As OleDbException
+            Debug.WriteLine($"Database saving in btnEdit_Click: {ex.Message}")
+            Debug.WriteLine($"Stack Trace: {ex.StackTrace}")
+            ' MessageBox.Show("error saving expense to database. please check the connection.", "Database error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        Catch ex As Exception
+            MessageBox.Show($"Unexpected error: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Debug.WriteLine($"General error in btnEdit_Click: {ex.Message}")
+            Debug.WriteLine($"Stack Trace: {ex.StackTrace}")
+        End Try
+
+        Debug.WriteLine("Existing btnEdit_Click")
+    End Sub
 End Class
