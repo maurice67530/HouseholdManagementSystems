@@ -11,7 +11,7 @@ Public Class MealPlan
         Try
             Debug.WriteLine("Entering btnEdit_Click")
 
-            Using conn As New OleDbConnection(connectionString)
+            Using conn As New OleDbConnection(Module1.connectionString)
                 conn.Open()
 
                 Dim query As String = "UPDATE MealPlans SET [StartDate] = @StartDate, [EndDate] = @EndDate, [Meals] = @Meals, [MealName] = @MealName, [Items] = @Items, [TotalCalories] = @TotalCalories, [Description] = @Description, [FilePath] = @FilePath, [Calories] = @Calories, [Frequency] = @Frequency WHERE [MealName] = @MealName"
@@ -74,7 +74,7 @@ Public Class MealPlan
             Debug.WriteLine("Form loading the data")
             Debug.WriteLine("Form loading  data failed")
 
-            Using conn As New OleDbConnection(connectionString)
+            Using conn As New OleDbConnection(Module1.connectionString)
                 conn.Open()
 
                 'Update the table name if neccessary
@@ -178,7 +178,7 @@ Public Class MealPlan
             If confirmationResult = DialogResult.Yes Then
                 ' Proceed with deletion  
                 Try
-                    Using conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
+                    Using conn As New OleDbConnection(Module1.connectionString)
                         conn.Open()
 
                         ' Create the delete command  
