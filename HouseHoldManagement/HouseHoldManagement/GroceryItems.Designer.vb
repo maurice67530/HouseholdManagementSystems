@@ -57,7 +57,7 @@ Partial Class Form2
         Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DataGridView1.Location = New System.Drawing.Point(3, 210)
         Me.DataGridView1.Name = "DataGridView1"
-        Me.DataGridView1.Size = New System.Drawing.Size(422, 158)
+        Me.DataGridView1.Size = New System.Drawing.Size(436, 158)
         Me.DataGridView1.TabIndex = 0
         '
         'Panel1
@@ -74,7 +74,7 @@ Partial Class Form2
         Me.Panel1.Controls.Add(Me.Label8)
         Me.Panel1.Location = New System.Drawing.Point(209, 51)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(213, 153)
+        Me.Panel1.Size = New System.Drawing.Size(230, 153)
         Me.Panel1.TabIndex = 1
         '
         'TextBox3
@@ -249,7 +249,7 @@ Partial Class Form2
         '
         Me.Button2.BackColor = System.Drawing.SystemColors.ActiveCaption
         Me.Button2.Image = CType(resources.GetObject("Button2.Image"), System.Drawing.Image)
-        Me.Button2.Location = New System.Drawing.Point(108, 374)
+        Me.Button2.Location = New System.Drawing.Point(109, 374)
         Me.Button2.Name = "Button2"
         Me.Button2.Size = New System.Drawing.Size(94, 63)
         Me.Button2.TabIndex = 5
@@ -259,7 +259,7 @@ Partial Class Form2
         '
         Me.Button3.BackColor = System.Drawing.SystemColors.ActiveCaption
         Me.Button3.Image = CType(resources.GetObject("Button3.Image"), System.Drawing.Image)
-        Me.Button3.Location = New System.Drawing.Point(209, 374)
+        Me.Button3.Location = New System.Drawing.Point(217, 374)
         Me.Button3.Name = "Button3"
         Me.Button3.Size = New System.Drawing.Size(106, 63)
         Me.Button3.TabIndex = 6
@@ -269,7 +269,7 @@ Partial Class Form2
         '
         Me.Button4.BackColor = System.Drawing.SystemColors.ActiveCaption
         Me.Button4.Image = CType(resources.GetObject("Button4.Image"), System.Drawing.Image)
-        Me.Button4.Location = New System.Drawing.Point(321, 374)
+        Me.Button4.Location = New System.Drawing.Point(338, 374)
         Me.Button4.Name = "Button4"
         Me.Button4.Size = New System.Drawing.Size(101, 63)
         Me.Button4.TabIndex = 7
@@ -279,7 +279,7 @@ Partial Class Form2
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(427, 445)
+        Me.ClientSize = New System.Drawing.Size(443, 445)
         Me.Controls.Add(Me.Button4)
         Me.Controls.Add(Me.Button3)
         Me.Controls.Add(Me.Button2)
