@@ -56,6 +56,8 @@ Partial Class Personnel
         Me.BtnBack = New System.Windows.Forms.Button()
         Me.BtnEdit = New System.Windows.Forms.Button()
         Me.BtnSave = New System.Windows.Forms.Button()
+        Me.Label10 = New System.Windows.Forms.Label()
+        Me.TextBox8 = New System.Windows.Forms.TextBox()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -399,11 +401,29 @@ Partial Class Personnel
         Me.BtnSave.TextAlign = System.Drawing.ContentAlignment.BottomCenter
         Me.BtnSave.UseVisualStyleBackColor = False
         '
+        'Label10
+        '
+        Me.Label10.AutoSize = True
+        Me.Label10.Location = New System.Drawing.Point(12, 52)
+        Me.Label10.Name = "Label10"
+        Me.Label10.Size = New System.Drawing.Size(18, 13)
+        Me.Label10.TabIndex = 75
+        Me.Label10.Text = "ID"
+        '
+        'TextBox8
+        '
+        Me.TextBox8.Location = New System.Drawing.Point(92, 49)
+        Me.TextBox8.Name = "TextBox8"
+        Me.TextBox8.Size = New System.Drawing.Size(100, 20)
+        Me.TextBox8.TabIndex = 76
+        '
         'Personnel
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(725, 592)
+        Me.Controls.Add(Me.TextBox8)
+        Me.Controls.Add(Me.Label10)
         Me.Controls.Add(Me.BtnDailyTasks)
         Me.Controls.Add(Me.BtnClear)
         Me.Controls.Add(Me.BtnDelete)
@@ -480,4 +500,6 @@ Partial Class Personnel
     Friend WithEvents BtnBack As Button
     Friend WithEvents BtnEdit As Button
     Friend WithEvents BtnSave As Button
+    Friend WithEvents Label10 As Label
+    Friend WithEvents TextBox8 As TextBox
 End Class
