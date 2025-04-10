@@ -42,7 +42,7 @@ Public Class Dashboard
     Private Sub Dashboard_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         LoadChoresStatus()
         LoadExpensesData()
-        UpdateBudgetStatus()
+        ' UpdateBudgetStatus()
         ' ToolTip1.SetToolTip(Button1, "Login")
         ToolTip1.SetToolTip(Button2, "Inventory")
         ToolTip1.SetToolTip(Button3, "Task")
@@ -131,21 +131,21 @@ Public Class Dashboard
         End Try
     End Sub
 
-    Private Sub UpdateBudgetStatus()
+    'Private Sub UpdateBudgetStatus()
 
-        Dim query As String = "SELECT SUM(Amount) FROM Expense"
+    '    Dim query As String = "SELECT SUM(Amount) FROM Expense"
 
-        Using conn As New OleDbConnection(connectionString)
-            conn.Open()
-            Dim cmd As New OleDbCommand(query, conn)
-            Dim totalExpenses As Decimal = Convert.ToDecimal(cmd.ExecuteScalar())
-            ' Assume you have a Label for Budget
-            Label2.Text = "Total Expenses: R" & totalExpenses.ToString()
-            ' Assuming a fixed budget, for example $500
-            Dim budget As Decimal = 24147
-            Label3.Text = "Budget Used: " & ((totalExpenses / budget) * 100).ToString("F2") & "%"
-            ' Update a progress bar if you have one
-            ProgressBar1.Value = CInt((totalExpenses / budget) * 100)
-        End Using
-    End Sub
+    '    Using conn As New OleDbConnection(connectionString)
+    '        conn.Open()
+    '        Dim cmd As New OleDbCommand(query, conn)
+    '        Dim totalExpenses As Decimal = Convert.ToDecimal(cmd.ExecuteScalar())
+    '        ' Assume you have a Label for Budget
+    '        Label2.Text = "Total Expenses: R" & totalExpenses.ToString()
+    '        ' Assuming a fixed budget, for example $500
+    '        Dim budget As Decimal = 24147
+    '        Label3.Text = "Budget Used: " & ((totalExpenses / budget) * 100).ToString("F2") & "%"
+    '        ' Update a progress bar if you have one
+    '        ProgressBar1.Value = CInt((totalExpenses / budget) * 100)
+    '    End Using
+    'End Sub
 End Class
