@@ -71,7 +71,7 @@ Public Class Personnel
             cmd.Parameters.AddWithValue("@Age", Age)
             cmd.Parameters.AddWithValue("@Role", Role)
             cmd.Parameters.AddWithValue("@Gender", Gender)
-            'cmd.Parameters.AddWithValue("@PostalCode", PostalCode)
+            cmd.Parameters.AddWithValue("@PostalCode", PostalCode)
             cmd.Parameters.AddWithValue("@MaritalStatus", MaritalStatus)
             cmd.Parameters.AddWithValue("@Deleter", Deleter)
             ' Execute the query
@@ -127,7 +127,7 @@ Public Class Personnel
             TextBox5.Text = row.Cells("Age").Value.ToString()
             ComboBox1.SelectedItem = row.Cells("Role").Value.ToString()
             ComboBox3.SelectedItem = row.Cells("Gender").Value.ToString()
-            'TextBox6.Text = row.Cells("PostalCode").Value.ToString()
+            TextBox6.Text = row.Cells("PostalCode").Value.ToString()
             ComboBox2.SelectedItem = row.Cells("MaritalStatus").Value.ToString()
             TextBox7.Text = row.Cells("Deleter").Value.ToString()
         End If
