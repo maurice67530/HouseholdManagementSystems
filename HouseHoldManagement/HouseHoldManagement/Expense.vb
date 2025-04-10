@@ -359,8 +359,9 @@ Public Class Expense
             End If
 
             ' Display total and average expenses on the form  
-            Label15.Text = $" R {totalExpenses:N2}"
-            Label16.Text = $" {ComboBox5.SelectedItem}: R {averageExpenses:N2}"
+            Label15.Text = $"Total Expense: R {totalExpenses:N2}"
+            'Label16.Text = $" {ComboBox5.SelectedItem}: R {averageExpenses:N2}"
+
 
         Catch ex As FormatException
             Debug.WriteLine("Invalid format in Button6_Click: Amount should be in numbers.")
@@ -378,4 +379,39 @@ Public Class Expense
         Debug.WriteLine("Exiting btnCalculate")
 
     End Sub
+
+       
+Private Sub DataGridView1_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridView1.CellContentClick
+
+    End Sub
+
+    Private Sub DataGridView1_SelectionChanged(sender As Object, e As EventArgs) Handles DataGridView1.SelectionChanged
+ Try
+
+
+            Debug.WriteLine("selecting data in the datagridview")
+            If DataGridView1.SelectedRows.Count > 0 Then
+                Dim selectedRow As DataGridViewRow = DataGridView1.SelectedRows(0)
+
+                ' Load the data from the selected row into UI controls  
+                TextBox2.Text = selectedRow.Cells("Amount").Value.ToString()
+                TextBox3.Text = selectedRow.Cells("TotalIncome").Value.ToString()
+                TextBox6.Text = selectedRow.Cells("Description").Value.ToString()
+                TextBox4.Text = selectedRow.Cells("Tags").Value.ToString()
+                ComboBox2.SelectedItem = selectedRow.Cells("currency").Value.ToString()
+                TextBox5.Text = selectedRow.Cells("Category").Value.ToString()
+                ComboBox1.SelectedItem = selectedRow.Cells("Paymentmethod").Value.ToString()
+                ComboBox5.SelectedItem = selectedRow.Cells("Frequency").Value.ToString()
+                ComboBox4.SelectedItem = selectedRow.Cells("Approvalstatus").Value.ToString()
+                DateTimePicker1.Text = selectedRow.Cells("Dateofexpenses").Value.ToString()
+
+            End If
+        Catch ex As Exception
+            Debug.WriteLine("error selection data in the database")
+            Debug.WriteLine($"Stack Trace: {ex.StackTrace}")
+        End Try
+    End Sub
+
+
 End Class
+
