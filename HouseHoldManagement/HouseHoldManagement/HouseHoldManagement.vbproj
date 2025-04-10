@@ -101,12 +101,6 @@
       <DependentUpon>Form1.vb</DependentUpon>
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="GroceryItems.Designer.vb">
-      <DependentUpon>GroceryItems.vb</DependentUpon>
-    </Compile>
-    <Compile Include="GroceryItems.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="Household Class.vb" />
     <Compile Include="HouseHoldManagment Module.vb" />
     <Compile Include="Inventory.Designer.vb">
@@ -176,9 +170,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Expense.resx">
       <DependentUpon>Expense.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="GroceryItems.resx">
-      <DependentUpon>GroceryItems.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Inventory.resx">
       <DependentUpon>Inventory.vb</DependentUpon>
