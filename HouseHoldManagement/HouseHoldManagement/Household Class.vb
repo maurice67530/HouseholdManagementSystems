@@ -1,12 +1,11 @@
 ﻿Public Class Household_Class
 
 End Class
-Public Class Register
+Public Class Registration
     'properties of the Register class
     Public Property FullNames As String
     Public Property Password As Integer
     Public Property Username As String
-
     Public Property Email As String
     Public Property Role As String
     Public Property DateCreated As String
@@ -29,12 +28,11 @@ Public Class chores_
     Public Property Recurring As String
     Public Property Description As String
 
-
 End Class
 Public Class MealPlans
 
     'properties of the mealplan class
-    Public Property MealPlanId As String
+
     Public Property StartDate As DateTime
     Public Property EndDate As DateTime
     Public Property Meals As String
@@ -44,7 +42,6 @@ Public Class MealPlans
     Public Property Description As String
     Public Property FilePath As String
     Public Property Calories As String
-
     Public Property Frequency As String
 
 End Class
@@ -54,7 +51,7 @@ Public Class Inventory1
     Public Property Description As String
     Public Property Quantity As String
     Public Property Category As String
-    Public Property ReoderLevel As String
+    Public Property ReorderLevel As String
     Public Property PricePerUnit As String
     Public Property DateAdded As DateTime
     Public Property ExpiryDate As DateTime
@@ -76,4 +73,25 @@ Public Class Expensetracking
     Public Property Receiver As String
     Public Property DateOfexpenses As DateTime
 
+End Class
+Public Class DailyTask
+    Public Property TaskID As String
+    Public Property Title As String
+    Public Property Description As String
+    Public Property DueDate As DateTime
+    Public Property Priority As String
+    Public Property Status As String
+    Public Property AssignedTo As String
+
+    Public Class GroceryItem
+        Public Property ItemID As String
+        Public Property ItemName As String
+        Public Property Unit As String
+        Public Property Quantity As String
+        Public Property ExpiryDate As DateTime
+        Public Property Category As String
+        Public Property PricePerUnit As Integer
+        Public Property Ispurchased As String
+
+    End Class
 End Class

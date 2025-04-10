@@ -66,6 +66,8 @@ Public Class Notifications
         ToolTip1.SetToolTip(Button1, "Mark As Read")
         ToolTip1.SetToolTip(Button2, "Clear Notification")
         ToolTip1.SetToolTip(Button3, "Refresh")
+        LoadNotifications()
+        TrackExpenses()
     End Sub
 
     Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
@@ -221,4 +223,6 @@ Public Class Notifications
             End Using
         End Using
     End Sub
+
+
 End Class
