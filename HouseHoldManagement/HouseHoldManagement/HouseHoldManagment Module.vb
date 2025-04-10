@@ -92,6 +92,7 @@ Module Module1
 End Module
 
 
+'DONGOLA (Please hu songo silingiwa module wanga weeeeeeeeeeeee)
 Module InventoryModule
     Public Const connectionString As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Dongola\Source\Repos\maurice67530\HouseholdManagementSystems\HMS.accdb"
 
