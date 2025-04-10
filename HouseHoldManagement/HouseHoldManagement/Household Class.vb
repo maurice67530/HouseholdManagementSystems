@@ -1,11 +1,12 @@
 ﻿Public Class Household_Class
 
 End Class
-Public Class Registeration
+Public Class Register
     'properties of the Register class
     Public Property FullNames As String
     Public Property Password As Integer
     Public Property Username As String
+
     Public Property Email As String
     Public Property Role As String
     Public Property DateCreated As String
@@ -43,8 +44,8 @@ Public Class MealPlans
     Public Property Description As String
     Public Property FilePath As String
     Public Property Calories As String
-    Public Property Ingredient As String
-    Public Property MealPlanPrint As String
+
+    Public Property Frequency As String
 
 End Class
 Public Class Inventory1

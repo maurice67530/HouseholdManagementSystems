@@ -106,33 +106,26 @@ Public Class Notifications
     End Sub
 
     Private Sub CheckLowInventory()
-        ' Create a new connection for this method to avoid issues with global connections.
         Dim localConn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
 
         Try
-            ' Open the connection.
             localConn.Open()
             Debug.WriteLine("Connection opened.")
 
-            ' Use 'Using' to manage the command and reader
             Using cmd As New OleDbCommand("SELECT ItemName, Quantity FROM Inventory WHERE LEN(Quantity) > 0 AND IsNumeric(Quantity) = True", localConn)
                 Using reader As OleDbDataReader = cmd.ExecuteReader()
                     While reader.Read()
                         Dim itemName As String = reader("ItemName").ToString()
 
-                        ' Get the Quantity value as a string
                         If Not IsDBNull(reader("Quantity")) Then
                             Dim quantityString As String = reader("Quantity").ToString().Trim()
-
-                            ' Attempt to convert the Quantity string to Integer if it's numeric
                             Dim quantity As Integer
+
                             If Integer.TryParse(quantityString, quantity) Then
-                                ' If the quantity is less than or equal to 60, send a notification
                                 If quantity <= 60 Then
-                                    AddNotification("System", itemName, quantity)
+                                    AddNotification(currentUser, itemName, quantity)
                                 End If
                             Else
-                                ' Handle case where Quantity is not numeric
                                 MessageBox.Show("Non-numeric quantity found for item: " & itemName)
                             End If
                         End If
@@ -141,10 +134,8 @@ Public Class Notifications
             End Using
 
         Catch ex As Exception
-            ' Show error message in case of failure
             MessageBox.Show("Error checking inventory: " & ex.Message)
         Finally
-            ' Ensure the connection is closed here
             If localConn.State = ConnectionState.Open Then
                 localConn.Close()
                 Debug.WriteLine("Connection closed.")
@@ -187,5 +178,47 @@ Public Class Notifications
     Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
         Timer1.Stop()
         CheckLowInventory()
+    End Sub
+
+    Private Sub DataGridView1_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridView1.CellContentClick
+        If e.RowIndex >= 0 Then
+            Dim notificationId As Integer = DataGridView1.Rows(e.RowIndex).Cells("ID").Value
+            Dim query As String = "UPDATE Notifications SET IsRead = True WHERE ID = " & notificationId
+            ExecuteQuery(query)
+        End If
+        CheckLowInventory()
+        LoadNotifications()
+    End Sub
+    Private Sub LoadNotifications()
+        Dim query As String = "SELECT * FROM Notifications ORDER BY DateCreated DESC"
+        Using conn As New OleDbConnection(HouseHoldManagment_Module.connectionString), cmd As New OleDbCommand(query, conn)
+            Dim adapter As New OleDbDataAdapter(cmd)
+            Dim table As New DataTable()
+            adapter.Fill(table)
+            DataGridView1.DataSource = table
+        End Using
+    End Sub
+    Private Sub ExecuteQuery(query As String)
+        Using conn As New OleDbConnection(HouseHoldManagment_Module.connectionString), cmd As New OleDbCommand(query, conn)
+            conn.Open()
+            cmd.ExecuteNonQuery()
+        End Using
+        LoadNotifications()
+        ShowNewNotifications()
+    End Sub
+    Private Sub ShowNewNotifications()
+        Dim query As String = "SELECT Message FROM Notifications WHERE IsRead = False"
+        Using conn As New OleDbConnection(HouseHoldManagment_Module.connectionString), cmd As New OleDbCommand(query, conn)
+            conn.Open()
+            Using reader As OleDbDataReader = cmd.ExecuteReader()
+                Dim messages As String = ""
+                While reader.Read()
+                    messages &= reader("Message").ToString() & vbCrLf
+                End While
+                If messages <> "" Then
+                    MessageBox.Show("New Notifications:" & vbCrLf & messages, "Notifications", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                End If
+            End Using
+        End Using
     End Sub
 End Class
