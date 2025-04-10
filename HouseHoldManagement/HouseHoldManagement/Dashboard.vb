@@ -42,7 +42,7 @@ Public Class Dashboard
     Private Sub Dashboard_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         LoadChoresStatus()
         LoadExpensesData()
-        UpdateBudgetStatus()
+        ' UpdateBudgetStatus()
         ' ToolTip1.SetToolTip(Button1, "Login")
         ToolTip1.SetToolTip(Button2, "Inventory")
         ToolTip1.SetToolTip(Button3, "Task")
