@@ -51,7 +51,7 @@ Public Class Inventory1
     Public Property Description As String
     Public Property Quantity As String
     Public Property Category As String
-    Public Property ReoderLevel As String
+    Public Property ReorderLevel As String
     Public Property PricePerUnit As String
     Public Property DateAdded As DateTime
     Public Property ExpiryDate As DateTime
