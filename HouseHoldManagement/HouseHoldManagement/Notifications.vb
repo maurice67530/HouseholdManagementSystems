@@ -67,6 +67,7 @@ Public Class Notifications
         ToolTip1.SetToolTip(Button2, "Clear Notification")
         ToolTip1.SetToolTip(Button3, "Refresh")
         LoadNotifications()
+        TrackExpenses()
     End Sub
 
     Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
@@ -222,10 +223,6 @@ Public Class Notifications
             End Using
         End Using
     End Sub
-    Private Sub TrackExpenses()
-        Dim query As String = "INSERT INTO Notifications (UserID, Message, DateCreated, Category, IsRead) " &
-                                  "SELECT 'Expense', 'Recent expense recorded: ' & Amount, Date(), False FROM Expenses WHERE Date >= Date()-7"
-        ExecuteQuery(query)
-    End Sub
+
 
 End Class
