@@ -6,8 +6,31 @@ Public Class Task_Management
     Private Status As String
     Private Tasks As Object
     Public Property Priority As String
+    Public Sub LoadTasksDataFromDatabase()
 
+        Debug.WriteLine("LoadTasksDataFromDatabase()")
+        Using connect As New OleDbConnection(connectionString)
+            connect.Open()
+
+            ' Update the table name if necessary  
+            Dim tableName As String = "Tasks"
+
+            ' Create an OleDbCommand to select the data from the database  
+            Dim cmd As New OleDbCommand($"SELECT * FROM {tableName}", connect)
+
+            ' Create a DataAdapter and fill a DataTable  
+            Dim da As New OleDbDataAdapter(cmd)
+            Dim dt As New DataTable()
+            da.Fill(dt)
+
+            ' Bind the DataTable to the DataGridView  
+            DataGridView1.DataSource = dt
+            'HighlightExpiredItemss()
+        End Using
+    End Sub
     Private Sub Task_Management_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
+        LoadTasksDataFromDatabase()
         Dim tooltip As New ToolTip
         tooltip.SetToolTip(Button1, "Submit")
         tooltip.SetToolTip(Button4, "Refresh")
@@ -20,30 +43,6 @@ Public Class Task_Management
         ComboBox1.Items.AddRange(New String() {"Low", "Medium", "High"})
         ComboBox2.Items.AddRange(New String() {"Not started", "In progress", "Completed"})
 
-        Try
-            Using conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
-
-                conn.Open()
-                ' Update the table name if necessary  
-                Dim tableName As String = "Tasks"
-
-                ' Create an OleDbCommand to select the data from the database  
-                Dim cmd As New OleDbCommand($"SELECT * FROM {tableName}", conn)
-
-                ' Create a DataAdapter and fill a DataTable  
-                Dim da As New OleDbDataAdapter(cmd)
-                Dim dt As New DataTable()
-                da.Fill(dt)
-
-                ' Bind the DataTable to the DataGridView  
-                DataGridView1.DataSource = dt
-            End Using
-
-        Catch ex As OleDbException
-            MessageBox.Show($"Error loading Task data from database: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-        Catch ex As Exception
-            MessageBox.Show($"Unexpected error: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-        End Try
     End Sub
     Private Sub ComboBox3_click(sender As Object, e As EventArgs) Handles ComboBox3.Click
         PopulateComboboxFromDatabase(ComboBox3)

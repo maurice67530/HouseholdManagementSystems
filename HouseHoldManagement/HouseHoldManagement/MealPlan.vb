@@ -279,7 +279,12 @@ Public Class MealPlan
         '    End Sub
     End Sub
 
-    Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
+    Private Sub btnRefresh_Click(sender As Object, e As EventArgs) Handles btnRefresh.Click
+        LoadMealPlanfromDatabase1()
+    End Sub
 
+    Private Sub btnSort_Click(sender As Object, e As EventArgs) Handles btnSort.Click
+        DataGridView1.Sort(DataGridView1.Columns("TotalCalories"), System.ComponentModel.ListSortDirection.Ascending)
+        DataGridView1.Sort(DataGridView1.Columns("StartDate"), System.ComponentModel.ListSortDirection.Ascending)
     End Sub
 End Class
