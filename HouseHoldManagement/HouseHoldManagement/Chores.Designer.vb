@@ -313,7 +313,7 @@ Partial Class Chores
         '
         Me.Label9.AutoSize = True
         Me.Label9.Font = New System.Drawing.Font("Microsoft Sans Serif", 20.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label9.Location = New System.Drawing.Point(198, 18)
+        Me.Label9.Location = New System.Drawing.Point(196, 18)
         Me.Label9.Name = "Label9"
         Me.Label9.Size = New System.Drawing.Size(268, 31)
         Me.Label9.TabIndex = 20
@@ -365,7 +365,7 @@ Partial Class Chores
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(698, 458)
+        Me.ClientSize = New System.Drawing.Size(674, 454)
         Me.Controls.Add(Me.Label10)
         Me.Controls.Add(Me.Button9)
         Me.Controls.Add(Me.Button8)
