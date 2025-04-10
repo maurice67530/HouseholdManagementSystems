@@ -52,6 +52,6 @@ Public Class Login
 
     End Sub
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
-        ' Register.ShowDialog()
+        Register.ShowDialog()
     End Sub
 End Class
