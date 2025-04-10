@@ -384,7 +384,5 @@ Partial Class Inventory
     Friend WithEvents Button4 As Button
     Friend WithEvents Timer1 As Timer
 
-    Private Sub Inventory_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
-    End Sub
 End Class
