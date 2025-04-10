@@ -1,7 +1,7 @@
 ﻿Imports System.Data.OleDb
 Imports HouseHoldManagement
 Public Class Task_Management
-    Public Const connectionString As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Delicious\Source\Repos\maurice67530\HouseholdManagementSystems\HMS.accdb"
+    Public Const connectionString As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\khodani\Source\Repos\maurice67530\HouseholdManagementSystems\HMS.accdb"
     Dim conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
     Private Status As String
     Private Tasks As Object
@@ -55,7 +55,7 @@ Public Class Task_Management
             conn.Open()
 
             ' 2. Retrieve the FirstName and LastName columns from the PersonalDetails table  
-            Dim query As String = "SELECT FirstName, LastName FROM Person"
+            Dim query As String = "SELECT FirstName, LastName FROM PersonalDetails"
             Dim cmd As New OleDbCommand(query, conn)
             Dim reader As OleDbDataReader = cmd.ExecuteReader()
 
@@ -78,7 +78,6 @@ Public Class Task_Management
             End If
         End Try
     End Sub
-
     Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
         ' Check if there are any selected rows in the DataGridView for personal  
         If DataGridView1.SelectedRows.Count > 0 Then
