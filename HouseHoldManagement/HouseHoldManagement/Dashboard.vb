@@ -5,7 +5,7 @@ Public Class Dashboard
     End Sub
 
     Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
-        'Task .ShowDialog()
+        ' Task.ShowDialog()
     End Sub
 
     Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
@@ -20,9 +20,9 @@ Public Class Dashboard
         Login.ShowDialog()
     End Sub
 
-    Private Sub Button7_Click(sender As Object, e As EventArgs) Handles Button7.Click
-        Grocery.ShowDialog()
-    End Sub
+    'Private Sub Button7_Click(sender As Object, e As EventArgs) Handles Button7.Click
+    '    Grocery.ShowDialog()
+    'End Sub
 
     Private Sub Button8_Click(sender As Object, e As EventArgs) Handles Button8.Click
         Personnel.ShowDialog()
