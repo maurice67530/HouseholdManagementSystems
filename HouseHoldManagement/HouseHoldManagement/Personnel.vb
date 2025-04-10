@@ -37,7 +37,7 @@ Public Class Personnel
         Dim Role As String
         Dim Gender As String
         Dim PostalCode As String
-        Dim MaritalStatus As String
+        Dim HealthStatus As String
         Dim Deleter As String
 
 
@@ -48,31 +48,31 @@ Public Class Personnel
         Email = TextBox4.Text
         Contact = TextBox3.Text
         Age = TextBox5.Text
-        Role = ComboBox1.SelectedItem.ToString
-        Gender = ComboBox3.SelectedItem.ToString
+        Role = ComboBox1.Text
+        Gender = ComboBox3.Text
         PostalCode = TextBox6.Text
-        MaritalStatus = ComboBox2.SelectedItem.ToString
+        HealthStatus = TextBox9.Text
         Deleter = TextBox7.Text
         ' Open the connection
         Try
             conn.Open()
 
             ' SQL query to insert the data
-            Dim query As String = "INSERT INTO PersonalDetails (FirstName, LastName, DateOfBirth, Email, Contact, Age, Role, Gender, PostalCode, MaritalStatus, Deleter) " &
-                                  "VALUES (@FirstName, @LastName, @DateOfBirth, @Email, @Contact, @Age, @Role, @Gender, @PostalCode, @MaritalStatus, @Deleter)"
+            Dim query As String = "INSERT INTO PersonalDetails (FirstName, LastName, DateOfBirth, Email, Contact, Age, Role, Gender, PostalCode, HealthStatus, Deleter) " &
+                                  "VALUES (@FirstName, @LastName, @DateOfBirth, @Email, @Contact, @Age, @Role, @Gender, @PostalCode, @HealthStatus, @Deleter)"
 
             ' Create the command and add parameters
             Dim cmd As New OleDbCommand(query, conn)
             cmd.Parameters.AddWithValue("@FirstName", FirstName)
             cmd.Parameters.AddWithValue("@LastName", LastName)
-            cmd.Parameters.AddWithValue("@Birthdate", DateOfBirth)
+            cmd.Parameters.AddWithValue("@DateOfBirth", DateOfBirth)
             cmd.Parameters.AddWithValue("@Email", Email)
             cmd.Parameters.AddWithValue("@Contact", Contact)
             cmd.Parameters.AddWithValue("@Age", Age)
             cmd.Parameters.AddWithValue("@Role", Role)
             cmd.Parameters.AddWithValue("@Gender", Gender)
-            'cmd.Parameters.AddWithValue("@PostalCode", PostalCode)
-            cmd.Parameters.AddWithValue("@MaritalStatus", MaritalStatus)
+            cmd.Parameters.AddWithValue("@PostalCode", PostalCode)
+            cmd.Parameters.AddWithValue("@HealthStatus", HealthStatus)
             cmd.Parameters.AddWithValue("@Deleter", Deleter)
             ' Execute the query
             Dim rowsAffected As Integer = cmd.ExecuteNonQuery()
@@ -125,10 +125,10 @@ Public Class Personnel
             TextBox4.Text = row.Cells("Email").Value.ToString()
             TextBox3.Text = row.Cells("Contact").Value.ToString()
             TextBox5.Text = row.Cells("Age").Value.ToString()
-            ComboBox1.SelectedItem = row.Cells("Role").Value.ToString()
-            ComboBox3.SelectedItem = row.Cells("Gender").Value.ToString()
-            'TextBox6.Text = row.Cells("PostalCode").Value.ToString()
-            ComboBox2.SelectedItem = row.Cells("MaritalStatus").Value.ToString()
+            ComboBox1.Text = row.Cells("Role").Value.ToString()
+            ComboBox3.Text = row.Cells("Gender").Value.ToString()
+            TextBox6.Text = row.Cells("PostalCode").Value.ToString()
+            TextBox9.Text = row.Cells("HealthStatus").Value.ToString()
             TextBox7.Text = row.Cells("Deleter").Value.ToString()
         End If
 
@@ -137,7 +137,7 @@ Public Class Personnel
     Private Sub BtnEdit_Click(sender As Object, e As EventArgs) Handles BtnEdit.Click
         Try
             conn.Open()
-            Dim query As String = "UPDATE PersonalDetails SET FirstName = ?, LastName = ?, DateOfBirth = ?, Email = ?, Contact = ?, Age = ?, Role = ?, Gender = ?, PostalCode = ?, MaritalStatus = ?, Deleter = ? WHERE ID = ?"
+            Dim query As String = "UPDATE PersonalDetails SET FirstName = ?, LastName = ?, DateOfBirth = ?, Email = ?, Contact = ?, Age = ?, Role = ?, Gender = ?, PostalCode = ?, HealthStatus = ?, Deleter = ? WHERE ID = ?"
             Using cmd As New OleDbCommand(query, conn)
                 cmd.Parameters.AddWithValue("@FirstName", TextBox1.Text)
                 cmd.Parameters.AddWithValue("@LastName", TextBox2.Text)
@@ -148,7 +148,7 @@ Public Class Personnel
                 cmd.Parameters.AddWithValue("@Role", ComboBox1.SelectedItem.ToString)
                 cmd.Parameters.AddWithValue("@Gender", ComboBox3.SelectedItem.ToString)
                 cmd.Parameters.AddWithValue("@PostalCode", TextBox6.Text)
-                cmd.Parameters.AddWithValue("@MaritalStatus", ComboBox2.SelectedItem.ToString)
+                cmd.Parameters.AddWithValue("@HealthStatus", TextBox9.Text)
                 cmd.Parameters.AddWithValue("@Deleter", TextBox7.Text)
                 cmd.Parameters.AddWithValue("@ID", CInt(TextBox8.Text))
                 cmd.ExecuteNonQuery()
@@ -182,7 +182,7 @@ Public Class Personnel
 
     End Sub
 
-    Private Sub BtnDailyTasks_Click(sender As Object, e As EventArgs) Handles BtnDailyTasks.Click
+    Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
 
     End Sub
 End Class
