@@ -6,7 +6,7 @@ Public Class Notifications
         Dim Conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
 
         If DataGridView1.SelectedRows.Count = 0 Then
-            MsgBox("Please select a notification to mark as read.", MsgBoxStyle.Exclamation, "No Selection")
+            MsgBox("Please select a notification.", MsgBoxStyle.Exclamation, "No Selection")
             Return
         End If
 
@@ -14,22 +14,42 @@ Public Class Notifications
 
         For Each row As DataGridViewRow In DataGridView1.SelectedRows
             Dim notificationID As Integer = Convert.ToInt32(row.Cells("ID").Value)
-            Dim query As String = "UPDATE Notifications SET IsRead = 'Yes' WHERE ID = @ID"
+            Dim currentStatus As String = row.Cells("IsRead").Value.ToString()
+            Dim newStatus As String = If(currentStatus = "Yes", "No", "Yes") ' Toggle status
+            Dim query As String = "UPDATE Notifications SET IsRead = @IsRead WHERE ID = @ID"
+
             Using cmd As New OleDbCommand(query, Conn)
+                cmd.Parameters.AddWithValue("@IsRead", newStatus)
                 cmd.Parameters.AddWithValue("@ID", notificationID)
                 cmd.ExecuteNonQuery()
             End Using
-            row.DefaultCellStyle.ForeColor = Color.Black ' Change UI for read status
+
+            row.Cells("IsRead").Value = newStatus ' Update UI cell value
+            row.DefaultCellStyle.ForeColor = If(newStatus = "Yes", Color.Black, Color.Red)
         Next
 
         Conn.Close()
 
-        MsgBox("Selected notifications marked as read!", MsgBoxStyle.Information, "Updated")
+        MsgBox("Selected notifications updated!", MsgBoxStyle.Information, "Updated")
 
-        ' Refresh unread count after marking as read
-        'CountUnreadNotifications()
+        ' Update unread count in Label2
+        UpdateUnreadCount()
     End Sub
-
+    ' You can define this sub to update the label
+    Sub UpdateUnreadCount()
+        Try
+            Using Conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
+                Conn.Open()
+                Dim query As String = "SELECT COUNT(*) FROM Notifications WHERE IsRead = 'No'"
+                Using cmd As New OleDbCommand(query, Conn)
+                    Dim count As Integer = Convert.ToInt32(cmd.ExecuteScalar())
+                    Label2.Text = "Unread: " & count.ToString()
+                End Using
+            End Using
+        Catch ex As Exception
+            Debug.WriteLine("Error counting unread notifications: " & ex.Message)
+        End Try
+    End Sub
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
         If DataGridView1.SelectedRows.Count = 0 Then
             MsgBox("Please select a notification to delete.", MsgBoxStyle.Exclamation, "No Selection")

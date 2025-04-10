@@ -51,6 +51,44 @@ Module Module1
         Next
 
     End Sub
+
+    Public Sub FilterMealPlan(Calories As String)
+        Dim Mealtable As New DataTable()
+
+
+        Try
+            conn.Open()
+            Dim query As String = "Select * FROM MealPlans WHERE 1=1"
+
+            If Not String.IsNullOrEmpty(Calories) Then
+                query &= " AND Calories = @Calories"
+            End If
+
+            'If Not String.IsNullOrEmpty(StartDate) Then
+            '    query &= " AND StartDate = @StartDate"
+            'End If
+
+            Dim command As New OleDb.OleDbCommand(query, conn)
+
+            If Not String.IsNullOrEmpty(Calories) Then
+                command.Parameters.AddWithValue("@Calories", Calories)
+            End If
+
+            'If Not String.IsNullOrEmpty(Calories) Then
+            '    command.Parameters.AddWithValue("@StartDate", StartDate)
+            'End If
+
+            Dim adapter As New OleDb.OleDbDataAdapter(command)
+            adapter.Fill(Mealtable)
+            MealPlan.DataGridView1.DataSource = Mealtable
+
+        Catch ex As Exception
+            MsgBox("Error filtering tasks: " & ex.Message, MsgBoxStyle.Critical, "Database Error")
+        Finally
+            conn.Close()
+        End Try
+    End Sub
+
 End Module
 
 
