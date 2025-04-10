@@ -6,7 +6,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{DEC8BF09-6D70-450D-B49C-BFCF4DBBB6B8}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <StartupObject>HouseHoldManagement.Chores</StartupObject>
+    <StartupObject>HouseHoldManagement.Task_Management</StartupObject>
     <RootNamespace>HouseHoldManagement</RootNamespace>
     <AssemblyName>HouseHoldManagement</AssemblyName>
     <FileAlignment>512</FileAlignment>
@@ -45,6 +45,9 @@
   </PropertyGroup>
   <PropertyGroup>
     <OptionInfer>On</OptionInfer>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationManifest>My Project\app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -98,12 +101,6 @@
       <DependentUpon>Form1.vb</DependentUpon>
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Grocery.Designer.vb">
-      <DependentUpon>Grocery.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Grocery.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="Household Class.vb" />
     <Compile Include="HouseHoldManagment Module.vb" />
     <Compile Include="Inventory.Designer.vb">
@@ -151,10 +148,10 @@
     <Compile Include="Personnel.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Photo Gallery.Designer.vb">
-      <DependentUpon>Photo Gallery.vb</DependentUpon>
+    <Compile Include="Register.Designer.vb">
+      <DependentUpon>Register.vb</DependentUpon>
     </Compile>
-    <Compile Include="Photo Gallery.vb">
+    <Compile Include="Register.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Task Management.Designer.vb">
@@ -173,9 +170,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Expense.resx">
       <DependentUpon>Expense.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Grocery.resx">
-      <DependentUpon>Grocery.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Inventory.resx">
       <DependentUpon>Inventory.vb</DependentUpon>
@@ -198,14 +192,15 @@
     <EmbeddedResource Include="Personnel.resx">
       <DependentUpon>Personnel.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Photo Gallery.resx">
-      <DependentUpon>Photo Gallery.vb</DependentUpon>
+    <EmbeddedResource Include="Register.resx">
+      <DependentUpon>Register.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Task Management.resx">
       <DependentUpon>Task Management.vb</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <None Include="My Project\app.manifest" />
     <None Include="My Project\Application.myapp">
       <Generator>MyApplicationCodeGenerator</Generator>
       <LastGenOutput>Application.Designer.vb</LastGenOutput>
@@ -243,6 +238,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\icons8-advise-32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-submit-32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-delete-321.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
