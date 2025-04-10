@@ -181,4 +181,8 @@ Public Class Personnel
         End Try
 
     End Sub
+
+    Private Sub BtnDailyTasks_Click(sender As Object, e As EventArgs) Handles BtnDailyTasks.Click
+
+    End Sub
 End Class
