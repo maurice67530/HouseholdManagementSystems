@@ -193,7 +193,7 @@ Partial Class Register
         '
         Me.Button2.BackgroundImage = CType(resources.GetObject("Button2.BackgroundImage"), System.Drawing.Image)
         Me.Button2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
-        Me.Button2.Location = New System.Drawing.Point(12, 213)
+        Me.Button2.Location = New System.Drawing.Point(9, 213)
         Me.Button2.Name = "Button2"
         Me.Button2.Size = New System.Drawing.Size(51, 40)
         Me.Button2.TabIndex = 11
