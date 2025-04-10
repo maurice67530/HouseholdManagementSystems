@@ -40,6 +40,8 @@ Partial Class Expense
         Me.TextBox4 = New System.Windows.Forms.TextBox()
         Me.Label10 = New System.Windows.Forms.Label()
         Me.Label7 = New System.Windows.Forms.Label()
+        Me.ComboBox2 = New System.Windows.Forms.ComboBox()
+        Me.Label5 = New System.Windows.Forms.Label()
         Me.Label8 = New System.Windows.Forms.Label()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.Panel2 = New System.Windows.Forms.Panel()
@@ -55,8 +57,6 @@ Partial Class Expense
         Me.ComboBox4 = New System.Windows.Forms.ComboBox()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Label6 = New System.Windows.Forms.Label()
-        Me.ComboBox2 = New System.Windows.Forms.ComboBox()
-        Me.Label5 = New System.Windows.Forms.Label()
         Me.Button4 = New System.Windows.Forms.Button()
         Me.Button3 = New System.Windows.Forms.Button()
         Me.Button2 = New System.Windows.Forms.Button()
@@ -110,7 +110,7 @@ Partial Class Expense
         '
         'Panel1
         '
-        Me.Panel1.BackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.Panel1.BackColor = System.Drawing.SystemColors.GradientActiveCaption
         Me.Panel1.Controls.Add(Me.TextBox3)
         Me.Panel1.Controls.Add(Me.TextBox2)
         Me.Panel1.Controls.Add(Me.Label14)
@@ -241,6 +241,26 @@ Partial Class Expense
         Me.Label7.TabIndex = 51
         Me.Label7.Text = "Amount"
         '
+        'ComboBox2
+        '
+        Me.ComboBox2.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ComboBox2.FormattingEnabled = True
+        Me.ComboBox2.Items.AddRange(New Object() {"", "usd", "zar", "eur", "jpy", "aur"})
+        Me.ComboBox2.Location = New System.Drawing.Point(113, 227)
+        Me.ComboBox2.Name = "ComboBox2"
+        Me.ComboBox2.Size = New System.Drawing.Size(198, 24)
+        Me.ComboBox2.TabIndex = 68
+        '
+        'Label5
+        '
+        Me.Label5.AutoSize = True
+        Me.Label5.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label5.Location = New System.Drawing.Point(11, 229)
+        Me.Label5.Name = "Label5"
+        Me.Label5.Size = New System.Drawing.Size(61, 16)
+        Me.Label5.TabIndex = 61
+        Me.Label5.Text = "Currency"
+        '
         'Label8
         '
         Me.Label8.AutoSize = True
@@ -263,7 +283,7 @@ Partial Class Expense
         '
         'Panel2
         '
-        Me.Panel2.BackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.Panel2.BackColor = System.Drawing.SystemColors.GradientActiveCaption
         Me.Panel2.Controls.Add(Me.Label16)
         Me.Panel2.Controls.Add(Me.Label15)
         Me.Panel2.Controls.Add(Me.TextBox7)
@@ -286,11 +306,11 @@ Partial Class Expense
         '
         Me.Label16.AutoSize = True
         Me.Label16.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label16.Location = New System.Drawing.Point(3, 200)
+        Me.Label16.Location = New System.Drawing.Point(3, 197)
         Me.Label16.Name = "Label16"
-        Me.Label16.Size = New System.Drawing.Size(56, 16)
+        Me.Label16.Size = New System.Drawing.Size(149, 16)
         Me.Label16.TabIndex = 86
-        Me.Label16.Text = "Label16"
+        Me.Label16.Text = "Average Expenses : R0"
         '
         'Label15
         '
@@ -298,9 +318,9 @@ Partial Class Expense
         Me.Label15.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label15.Location = New System.Drawing.Point(3, 172)
         Me.Label15.Name = "Label15"
-        Me.Label15.Size = New System.Drawing.Size(56, 16)
+        Me.Label15.Size = New System.Drawing.Size(125, 16)
         Me.Label15.TabIndex = 85
-        Me.Label15.Text = "Label15"
+        Me.Label15.Text = "Total Expenses: R0"
         '
         'TextBox7
         '
@@ -397,26 +417,6 @@ Partial Class Expense
         Me.Label6.TabIndex = 62
         Me.Label6.Text = "Frequency"
         '
-        'ComboBox2
-        '
-        Me.ComboBox2.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.ComboBox2.FormattingEnabled = True
-        Me.ComboBox2.Items.AddRange(New Object() {"", "usd", "zar", "eur", "jpy", "aur"})
-        Me.ComboBox2.Location = New System.Drawing.Point(113, 227)
-        Me.ComboBox2.Name = "ComboBox2"
-        Me.ComboBox2.Size = New System.Drawing.Size(198, 24)
-        Me.ComboBox2.TabIndex = 68
-        '
-        'Label5
-        '
-        Me.Label5.AutoSize = True
-        Me.Label5.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label5.Location = New System.Drawing.Point(11, 229)
-        Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(61, 16)
-        Me.Label5.TabIndex = 61
-        Me.Label5.Text = "Currency"
-        '
         'Button4
         '
         Me.Button4.BackColor = System.Drawing.SystemColors.ActiveCaption
@@ -474,7 +474,7 @@ Partial Class Expense
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(657, 556)
+        Me.ClientSize = New System.Drawing.Size(656, 556)
         Me.Controls.Add(Me.DataGridView1)
         Me.Controls.Add(Me.Button7)
         Me.Controls.Add(Me.Button6)

@@ -45,12 +45,13 @@ Public Class Login
         End Using
     End Sub
     Private Sub Login_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
         Dim tooltip As New ToolTip()
         tooltip.SetToolTip(Button1, "Login")
         tooltip.SetToolTip(Button2, "Register")
-    End Sub
 
+    End Sub
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
-        'Register
+        ' Register.ShowDialog()
     End Sub
 End Class

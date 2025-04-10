@@ -10,14 +10,14 @@ Public Class MealPlan
                 conn.Open()
 
                 Dim tablename As String = "MealPlans"
-                Using cmd As New OleDbCommand("INSERT INTO MealPlans ([StartDate], [EndDate], [Meals], [MealName], [Items], [TotalCalories], [Description], [FilePath], [Calories], [Frequency]) VALUES (@StartDate, @EndDate, @Meals, @MealName, @Items, @TotalCalories@Description, @FilePath, @Calories, @Frequency)", conn)
+                Using cmd As New OleDbCommand("INSERT INTO MealPlans ([StartDate], [EndDate], [Meals], [MealName], [Items], [TotalCalories], [Description], [FilePath], [Calories], [Frequency]) VALUES (@StartDate, @EndDate, @Meals, @MealName, @Items, @TotalCalories, @Description, @FilePath, @Calories, @Frequency)", conn)
 
                     cmd.Parameters.AddWithValue("@StartDate", DateTimePicker1.Text)
                     cmd.Parameters.AddWithValue("@EndDate", DateTimePicker2.Text)
                     cmd.Parameters.AddWithValue("@Meals", ListBox1.SelectedItem.ToString)
                     cmd.Parameters.AddWithValue("@MealName", TextBox4.Text)
                     cmd.Parameters.AddWithValue("@Items", ComboBox2.SelectedItem.ToString)
-                    cmd.Parameters.AddWithValue("@TotalCalories", NumericUpDown1.Text)
+                    cmd.Parameters.AddWithValue("@TotalCalories", NumericUpDown1.Value)
                     cmd.Parameters.AddWithValue("@Description", TextBox2.Text)
                     cmd.Parameters.AddWithValue("@FilePath", TextBox3.Text)
                     cmd.Parameters.AddWithValue("@Calories", ComboBox3.SelectedItem.ToString)
@@ -58,7 +58,43 @@ Public Class MealPlan
         tooltip.SetToolTip(btnSuggest, "Suggest")
         tooltip.SetToolTip(btnFilter, "Filter")
 
+        LoadMealPlanfromDatabase1()
         PopulateDataGridView()
+    End Sub
+
+    Public Sub LoadMealPlanfromDatabase1()
+        Try
+            Debug.WriteLine("Form loading the data")
+            Debug.WriteLine("Form loading  data failed")
+
+            Using conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
+                conn.Open()
+
+                'Update the table name if neccessary
+                Dim DataTable As String = "MealPlans"
+
+                'Create an OleDbCommand to select the data from the database
+                Dim cmd As New OleDbCommand($"SELECT*FROM {DataTable}", conn)
+
+                'create a DataAdapter and fill a DataTable
+                Dim da As New OleDbDataAdapter(cmd)
+                Dim dt As New DataTable()
+                da.Fill(dt)
+
+                'Bind the DataTable to the DataGridView
+                DataGridView1.DataSource = dt
+            End Using
+
+        Catch ex As FormatException
+            Debug.WriteLine("initializing the data.")
+            MessageBox.Show("Please load the information.", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            MessageBox.Show("&Error Loading task to database: " & ex.Message & vbNewLine & ex.StackTrace, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        Catch ex As Exception
+            Debug.WriteLine($"Form loaded unsuccessfully {ex.Message}")
+            MessageBox.Show("An unexpected error occured during loading the data.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            MessageBox.Show("&unexpected Error:" & ex.Message & vbNewLine & ex.StackTrace, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+
+        End Try
     End Sub
     Public Property meals As New List(Of MealPlans)
     Private Sub PopulateDataGridView()
@@ -243,7 +279,7 @@ Public Class MealPlan
         '    End Sub
     End Sub
 
-    Private Sub btnRefresh_Click(sender As Object, e As EventArgs) Handles btnRefresh.Click
+    Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
 
     End Sub
 End Class
