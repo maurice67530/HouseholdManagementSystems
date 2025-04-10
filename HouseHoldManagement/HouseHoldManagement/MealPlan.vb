@@ -2,10 +2,6 @@
 Imports System.Data.OleDb
 
 Public Class MealPlan
-    ' Dim conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
-    Public Property conn As New OleDbConnection(connectionString)
-    ' Connection string using relative path to the database
-    Public Const connectionString As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Zwivhuya\Source\Repos\maurice67530\HouseholdManagementSystems\HMS.accdb;Persist Security Info=False;"
 
     Private Sub btnEdit_Click(sender As Object, e As EventArgs) Handles btnEdit.Click
 
@@ -36,7 +32,7 @@ Public Class MealPlan
             Debug.WriteLine("Form loading the data")
             Debug.WriteLine("Form loading  data failed")
 
-            Using conn As New OleDbConnection(connectionString)
+            Using conn As New OleDbConnection(Module1.connectionString)
                 conn.Open()
 
                 'Update the table name if neccessary
