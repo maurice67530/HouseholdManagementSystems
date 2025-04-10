@@ -290,8 +290,8 @@ Public Class Expense
         ComboBox4.SelectedItem = ""
         TextBox7.Text = ""
         ComboBox3.SelectedItem = ""
-        ComboBox4.SelectedItem = ""
-        ComboBox5.SelectedItem = ""
+        'ComboBox4.SelectedItem = ""
+        'ComboBox5.SelectedItem = ""
         'DateTimePicker1.Text = ""
     End Sub
 
