@@ -1,8 +1,7 @@
 ﻿Imports System.Data.OleDb
 Public Class Chores
-    Public Property conn As New OleDbConnection(connectionString)
-    ' Connection string using relative path to the database
-    Public Const connectionString As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Masindi\Source\Repos\maurice67530\HouseholdManagementSystems\HMS.accdb"
+    Public Property conn As New OleDbConnection(Murangi.connectionString)
+
     Private Sub Chores_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
         cmbpri.Items.AddRange(New String() {"Low", "Medium", "High"})
@@ -143,7 +142,7 @@ Public Class Chores
 
 
 
-                Using conn As New OleDbConnection(connectionString)
+                Using conn As New OleDbConnection(Murangi.connectionString)
                     conn.Open()
 
 
@@ -179,7 +178,7 @@ Public Class Chores
 
             Debug.WriteLine("Datagridview: populated successfully.")
 
-            Using conn As New OleDbConnection(connectionString)
+            Using conn As New OleDbConnection(Murangi.connectionString)
                 conn.Open()
 
                 Dim tableName As String = "Chores"
@@ -245,7 +244,7 @@ Public Class Chores
             Dim Recurring As String = NumericUpDown1.Value
             Dim Description As String = txtdes.Text
 
-            Using conn As New OleDbConnection(connectionString)
+            Using conn As New OleDbConnection(Murangi.connectionString)
                 conn.Open()
 
                 'Get the ID of the selected row (assuming your table has a primary key named "ID")  
