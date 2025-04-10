@@ -2,44 +2,13 @@
 Imports System.Data.OleDb
 
 Public Class MealPlan
-    Dim conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
+    ' Dim conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
+    Public Property conn As New OleDbConnection(connectionString)
+    ' Connection string using relative path to the database
+    Public Const connectionString As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Zwivhuya\Source\Repos\maurice67530\HouseholdManagementSystems\HMS.accdb;Persist Security Info=False;"
+
     Private Sub btnEdit_Click(sender As Object, e As EventArgs) Handles btnEdit.Click
-        Try
-            Debug.WriteLine("Entering btnEdit_Click")
-            Using conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
-                conn.Open()
 
-                Dim tablename As String = "MealPlans"
-                Using cmd As New OleDbCommand("INSERT INTO MealPlans ([StartDate], [EndDate], [Meals], [MealName], [Items], [TotalCalories], [Description], [FilePath], [Calories], [Frequency]) VALUES (@StartDate, @EndDate, @Meals, @MealName, @Items, @TotalCalories@Description, @FilePath, @Calories, @Frequency)", conn)
-
-                    cmd.Parameters.AddWithValue("@StartDate", DateTimePicker1.Text)
-                    cmd.Parameters.AddWithValue("@EndDate", DateTimePicker2.Text)
-                    cmd.Parameters.AddWithValue("@Meals", ListBox1.SelectedItem.ToString)
-                    cmd.Parameters.AddWithValue("@MealName", TextBox4.Text)
-                    cmd.Parameters.AddWithValue("@Items", ComboBox2.SelectedItem.ToString)
-                    cmd.Parameters.AddWithValue("@TotalCalories", NumericUpDown1.Text)
-                    cmd.Parameters.AddWithValue("@Description", TextBox2.Text)
-                    cmd.Parameters.AddWithValue("@FilePath", TextBox3.Text)
-                    cmd.Parameters.AddWithValue("@Calories", ComboBox3.SelectedItem.ToString)
-                    cmd.Parameters.AddWithValue("@Frequency", ComboBox1.SelectedItem.ToString)
-                    cmd.ExecuteNonQuery()
-                End Using
-                MessageBox.Show("Edited successfully")
-
-            End Using
-
-            Debug.WriteLine("The data has been edited successfully")
-        Catch ex As OleDbException
-            Debug.WriteLine($"Database saving in btnEdit_Click: {ex.Message}")
-            Debug.WriteLine($"Stack Trace: {ex.StackTrace}")
-            ' MessageBox.Show("error saving expense to database. please check the connection.", "Database error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-        Catch ex As Exception
-            MessageBox.Show($"Unexpected error: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-            Debug.WriteLine($"General error in btnEdit_Click: {ex.Message}")
-            Debug.WriteLine($"Stack Trace: {ex.StackTrace}")
-        End Try
-
-        Debug.WriteLine("Existing btnEdit_Click")
     End Sub
 
     Private Sub MealPlan_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -67,7 +36,7 @@ Public Class MealPlan
             Debug.WriteLine("Form loading the data")
             Debug.WriteLine("Form loading  data failed")
 
-            Using conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
+            Using conn As New OleDbConnection(connectionString)
                 conn.Open()
 
                 'Update the table name if neccessary
@@ -277,5 +246,53 @@ Public Class MealPlan
         '            MsgBox("No meals can be prepared with current inventory.", MsgBoxStyle.Exclamation, "No Available Meals")
         '        End If
         '    End Sub
+    End Sub
+
+    Private Sub btnRefresh_Click(sender As Object, e As EventArgs) Handles btnRefresh.Click
+        LoadMealPlanfromDatabase1()
+    End Sub
+
+    Private Sub btnSort_Click(sender As Object, e As EventArgs) Handles btnSort.Click
+        DataGridView1.Sort(DataGridView1.Columns("TotalCalories"), System.ComponentModel.ListSortDirection.Ascending)
+        DataGridView1.Sort(DataGridView1.Columns("StartDate"), System.ComponentModel.ListSortDirection.Ascending)
+    End Sub
+
+    Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
+        Try
+            Debug.WriteLine("Entering btnEdit_Click")
+            Using conn As New OleDbConnection(connectionString)
+                conn.Open()
+
+                Dim tablename As String = "MealPlans"
+                Using cmd As New OleDbCommand("INSERT INTO MealPlans ([StartDate], [EndDate], [Meals], [MealName], [Items], [TotalCalories], [Description], [FilePath], [Calories], [Frequency]) VALUES (@StartDate, @EndDate, @Meals, @MealName, @Items, @TotalCalories, @Description, @FilePath, @Calories, @Frequency)", conn)
+
+                    cmd.Parameters.AddWithValue("@StartDate", DateTimePicker1.Text)
+                    cmd.Parameters.AddWithValue("@EndDate", DateTimePicker2.Text)
+                    cmd.Parameters.AddWithValue("@Meals", ListBox1.SelectedItem.ToString)
+                    cmd.Parameters.AddWithValue("@MealName", TextBox4.Text)
+                    cmd.Parameters.AddWithValue("@Items", ComboBox2.SelectedItem.ToString)
+                    cmd.Parameters.AddWithValue("@TotalCalories", NumericUpDown1.Value)
+                    cmd.Parameters.AddWithValue("@Description", TextBox2.Text)
+                    cmd.Parameters.AddWithValue("@FilePath", TextBox3.Text)
+                    cmd.Parameters.AddWithValue("@Calories", ComboBox3.SelectedItem.ToString)
+                    cmd.Parameters.AddWithValue("@Frequency", ComboBox1.SelectedItem.ToString)
+                    cmd.ExecuteNonQuery()
+                End Using
+                MessageBox.Show("Edited successfully")
+
+            End Using
+
+            Debug.WriteLine("The data has been edited successfully")
+        Catch ex As OleDbException
+            Debug.WriteLine($"Database saving in btnEdit_Click: {ex.Message}")
+            Debug.WriteLine($"Stack Trace: {ex.StackTrace}")
+            ' MessageBox.Show("error saving expense to database. please check the connection.", "Database error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        Catch ex As Exception
+            MessageBox.Show($"Unexpected error: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Debug.WriteLine($"General error in btnEdit_Click: {ex.Message}")
+            Debug.WriteLine($"Stack Trace: {ex.StackTrace}")
+        End Try
+
+        Debug.WriteLine("Existing btnEdit_Click")
     End Sub
 End Class
