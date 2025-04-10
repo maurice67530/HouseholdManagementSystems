@@ -6,7 +6,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{DEC8BF09-6D70-450D-B49C-BFCF4DBBB6B8}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <StartupObject>HouseHoldManagement.Login</StartupObject>
+    <StartupObject>HouseHoldManagement.Notifications</StartupObject>
     <RootNamespace>HouseHoldManagement</RootNamespace>
     <AssemblyName>HouseHoldManagement</AssemblyName>
     <FileAlignment>512</FileAlignment>
@@ -148,6 +148,12 @@
     <Compile Include="Personnel.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Photo.Designer.vb">
+      <DependentUpon>Photo.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Photo.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Register.Designer.vb">
       <DependentUpon>Register.vb</DependentUpon>
     </Compile>
@@ -191,6 +197,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Personnel.resx">
       <DependentUpon>Personnel.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Photo.resx">
+      <DependentUpon>Photo.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Register.resx">
       <DependentUpon>Register.vb</DependentUpon>
