@@ -88,6 +88,8 @@ Module Rinae
     Public Const connectionString As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Rinae\Source\Repos\maurice67530\HouseholdManagementSystems\HMS.accdb"
 
 End Module
+
+'[Dongola] vhasongo silinga
 Module InventoryModule
     Public Const connectionString As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Dongola\Source\Repos\maurice67530\HouseholdManagementSystems\HMS.accdb"
 
