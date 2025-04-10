@@ -278,7 +278,17 @@ Public Class Expense
     End Sub
 
     Private Sub Button6_Click(sender As Object, e As EventArgs) Handles Button6.Click
-        ClearControlss(Me)
+
+        TextBox2.Text = ""
+        TextBox3.Text = ""
+        TextBox6.Text = ""
+        TextBox4.Text = ""
+        ComboBox2.SelectedItem = ""
+        TextBox5.Text = ""
+        ComboBox1.SelectedItem = ""
+        ComboBox5.SelectedItem = ""
+        ComboBox4.SelectedItem = ""
+        'DateTimePicker1.Text = ""
     End Sub
 
     Public Sub LoadExpenseDataFromDatabase()
