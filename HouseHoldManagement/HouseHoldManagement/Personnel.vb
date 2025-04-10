@@ -3,7 +3,7 @@ Imports System.Data.OleDb
 Public Class Personnel
 
     ' Connection to the database
-    Dim conn As New OleDbConnection("YourConnectionStringHere")
+    Dim conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
 
     ' Variables to hold user inputs
     Dim FirstName As String
@@ -92,6 +92,7 @@ Public Class Personnel
                 conn.Close()
             End If
         End Try
+        LoadData()
     End Sub
 
 
