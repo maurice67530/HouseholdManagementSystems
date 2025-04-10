@@ -7,7 +7,7 @@
     End Sub
 
     Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
-        ' Task.ShowDialog()
+        'Task.ShowDialog()
     End Sub
 
     Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
@@ -25,9 +25,13 @@
     End Sub
 
     Private Sub Button9_Click(sender As Object, e As EventArgs) Handles Button9.Click
-        'gallery.showdialog
+        ' gallery.showdialog
     End Sub
     Private Sub Button10_Click(sender As Object, e As EventArgs) Handles Button10.Click
         Notifications.ShowDialog()
+    End Sub
+
+    Private Sub Chart1_Click(sender As Object, e As EventArgs) Handles Chart1.Click
+
     End Sub
 End Class
