@@ -1,7 +1,8 @@
 ﻿Public Class Household_Class
 
 End Class
-Public Class Register
+Public Class Registration
+
     'properties of the Register class
     Public Property FullNames As String
     Public Property Password As Integer
@@ -103,7 +104,7 @@ Public Class DailyTask
             Public Property Email As String
             Public Property DateOfBirth As DateTime
             Public Property Role As String
-            Public Property HealthStatus As String
+            Public Property MaritalStatus As String
             Public Property postalcode As String
             Public Property Age As Integer
             Public Property Contact As Integer
