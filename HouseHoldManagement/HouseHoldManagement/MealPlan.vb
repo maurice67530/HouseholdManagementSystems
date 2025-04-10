@@ -20,12 +20,12 @@ Public Class MealPlan
                     cmd.Parameters.AddWithValue("@EndDate", DateTimePicker2.Text)
                     cmd.Parameters.AddWithValue("@Meals", ListBox1.SelectedItem.ToString)
                     cmd.Parameters.AddWithValue("@MealName", TextBox4.Text)
-                    cmd.Parameters.AddWithValue("@Items", ComboBox2.SelectedItem.ToString)
+                    cmd.Parameters.AddWithValue("@Items", ComboBox3.SelectedItem.ToString)
                     cmd.Parameters.AddWithValue("@TotalCalories", NumericUpDown1.Value)
                     cmd.Parameters.AddWithValue("@Description", TextBox2.Text)
                     cmd.Parameters.AddWithValue("@FilePath", TextBox3.Text)
-                    cmd.Parameters.AddWithValue("@Calories", ComboBox3.SelectedItem.ToString)
-                    cmd.Parameters.AddWithValue("@Frequency", ComboBox1.SelectedItem.ToString)
+                    cmd.Parameters.AddWithValue("@Calories", ComboBox1.SelectedItem.ToString)
+                    cmd.Parameters.AddWithValue("@Frequency", ComboBox2.SelectedItem.ToString)
                     cmd.ExecuteNonQuery()
                 End Using
                 MessageBox.Show("Edited successfully")
@@ -371,8 +371,6 @@ Public Class MealPlan
     Private Sub btnFilter_Click(sender As Object, e As EventArgs) Handles btnFilter.Click
 
         Dim SelectedCalories As String = If(ComboBox1.SelectedItem IsNot Nothing, ComboBox1.SelectedItem.ToString(), "")
-
-        'Dim StartDate As DateTime = If(DateTimePicker1.Text IsNot Nothing, DateTimePicker1.Value.ToString(), "")
         Module1.FilterMealPlan(SelectedCalories)
     End Sub
 End Class
