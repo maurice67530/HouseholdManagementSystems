@@ -3,7 +3,7 @@ Imports System.Data.OleDb
 Public Class Login
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
 
-        Using conn As New OleDbConnection(Xiluva.connectionString)
+        Using conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
             Try
                 conn.Open()
 
