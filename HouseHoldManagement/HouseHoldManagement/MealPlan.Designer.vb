@@ -404,7 +404,7 @@ Partial Class MealPlan
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.SystemColors.Control
-        Me.ClientSize = New System.Drawing.Size(663, 469)
+        Me.ClientSize = New System.Drawing.Size(663, 486)
         Me.Controls.Add(Me.btnSuggest)
         Me.Controls.Add(Me.btnPrint)
         Me.Controls.Add(Me.btnDelete)

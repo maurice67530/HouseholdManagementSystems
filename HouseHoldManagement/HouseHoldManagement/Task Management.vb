@@ -1,5 +1,5 @@
 ﻿Imports System.Data.OleDb
-
+Imports HouseHoldManagement
 Public Class Task_Management
     Public Const connectionString As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\khodani\Source\Repos\maurice67530\HouseholdManagementSystems\HMS.accdb"
     Dim conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
@@ -232,14 +232,30 @@ Public Class Task_Management
     Private Sub Button6_Click(sender As Object, e As EventArgs) Handles Button6.Click
         DataGridView1.Sort(DataGridView1.Columns("DueDate"), System.ComponentModel.ListSortDirection.Ascending)
     End Sub
-
     Private Sub Button8_Click(sender As Object, e As EventArgs) Handles Button8.Click
         Dashboard.Show()
         Me.Close()
     End Sub
+    Public Sub LoadTaskDataFromDatabase()
 
+        Debug.WriteLine(" Task load has been initialised!")
+        Using conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
+            conn.Open()
+
+            Dim TableName As String = "Tasks"
+
+            Dim cmd As New OleDbCommand($"SELECT*FROM {TableName}", conn)
+
+            Dim da As New OleDbDataAdapter(cmd)
+            Dim dt As New DataTable
+            da.Fill(dt)
+
+            DataGridView1.DataSource = dt
+
+        End Using
+    End Sub
     Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
-
+        LoadTaskDataFromDatabase()
     End Sub
 
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
