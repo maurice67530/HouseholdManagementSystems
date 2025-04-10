@@ -150,7 +150,7 @@ Public Class Personnel
                 cmd.Parameters.AddWithValue("@PostalCode", TextBox6.Text)
                 cmd.Parameters.AddWithValue("@HealthStatus", TextBox9.Text)
                 cmd.Parameters.AddWithValue("@Deleter", TextBox7.Text)
-                cmd.Parameters.AddWithValue("@ID", CInt(TextBox1.Text))
+                cmd.Parameters.AddWithValue("@ID", CInt(TextBox8.Text))
                 cmd.ExecuteNonQuery()
             End Using
             MessageBox.Show("Member updated successfully.")
@@ -168,7 +168,7 @@ Public Class Personnel
             conn.Open()
             Dim query As String = "DELETE FROM PersonalDetails WHERE ID = ?"
             Using cmd As New OleDbCommand(query, conn)
-                cmd.Parameters.AddWithValue("@ID", CInt(TextBox1.Text))
+                cmd.Parameters.AddWithValue("@ID", CInt(TextBox8.Text))
                 cmd.ExecuteNonQuery()
             End Using
             MessageBox.Show("Member deleted successfully.")
