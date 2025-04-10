@@ -215,8 +215,6 @@ Public Class Expense
         ' Check if there are any selected rows in the DataGridView for expenses  
         If DataGridView1.SelectedRows.Count > 0 Then
 
-
-
             ' Get the selected row  
             Dim selectedRow As DataGridViewRow = DataGridView1.SelectedRows(0)
 
@@ -280,16 +278,23 @@ Public Class Expense
     End Sub
 
     Private Sub Button6_Click(sender As Object, e As EventArgs) Handles Button6.Click
-        'PrintDialog1.Document = PrintDocument1
-        'If PrintDialog1.ShowDialog() = DialogResult.OK Then
-        '    'LoadFilteredMealPlan() ' Load filtered data based on selected frequency
-        '    If mealPlanData.Rows.Count > 0 Then
-        '        PrintDocument1.Print()
-        '    Else
-        '        MessageBox.Show("No meal plans found for the selected period.", "Print Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-        '    End If
-        'End If
+        TextBox1.Text = ""
+        TextBox2.Text = ""
+        TextBox3.Text = ""
+        TextBox6.Text = ""
+        TextBox4.Text = ""
+        ComboBox2.SelectedItem = ""
+        TextBox5.Text = ""
+        ComboBox1.SelectedItem = ""
+        ComboBox5.SelectedItem = ""
+        ComboBox4.SelectedItem = ""
+        TextBox7.Text = ""
+        ComboBox3.SelectedItem = ""
+        'ComboBox4.SelectedItem = ""
+        'ComboBox5.SelectedItem = ""
+        'DateTimePicker1.Text = ""
     End Sub
+
     Public Sub LoadExpenseDataFromDatabase()
 
         Debug.WriteLine("LoadMealPlansDataFromDatabase")
@@ -322,7 +327,7 @@ Public Class Expense
         toolTip.ShowAlways = True
 
         toolTip1.SetToolTip(Button5, "Sort")
-        toolTip1.SetToolTip(Button6, "Print to Doc")
+        toolTip1.SetToolTip(Button6, "Clear controls")
         toolTip1.SetToolTip(Button3, "Edit")
         toolTip1.SetToolTip(Button4, "Delete")
         toolTip1.SetToolTip(Button7, "Calculate Budget")
@@ -355,12 +360,10 @@ Public Class Expense
                         ' Handle other frequencies as needed  
                 End Select
 
-
             End If
-
             ' Display total and average expenses on the form  
-            Label15.Text = $" R {totalExpenses:N2}"
-            Label16.Text = $" {ComboBox5.SelectedItem}: R {averageExpenses:N2}"
+            Label15.Text = $"Total Expense: R {totalExpenses:N2}"
+            'Label16.Text = $" {ComboBox5.SelectedItem}: R {averageExpenses:N2}"
 
         Catch ex As FormatException
             Debug.WriteLine("Invalid format in Button6_Click: Amount should be in numbers.")
@@ -373,9 +376,58 @@ Public Class Expense
             Debug.WriteLine($"Unexpected error in Button6_Click: {ex.Message}")
             MessageBox.Show("An unexpected error occured during calculations.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
-
         Debug.WriteLine($"Calculation complete. Total:{totalExpenses},Avarage:{averageExpenses}")
         Debug.WriteLine("Exiting btnCalculate")
 
     End Sub
+
+    Private Sub DataGridView1_SelectionChanged(sender As Object, e As EventArgs) Handles DataGridView1.SelectionChanged
+ Try
+
+            Debug.WriteLine("selecting data in the datagridview")
+            If DataGridView1.SelectedRows.Count > 0 Then
+                Dim selectedRow As DataGridViewRow = DataGridView1.SelectedRows(0)
+
+                ' Load the data from the selected row into UI controls  
+                TextBox2.Text = selectedRow.Cells("Amount").Value.ToString()
+                TextBox3.Text = selectedRow.Cells("TotalIncome").Value.ToString()
+                TextBox6.Text = selectedRow.Cells("Description").Value.ToString()
+                TextBox4.Text = selectedRow.Cells("Tags").Value.ToString()
+                ComboBox2.SelectedItem = selectedRow.Cells("currency").Value.ToString()
+                TextBox5.Text = selectedRow.Cells("Category").Value.ToString()
+                ComboBox1.SelectedItem = selectedRow.Cells("Paymentmethod").Value.ToString()
+                ComboBox5.SelectedItem = selectedRow.Cells("Frequency").Value.ToString()
+                ComboBox4.SelectedItem = selectedRow.Cells("Approvalstatus").Value.ToString()
+                DateTimePicker1.Text = selectedRow.Cells("Dateofexpenses").Value.ToString()
+
+            End If
+        Catch ex As Exception
+            Debug.WriteLine("error selection data in the database")
+            Debug.WriteLine($"Stack Trace: {ex.StackTrace}")
+        End Try
+    End Sub
+    Public Sub ClearControlss(ByVal FORM As Form)
+        ' Clear TextBoxes  
+        For Each ctrl As Control In FORM.Controls
+            If TypeOf ctrl Is TextBox Then
+                CType(ctrl, TextBox).Clear()
+            End If
+        Next
+
+        ' Clear ComboBoxes  
+        For Each ctrl As Control In FORM.Controls
+            If TypeOf ctrl Is ComboBox Then
+                CType(ctrl, ComboBox).ResetText()
+            End If
+        Next
+
+        ' Clear DateTimePickers  
+        For Each ctrl As Control In FORM.Controls
+            If TypeOf ctrl Is DateTimePicker Then
+                CType(ctrl, DateTimePicker).Value = DateTimePicker.MinimumDateTime ' or set to a specific date  
+            End If
+        Next
+    End Sub
+
 End Class
+
