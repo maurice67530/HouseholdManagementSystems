@@ -134,4 +134,51 @@ Public Class Personnel
 
     End Sub
 
+    Private Sub BtnEdit_Click(sender As Object, e As EventArgs) Handles BtnEdit.Click
+        Try
+            conn.Open()
+            Dim query As String = "UPDATE PersonalDetails SET FirstName = ?, LastName = ?, DateOfBirth = ?, Email = ?, Contact = ?, Age = ?, Role = ?, Gender = ?, PostalCode = ?, HealthStatus = ?, Deleter = ? WHERE ID = ?"
+            Using cmd As New OleDbCommand(query, conn)
+                cmd.Parameters.AddWithValue("@FirstName", TextBox1.Text)
+                cmd.Parameters.AddWithValue("@LastName", TextBox2.Text)
+                cmd.Parameters.AddWithValue("@DateOfBirth", DateTimePicker1.Value.ToString)
+                cmd.Parameters.AddWithValue("@Email", TextBox4.Text)
+                cmd.Parameters.AddWithValue("@Contact", TextBox3.Text)
+                cmd.Parameters.AddWithValue("@Age", TextBox5.Text)
+                cmd.Parameters.AddWithValue("@Role", ComboBox1.SelectedItem.ToString)
+                cmd.Parameters.AddWithValue("@Gender", ComboBox3.SelectedItem.ToString)
+                cmd.Parameters.AddWithValue("@PostalCode", TextBox6.Text)
+                cmd.Parameters.AddWithValue("@HealthStatus", TextBox9.Text)
+                cmd.Parameters.AddWithValue("@Deleter", TextBox7.Text)
+                cmd.Parameters.AddWithValue("@ID", CInt(TextBox1.Text))
+                cmd.ExecuteNonQuery()
+            End Using
+            MessageBox.Show("Member updated successfully.")
+            LoadData()
+
+        Catch ex As Exception
+            MessageBox.Show("Update failed: " & ex.Message)
+        Finally
+            conn.Close()
+        End Try
+    End Sub
+
+    Private Sub BtnDelete_Click(sender As Object, e As EventArgs) Handles BtnDelete.Click
+        Try
+            conn.Open()
+            Dim query As String = "DELETE FROM PersonalDetails WHERE ID = ?"
+            Using cmd As New OleDbCommand(query, conn)
+                cmd.Parameters.AddWithValue("@ID", CInt(TextBox1.Text))
+                cmd.ExecuteNonQuery()
+            End Using
+            MessageBox.Show("Member deleted successfully.")
+            LoadData()
+
+        Catch ex As Exception
+            MessageBox.Show("Delete failed: " & ex.Message)
+        Finally
+            conn.Close()
+        End Try
+
+    End Sub
 End Class
