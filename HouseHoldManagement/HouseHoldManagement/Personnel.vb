@@ -164,7 +164,7 @@ Public Class Personnel
 
             MessageBox.Show("Member updated successfully.")
             LoadData()
-
+            ClearForm()
 
         Catch ex As Exception
             MessageBox.Show("Update failed: " & ex.Message)
@@ -197,7 +197,7 @@ Public Class Personnel
 
             MessageBox.Show("Member deleted successfully.")
             LoadData()
-
+            ClearForm()
 
         Catch ex As Exception
             MessageBox.Show("Delete failed: " & ex.Message)
@@ -229,5 +229,20 @@ Public Class Personnel
                 DateTimePicker1.Value = row.Cells("DateOfBirth").Value.ToString()
             End If
         End If
+    End Sub
+
+    Private Sub ClearForm()
+        TextBox8.Clear()
+        TextBox1.Clear()
+        TextBox2.Clear()
+        'DateTimePicker1.CLEAR
+        TextBox4.Clear()
+        TextBox3.Clear()
+        TextBox5.Clear()
+        'ComboBox1.CLEAR
+        'ComboBox3.CLEAR
+        TextBox6.Clear()
+        'ComboBox2.CLEAR
+
     End Sub
 End Class
