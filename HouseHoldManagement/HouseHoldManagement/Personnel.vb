@@ -137,26 +137,34 @@ Public Class Personnel
     End Sub
 
     Private Sub BtnEdit_Click(sender As Object, e As EventArgs) Handles BtnEdit.Click
+        ' Check if a member is selected
+        If String.IsNullOrWhiteSpace(TextBox8.Text) Then
+            MessageBox.Show("Please select a member from the table before updating.", "Selection Required", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            Exit Sub
+        End If
+
         Try
             conn.Open()
-            Dim query As String = "UPDATE PersonalDetails SET FirstName = ?, LastName = ?, DateOfBirth = ?, Email = ?, Contact = ?, Age = ?, Role = ?, Gender = ?, PostalCode = ?, MaritalStatus = ? WHERE ID = ?"
+            Dim query As String = "UPDATE PersonalDetails SET FirstName = ?, LastName = ?, DateOfBirth = ?, Contact = ?, Email = ?, Age = ? , Role = ?, Gender = ?, PostalCode = ?, MaritalStatus = ? WHERE ID = ?"
+
             Using cmd As New OleDbCommand(query, conn)
                 cmd.Parameters.AddWithValue("@FirstName", TextBox1.Text)
                 cmd.Parameters.AddWithValue("@LastName", TextBox2.Text)
-                cmd.Parameters.AddWithValue("@DateOfBirth", DateTimePicker1.Value.ToString)
-                cmd.Parameters.AddWithValue("@Email", TextBox4.Text)
+                cmd.Parameters.AddWithValue("@DateOfBirth", DateTimePicker1.Value)
                 cmd.Parameters.AddWithValue("@Contact", TextBox3.Text)
+                cmd.Parameters.AddWithValue("@Email", TextBox4.Text)
                 cmd.Parameters.AddWithValue("@Age", TextBox5.Text)
-                cmd.Parameters.AddWithValue("@Role", ComboBox1.SelectedItem.ToString)
-                cmd.Parameters.AddWithValue("@Gender", ComboBox3.SelectedItem.ToString)
+                cmd.Parameters.AddWithValue("@Role", ComboBox1.SelectedItem)
+                cmd.Parameters.AddWithValue("@Gender", ComboBox3.SelectedItem)
                 cmd.Parameters.AddWithValue("@PostalCode", TextBox6.Text)
-                cmd.Parameters.AddWithValue("@MaritalStatus", ComboBox2.SelectedItem.ToString)
-                'cmd.Parameters.AddWithValue("@Deleter", TextBox7.Text)
+                cmd.Parameters.AddWithValue("@MaritalStatus", ComboBox2.SelectedItem)
                 cmd.Parameters.AddWithValue("@ID", CInt(TextBox8.Text))
                 cmd.ExecuteNonQuery()
             End Using
+
             MessageBox.Show("Member updated successfully.")
             LoadData()
+
 
         Catch ex As Exception
             MessageBox.Show("Update failed: " & ex.Message)
@@ -166,23 +174,39 @@ Public Class Personnel
     End Sub
 
     Private Sub BtnDelete_Click(sender As Object, e As EventArgs) Handles BtnDelete.Click
+        ' Check if a member is selected
+        If String.IsNullOrWhiteSpace(TextBox8.Text) Then
+            MessageBox.Show("Please select a member from the table before deleting.", "Selection Required", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            Exit Sub
+        End If
+
+        ' Confirm before deletion
+        Dim confirmDelete As DialogResult = MessageBox.Show("Are you sure you want to delete this member?", "Confirm Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
+        If confirmDelete = DialogResult.No Then
+            Exit Sub
+        End If
+
         Try
             conn.Open()
             Dim query As String = "DELETE FROM PersonalDetails WHERE ID = ?"
+
             Using cmd As New OleDbCommand(query, conn)
                 cmd.Parameters.AddWithValue("@ID", CInt(TextBox8.Text))
                 cmd.ExecuteNonQuery()
             End Using
+
             MessageBox.Show("Member deleted successfully.")
             LoadData()
+
 
         Catch ex As Exception
             MessageBox.Show("Delete failed: " & ex.Message)
         Finally
             conn.Close()
         End Try
-
     End Sub
+
+
 
     Private Sub BtnBack_Click(sender As Object, e As EventArgs) Handles BtnBack.Click
 
