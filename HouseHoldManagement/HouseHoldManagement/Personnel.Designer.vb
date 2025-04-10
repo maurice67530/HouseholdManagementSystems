@@ -24,10 +24,7 @@ Partial Class Personnel
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Personnel))
         Me.Label14 = New System.Windows.Forms.Label()
-        Me.TextBox7 = New System.Windows.Forms.TextBox()
-        Me.Label12 = New System.Windows.Forms.Label()
         Me.Label13 = New System.Windows.Forms.Label()
-        Me.TextBox9 = New System.Windows.Forms.TextBox()
         Me.DateTimePicker1 = New System.Windows.Forms.DateTimePicker()
         Me.ComboBox3 = New System.Windows.Forms.ComboBox()
         Me.ComboBox1 = New System.Windows.Forms.ComboBox()
@@ -56,6 +53,9 @@ Partial Class Personnel
         Me.BtnBack = New System.Windows.Forms.Button()
         Me.BtnEdit = New System.Windows.Forms.Button()
         Me.BtnSave = New System.Windows.Forms.Button()
+        Me.Label10 = New System.Windows.Forms.Label()
+        Me.TextBox8 = New System.Windows.Forms.TextBox()
+        Me.ComboBox2 = New System.Windows.Forms.ComboBox()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -69,45 +69,17 @@ Partial Class Personnel
         Me.Label14.TabIndex = 66
         Me.Label14.Text = "Picture"
         '
-        'TextBox7
-        '
-        Me.TextBox7.Location = New System.Drawing.Point(481, 330)
-        Me.TextBox7.Name = "TextBox7"
-        Me.TextBox7.ReadOnly = True
-        Me.TextBox7.Size = New System.Drawing.Size(239, 20)
-        Me.TextBox7.TabIndex = 65
-        Me.TextBox7.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        '
-        'Label12
-        '
-        Me.Label12.AutoSize = True
-        Me.Label12.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        Me.Label12.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label12.Location = New System.Drawing.Point(393, 328)
-        Me.Label12.Name = "Label12"
-        Me.Label12.Size = New System.Drawing.Size(55, 17)
-        Me.Label12.TabIndex = 64
-        Me.Label12.Text = "Deleter :"
-        '
         'Label13
         '
         Me.Label13.BackColor = System.Drawing.Color.Transparent
         Me.Label13.Font = New System.Drawing.Font("Segoe Print", 20.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label13.ForeColor = System.Drawing.Color.Black
-        Me.Label13.Location = New System.Drawing.Point(227, 8)
+        Me.Label13.Location = New System.Drawing.Point(213, 9)
         Me.Label13.Name = "Label13"
         Me.Label13.Size = New System.Drawing.Size(287, 40)
         Me.Label13.TabIndex = 62
         Me.Label13.Text = "Personnel"
         Me.Label13.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'TextBox9
-        '
-        Me.TextBox9.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox9.Location = New System.Drawing.Point(92, 231)
-        Me.TextBox9.Name = "TextBox9"
-        Me.TextBox9.Size = New System.Drawing.Size(267, 21)
-        Me.TextBox9.TabIndex = 61
         '
         'DateTimePicker1
         '
@@ -399,11 +371,40 @@ Partial Class Personnel
         Me.BtnSave.TextAlign = System.Drawing.ContentAlignment.BottomCenter
         Me.BtnSave.UseVisualStyleBackColor = False
         '
+        'Label10
+        '
+        Me.Label10.AutoSize = True
+        Me.Label10.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.Label10.Location = New System.Drawing.Point(15, 54)
+        Me.Label10.Name = "Label10"
+        Me.Label10.Size = New System.Drawing.Size(20, 15)
+        Me.Label10.TabIndex = 82
+        Me.Label10.Text = "ID"
+        '
+        'TextBox8
+        '
+        Me.TextBox8.Location = New System.Drawing.Point(91, 54)
+        Me.TextBox8.Name = "TextBox8"
+        Me.TextBox8.Size = New System.Drawing.Size(268, 20)
+        Me.TextBox8.TabIndex = 83
+        '
+        'ComboBox2
+        '
+        Me.ComboBox2.FormattingEnabled = True
+        Me.ComboBox2.Items.AddRange(New Object() {"Single", "Married"})
+        Me.ComboBox2.Location = New System.Drawing.Point(92, 229)
+        Me.ComboBox2.Name = "ComboBox2"
+        Me.ComboBox2.Size = New System.Drawing.Size(267, 21)
+        Me.ComboBox2.TabIndex = 84
+        '
         'Personnel
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(725, 592)
+        Me.Controls.Add(Me.ComboBox2)
+        Me.Controls.Add(Me.TextBox8)
+        Me.Controls.Add(Me.Label10)
         Me.Controls.Add(Me.BtnDailyTasks)
         Me.Controls.Add(Me.BtnClear)
         Me.Controls.Add(Me.BtnDelete)
@@ -413,11 +414,8 @@ Partial Class Personnel
         Me.Controls.Add(Me.BtnSave)
         Me.Controls.Add(Me.DataGridView1)
         Me.Controls.Add(Me.Label14)
-        Me.Controls.Add(Me.TextBox7)
-        Me.Controls.Add(Me.Label12)
         Me.Controls.Add(Me.PictureBox1)
         Me.Controls.Add(Me.Label13)
-        Me.Controls.Add(Me.TextBox9)
         Me.Controls.Add(Me.DateTimePicker1)
         Me.Controls.Add(Me.ComboBox3)
         Me.Controls.Add(Me.ComboBox1)
@@ -448,11 +446,8 @@ Partial Class Personnel
     End Sub
 
     Friend WithEvents Label14 As Label
-    Friend WithEvents TextBox7 As TextBox
-    Friend WithEvents Label12 As Label
     Friend WithEvents PictureBox1 As PictureBox
     Friend WithEvents Label13 As Label
-    Friend WithEvents TextBox9 As TextBox
     Friend WithEvents DateTimePicker1 As DateTimePicker
     Friend WithEvents ComboBox3 As ComboBox
     Friend WithEvents ComboBox1 As ComboBox
@@ -480,4 +475,7 @@ Partial Class Personnel
     Friend WithEvents BtnBack As Button
     Friend WithEvents BtnEdit As Button
     Friend WithEvents BtnSave As Button
+    Friend WithEvents Label10 As Label
+    Friend WithEvents TextBox8 As TextBox
+    Friend WithEvents ComboBox2 As ComboBox
 End Class
