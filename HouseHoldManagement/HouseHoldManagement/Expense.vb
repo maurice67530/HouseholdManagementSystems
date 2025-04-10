@@ -280,15 +280,44 @@ Public Class Expense
     End Sub
 
     Private Sub Button6_Click(sender As Object, e As EventArgs) Handles Button6.Click
-        'PrintDialog1.Document = PrintDocument1
-        'If PrintDialog1.ShowDialog() = DialogResult.OK Then
-        '    'LoadFilteredMealPlan() ' Load filtered data based on selected frequency
-        '    If mealPlanData.Rows.Count > 0 Then
-        '        PrintDocument1.Print()
-        '    Else
-        '        MessageBox.Show("No meal plans found for the selected period.", "Print Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-        '    End If
-        'End If
+        PrintDialog1.Document = PrintDocument1
+        If PrintDialog1.ShowDialog() = DialogResult.OK Then
+            LoadFilteredMealPlan() ' Load filtered data based on selected frequency
+            If mealPlanData.Rows.Count > 0 Then
+                PrintDocument1.Print()
+            Else
+                MessageBox.Show("No meal plans found for the selected period.", "Print Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            End If
+        End If
+    End Sub
+    Private Sub LoadFilteredMealPlan()
+        Using dbConnection As New OleDbConnection(connectionString)
+            Dim selectedFilter As String = ComboBox5.SelectedItem?.ToString()
+            Dim query As String = "SELECT * FROM Expense WHERE filter = ? AND 1=1"
+            Dim startDate As Date = Date.Today
+            Dim endDate As Date = Date.Today
+
+            If Not String.IsNullOrEmpty(selectedFilter) Then
+                Select Case selectedFilter
+                    Case "Day"
+                        endDate = startDate
+                    Case "Week"
+                        endDate = startDate.AddDays(7)
+                    Case "Month"
+                        endDate = startDate.AddMonths(1)
+                End Select
+            End If
+
+            ' Create command with parameters
+            Dim cmd As New OleDbCommand(query, dbConnection)
+            cmd.Parameters.AddWithValue("?", selectedFilter) ' Bind Frequency value
+
+            Dim adapter As New OleDbDataAdapter(cmd)
+            mealPlanData = New DataTable()
+            adapter.Fill(mealPlanData)
+
+            DataGridView1.DataSource = mealPlanData ' Display filtered data in DataGridView
+        End Using
     End Sub
     Public Sub LoadExpenseDataFromDatabase()
 

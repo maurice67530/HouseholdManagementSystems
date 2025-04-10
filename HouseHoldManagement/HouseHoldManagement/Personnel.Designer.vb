@@ -127,7 +127,7 @@ Partial Class Personnel
         Me.ComboBox3.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ComboBox3.FormattingEnabled = True
         Me.ComboBox3.Items.AddRange(New Object() {"Male", "Female"})
-        Me.ComboBox3.Location = New System.Drawing.Point(92, 333)
+        Me.ComboBox3.Location = New System.Drawing.Point(99, 333)
         Me.ComboBox3.Name = "ComboBox3"
         Me.ComboBox3.Size = New System.Drawing.Size(267, 23)
         Me.ComboBox3.TabIndex = 59
@@ -137,7 +137,7 @@ Partial Class Personnel
         Me.ComboBox1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ComboBox1.FormattingEnabled = True
         Me.ComboBox1.Items.AddRange(New Object() {"User", "Mother", "Father", "Child", "Nanny", "Book Editor", "Administrator", ""})
-        Me.ComboBox1.Location = New System.Drawing.Point(92, 301)
+        Me.ComboBox1.Location = New System.Drawing.Point(99, 301)
         Me.ComboBox1.Name = "ComboBox1"
         Me.ComboBox1.Size = New System.Drawing.Size(267, 23)
         Me.ComboBox1.TabIndex = 58
@@ -145,7 +145,7 @@ Partial Class Personnel
         'TextBox6
         '
         Me.TextBox6.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox6.Location = New System.Drawing.Point(92, 269)
+        Me.TextBox6.Location = New System.Drawing.Point(99, 269)
         Me.TextBox6.Name = "TextBox6"
         Me.TextBox6.Size = New System.Drawing.Size(267, 21)
         Me.TextBox6.TabIndex = 57
@@ -153,7 +153,7 @@ Partial Class Personnel
         'TextBox5
         '
         Me.TextBox5.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox5.Location = New System.Drawing.Point(92, 209)
+        Me.TextBox5.Location = New System.Drawing.Point(99, 209)
         Me.TextBox5.Name = "TextBox5"
         Me.TextBox5.Size = New System.Drawing.Size(267, 21)
         Me.TextBox5.TabIndex = 56
@@ -161,7 +161,7 @@ Partial Class Personnel
         'TextBox4
         '
         Me.TextBox4.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox4.Location = New System.Drawing.Point(92, 179)
+        Me.TextBox4.Location = New System.Drawing.Point(99, 179)
         Me.TextBox4.Name = "TextBox4"
         Me.TextBox4.Size = New System.Drawing.Size(267, 21)
         Me.TextBox4.TabIndex = 55
@@ -169,7 +169,7 @@ Partial Class Personnel
         'TextBox3
         '
         Me.TextBox3.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox3.Location = New System.Drawing.Point(92, 149)
+        Me.TextBox3.Location = New System.Drawing.Point(99, 149)
         Me.TextBox3.Name = "TextBox3"
         Me.TextBox3.Size = New System.Drawing.Size(267, 21)
         Me.TextBox3.TabIndex = 54
@@ -177,7 +177,7 @@ Partial Class Personnel
         'TextBox2
         '
         Me.TextBox2.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox2.Location = New System.Drawing.Point(92, 120)
+        Me.TextBox2.Location = New System.Drawing.Point(99, 120)
         Me.TextBox2.Name = "TextBox2"
         Me.TextBox2.Size = New System.Drawing.Size(267, 21)
         Me.TextBox2.TabIndex = 53
@@ -185,7 +185,7 @@ Partial Class Personnel
         'TextBox1
         '
         Me.TextBox1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox1.Location = New System.Drawing.Point(92, 90)
+        Me.TextBox1.Location = New System.Drawing.Point(99, 90)
         Me.TextBox1.Name = "TextBox1"
         Me.TextBox1.Size = New System.Drawing.Size(267, 21)
         Me.TextBox1.TabIndex = 52
@@ -406,7 +406,7 @@ Partial Class Personnel
         '
         'TextBox8
         '
-        Me.TextBox8.Location = New System.Drawing.Point(92, 60)
+        Me.TextBox8.Location = New System.Drawing.Point(99, 60)
         Me.TextBox8.Name = "TextBox8"
         Me.TextBox8.Size = New System.Drawing.Size(267, 20)
         Me.TextBox8.TabIndex = 76
@@ -414,10 +414,9 @@ Partial Class Personnel
         'ComboBox2
         '
         Me.ComboBox2.FormattingEnabled = True
-        Me.ComboBox2.Items.AddRange(New Object() {"Single", "Married"})
-        Me.ComboBox2.Location = New System.Drawing.Point(92, 235)
+        Me.ComboBox2.Location = New System.Drawing.Point(99, 235)
         Me.ComboBox2.Name = "ComboBox2"
-        Me.ComboBox2.Size = New System.Drawing.Size(121, 21)
+        Me.ComboBox2.Size = New System.Drawing.Size(267, 21)
         Me.ComboBox2.TabIndex = 77
         '
         'Personnel
