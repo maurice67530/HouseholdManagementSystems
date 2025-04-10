@@ -6,7 +6,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{DEC8BF09-6D70-450D-B49C-BFCF4DBBB6B8}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <StartupObject>HouseHoldManagement.Login</StartupObject>
+    <StartupObject>HouseHoldManagement.Form2</StartupObject>
     <RootNamespace>HouseHoldManagement</RootNamespace>
     <AssemblyName>HouseHoldManagement</AssemblyName>
     <FileAlignment>512</FileAlignment>
@@ -101,6 +101,12 @@
       <DependentUpon>Form1.vb</DependentUpon>
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="GroceryItems.Designer.vb">
+      <DependentUpon>GroceryItems.vb</DependentUpon>
+    </Compile>
+    <Compile Include="GroceryItems.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Household Class.vb" />
     <Compile Include="HouseHoldManagment Module.vb" />
     <Compile Include="Inventory.Designer.vb">
@@ -172,6 +178,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Expense.resx">
       <DependentUpon>Expense.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GroceryItems.resx">
+      <DependentUpon>GroceryItems.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Inventory.resx">
       <DependentUpon>Inventory.vb</DependentUpon>
