@@ -165,9 +165,9 @@ Partial Class Personnel
         Me.Label11.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label11.Location = New System.Drawing.Point(13, 238)
         Me.Label11.Name = "Label11"
-        Me.Label11.Size = New System.Drawing.Size(91, 17)
+        Me.Label11.Size = New System.Drawing.Size(84, 17)
         Me.Label11.TabIndex = 51
-        Me.Label11.Text = "Maritual Status"
+        Me.Label11.Text = "Marital Status"
         '
         'Label9
         '

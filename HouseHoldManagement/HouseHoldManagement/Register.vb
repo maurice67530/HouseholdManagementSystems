@@ -1,14 +1,14 @@
 ﻿Imports System.Data.OleDb
 Public Class Register
       Public Property conn As New OleDbConnection(connectionString)
-    ' Connection string using relative path to the database
+
     Public Const connectionString As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Xiluva\Source\Repos\maurice67530\HouseholdManagementSystems\HMS.accdb;Persist Security Info=False;"
 
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
 
         Try
             conn.Open()
-            ' Check if Username or Email already exists
+
             Dim checkCmd As New OleDbCommand("SELECT COUNT(*) FROM Users WHERE UserName = ? OR Password = ?", conn)
             checkCmd.Parameters.AddWithValue("?", TextBox3.Text)
             checkCmd.Parameters.AddWithValue("?", TextBox2.Text)
@@ -19,7 +19,7 @@ Public Class Register
                 Exit Sub
             End If
 
-            ' Insert new user
+
             Dim cmd As New OleDbCommand("INSERT INTO Users ([FullNames], [UserName], [Email], [Password], [Role], [DateCreated]) VALUES (?, ?, ?, ?, ?, ?)", conn)
             cmd.Parameters.AddWithValue("?", TextBox1.Text)
             cmd.Parameters.AddWithValue("?", TextBox3.Text)
@@ -30,7 +30,6 @@ Public Class Register
 
             cmd.ExecuteNonQuery()
             MessageBox.Show("Registration successful!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
-
 
             Me.Hide()
             Login.Show()
