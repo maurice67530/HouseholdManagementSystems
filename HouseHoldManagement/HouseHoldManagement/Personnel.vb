@@ -13,16 +13,16 @@ Public Class Personnel
         toolTip.ReshowDelay = 200
         toolTip.ShowAlways = True
 
-        toolTip1.SetToolTip(Button3, "Back")
-        toolTip1.SetToolTip(Button4, "Add a Picture")
-        toolTip1.SetToolTip(Button2, "Edit")
-        toolTip1.SetToolTip(Button5, "Delete")
-        toolTip1.SetToolTip(Button6, "Clear")
-        toolTip1.SetToolTip(Button7, "Daily tasks")
-        toolTip1.SetToolTip(Button1, "Save")
+        toolTip1.SetToolTip(BtnBack, "Back")
+        toolTip1.SetToolTip(BtnAddpicture, "Add a Picture")
+        toolTip1.SetToolTip(BtnEdit, "Edit")
+        toolTip1.SetToolTip(BtnDelete, "Delete")
+        toolTip1.SetToolTip(BtnClear, "Clear")
+        toolTip1.SetToolTip(BtnDailyTasks, "Daily tasks")
+        toolTip1.SetToolTip(BtnSave, "Save")
     End Sub
 
-    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles BtnSave.Click
 
         ' Connection to the database
         Dim conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
@@ -55,7 +55,7 @@ Public Class Personnel
         Deleter = TextBox7.Text
         ' Open the connection
         Try
-                conn.Open()
+            conn.Open()
 
             ' SQL query to insert the data
             Dim query As String = "INSERT INTO PersonalDetails (FirstName, LastName, DateOfBirth, Email, Contact, Age, Role, Gender, PostalCode, HealthStatus, Deleter) " &
@@ -77,22 +77,22 @@ Public Class Personnel
             ' Execute the query
             Dim rowsAffected As Integer = cmd.ExecuteNonQuery()
 
-                ' Show confirmation message
-                If rowsAffected > 0 Then
-                    MessageBox.Show(rowsAffected.ToString() & " record inserted successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
-                Else
-                    MessageBox.Show("No records were inserted.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-                End If
-            Catch ex As Exception
-                ' Handle any errors
-                MessageBox.Show("An error occurred: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-            Finally
-                ' Ensure the connection is closed even if an error occurs
-                If conn.State = ConnectionState.Open Then
-                    conn.Close()
-                End If
-            End Try
-        End Sub
+            ' Show confirmation message
+            If rowsAffected > 0 Then
+                MessageBox.Show(rowsAffected.ToString() & " record inserted successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
+            Else
+                MessageBox.Show("No records were inserted.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            End If
+        Catch ex As Exception
+            ' Handle any errors
+            MessageBox.Show("An error occurred: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        Finally
+            ' Ensure the connection is closed even if an error occurs
+            If conn.State = ConnectionState.Open Then
+                conn.Close()
+            End If
+        End Try
+    End Sub
 
     ' Method to load data into the DataGridView
     Private Sub LoadData()
