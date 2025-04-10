@@ -91,7 +91,10 @@ Module Module1
 
 End Module
 
+Module Rinae
+    Public Const connectionString As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Rinae\Source\Repos\maurice67530\HouseholdManagementSystems\HMS.accdb"
 
+End Module
 Module InventoryModule
     Public Const connectionString As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Dongola\Source\Repos\maurice67530\HouseholdManagementSystems\HMS.accdb"
 
@@ -130,8 +133,6 @@ Module InventoryModule
             conn.Close()
         End Try
     End Sub
-    '  Module personel
-    'Public Const connectionString As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Rinae\Source\Repos\maurice67530\HouseholdManagementSystems\HMS.accdb"
 
 
 End Module
