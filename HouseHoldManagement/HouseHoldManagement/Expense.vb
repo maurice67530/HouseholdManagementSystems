@@ -280,15 +280,44 @@ Public Class Expense
     End Sub
 
     Private Sub Button6_Click(sender As Object, e As EventArgs) Handles Button6.Click
-        'PrintDialog1.Document = PrintDocument1
-        'If PrintDialog1.ShowDialog() = DialogResult.OK Then
-        '    'LoadFilteredMealPlan() ' Load filtered data based on selected frequency
-        '    If mealPlanData.Rows.Count > 0 Then
-        '        PrintDocument1.Print()
-        '    Else
-        '        MessageBox.Show("No meal plans found for the selected period.", "Print Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-        '    End If
-        'End If
+        PrintDialog1.Document = PrintDocument1
+        If PrintDialog1.ShowDialog() = DialogResult.OK Then
+            LoadFilteredMealPlan() ' Load filtered data based on selected frequency
+            If mealPlanData.Rows.Count > 0 Then
+                PrintDocument1.Print()
+            Else
+                MessageBox.Show("No meal plans found for the selected period.", "Print Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            End If
+        End If
+    End Sub
+    Private Sub LoadFilteredMealPlan()
+        Using dbConnection As New OleDbConnection(connectionString)
+            Dim selectedFilter As String = ComboBox5.SelectedItem?.ToString()
+            Dim query As String = "SELECT * FROM Expense WHERE filter = ? AND 1=1"
+            Dim startDate As Date = Date.Today
+            Dim endDate As Date = Date.Today
+
+            If Not String.IsNullOrEmpty(selectedFilter) Then
+                Select Case selectedFilter
+                    Case "Day"
+                        endDate = startDate
+                    Case "Week"
+                        endDate = startDate.AddDays(7)
+                    Case "Month"
+                        endDate = startDate.AddMonths(1)
+                End Select
+            End If
+
+            ' Create command with parameters
+            Dim cmd As New OleDbCommand(query, dbConnection)
+            cmd.Parameters.AddWithValue("?", selectedFilter) ' Bind Frequency value
+
+            Dim adapter As New OleDbDataAdapter(cmd)
+            mealPlanData = New DataTable()
+            adapter.Fill(mealPlanData)
+
+            DataGridView1.DataSource = mealPlanData ' Display filtered data in DataGridView
+        End Using
     End Sub
     Public Sub LoadExpenseDataFromDatabase()
 
@@ -359,8 +388,9 @@ Public Class Expense
             End If
 
             ' Display total and average expenses on the form  
-            Label15.Text = $" R {totalExpenses:N2}"
-            Label16.Text = $" {ComboBox5.SelectedItem}: R {averageExpenses:N2}"
+            Label15.Text = $"Total Expense: R {totalExpenses:N2}"
+            'Label16.Text = $" {ComboBox5.SelectedItem}: R {averageExpenses:N2}"
+
 
         Catch ex As FormatException
             Debug.WriteLine("Invalid format in Button6_Click: Amount should be in numbers.")
@@ -378,4 +408,39 @@ Public Class Expense
         Debug.WriteLine("Exiting btnCalculate")
 
     End Sub
+
+       
+Private Sub DataGridView1_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridView1.CellContentClick
+
+    End Sub
+
+    Private Sub DataGridView1_SelectionChanged(sender As Object, e As EventArgs) Handles DataGridView1.SelectionChanged
+ Try
+
+
+            Debug.WriteLine("selecting data in the datagridview")
+            If DataGridView1.SelectedRows.Count > 0 Then
+                Dim selectedRow As DataGridViewRow = DataGridView1.SelectedRows(0)
+
+                ' Load the data from the selected row into UI controls  
+                TextBox2.Text = selectedRow.Cells("Amount").Value.ToString()
+                TextBox3.Text = selectedRow.Cells("TotalIncome").Value.ToString()
+                TextBox6.Text = selectedRow.Cells("Description").Value.ToString()
+                TextBox4.Text = selectedRow.Cells("Tags").Value.ToString()
+                ComboBox2.SelectedItem = selectedRow.Cells("currency").Value.ToString()
+                TextBox5.Text = selectedRow.Cells("Category").Value.ToString()
+                ComboBox1.SelectedItem = selectedRow.Cells("Paymentmethod").Value.ToString()
+                ComboBox5.SelectedItem = selectedRow.Cells("Frequency").Value.ToString()
+                ComboBox4.SelectedItem = selectedRow.Cells("Approvalstatus").Value.ToString()
+                DateTimePicker1.Text = selectedRow.Cells("Dateofexpenses").Value.ToString()
+
+            End If
+        Catch ex As Exception
+            Debug.WriteLine("error selection data in the database")
+            Debug.WriteLine($"Stack Trace: {ex.StackTrace}")
+        End Try
+    End Sub
+
+
 End Class
+

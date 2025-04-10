@@ -4,12 +4,52 @@ Imports System.Data.OleDb
 Public Class MealPlan
     ' Dim conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
     Public Property conn As New OleDbConnection(connectionString)
-    ' Connection string using relative path to the database
-    Public Const connectionString As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Zwivhuya\Source\Repos\maurice67530\HouseholdManagementSystems\HMS.accdb;Persist Security Info=False;"
+    ' Connection string using relative path to the databas
+    Public Const connectionString As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Mudzunga\Source\Repos\maurice67530\HouseholdManagementSystems\HMS.accdb;Persist Security Info=False;"
 
     Private Sub btnEdit_Click(sender As Object, e As EventArgs) Handles btnEdit.Click
+   Try
+            Debug.WriteLine("Entering btnEdit_Click")
+            Using conn As New OleDbConnection(Module1.connectionString)
+                conn.Open()
 
+                Dim tablename As String = "MealPlans"
+                Using cmd As New OleDbCommand("INSERT INTO MealPlans ([StartDate], [EndDate], [Meals], [MealName], [Items], [TotalCalories], [Description], [FilePath], [Calories], [Frequency]) VALUES (@StartDate, @EndDate, @Meals, @MealName, @Items, @TotalCalories, @Description, @FilePath, @Calories, @Frequency)", conn)
+
+                    cmd.Parameters.AddWithValue("@StartDate", DateTimePicker1.Text)
+                    cmd.Parameters.AddWithValue("@EndDate", DateTimePicker2.Text)
+                    cmd.Parameters.AddWithValue("@Meals", ListBox1.SelectedItem.ToString)
+                    cmd.Parameters.AddWithValue("@MealName", TextBox4.Text)
+                    cmd.Parameters.AddWithValue("@Items", ComboBox2.SelectedItem.ToString)
+                    cmd.Parameters.AddWithValue("@TotalCalories", NumericUpDown1.Value)
+                    cmd.Parameters.AddWithValue("@Description", TextBox2.Text)
+                    cmd.Parameters.AddWithValue("@FilePath", TextBox3.Text)
+                    cmd.Parameters.AddWithValue("@Calories", ComboBox3.SelectedItem.ToString)
+                    cmd.Parameters.AddWithValue("@Frequency", ComboBox1.SelectedItem.ToString)
+                    cmd.ExecuteNonQuery()
+                End Using
+                MessageBox.Show("Edited successfully")
+
+            End Using
+
+            Debug.WriteLine("The data has been edited successfully")
+        Catch ex As OleDbException
+            Debug.WriteLine($"Database saving in btnEdit_Click: {ex.Message}")
+            Debug.WriteLine($"Stack Trace: {ex.StackTrace}")
+            ' MessageBox.Show("error saving expense to database. please check the connection.", "Database error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        Catch ex As Exception
+            MessageBox.Show($"Unexpected error: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Debug.WriteLine($"General error in btnEdit_Click: {ex.Message}")
+            Debug.WriteLine($"Stack Trace: {ex.StackTrace}")
+        End Try
+
+        Debug.WriteLine("Existing btnEdit_Click")
     End Sub
+
+
+
+
+
 
     Private Sub MealPlan_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         ComboBox1.Items.AddRange(New String() {"<500", "500-1000", ">1000"})
@@ -36,7 +76,7 @@ Public Class MealPlan
             Debug.WriteLine("Form loading the data")
             Debug.WriteLine("Form loading  data failed")
 
-            Using conn As New OleDbConnection(connectionString)
+            Using conn As New OleDbConnection(Module1.connectionString)
                 conn.Open()
 
                 'Update the table name if neccessary
@@ -140,7 +180,7 @@ Public Class MealPlan
             If confirmationResult = DialogResult.Yes Then
                 ' Proceed with deletion  
                 Try
-                    Using conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
+                    Using conn As New OleDbConnection(Module1.connectionString)
                         conn.Open()
 
                         ' Create the delete command  
@@ -260,12 +300,13 @@ Public Class MealPlan
     Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
         Try
             Debug.WriteLine("Entering btnEdit_Click")
+
             Using conn As New OleDbConnection(connectionString)
                 conn.Open()
 
-                Dim tablename As String = "MealPlans"
-                Using cmd As New OleDbCommand("INSERT INTO MealPlans ([StartDate], [EndDate], [Meals], [MealName], [Items], [TotalCalories], [Description], [FilePath], [Calories], [Frequency]) VALUES (@StartDate, @EndDate, @Meals, @MealName, @Items, @TotalCalories, @Description, @FilePath, @Calories, @Frequency)", conn)
+                Dim query As String = "UPDATE MealPlans SET [StartDate] = @StartDate, [EndDate] = @EndDate, [Meals] = @Meals, [MealName] = @MealName, [Items] = @Items, [TotalCalories] = @TotalCalories, [Description] = @Description, [FilePath] = @FilePath, [Calories] = @Calories, [Frequency] = @Frequency WHERE [MealName] = @MealName"
 
+                Using cmd As New OleDbCommand(query, conn)
                     cmd.Parameters.AddWithValue("@StartDate", DateTimePicker1.Text)
                     cmd.Parameters.AddWithValue("@EndDate", DateTimePicker2.Text)
                     cmd.Parameters.AddWithValue("@Meals", ListBox1.SelectedItem.ToString)
@@ -276,23 +317,26 @@ Public Class MealPlan
                     cmd.Parameters.AddWithValue("@FilePath", TextBox3.Text)
                     cmd.Parameters.AddWithValue("@Calories", ComboBox3.SelectedItem.ToString)
                     cmd.Parameters.AddWithValue("@Frequency", ComboBox1.SelectedItem.ToString)
+
                     cmd.ExecuteNonQuery()
                 End Using
-                MessageBox.Show("Edited successfully")
-
             End Using
 
+            MessageBox.Show("Edited successfully")
             Debug.WriteLine("The data has been edited successfully")
+
         Catch ex As OleDbException
-            Debug.WriteLine($"Database saving in btnEdit_Click: {ex.Message}")
-            Debug.WriteLine($"Stack Trace: {ex.StackTrace}")
-            ' MessageBox.Show("error saving expense to database. please check the connection.", "Database error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Debug.WriteLine($"Database error in btnEdit_Click: {ex.Message}")
+            Debug.WriteLine($"Stack Trace: {ex.StackTrace}")
+            ' MessageBox.Show("Database error. Please check the connection.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+
         Catch ex As Exception
             MessageBox.Show($"Unexpected error: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
             Debug.WriteLine($"General error in btnEdit_Click: {ex.Message}")
-            Debug.WriteLine($"Stack Trace: {ex.StackTrace}")
+            Debug.WriteLine($"Stack Trace: {ex.StackTrace}")
         End Try
 
-        Debug.WriteLine("Existing btnEdit_Click")
+        Debug.WriteLine("Exiting btnEdit_Click")
     End Sub
+
 End Class

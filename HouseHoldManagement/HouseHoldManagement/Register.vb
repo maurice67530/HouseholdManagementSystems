@@ -2,7 +2,7 @@
 Public Class Register
       Public Property conn As New OleDbConnection(connectionString)
     ' Connection string using relative path to the database
-    Public Const connectionString As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Xiluva\Source\Repos\HouseholdManagementSystems\HMS.accdb;Persist Security Info=False;"
+    Public Const connectionString As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Xiluva\Source\Repos\maurice67530\HouseholdManagementSystems\HMS.accdb;Persist Security Info=False;"
 
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
 
@@ -45,4 +45,5 @@ Public Class Register
     Private Sub Register_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         ComboBox1.Items.AddRange(New String() {"Admin", "Member", "Finance", "Chef"})
     End Sub
+
 End Class
