@@ -187,4 +187,23 @@ Public Class Personnel
     Private Sub BtnBack_Click(sender As Object, e As EventArgs) Handles BtnBack.Click
 
     End Sub
+
+    Private Sub DataGridView1_SelectionChanged(sender As Object, e As EventArgs) Handles DataGridView1.SelectionChanged
+        If DataGridView1.SelectedRows.Count > 0 Then
+            Dim row As DataGridViewRow = DataGridView1.SelectedRows(0)
+            If Not row.IsNewRow Then
+                TextBox8.Text = row.Cells("ID").Value.ToString()
+                TextBox1.Text = row.Cells("FirstName").Value.ToString()
+                TextBox2.Text = row.Cells("LastName").Value.ToString()
+                TextBox3.Text = row.Cells("Contact").Value.ToString()
+                TextBox4.Text = row.Cells("Email").Value.ToString()
+                TextBox5.Text = row.Cells("Age").Value.ToString()
+                ComboBox2.SelectedItem = row.Cells("MaritalStatus").Value.ToString()
+                ComboBox1.SelectedItem = row.Cells("Role").Value.ToString()
+                ComboBox3.SelectedItem = row.Cells("Gender").Value.ToString()
+                TextBox6.Text = row.Cells("PostalCode").Value.ToString()
+                DateTimePicker1.Value = row.Cells("DateOfBirth").Value.ToString()
+            End If
+        End If
+    End Sub
 End Class
