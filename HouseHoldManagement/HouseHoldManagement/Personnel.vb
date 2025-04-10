@@ -1,7 +1,23 @@
 ﻿Imports System.IO
 Imports System.Data.OleDb
 Public Class Personnel
-    Private conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
+
+    ' Connection to the database
+    Dim conn As New OleDbConnection("YourConnectionStringHere")
+
+    ' Variables to hold user inputs
+    Dim FirstName As String
+    Dim LastName As String
+    Dim DateOfBirth As Date
+    Dim Email As String
+    Dim Contact As String
+    Dim Age As String
+    Dim Role As String
+    Dim Gender As String
+    Dim PostalCode As String
+    Dim MaritalStatus As String
+
+
     ' Create a ToolTip object
     Private toolTip As New ToolTip()
     Private toolTip1 As New ToolTip()
@@ -23,57 +39,41 @@ Public Class Personnel
     End Sub
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles BtnSave.Click
-
-        ' Connection to the database
-        Dim conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
-
-        ' Variables to hold user inputs
-        Dim FirstName As String
-        Dim LastName As String
-        Dim Birthdate As Date
-        Dim Email As String
-        Dim ContactNumber As String
-        Dim Age As String
-        Dim Role As String
-        Dim Gender As String
-        Dim PostalCode As String
-        Dim MaritalStatus As String
-        Dim Deleter As String
-
-
         ' Get user input from TextBoxes
         FirstName = TextBox1.Text
         LastName = TextBox2.Text
-        Birthdate = DateTimePicker1.Value
+        DateOfBirth = DateTimePicker1.Value
         Email = TextBox4.Text
-        ContactNumber = TextBox3.Text
+        Contact = TextBox3.Text
         Age = TextBox5.Text
-        Role = ComboBox1.Text
-        Gender = ComboBox3.Text
+        Role = ComboBox1.SelectedItem.ToString
         PostalCode = TextBox6.Text
-        MaritalStatus = TextBox9.Text
-        Deleter = TextBox7.Text
+        Gender = ComboBox3.SelectedItem.ToString
+        MaritalStatus = ComboBox2.SelectedItem.ToString
+
+
+
         ' Open the connection
         Try
             conn.Open()
 
             ' SQL query to insert the data
-            Dim query As String = "INSERT INTO PersonalDetails (FirstName, LastName, Birthdate, Email, ContactNumber, Age, Role, Gender, PostalCode, MaritalStatus, Deleter) " &
-                                  "VALUES (@FirstName, @LastName, @Birthdate, @Email, @ContactNumber, @Age, @Role, @Gender, @PostalCode, @MaritalStatus, @Deleter)"
+            Dim query As String = "INSERT INTO PersonalDetails (FirstName, LastName, DateOfBirth, Email, Contact, Age, Role, Gender, PostalCode, MaritalStatus) " &
+                                  "VALUES (@FirstName, @LastName, @DateOfBirth, @Email, @Contact, @Age, @Role, @Gender, @PostalCode, @MaritalStatus)"
 
             ' Create the command and add parameters
             Dim cmd As New OleDbCommand(query, conn)
             cmd.Parameters.AddWithValue("@FirstName", FirstName)
             cmd.Parameters.AddWithValue("@LastName", LastName)
-            cmd.Parameters.AddWithValue("@Birthdate", Birthdate)
+            cmd.Parameters.AddWithValue("@DateOfBirth", DateOfBirth)
             cmd.Parameters.AddWithValue("@Email", Email)
-            cmd.Parameters.AddWithValue("@ContactNumber", ContactNumber)
+            cmd.Parameters.AddWithValue("@Contact", Contact)
             cmd.Parameters.AddWithValue("@Age", Age)
             cmd.Parameters.AddWithValue("@Role", Role)
             cmd.Parameters.AddWithValue("@Gender", Gender)
             cmd.Parameters.AddWithValue("@PostalCode", PostalCode)
             cmd.Parameters.AddWithValue("@MaritalStatus", MaritalStatus)
-            cmd.Parameters.AddWithValue("@Deleter", Deleter)
+
             ' Execute the query
             Dim rowsAffected As Integer = cmd.ExecuteNonQuery()
 
@@ -93,6 +93,7 @@ Public Class Personnel
             End If
         End Try
     End Sub
+
 
     ' Method to load data into the DataGridView
     Private Sub LoadData()
@@ -121,15 +122,15 @@ Public Class Personnel
             ' Fill the form fields with the values from the selected row
             TextBox1.Text = row.Cells("FirstName").Value.ToString()
             TextBox2.Text = row.Cells("LastName").Value.ToString()
-            DateTimePicker1.Value = Convert.ToDateTime(row.Cells("Birthdate").Value)
+            DateTimePicker1.Value = Convert.ToDateTime(row.Cells("DateOfBirth").Value)
             TextBox4.Text = row.Cells("Email").Value.ToString()
-            TextBox3.Text = row.Cells("ContactNumber").Value.ToString()
+            TextBox3.Text = row.Cells("Contact").Value.ToString()
             TextBox5.Text = row.Cells("Age").Value.ToString()
             ComboBox1.Text = row.Cells("Role").Value.ToString()
             ComboBox3.Text = row.Cells("Gender").Value.ToString()
             TextBox6.Text = row.Cells("PostalCode").Value.ToString()
-            TextBox9.Text = row.Cells("MaritalStatus").Value.ToString()
-            TextBox7.Text = row.Cells("Deleter").Value.ToString()
+            ComboBox2.SelectedItem = row.Cells("MaritalStatus").Value.ToString()
+            'TextBox7.Text = row.Cells("Deleter").Value.ToString()
         End If
 
     End Sub
@@ -137,19 +138,19 @@ Public Class Personnel
     Private Sub BtnEdit_Click(sender As Object, e As EventArgs) Handles BtnEdit.Click
         Try
             conn.Open()
-            Dim query As String = "UPDATE PersonalDetails SET FirstName = ?, LastName = ?, Birthdate = ?, Email = ?, Contact = ?, Age = ?, Role = ?, Gender = ?, PostalCode = ?, HealthStatus = ?, Deleter = ? WHERE ID = ?"
+            Dim query As String = "UPDATE PersonalDetails SET FirstName = ?, LastName = ?, DateOfBirth = ?, Email = ?, Contact = ?, Age = ?, Role = ?, Gender = ?, PostalCode = ?, MaritalStatus = ? WHERE ID = ?"
             Using cmd As New OleDbCommand(query, conn)
                 cmd.Parameters.AddWithValue("@FirstName", TextBox1.Text)
                 cmd.Parameters.AddWithValue("@LastName", TextBox2.Text)
-                cmd.Parameters.AddWithValue("@Birthdate", DateTimePicker1.Value.ToString)
+                cmd.Parameters.AddWithValue("@DateOfBirth", DateTimePicker1.Value.ToString)
                 cmd.Parameters.AddWithValue("@Email", TextBox4.Text)
-                cmd.Parameters.AddWithValue("@ContactNumber", TextBox3.Text)
+                cmd.Parameters.AddWithValue("@Contact", TextBox3.Text)
                 cmd.Parameters.AddWithValue("@Age", TextBox5.Text)
                 cmd.Parameters.AddWithValue("@Role", ComboBox1.SelectedItem.ToString)
                 cmd.Parameters.AddWithValue("@Gender", ComboBox3.SelectedItem.ToString)
                 cmd.Parameters.AddWithValue("@PostalCode", TextBox6.Text)
-                cmd.Parameters.AddWithValue("@MaritalStatus", TextBox9.Text)
-                cmd.Parameters.AddWithValue("@Deleter", TextBox7.Text)
+                cmd.Parameters.AddWithValue("@MaritalStatus", ComboBox2.SelectedItem.ToString)
+                'cmd.Parameters.AddWithValue("@Deleter", TextBox7.Text)
                 cmd.Parameters.AddWithValue("@ID", CInt(TextBox8.Text))
                 cmd.ExecuteNonQuery()
             End Using
@@ -179,6 +180,10 @@ Public Class Personnel
         Finally
             conn.Close()
         End Try
+
+    End Sub
+
+    Private Sub BtnBack_Click(sender As Object, e As EventArgs) Handles BtnBack.Click
 
     End Sub
 End Class
