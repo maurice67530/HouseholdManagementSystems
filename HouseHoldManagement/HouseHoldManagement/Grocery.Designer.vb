@@ -22,8 +22,8 @@ Partial Class Grocery
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Grocery))
         Me.Panel2 = New System.Windows.Forms.Panel()
-        Me.Label1 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.TextBox1 = New System.Windows.Forms.TextBox()
@@ -47,6 +47,7 @@ Partial Class Grocery
         Me.Button2 = New System.Windows.Forms.Button()
         Me.DataGridView1 = New System.Windows.Forms.DataGridView()
         Me.btnSubmit = New System.Windows.Forms.Button()
+        Me.Label1 = New System.Windows.Forms.Label()
         Me.Panel2.SuspendLayout()
         Me.Panel1.SuspendLayout()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -54,8 +55,8 @@ Partial Class Grocery
         '
         'Panel2
         '
-        Me.Panel2.BackColor = System.Drawing.SystemColors.InactiveCaption
-        Me.Panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Panel2.BackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.Panel2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         Me.Panel2.Controls.Add(Me.Label1)
         Me.Panel2.Controls.Add(Me.Label2)
         Me.Panel2.Controls.Add(Me.Label3)
@@ -68,17 +69,6 @@ Partial Class Grocery
         Me.Panel2.Name = "Panel2"
         Me.Panel2.Size = New System.Drawing.Size(243, 159)
         Me.Panel2.TabIndex = 29
-        '
-        'Label1
-        '
-        Me.Label1.AutoSize = True
-        Me.Label1.BackColor = System.Drawing.SystemColors.InactiveCaption
-        Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.Location = New System.Drawing.Point(4, 14)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(83, 20)
-        Me.Label1.TabIndex = 0
-        Me.Label1.Text = "ItemName"
         '
         'Label2
         '
@@ -142,8 +132,8 @@ Partial Class Grocery
         '
         'Panel1
         '
-        Me.Panel1.BackColor = System.Drawing.SystemColors.InactiveCaption
-        Me.Panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Panel1.BackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.Panel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         Me.Panel1.Controls.Add(Me.Label7)
         Me.Panel1.Controls.Add(Me.Label4)
         Me.Panel1.Controls.Add(Me.Label5)
@@ -161,7 +151,7 @@ Partial Class Grocery
         '
         Me.Label7.AutoSize = True
         Me.Label7.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label7.Location = New System.Drawing.Point(-4, 80)
+        Me.Label7.Location = New System.Drawing.Point(-8, 89)
         Me.Label7.Name = "Label7"
         Me.Label7.Size = New System.Drawing.Size(97, 20)
         Me.Label7.TabIndex = 6
@@ -171,7 +161,7 @@ Partial Class Grocery
         '
         Me.Label4.AutoSize = True
         Me.Label4.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label4.Location = New System.Drawing.Point(-4, 44)
+        Me.Label4.Location = New System.Drawing.Point(4, 5)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(73, 20)
         Me.Label4.TabIndex = 3
@@ -181,7 +171,7 @@ Partial Class Grocery
         '
         Me.Label5.AutoSize = True
         Me.Label5.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label5.Location = New System.Drawing.Point(-4, 113)
+        Me.Label5.Location = New System.Drawing.Point(3, 131)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(86, 20)
         Me.Label5.TabIndex = 4
@@ -191,29 +181,29 @@ Partial Class Grocery
         '
         Me.Label6.AutoSize = True
         Me.Label6.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label6.Location = New System.Drawing.Point(-4, 12)
+        Me.Label6.Location = New System.Drawing.Point(3, 53)
         Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(44, 20)
+        Me.Label6.Size = New System.Drawing.Size(97, 20)
         Me.Label6.TabIndex = 5
-        Me.Label6.Text = "Price"
+        Me.Label6.Text = "PricePerUnit"
         '
         'TextBox5
         '
-        Me.TextBox5.Location = New System.Drawing.Point(117, 10)
+        Me.TextBox5.Location = New System.Drawing.Point(117, 53)
         Me.TextBox5.Name = "TextBox5"
         Me.TextBox5.Size = New System.Drawing.Size(100, 20)
         Me.TextBox5.TabIndex = 12
         '
         'DateTimePicker1
         '
-        Me.DateTimePicker1.Location = New System.Drawing.Point(117, 113)
+        Me.DateTimePicker1.Location = New System.Drawing.Point(117, 128)
         Me.DateTimePicker1.Name = "DateTimePicker1"
         Me.DateTimePicker1.Size = New System.Drawing.Size(171, 20)
         Me.DateTimePicker1.TabIndex = 13
         '
         'TextBox6
         '
-        Me.TextBox6.Location = New System.Drawing.Point(117, 44)
+        Me.TextBox6.Location = New System.Drawing.Point(117, 5)
         Me.TextBox6.Name = "TextBox6"
         Me.TextBox6.Size = New System.Drawing.Size(100, 20)
         Me.TextBox6.TabIndex = 14
@@ -222,17 +212,18 @@ Partial Class Grocery
         '
         Me.ComboBox1.FormattingEnabled = True
         Me.ComboBox1.Items.AddRange(New Object() {"Dairy", "Vegetables", "Meet"})
-        Me.ComboBox1.Location = New System.Drawing.Point(117, 79)
+        Me.ComboBox1.Location = New System.Drawing.Point(117, 88)
         Me.ComboBox1.Name = "ComboBox1"
         Me.ComboBox1.Size = New System.Drawing.Size(100, 21)
         Me.ComboBox1.TabIndex = 16
         '
         'Button5
         '
-        Me.Button5.BackColor = System.Drawing.SystemColors.Control
+        Me.Button5.BackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.Button5.Image = CType(resources.GetObject("Button5.Image"), System.Drawing.Image)
         Me.Button5.Location = New System.Drawing.Point(127, 386)
         Me.Button5.Name = "Button5"
-        Me.Button5.Size = New System.Drawing.Size(100, 50)
+        Me.Button5.Size = New System.Drawing.Size(100, 56)
         Me.Button5.TabIndex = 34
         Me.Button5.UseVisualStyleBackColor = False
         '
@@ -248,28 +239,31 @@ Partial Class Grocery
         '
         'Button4
         '
-        Me.Button4.BackColor = System.Drawing.SystemColors.Control
+        Me.Button4.BackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.Button4.Image = CType(resources.GetObject("Button4.Image"), System.Drawing.Image)
         Me.Button4.Location = New System.Drawing.Point(249, 386)
         Me.Button4.Name = "Button4"
-        Me.Button4.Size = New System.Drawing.Size(93, 50)
+        Me.Button4.Size = New System.Drawing.Size(93, 56)
         Me.Button4.TabIndex = 33
         Me.Button4.UseVisualStyleBackColor = False
         '
         'Button3
         '
-        Me.Button3.BackColor = System.Drawing.SystemColors.Control
+        Me.Button3.BackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.Button3.Image = CType(resources.GetObject("Button3.Image"), System.Drawing.Image)
         Me.Button3.Location = New System.Drawing.Point(364, 387)
         Me.Button3.Name = "Button3"
-        Me.Button3.Size = New System.Drawing.Size(97, 50)
+        Me.Button3.Size = New System.Drawing.Size(97, 55)
         Me.Button3.TabIndex = 32
         Me.Button3.UseVisualStyleBackColor = False
         '
         'Button2
         '
-        Me.Button2.BackColor = System.Drawing.SystemColors.Control
+        Me.Button2.BackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.Button2.Image = CType(resources.GetObject("Button2.Image"), System.Drawing.Image)
         Me.Button2.Location = New System.Drawing.Point(478, 386)
         Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(92, 50)
+        Me.Button2.Size = New System.Drawing.Size(92, 56)
         Me.Button2.TabIndex = 31
         Me.Button2.UseVisualStyleBackColor = False
         '
@@ -283,18 +277,29 @@ Partial Class Grocery
         '
         'btnSubmit
         '
-        Me.btnSubmit.BackColor = System.Drawing.SystemColors.Control
+        Me.btnSubmit.BackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.btnSubmit.Image = CType(resources.GetObject("btnSubmit.Image"), System.Drawing.Image)
         Me.btnSubmit.Location = New System.Drawing.Point(12, 386)
         Me.btnSubmit.Name = "btnSubmit"
-        Me.btnSubmit.Size = New System.Drawing.Size(88, 50)
+        Me.btnSubmit.Size = New System.Drawing.Size(88, 56)
         Me.btnSubmit.TabIndex = 28
         Me.btnSubmit.UseVisualStyleBackColor = False
+        '
+        'Label1
+        '
+        Me.Label1.AutoSize = True
+        Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label1.Location = New System.Drawing.Point(3, 21)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(83, 20)
+        Me.Label1.TabIndex = 23
+        Me.Label1.Text = "ItemName"
         '
         'Grocery
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(585, 441)
+        Me.ClientSize = New System.Drawing.Size(585, 454)
         Me.Controls.Add(Me.Panel2)
         Me.Controls.Add(Me.Panel1)
         Me.Controls.Add(Me.Button5)
@@ -317,7 +322,6 @@ Partial Class Grocery
     End Sub
 
     Friend WithEvents Panel2 As Panel
-    Friend WithEvents Label1 As Label
     Friend WithEvents Label2 As Label
     Friend WithEvents Label3 As Label
     Friend WithEvents TextBox1 As TextBox
@@ -341,4 +345,5 @@ Partial Class Grocery
     Friend WithEvents Button2 As Button
     Friend WithEvents DataGridView1 As DataGridView
     Friend WithEvents btnSubmit As Button
+    Friend WithEvents Label1 As Label
 End Class
