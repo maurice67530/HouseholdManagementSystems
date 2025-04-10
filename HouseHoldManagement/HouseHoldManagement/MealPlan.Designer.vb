@@ -22,6 +22,7 @@ Partial Class MealPlan
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Me.DataGridView1 = New System.Windows.Forms.DataGridView()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Panel2 = New System.Windows.Forms.Panel()
@@ -57,6 +58,7 @@ Partial Class MealPlan
         Me.btnRefresh = New System.Windows.Forms.Button()
         Me.btnFilter = New System.Windows.Forms.Button()
         Me.btnSort = New System.Windows.Forms.Button()
+        Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel2.SuspendLayout()
         CType(Me.NumericUpDown1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -315,7 +317,6 @@ Partial Class MealPlan
         Me.btnSuggest.Name = "btnSuggest"
         Me.btnSuggest.Size = New System.Drawing.Size(41, 37)
         Me.btnSuggest.TabIndex = 45
-        Me.btnSuggest.Text = "Suggest"
         Me.btnSuggest.UseVisualStyleBackColor = True
         '
         'btnPrint
@@ -326,7 +327,6 @@ Partial Class MealPlan
         Me.btnPrint.Name = "btnPrint"
         Me.btnPrint.Size = New System.Drawing.Size(41, 37)
         Me.btnPrint.TabIndex = 44
-        Me.btnPrint.Text = "Print"
         Me.btnPrint.UseVisualStyleBackColor = True
         '
         'btnDelete
@@ -337,7 +337,6 @@ Partial Class MealPlan
         Me.btnDelete.Name = "btnDelete"
         Me.btnDelete.Size = New System.Drawing.Size(41, 37)
         Me.btnDelete.TabIndex = 43
-        Me.btnDelete.Text = "Delete"
         Me.btnDelete.UseVisualStyleBackColor = True
         '
         'btnEdit
@@ -348,7 +347,6 @@ Partial Class MealPlan
         Me.btnEdit.Name = "btnEdit"
         Me.btnEdit.Size = New System.Drawing.Size(41, 37)
         Me.btnEdit.TabIndex = 42
-        Me.btnEdit.Text = "Edit"
         Me.btnEdit.UseVisualStyleBackColor = True
         '
         'btnSave
@@ -359,7 +357,6 @@ Partial Class MealPlan
         Me.btnSave.Name = "btnSave"
         Me.btnSave.Size = New System.Drawing.Size(41, 37)
         Me.btnSave.TabIndex = 41
-        Me.btnSave.Text = "Save"
         Me.btnSave.UseVisualStyleBackColor = True
         '
         'btnHighlight
@@ -370,7 +367,6 @@ Partial Class MealPlan
         Me.btnHighlight.Name = "btnHighlight"
         Me.btnHighlight.Size = New System.Drawing.Size(41, 37)
         Me.btnHighlight.TabIndex = 40
-        Me.btnHighlight.Text = "Highlight"
         Me.btnHighlight.UseVisualStyleBackColor = True
         '
         'btnRefresh
@@ -381,7 +377,6 @@ Partial Class MealPlan
         Me.btnRefresh.Name = "btnRefresh"
         Me.btnRefresh.Size = New System.Drawing.Size(41, 37)
         Me.btnRefresh.TabIndex = 39
-        Me.btnRefresh.Text = "Refresh"
         Me.btnRefresh.UseVisualStyleBackColor = True
         '
         'btnFilter
@@ -392,7 +387,6 @@ Partial Class MealPlan
         Me.btnFilter.Name = "btnFilter"
         Me.btnFilter.Size = New System.Drawing.Size(41, 37)
         Me.btnFilter.TabIndex = 38
-        Me.btnFilter.Text = "Filter"
         Me.btnFilter.UseVisualStyleBackColor = True
         '
         'btnSort
@@ -403,7 +397,6 @@ Partial Class MealPlan
         Me.btnSort.Name = "btnSort"
         Me.btnSort.Size = New System.Drawing.Size(41, 37)
         Me.btnSort.TabIndex = 37
-        Me.btnSort.Text = "Sort"
         Me.btnSort.UseVisualStyleBackColor = True
         '
         'MealPlan
@@ -411,7 +404,7 @@ Partial Class MealPlan
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.SystemColors.Control
-        Me.ClientSize = New System.Drawing.Size(663, 469)
+        Me.ClientSize = New System.Drawing.Size(663, 486)
         Me.Controls.Add(Me.btnSuggest)
         Me.Controls.Add(Me.btnPrint)
         Me.Controls.Add(Me.btnDelete)
@@ -474,4 +467,5 @@ Partial Class MealPlan
     Friend WithEvents Label9 As Label
     Friend WithEvents Label11 As Label
     Friend WithEvents Label12 As Label
+    Friend WithEvents ToolTip1 As ToolTip
 End Class

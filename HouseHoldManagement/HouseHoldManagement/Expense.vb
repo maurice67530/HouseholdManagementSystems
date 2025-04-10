@@ -9,6 +9,9 @@ Public Class Expense
     ' Create a ToolTip object
     Private toolTip As New ToolTip()
     Private toolTip1 As New ToolTip()
+
+    Private mealPlanData As DataTable
+
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         Debug.WriteLine("Entering btnSubmit")
 
@@ -106,6 +109,7 @@ Public Class Expense
             MessageBox.Show("An Unexpected error occured.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
         conn.Close()
+        LoadExpenseDataFromDatabase()
         Debug.WriteLine("Exiting btnSubmit")
     End Sub
 
@@ -201,7 +205,7 @@ Public Class Expense
             Debug.WriteLine($"Stack Trace : {ex.StackTrace}")
             Debug.WriteLine($"An  Error has occured when Editing data from Database")
         End Try
-        'LoadExpenseDataFromDatabase()
+        LoadExpenseDataFromDatabase()
         Debug.WriteLine("Exited btnEdit")
     End Sub
 
@@ -264,7 +268,7 @@ Public Class Expense
             Debug.WriteLine($" No row  selected, exiting btnDelete")
             MessageBox.Show("Please select an expense to delete.", "Deletion Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
         End If
-        'LoadExpenseDataFromDatabase()
+        LoadExpenseDataFromDatabase()
 
         Debug.WriteLine("Exiting deletion")
     End Sub
@@ -272,6 +276,106 @@ Public Class Expense
     Private Sub Button5_Click(sender As Object, e As EventArgs) Handles Button5.Click
         DataGridView1.Sort(DataGridView1.Columns("Amount"), System.ComponentModel.ListSortDirection.Descending)
         DataGridView1.Sort(DataGridView1.Columns("Currency"), System.ComponentModel.ListSortDirection.Ascending)
+
+    End Sub
+
+    Private Sub Button6_Click(sender As Object, e As EventArgs) Handles Button6.Click
+        'PrintDialog1.Document = PrintDocument1
+        'If PrintDialog1.ShowDialog() = DialogResult.OK Then
+        '    'LoadFilteredMealPlan() ' Load filtered data based on selected frequency
+        '    If mealPlanData.Rows.Count > 0 Then
+        '        PrintDocument1.Print()
+        '    Else
+        '        MessageBox.Show("No meal plans found for the selected period.", "Print Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+        '    End If
+        'End If
+    End Sub
+    Public Sub LoadExpenseDataFromDatabase()
+
+        Debug.WriteLine("LoadMealPlansDataFromDatabase")
+        Using connect As New OleDbConnection(connectionString)
+            connect.Open()
+
+            ' Update the table name if necessary  
+            Dim tableName As String = "Expense"
+
+            ' Create an OleDbCommand to select the data from the database  
+            Dim cmd As New OleDbCommand($"SELECT * FROM {tableName}", connect)
+
+            ' Create a DataAdapter and fill a DataTable  
+            Dim da As New OleDbDataAdapter(cmd)
+            Dim dt As New DataTable()
+            da.Fill(dt)
+
+            ' Bind the DataTable to the DataGridView  
+            DataGridView1.DataSource = dt
+            'HighlightExpiredItemss()
+        End Using
+
+    End Sub
+    Private Sub Expense_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
+        ' Initialize ToolTip properties (optional)
+        toolTip.AutoPopDelay = 5000
+        toolTip.InitialDelay = 500
+        toolTip.ReshowDelay = 200
+        toolTip.ShowAlways = True
+
+        toolTip1.SetToolTip(Button5, "Sort")
+        toolTip1.SetToolTip(Button6, "Print to Doc")
+        toolTip1.SetToolTip(Button3, "Edit")
+        toolTip1.SetToolTip(Button4, "Delete")
+        toolTip1.SetToolTip(Button7, "Calculate Budget")
+        'toolTip1.SetToolTip(Button7, "Daily tasks")
+        toolTip1.SetToolTip(Button1, "Save")
+        LoadExpenseDataFromDatabase()
+    End Sub
+
+    Private Sub Button7_Click(sender As Object, e As EventArgs) Handles Button7.Click
+        Debug.WriteLine("Entering btnCalculate")
+
+        ' Calculate total expenses  
+        Dim totalExpenses As Decimal = Decimal.Parse(TextBox2.Text)
+        Dim averageExpenses As Decimal = 0
+
+        Try
+            Debug.WriteLine("User confirmed btnCalculate")
+            ' Calculate average expenses based on frequency  
+
+            If ComboBox5.SelectedItem IsNot Nothing Then
+
+                Select Case ComboBox5.SelectedItem.ToString()
+                    Case "Monthly"
+                        averageExpenses = totalExpenses / 12
+                    Case "Weekly"
+                        averageExpenses = totalExpenses / 52
+                    Case "Daily"
+                        averageExpenses = totalExpenses / 365
+                    Case Else
+                        ' Handle other frequencies as needed  
+                End Select
+
+
+            End If
+
+            ' Display total and average expenses on the form  
+            Label15.Text = $" R {totalExpenses:N2}"
+            Label16.Text = $" {ComboBox5.SelectedItem}: R {averageExpenses:N2}"
+
+        Catch ex As FormatException
+            Debug.WriteLine("Invalid format in Button6_Click: Amount should be in numbers.")
+            Debug.WriteLine($"Stack Trace : {ex.StackTrace}")
+            MessageBox.Show("Please enter a valid numeriv value for the Amount.", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+
+        Catch ex As Exception
+            Debug.WriteLine("Failed to calculate")
+            Debug.WriteLine($"Stack Trace : {ex.StackTrace}")
+            Debug.WriteLine($"Unexpected error in Button6_Click: {ex.Message}")
+            MessageBox.Show("An unexpected error occured during calculations.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
+
+        Debug.WriteLine($"Calculation complete. Total:{totalExpenses},Avarage:{averageExpenses}")
+        Debug.WriteLine("Exiting btnCalculate")
 
     End Sub
 End Class
