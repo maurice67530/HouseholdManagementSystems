@@ -60,8 +60,8 @@ Public Class Personnel
             ComboBox1.Text = row.Cells("Role").Value.ToString()
             ComboBox3.Text = row.Cells("Gender").Value.ToString()
             TextBox6.Text = row.Cells("PostalCode").Value.ToString()
-            TextBox9.Text = row.Cells("HealthStatus").Value.ToString()
-            TextBox7.Text = row.Cells("Deleter").Value.ToString()
+            ComboBox2.SelectedItem = row.Cells("MaritalStatus").Value.ToString()
+            'TextBox7.Text = row.Cells("Deleter").Value.ToString()
         End If
 
     End Sub
@@ -69,7 +69,7 @@ Public Class Personnel
     Private Sub BtnEdit_Click(sender As Object, e As EventArgs) Handles BtnEdit.Click
         Try
             conn.Open()
-            Dim query As String = "UPDATE PersonalDetails SET FirstName = ?, LastName = ?, DateOfBirth = ?, Email = ?, Contact = ?, Age = ?, Role = ?, Gender = ?, PostalCode = ?, HealthStatus = ?, Deleter = ? WHERE ID = ?"
+            Dim query As String = "UPDATE PersonalDetails SET FirstName = ?, LastName = ?, DateOfBirth = ?, Email = ?, Contact = ?, Age = ?, Role = ?, Gender = ?, PostalCode = ?, MaritalStatus = ? WHERE ID = ?"
             Using cmd As New OleDbCommand(query, conn)
                 cmd.Parameters.AddWithValue("@FirstName", TextBox1.Text)
                 cmd.Parameters.AddWithValue("@LastName", TextBox2.Text)
@@ -80,8 +80,8 @@ Public Class Personnel
                 cmd.Parameters.AddWithValue("@Role", ComboBox1.SelectedItem.ToString)
                 cmd.Parameters.AddWithValue("@Gender", ComboBox3.SelectedItem.ToString)
                 cmd.Parameters.AddWithValue("@PostalCode", TextBox6.Text)
-                cmd.Parameters.AddWithValue("@HealthStatus", TextBox9.Text)
-                cmd.Parameters.AddWithValue("@Deleter", TextBox7.Text)
+                cmd.Parameters.AddWithValue("@MaritalStatus", ComboBox2.SelectedItem.ToString)
+                'cmd.Parameters.AddWithValue("@Deleter", TextBox7.Text)
                 cmd.Parameters.AddWithValue("@ID", CInt(TextBox8.Text))
                 cmd.ExecuteNonQuery()
             End Using
