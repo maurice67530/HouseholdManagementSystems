@@ -215,8 +215,6 @@ Public Class Expense
         ' Check if there are any selected rows in the DataGridView for expenses  
         If DataGridView1.SelectedRows.Count > 0 Then
 
-
-
             ' Get the selected row  
             Dim selectedRow As DataGridViewRow = DataGridView1.SelectedRows(0)
 
@@ -280,7 +278,20 @@ Public Class Expense
     End Sub
 
     Private Sub Button6_Click(sender As Object, e As EventArgs) Handles Button6.Click
-        ClearControls(Me)
+
+        TextBox1.Text = ""
+        TextBox2.Text = ""
+        TextBox3.Text = ""
+        TextBox6.Text = ""
+        TextBox4.Text = ""
+        ComboBox2.SelectedItem = ""
+        TextBox5.Text = ""
+        ComboBox1.SelectedItem = ""
+        ComboBox5.SelectedItem = ""
+        ComboBox4.SelectedItem = ""
+        TextBox7.Text = ""
+        ComboBox3.SelectedItem = ""
+
     End Sub
 
     Public Sub LoadExpenseDataFromDatabase()
@@ -348,13 +359,10 @@ Public Class Expense
                         ' Handle other frequencies as needed  
                 End Select
 
-
             End If
-
             ' Display total and average expenses on the form  
             Label15.Text = $"Total Expense: R {totalExpenses:N2}"
             'Label16.Text = $" {ComboBox5.SelectedItem}: R {averageExpenses:N2}"
-
 
         Catch ex As FormatException
             Debug.WriteLine("Invalid format in Button6_Click: Amount should be in numbers.")
@@ -367,20 +375,13 @@ Public Class Expense
             Debug.WriteLine($"Unexpected error in Button6_Click: {ex.Message}")
             MessageBox.Show("An unexpected error occured during calculations.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
-
         Debug.WriteLine($"Calculation complete. Total:{totalExpenses},Avarage:{averageExpenses}")
         Debug.WriteLine("Exiting btnCalculate")
 
     End Sub
 
-       
-Private Sub DataGridView1_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridView1.CellContentClick
-
-    End Sub
-
     Private Sub DataGridView1_SelectionChanged(sender As Object, e As EventArgs) Handles DataGridView1.SelectionChanged
  Try
-
 
             Debug.WriteLine("selecting data in the datagridview")
             If DataGridView1.SelectedRows.Count > 0 Then
@@ -404,7 +405,28 @@ Private Sub DataGridView1_CellContentClick(sender As Object, e As DataGridViewCe
             Debug.WriteLine($"Stack Trace: {ex.StackTrace}")
         End Try
     End Sub
+    Public Sub ClearControlss(ByVal FORM As Form)
+        ' Clear TextBoxes  
+        For Each ctrl As Control In FORM.Controls
+            If TypeOf ctrl Is TextBox Then
+                CType(ctrl, TextBox).Clear()
+            End If
+        Next
 
+        ' Clear ComboBoxes  
+        For Each ctrl As Control In FORM.Controls
+            If TypeOf ctrl Is ComboBox Then
+                CType(ctrl, ComboBox).ResetText()
+            End If
+        Next
+
+        ' Clear DateTimePickers  
+        For Each ctrl As Control In FORM.Controls
+            If TypeOf ctrl Is DateTimePicker Then
+                CType(ctrl, DateTimePicker).Value = DateTimePicker.MinimumDateTime ' or set to a specific date  
+            End If
+        Next
+    End Sub
 
 End Class
 
