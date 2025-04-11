@@ -333,7 +333,7 @@ Public Class Expense
         'toolTip1.SetToolTip(Button7, "Daily tasks")
         toolTip1.SetToolTip(Button1, "Save")
         LoadExpenseDataFromDatabase()
-        'PopulateComboboxFromDatabase(ComboBox3)
+        PopulateComboboxFromDatabase(ComboBox3)
     End Sub
     Public Sub PopulateComboboxFromDatabase(ByRef comboBox As ComboBox)
 
