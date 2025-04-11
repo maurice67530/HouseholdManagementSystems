@@ -26,6 +26,7 @@ Partial Class MealPlan
         Me.DataGridView1 = New System.Windows.Forms.DataGridView()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.TextBox1 = New System.Windows.Forms.TextBox()
         Me.DateTimePicker2 = New System.Windows.Forms.DateTimePicker()
         Me.ComboBox1 = New System.Windows.Forms.ComboBox()
         Me.DateTimePicker1 = New System.Windows.Forms.DateTimePicker()
@@ -40,7 +41,7 @@ Partial Class MealPlan
         Me.Label11 = New System.Windows.Forms.Label()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.ComboBox2 = New System.Windows.Forms.ComboBox()
-        Me.ListBox1 = New System.Windows.Forms.ListBox()
+        Me.lstMealSuggestions = New System.Windows.Forms.ListBox()
         Me.Label6 = New System.Windows.Forms.Label()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.TextBox4 = New System.Windows.Forms.TextBox()
@@ -69,9 +70,9 @@ Partial Class MealPlan
         'DataGridView1
         '
         Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DataGridView1.Location = New System.Drawing.Point(6, 275)
+        Me.DataGridView1.Location = New System.Drawing.Point(6, 300)
         Me.DataGridView1.Name = "DataGridView1"
-        Me.DataGridView1.Size = New System.Drawing.Size(651, 150)
+        Me.DataGridView1.Size = New System.Drawing.Size(651, 125)
         Me.DataGridView1.TabIndex = 35
         '
         'Label1
@@ -88,6 +89,7 @@ Partial Class MealPlan
         '
         Me.Panel2.BackColor = System.Drawing.SystemColors.ActiveCaption
         Me.Panel2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.Panel2.Controls.Add(Me.TextBox1)
         Me.Panel2.Controls.Add(Me.DateTimePicker2)
         Me.Panel2.Controls.Add(Me.ComboBox1)
         Me.Panel2.Controls.Add(Me.DateTimePicker1)
@@ -103,8 +105,15 @@ Partial Class MealPlan
         Me.Panel2.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Panel2.Location = New System.Drawing.Point(331, 27)
         Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(326, 242)
+        Me.Panel2.Size = New System.Drawing.Size(326, 267)
         Me.Panel2.TabIndex = 33
+        '
+        'TextBox1
+        '
+        Me.TextBox1.Location = New System.Drawing.Point(98, 237)
+        Me.TextBox1.Name = "TextBox1"
+        Me.TextBox1.Size = New System.Drawing.Size(199, 21)
+        Me.TextBox1.TabIndex = 26
         '
         'DateTimePicker2
         '
@@ -222,14 +231,14 @@ Partial Class MealPlan
         Me.ComboBox2.Size = New System.Drawing.Size(121, 23)
         Me.ComboBox2.TabIndex = 21
         '
-        'ListBox1
+        'lstMealSuggestions
         '
-        Me.ListBox1.FormattingEnabled = True
-        Me.ListBox1.ItemHeight = 15
-        Me.ListBox1.Location = New System.Drawing.Point(105, 53)
-        Me.ListBox1.Name = "ListBox1"
-        Me.ListBox1.Size = New System.Drawing.Size(120, 49)
-        Me.ListBox1.TabIndex = 26
+        Me.lstMealSuggestions.FormattingEnabled = True
+        Me.lstMealSuggestions.ItemHeight = 15
+        Me.lstMealSuggestions.Location = New System.Drawing.Point(105, 53)
+        Me.lstMealSuggestions.Name = "lstMealSuggestions"
+        Me.lstMealSuggestions.Size = New System.Drawing.Size(120, 49)
+        Me.lstMealSuggestions.TabIndex = 26
         '
         'Label6
         '
@@ -244,7 +253,7 @@ Partial Class MealPlan
         '
         Me.Panel1.BackColor = System.Drawing.SystemColors.ActiveCaption
         Me.Panel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        Me.Panel1.Controls.Add(Me.ListBox1)
+        Me.Panel1.Controls.Add(Me.lstMealSuggestions)
         Me.Panel1.Controls.Add(Me.Label6)
         Me.Panel1.Controls.Add(Me.TextBox4)
         Me.Panel1.Controls.Add(Me.Label3)
@@ -257,7 +266,7 @@ Partial Class MealPlan
         Me.Panel1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Panel1.Location = New System.Drawing.Point(6, 27)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(319, 242)
+        Me.Panel1.Size = New System.Drawing.Size(319, 267)
         Me.Panel1.TabIndex = 32
         '
         'TextBox4
@@ -444,7 +453,7 @@ Partial Class MealPlan
     Friend WithEvents DataGridView1 As DataGridView
     Friend WithEvents Label1 As Label
     Friend WithEvents Panel2 As Panel
-    Friend WithEvents ListBox1 As ListBox
+    Friend WithEvents lstMealSuggestions As ListBox
     Friend WithEvents Label6 As Label
     Friend WithEvents DateTimePicker2 As DateTimePicker
     Friend WithEvents DateTimePicker1 As DateTimePicker
@@ -468,4 +477,5 @@ Partial Class MealPlan
     Friend WithEvents Label11 As Label
     Friend WithEvents Label12 As Label
     Friend WithEvents ToolTip1 As ToolTip
+    Friend WithEvents TextBox1 As TextBox
 End Class

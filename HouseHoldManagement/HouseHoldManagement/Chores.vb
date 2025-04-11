@@ -3,13 +3,10 @@ Public Class Chores
     Public Property connect As New OleDbConnection(Ndivhuwo.connectionString)
     Public Property connn As New OleDbConnection(Masindi.connectionString)
     Public Property conn As New OleDbConnection(Murangi.connectionString)
-
     Private Sub Chores_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-
         cmbpri.Items.AddRange(New String() {"Low", "Medium", "High"})
         cmbstatus.Items.AddRange(New String() {"Not started", "In progress", "Completed"})
         cmbfre.Items.AddRange(New String() {"Daily", "Weekly", "Monthly"})
-
 
         Dim tooltip As New ToolTip
         tooltip.SetToolTip(Button1, "Dashboard")
@@ -25,7 +22,6 @@ Public Class Chores
         PopulateComboboxFromDatabase(cmbassi)
         loadChoresFromDatabase()
     End Sub
-
     Private Sub Button6_Click(sender As Object, e As EventArgs) Handles Button6.Click
         conn.Open()
 
@@ -39,7 +35,6 @@ Public Class Chores
             .DueDate = DateTimePicker1.Text,
             .Recurring = NumericUpDown1.Value,
             .Description = txtdes.Text}
-
 
         Dim tablename As String = "Chores"
         Dim Cmd As New OleDbCommand($"INSERT INTO {tablename} ([Title], [AssignedTo], [Priority], [Status], [Frequency], [DueDate], [Recurring], [Description]) VALUES (?, ?, ?, ?, ?, ?, ?, ?)", conn)
@@ -80,9 +75,7 @@ Public Class Chores
         'End Try
         'Debug.WriteLine("Existing button Save")
 
-
     End Sub
-
     Private Sub Button7_Click(sender As Object, e As EventArgs) Handles Button7.Click
         Try
             For Each row As DataGridViewRow In DataGridView1.Rows
@@ -142,8 +135,6 @@ Public Class Chores
 
                     MessageBox.Show("Please Select chore to delete", "Deletion Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
                 End If
-
-
 
                 Using conn As New OleDbConnection(Murangi.connectionString)
                     conn.Open()

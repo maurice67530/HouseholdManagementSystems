@@ -1,9 +1,9 @@
 ﻿Imports System.IO
 Imports System.Data.OleDb
 Public Class Personnel
-
     ' Connection to the database
-    Dim conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
+    'Dim conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
+    Dim connec As New OleDbConnection(Rasta.connectionString)
 
     ' Variables to hold user inputs
     Dim FirstName As String
@@ -55,14 +55,14 @@ Public Class Personnel
 
         ' Open the connection
         Try
-            conn.Open()
+            connec.Open()
 
             ' SQL query to insert the data
             Dim query As String = "INSERT INTO PersonalDetails (FirstName, LastName, DateOfBirth, Email, Contact, Age, Role, Gender, PostalCode, MaritalStatus) " &
                                   "VALUES (@FirstName, @LastName, @DateOfBirth, @Email, @Contact, @Age, @Role, @Gender, @PostalCode, @MaritalStatus)"
 
             ' Create the command and add parameters
-            Dim cmd As New OleDbCommand(query, conn)
+            Dim cmd As New OleDbCommand(query, connec)
             cmd.Parameters.AddWithValue("@FirstName", FirstName)
             cmd.Parameters.AddWithValue("@LastName", LastName)
             cmd.Parameters.AddWithValue("@DateOfBirth", DateOfBirth)
@@ -88,20 +88,21 @@ Public Class Personnel
             MessageBox.Show("An error occurred: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         Finally
             ' Ensure the connection is closed even if an error occurs
-            If conn.State = ConnectionState.Open Then
-                conn.Close()
+            If connec.State = ConnectionState.Open Then
+                connec.Close()
             End If
         End Try
         LoadData()
+        ClearForm()
     End Sub
 
 
     ' Method to load data into the DataGridView
     Private Sub LoadData()
         Try
-            conn.Open()
+            connec.Open()
             Dim query As String = "SELECT * FROM PersonalDetails"
-            Dim cmd As New OleDbCommand(query, conn)
+            Dim cmd As New OleDbCommand(query, connec)
             Dim adapter As New OleDbDataAdapter(cmd)
             Dim dt As New DataTable()
             adapter.Fill(dt)
@@ -109,7 +110,7 @@ Public Class Personnel
         Catch ex As Exception
             MessageBox.Show("Failed to load data: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         Finally
-            conn.Close()
+            connec.Close()
         End Try
     End Sub
 
@@ -144,10 +145,10 @@ Public Class Personnel
         End If
 
         Try
-            conn.Open()
+            connec.Open()
             Dim query As String = "UPDATE PersonalDetails SET FirstName = ?, LastName = ?, DateOfBirth = ?, Contact = ?, Email = ?, Age = ? , Role = ?, Gender = ?, PostalCode = ?, MaritalStatus = ? WHERE ID = ?"
 
-            Using cmd As New OleDbCommand(query, conn)
+            Using cmd As New OleDbCommand(query, connec)
                 cmd.Parameters.AddWithValue("@FirstName", TextBox1.Text)
                 cmd.Parameters.AddWithValue("@LastName", TextBox2.Text)
                 cmd.Parameters.AddWithValue("@DateOfBirth", DateTimePicker1.Value)
@@ -169,7 +170,7 @@ Public Class Personnel
         Catch ex As Exception
             MessageBox.Show("Update failed: " & ex.Message)
         Finally
-            conn.Close()
+            connec.Close()
         End Try
     End Sub
 
@@ -187,10 +188,10 @@ Public Class Personnel
         End If
 
         Try
-            conn.Open()
+            connec.Open()
             Dim query As String = "DELETE FROM PersonalDetails WHERE ID = ?"
 
-            Using cmd As New OleDbCommand(query, conn)
+            Using cmd As New OleDbCommand(query, connec)
                 cmd.Parameters.AddWithValue("@ID", CInt(TextBox8.Text))
                 cmd.ExecuteNonQuery()
             End Using
@@ -202,14 +203,14 @@ Public Class Personnel
         Catch ex As Exception
             MessageBox.Show("Delete failed: " & ex.Message)
         Finally
-            conn.Close()
+            connec.Close()
         End Try
     End Sub
 
 
 
     Private Sub BtnBack_Click(sender As Object, e As EventArgs) Handles BtnBack.Click
-
+        Me.Visible = False
     End Sub
 
     Private Sub DataGridView1_SelectionChanged(sender As Object, e As EventArgs) Handles DataGridView1.SelectionChanged
@@ -248,5 +249,29 @@ Public Class Personnel
 
     Private Sub Label13_Click(sender As Object, e As EventArgs) Handles Label13.Click
 
+    End Sub
+
+    Private Sub BtnAddpicture_Click(sender As Object, e As EventArgs) Handles BtnAddpicture.Click
+        OpenFileDialog1.Filter = "Bitmaps (*.bmp)|*.bmp| (*.jpg)|*.jpg"
+        If OpenFileDialog1.ShowDialog() = DialogResult.OK Then
+            PictureBox1.Image = System.Drawing.Image.FromFile(OpenFileDialog1.FileName)
+        End If
+    End Sub
+
+    Private Sub BtnDailyTasks_Click(sender As Object, e As EventArgs) Handles BtnDailyTasks.Click
+        Chores.ShowDialog()
+    End Sub
+
+    Private Sub BtnClear_Click(sender As Object, e As EventArgs) Handles BtnClear.Click
+        TextBox1.Text = ""
+        TextBox2.Text = ""
+        TextBox3.Text = ""
+        TextBox4.Text = ""
+        TextBox5.Text = ""
+        TextBox6.Text = ""
+        TextBox8.Text = ""
+        ComboBox1.Text = ""
+        ComboBox2.Text = ""
+        ComboBox3.Text = ""
     End Sub
 End Class

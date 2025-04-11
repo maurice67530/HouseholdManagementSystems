@@ -1,7 +1,7 @@
 ﻿Imports System.Data.OleDb
 Imports HouseHoldManagement
 Public Class Task_Management
-    Public Const connectionString As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\khodani\Source\Repos\maurice67530\HouseholdManagementSystems\HMS.accdb"
+    Public Const connectionString As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Delicious\Source\Repos\maurice67530\HouseholdManagementSystems\HMS.accdb"
     Dim conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
     Private Status As String
     Private Tasks As Object
@@ -42,7 +42,7 @@ Public Class Task_Management
 
         ComboBox1.Items.AddRange(New String() {"Low", "Medium", "High"})
         ComboBox2.Items.AddRange(New String() {"Not started", "In progress", "Completed"})
-
+        PopulateComboboxFromDatabase(ComboBox3)
     End Sub
     Private Sub ComboBox3_click(sender As Object, e As EventArgs) Handles ComboBox3.Click
         PopulateComboboxFromDatabase(ComboBox3)
@@ -171,7 +171,7 @@ Public Class Task_Management
                    "DueDate: " & Task.DueDate & vbCrLf &
                    "Priority: " & Task.Priority & vbCrLf &
                    "Status: " & Task.Status & vbCrLf &
-                   "Assignedto: " & Task.AssignedTo, vbInformation, "inventory Confirmation")
+                   "Assignedto: " & Task.AssignedTo, vbInformation, "Tasks Confirmation")
 
 
             End Using
@@ -235,26 +235,26 @@ Public Class Task_Management
         Dashboard.Show()
         Me.Close()
     End Sub
-    Public Sub LoadTaskDataFromDatabase()
+    'Public Sub LoadTaskDataFromDatabase()
 
-        Debug.WriteLine(" Task load has been initialised!")
-        Using conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
-            conn.Open()
+    '    Debug.WriteLine(" Task load has been initialised!")
+    '    Using conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
+    '        conn.Open()
 
-            Dim TableName As String = "Tasks"
+    '        Dim TableName As String = "Tasks"
 
-            Dim cmd As New OleDbCommand($"SELECT*FROM {TableName}", conn)
+    '        Dim cmd As New OleDbCommand($"SELECT*FROM {TableName}", conn)
 
-            Dim da As New OleDbDataAdapter(cmd)
-            Dim dt As New DataTable
-            da.Fill(dt)
+    '        Dim da As New OleDbDataAdapter(cmd)
+    '        Dim dt As New DataTable
+    '        da.Fill(dt)
 
-            DataGridView1.DataSource = dt
+    '        DataGridView1.DataSource = dt
 
-        End Using
-    End Sub
+    '    End Using
+    'End Sub
     Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
-        LoadTaskDataFromDatabase()
+        'LoadTaskDataFromDatabase()
     End Sub
 
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
