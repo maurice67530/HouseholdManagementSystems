@@ -232,7 +232,7 @@ Public Class MealPlan
                 ' Check if all required ingredients exist in GroceryInventory and are not expired
                 For Each ingredient In requiredIngredients
                     Dim trimmedIngredient As String = ingredient.Trim()
-                    Dim checkQuery As String = "SELECT ExpiryDate FROM Inventory WHERE Category AND Quantity > 0"
+                    Dim checkQuery As String = "SELECT ExpiryDate FROM GroceryItem WHERE Category AND Quantity > 0"
                     Dim checkCommand As New OleDb.OleDbCommand(checkQuery, conn)
                     checkCommand.Parameters.AddWithValue("@Ingredients", trimmedIngredient)
 
