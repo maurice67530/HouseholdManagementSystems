@@ -1,5 +1,7 @@
 ﻿Imports System.Data.OleDb
 Public Class Chores
+
+    Public Property connn As New OleDbConnection(Masindi.connectionString)
     Public Property conn As New OleDbConnection(Murangi.connectionString)
 
     Private Sub Chores_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -290,5 +292,38 @@ Public Class Chores
 
     Private Sub Button9_Click(sender As Object, e As EventArgs) Handles Button9.Click
         DataGridView1.Sort(DataGridView1.Columns("DueDate"), System.ComponentModel.ListSortDirection.Ascending)
+    End Sub
+
+    Private Sub DataGridView1_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridView1.CellContentClick
+
+    End Sub
+
+    Private Sub DataGridView1_SelectionChanged(sender As Object, e As EventArgs) Handles DataGridView1.SelectionChanged
+        Try
+
+            'Button1.Enabled = False
+
+            If DataGridView1.SelectedRows.Count > 0 Then
+                Dim selectedRow As DataGridViewRow = DataGridView1.SelectedRows(0)
+                Debug.WriteLine("row selected on dgv")
+
+
+                TXTtitle.Text = selectedRow.Cells("Title").Value.ToString()
+                cmbassi.SelectedItem = selectedRow.Cells("AssignedTo").Value.ToString()
+                cmbpri.SelectedItem = selectedRow.Cells("Priority").Value.ToString()
+                cmbstatus.SelectedItem = selectedRow.Cells("Status").Value.ToString()
+                cmbfre.SelectedItem = selectedRow.Cells("Frequency").Value.ToString()
+                NumericUpDown1.Value = selectedRow.Cells("Recurring").Value.ToString()
+                txtdes.Text = selectedRow.Cells("Description").Value.ToString()
+                DateTimePicker1.Value = selectedRow.Cells("DueDate").Value.ToString()
+
+
+            End If
+            'Button1.Enabled = True
+        Catch ex As Exception
+            Debug.WriteLine("Data not selected: Error")
+            Debug.WriteLine($"Stack Trace: {ex.StackTrace}")
+
+        End Try
     End Sub
 End Class

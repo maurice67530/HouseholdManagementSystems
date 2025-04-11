@@ -151,7 +151,7 @@ Partial Class Grocery
         '
         Me.Label7.AutoSize = True
         Me.Label7.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label7.Location = New System.Drawing.Point(-8, 89)
+        Me.Label7.Location = New System.Drawing.Point(3, 91)
         Me.Label7.Name = "Label7"
         Me.Label7.Size = New System.Drawing.Size(97, 20)
         Me.Label7.TabIndex = 6
@@ -161,7 +161,7 @@ Partial Class Grocery
         '
         Me.Label4.AutoSize = True
         Me.Label4.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label4.Location = New System.Drawing.Point(4, 5)
+        Me.Label4.Location = New System.Drawing.Point(3, 12)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(73, 20)
         Me.Label4.TabIndex = 3
@@ -181,7 +181,7 @@ Partial Class Grocery
         '
         Me.Label6.AutoSize = True
         Me.Label6.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label6.Location = New System.Drawing.Point(3, 53)
+        Me.Label6.Location = New System.Drawing.Point(3, 51)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(97, 20)
         Me.Label6.TabIndex = 5
@@ -189,7 +189,7 @@ Partial Class Grocery
         '
         'TextBox5
         '
-        Me.TextBox5.Location = New System.Drawing.Point(117, 53)
+        Me.TextBox5.Location = New System.Drawing.Point(117, 51)
         Me.TextBox5.Name = "TextBox5"
         Me.TextBox5.Size = New System.Drawing.Size(100, 20)
         Me.TextBox5.TabIndex = 12
@@ -203,7 +203,7 @@ Partial Class Grocery
         '
         'TextBox6
         '
-        Me.TextBox6.Location = New System.Drawing.Point(117, 5)
+        Me.TextBox6.Location = New System.Drawing.Point(117, 14)
         Me.TextBox6.Name = "TextBox6"
         Me.TextBox6.Size = New System.Drawing.Size(100, 20)
         Me.TextBox6.TabIndex = 14
@@ -211,7 +211,7 @@ Partial Class Grocery
         'ComboBox1
         '
         Me.ComboBox1.FormattingEnabled = True
-        Me.ComboBox1.Items.AddRange(New Object() {"Dairy", "Vegetables", "Meet"})
+        Me.ComboBox1.Items.AddRange(New Object() {"Yes", "No"})
         Me.ComboBox1.Location = New System.Drawing.Point(117, 88)
         Me.ComboBox1.Name = "ComboBox1"
         Me.ComboBox1.Size = New System.Drawing.Size(100, 21)
@@ -261,7 +261,7 @@ Partial Class Grocery
         '
         Me.Button2.BackColor = System.Drawing.SystemColors.ActiveCaption
         Me.Button2.Image = CType(resources.GetObject("Button2.Image"), System.Drawing.Image)
-        Me.Button2.Location = New System.Drawing.Point(478, 386)
+        Me.Button2.Location = New System.Drawing.Point(478, 387)
         Me.Button2.Name = "Button2"
         Me.Button2.Size = New System.Drawing.Size(92, 56)
         Me.Button2.TabIndex = 31
