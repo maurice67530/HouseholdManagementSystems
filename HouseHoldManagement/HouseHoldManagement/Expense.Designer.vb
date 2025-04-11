@@ -306,7 +306,7 @@ Partial Class Expense
         '
         Me.Label16.AutoSize = True
         Me.Label16.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label16.Location = New System.Drawing.Point(3, 197)
+        Me.Label16.Location = New System.Drawing.Point(3, 221)
         Me.Label16.Name = "Label16"
         Me.Label16.Size = New System.Drawing.Size(149, 16)
         Me.Label16.TabIndex = 86
@@ -316,7 +316,7 @@ Partial Class Expense
         '
         Me.Label15.AutoSize = True
         Me.Label15.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label15.Location = New System.Drawing.Point(3, 172)
+        Me.Label15.Location = New System.Drawing.Point(3, 196)
         Me.Label15.Name = "Label15"
         Me.Label15.Size = New System.Drawing.Size(125, 16)
         Me.Label15.TabIndex = 85
@@ -327,6 +327,7 @@ Partial Class Expense
         Me.TextBox7.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TextBox7.Location = New System.Drawing.Point(122, 141)
         Me.TextBox7.Name = "TextBox7"
+        Me.TextBox7.ReadOnly = True
         Me.TextBox7.Size = New System.Drawing.Size(188, 22)
         Me.TextBox7.TabIndex = 84
         '
