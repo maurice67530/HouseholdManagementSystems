@@ -3,7 +3,7 @@ Imports System.Data.OleDb
 Public Class Login
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
 
-        Using conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
+        Using conn As New OleDbConnection(Xiluva.connectionString)
             Try
                 conn.Open()
 
@@ -20,13 +20,13 @@ Public Class Login
 
                     Select Case Role.ToString()
                         Case "Admin"
-                            Dashboard.Show()
+                            'Dashboard.Show()
                         Case "Members"
-                            Dashboard.Show()
+                            'Dashboard.Show()
                         Case "Finance"
-                            Dashboard.Show()
+                            'Dashboard.Show()
                         Case "Chef"
-                            Dashboard.Show()
+                            'Dashboard.Show()
                         Case Else
                             MessageBox.Show("Unknown role.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
                     End Select
@@ -43,7 +43,7 @@ Public Class Login
                 conn.Close()
             End Try
         End Using
-        Dashboard.ShowDialog()
+        'Dashboard.ShowDialog()
     End Sub
     Private Sub Login_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
