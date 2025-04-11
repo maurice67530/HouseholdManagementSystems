@@ -1,16 +1,20 @@
 ﻿Imports System.IO
 Imports System.Data.OleDb
 Public Class Login
+    Public Property conn As New OleDbConnection(Xiluva.connectionString)
+
+    Public Const connectionString As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Xiluva\Source\Repos\maurice67530\HouseholdManagementSystems\HMS.accdb;Persist Security Info=False;"
+
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
 
-        Using conn As New OleDbConnection(Module1.connectionString)
+        Using conn As New OleDbConnection(Xiluva.connectionString)
             Try
                 conn.Open()
 
                 Dim cmd As New OleDbCommand("SELECT Role FROM Users WHERE Username = ? AND Password = ?", conn)
 
                 cmd.Parameters.AddWithValue("?", TextBox1.Text)
-                'cmd.Parameters.AddWithValue("?", TextBox2.Text)
+                cmd.Parameters.AddWithValue("?", TextBox2.Text)
 
                 Dim Role As Object = cmd.ExecuteScalar()
 

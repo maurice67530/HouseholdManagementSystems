@@ -81,7 +81,7 @@ Public Class Notifications
 
     Private Sub Notifications_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Timer1.Start()
-        Timer1.Interval = 2000
+        Timer1.Interval = 4000
 
         ToolTip1.SetToolTip(Button1, "Mark As Read")
         ToolTip1.SetToolTip(Button2, "Clear Notification")
@@ -89,6 +89,7 @@ Public Class Notifications
         LoadNotifications()
 
         'CheckInventoryAndChores()
+
     End Sub
 
     Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
@@ -280,17 +281,157 @@ Public Class Notifications
         End Using
     End Sub
 
+    'Private Sub CheckInventoryAndChores()
+    '    Dim conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
+    '    Dim currentUser As String = "System"
+    '    Dim dateCreated As String = Date.Now.ToString("yyyy-MM-dd HH:mm:ss")
+    '    Dim isRead As String = "No"
+
+    '    Try
+    '        conn.Open()
+
+    '        ' Check Inventory (Quantity <= 60)
+    '        Dim inventoryCmd As New OleDbCommand("SELECT ItemName, Quantity FROM Inventory WHERE LEN(Quantity) > 0 AND IsNumeric(Quantity) = True", conn)
+    '        Dim inventoryReader As OleDbDataReader = inventoryCmd.ExecuteReader()
+    '        While inventoryReader.Read()
+    '            Dim itemName As String = inventoryReader("ItemName").ToString()
+    '            Dim quantity As Integer
+    '            If Integer.TryParse(inventoryReader("Quantity").ToString(), quantity) AndAlso quantity <= 60 Then
+    '                Dim message As String = "Low inventory: " & itemName & " only has " & quantity.ToString()
+    '                If Not NotificationExists(conn, message) Then
+    '                    AddNotification(conn, currentUser, message, "Inventory", dateCreated, isRead)
+    '                End If
+    '            End If
+    '        End While
+    '        inventoryReader.Close()
+
+    '        ' Check Chores (Overdue)
+    '        Dim choreCmd As New OleDbCommand("SELECT Title, DueDate FROM Chores", conn)
+    '        Dim choreReader As OleDbDataReader = choreCmd.ExecuteReader()
+    '        While choreReader.Read()
+    '            Dim title As String = choreReader("Title").ToString()
+    '            Dim dueDate As Date
+    '            If Date.TryParse(choreReader("DueDate").ToString(), dueDate) AndAlso dueDate < Date.Today Then
+    '                Dim message As String = "Overdue chore: " & title & " was due on " & dueDate.ToShortDateString()
+    '                If Not NotificationExists(conn, message) Then
+    '                    AddNotification(conn, currentUser, message, "Chore", dateCreated, isRead)
+    '                End If
+    '            End If
+    '        End While
+    '        choreReader.Close()
+
+    '        ' Optional Alert
+    '        SystemSounds.Exclamation.Play()
+
+    '    Catch ex As Exception
+    '        MessageBox.Show("Error: " & ex.Message)
+    '    Finally
+    '        If conn.State = ConnectionState.Open Then conn.Close()
+    '    End Try
+    'End Sub
+
+    'Private Sub AddNotification(conn As OleDbConnection, userID As String, message As String, category As String, dateCreated As String, isRead As String)
+    '    Try
+    '        Dim insertQuery As String = "INSERT INTO Notifications ([UserID], [Message], [DateCreated], [Category], [IsRead]) VALUES (?, ?, ?, ?, ?)"
+    '        Using cmd As New OleDbCommand(insertQuery, conn)
+    '            cmd.Parameters.AddWithValue("?", userID)
+    '            cmd.Parameters.AddWithValue("?", message)
+    '            cmd.Parameters.AddWithValue("?", dateCreated)
+    '            cmd.Parameters.AddWithValue("?", category)
+    '            cmd.Parameters.AddWithValue("?", isRead)
+    '            cmd.ExecuteNonQuery()
+    '        End Using
+    '    Catch ex As Exception
+    '        MessageBox.Show("Error saving notification: " & ex.Message)
+    '    End Try
+    'End Sub
+
+    'Private Function NotificationExists(conn As OleDbConnection, message As String) As Boolean
+    '    Dim checkQuery As String = "SELECT COUNT(*) FROM Notifications WHERE Message = ?"
+    '    Using cmd As New OleDbCommand(checkQuery, conn)
+    '        cmd.Parameters.AddWithValue("?", message)
+    '        Dim count As Integer = Convert.ToInt32(cmd.ExecuteScalar())
+    '        Return count > 0
+    '    End Using
+    'End Function
+
+
+
+
+    'Private Sub CheckInventoryAndChores()
+    '    Dim conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
+    '    Dim currentUser As String = GetCurrentUser(conn) ' Get the current user from Users table
+    '    Dim dateCreated As String = Date.Now.ToString("yyyy-MM-dd HH:mm:ss")
+    '    Dim isRead As String = "No"
+    '    Dim summaryMessage As String = ""
+
+    '    Try
+    '        conn.Open()
+
+    '        ' Check Inventory (Quantity <= 60)
+    '        Dim inventoryCmd As New OleDbCommand("SELECT ItemName, Quantity FROM Inventory", conn)
+    '        Dim inventoryReader As OleDbDataReader = inventoryCmd.ExecuteReader()
+    '        While inventoryReader.Read()
+    '            Dim itemName As String = inventoryReader("ItemName").ToString()
+    '            Dim quantity As Integer
+    '            If Integer.TryParse(inventoryReader("Quantity").ToString(), quantity) AndAlso quantity <= 60 Then
+    '                Dim message As String = "Low inventory: " & itemName & " only has " & quantity.ToString()
+    '                If Not NotificationExists(conn, message) Then
+    '                    AddNotification(conn, currentUser, message, "Inventory", dateCreated, isRead)
+    '                    Debug.WriteLine("Notification added for Inventory: " & message)
+    '                End If
+    '                summaryMessage &= message & vbCrLf
+    '            End If
+    '        End While
+    '        inventoryReader.Close()
+
+    '        ' Check Chores (Overdue)
+    '        Dim choreCmd As New OleDbCommand("SELECT Title, DueDate FROM Chores", conn)
+    '        Dim choreReader As OleDbDataReader = choreCmd.ExecuteReader()
+    '        While choreReader.Read()
+    '            Dim title As String = choreReader("Title").ToString()
+    '            Dim dueDate As Date
+    '            If Date.TryParse(choreReader("DueDate").ToString(), dueDate) AndAlso dueDate < Date.Today Then
+    '                Dim message As String = "Overdue chore: " & title & " was due on " & dueDate.ToShortDateString()
+    '                If Not NotificationExists(conn, message) Then
+    '                    AddNotification(conn, currentUser, message, "Chore", dateCreated, isRead)
+    '                    Debug.WriteLine("Notification added for Overdue Chore: " & message)
+    '                End If
+    '                summaryMessage &= message & vbCrLf
+    '            End If
+    '        End While
+    '        choreReader.Close()
+
+    '        ' Optional Alert System
+    '        If summaryMessage <> "" Then
+    '            SystemSounds.Exclamation.Play()
+    '            MessageBox.Show(summaryMessage, "Smart Household Alerts", MessageBoxButtons.OK, MessageBoxIcon.Information)
+    '        End If
+
+    '    Catch ex As Exception
+    '        MessageBox.Show("Error: " & ex.Message)
+    '    Finally
+    '        If conn.State = ConnectionState.Open Then
+    '            conn.Close()
+    '        End If
+    '    End Try
+    'End Sub
+
+
+
+
     Private Sub CheckInventoryAndChores()
         Dim conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
-        Dim currentUser As String = "System"
+        Dim currentUser As String = GetCurrentUser(conn)
         Dim dateCreated As String = Date.Now.ToString("yyyy-MM-dd HH:mm:ss")
         Dim isRead As String = "No"
+        Dim summaryMessage As String = ""
 
         Try
             conn.Open()
 
             ' Check Inventory (Quantity <= 60)
-            Dim inventoryCmd As New OleDbCommand("SELECT ItemName, Quantity FROM Inventory WHERE LEN(Quantity) > 0 AND IsNumeric(Quantity) = True", conn)
+            Dim inventoryCmd As New OleDbCommand("SELECT ItemName, Quantity FROM Inventory", conn)
             Dim inventoryReader As OleDbDataReader = inventoryCmd.ExecuteReader()
             While inventoryReader.Read()
                 Dim itemName As String = inventoryReader("ItemName").ToString()
@@ -299,7 +440,9 @@ Public Class Notifications
                     Dim message As String = "Low inventory: " & itemName & " only has " & quantity.ToString()
                     If Not NotificationExists(conn, message) Then
                         AddNotification(conn, currentUser, message, "Inventory", dateCreated, isRead)
+                        Debug.WriteLine("Notification added for Inventory: " & message)
                     End If
+                    summaryMessage &= message & vbCrLf
                 End If
             End While
             inventoryReader.Close()
@@ -314,24 +457,85 @@ Public Class Notifications
                     Dim message As String = "Overdue chore: " & title & " was due on " & dueDate.ToShortDateString()
                     If Not NotificationExists(conn, message) Then
                         AddNotification(conn, currentUser, message, "Chore", dateCreated, isRead)
+                        Debug.WriteLine("Notification added for Overdue Chore: " & message)
                     End If
+                    summaryMessage &= message & vbCrLf
                 End If
             End While
             choreReader.Close()
 
-            ' Optional Alert
-            SystemSounds.Exclamation.Play()
+            ' Check Expenses (Total by Category > 30000)
+            Dim expenseCmd As New OleDbCommand("SELECT Category FROM Expense ", conn)
+            Dim categoryReader As OleDbDataReader = expenseCmd.ExecuteReader()
+            While categoryReader.Read()
+                Dim category As String = categoryReader("Category").ToString()
+                ' Now calculate total amount for each category
+                Dim totalAmount As Decimal = 0
+                Dim amountCmd As New OleDbCommand("SELECT Amount FROM Expense ", conn)
+                amountCmd.Parameters.AddWithValue("?", category)
+                Dim amountReader As OleDbDataReader = amountCmd.ExecuteReader()
+                While amountReader.Read()
+                    Dim amt As Decimal
+                    If Decimal.TryParse(amountReader("Amount").ToString(), amt) Then
+                        totalAmount += amt
+                    End If
+                End While
+                amountReader.Close()
+
+                If totalAmount > 20000D Then
+                    Dim message As String = "High expense alert: " & category & " has exceeded R" & totalAmount.ToString("N2")
+                    If Not NotificationExists(conn, message) Then
+                        AddNotification(conn, currentUser, message, "Expense", dateCreated, isRead)
+                        Debug.WriteLine("Notification added for Expense: " & message)
+                    End If
+                    summaryMessage &= message & vbCrLf
+                End If
+            End While
+            categoryReader.Close()
 
         Catch ex As Exception
             MessageBox.Show("Error: " & ex.Message)
         Finally
-            If conn.State = ConnectionState.Open Then conn.Close()
+            If conn.State = ConnectionState.Open Then
+                conn.Close()
+            End If
         End Try
     End Sub
+
+
+
+
+
+
+
+    Private Function GetCurrentUser(conn As OleDbConnection) As String
+        ' Query to get the current user from Users table (assuming LoggedIn field or similar)
+        Dim userQuery As String = "SELECT UserName FROM Users "
+        Dim currentUser As String = String.Empty
+
+        Try
+            Dim cmd As New OleDbCommand(userQuery, conn)
+            conn.Open()
+            Dim result As Object = cmd.ExecuteScalar()
+            If result IsNot Nothing Then
+                currentUser = result.ToString()
+                Debug.WriteLine("Current User: " & currentUser) ' Debug log
+            End If
+        Catch ex As Exception
+            MessageBox.Show("Error retrieving current user: " & ex.Message)
+        Finally
+            If conn.State = ConnectionState.Open Then
+                conn.Close()
+            End If
+        End Try
+
+        Return currentUser
+    End Function
 
     Private Sub AddNotification(conn As OleDbConnection, userID As String, message As String, category As String, dateCreated As String, isRead As String)
         Try
             Dim insertQuery As String = "INSERT INTO Notifications ([UserID], [Message], [DateCreated], [Category], [IsRead]) VALUES (?, ?, ?, ?, ?)"
+
             Using cmd As New OleDbCommand(insertQuery, conn)
                 cmd.Parameters.AddWithValue("?", userID)
                 cmd.Parameters.AddWithValue("?", message)
@@ -339,7 +543,9 @@ Public Class Notifications
                 cmd.Parameters.AddWithValue("?", category)
                 cmd.Parameters.AddWithValue("?", isRead)
                 cmd.ExecuteNonQuery()
+                Debug.WriteLine("Inserted notification into the database") ' Debug log
             End Using
+
         Catch ex As Exception
             MessageBox.Show("Error saving notification: " & ex.Message)
         End Try
@@ -347,12 +553,19 @@ Public Class Notifications
 
     Private Function NotificationExists(conn As OleDbConnection, message As String) As Boolean
         Dim checkQuery As String = "SELECT COUNT(*) FROM Notifications WHERE Message = ?"
+
         Using cmd As New OleDbCommand(checkQuery, conn)
             cmd.Parameters.AddWithValue("?", message)
             Dim count As Integer = Convert.ToInt32(cmd.ExecuteScalar())
+            Debug.WriteLine("NotificationExists check result: " & count.ToString()) ' Debug log
             Return count > 0
         End Using
     End Function
+
+
+
+
+
 
 
 End Class

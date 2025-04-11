@@ -59,6 +59,7 @@ Partial Class MealPlan
         Me.btnFilter = New System.Windows.Forms.Button()
         Me.btnSort = New System.Windows.Forms.Button()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
+        Me.TextBox1 = New System.Windows.Forms.TextBox()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel2.SuspendLayout()
         CType(Me.NumericUpDown1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -69,9 +70,9 @@ Partial Class MealPlan
         'DataGridView1
         '
         Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DataGridView1.Location = New System.Drawing.Point(6, 275)
+        Me.DataGridView1.Location = New System.Drawing.Point(6, 300)
         Me.DataGridView1.Name = "DataGridView1"
-        Me.DataGridView1.Size = New System.Drawing.Size(651, 150)
+        Me.DataGridView1.Size = New System.Drawing.Size(651, 125)
         Me.DataGridView1.TabIndex = 35
         '
         'Label1
@@ -88,6 +89,7 @@ Partial Class MealPlan
         '
         Me.Panel2.BackColor = System.Drawing.SystemColors.ActiveCaption
         Me.Panel2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.Panel2.Controls.Add(Me.TextBox1)
         Me.Panel2.Controls.Add(Me.DateTimePicker2)
         Me.Panel2.Controls.Add(Me.ComboBox1)
         Me.Panel2.Controls.Add(Me.DateTimePicker1)
@@ -103,7 +105,7 @@ Partial Class MealPlan
         Me.Panel2.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Panel2.Location = New System.Drawing.Point(331, 27)
         Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(326, 242)
+        Me.Panel2.Size = New System.Drawing.Size(326, 267)
         Me.Panel2.TabIndex = 33
         '
         'DateTimePicker2
@@ -257,7 +259,7 @@ Partial Class MealPlan
         Me.Panel1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Panel1.Location = New System.Drawing.Point(6, 27)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(319, 242)
+        Me.Panel1.Size = New System.Drawing.Size(319, 267)
         Me.Panel1.TabIndex = 32
         '
         'TextBox4
@@ -399,6 +401,13 @@ Partial Class MealPlan
         Me.btnSort.TabIndex = 37
         Me.btnSort.UseVisualStyleBackColor = True
         '
+        'TextBox1
+        '
+        Me.TextBox1.Location = New System.Drawing.Point(98, 237)
+        Me.TextBox1.Name = "TextBox1"
+        Me.TextBox1.Size = New System.Drawing.Size(97, 21)
+        Me.TextBox1.TabIndex = 26
+        '
         'MealPlan
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -468,4 +477,5 @@ Partial Class MealPlan
     Friend WithEvents Label11 As Label
     Friend WithEvents Label12 As Label
     Friend WithEvents ToolTip1 As ToolTip
+    Friend WithEvents TextBox1 As TextBox
 End Class
