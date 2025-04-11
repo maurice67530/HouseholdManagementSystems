@@ -94,7 +94,7 @@ Public Class DailyTask
         Public Property Quantity As String
         Public Property ExpiryDate As DateTime
         Public Property Category As String
-        Public Property PricePerUnit As Integer
+        Public Property Price As Integer
         Public Property Ispurchased As String
 
         Public Class Personnel
