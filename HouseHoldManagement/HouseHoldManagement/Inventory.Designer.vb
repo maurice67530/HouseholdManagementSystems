@@ -246,7 +246,7 @@ Partial Class Inventory
         'ComboBox1
         '
         Me.ComboBox1.FormattingEnabled = True
-        Me.ComboBox1.Items.AddRange(New Object() {"Vegetables", "Fruits", "Meat", "Refreshments"})
+        Me.ComboBox1.Items.AddRange(New Object() {"Vegetables", "Fruits", "Meat", "Refreshments", "Snacks"})
         Me.ComboBox1.Location = New System.Drawing.Point(399, 87)
         Me.ComboBox1.Name = "ComboBox1"
         Me.ComboBox1.Size = New System.Drawing.Size(100, 21)

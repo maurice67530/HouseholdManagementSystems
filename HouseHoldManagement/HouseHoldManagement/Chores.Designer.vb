@@ -171,7 +171,6 @@ Partial Class Chores
         'cmbfre
         '
         Me.cmbfre.FormattingEnabled = True
-        Me.cmbfre.Items.AddRange(New Object() {"fggf"})
         Me.cmbfre.Location = New System.Drawing.Point(119, 117)
         Me.cmbfre.Name = "cmbfre"
         Me.cmbfre.Size = New System.Drawing.Size(170, 21)
@@ -190,7 +189,6 @@ Partial Class Chores
         'cmbstatus
         '
         Me.cmbstatus.FormattingEnabled = True
-        Me.cmbstatus.Items.AddRange(New Object() {"fggf"})
         Me.cmbstatus.Location = New System.Drawing.Point(119, 82)
         Me.cmbstatus.Name = "cmbstatus"
         Me.cmbstatus.Size = New System.Drawing.Size(170, 21)
@@ -209,7 +207,6 @@ Partial Class Chores
         'cmbpri
         '
         Me.cmbpri.FormattingEnabled = True
-        Me.cmbpri.Items.AddRange(New Object() {"fgfg"})
         Me.cmbpri.Location = New System.Drawing.Point(119, 49)
         Me.cmbpri.Name = "cmbpri"
         Me.cmbpri.Size = New System.Drawing.Size(170, 21)
@@ -218,7 +215,6 @@ Partial Class Chores
         'cmbassi
         '
         Me.cmbassi.FormattingEnabled = True
-        Me.cmbassi.Items.AddRange(New Object() {"Ndivhuwo", "Masindi", "Murangi"})
         Me.cmbassi.Location = New System.Drawing.Point(119, 11)
         Me.cmbassi.Name = "cmbassi"
         Me.cmbassi.Size = New System.Drawing.Size(170, 21)
@@ -365,7 +361,7 @@ Partial Class Chores
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(674, 454)
+        Me.ClientSize = New System.Drawing.Size(672, 449)
         Me.Controls.Add(Me.Label10)
         Me.Controls.Add(Me.Button9)
         Me.Controls.Add(Me.Button8)
