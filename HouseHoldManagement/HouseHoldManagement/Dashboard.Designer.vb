@@ -230,7 +230,7 @@ Partial Class Dashboard
         'Label4
         '
         Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(621, 396)
+        Me.Label4.Location = New System.Drawing.Point(584, 393)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(39, 13)
         Me.Label4.TabIndex = 22
@@ -238,7 +238,7 @@ Partial Class Dashboard
         '
         'TextBox1
         '
-        Me.TextBox1.Location = New System.Drawing.Point(679, 393)
+        Me.TextBox1.Location = New System.Drawing.Point(573, 409)
         Me.TextBox1.Name = "TextBox1"
         Me.TextBox1.Size = New System.Drawing.Size(100, 20)
         Me.TextBox1.TabIndex = 23
