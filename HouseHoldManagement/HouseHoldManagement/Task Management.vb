@@ -235,26 +235,26 @@ Public Class Task_Management
         Dashboard.Show()
         Me.Close()
     End Sub
-    Public Sub LoadTaskDataFromDatabase()
+    'Public Sub LoadTaskDataFromDatabase()
 
-        Debug.WriteLine(" Task load has been initialised!")
-        Using conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
-            conn.Open()
+    '    Debug.WriteLine(" Task load has been initialised!")
+    '    Using conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
+    '        conn.Open()
 
-            Dim TableName As String = "Tasks"
+    '        Dim TableName As String = "Tasks"
 
-            Dim cmd As New OleDbCommand($"SELECT*FROM {TableName}", conn)
+    '        Dim cmd As New OleDbCommand($"SELECT*FROM {TableName}", conn)
 
-            Dim da As New OleDbDataAdapter(cmd)
-            Dim dt As New DataTable
-            da.Fill(dt)
+    '        Dim da As New OleDbDataAdapter(cmd)
+    '        Dim dt As New DataTable
+    '        da.Fill(dt)
 
-            DataGridView1.DataSource = dt
+    '        DataGridView1.DataSource = dt
 
-        End Using
-    End Sub
+    '    End Using
+    'End Sub
     Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
-        LoadTaskDataFromDatabase()
+        'LoadTaskDataFromDatabase()
     End Sub
 
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
