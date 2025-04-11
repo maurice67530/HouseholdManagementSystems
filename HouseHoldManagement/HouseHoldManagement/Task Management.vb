@@ -42,7 +42,7 @@ Public Class Task_Management
 
         ComboBox1.Items.AddRange(New String() {"Low", "Medium", "High"})
         ComboBox2.Items.AddRange(New String() {"Not started", "In progress", "Completed"})
-
+        PopulateComboboxFromDatabase(ComboBox3)
     End Sub
     Private Sub ComboBox3_click(sender As Object, e As EventArgs) Handles ComboBox3.Click
         PopulateComboboxFromDatabase(ComboBox3)
@@ -171,7 +171,7 @@ Public Class Task_Management
                    "DueDate: " & Task.DueDate & vbCrLf &
                    "Priority: " & Task.Priority & vbCrLf &
                    "Status: " & Task.Status & vbCrLf &
-                   "Assignedto: " & Task.AssignedTo, vbInformation, "inventory Confirmation")
+                   "Assignedto: " & Task.AssignedTo, vbInformation, "Tasks Confirmation")
 
 
             End Using
@@ -341,6 +341,10 @@ Public Class Task_Management
             Debug.WriteLine("error selection data in the database")
             Debug.WriteLine($"Stack Trace: {ex.StackTrace}")
         End Try
+
+    End Sub
+
+    Private Sub ComboBox3_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ComboBox3.SelectedIndexChanged
 
     End Sub
 End Class
