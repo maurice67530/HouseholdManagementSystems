@@ -56,6 +56,7 @@ Partial Class Personnel
         Me.Label10 = New System.Windows.Forms.Label()
         Me.TextBox8 = New System.Windows.Forms.TextBox()
         Me.ComboBox2 = New System.Windows.Forms.ComboBox()
+        Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -409,6 +410,10 @@ Partial Class Personnel
         Me.ComboBox2.Size = New System.Drawing.Size(267, 21)
         Me.ComboBox2.TabIndex = 84
         '
+        'OpenFileDialog1
+        '
+        Me.OpenFileDialog1.FileName = "OpenFileDialog1"
+        '
         'Personnel
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -490,4 +495,5 @@ Partial Class Personnel
     Friend WithEvents Label10 As Label
     Friend WithEvents TextBox8 As TextBox
     Friend WithEvents ComboBox2 As ComboBox
+    Friend WithEvents OpenFileDialog1 As OpenFileDialog
 End Class
