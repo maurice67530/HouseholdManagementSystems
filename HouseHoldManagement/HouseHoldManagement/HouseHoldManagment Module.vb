@@ -23,8 +23,6 @@ Module Module1
             If TypeOf ctrl Is TextBox Then
                 CType(ctrl, TextBox).Clear()
             End If
-
-
         Next
 
         'clear comboBoxes
