@@ -248,7 +248,7 @@ Partial Class Dashboard
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.ClientSize = New System.Drawing.Size(986, 749)
+        Me.ClientSize = New System.Drawing.Size(1284, 1005)
         Me.Controls.Add(Me.TextBox1)
         Me.Controls.Add(Me.Label4)
         Me.Controls.Add(Me.ProgressBar1)
@@ -268,6 +268,7 @@ Partial Class Dashboard
         Me.Controls.Add(Me.Chart1)
         Me.Name = "Dashboard"
         Me.Text = " "
+        Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
         CType(Me.Chart1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.Chart2, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
