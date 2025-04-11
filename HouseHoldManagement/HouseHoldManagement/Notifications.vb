@@ -87,6 +87,7 @@ Public Class Notifications
         ToolTip1.SetToolTip(Button3, "Refresh")
         LoadNotifications()
         CheckOverdueChores()
+
     End Sub
 
     Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
@@ -227,6 +228,7 @@ Public Class Notifications
     Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
         Timer1.Stop()
         CheckLowInventory()
+
     End Sub
 
     Private Sub DataGridView1_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridView1.CellContentClick
@@ -241,7 +243,7 @@ Public Class Notifications
     End Sub
     Private Sub LoadNotifications()
         Dim query As String = "SELECT * FROM Notifications ORDER BY DateCreated DESC"
-        Using conn As New OleDbConnection(HouseHoldManagment_Module.connectionString), cmd As New OleDbCommand(query, conn)
+        Using conn As New OleDbConnection(Rotondwa.connectionString), cmd As New OleDbCommand(query, conn)
             Dim adapter As New OleDbDataAdapter(cmd)
             Dim table As New DataTable()
             adapter.Fill(table)
