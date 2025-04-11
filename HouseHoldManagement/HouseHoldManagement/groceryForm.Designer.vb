@@ -41,12 +41,12 @@ Partial Class groceryForm
         Me.DateTimePicker1 = New System.Windows.Forms.DateTimePicker()
         Me.TextBox6 = New System.Windows.Forms.TextBox()
         Me.ComboBox1 = New System.Windows.Forms.ComboBox()
-        Me.Button5 = New System.Windows.Forms.Button()
         Me.Label8 = New System.Windows.Forms.Label()
+        Me.DataGridView1 = New System.Windows.Forms.DataGridView()
+        Me.Button5 = New System.Windows.Forms.Button()
         Me.Button4 = New System.Windows.Forms.Button()
         Me.Button3 = New System.Windows.Forms.Button()
         Me.Button2 = New System.Windows.Forms.Button()
-        Me.DataGridView1 = New System.Windows.Forms.DataGridView()
         Me.btnSubmit = New System.Windows.Forms.Button()
         Me.Panel2.SuspendLayout()
         Me.Panel1.SuspendLayout()
@@ -227,16 +227,6 @@ Partial Class groceryForm
         Me.ComboBox1.Size = New System.Drawing.Size(100, 21)
         Me.ComboBox1.TabIndex = 16
         '
-        'Button5
-        '
-        Me.Button5.BackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.Button5.Image = CType(resources.GetObject("Button5.Image"), System.Drawing.Image)
-        Me.Button5.Location = New System.Drawing.Point(123, 404)
-        Me.Button5.Name = "Button5"
-        Me.Button5.Size = New System.Drawing.Size(100, 60)
-        Me.Button5.TabIndex = 34
-        Me.Button5.UseVisualStyleBackColor = False
-        '
         'Label8
         '
         Me.Label8.AutoSize = True
@@ -247,10 +237,28 @@ Partial Class groceryForm
         Me.Label8.TabIndex = 27
         Me.Label8.Text = "Grocery Item"
         '
+        'DataGridView1
+        '
+        Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.DataGridView1.Location = New System.Drawing.Point(8, 230)
+        Me.DataGridView1.Name = "DataGridView1"
+        Me.DataGridView1.Size = New System.Drawing.Size(558, 169)
+        Me.DataGridView1.TabIndex = 30
+        '
+        'Button5
+        '
+        Me.Button5.BackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.Button5.Image = Global.HouseHoldManagement.My.Resources.Resources.icons8_refresh_32__1_
+        Me.Button5.Location = New System.Drawing.Point(123, 404)
+        Me.Button5.Name = "Button5"
+        Me.Button5.Size = New System.Drawing.Size(100, 60)
+        Me.Button5.TabIndex = 34
+        Me.Button5.UseVisualStyleBackColor = False
+        '
         'Button4
         '
         Me.Button4.BackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.Button4.Image = CType(resources.GetObject("Button4.Image"), System.Drawing.Image)
+        Me.Button4.Image = Global.HouseHoldManagement.My.Resources.Resources.icons8_delete_321
         Me.Button4.Location = New System.Drawing.Point(245, 404)
         Me.Button4.Name = "Button4"
         Me.Button4.Size = New System.Drawing.Size(93, 60)
@@ -277,18 +285,10 @@ Partial Class groceryForm
         Me.Button2.TabIndex = 31
         Me.Button2.UseVisualStyleBackColor = False
         '
-        'DataGridView1
-        '
-        Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DataGridView1.Location = New System.Drawing.Point(8, 230)
-        Me.DataGridView1.Name = "DataGridView1"
-        Me.DataGridView1.Size = New System.Drawing.Size(558, 169)
-        Me.DataGridView1.TabIndex = 30
-        '
         'btnSubmit
         '
         Me.btnSubmit.BackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.btnSubmit.Image = CType(resources.GetObject("btnSubmit.Image"), System.Drawing.Image)
+        Me.btnSubmit.Image = Global.HouseHoldManagement.My.Resources.Resources.icons8_submit_32
         Me.btnSubmit.Location = New System.Drawing.Point(8, 404)
         Me.btnSubmit.Name = "btnSubmit"
         Me.btnSubmit.Size = New System.Drawing.Size(88, 60)
