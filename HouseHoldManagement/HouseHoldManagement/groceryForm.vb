@@ -23,7 +23,6 @@ Public Class groceryForm
         Grocery.Add(Item)
 
 
-
         Debug.WriteLine("Entering btnSubmit")
 
         Using conn As New OleDbConnection(Rotondwa.connectionString)
@@ -60,7 +59,7 @@ Public Class groceryForm
             TextBox2.Text = selectedRow.Cells("Quantity").Value.ToString()
             ComboBox2.SelectedItem = selectedRow.Cells("Unit").Value.ToString()
             TextBox6.Text = selectedRow.Cells("Category").Value.ToString(
-                TextBox5.Text = selectedRow.Cells("Price").Value.ToString())
+            TextBox5.Text = selectedRow.Cells("Price").Value.ToString())
             ComboBox1.SelectedItem = selectedRow.Cells("Ispurchased").Value.ToString()
             DateTimePicker1.Value = selectedRow.Cells("ExpiryDate").Value.ToString
 
@@ -70,14 +69,9 @@ Public Class groceryForm
             btnSubmit.Enabled = False
             LoadGroceryItemDataFromDatabase()
 
-
         End If
     End Sub
     Public Sub LoadGroceryItemDataFromDatabase()
-
-
-
-
 
         Try
             Debug.WriteLine("Loading successfully")
@@ -119,7 +113,6 @@ Public Class groceryForm
         'AlertExpiringGroceries()
         Timer1.Interval = 6000
         Timer1.Start()
-
 
     End Sub
 
@@ -344,10 +337,10 @@ Public Class groceryForm
         'End If
     End Sub
 
-    Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
-        ToolTip1.SetToolTip(Button3, "DashBoard")
+    'Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
+    '    ToolTip1.SetToolTip(Button3, "DashBoard")
 
-    End Sub
+    'End Sub
 
     Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
 
