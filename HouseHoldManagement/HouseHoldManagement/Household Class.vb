@@ -86,8 +86,10 @@ Public Class DailyTask
     Public Property Priority As String
     Public Property Status As String
     Public Property AssignedTo As String
+End Class
 
-    Public Class Grocery
+
+Public Class GroceryClass
         Public Property ItemID As String
         Public Property ItemName As String
         Public Property Unit As String
@@ -96,8 +98,11 @@ Public Class DailyTask
         Public Property Category As String
         Public Property Price As Integer
         Public Property Ispurchased As String
+    End Class
 
-        Public Class Personnel
+
+
+    Public Class Personnel
             Public Property FistName As String
             Public Property LastName As String
             Public Property Gender As String
@@ -108,6 +113,6 @@ Public Class DailyTask
             Public Property postalcode As String
             Public Property Age As Integer
             Public Property Contact As Integer
+
         End Class
-    End Class
 End Class
