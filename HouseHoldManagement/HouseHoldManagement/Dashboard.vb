@@ -63,7 +63,7 @@ Public Class Dashboard
     Private Sub LoadChoresStatus()
 
         Dim completed As Integer = 0, inProgress As Integer = 0, notStarted As Integer = 0
-        Dim query As String = "SELECT Status, COUNT(*) FROM Chore GROUP BY Status"
+        Dim query As String = "SELECT Status, COUNT(*) FROM Chores GROUP BY Status"
 
         Using conn As New OleDbConnection(HouseHoldManagment_Module.connectionString), cmd As New OleDbCommand(query, conn)
             conn.Open()
