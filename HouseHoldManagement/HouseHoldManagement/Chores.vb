@@ -22,6 +22,7 @@ Public Class Chores
         tooltip.SetToolTip(Button8, "Filter")
         tooltip.SetToolTip(Button9, "Sort")
 
+        PopulateComboboxFromDatabase(cmbassi)
         loadChoresFromDatabase()
     End Sub
 
@@ -324,6 +325,40 @@ Public Class Chores
             Debug.WriteLine("Data not selected: Error")
             Debug.WriteLine($"Stack Trace: {ex.StackTrace}")
 
+        End Try
+    End Sub
+    Public Sub PopulateComboboxFromDatabase(ByRef comboBox As ComboBox)
+        Dim conn As New OleDbConnection(Murangi.connectionString)
+        Try
+            Debug.WriteLine("populate combobox successful")
+            'open the database connection
+            conn.Open()
+
+            'retrieve the firstname and surname columns from the personaldetails tabel
+            Dim query As String = "SELECT FirstName, LastName FROM PersonalDetails"
+            Dim cmd As New OleDbCommand(query, conn)
+            Dim reader As OleDbDataReader = cmd.ExecuteReader()
+
+            'bind the retrieved data to the combobox
+            cmbassi.Items.Clear()
+            While reader.Read()
+                cmbassi.Items.Add($"{reader("FirstName")} {reader("LastName")}")
+            End While
+
+            'close the database
+            reader.Close()
+
+        Catch ex As Exception
+            'handle any exeptions that may occur  
+            Debug.WriteLine("failed to populate combobox")
+            Debug.WriteLine($"Stack Trace: {ex.StackTrace}")
+            MessageBox.Show($"Error: {ex.StackTrace}")
+
+        Finally
+            'close the database connection
+            If conn.State = ConnectionState.Open Then
+                conn.Close()
+            End If
         End Try
     End Sub
 End Class
