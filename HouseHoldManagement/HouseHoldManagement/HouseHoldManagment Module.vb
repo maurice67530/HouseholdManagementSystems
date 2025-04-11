@@ -12,7 +12,6 @@ Module HouseHoldManagment_Module
     End Function
 
 End Module
-
 Module Module1
     Public Property conn As New OleDbConnection(connectionString)
     Public Const connectionString As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Zwivhuya\Source\Repos\maurice67530\HouseholdManagementSystems\HMS.accdb;Persist Security Info=False;"
@@ -85,9 +84,10 @@ End Module
 
 Module Rinae
     Public Const connectionString As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Rinae\Source\Repos\maurice67530\HouseholdManagementSystems\HMS.accdb"
-
 End Module
-
+Module Ndivhuwo
+    Public Const connectionString As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Delicious\Source\Repos\maurice67530\HouseholdManagementSystems\HMS.accdb"
+End Module
 '[Dongola] vhasongo silinga
 Module InventoryModule
     Public Const connectionString As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Dongola\Source\Repos\maurice67530\HouseholdManagementSystems\HMS.accdb"
@@ -127,12 +127,8 @@ Module InventoryModule
             conn.Close()
         End Try
     End Sub
-
-
 End Module
-
-
-'Murangi (don't Touch)
-Module Murangi
+    'Murangi (don't Touch)
+    Module Murangi
     Public Const connectionString As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Murangi\Source\Repos\maurice67530\HouseholdManagementSystems\HMS.accdb"
 End Module
