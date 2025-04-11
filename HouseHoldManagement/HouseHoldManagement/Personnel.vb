@@ -93,6 +93,7 @@ Public Class Personnel
             End If
         End Try
         LoadData()
+        ClearForm()
     End Sub
 
 
@@ -209,7 +210,7 @@ Public Class Personnel
 
 
     Private Sub BtnBack_Click(sender As Object, e As EventArgs) Handles BtnBack.Click
-
+        Me.Visible = False
     End Sub
 
     Private Sub DataGridView1_SelectionChanged(sender As Object, e As EventArgs) Handles DataGridView1.SelectionChanged
@@ -248,5 +249,29 @@ Public Class Personnel
 
     Private Sub Label13_Click(sender As Object, e As EventArgs) Handles Label13.Click
 
+    End Sub
+
+    Private Sub BtnAddpicture_Click(sender As Object, e As EventArgs) Handles BtnAddpicture.Click
+        OpenFileDialog1.Filter = "Bitmaps (*.bmp)|*.bmp| (*.jpg)|*.jpg"
+        If OpenFileDialog1.ShowDialog() = DialogResult.OK Then
+            PictureBox1.Image = System.Drawing.Image.FromFile(OpenFileDialog1.FileName)
+        End If
+    End Sub
+
+    Private Sub BtnDailyTasks_Click(sender As Object, e As EventArgs) Handles BtnDailyTasks.Click
+        Chores.ShowDialog()
+    End Sub
+
+    Private Sub BtnClear_Click(sender As Object, e As EventArgs) Handles BtnClear.Click
+        TextBox1.Text = ""
+        TextBox2.Text = ""
+        TextBox3.Text = ""
+        TextBox4.Text = ""
+        TextBox5.Text = ""
+        TextBox6.Text = ""
+        TextBox8.Text = ""
+        ComboBox1.Text = ""
+        ComboBox2.Text = ""
+        ComboBox3.Text = ""
     End Sub
 End Class

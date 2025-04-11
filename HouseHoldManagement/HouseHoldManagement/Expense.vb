@@ -336,37 +336,36 @@ Public Class Expense
         PopulateComboboxFromDatabase(ComboBox3)
     End Sub
     Public Sub PopulateComboboxFromDatabase(ByRef comboBox As ComboBox)
-
-        Dim connect As New OleDbConnection(connectionString)
-
+        Dim conn As New OleDbConnection(connectionString)
         Try
-            Debug.WriteLine("ComboBox populated successfully")
-            ' 1. Open the database connection  
-            connect.Open()
+            Debug.WriteLine("populate combobox successful")
+            'open the database connection
+            conn.Open()
 
-            ' 2. Retrieve the FirstName and LastName columns from the Personnel table  
+            'retrieve the firstname and surname columns from the personaldetails tabel
             Dim query As String = "SELECT FirstName, LastName FROM PersonalDetails"
-            Dim cmd As New OleDbCommand(query, connect)
+            Dim cmd As New OleDbCommand(query, conn)
             Dim reader As OleDbDataReader = cmd.ExecuteReader()
 
-            ' 3. Bind the retrieved data to the combobox  
+            'bind the retrieved data to the combobox
             ComboBox3.Items.Clear()
             While reader.Read()
                 ComboBox3.Items.Add($"{reader("FirstName")} {reader("LastName")}")
             End While
 
-            ' 4. Close the database connection  
+            'close the database
             reader.Close()
+
         Catch ex As Exception
-            ' Handle any exceptions that may occur  
-            Debug.WriteLine("ComboBox population failed")
-            Debug.WriteLine($" An error has occured when PopulateComboboxFromDatabase: {ex.Message}")
-            Debug.WriteLine($"Stack Trace : {ex.StackTrace}")
-            MessageBox.Show($"Error: {ex.Message}")
+            'handle any exeptions that may occur  
+            Debug.WriteLine("failed to populate combobox")
+            Debug.WriteLine($"Stack Trace: {ex.StackTrace}")
+            MessageBox.Show($"Error: {ex.StackTrace}")
+
         Finally
-            ' Close the database connection  
-            If connect.State = ConnectionState.Open Then
-                connect.Close()
+            'close the database connection
+            If conn.State = ConnectionState.Open Then
+                conn.Close()
             End If
         End Try
     End Sub
