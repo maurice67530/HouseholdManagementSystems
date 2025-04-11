@@ -1,10 +1,8 @@
 ﻿Imports System.Data.OleDb
 Public Class Chores
-
     Public Property conn As New OleDbConnection(Murangi.connectionString)
 
     Private Sub Chores_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-
         cmbpri.Items.AddRange(New String() {"Low", "Medium", "High"})
         cmbstatus.Items.AddRange(New String() {"Not started", "In progress", "Completed"})
         cmbfre.Items.AddRange(New String() {"Daily", "Weekly", "Monthly"})
