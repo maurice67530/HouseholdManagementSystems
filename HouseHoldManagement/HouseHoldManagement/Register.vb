@@ -1,6 +1,6 @@
 ﻿Imports System.Data.OleDb
 Public Class Register
-      Public Property conn As New OleDbConnection(connectionString)
+    Public Property conn As New OleDbConnection(Xiluva.connectionString)
 
     Public Const connectionString As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Xiluva\Source\Repos\maurice67530\HouseholdManagementSystems\HMS.accdb;Persist Security Info=False;"
 
@@ -43,9 +43,5 @@ Public Class Register
 
     Private Sub Register_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         ComboBox1.Items.AddRange(New String() {"Admin", "Member", "Finance", "Chef"})
-    End Sub
-
-    Private Sub DateTimePicker1_ValueChanged(sender As Object, e As EventArgs) Handles DateTimePicker1.ValueChanged
-
     End Sub
 End Class
