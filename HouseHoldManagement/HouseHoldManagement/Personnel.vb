@@ -1,9 +1,9 @@
 ﻿Imports System.IO
 Imports System.Data.OleDb
 Public Class Personnel
-
     ' Connection to the database
     Dim conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
+    Dim connec As New OleDbConnection(Rasta.connectionString)
 
     ' Variables to hold user inputs
     Dim FirstName As String
