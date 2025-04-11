@@ -115,4 +115,4 @@ Public Class GroceryClass
             Public Property Contact As Integer
 
         End Class
-End Class
+
