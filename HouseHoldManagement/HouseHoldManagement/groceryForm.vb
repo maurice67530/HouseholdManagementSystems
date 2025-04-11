@@ -41,7 +41,7 @@ Public Class groceryForm
         End Using
 
         'display a confirmation message
-        MsgBox("Grocery Items Added!" & vbCrLf & "Name:" & Item.ItemName & vbCrLf & "Quantity:" & Item.Quantity & vbCrLf & "inpurchases:" & Item.Ispurchased & vbCrLf & "Category:" & Item.Category & vbCrLf & "Price:" & Item.Price.ToString & vbCrLf & "Unit:" & Item.Unit & vbCrLf & "ItemID:" & Item.ItemID, vbInformation, "Item Confirmation")
+        MsgBox("Grocery Items Added!" & vbCrLf & "Name:" & Item.ItemName & vbCrLf & "Quantity:" & Item.Quantity & vbCrLf & "Ispurchased:" & Item.Ispurchased & vbCrLf & "Category:" & Item.Category & vbCrLf & "Price:" & Item.Price.ToString & vbCrLf & "Unit:" & Item.Unit & vbCrLf & "ItemID:" & Item.ItemID, vbInformation, "Item Confirmation")
         'LoadGroceryItemDataFromDatabase()
 
 
@@ -106,5 +106,10 @@ Public Class groceryForm
             Debug.WriteLine($"Stack Trace: {ex.StackTrace}")
             MessageBox.Show($"UnExpected error in loading Grocery   from database.{ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
+    End Sub
+
+    Private Sub groceryForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        LoadGroceryItemDataFromDatabase()
+
     End Sub
 End Class

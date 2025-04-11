@@ -102,17 +102,17 @@ Public Class GroceryClass
 
 
 
-    Public Class Personnel
-            Public Property FistName As String
-            Public Property LastName As String
-            Public Property Gender As String
-            Public Property Email As String
-            Public Property DateOfBirth As DateTime
-            Public Property Role As String
-            Public Property MaritalStatus As String
-            Public Property postalcode As String
-            Public Property Age As Integer
-            Public Property Contact As Integer
+Public Class Person
+    Public Property FistName As String
+    Public Property LastName As String
+    Public Property Gender As String
+    Public Property Email As String
+    Public Property DateOfBirth As DateTime
+    Public Property Role As String
+    Public Property MaritalStatus As String
+    Public Property postalcode As String
+    Public Property Age As Integer
+    Public Property Contact As Integer
 
-        End Class
+End Class
 
