@@ -426,11 +426,12 @@ Public Class Notifications
         Dim dateCreated As String = Date.Now.ToString("yyyy-MM-dd HH:mm:ss")
         Dim isRead As String = "No"
         Dim summaryMessage As String = ""
+        Dim notificationsToSave As New List(Of String)
 
         Try
             conn.Open()
 
-            ' Check Inventory (Quantity <= 60)
+            ' --- Check Inventory (Quantity <= 60) ---
             Dim inventoryCmd As New OleDbCommand("SELECT ItemName, Quantity FROM Inventory", conn)
             Dim inventoryReader As OleDbDataReader = inventoryCmd.ExecuteReader()
             While inventoryReader.Read()
@@ -438,16 +439,13 @@ Public Class Notifications
                 Dim quantity As Integer
                 If Integer.TryParse(inventoryReader("Quantity").ToString(), quantity) AndAlso quantity <= 60 Then
                     Dim message As String = "Low inventory: " & itemName & " only has " & quantity.ToString()
-                    If Not NotificationExists(conn, message) Then
-                        AddNotification(conn, currentUser, message, "Inventory", dateCreated, isRead)
-                        Debug.WriteLine("Notification added for Inventory: " & message)
-                    End If
                     summaryMessage &= message & vbCrLf
+                    notificationsToSave.Add(message)
                 End If
             End While
             inventoryReader.Close()
 
-            ' Check Chores (Overdue)
+            ' --- Check Overdue Chores ---
             Dim choreCmd As New OleDbCommand("SELECT Title, DueDate FROM Chores", conn)
             Dim choreReader As OleDbDataReader = choreCmd.ExecuteReader()
             While choreReader.Read()
@@ -455,22 +453,19 @@ Public Class Notifications
                 Dim dueDate As Date
                 If Date.TryParse(choreReader("DueDate").ToString(), dueDate) AndAlso dueDate < Date.Today Then
                     Dim message As String = "Overdue chore: " & title & " was due on " & dueDate.ToShortDateString()
-                    If Not NotificationExists(conn, message) Then
-                        AddNotification(conn, currentUser, message, "Chore", dateCreated, isRead)
-                        Debug.WriteLine("Notification added for Overdue Chore: " & message)
-                    End If
                     summaryMessage &= message & vbCrLf
+                    notificationsToSave.Add(message)
                 End If
             End While
             choreReader.Close()
 
-            ' Check Expenses (Total by Category > 30000)
-            Dim expenseCmd As New OleDbCommand("SELECT Category FROM Expense ", conn)
-            Dim categoryReader As OleDbDataReader = expenseCmd.ExecuteReader()
+            ' --- Check Expenses Exceeding 30000 by Category ---
+            Dim categoryCmd As New OleDbCommand("SELECT Category FROM Expense", conn)
+            Dim categoryReader As OleDbDataReader = categoryCmd.ExecuteReader()
             While categoryReader.Read()
                 Dim category As String = categoryReader("Category").ToString()
-                ' Now calculate total amount for each category
                 Dim totalAmount As Decimal = 0
+
                 Dim amountCmd As New OleDbCommand("SELECT Amount FROM Expense ", conn)
                 amountCmd.Parameters.AddWithValue("?", category)
                 Dim amountReader As OleDbDataReader = amountCmd.ExecuteReader()
@@ -482,25 +477,49 @@ Public Class Notifications
                 End While
                 amountReader.Close()
 
-                If totalAmount > 20000D Then
+                If totalAmount > 30000D Then
                     Dim message As String = "High expense alert: " & category & " has exceeded R" & totalAmount.ToString("N2")
-                    If Not NotificationExists(conn, message) Then
-                        AddNotification(conn, currentUser, message, "Expense", dateCreated, isRead)
-                        Debug.WriteLine("Notification added for Expense: " & message)
-                    End If
                     summaryMessage &= message & vbCrLf
+                    notificationsToSave.Add(message)
                 End If
             End While
             categoryReader.Close()
 
+            ' --- If any alerts found, show and save them ---
+            If summaryMessage <> "" Then
+                SystemSounds.Exclamation.Play()
+                MessageBox.Show(summaryMessage, "Smart Household Alerts", MessageBoxButtons.OK, MessageBoxIcon.Information)
+
+                ' Save notifications shown in message box
+                For Each msg In notificationsToSave
+                    If Not NotificationExists(conn, msg) Then
+                        Dim category As String = ""
+                        If msg.StartsWith("Low inventory") Then
+                            category = "Inventory"
+                        ElseIf msg.StartsWith("Overdue chore") Then
+                            category = "Chore"
+                        ElseIf msg.StartsWith("High expense alert") Then
+                            category = "Expense"
+                        End If
+                        AddNotification(conn, currentUser, msg, category, dateCreated, isRead)
+                        Debug.WriteLine("Notification saved: " & msg)
+                    End If
+                Next
+            End If
+
+            ' --- Update Label2 with unread notifications count ---
+            Dim countCmd As New OleDbCommand("SELECT COUNT(*) FROM Notifications WHERE IsRead = 'No'", conn)
+            Dim unreadCount As Integer = Convert.ToInt32(countCmd.ExecuteScalar())
+            Label2.Text = "Unread: " & unreadCount.ToString()
+
         Catch ex As Exception
             MessageBox.Show("Error: " & ex.Message)
         Finally
-            If conn.State = ConnectionState.Open Then
-                conn.Close()
-            End If
+            If conn.State = ConnectionState.Open Then conn.Close()
         End Try
     End Sub
+
+
 
 
 
