@@ -3,14 +3,14 @@ Imports System.Data.OleDb
 Public Class Login
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
 
-        Using conn As New OleDbConnection(Xiluva.connectionString)
+        Using conn As New OleDbConnection(Module1.connectionString)
             Try
                 conn.Open()
 
                 Dim cmd As New OleDbCommand("SELECT Role FROM Users WHERE Username = ? AND Password = ?", conn)
 
                 cmd.Parameters.AddWithValue("?", TextBox1.Text)
-                cmd.Parameters.AddWithValue("?", TextBox2.Text)
+                'cmd.Parameters.AddWithValue("?", TextBox2.Text)
 
                 Dim Role As Object = cmd.ExecuteScalar()
 
@@ -42,8 +42,11 @@ Public Class Login
             Finally
                 conn.Close()
             End Try
+
         End Using
+
         'Dashboard.ShowDialog()
+
     End Sub
     Private Sub Login_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
