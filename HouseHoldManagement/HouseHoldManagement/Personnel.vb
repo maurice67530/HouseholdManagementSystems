@@ -93,6 +93,7 @@ Public Class Personnel
             End If
         End Try
         LoadData()
+        ClearForm()
     End Sub
 
 
