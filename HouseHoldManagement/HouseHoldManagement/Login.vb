@@ -14,7 +14,7 @@ Public Class Login
                 Dim cmd As New OleDbCommand("SELECT Role FROM Users WHERE Username = ? AND Password = ?", conn)
 
                 cmd.Parameters.AddWithValue("?", TextBox1.Text)
-                'cmd.Parameters.AddWithValue("?", TextBox2.Text)
+                cmd.Parameters.AddWithValue("?", TextBox2.Text)
 
                 Dim Role As Object = cmd.ExecuteScalar()
 
