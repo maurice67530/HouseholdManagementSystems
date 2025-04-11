@@ -284,7 +284,7 @@ Public Class MealPlan
                 ListBox1.Items.Add(meal)
 
             Next
-            MsgBox("Meal Suggestions have been prepared with current Greocery Items.", MsgBoxStyle.Information, "No Available Meals")
+            MsgBox("Meal Suggestions have been prepared with current Grocery Items.", MsgBoxStyle.Information, "No Available Meals")
             'FetchAlternativeMeals(SuggestMeals)
         Else
             MsgBox("No meals can be prepared with current inventory.", MsgBoxStyle.Exclamation, "No Available Meals")
