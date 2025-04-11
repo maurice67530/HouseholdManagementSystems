@@ -41,7 +41,7 @@ Public Class groceryForm
         End Using
 
         'display a confirmation message
-        MsgBox("Grocery Items Added!" & vbCrLf & "Name:" & Item.ItemName & vbCrLf & "Quantity:" & Item.Quantity & vbCrLf & "Ispurchased:" & Item.Ispurchased & vbCrLf & "Category:" & Item.Category & vbCrLf & "Price:" & Item.Price.ToString & vbCrLf & "Unit:" & Item.Unit & vbCrLf & "ItemID:" & Item.ItemID, vbInformation, "Item Confirmation")
+        MsgBox("Grocery Items Added!" & vbCrLf & "ItemName:" & Item.ItemName & vbCrLf & "Quantity:" & Item.Quantity & vbCrLf & "Ispurchased:" & Item.Ispurchased & vbCrLf & "Category:" & Item.Category & vbCrLf & "Price:" & Item.Price.ToString & vbCrLf & "Unit:" & Item.Unit & vbCrLf & "ItemID:" & Item.ItemID, vbInformation, "Item Confirmation")
         'LoadGroceryItemDataFromDatabase()
 
 
