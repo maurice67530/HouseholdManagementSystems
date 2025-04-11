@@ -333,8 +333,43 @@ Public Class Expense
         'toolTip1.SetToolTip(Button7, "Daily tasks")
         toolTip1.SetToolTip(Button1, "Save")
         LoadExpenseDataFromDatabase()
+        'PopulateComboboxFromDatabase(ComboBox3)
     End Sub
+    Public Sub PopulateComboboxFromDatabase(ByRef comboBox As ComboBox)
 
+        Dim connect As New OleDbConnection(connectionString)
+
+        Try
+            Debug.WriteLine("ComboBox populated successfully")
+            ' 1. Open the database connection  
+            connect.Open()
+
+            ' 2. Retrieve the FirstName and LastName columns from the Personnel table  
+            Dim query As String = "SELECT FirstName, LastName FROM PersonalDetails"
+            Dim cmd As New OleDbCommand(query, connect)
+            Dim reader As OleDbDataReader = cmd.ExecuteReader()
+
+            ' 3. Bind the retrieved data to the combobox  
+            ComboBox3.Items.Clear()
+            While reader.Read()
+                ComboBox3.Items.Add($"{reader("FirstName")} {reader("LastName")}")
+            End While
+
+            ' 4. Close the database connection  
+            reader.Close()
+        Catch ex As Exception
+            ' Handle any exceptions that may occur  
+            Debug.WriteLine("ComboBox population failed")
+            Debug.WriteLine($" An error has occured when PopulateComboboxFromDatabase: {ex.Message}")
+            Debug.WriteLine($"Stack Trace : {ex.StackTrace}")
+            MessageBox.Show($"Error: {ex.Message}")
+        Finally
+            ' Close the database connection  
+            If connect.State = ConnectionState.Open Then
+                connect.Close()
+            End If
+        End Try
+    End Sub
     Private Sub Button7_Click(sender As Object, e As EventArgs) Handles Button7.Click
         Debug.WriteLine("Entering btnCalculate")
 
