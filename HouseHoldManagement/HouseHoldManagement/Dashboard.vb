@@ -5,7 +5,7 @@ Public Class Dashboard
     End Sub
 
     Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
-        ' Task.ShowDialog()
+        'Task .ShowDialog()
     End Sub
 
     Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
@@ -20,16 +20,16 @@ Public Class Dashboard
         Login.ShowDialog()
     End Sub
 
-    'Private Sub Button7_Click(sender As Object, e As EventArgs) Handles Button7.Click
-    '    Grocery.ShowDialog()
-    'End Sub
+    Private Sub Button7_Click(sender As Object, e As EventArgs) Handles Button7.Click
+        'Grocery.ShowDialog()
+    End Sub
 
     Private Sub Button8_Click(sender As Object, e As EventArgs) Handles Button8.Click
         Personnel.ShowDialog()
     End Sub
 
     Private Sub Button9_Click(sender As Object, e As EventArgs) Handles Button9.Click
-        ' photos.ShowDialog()
+        ' photo.ShowDialog()
     End Sub
 
     Private Sub Button6_Click(sender As Object, e As EventArgs) Handles Button6.Click
@@ -40,9 +40,13 @@ Public Class Dashboard
         Notifications.ShowDialog()
     End Sub
     Private Sub Dashboard_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
         LoadChoresStatus()
+
         LoadExpensesData()
-        ' UpdateBudgetStatus()
+
+        UpdateBudgetStatus()
+
         ' ToolTip1.SetToolTip(Button1, "Login")
         ToolTip1.SetToolTip(Button2, "Inventory")
         ToolTip1.SetToolTip(Button3, "Task")
@@ -106,6 +110,7 @@ Public Class Dashboard
                 Dim totalExpense As Decimal = Convert.ToDecimal(row("TotalExpense"))
                 totalExpenses += totalExpense
 
+
                 ' Combine expenses for the same tag
                 If uniqueTags.ContainsKey(tag) Then
                     uniqueTags(tag) += totalExpense
@@ -122,30 +127,62 @@ Public Class Dashboard
                 For Each kvp As KeyValuePair(Of String, Decimal) In uniqueTags
                     Chart1.Series("Expense").Points.AddXY(kvp.Key, kvp.Value)
                 Next
+
             End If
+
             'End If
         Catch ex As Exception
+
             MessageBox.Show("Error loading expenses data: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         Finally
+
             conn.Close()
+
         End Try
     End Sub
 
-    'Private Sub UpdateBudgetStatus()
+    Private Sub UpdateBudgetStatus()
 
-    '    Dim query As String = "SELECT SUM(Amount) FROM Expense"
+        Dim query As String = "SELECT SUM(Amount) FROM Expense"
 
-    '    Using conn As New OleDbConnection(connectionString)
-    '        conn.Open()
-    '        Dim cmd As New OleDbCommand(query, conn)
-    '        Dim totalExpenses As Decimal = Convert.ToDecimal(cmd.ExecuteScalar())
-    '        ' Assume you have a Label for Budget
-    '        Label2.Text = "Total Expenses: R" & totalExpenses.ToString()
-    '        ' Assuming a fixed budget, for example $500
-    '        Dim budget As Decimal = 24147
-    '        Label3.Text = "Budget Used: " & ((totalExpenses / budget) * 100).ToString("F2") & "%"
-    '        ' Update a progress bar if you have one
-    '        ProgressBar1.Value = CInt((totalExpenses / budget) * 100)
-    '    End Using
-    'End Sub
+        Using conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
+            conn.Open()
+            Dim cmd As New OleDbCommand(query, conn)
+            Dim totalExpenses As Decimal = Convert.ToDecimal(cmd.ExecuteScalar())
+            ' Assume you have a Label for Budget
+            Label2.Text = "Total Expenses: R" & totalExpenses.ToString()
+            ' Assuming a fixed budget, for example $500
+            Dim budget As Decimal = 24147
+            Label3.Text = "Budget Used: " & ((totalExpenses / budget) * 100).ToString("F2") & "%"
+            ' Update a progress bar if you have one
+            ProgressBar1.Value = CInt((totalExpenses / budget) * 100)
+        End Using
+    End Sub
+
+    Private Sub LoadChartData()
+        ' Update this connection string based  on my database confirguration
+        Dim connectionString As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source= C:\Users\Mulanga\Source\Repos\HouseholdManagementSystems\HMS.accdb"
+        Dim query As String = "SELECT [Amount], [Person] FROM [Expense]"
+
+        Using conn As New OleDbConnection(connectionString)
+            Dim command As New OleDbCommand(query, conn)
+            conn.Open()
+
+            Using reader As OleDbDataReader = command.ExecuteReader
+                While reader.Read
+                    ' assuming ColumnX is a string (category)  and columnY is numeric value
+                    'Chart1.Series.Add("BudgetStatus")
+                    Dim Person As String = reader("Person").ToString
+                    Dim Budget As String = reader("Amount").ToString
+
+                    ' add points to the chart; chage the series name added
+
+                    Chart1.Series("Series1").Points.AddXY(Person, Budget)
+
+                End While
+            End Using
+        End Using
+        Chart1.ChartAreas(0).AxisX.Title = "Person"
+        Chart1.ChartAreas(0).AxisY.Title = "Amount"
+    End Sub
 End Class
