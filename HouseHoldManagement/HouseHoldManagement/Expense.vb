@@ -336,7 +336,7 @@ Public Class Expense
         PopulateComboboxFromDatabase(ComboBox3)
     End Sub
     Public Sub PopulateComboboxFromDatabase(ByRef comboBox As ComboBox)
-        Dim conn As New OleDbConnection(Murangi.connectionString)
+        Dim conn As New OleDbConnection(connectionString)
         Try
             Debug.WriteLine("populate combobox successful")
             'open the database connection
