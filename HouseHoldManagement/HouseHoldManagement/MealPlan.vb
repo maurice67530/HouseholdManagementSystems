@@ -276,7 +276,7 @@ Public Class MealPlan
         'Module1.Mains()
 
         ListBox1.Items.Clear()
-        TextBox4.ReadOnly = True
+        TextBox1.ReadOnly = True
         Dim meals As List(Of String) = SuggestMeals()
 
         If meals.Count > 0 Then
