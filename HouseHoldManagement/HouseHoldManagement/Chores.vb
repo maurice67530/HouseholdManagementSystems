@@ -1,7 +1,5 @@
 ﻿Imports System.Data.OleDb
 Public Class Chores
-
-    Public Property connn As New OleDbConnection(Masindi.connectionString)
     Public Property conn As New OleDbConnection(Murangi.connectionString)
 
     Private Sub Chores_Load(sender As Object, e As EventArgs) Handles MyBase.Load

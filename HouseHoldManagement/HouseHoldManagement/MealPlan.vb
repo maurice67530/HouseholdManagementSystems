@@ -219,20 +219,20 @@ Public Class MealPlan
             conn.Open()
 
             ' Get all meal recipes
-            Dim mealQuery As String = "SELECT MealName, Ingredients FROM MealPlans"
+            Dim mealQuery As String = "SELECT MealName, Meals FROM MealPlans"
             Dim mealCommand As New OleDb.OleDbCommand(mealQuery, conn)
             Dim mealReader As OleDb.OleDbDataReader = mealCommand.ExecuteReader()
 
             While mealReader.Read()
                 Dim mealName As String = mealReader("MealName").ToString()
-                Dim requiredIngredients As String() = mealReader("Ingredients").ToString().Split(",")
+                Dim requiredIngredients As String() = mealReader("Meals").ToString().Split(",")
 
                 Dim allIngredientsAvailable As Boolean = True
 
                 ' Check if all required ingredients exist in GroceryInventory and are not expired
                 For Each ingredient In requiredIngredients
                     Dim trimmedIngredient As String = ingredient.Trim()
-                    Dim checkQuery As String = "SELECT ExpiryDate FROM GroceryItems WHERE ItemName=@Ingredients AND Quantity > 0"
+                    Dim checkQuery As String = "SELECT ExpiryDate FROM Inventory WHERE Category AND Quantity > 0"
                     Dim checkCommand As New OleDb.OleDbCommand(checkQuery, conn)
                     checkCommand.Parameters.AddWithValue("@Ingredients", trimmedIngredient)
 
@@ -276,7 +276,7 @@ Public Class MealPlan
         'Module1.Mains()
 
         ListBox1.Items.Clear()
-        TextBox2.ReadOnly = True
+        TextBox4.ReadOnly = True
         Dim meals As List(Of String) = SuggestMeals()
 
         If meals.Count > 0 Then
@@ -284,7 +284,7 @@ Public Class MealPlan
                 ListBox1.Items.Add(meal)
 
             Next
-            MsgBox("Meal Suggestions have been prepared with current Greocery Items.", MsgBoxStyle.Information, "No Available Meals")
+            MsgBox("Meal Suggestions have been prepared with current Grocery Items.", MsgBoxStyle.Information, "No Available Meals")
             'FetchAlternativeMeals(SuggestMeals)
         Else
             MsgBox("No meals can be prepared with current inventory.", MsgBoxStyle.Exclamation, "No Available Meals")
