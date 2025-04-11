@@ -1,5 +1,6 @@
 ﻿Imports System.Data.OleDb
 Public Class Dashboard
+    Dim connectionString As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source= C:\Users\Mulanga\Source\Repos\HouseholdManagementSystems\HMS.accdb"
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
         Inventory.ShowDialog()
     End Sub
@@ -40,10 +41,11 @@ Public Class Dashboard
         Notifications.ShowDialog()
     End Sub
     Private Sub Dashboard_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-
+        LoadChartData()
+        SetupCharts()
         LoadChoresStatus()
 
-        LoadExpensesData()
+        'LoadExpensesData()
 
         UpdateBudgetStatus()
 
@@ -65,7 +67,7 @@ Public Class Dashboard
         Dim completed As Integer = 0, inProgress As Integer = 0, notStarted As Integer = 0
         Dim query As String = "SELECT Status, COUNT(*) FROM Chores GROUP BY Status"
 
-        Using conn As New OleDbConnection(HouseHoldManagment_Module.connectionString), cmd As New OleDbCommand(query, conn)
+        Using conn As New OleDbConnection(connectionString), cmd As New OleDbCommand(query, conn)
             conn.Open()
             Using reader = cmd.ExecuteReader()
                 While reader.Read()
@@ -90,7 +92,7 @@ Public Class Dashboard
 
     Private Sub LoadExpensesData()
 
-        Dim conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
+        Dim conn As New OleDbConnection(connectionString)
         Dim cmd As New OleDbCommand("SELECT Description, Amount As TotalExpense FROM Expense", conn)
         Dim dt As New DataTable()
 
@@ -145,14 +147,14 @@ Public Class Dashboard
 
         Dim query As String = "SELECT SUM(Amount) FROM Expense"
 
-        Using conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
+        Using conn As New OleDbConnection(connectionString)
             conn.Open()
             Dim cmd As New OleDbCommand(query, conn)
             Dim totalExpenses As Decimal = Convert.ToDecimal(cmd.ExecuteScalar())
             ' Assume you have a Label for Budget
             Label2.Text = "Total Expenses: R" & totalExpenses.ToString()
             ' Assuming a fixed budget, for example $500
-            Dim budget As Decimal = 24147
+            Dim budget As Decimal = 500563
             Label3.Text = "Budget Used: " & ((totalExpenses / budget) * 100).ToString("F2") & "%"
             ' Update a progress bar if you have one
             ProgressBar1.Value = CInt((totalExpenses / budget) * 100)
@@ -162,7 +164,7 @@ Public Class Dashboard
     Private Sub LoadChartData()
         ' Update this connection string based  on my database confirguration
         Dim connectionString As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source= C:\Users\Mulanga\Source\Repos\HouseholdManagementSystems\HMS.accdb"
-        Dim query As String = "SELECT [Amount], [Person] FROM [Expense]"
+        Dim query As String = "SELECT [Amount], [Tags] FROM [Expense]"
 
         Using conn As New OleDbConnection(connectionString)
             Dim command As New OleDbCommand(query, conn)
@@ -172,17 +174,107 @@ Public Class Dashboard
                 While reader.Read
                     ' assuming ColumnX is a string (category)  and columnY is numeric value
                     'Chart1.Series.Add("BudgetStatus")
-                    Dim Person As String = reader("Person").ToString
+                    Dim Frequency As String = reader("Tags").ToString
                     Dim Budget As String = reader("Amount").ToString
 
                     ' add points to the chart; chage the series name added
 
-                    Chart1.Series("Series1").Points.AddXY(Person, Budget)
+                    Chart1.Series("Expenses").Points.AddXY(Frequency, Budget)
 
                 End While
             End Using
         End Using
-        Chart1.ChartAreas(0).AxisX.Title = "Person"
+        Chart1.ChartAreas(0).AxisX.Title = "Tags"
         Chart1.ChartAreas(0).AxisY.Title = "Amount"
+
     End Sub
+
+    'Set up Budget Status And Chores Status charts
+    Private Sub SetupCharts()
+        ' Chores Status - Pie Chart
+        Chart2.Series.Clear()
+        Chart2.Series.Add("Chores")
+        Chart2.Series("Chores").Points.AddXY("Completed", 0)
+        Chart2.Series("Chores").Points.AddXY("In progress", 1)
+        Chart2.Series("Chores").Points.AddXY("Not Started", 0)
+        Chart2.Series("Chores").IsValueShownAsLabel = True
+        ''Chart1.Series("Chores").ChartType = series1.Pie
+
+    End Sub
+
+    Public Sub PopulateListboxFromChores(ByRef Listbox As ListBox)
+        Dim conn As New OleDbConnection(connectionString)
+        Try
+            Debug.WriteLine("populate listbox successful")
+            'open the database connection
+            conn.Open()
+
+            'retrieve the firstname and surname columns from the personaldetails tabel
+            Dim query As String = "SELECT ID, Status, Title FROM Chores"
+            Dim cmd As New OleDbCommand(query, conn)
+            Dim reader As OleDbDataReader = cmd.ExecuteReader()
+
+            'bind the retrieved data to the combobox
+            ListBox1.Items.Clear()
+            While reader.Read()
+                ListBox1.Items.Add($"{reader("ID")} {reader("Status")} {reader("Title")}")
+            End While
+
+            'close the database
+            reader.Close()
+        Catch ex As Exception
+            'handle any exeptions that may occur  
+            Debug.WriteLine("failed to populate ListBox")
+            Debug.WriteLine($"Stack Trace: {ex.StackTrace}")
+            MessageBox.Show($"Error: {ex.StackTrace}")
+
+        Finally
+            'close the database connection
+            If conn.State = ConnectionState.Open Then
+                conn.Close()
+            End If
+        End Try
+    End Sub
+
+
+
+
+    Private Function GetPendingChores() As List(Of String)
+
+        Dim pendingChores As New List(Of String)
+
+        Try
+
+            Using conn As New OleDbConnection(connectionString)
+
+                conn.Open()
+
+                Dim query As String = "SELECT Title FROM Chores WHERE Status = 'In Progress'"
+
+                Using cmd As New OleDbCommand(query, conn)
+
+                    Using reader As OleDbDataReader = cmd.ExecuteReader()
+
+                        While reader.Read()
+
+                            pendingChores.Add(reader("Title").ToString())
+
+                        End While
+
+                    End Using
+
+                End Using
+
+            End Using
+
+        Catch ex As Exception
+
+            MessageBox.Show("Database error: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+
+        End Try
+
+        Return pendingChores
+
+    End Function
+
 End Class
