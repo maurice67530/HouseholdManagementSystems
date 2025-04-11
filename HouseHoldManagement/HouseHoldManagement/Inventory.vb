@@ -35,11 +35,11 @@ Public Class Inventory
                 cmd.Parameters.AddWithValue("@Description", TextBox2.Text)
                 cmd.Parameters.AddWithValue("@Quantity", TextBox3.Text)
                 cmd.Parameters.AddWithValue("@Category", ComboBox1.SelectedItem)
-                cmd.Parameters.AddWithValue("@ReorderLevel", TextBox5.Text)
+                cmd.Parameters.AddWithValue("@ReorderLevel", ComboBox2.SelectedItem)
                 cmd.Parameters.AddWithValue("@PricePerUnit", TextBox6.Text)
                 cmd.Parameters.AddWithValue("@DateAdded", DateTimePicker1.Value)
                 cmd.Parameters.AddWithValue("@ExpiryDate", DateTimePicker2.Value)
-                cmd.Parameters.AddWithValue("@Unit", ComboBox2.SelectedItem)
+                cmd.Parameters.AddWithValue("@Unit", ComboBox3.SelectedItem)
 
                 cmd.ExecuteNonQuery()
                 conn.Close()
@@ -59,7 +59,6 @@ Public Class Inventory
         Finally
         End Try
     End Sub
-
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
         Debug.WriteLine("Entering button update click")
         If DataGridView1.SelectedRows.Count = 0 Then
@@ -69,19 +68,21 @@ Public Class Inventory
         End If
 
         Try
+
             Debug.WriteLine($"Format error in button update:")
             Debug.WriteLine("Updating data: data updated")
             Dim ItemName As String = TextBox1.Text
             Dim Description As String = TextBox2.Text
             Dim Quantity As String = TextBox3.Text
-            Dim Category As String = ComboBox1.SelectedItem.ToString
-            Dim ReorderLevel As String = TextBox5.Text
+            Dim Category As String = ComboBox1.Text
+            Dim ReorderLevel As String = ComboBox3.Text
             Dim PricePerUnit As String = TextBox6.Text
             Dim DateAdded As String = DateTimePicker1.Value
             Dim ExpiryDate As String = DateTimePicker1.Value
-            Dim Unit As String = ComboBox2.SelectedItem.ToString
+            Dim Unit As String = ComboBox2.Text
 
             Using conn As New OleDbConnection(InventoryModule.connectionString)
+
                 conn.Open()
 
                 ' Get the ID of the selected row (assuming your table has a primary key named "ID")  
@@ -92,7 +93,6 @@ Public Class Inventory
                 Dim cmd As New OleDbCommand("UPDATE [Inventory] SET [ItemName] = ?, [Description] = ?, [Quantity] = ?, [Category] = ?, [ReorderLevel] = ?, [PricePerUnit] = ?, [DateAdded] = ?,  [ExpiryDate] = ?, [Unit] = ? WHERE [ID] = ?", conn)
 
                 ' Set the parameter values from the UI controls  
-
                 cmd.Parameters.AddWithValue("@ItemName", ItemName)
                 cmd.Parameters.AddWithValue("@Description", Description)
                 cmd.Parameters.AddWithValue("@Quantity", Quantity)
@@ -103,13 +103,14 @@ Public Class Inventory
                 cmd.Parameters.AddWithValue("@ExpiryDate", ExpiryDate)
                 cmd.Parameters.AddWithValue("@Unit", Unit)
                 cmd.Parameters.AddWithValue("@ID", ID)
-
                 cmd.ExecuteNonQuery()
 
                 MsgBox("Inventory Items Updated Successfuly!", vbInformation, "Update Confirmation")
                 LoadInventorydataFromDatabase()
                 '  InventoryModule.ClearControls(Me)
+
             End Using
+
         Catch ex As OleDbException
             Debug.WriteLine("User cancelled update")
             Debug.WriteLine("Unexpected error in button update")
@@ -187,7 +188,7 @@ Public Class Inventory
         TextBox3.Text = ""
         TextBox2.Text = ""
         TextBox6.Text = ""
-        TextBox5.Text = ""
+        ComboBox3.Text = ""
         ComboBox1.SelectedItem = ""
         ComboBox2.SelectedItem = ""
     End Sub
@@ -202,7 +203,7 @@ Public Class Inventory
                 TextBox2.Text = selectedRow.Cells("Description").Value.ToString()
                 TextBox3.Text = selectedRow.Cells("Quantity").Value.ToString()
                 ComboBox1.Text = selectedRow.Cells("Category").Value.ToString()
-                TextBox5.Text = selectedRow.Cells("ReorderLevel").Value.ToString()
+                ComboBox3.Text = selectedRow.Cells("ReorderLevel").Value.ToString()
                 TextBox6.Text = selectedRow.Cells("PricePerUnit").Value.ToString()
                 ComboBox2.Text = selectedRow.Cells("Unit").Value.ToString()
             End If
@@ -271,5 +272,10 @@ Public Class Inventory
 
     Private Sub Inventory_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         LoadInventorydataFromDatabase()
+    End Sub
+
+    Private Sub Button9_Click(sender As Object, e As EventArgs) Handles Button9.Click
+        Dashboard.ShowDialog()
+        Me.Close()
     End Sub
 End Class
