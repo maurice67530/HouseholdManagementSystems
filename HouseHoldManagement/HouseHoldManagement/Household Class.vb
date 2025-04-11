@@ -97,7 +97,7 @@ Public Class DailyTask
         Public Property PricePerUnit As Integer
         Public Property Ispurchased As String
 
-        Public Class personell
+        Public Class Personnel
             Public Property FistName As String
             Public Property LastName As String
             Public Property Gender As String

@@ -12,7 +12,6 @@ Module HouseHoldManagment_Module
     End Function
 
 End Module
-
 Module Module1
     Public Property conn As New OleDbConnection(connectionString)
     Public Const connectionString As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Zwivhuya\Source\Repos\maurice67530\HouseholdManagementSystems\HMS.accdb;Persist Security Info=False;"
@@ -24,8 +23,6 @@ Module Module1
             If TypeOf ctrl Is TextBox Then
                 CType(ctrl, TextBox).Clear()
             End If
-
-
         Next
 
         'clear comboBoxes
@@ -83,7 +80,7 @@ Module Module1
 
 End Module
 
-Module Rinae
+Module Personell
     Public Const connectionString As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Rinae\Source\Repos\maurice67530\HouseholdManagementSystems\HMS.accdb"
 
 End Module
