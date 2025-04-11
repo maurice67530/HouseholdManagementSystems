@@ -18,7 +18,7 @@ Public Class MealPlan
 
                     cmd.Parameters.AddWithValue("@StartDate", DateTimePicker1.Text)
                     cmd.Parameters.AddWithValue("@EndDate", DateTimePicker2.Text)
-                    cmd.Parameters.AddWithValue("@Meals", ListBox1.SelectedItem.ToString)
+                    cmd.Parameters.AddWithValue("@Meals", lstMealSuggestions.SelectedItem.ToString)
                     cmd.Parameters.AddWithValue("@MealName", TextBox4.Text)
                     cmd.Parameters.AddWithValue("@Items", ComboBox3.SelectedItem.ToString)
                     cmd.Parameters.AddWithValue("@TotalCalories", NumericUpDown1.Value)
@@ -55,7 +55,7 @@ Public Class MealPlan
         ComboBox1.Items.AddRange(New String() {"<500", "500-1000", ">1000"})
         ComboBox2.Items.AddRange(New String() {"Daily", "Weekly", "Monthly"})
         ComboBox3.Items.AddRange(New String() {"Noodles", "Chicken", "Bread"})
-        ListBox1.Items.AddRange(New String() {"Noodles", "Chicken Curry", "Kota"})
+        lstMealSuggestions.Items.AddRange(New String() {"Noodles", "Chicken Curry", "Kota"})
         Dim tooltip As New ToolTip
         tooltip.SetToolTip(btnSave, "Save")
         tooltip.SetToolTip(btnEdit, "Edit")
@@ -141,7 +141,7 @@ Public Class MealPlan
                 ComboBox3.SelectedItem = selectedRow.Cells("Items").Value.ToString()
                 ComboBox1.SelectedItem = selectedRow.Cells("Calories").Value.ToString()
                 ComboBox2.SelectedItem = selectedRow.Cells("Frequency").Value.ToString()
-                ListBox1.SelectedItem = selectedRow.Cells("Meals").Value.ToString()
+                lstMealSuggestions.SelectedItem = selectedRow.Cells("Meals").Value.ToString()
                 TextBox4.Text = selectedRow.Cells("MealName").Value.ToString()
 
                 ' Enable/ disable the buttons based on the selected person  
@@ -275,13 +275,13 @@ Public Class MealPlan
 
         'Module1.Mains()
 
-        ListBox1.Items.Clear()
+        lstMealSuggestions.Items.Clear()
         TextBox1.ReadOnly = True
         Dim meals As List(Of String) = SuggestMeals()
 
         If meals.Count > 0 Then
             For Each meal In meals
-                ListBox1.Items.Add(meal)
+                lstMealSuggestions.Items.Add(meal)
 
             Next
             MsgBox("Meal Suggestions have been prepared with current Grocery Items.", MsgBoxStyle.Information, "No Available Meals")
@@ -301,6 +301,14 @@ Public Class MealPlan
     End Sub
 
     Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
+
+        'If lstMealSuggestions.SelectedItem Is Nothing Then
+        '    MsgBox("Please select a meal to save.", MsgBoxStyle.Exclamation, "Select Meal")
+        '    Exit Sub
+        'End If
+
+        'Dim selectedMeal As String = lstMealSuggestions.SelectedItem.ToString()
+
         Try
             Debug.WriteLine("Entering btnEdit_Click")
 
@@ -312,7 +320,7 @@ Public Class MealPlan
                 Using cmd As New OleDbCommand(query, conn)
                     cmd.Parameters.AddWithValue("@StartDate", DateTimePicker1.Text)
                     cmd.Parameters.AddWithValue("@EndDate", DateTimePicker2.Text)
-                    cmd.Parameters.AddWithValue("@Meals", ListBox1.SelectedItem.ToString)
+                    cmd.Parameters.AddWithValue("@Meals", lstMealSuggestions.SelectedItem.ToString)
                     cmd.Parameters.AddWithValue("@MealName", TextBox4.Text)
                     cmd.Parameters.AddWithValue("@Items", ComboBox2.SelectedItem.ToString)
                     cmd.Parameters.AddWithValue("@TotalCalories", NumericUpDown1.Value)
@@ -323,6 +331,36 @@ Public Class MealPlan
 
                     cmd.ExecuteNonQuery()
                 End Using
+                'Dim selectedItem As String = ComboBox1.SelectedItem.ToString() ' Meal selected from ComboBox2
+
+
+                '' Fetch the item and its details from the Inventory1 table.
+                'Dim fetchcommand As New OleDbCommand("SELECT ItemName, Quantity, Price FROM GroceryItem WHERE ItemName = ?", conn)
+                'fetchcommand.Parameters.AddWithValue("@ItemName", selectedItem)
+
+                'Using Readers As OleDbDataReader = fetchcommand.ExecuteReader()
+                '    If Readers.Read() Then
+                '        Dim ItemQuantity As Integer = Convert.ToInt32(Readers("Quantity")) ' Get the available total quantity of the item
+
+                '        ' If the item is in stock
+                '        If ItemQuantity > 0 Then
+                '            ' Update the inventory by reducing quantity by 1 (the meal uses one unit of the item)
+                '            Dim updateCommand As New OleDbCommand("UPDATE GroceryItem SET Quantity = Quantity - 1 WHERE ItemName = ?", conn)
+                '            updateCommand.Parameters.AddWithValue("@ItemName", selectedItem)
+                '            updateCommand.ExecuteNonQuery()
+
+                '            ' Display confirmation message
+                '            MessageBox.Show("Item added to Meal Plan. GroceryItem updated", "complete", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+
+                '            ' Display updated stock status
+                '            TextBox1.Text = "Available Stock: " & (ItemQuantity - 1).ToString()
+                '        Else
+                '            ' Item is out of stock
+                '            MessageBox.Show("Item is out of stock.", "Notice", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                '    '            TextBox1.Text = "Available Stock: 0"
+                '    End If
+                '        End If
+                '    End Using
 
             End Using
 
