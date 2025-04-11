@@ -42,7 +42,7 @@ Public Class Task_Management
 
         ComboBox1.Items.AddRange(New String() {"Low", "Medium", "High"})
         ComboBox2.Items.AddRange(New String() {"Not started", "In progress", "Completed"})
-
+        PopulateComboboxFromDatabase(ComboBox3)
     End Sub
     Private Sub ComboBox3_click(sender As Object, e As EventArgs) Handles ComboBox3.Click
         PopulateComboboxFromDatabase(ComboBox3)
