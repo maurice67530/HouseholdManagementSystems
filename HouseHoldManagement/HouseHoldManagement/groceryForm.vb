@@ -344,12 +344,9 @@ Public Class groceryForm
         'End If
     End Sub
 
+
+
     Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
         ToolTip1.SetToolTip(Button3, "DashBoard")
-
-    End Sub
-
-    Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
-
     End Sub
 End Class
