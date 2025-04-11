@@ -93,6 +93,7 @@ Public Class Personnel
             End If
         End Try
         LoadData()
+        ClearForm()
     End Sub
 
 
@@ -243,6 +244,10 @@ Public Class Personnel
         'ComboBox3.CLEAR
         TextBox6.Clear()
         'ComboBox2.CLEAR
+
+    End Sub
+
+    Private Sub Label13_Click(sender As Object, e As EventArgs) Handles Label13.Click
 
     End Sub
 End Class

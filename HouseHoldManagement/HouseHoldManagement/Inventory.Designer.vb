@@ -246,7 +246,7 @@ Partial Class Inventory
         'ComboBox1
         '
         Me.ComboBox1.FormattingEnabled = True
-        Me.ComboBox1.Items.AddRange(New Object() {"Vegetables", "Fruits", "Meat"})
+        Me.ComboBox1.Items.AddRange(New Object() {"Vegetables", "Fruits", "Meat", "Refreshments"})
         Me.ComboBox1.Location = New System.Drawing.Point(399, 87)
         Me.ComboBox1.Name = "ComboBox1"
         Me.ComboBox1.Size = New System.Drawing.Size(100, 21)
@@ -310,6 +310,9 @@ Partial Class Inventory
         Me.Button4.TabIndex = 86
         Me.Button4.Text = " "
         Me.Button4.UseVisualStyleBackColor = True
+        '
+        'Timer1
+        '
         '
         'Inventory
         '

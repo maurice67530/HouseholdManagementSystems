@@ -1,5 +1,7 @@
 ﻿Imports System.Data.OleDb
 Public Class Chores
+    Public Property connect As New OleDbConnection(Ndivhuwo.connectionString)
+    Public Property connn As New OleDbConnection(Masindi.connectionString)
     Public Property conn As New OleDbConnection(Murangi.connectionString)
 
     Private Sub Chores_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -20,6 +22,7 @@ Public Class Chores
         tooltip.SetToolTip(Button8, "Filter")
         tooltip.SetToolTip(Button9, "Sort")
 
+        PopulateComboboxFromDatabase(cmbassi)
         loadChoresFromDatabase()
     End Sub
 
@@ -290,5 +293,72 @@ Public Class Chores
 
     Private Sub Button9_Click(sender As Object, e As EventArgs) Handles Button9.Click
         DataGridView1.Sort(DataGridView1.Columns("DueDate"), System.ComponentModel.ListSortDirection.Ascending)
+    End Sub
+
+    Private Sub DataGridView1_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridView1.CellContentClick
+
+    End Sub
+
+    Private Sub DataGridView1_SelectionChanged(sender As Object, e As EventArgs) Handles DataGridView1.SelectionChanged
+        Try
+
+            'Button1.Enabled = False
+
+            If DataGridView1.SelectedRows.Count > 0 Then
+                Dim selectedRow As DataGridViewRow = DataGridView1.SelectedRows(0)
+                Debug.WriteLine("row selected on dgv")
+
+
+                TXTtitle.Text = selectedRow.Cells("Title").Value.ToString()
+                cmbassi.SelectedItem = selectedRow.Cells("AssignedTo").Value.ToString()
+                cmbpri.SelectedItem = selectedRow.Cells("Priority").Value.ToString()
+                cmbstatus.SelectedItem = selectedRow.Cells("Status").Value.ToString()
+                cmbfre.SelectedItem = selectedRow.Cells("Frequency").Value.ToString()
+                NumericUpDown1.Value = selectedRow.Cells("Recurring").Value.ToString()
+                txtdes.Text = selectedRow.Cells("Description").Value.ToString()
+                DateTimePicker1.Value = selectedRow.Cells("DueDate").Value.ToString()
+
+
+            End If
+            'Button1.Enabled = True
+        Catch ex As Exception
+            Debug.WriteLine("Data not selected: Error")
+            Debug.WriteLine($"Stack Trace: {ex.StackTrace}")
+
+        End Try
+    End Sub
+    Public Sub PopulateComboboxFromDatabase(ByRef comboBox As ComboBox)
+        Dim conn As New OleDbConnection(Murangi.connectionString)
+        Try
+            Debug.WriteLine("populate combobox successful")
+            'open the database connection
+            conn.Open()
+
+            'retrieve the firstname and surname columns from the personaldetails tabel
+            Dim query As String = "SELECT FirstName, LastName FROM PersonalDetails"
+            Dim cmd As New OleDbCommand(query, conn)
+            Dim reader As OleDbDataReader = cmd.ExecuteReader()
+
+            'bind the retrieved data to the combobox
+            cmbassi.Items.Clear()
+            While reader.Read()
+                cmbassi.Items.Add($"{reader("FirstName")} {reader("LastName")}")
+            End While
+
+            'close the database
+            reader.Close()
+
+        Catch ex As Exception
+            'handle any exeptions that may occur  
+            Debug.WriteLine("failed to populate combobox")
+            Debug.WriteLine($"Stack Trace: {ex.StackTrace}")
+            MessageBox.Show($"Error: {ex.StackTrace}")
+
+        Finally
+            'close the database connection
+            If conn.State = ConnectionState.Open Then
+                conn.Close()
+            End If
+        End Try
     End Sub
 End Class

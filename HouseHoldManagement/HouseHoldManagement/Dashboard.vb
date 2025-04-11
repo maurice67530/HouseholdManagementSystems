@@ -63,7 +63,7 @@ Public Class Dashboard
     Private Sub LoadChoresStatus()
 
         Dim completed As Integer = 0, inProgress As Integer = 0, notStarted As Integer = 0
-        Dim query As String = "SELECT Status, COUNT(*) FROM Chore GROUP BY Status"
+        Dim query As String = "SELECT Status, COUNT(*) FROM Chores GROUP BY Status"
 
         Using conn As New OleDbConnection(HouseHoldManagment_Module.connectionString), cmd As New OleDbCommand(query, conn)
             conn.Open()
@@ -157,5 +157,32 @@ Public Class Dashboard
             ' Update a progress bar if you have one
             ProgressBar1.Value = CInt((totalExpenses / budget) * 100)
         End Using
+    End Sub
+
+    Private Sub LoadChartData()
+        ' Update this connection string based  on my database confirguration
+        Dim connectionString As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source= C:\Users\Mulanga\Source\Repos\HouseholdManagementSystems\HMS.accdb"
+        Dim query As String = "SELECT [Amount], [Person] FROM [Expense]"
+
+        Using conn As New OleDbConnection(connectionString)
+            Dim command As New OleDbCommand(query, conn)
+            conn.Open()
+
+            Using reader As OleDbDataReader = command.ExecuteReader
+                While reader.Read
+                    ' assuming ColumnX is a string (category)  and columnY is numeric value
+                    'Chart1.Series.Add("BudgetStatus")
+                    Dim Person As String = reader("Person").ToString
+                    Dim Budget As String = reader("Amount").ToString
+
+                    ' add points to the chart; chage the series name added
+
+                    Chart1.Series("Series1").Points.AddXY(Person, Budget)
+
+                End While
+            End Using
+        End Using
+        Chart1.ChartAreas(0).AxisX.Title = "Person"
+        Chart1.ChartAreas(0).AxisY.Title = "Amount"
     End Sub
 End Class
