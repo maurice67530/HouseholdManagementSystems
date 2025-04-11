@@ -1,5 +1,4 @@
-﻿
-Imports System.IO
+﻿Imports System.IO
 Imports System.Data.OleDb
 Module HouseHoldManagment_Module
 
@@ -131,11 +130,12 @@ Module InventoryModule
         End Try
     End Sub
 
-
+End Module
+Module Ndivhuwo
+    Public Const connectionString As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Delicious\Source\Repos\maurice67530\HouseholdManagementSystems\HMS.accdb"
 End Module
 Module Masindi
     Public Const connectionString As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Masindi\Source\Repos\maurice67530\HouseholdManagementSystems\HMS.accdb"
-
 End Module
 
 'Murangi (don't Touch)
