@@ -82,7 +82,7 @@ Public Class Dashboard
                 End While
             End Using
         End Using
-        Label2.Text = $"   Chores: 
+        Label4.Text = $"   Chores: 
            -Completed: {completed}
 
            -In Progress:{inProgress}
@@ -111,7 +111,6 @@ Public Class Dashboard
                 Dim tag As String = row("Description").ToString().Trim()
                 Dim totalExpense As Decimal = Convert.ToDecimal(row("TotalExpense"))
                 totalExpenses += totalExpense
-
 
                 ' Combine expenses for the same tag
                 If uniqueTags.ContainsKey(tag) Then
@@ -198,7 +197,7 @@ Public Class Dashboard
         Chart2.Series("Chores").Points.AddXY("In progress", 1)
         Chart2.Series("Chores").Points.AddXY("Not Started", 0)
         Chart2.Series("Chores").IsValueShownAsLabel = True
-        ''Chart1.Series("Chores").ChartType = series1.Pie
+        'Chart1.Series("Chores").ChartType = series1.Pie
 
     End Sub
 
@@ -236,45 +235,42 @@ Public Class Dashboard
         End Try
     End Sub
 
+    '    Private Function GetPendingChores() As List(Of String)
 
+    '        Dim pendingChores As New List(Of String)
 
+    '        Try
 
-    Private Function GetPendingChores() As List(Of String)
+    '            Using conn As New OleDbConnection(connectionString)
 
-        Dim pendingChores As New List(Of String)
+    '                conn.Open()
 
-        Try
+    '                Dim query As String = "SELECT Title FROM Chores WHERE Status = 'In Progress'"
 
-            Using conn As New OleDbConnection(connectionString)
+    '                Using cmd As New OleDbCommand(query, conn)
 
-                conn.Open()
+    '                    Using reader As OleDbDataReader = cmd.ExecuteReader()
 
-                Dim query As String = "SELECT Title FROM Chores WHERE Status = 'In Progress'"
+    '                        While reader.Read()
 
-                Using cmd As New OleDbCommand(query, conn)
+    '                            pendingChores.Add(reader("Title").ToString())
 
-                    Using reader As OleDbDataReader = cmd.ExecuteReader()
+    '                        End While
 
-                        While reader.Read()
+    '                    End Using
 
-                            pendingChores.Add(reader("Title").ToString())
+    '                End Using
 
-                        End While
+    '            End Using
 
-                    End Using
+    '        Catch ex As Exception
 
-                End Using
+    '            MessageBox.Show("Database error: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
 
-            End Using
+    '        End Try
 
-        Catch ex As Exception
+    '        Return pendingChores
 
-            MessageBox.Show("Database error: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-
-        End Try
-
-        Return pendingChores
-
-    End Function
+    '    End Function
 
 End Class
