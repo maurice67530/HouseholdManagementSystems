@@ -22,6 +22,7 @@ Partial Class groceryForm
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(groceryForm))
         Me.Panel2 = New System.Windows.Forms.Panel()
         Me.Label1 = New System.Windows.Forms.Label()
@@ -48,6 +49,8 @@ Partial Class groceryForm
         Me.Button2 = New System.Windows.Forms.Button()
         Me.DataGridView1 = New System.Windows.Forms.DataGridView()
         Me.btnSubmit = New System.Windows.Forms.Button()
+        Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
+        Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
         Me.Panel2.SuspendLayout()
         Me.Panel1.SuspendLayout()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -295,6 +298,9 @@ Partial Class groceryForm
         Me.btnSubmit.TabIndex = 28
         Me.btnSubmit.UseVisualStyleBackColor = False
         '
+        'Timer1
+        '
+        '
         'groceryForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -346,4 +352,6 @@ Partial Class groceryForm
     Friend WithEvents Button2 As Button
     Friend WithEvents DataGridView1 As DataGridView
     Friend WithEvents btnSubmit As Button
+    Friend WithEvents ToolTip1 As ToolTip
+    Friend WithEvents Timer1 As Timer
 End Class
