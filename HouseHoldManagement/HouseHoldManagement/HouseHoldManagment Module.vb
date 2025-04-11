@@ -86,7 +86,7 @@ Module Module1
 
 End Module
 
-Module Rinae
+Module Personell
     Public Const connectionString As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Rinae\Source\Repos\maurice67530\HouseholdManagementSystems\HMS.accdb"
 
 End Module
@@ -133,9 +133,13 @@ Module InventoryModule
 
 
 End Module
+Module Masindi
+    Public Const connectionString As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Masindi\Source\Repos\maurice67530\HouseholdManagementSystems\HMS.accdb"
 
+End Module
 
 'Murangi (don't Touch)
 Module Murangi
     Public Const connectionString As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Murangi\Source\Repos\maurice67530\HouseholdManagementSystems\HMS.accdb"
 End Module
+
