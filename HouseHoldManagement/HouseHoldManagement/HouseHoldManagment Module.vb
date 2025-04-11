@@ -12,6 +12,12 @@ Module HouseHoldManagment_Module
     End Function
 
 End Module
+Module Xiluva
+    Public Property conn As New OleDbConnection(connectionString)
+
+    Public Const connectionString As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Xiluva\Source\Repos\maurice67530\HouseholdManagementSystems\HMS.accdb;Persist Security Info=False;"
+
+End Module
 Module Module1
     Public Property conn As New OleDbConnection(connectionString)
     Public Const connectionString As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Zwivhuya\Source\Repos\maurice67530\HouseholdManagementSystems\HMS.accdb;Persist Security Info=False;"
@@ -23,8 +29,6 @@ Module Module1
             If TypeOf ctrl Is TextBox Then
                 CType(ctrl, TextBox).Clear()
             End If
-
-
         Next
 
         'clear comboBoxes
@@ -82,12 +86,11 @@ Module Module1
 
 End Module
 
-Module Rinae
+Module Personell
     Public Const connectionString As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Rinae\Source\Repos\maurice67530\HouseholdManagementSystems\HMS.accdb"
+
 End Module
-Module Ndivhuwo
-    Public Const connectionString As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Delicious\Source\Repos\maurice67530\HouseholdManagementSystems\HMS.accdb"
-End Module
+
 '[Dongola] vhasongo silinga
 Module InventoryModule
     Public Const connectionString As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Dongola\Source\Repos\maurice67530\HouseholdManagementSystems\HMS.accdb"
@@ -127,8 +130,16 @@ Module InventoryModule
             conn.Close()
         End Try
     End Sub
+
+
 End Module
-    'Murangi (don't Touch)
-    Module Murangi
+Module Masindi
+    Public Const connectionString As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Masindi\Source\Repos\maurice67530\HouseholdManagementSystems\HMS.accdb"
+
+End Module
+
+'Murangi (don't Touch)
+Module Murangi
     Public Const connectionString As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Murangi\Source\Repos\maurice67530\HouseholdManagementSystems\HMS.accdb"
 End Module
+
