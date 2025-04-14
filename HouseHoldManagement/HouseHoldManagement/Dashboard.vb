@@ -2,8 +2,7 @@
 Imports System.IO
 Imports System.Data.OleDb
 Public Class Dashboard
-    Public Const connectionString As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Dongola\Source\Repos\maurice67530\HouseholdManagementSystems\HMS.accdb"
-
+    Public Const connectionString As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source= C:\Users\Aousy\Source\Repos\maurice67530\HouseholdManagementSystems\HMS.accdb"
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
         Inventory.ShowDialog()
     End Sub
@@ -83,17 +82,17 @@ Public Class Dashboard
         Using conn As New OleDbConnection(connectionString), cmd As New OleDbCommand(query, conn)
             conn.Open()
             Using reader = cmd.ExecuteReader()
-            While reader.Read()
-                Select Case reader("Status").ToString()
-                    Case "Completed"
-                        completed = Convert.ToInt32(reader(1))
-                    Case "In progress"
-                        inProgress = Convert.ToInt32(reader(1))
-                    Case "Not Started"
-                        notStarted = Convert.ToInt32(reader(1))
-                End Select
-            End While
-        End Using
+                While reader.Read()
+                    Select Case reader("Status").ToString()
+                        Case "Completed"
+                            completed = Convert.ToInt32(reader(1))
+                        Case "In progress"
+                            inProgress = Convert.ToInt32(reader(1))
+                        Case "Not Started"
+                            notStarted = Convert.ToInt32(reader(1))
+                    End Select
+                End While
+            End Using
         End Using
         Label2.Text = $"   Chores: 
            -Completed: {completed}
@@ -158,6 +157,7 @@ Public Class Dashboard
 
     End Sub
 
+    Dim increment As Integer = 0
     Private Sub UpdateBudgetStatus()
 
         Dim query As String = "SELECT SUM(Amount) FROM Expense"
@@ -178,7 +178,7 @@ Public Class Dashboard
 
     Private Sub LoadChartData()
         ' update this connection string based  on my database confirguration
-        Dim connectionString As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Dongola\Source\Repos\maurice67530\HouseholdManagementSystems\HMS.accdb"
+        Dim connectionString As String = "Provider = Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Aousy\Source\Repos\maurice67530\HouseholdManagementSystems\HMS.accdb"
         Dim query As String = "SELECT [Amount], [Frequency] FROM [Expense]"
 
         Using conn As New OleDbConnection(connectionString)
