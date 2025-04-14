@@ -5,19 +5,6 @@ Public Class Personnel
     'Dim conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
     Dim connec As New OleDbConnection(Rasta.connectionString)
 
-    '' Variables to hold user inputs
-    'Dim FirstName As String
-    'Dim LastName As String
-    'Dim DateOfBirth As Date
-    'Dim Email As String
-    'Dim Contact As String
-    'Dim Age As String
-    'Dim Role As String
-    'Dim Gender As String
-    'Dim PostalCode As String
-    'Dim MaritalStatus As String
-
-
     ' Create a ToolTip object
     Private toolTip As New ToolTip()
     Private toolTip1 As New ToolTip()
@@ -122,6 +109,7 @@ Public Class Personnel
         'connec.Close()
         LoadData()
         ClearForm()
+        ClearControls(Me)
     End Sub
 
     Private Sub Person_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -339,7 +327,28 @@ Public Class Personnel
         ComboBox2.Text = ""
         ComboBox3.Text = ""
     End Sub
+    Public Sub ClearControls(ByVal FORM As Form)
+        ' Clear TextBoxes  
+        For Each ctrl As Control In FORM.Controls
+            If TypeOf ctrl Is TextBox Then
+                CType(ctrl, TextBox).Clear()
+            End If
+        Next
 
+        ' Clear ComboBoxes  
+        For Each ctrl As Control In FORM.Controls
+            If TypeOf ctrl Is ComboBox Then
+                CType(ctrl, ComboBox).ResetText()
+            End If
+        Next
+
+        ' Clear DateTimePickers  
+        For Each ctrl As Control In FORM.Controls
+            If TypeOf ctrl Is DateTimePicker Then
+                CType(ctrl, DateTimePicker).Value = DateTimePicker.MinimumDateTime ' or set to a specific date  
+            End If
+        Next
+    End Sub
     Private Sub BtnAddpicture_Click(sender As Object, e As EventArgs) Handles BtnAddpicture.Click
         OpenFileDialog1.Filter = "Bitmaps (*.bmp)|*.bmp| (*.jpg)|*.jpg"
         If OpenFileDialog1.ShowDialog() = DialogResult.OK Then
