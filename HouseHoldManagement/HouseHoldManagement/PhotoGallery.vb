@@ -70,7 +70,7 @@ Public Class PhotoGallery
 
                 cmd.ExecuteNonQuery()
 
-                MsgBox("Chores Updated Successfuly!", vbInformation, "Update Confirmation")
+                MsgBox("Photo Updated Successfuly!", vbInformation, "Update Confirmation")
                 LoadPhotodataFromDatabase()
                 ' HouseHold.ClearControls(Me)
             End Using
@@ -137,7 +137,7 @@ Public Class PhotoGallery
             'Dim DeletedBy As String
 
             ' Confirm deletion  
-            Dim confirmationResult As DialogResult = MessageBox.Show("Are you sure you want to delete this?", "Confirm Deletion", MessageBoxButtons.YesNo, MessageBoxIcon.Warning)
+            Dim confirmationResult As DialogResult = MessageBox.Show("Are you sure you want to delete this Photos?", "Confirm Deletion", MessageBoxButtons.YesNo, MessageBoxIcon.Warning)
             If confirmationResult = DialogResult.Yes Then
                 Debug.WriteLine("User confirmation deletion.")
                 ' Proceed with deletion  
@@ -238,14 +238,14 @@ Public Class PhotoGallery
             conn.Open()
 
             'retrieve the firstname and surname columns from the personaldetails tabel
-            Dim query As String = "SELECT FirstName, SurName FROM PersonalDetails"
+            Dim query As String = "SELECT FirstName, LastName FROM PersonalDetails"
             Dim cmd As New OleDbCommand(query, conn)
             Dim reader As OleDbDataReader = cmd.ExecuteReader()
 
             'bind the retrieved data to the combobox
             ComboBox1.Items.Clear()
             While reader.Read()
-                ComboBox1.Items.Add($"{reader("FirstName")} {reader("Surname")}")
+                ComboBox1.Items.Add($"{reader("FirstName")} {reader("LastName")}")
             End While
 
             'close the database
@@ -376,7 +376,7 @@ Public Class PhotoGallery
         Timer1.Stop()
     End Sub
 
-    Private Sub ComboBox2_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ComboBox2.SelectedIndexChanged
+    Private Sub ComboBox2_SelectedIndexChanged(sender As Object, e As EventArgs)
         ' Clear previous images and reset variables
         imagePaths.Clear()
 
@@ -409,5 +409,13 @@ Public Class PhotoGallery
             PictureBox1.ImageLocation = OpenFileDialog.FileName
             TextBox5.Text = OpenFileDialog.FileName
         End If
+    End Sub
+
+    Private Sub Panel2_Paint(sender As Object, e As PaintEventArgs) Handles Panel2.Paint
+
+    End Sub
+
+    Private Sub Label9_Click(sender As Object, e As EventArgs) Handles Label9.Click
+
     End Sub
 End Class
