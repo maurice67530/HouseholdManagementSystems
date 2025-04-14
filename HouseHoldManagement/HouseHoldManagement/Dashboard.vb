@@ -2,7 +2,7 @@
 Imports System.IO
 Imports System.Data.OleDb
 Public Class Dashboard
-    Public Const connectionString As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Rinae\Source\Repos\maurice67530\HouseholdManagementSystems\HMS.accdb"
+    Public Const connectionString As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Mulanga\Source\Repos\maurice67530\HouseholdManagementSystems\HMS.accdb"
 
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
         Inventory.ShowDialog()
@@ -20,8 +20,12 @@ Public Class Dashboard
         Chores.ShowDialog()
     End Sub
 
+    Private Sub Button1_Click_1(sender As Object, e As EventArgs)
+        Login.ShowDialog()
+    End Sub
+
     Private Sub Button7_Click(sender As Object, e As EventArgs) Handles Button7.Click
-        'Grocery.ShowDialog()
+        '  Grocery.ShowDialog()
     End Sub
 
     Private Sub Button8_Click(sender As Object, e As EventArgs) Handles Button8.Click
@@ -35,18 +39,18 @@ Public Class Dashboard
     Private Sub Button6_Click(sender As Object, e As EventArgs) Handles Button6.Click
         MealPlan.ShowDialog()
     End Sub
-
     Private Sub Button10_Click(sender As Object, e As EventArgs) Handles Button10.Click
         Notifications.ShowDialog()
     End Sub
     Private Sub Dashboard_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
         LoadUpcomingMeals()
         LoadChoresStatus()
-        PopulateListboxFromChores(ListBox1)
+        PopulateListboxFromChores(ListBox2)
+        'LoadExpensesData()
         LoadChartData()
         SetupCharts()
         UpdateBudgetStatus()
-
         'LoadRecentPhotos()
         ' ToolTip1.SetToolTip(Button1, "Login")
         ToolTip1.SetToolTip(Button2, "Inventory")
@@ -58,11 +62,10 @@ Public Class Dashboard
         ToolTip1.SetToolTip(Button8, "Person")
         ToolTip1.SetToolTip(Button9, "Photos")
         ToolTip1.SetToolTip(Button10, "Notification")
-
     End Sub
     'Set up Budget Status And Chores Status charts
     Private Sub SetupCharts()
-        ' Chores Status - Pie Chart
+        'Chores Status - Pie Chart
         Chart2.Series.Clear()
         Chart2.Series.Add("Chores")
         Chart2.Series("Chores").Points.AddXY("Completed", 0)
@@ -71,7 +74,6 @@ Public Class Dashboard
         Chart2.Series("Chores").IsValueShownAsLabel = True
         ''Chart1.Series("Chores").ChartType = series1.Pie
     End Sub
-
     Private Sub LoadChoresStatus()
 
         Dim completed As Integer = 0, inProgress As Integer = 0, notStarted As Integer = 0
@@ -89,18 +91,23 @@ Public Class Dashboard
                         Case "Not Started"
                             notStarted = Convert.ToInt32(reader(1))
                     End Select
+
                 End While
+
             End Using
+
         End Using
-        Label2.Text = $"   Chores: 
+
+        Label8.Text = $"   Chores: 
            -Completed: {completed}
 
            -In Progress:{inProgress}
 
            -Not Started:{notStarted}"
-    End Sub
 
+    End Sub
     Private Sub LoadUpcomingMeals()
+
         Dim query As String = "Select MealName, StartDate, Description FROM MealPlans WHERE EndDate >= StartDate"
 
         ' Fetch data from the database
@@ -171,11 +178,12 @@ Public Class Dashboard
             ' Update a progress bar if you have one
             ProgressBar2.Value = CInt((totalExpenses / budget) * 100)
         End Using
-    End Sub
 
+    End Sub
     Private Sub LoadChartData()
+
         ' update this connection string based  on my database confirguration
-        Dim connectionString As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Rinae\Source\Repos\maurice67530\HouseholdManagementSystems\HMS.accdb"
+        Dim connectionString As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Mulanga\Source\Repos\maurice67530\HouseholdManagementSystems\HMS.accdb"
         Dim query As String = "SELECT [Amount], [Frequency] FROM [Expense]"
 
         Using conn As New OleDbConnection(connectionString)
@@ -194,106 +202,92 @@ Public Class Dashboard
                     Chart1.Series("Expenses").Points.AddXY(personnel, Budget)
 
                 End While
+
             End Using
+
         End Using
+
         Chart1.ChartAreas(0).AxisX.Title = "Frequency"
+
         Chart1.ChartAreas(0).AxisY.Title = "Amount"
     End Sub
+
     Public Sub PopulateListboxFromChores(ByRef Listbox As ListBox)
-
         Dim conn As New OleDbConnection(connectionString)
-
         Try
-
             Debug.WriteLine("populate listbox successful")
-
             'open the database connection
-
             conn.Open()
 
             'retrieve the firstname and surname columns from the personaldetails tabel
-
-            Dim query As String = "SELECT ID, Status, Title FROM Chores"
-
+            Dim query As String = "SELECT ID, Status,Title FROM Chores"
             Dim cmd As New OleDbCommand(query, conn)
-
             Dim reader As OleDbDataReader = cmd.ExecuteReader()
 
             'bind the retrieved data to the combobox
-
-            ListBox1.Items.Clear()
-
+            ListBox2.Items.Clear()
             While reader.Read()
-
-                ListBox1.Items.Add($"{reader("ID")} {reader("Status")} {reader("Title")}")
-
+                ListBox2.Items.Add($"{reader("ID")} {reader("Status")} {reader("Title")}")
             End While
 
             'close the database
-
             reader.Close()
-
         Catch ex As Exception
-
             'handle any exeptions that may occur  
-
             Debug.WriteLine("failed to populate ListBox")
-
             Debug.WriteLine($"Stack Trace: {ex.StackTrace}")
-
             MessageBox.Show($"Error: {ex.StackTrace}")
 
         Finally
 
             'close the database connection
-
             If conn.State = ConnectionState.Open Then
-
                 conn.Close()
-
             End If
-
         End Try
+
     End Sub
 
-    '    Private photoList As New List(Of String)() ' List to store photo paths
-    '    Private currentPhotoIndex As Integer = 0
-    '    Private WithEvents photoTimer As New Timer()
-    '    Private Sub LoadRecentPhotos()
+    Private Sub FlowLayoutPanel2_Paint(sender As Object, e As PaintEventArgs) Handles FlowLayoutPanel2.Paint
 
+    End Sub
+    'Private photoList As New List(Of String)() ' List to store photo paths
+    'Private currentPhotoIndex As Integer = 0
+    'Private WithEvents photoTimer As New Timer()
+    'Private Sub LoadRecentPhotos()
 
-    '        photoList.Clear()
-    '        Dim query As String = "SELECT TOP 5 FilePath FROM Gallery ORDER BY DateAdded "
-    '        Using conn As New OleDbConnection(connectionString)
-    '            Using cmd As New OleDbCommand(query, conn)
-    '                conn.Open()
-    '                Using reader As OleDbDataReader = cmd.ExecuteReader()
-    '                    While reader.Read()
-    '                        photoList.Add(reader("filepath").ToString())
-    '                    End While
-    '                End Using
+    '    photoList.Clear()
+    '    Dim query As String = "SELECT TOP 5 FilePath FROM photo ORDER BY DateAdded "
+    '    Using conn As New OleDbConnection(connectionString)
+    '        Using cmd As New OleDbCommand(query, conn)
+    '            conn.Open()
+    '            Using reader As OleDbDataReader = cmd.ExecuteReader()
+    '                While reader.Read()
+    '                    photoList.Add(reader("filepath").ToString())
+    '                End While
     '            End Using
     '        End Using
-    '    End Sub
-    '    Private Sub DisplayPhoto()
-    '        If photoList.Count > 0 Then
-    '            FlowLayoutPanel1.Controls.Clear() ' Clear previous image
-    '            Dim pb As New PictureBox()
-    '            pb.Image = Image.FromFile(photoList(currentPhotoIndex))
-    '            pb.SizeMode = PictureBoxSizeMode.StretchImage ' Set stretch mode
-    '            pb.Size = FlowLayoutPanel1.Size ' Match panel size
-    '            FlowLayoutPanel1.Controls.Add(pb) ' Add to FlowLayoutPanel
-    '        End If
-    '    End Sub
-    '    Private Sub SetupTimer()
-    '        photoTimer.Interval = 2000 ' 2 seconds
-    '        AddHandler photoTimer.Tick, AddressOf PhotoTimer_Tick
-    '        photoTimer.Start()
-    '    End Sub
-    '    Private Sub PhotoTimer_Tick(sender As Object, e As EventArgs)
-    '        If photoList.Count > 0 Then
-    '            currentPhotoIndex = (currentPhotoIndex + 1) Mod photoList.Count ' Loop through photos
-    '            DisplayPhoto()
-    '        End If
-    '    End Sub
+    '    End Using
+    'End Sub
+    'Private Sub DisplayPhoto()
+    '    If photoList.Count > 0 Then
+    '        FlowLayoutPanel1.Controls.Clear() ' Clear previous image
+    '        Dim pb As New PictureBox()
+    '        pb.Image = Image.FromFile(photoList(currentPhotoIndex))
+    '        pb.SizeMode = PictureBoxSizeMode.StretchImage ' Set stretch mode
+    '        pb.Size = FlowLayoutPanel1.Size ' Match panel size
+    '        FlowLayoutPanel1.Controls.Add(pb) ' Add to FlowLayoutPanel
+    '    End If
+    'End Sub
+    'Private Sub SetupTimer()
+    '    photoTimer.Interval = 2000 ' 2 seconds
+    '    AddHandler photoTimer.Tick, AddressOf PhotoTimer_Tick
+    '    photoTimer.Start()
+    'End Sub
+    'Private Sub PhotoTimer_Tick(sender As Object, e As EventArgs)
+    '    If photoList.Count > 0 Then
+    '        currentPhotoIndex = (currentPhotoIndex + 1) Mod photoList.Count ' Loop through photos
+    '        DisplayPhoto()
+    '    End If
+    'End Sub
 End Class
