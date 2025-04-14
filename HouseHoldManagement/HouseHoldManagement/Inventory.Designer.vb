@@ -62,10 +62,10 @@ Partial Class Inventory
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.Location = New System.Drawing.Point(212, 9)
+        Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label1.Location = New System.Drawing.Point(197, 9)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(96, 16)
+        Me.Label1.Size = New System.Drawing.Size(111, 20)
         Me.Label1.TabIndex = 0
         Me.Label1.Text = "INVENTORY"
         '
@@ -211,33 +211,36 @@ Partial Class Inventory
         '
         'Button1
         '
+        Me.Button1.BackColor = System.Drawing.SystemColors.ActiveCaption
         Me.Button1.BackgroundImage = CType(resources.GetObject("Button1.BackgroundImage"), System.Drawing.Image)
         Me.Button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
         Me.Button1.Location = New System.Drawing.Point(12, 326)
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(56, 50)
         Me.Button1.TabIndex = 20
-        Me.Button1.UseVisualStyleBackColor = True
+        Me.Button1.UseVisualStyleBackColor = False
         '
         'Button2
         '
+        Me.Button2.BackColor = System.Drawing.SystemColors.ActiveCaption
         Me.Button2.BackgroundImage = CType(resources.GetObject("Button2.BackgroundImage"), System.Drawing.Image)
         Me.Button2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
         Me.Button2.Location = New System.Drawing.Point(71, 326)
         Me.Button2.Name = "Button2"
         Me.Button2.Size = New System.Drawing.Size(56, 50)
         Me.Button2.TabIndex = 21
-        Me.Button2.UseVisualStyleBackColor = True
+        Me.Button2.UseVisualStyleBackColor = False
         '
         'Button3
         '
+        Me.Button3.BackColor = System.Drawing.SystemColors.ActiveCaption
         Me.Button3.BackgroundImage = CType(resources.GetObject("Button3.BackgroundImage"), System.Drawing.Image)
         Me.Button3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
         Me.Button3.Location = New System.Drawing.Point(130, 326)
         Me.Button3.Name = "Button3"
         Me.Button3.Size = New System.Drawing.Size(56, 50)
         Me.Button3.TabIndex = 22
-        Me.Button3.UseVisualStyleBackColor = True
+        Me.Button3.UseVisualStyleBackColor = False
         '
         'ComboBox1
         '
@@ -259,53 +262,58 @@ Partial Class Inventory
         '
         'Button8
         '
+        Me.Button8.BackColor = System.Drawing.SystemColors.ActiveCaption
         Me.Button8.Image = CType(resources.GetObject("Button8.Image"), System.Drawing.Image)
         Me.Button8.Location = New System.Drawing.Point(192, 326)
         Me.Button8.Name = "Button8"
         Me.Button8.Size = New System.Drawing.Size(56, 50)
         Me.Button8.TabIndex = 90
         Me.Button8.Text = " "
-        Me.Button8.UseVisualStyleBackColor = True
+        Me.Button8.UseVisualStyleBackColor = False
         '
         'Button7
         '
+        Me.Button7.BackColor = System.Drawing.SystemColors.ActiveCaption
         Me.Button7.Image = CType(resources.GetObject("Button7.Image"), System.Drawing.Image)
         Me.Button7.Location = New System.Drawing.Point(436, 326)
         Me.Button7.Name = "Button7"
         Me.Button7.Size = New System.Drawing.Size(46, 50)
         Me.Button7.TabIndex = 89
         Me.Button7.Text = " "
-        Me.Button7.UseVisualStyleBackColor = True
+        Me.Button7.UseVisualStyleBackColor = False
         '
         'Button6
         '
+        Me.Button6.BackColor = System.Drawing.SystemColors.ActiveCaption
         Me.Button6.Image = CType(resources.GetObject("Button6.Image"), System.Drawing.Image)
         Me.Button6.Location = New System.Drawing.Point(374, 326)
         Me.Button6.Name = "Button6"
         Me.Button6.Size = New System.Drawing.Size(56, 50)
         Me.Button6.TabIndex = 88
         Me.Button6.Text = " "
-        Me.Button6.UseVisualStyleBackColor = True
+        Me.Button6.UseVisualStyleBackColor = False
         '
         'Button5
         '
+        Me.Button5.BackColor = System.Drawing.SystemColors.ActiveCaption
         Me.Button5.Image = CType(resources.GetObject("Button5.Image"), System.Drawing.Image)
         Me.Button5.Location = New System.Drawing.Point(312, 326)
         Me.Button5.Name = "Button5"
         Me.Button5.Size = New System.Drawing.Size(56, 50)
         Me.Button5.TabIndex = 87
         Me.Button5.Text = " "
-        Me.Button5.UseVisualStyleBackColor = True
+        Me.Button5.UseVisualStyleBackColor = False
         '
         'Button4
         '
+        Me.Button4.BackColor = System.Drawing.SystemColors.ActiveCaption
         Me.Button4.Image = CType(resources.GetObject("Button4.Image"), System.Drawing.Image)
         Me.Button4.Location = New System.Drawing.Point(252, 326)
         Me.Button4.Name = "Button4"
         Me.Button4.Size = New System.Drawing.Size(56, 50)
         Me.Button4.TabIndex = 86
         Me.Button4.Text = " "
-        Me.Button4.UseVisualStyleBackColor = True
+        Me.Button4.UseVisualStyleBackColor = False
         '
         'Timer1
         '
@@ -321,15 +329,17 @@ Partial Class Inventory
         '
         'Button9
         '
+        Me.Button9.BackColor = System.Drawing.SystemColors.ActiveCaption
         Me.Button9.Image = CType(resources.GetObject("Button9.Image"), System.Drawing.Image)
         Me.Button9.Location = New System.Drawing.Point(488, 326)
         Me.Button9.Name = "Button9"
         Me.Button9.Size = New System.Drawing.Size(43, 50)
         Me.Button9.TabIndex = 92
-        Me.Button9.UseVisualStyleBackColor = True
+        Me.Button9.UseVisualStyleBackColor = False
         '
         'Panel1
         '
+        Me.Panel1.BackColor = System.Drawing.SystemColors.ActiveCaption
         Me.Panel1.Controls.Add(Me.Label2)
         Me.Panel1.Controls.Add(Me.Label5)
         Me.Panel1.Controls.Add(Me.ComboBox3)
@@ -357,7 +367,7 @@ Partial Class Inventory
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.BackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.BackColor = System.Drawing.SystemColors.Control
         Me.ClientSize = New System.Drawing.Size(543, 392)
         Me.Controls.Add(Me.Panel1)
         Me.Controls.Add(Me.Button9)
