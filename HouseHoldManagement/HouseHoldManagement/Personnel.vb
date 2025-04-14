@@ -1,6 +1,6 @@
 ﻿Imports System.IO
 Imports System.Data.OleDb
-Public Class Person
+Public Class Personnel
     ' Connection to the database
     'Dim conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
     Dim connec As New OleDbConnection(Rasta.connectionString)
