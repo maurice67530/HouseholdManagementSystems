@@ -5,17 +5,17 @@ Public Class Personnel
     'Dim conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
     Dim connec As New OleDbConnection(Rasta.connectionString)
 
-    ' Variables to hold user inputs
-    Dim FirstName As String
-    Dim LastName As String
-    Dim DateOfBirth As Date
-    Dim Email As String
-    Dim Contact As String
-    Dim Age As String
-    Dim Role As String
-    Dim Gender As String
-    Dim PostalCode As String
-    Dim MaritalStatus As String
+    '' Variables to hold user inputs
+    'Dim FirstName As String
+    'Dim LastName As String
+    'Dim DateOfBirth As Date
+    'Dim Email As String
+    'Dim Contact As String
+    'Dim Age As String
+    'Dim Role As String
+    'Dim Gender As String
+    'Dim PostalCode As String
+    'Dim MaritalStatus As String
 
 
     ' Create a ToolTip object
@@ -39,60 +39,104 @@ Public Class Personnel
     End Sub
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles BtnSave.Click
-        ' Get user input from TextBoxes
-        FirstName = TextBox1.Text
-        LastName = TextBox2.Text
-        DateOfBirth = DateTimePicker1.Value
-        Email = TextBox4.Text
-        Contact = TextBox3.Text
-        Age = TextBox5.Text
-        Role = ComboBox1.SelectedItem.ToString
-        PostalCode = TextBox6.Text
-        Gender = ComboBox3.SelectedItem.ToString
-        MaritalStatus = ComboBox2.SelectedItem.ToString
+        '' Get user input from TextBoxes
+        'FirstName = TextBox1.Text
+        'LastName = TextBox2.Text
+        'DateOfBirth = DateTimePicker1.Value
+        'Email = TextBox4.Text
+        'Contact = TextBox3.Text
+        'Age = TextBox5.Text
+        'Role = ComboBox1.SelectedItem.ToString
+        'PostalCode = TextBox6.Text
+        'Gender = ComboBox3.SelectedItem.ToString
+        'MaritalStatus = ComboBox2.SelectedItem.ToString
 
 
 
-        ' Open the connection
+        Debug.WriteLine("Entering btnSubmit")
+
         Try
-            connec.Open()
+            Debug.WriteLine("User confirmed btnSubmit")
 
-            ' SQL query to insert the data
-            Dim query As String = "INSERT INTO PersonalDetails (FirstName, LastName, DateOfBirth, Email, Contact, Age, Role, Gender, PostalCode, MaritalStatus) " &
-                                  "VALUES (@FirstName, @LastName, @DateOfBirth, @Email, @Contact, @Age, @Role, @Gender, @PostalCode, @MaritalStatus)"
+            Using connect As New OleDbConnection(Module1.connectionString)
+                connect.Open()
 
-            ' Create the command and add parameters
-            Dim cmd As New OleDbCommand(query, connec)
-            cmd.Parameters.AddWithValue("@FirstName", FirstName)
-            cmd.Parameters.AddWithValue("@LastName", LastName)
-            cmd.Parameters.AddWithValue("@DateOfBirth", DateOfBirth)
-            cmd.Parameters.AddWithValue("@Email", Email)
-            cmd.Parameters.AddWithValue("@Contact", Contact)
-            cmd.Parameters.AddWithValue("@Age", Age)
-            cmd.Parameters.AddWithValue("@Role", Role)
-            cmd.Parameters.AddWithValue("@Gender", Gender)
-            cmd.Parameters.AddWithValue("@PostalCode", PostalCode)
-            cmd.Parameters.AddWithValue("@MaritalStatus", MaritalStatus)
+                ' Update the table name if necessary  
+                'Dim tableName As String = "Personnel"
 
-            ' Execute the query
-            Dim rowsAffected As Integer = cmd.ExecuteNonQuery()
+                ' Create an OleDbCommand to insert the personnel data into the database  
+                Dim cmd As New OleDbCommand("INSERT INTO PersonalDetails ( FirstName, LastName, DateOfBirth, Gender, Contact, Email, Role, Age, PostalCode, MaritalStatus) VALUES ( ?, ?, ?, ?, ?, ?, ?, ? ,?, ?)", connect)
 
-            ' Show confirmation message
-            If rowsAffected > 0 Then
-                MessageBox.Show(rowsAffected.ToString() & " record inserted successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
-            Else
-                MessageBox.Show("No records were inserted.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-            End If
+                ' Set the parameter values from the UI controls 
+                'Class declaretions
+                Dim person As New Person
+
+                'Assign Values 
+                person.FirstName = TextBox1.Text
+                person.LastName = TextBox2.Text
+                person.DateOfBirth = DateTimePicker1.Value.ToString()
+                person.Gender = ComboBox3.SelectedItem.ToString()
+                person.Contact = TextBox3.Text
+                person.Email = TextBox4.Text
+                person.Role = ComboBox1.SelectedItem.ToString()
+                person.Age = TextBox5.Text
+                person.postalcode = TextBox6.Text
+                person.MaritalStatus = ComboBox2.SelectedItem.ToString
+
+                'For Each person As person In Personal
+                cmd.Parameters.Clear()
+
+                'cmd.Parameters.AddWithValue("@ID",TextBox8)
+                cmd.Parameters.AddWithValue("@FirstName", person.FirstName)
+                cmd.Parameters.AddWithValue("@LastName", person.LastName)
+                cmd.Parameters.AddWithValue("@DateOfBirth", person.DateOfBirth)
+                cmd.Parameters.AddWithValue("@Gender", person.Gender)
+                cmd.Parameters.AddWithValue("@Contact", person.Contact)
+                cmd.Parameters.AddWithValue("@Email", person.Email)
+                cmd.Parameters.AddWithValue("@Role", person.Role)
+                cmd.Parameters.AddWithValue("@Age", person.Age)
+                cmd.Parameters.AddWithValue("@PostalCode", person.postalcode)
+                cmd.Parameters.AddWithValue("@MaritalStatus", person.MaritalStatus)
+
+
+                'cmd.Parameters.AddWithValue("@PhysicalAddres", TextBox7.Text)
+                'cmd.Parameters.AddWithValue("@HealthStatus", person.HealthStatus)
+
+                MsgBox(" You are now added as a member of the HoseHold Managment System!" & vbCrLf &
+                      "FirstName: " & person.FirstName & vbCrLf &
+                      "LastName: " & person.LastName & vbCrLf &
+                      "Birth of Date:" & person.DateOfBirth & vbCrLf &
+                      "Gender: " & person.Gender & vbCrLf &
+                      "Contact Number: " & person.Contact & vbCrLf &
+                      "Email: " & person.Email & vbCrLf &
+                      "Role: " & person.Role & vbCrLf &
+                      "Age: " & person.Age & vbCrLf &
+                      "Postal Code: " & person.postalcode & vbCrLf &
+                      "Health Status: " & person.MaritalStatus & vbCrLf, vbInformation, "Credentials  confirmation")
+
+                MessageBox.Show("Personnel information saved to Database successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
+
+                ' Execute the SQL command to insert the data  
+                cmd.ExecuteNonQuery()
+                'Next
+
+            End Using
+        Catch ex As OleDbException
+            Debug.WriteLine($" Database error in Button_Click: {ex.Message}")
+            Debug.WriteLine($"Stack Trace : {ex.StackTrace}")
+            MessageBox.Show($"Error saving personnel to database: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+
+            ' MessageBox.Show("Error saving personnel to database: " & ex.Message & vbNewLine & ex.StackTrace, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         Catch ex As Exception
-            ' Handle any errors
-            MessageBox.Show("An error occurred: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-        Finally
-            ' Ensure the connection is closed even if an error occurs
-            'If connec.State = ConnectionState.Open Then
-            '    connec.Close()
-            'End If
+            Debug.WriteLine($" General error in Button: {ex.Message}")
+            Debug.WriteLine($"Stack Trace : {ex.StackTrace}")
+            Debug.WriteLine(" Failed to save")
+            MessageBox.Show("Unexpected Error: " & ex.Message & vbNewLine & ex.StackTrace, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+
         End Try
         connec.Close()
+        Debug.WriteLine("Exiting btnSubmit")
+        'connec.Close()
         LoadData()
         ClearForm()
     End Sub
@@ -111,9 +155,9 @@ Public Class Personnel
         Catch ex As Exception
             MessageBox.Show("Failed to load data: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         Finally
-
+            connec.Close()
         End Try
-        connec.Close()
+
     End Sub
 
     Private Sub DataGridView1_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridView1.CellContentClick
@@ -140,40 +184,82 @@ Public Class Personnel
     End Sub
 
     Private Sub BtnEdit_Click(sender As Object, e As EventArgs) Handles BtnEdit.Click
-        ' Check if a member is selected
-        If String.IsNullOrWhiteSpace(TextBox8.Text) Then
-            MessageBox.Show("Please select a member from the table before updating.", "Selection Required", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-            Exit Sub
+
+        Debug.WriteLine("Entering btnEdit")
+
+        ' Ensure a row is selected in the DataGridView  
+        If DataGridView1.SelectedRows.Count = 0 Then
+            Debug.WriteLine("User canceled btnEdit")
+            MessageBox.Show("Please select a record to update.", "No Selection", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+
+            Return
         End If
 
         Try
-            connec.Open()
-            Dim query As String = "UPDATE PersonalDetails SET FirstName = ?, LastName = ?, DateOfBirth = ?, Contact = ?, Email = ?, Age = ? , Role = ?, Gender = ?, PostalCode = ?, MaritalStatus = ? WHERE ID = ?"
+            Debug.WriteLine("User confirmed btnEdit")
 
-            Using cmd As New OleDbCommand(query, connec)
-                cmd.Parameters.AddWithValue("@FirstName", TextBox1.Text)
-                cmd.Parameters.AddWithValue("@LastName", TextBox2.Text)
-                cmd.Parameters.AddWithValue("@DateOfBirth", DateTimePicker1.Value)
-                cmd.Parameters.AddWithValue("@Contact", TextBox3.Text)
-                cmd.Parameters.AddWithValue("@Email", TextBox4.Text)
-                cmd.Parameters.AddWithValue("@Age", TextBox5.Text)
-                cmd.Parameters.AddWithValue("@Role", ComboBox1.SelectedItem)
-                cmd.Parameters.AddWithValue("@Gender", ComboBox3.SelectedItem)
-                cmd.Parameters.AddWithValue("@PostalCode", TextBox6.Text)
-                cmd.Parameters.AddWithValue("@MaritalStatus", ComboBox2.SelectedItem)
-                cmd.Parameters.AddWithValue("@ID", CInt(TextBox8.Text))
+            Using connec As New OleDbConnection(Rasta.connectionString)
+                connec.Open()
+
+
+                Dim FirstName As String = TextBox1.Text
+                Dim LastName As String = TextBox2.Text
+                Dim Gender As String = ComboBox3.Text
+                Dim Contact As String = TextBox3.Text
+                Dim Email As String = TextBox4.Text
+                Dim Role As String = ComboBox1.Text
+                Dim Age As String = TextBox5.Text
+                Dim PostalCode As String = TextBox6.Text
+                Dim MaritalStatus As String = ComboBox2.SelectedItem.ToString
+
+                ' Get the ID of the selected row (assuming your table has a primary key named "ID")  
+                Dim selectedRow As DataGridViewRow = DataGridView1.SelectedRows(0)
+                Dim ID As Integer = Convert.ToInt32(selectedRow.Cells("ID").Value) ' Change "ID" to your primary key column name  
+
+                ' Create an OleDbCommand to update the personnel data in the database  
+                Dim cmd As New OleDbCommand("UPDATE [PersonalDetails] SET [FirstName] = ?, [LastName] = ?, [Gender] = ?, [Contact] = ?, [Email] = ?, [Role] = ?, [Age] = ?, [PostalCode] = ?, [MaritalStatus] = ? WHERE ID = ?", connec)
+
+                ' Set the parameter values from the UI controls  
+                cmd.Parameters.AddWithValue("@FirstName", FirstName)
+                cmd.Parameters.AddWithValue("@LastName", LastName)
+                cmd.Parameters.AddWithValue("@Gender", Gender)
+                cmd.Parameters.AddWithValue("@Contact", Contact)
+                cmd.Parameters.AddWithValue("@Email", Email)
+                cmd.Parameters.AddWithValue("@Role", Role)
+                cmd.Parameters.AddWithValue("@Age", Age)
+                cmd.Parameters.AddWithValue("@PostalCode", PostalCode)
+                cmd.Parameters.AddWithValue("MaritalStatus", MaritalStatus)
+                cmd.Parameters.AddWithValue("ID", ID)
+
+                ' Execute the SQL command to update the data
                 cmd.ExecuteNonQuery()
-            End Using
 
-            MessageBox.Show("Member updated successfully.")
-            LoadData()
-            ClearForm()
+
+                MsgBox("Personnel information updated!")
+
+
+                LoadData()
+
+                connec.Close()
+
+            End Using
+        Catch ex As OleDbException
+            'Debug.WriteLine($"Stack Trace : {ex.StackTrace}")
+            'MessageBox.Show($"Error updating personnel in database: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            'MessageBox.Show("Error saving personnel to database: " & ex.Message & vbNewLine & ex.StackTrace, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        Catch ex As FormatException
+            Debug.WriteLine($"Format error in btnEdit:{ex.Message}")
+            'Debug.WriteLine($"Stack Trace : {ex.StackTrace}")
+            MessageBox.Show("Ensure all feilds are filled correctly.", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
 
         Catch ex As Exception
-            MessageBox.Show("Update failed: " & ex.Message)
-        Finally
-
+            'MessageBox.Show($"Unexpected error: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Debug.WriteLine("Failed entering btnEdit_")
+            'MessageBox.Show("Error saving personnel to database: " & ex.Message & vbNewLine & ex.StackTrace, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            'Debug.WriteLine($"Stack Trace : {ex.StackTrace}")
+            Debug.WriteLine($"An  Error has occured when Editing data from Database")
         End Try
+        'connect.close
         connec.Close()
     End Sub
 
@@ -250,9 +336,7 @@ Public Class Personnel
 
     End Sub
 
-    Private Sub Label13_Click(sender As Object, e As EventArgs) Handles Label13.Click
 
-    End Sub
 
     Private Sub BtnAddpicture_Click(sender As Object, e As EventArgs) Handles BtnAddpicture.Click
         OpenFileDialog1.Filter = "Bitmaps (*.bmp)|*.bmp| (*.jpg)|*.jpg"
@@ -278,3 +362,16 @@ Public Class Personnel
         ComboBox3.Text = ""
     End Sub
 End Class
+'Public Class Person
+'    Public Property FistName As String
+'    Public Property LastName As String
+'    Public Property Gender As String
+'    Public Property Email As String
+'    Public Property DateOfBirth As DateTime
+'    Public Property Role As String
+'    Public Property MaritalStatus As String
+'    Public Property postalcode As String
+'    Public Property Age As Integer
+'    Public Property Contact As Integer
+
+'End Class
