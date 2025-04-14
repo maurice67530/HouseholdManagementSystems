@@ -1,9 +1,9 @@
 ﻿Imports System.IO
 Imports System.Data.OleDb
 Public Class Personnel
-
     ' Connection to the database
-    Dim conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
+    'Dim conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
+    Dim connec As New OleDbConnection(Rasta.connectionString)
 
     ' Variables to hold user inputs
     Dim FirstName As String
@@ -55,14 +55,14 @@ Public Class Personnel
 
         ' Open the connection
         Try
-            conn.Open()
+            connec.Open()
 
             ' SQL query to insert the data
             Dim query As String = "INSERT INTO PersonalDetails (FirstName, LastName, DateOfBirth, Email, Contact, Age, Role, Gender, PostalCode, MaritalStatus) " &
                                   "VALUES (@FirstName, @LastName, @DateOfBirth, @Email, @Contact, @Age, @Role, @Gender, @PostalCode, @MaritalStatus)"
 
             ' Create the command and add parameters
-            Dim cmd As New OleDbCommand(query, conn)
+            Dim cmd As New OleDbCommand(query, connec)
             cmd.Parameters.AddWithValue("@FirstName", FirstName)
             cmd.Parameters.AddWithValue("@LastName", LastName)
             cmd.Parameters.AddWithValue("@DateOfBirth", DateOfBirth)
@@ -88,10 +88,11 @@ Public Class Personnel
             MessageBox.Show("An error occurred: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         Finally
             ' Ensure the connection is closed even if an error occurs
-            If conn.State = ConnectionState.Open Then
-                conn.Close()
-            End If
+            'If connec.State = ConnectionState.Open Then
+            '    connec.Close()
+            'End If
         End Try
+        connec.Close()
         LoadData()
         ClearForm()
     End Sub
@@ -100,9 +101,9 @@ Public Class Personnel
     ' Method to load data into the DataGridView
     Private Sub LoadData()
         Try
-            conn.Open()
+            connec.Open()
             Dim query As String = "SELECT * FROM PersonalDetails"
-            Dim cmd As New OleDbCommand(query, conn)
+            Dim cmd As New OleDbCommand(query, connec)
             Dim adapter As New OleDbDataAdapter(cmd)
             Dim dt As New DataTable()
             adapter.Fill(dt)
@@ -110,8 +111,9 @@ Public Class Personnel
         Catch ex As Exception
             MessageBox.Show("Failed to load data: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         Finally
-            conn.Close()
+
         End Try
+        connec.Close()
     End Sub
 
     Private Sub DataGridView1_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridView1.CellContentClick
@@ -145,10 +147,10 @@ Public Class Personnel
         End If
 
         Try
-            conn.Open()
+            connec.Open()
             Dim query As String = "UPDATE PersonalDetails SET FirstName = ?, LastName = ?, DateOfBirth = ?, Contact = ?, Email = ?, Age = ? , Role = ?, Gender = ?, PostalCode = ?, MaritalStatus = ? WHERE ID = ?"
 
-            Using cmd As New OleDbCommand(query, conn)
+            Using cmd As New OleDbCommand(query, connec)
                 cmd.Parameters.AddWithValue("@FirstName", TextBox1.Text)
                 cmd.Parameters.AddWithValue("@LastName", TextBox2.Text)
                 cmd.Parameters.AddWithValue("@DateOfBirth", DateTimePicker1.Value)
@@ -170,8 +172,9 @@ Public Class Personnel
         Catch ex As Exception
             MessageBox.Show("Update failed: " & ex.Message)
         Finally
-            conn.Close()
+
         End Try
+        connec.Close()
     End Sub
 
     Private Sub BtnDelete_Click(sender As Object, e As EventArgs) Handles BtnDelete.Click
@@ -188,10 +191,10 @@ Public Class Personnel
         End If
 
         Try
-            conn.Open()
+            connec.Open()
             Dim query As String = "DELETE FROM PersonalDetails WHERE ID = ?"
 
-            Using cmd As New OleDbCommand(query, conn)
+            Using cmd As New OleDbCommand(query, connec)
                 cmd.Parameters.AddWithValue("@ID", CInt(TextBox8.Text))
                 cmd.ExecuteNonQuery()
             End Using
@@ -203,7 +206,7 @@ Public Class Personnel
         Catch ex As Exception
             MessageBox.Show("Delete failed: " & ex.Message)
         Finally
-            conn.Close()
+            connec.Close()
         End Try
     End Sub
 
