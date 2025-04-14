@@ -6,7 +6,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{DEC8BF09-6D70-450D-B49C-BFCF4DBBB6B8}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <StartupObject>HouseHoldManagement.Dashboard</StartupObject>
+    <StartupObject>HouseHoldManagement.Expense</StartupObject>
     <RootNamespace>HouseHoldManagement</RootNamespace>
     <AssemblyName>HouseHoldManagement</AssemblyName>
     <FileAlignment>512</FileAlignment>
@@ -101,6 +101,12 @@
       <DependentUpon>Form1.vb</DependentUpon>
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="groceryForm.Designer.vb">
+      <DependentUpon>groceryForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="groceryForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Household Class.vb" />
     <Compile Include="HouseHoldManagment Module.vb" />
     <Compile Include="Inventory.Designer.vb">
@@ -170,6 +176,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Expense.resx">
       <DependentUpon>Expense.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="groceryForm.resx">
+      <DependentUpon>groceryForm.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Inventory.resx">
       <DependentUpon>Inventory.vb</DependentUpon>
@@ -246,13 +255,10 @@
     <None Include="Resources\icons8-delete-321.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\icons8-chores-48.png" />
+    <None Include="Resources\icons8-submit-321.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\icons8-task-96.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\icons8-inventory-papercut-96.png" />
+    <None Include="Resources\icons8-delete-322.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
