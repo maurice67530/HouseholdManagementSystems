@@ -319,7 +319,7 @@ Public Class Notifications
                 End While
                 amountReader.Close()
 
-                If totalAmount > 30000D Then
+                If totalAmount > 10000D Then
                     Dim message As String = "High expense alert: " & category & " has exceeded R" & totalAmount.ToString("N2")
                     summaryMessage &= message & vbCrLf
                     notificationsToSave.Add(message)
@@ -330,7 +330,7 @@ Public Class Notifications
             ' --- If any alerts found, show and save them ---
             If summaryMessage <> "" Then
                 SystemSounds.Exclamation.Play()
-                MessageBox.Show(summaryMessage, "Smart Household Alerts", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                MessageBox.Show(summaryMessage, "Household Alerts", MessageBoxButtons.OK, MessageBoxIcon.Information)
 
                 ' Save notifications shown in message box
                 For Each msg In notificationsToSave
@@ -392,10 +392,6 @@ Public Class Notifications
     End Function
 
     Private Sub AddNotification(conn As OleDbConnection, userID As String, message As String, category As String, dateCreated As String, isRead As String)
-
-
-
-
         Try
             Dim insertQuery As String = "INSERT INTO Notifications ([UserID], [Message], [DateCreated], [Category], [IsRead]) VALUES (?, ?, ?, ?, ?)"
 
