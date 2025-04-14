@@ -52,11 +52,11 @@ Partial Class PhotoGallery
         Me.Button1 = New System.Windows.Forms.Button()
         Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
         Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.ComboBox2 = New System.Windows.Forms.ComboBox()
+        Me.Label8 = New System.Windows.Forms.Label()
         Me.DataGridView1 = New System.Windows.Forms.DataGridView()
         Me.Label9 = New System.Windows.Forms.Label()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
-        Me.ComboBox2 = New System.Windows.Forms.ComboBox()
-        Me.Label8 = New System.Windows.Forms.Label()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel1.SuspendLayout()
         Me.Panel2.SuspendLayout()
@@ -66,7 +66,7 @@ Partial Class PhotoGallery
         'Label11
         '
         Me.Label11.AutoSize = True
-        Me.Label11.Location = New System.Drawing.Point(17, 177)
+        Me.Label11.Location = New System.Drawing.Point(11, 225)
         Me.Label11.Name = "Label11"
         Me.Label11.Size = New System.Drawing.Size(48, 13)
         Me.Label11.TabIndex = 107
@@ -76,7 +76,7 @@ Partial Class PhotoGallery
         '
         Me.Label10.AutoSize = True
         Me.Label10.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
-        Me.Label10.Location = New System.Drawing.Point(17, 226)
+        Me.Label10.Location = New System.Drawing.Point(11, 310)
         Me.Label10.Name = "Label10"
         Me.Label10.Size = New System.Drawing.Size(10, 13)
         Me.Label10.TabIndex = 106
@@ -85,7 +85,7 @@ Partial Class PhotoGallery
         'Label7
         '
         Me.Label7.AutoSize = True
-        Me.Label7.Location = New System.Drawing.Point(38, 174)
+        Me.Label7.Location = New System.Drawing.Point(21, 215)
         Me.Label7.Name = "Label7"
         Me.Label7.Size = New System.Drawing.Size(41, 13)
         Me.Label7.TabIndex = 125
@@ -93,23 +93,23 @@ Partial Class PhotoGallery
         '
         'TextBox4
         '
-        Me.TextBox4.Location = New System.Drawing.Point(94, 167)
+        Me.TextBox4.Location = New System.Drawing.Point(115, 208)
         Me.TextBox4.Name = "TextBox4"
-        Me.TextBox4.Size = New System.Drawing.Size(148, 20)
+        Me.TextBox4.Size = New System.Drawing.Size(248, 20)
         Me.TextBox4.TabIndex = 124
         '
         'TextBox2
         '
-        Me.TextBox2.Location = New System.Drawing.Point(94, 61)
+        Me.TextBox2.Location = New System.Drawing.Point(115, 102)
         Me.TextBox2.Multiline = True
         Me.TextBox2.Name = "TextBox2"
-        Me.TextBox2.Size = New System.Drawing.Size(148, 21)
+        Me.TextBox2.Size = New System.Drawing.Size(248, 21)
         Me.TextBox2.TabIndex = 123
         '
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(19, 69)
+        Me.Label3.Location = New System.Drawing.Point(21, 110)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(60, 13)
         Me.Label3.TabIndex = 122
@@ -117,15 +117,15 @@ Partial Class PhotoGallery
         '
         'TextBox3
         '
-        Me.TextBox3.Location = New System.Drawing.Point(94, 88)
+        Me.TextBox3.Location = New System.Drawing.Point(115, 129)
         Me.TextBox3.Name = "TextBox3"
-        Me.TextBox3.Size = New System.Drawing.Size(148, 20)
+        Me.TextBox3.Size = New System.Drawing.Size(248, 20)
         Me.TextBox3.TabIndex = 121
         '
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(8, 95)
+        Me.Label2.Location = New System.Drawing.Point(21, 136)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(71, 13)
         Me.Label2.TabIndex = 120
@@ -133,34 +133,34 @@ Partial Class PhotoGallery
         '
         'DateTimePicker1
         '
-        Me.DateTimePicker1.Location = New System.Drawing.Point(94, 35)
+        Me.DateTimePicker1.Location = New System.Drawing.Point(115, 76)
         Me.DateTimePicker1.Name = "DateTimePicker1"
-        Me.DateTimePicker1.Size = New System.Drawing.Size(148, 20)
+        Me.DateTimePicker1.Size = New System.Drawing.Size(248, 20)
         Me.DateTimePicker1.TabIndex = 119
         '
         'PictureBox1
         '
         Me.PictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.PictureBox1.ImageLocation = ""
-        Me.PictureBox1.Location = New System.Drawing.Point(22, 15)
+        Me.PictureBox1.Location = New System.Drawing.Point(79, 15)
         Me.PictureBox1.Name = "PictureBox1"
-        Me.PictureBox1.Size = New System.Drawing.Size(208, 149)
+        Me.PictureBox1.Size = New System.Drawing.Size(296, 198)
         Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
         Me.PictureBox1.TabIndex = 93
         Me.PictureBox1.TabStop = False
         '
         'TextBox1
         '
-        Me.TextBox1.Location = New System.Drawing.Point(94, 9)
+        Me.TextBox1.Location = New System.Drawing.Point(115, 50)
         Me.TextBox1.Name = "TextBox1"
         Me.TextBox1.ReadOnly = True
-        Me.TextBox1.Size = New System.Drawing.Size(148, 20)
+        Me.TextBox1.Size = New System.Drawing.Size(248, 20)
         Me.TextBox1.TabIndex = 117
         '
         'Label6
         '
         Me.Label6.AutoSize = True
-        Me.Label6.Location = New System.Drawing.Point(2, 122)
+        Me.Label6.Location = New System.Drawing.Point(21, 163)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(77, 13)
         Me.Label6.TabIndex = 116
@@ -169,7 +169,7 @@ Partial Class PhotoGallery
         'Label5
         '
         Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(15, 41)
+        Me.Label5.Location = New System.Drawing.Point(21, 82)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(64, 13)
         Me.Label5.TabIndex = 115
@@ -178,7 +178,7 @@ Partial Class PhotoGallery
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(30, 16)
+        Me.Label1.Location = New System.Drawing.Point(21, 57)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(49, 13)
         Me.Label1.TabIndex = 114
@@ -200,7 +200,7 @@ Partial Class PhotoGallery
         'Button6
         '
         Me.Button6.Image = CType(resources.GetObject("Button6.Image"), System.Drawing.Image)
-        Me.Button6.Location = New System.Drawing.Point(412, 428)
+        Me.Button6.Location = New System.Drawing.Point(750, 428)
         Me.Button6.Name = "Button6"
         Me.Button6.Size = New System.Drawing.Size(55, 43)
         Me.Button6.TabIndex = 131
@@ -211,16 +211,16 @@ Partial Class PhotoGallery
         '
         Me.ComboBox1.FormattingEnabled = True
         Me.ComboBox1.Items.AddRange(New Object() {""})
-        Me.ComboBox1.Location = New System.Drawing.Point(94, 114)
+        Me.ComboBox1.Location = New System.Drawing.Point(115, 155)
         Me.ComboBox1.Name = "ComboBox1"
-        Me.ComboBox1.Size = New System.Drawing.Size(148, 21)
+        Me.ComboBox1.Size = New System.Drawing.Size(248, 21)
         Me.ComboBox1.TabIndex = 118
         '
         'TextBox5
         '
-        Me.TextBox5.Location = New System.Drawing.Point(85, 170)
+        Me.TextBox5.Location = New System.Drawing.Point(79, 218)
         Me.TextBox5.Name = "TextBox5"
-        Me.TextBox5.Size = New System.Drawing.Size(144, 20)
+        Me.TextBox5.Size = New System.Drawing.Size(296, 20)
         Me.TextBox5.TabIndex = 104
         '
         'Panel1
@@ -231,15 +231,15 @@ Partial Class PhotoGallery
         Me.Panel1.Controls.Add(Me.Label10)
         Me.Panel1.Controls.Add(Me.PictureBox1)
         Me.Panel1.Controls.Add(Me.TextBox5)
-        Me.Panel1.Location = New System.Drawing.Point(276, 63)
+        Me.Panel1.Location = New System.Drawing.Point(417, 63)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(253, 195)
+        Me.Panel1.Size = New System.Drawing.Size(388, 250)
         Me.Panel1.TabIndex = 128
         '
         'Button5
         '
         Me.Button5.Image = CType(resources.GetObject("Button5.Image"), System.Drawing.Image)
-        Me.Button5.Location = New System.Drawing.Point(350, 426)
+        Me.Button5.Location = New System.Drawing.Point(688, 428)
         Me.Button5.Name = "Button5"
         Me.Button5.Size = New System.Drawing.Size(56, 45)
         Me.Button5.TabIndex = 127
@@ -249,7 +249,7 @@ Partial Class PhotoGallery
         'Button4
         '
         Me.Button4.Image = CType(resources.GetObject("Button4.Image"), System.Drawing.Image)
-        Me.Button4.Location = New System.Drawing.Point(226, 424)
+        Me.Button4.Location = New System.Drawing.Point(388, 426)
         Me.Button4.Name = "Button4"
         Me.Button4.Size = New System.Drawing.Size(56, 45)
         Me.Button4.TabIndex = 126
@@ -259,7 +259,7 @@ Partial Class PhotoGallery
         'Button3
         '
         Me.Button3.Image = CType(resources.GetObject("Button3.Image"), System.Drawing.Image)
-        Me.Button3.Location = New System.Drawing.Point(288, 426)
+        Me.Button3.Location = New System.Drawing.Point(450, 428)
         Me.Button3.Name = "Button3"
         Me.Button3.Size = New System.Drawing.Size(56, 45)
         Me.Button3.TabIndex = 125
@@ -269,7 +269,7 @@ Partial Class PhotoGallery
         'Button2
         '
         Me.Button2.Image = CType(resources.GetObject("Button2.Image"), System.Drawing.Image)
-        Me.Button2.Location = New System.Drawing.Point(164, 424)
+        Me.Button2.Location = New System.Drawing.Point(326, 426)
         Me.Button2.Name = "Button2"
         Me.Button2.Size = New System.Drawing.Size(56, 45)
         Me.Button2.TabIndex = 124
@@ -279,7 +279,7 @@ Partial Class PhotoGallery
         'Button1
         '
         Me.Button1.Image = CType(resources.GetObject("Button1.Image"), System.Drawing.Image)
-        Me.Button1.Location = New System.Drawing.Point(103, 424)
+        Me.Button1.Location = New System.Drawing.Point(265, 426)
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(56, 45)
         Me.Button1.TabIndex = 123
@@ -310,15 +310,33 @@ Partial Class PhotoGallery
         Me.Panel2.Controls.Add(Me.Label1)
         Me.Panel2.Location = New System.Drawing.Point(17, 63)
         Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(253, 195)
+        Me.Panel2.Size = New System.Drawing.Size(394, 250)
         Me.Panel2.TabIndex = 119
+        '
+        'ComboBox2
+        '
+        Me.ComboBox2.FormattingEnabled = True
+        Me.ComboBox2.Items.AddRange(New Object() {"Church", "Soccer", "Family", "Christmas"})
+        Me.ComboBox2.Location = New System.Drawing.Point(115, 181)
+        Me.ComboBox2.Name = "ComboBox2"
+        Me.ComboBox2.Size = New System.Drawing.Size(248, 21)
+        Me.ComboBox2.TabIndex = 129
+        '
+        'Label8
+        '
+        Me.Label8.AutoSize = True
+        Me.Label8.Location = New System.Drawing.Point(21, 189)
+        Me.Label8.Name = "Label8"
+        Me.Label8.Size = New System.Drawing.Size(36, 13)
+        Me.Label8.TabIndex = 128
+        Me.Label8.Text = "Album"
         '
         'DataGridView1
         '
         Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DataGridView1.Location = New System.Drawing.Point(17, 264)
+        Me.DataGridView1.Location = New System.Drawing.Point(17, 319)
         Me.DataGridView1.Name = "DataGridView1"
-        Me.DataGridView1.Size = New System.Drawing.Size(512, 143)
+        Me.DataGridView1.Size = New System.Drawing.Size(788, 101)
         Me.DataGridView1.TabIndex = 121
         '
         'Label9
@@ -328,35 +346,17 @@ Partial Class PhotoGallery
         Me.Label9.Font = New System.Drawing.Font("Segoe Print", 20.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label9.Location = New System.Drawing.Point(17, 9)
         Me.Label9.Name = "Label9"
-        Me.Label9.Size = New System.Drawing.Size(512, 51)
+        Me.Label9.Size = New System.Drawing.Size(788, 51)
         Me.Label9.TabIndex = 120
         Me.Label9.Text = "Gallery"
         Me.Label9.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'ComboBox2
-        '
-        Me.ComboBox2.FormattingEnabled = True
-        Me.ComboBox2.Items.AddRange(New Object() {"Church", "Soccer", "Family", "Christmas"})
-        Me.ComboBox2.Location = New System.Drawing.Point(94, 140)
-        Me.ComboBox2.Name = "ComboBox2"
-        Me.ComboBox2.Size = New System.Drawing.Size(148, 21)
-        Me.ComboBox2.TabIndex = 129
-        '
-        'Label8
-        '
-        Me.Label8.AutoSize = True
-        Me.Label8.Location = New System.Drawing.Point(38, 148)
-        Me.Label8.Name = "Label8"
-        Me.Label8.Size = New System.Drawing.Size(36, 13)
-        Me.Label8.TabIndex = 128
-        Me.Label8.Text = "Album"
         '
         'PhotoGallery
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.ClientSize = New System.Drawing.Size(555, 476)
+        Me.ClientSize = New System.Drawing.Size(817, 476)
         Me.Controls.Add(Me.Button8)
         Me.Controls.Add(Me.Button6)
         Me.Controls.Add(Me.Panel1)
