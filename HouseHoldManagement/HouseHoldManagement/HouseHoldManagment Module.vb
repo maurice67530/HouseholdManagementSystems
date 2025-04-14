@@ -5,7 +5,7 @@ Module HouseHoldManagment_Module
 
     Public currentUser As String ' Global variable for logged-in user
     Public Property conn As New OleDbConnection(connectionString)
-    Public Const connectionString As String = " Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Muhanelwa\Source\Repos\maurice67530\HouseholdManagementSystems\HMS.accdb;Persist Security Info=False;"
+    Public Const connectionString As String = " Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Mudzunga\Source\Repos\maurice67530\HouseholdManagementSystems\HMS.accdb;Persist Security Info=False;"
 
     Public Function GetConnection() As OleDbConnection
         Return New OleDbConnection(connectionString)
@@ -131,7 +131,40 @@ Module InventoryModule
             conn.Close()
         End Try
     End Sub
+    Public Sub FilterPhoto(FamilyMember As String) ', DateAdded As DateTime)
+        Dim taskTable As New DataTable
+        Dim conn As New OleDbConnection(connectionString)
+        Try
+            conn.Open()
+            Dim query As String = "SELECT * FROM Photos WHERE 1=1"
 
+            If Not String.IsNullOrEmpty(FamilyMember) Then
+                query &= " AND FamilyMember = @FamilyMember"
+            End If
+
+            'If Not String.IsNullOrEmpty(DateAdded) Then
+            '    query &= " AND DateAdded = @DateAdded"
+            'End If
+
+            Dim command As New OleDb.OleDbCommand(query, conn)
+
+            If Not String.IsNullOrEmpty(FamilyMember) Then
+                command.Parameters.AddWithValue("@FamilyMember", FamilyMember)
+            End If
+
+            'If Not String.IsNullOrEmpty(DateAdded) Then
+            '    command.Parameters.AddWithValue("@DateAdded", DateAdded)
+            'End If
+
+            Dim adapter As New OleDb.OleDbDataAdapter(command)
+            adapter.Fill(taskTable)
+            PhotoGallery.DataGridView1.DataSource = taskTable
+        Catch ex As Exception
+            MsgBox("Error filtering photo: " & ex.Message, MsgBoxStyle.Critical, "Database Error")
+        Finally
+            conn.Close()
+        End Try
+    End Sub
 
 End Module
 Module Xiluva
