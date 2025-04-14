@@ -158,7 +158,6 @@ Public Class Dashboard
 
     End Sub
 
-    Dim increment As Integer = 0
     Private Sub UpdateBudgetStatus()
 
         Dim query As String = "SELECT SUM(Amount) FROM Expense"
