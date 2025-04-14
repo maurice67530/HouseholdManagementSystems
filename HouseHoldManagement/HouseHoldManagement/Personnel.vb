@@ -88,10 +88,11 @@ Public Class Personnel
             MessageBox.Show("An error occurred: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         Finally
             ' Ensure the connection is closed even if an error occurs
-            If connec.State = ConnectionState.Open Then
-                connec.Close()
-            End If
+            'If connec.State = ConnectionState.Open Then
+            '    connec.Close()
+            'End If
         End Try
+        connec.Close()
         LoadData()
         ClearForm()
     End Sub
@@ -110,8 +111,9 @@ Public Class Personnel
         Catch ex As Exception
             MessageBox.Show("Failed to load data: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         Finally
-            connec.Close()
+
         End Try
+        connec.Close()
     End Sub
 
     Private Sub DataGridView1_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridView1.CellContentClick
@@ -170,8 +172,9 @@ Public Class Personnel
         Catch ex As Exception
             MessageBox.Show("Update failed: " & ex.Message)
         Finally
-            connec.Close()
+
         End Try
+        connec.Close()
     End Sub
 
     Private Sub BtnDelete_Click(sender As Object, e As EventArgs) Handles BtnDelete.Click
