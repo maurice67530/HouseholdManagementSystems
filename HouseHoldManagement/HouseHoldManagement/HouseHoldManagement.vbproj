@@ -10,7 +10,7 @@
     <RootNamespace>HouseHoldManagement</RootNamespace>
     <AssemblyName>HouseHoldManagement</AssemblyName>
     <FileAlignment>512</FileAlignment>
-    <MyType>WindowsForms</MyType>
+    <MyType>WindowsFormsWithCustomSubMain</MyType>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
   </PropertyGroup>
@@ -142,10 +142,10 @@
     <Compile Include="Notifications.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Personnel.Designer.vb">
-      <DependentUpon>Personnel.vb</DependentUpon>
+    <Compile Include="Person.Designer.vb">
+      <DependentUpon>Person.vb</DependentUpon>
     </Compile>
-    <Compile Include="Personnel.vb">
+    <Compile Include="Person.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="PhotoGallery.Designer.vb">
@@ -195,8 +195,8 @@
     <EmbeddedResource Include="Notifications.resx">
       <DependentUpon>Notifications.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Personnel.resx">
-      <DependentUpon>Personnel.vb</DependentUpon>
+    <EmbeddedResource Include="Person.resx">
+      <DependentUpon>Person.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PhotoGallery.resx">
       <DependentUpon>PhotoGallery.vb</DependentUpon>
