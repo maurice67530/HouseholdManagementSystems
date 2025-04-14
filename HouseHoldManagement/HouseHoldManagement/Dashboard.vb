@@ -103,9 +103,6 @@ Public Class Dashboard
            -Not Started:{notStarted}"
     End Sub
 
-
-
-
     Private Sub LoadUpcomingMeals()
         Dim query As String = "Select MealName, StartDate, Description FROM MealPlans WHERE EndDate >= StartDate"
 
@@ -160,7 +157,6 @@ Public Class Dashboard
         End Using
 
     End Sub
-
 
     Dim increment As Integer = 0
     Private Sub UpdateBudgetStatus()
