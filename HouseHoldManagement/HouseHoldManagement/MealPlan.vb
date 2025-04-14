@@ -49,7 +49,7 @@ Public Class MealPlan
     Private Sub MealPlan_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         ComboBox1.Items.AddRange(New String() {"<500", "500-1000", ">1000"})
         ComboBox2.Items.AddRange(New String() {"Daily", "Weekly", "Monthly"})
-        ComboBox3.Items.AddRange(New String() {"Noodles", "Chicken", "Bread"})
+
         lstMealSuggestions.Items.AddRange(New String() {"Noodles", "Chicken Curry", "Kota"})
         Dim tooltip As New ToolTip
         tooltip.SetToolTip(btnSave, "Save")
@@ -62,11 +62,29 @@ Public Class MealPlan
         tooltip.SetToolTip(btnSuggest, "Suggest")
         tooltip.SetToolTip(btnFilter, "Filter")
 
+        tooltip.SetToolTip(ComboBox3, "Select the meal")
         LoadMealPlanfromDatabase1()
         PopulateDataGridView()
 
+
+
+
+        ComboBox3.Items.Clear()
+        Using conn As New OleDbConnection(Module1.connectionString)
+            conn.Open()
+            ' Query to fetch all ItemName values from Inventory1
+            Dim fetchcommand As New OleDbCommand("SELECT ItemName FROM Inventory", conn)
+            Using Readers As OleDbDataReader = fetchcommand.ExecuteReader()
+                ' Add ItemName values to ComboBox1
+                While Readers.Read()
+                    ComboBox3.Items.Add(Readers("ItemName").ToString())
+                End While
+            End Using
+        End Using
+
         Module1.ClearControls(Me)
     End Sub
+
 
     Public Sub LoadMealPlanfromDatabase1()
         Try
