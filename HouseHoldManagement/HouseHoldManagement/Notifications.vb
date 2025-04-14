@@ -265,6 +265,52 @@ Public Class Notifications
             End While
             categoryReader.Close()
 
+
+            ' --- Check Meals That Can't Be Suggested ---
+            Dim mealCmd As New OleDbCommand("SELECT DISTINCT Meals FROM MealPlans", conn)
+            Dim mealReader As OleDbDataReader = mealCmd.ExecuteReader()
+
+            While mealReader.Read()
+                Dim mealName As String = mealReader("Meals").ToString()
+                Dim missingOrExpired As New List(Of String)
+
+                ' Get ingredients for this meal
+                Dim ingredientsCmd As New OleDbCommand("SELECT MealName FROM MealPlans WHERE Meals = ?", conn)
+                ingredientsCmd.Parameters.AddWithValue("?", mealName)
+                Dim ingredientsReader As OleDbDataReader = ingredientsCmd.ExecuteReader()
+
+                While ingredientsReader.Read()
+                    Dim ingredient As String = ingredientsReader("MealName").ToString()
+
+                    ' Check if ingredient exists in inventory
+                    Dim invCmd As New OleDbCommand("SELECT Quantity, ExpiryDate FROM Inventory WHERE ItemName = ?", conn)
+                    invCmd.Parameters.AddWithValue("?", ingredient)
+                    Dim invReader As OleDbDataReader = invCmd.ExecuteReader()
+
+                    If invReader.Read() Then
+                        Dim qty As Integer = Convert.ToInt32(invReader("Quantity"))
+                        Dim expiry As Date = Convert.ToDateTime(invReader("ExpiryDate"))
+
+                        If qty <= 0 OrElse expiry < Date.Today Then
+                            missingOrExpired.Add(ingredient)
+                        End If
+                    Else
+                        ' Ingredient not found in inventory at all
+                        missingOrExpired.Add(ingredient)
+                    End If
+
+                    invReader.Close()
+                End While
+                ingredientsReader.Close()
+
+                ' If any missing or expired ingredients, notify
+                If missingOrExpired.Count > 0 Then
+                    Dim message As String = "Meal '" & mealName & "' cannot be suggested due to expired or missing ingredients: " & String.Join(", ", missingOrExpired)
+                    summaryMessage &= message & vbCrLf
+                    notificationsToSave.Add(message)
+                End If
+            End While
+            mealReader.Close()
             ' --- If any alerts found, show and save them ---
             If summaryMessage <> "" Then
                 SystemSounds.Exclamation.Play()
@@ -282,6 +328,8 @@ Public Class Notifications
                             category = "Tasks"
                         ElseIf msg.StartsWith("High expense alert") Then
                             category = "Expense"
+                        ElseIf msg.StartsWith("Meal '") Then
+                            category = "MealPlan"
                         End If
                         AddNotification(conn, currentUser, msg, category, dateCreated, isRead)
                         Debug.WriteLine("Notification saved: " & msg)
