@@ -76,7 +76,7 @@ Partial Class PhotoGallery
         '
         Me.Label10.AutoSize = True
         Me.Label10.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
-        Me.Label10.Location = New System.Drawing.Point(11, 310)
+        Me.Label10.Location = New System.Drawing.Point(76, 189)
         Me.Label10.Name = "Label10"
         Me.Label10.Size = New System.Drawing.Size(10, 13)
         Me.Label10.TabIndex = 106
@@ -142,9 +142,9 @@ Partial Class PhotoGallery
         '
         Me.PictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.PictureBox1.ImageLocation = ""
-        Me.PictureBox1.Location = New System.Drawing.Point(79, 15)
+        Me.PictureBox1.Location = New System.Drawing.Point(14, 12)
         Me.PictureBox1.Name = "PictureBox1"
-        Me.PictureBox1.Size = New System.Drawing.Size(296, 198)
+        Me.PictureBox1.Size = New System.Drawing.Size(352, 200)
         Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
         Me.PictureBox1.TabIndex = 93
         Me.PictureBox1.TabStop = False
@@ -334,7 +334,7 @@ Partial Class PhotoGallery
         'DataGridView1
         '
         Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DataGridView1.Location = New System.Drawing.Point(17, 319)
+        Me.DataGridView1.Location = New System.Drawing.Point(17, 321)
         Me.DataGridView1.Name = "DataGridView1"
         Me.DataGridView1.Size = New System.Drawing.Size(788, 101)
         Me.DataGridView1.TabIndex = 121
