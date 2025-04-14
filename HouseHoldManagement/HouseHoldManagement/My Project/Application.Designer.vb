@@ -10,8 +10,6 @@
 
 Option Strict On
 Option Explicit On
-
-
 Namespace My
 
     'NOTE: This file is auto-generated; do not modify it directly.  To make changes,
@@ -29,10 +27,9 @@ Namespace My
             Me.SaveMySettingsOnExit = True
             Me.ShutDownStyle = Global.Microsoft.VisualBasic.ApplicationServices.ShutdownMode.AfterMainFormCloses
         End Sub
-
         <Global.System.Diagnostics.DebuggerStepThroughAttribute()>
         Protected Overrides Sub OnCreateMainForm()
-            Me.MainForm = Global.HouseHoldManagement.MealPlan
+            Me.MainForm = Global.HouseHoldManagement.PhotoGallery
         End Sub
     End Class
 End Namespace
