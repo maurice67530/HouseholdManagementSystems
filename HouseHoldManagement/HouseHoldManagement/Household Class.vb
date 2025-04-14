@@ -88,7 +88,6 @@ Public Class DailyTask
     Public Property AssignedTo As String
 End Class
 
-
 Public Class GroceryClass
         Public Property ItemID As String
         Public Property ItemName As String
@@ -99,8 +98,6 @@ Public Class GroceryClass
         Public Property Price As Integer
         Public Property Ispurchased As String
     End Class
-
-
 
 Public Class Person
     Public Property FirstName As String
