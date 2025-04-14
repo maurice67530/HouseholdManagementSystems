@@ -21,24 +21,7 @@ Public Class Personnel
     ' Create a ToolTip object
     Private toolTip As New ToolTip()
     Private toolTip1 As New ToolTip()
-    Private Sub Personnel_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        LoadData()
-        ' Initialize ToolTip properties (optional)
-        toolTip.AutoPopDelay = 5000
-        toolTip.InitialDelay = 500
-        toolTip.ReshowDelay = 200
-        toolTip.ShowAlways = True
-
-        toolTip1.SetToolTip(BtnBack, "Back")
-        toolTip1.SetToolTip(BtnAddpicture, "Add a Picture")
-        toolTip1.SetToolTip(BtnEdit, "Edit")
-        toolTip1.SetToolTip(BtnDelete, "Delete")
-        toolTip1.SetToolTip(BtnClear, "Clear")
-        toolTip1.SetToolTip(BtnDailyTasks, "Daily tasks")
-        toolTip1.SetToolTip(BtnSave, "Save")
-    End Sub
-
-    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles BtnSave.Click
+    Private Sub BtnSave_Click(sender As Object, e As EventArgs) Handles BtnSave.Click
         '' Get user input from TextBoxes
         'FirstName = TextBox1.Text
         'LastName = TextBox2.Text
@@ -141,7 +124,22 @@ Public Class Personnel
         ClearForm()
     End Sub
 
+    Private Sub Person_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        LoadData()
+        ' Initialize ToolTip properties (optional)
+        toolTip.AutoPopDelay = 5000
+        toolTip.InitialDelay = 500
+        toolTip.ReshowDelay = 200
+        toolTip.ShowAlways = True
 
+        toolTip1.SetToolTip(BtnBack, "Back")
+        toolTip1.SetToolTip(BtnAddpicture, "Add a Picture")
+        toolTip1.SetToolTip(BtnEdit, "Edit")
+        toolTip1.SetToolTip(BtnDelete, "Delete")
+        toolTip1.SetToolTip(BtnClear, "Clear")
+        toolTip1.SetToolTip(BtnDailyTasks, "Daily tasks")
+        toolTip1.SetToolTip(BtnSave, "Save")
+    End Sub
     ' Method to load data into the DataGridView
     Private Sub LoadData()
         Try
@@ -184,7 +182,6 @@ Public Class Personnel
     End Sub
 
     Private Sub BtnEdit_Click(sender As Object, e As EventArgs) Handles BtnEdit.Click
-
         Debug.WriteLine("Entering btnEdit")
 
         ' Ensure a row is selected in the DataGridView  
@@ -318,7 +315,6 @@ Public Class Personnel
             End If
         End If
     End Sub
-
     Private Sub ClearForm()
         TextBox8.Clear()
         TextBox1.Clear()
@@ -332,9 +328,17 @@ Public Class Personnel
         TextBox6.Clear()
         'ComboBox2.CLEAR
 
+        TextBox1.Text = ""
+        TextBox2.Text = ""
+        TextBox3.Text = ""
+        TextBox4.Text = ""
+        TextBox5.Text = ""
+        TextBox6.Text = ""
+        TextBox8.Text = ""
+        ComboBox1.Text = ""
+        ComboBox2.Text = ""
+        ComboBox3.Text = ""
     End Sub
-
-
 
     Private Sub BtnAddpicture_Click(sender As Object, e As EventArgs) Handles BtnAddpicture.Click
         OpenFileDialog1.Filter = "Bitmaps (*.bmp)|*.bmp| (*.jpg)|*.jpg"
@@ -360,16 +364,3 @@ Public Class Personnel
         ComboBox3.Text = ""
     End Sub
 End Class
-'Public Class Person
-'    Public Property FistName As String
-'    Public Property LastName As String
-'    Public Property Gender As String
-'    Public Property Email As String
-'    Public Property DateOfBirth As DateTime
-'    Public Property Role As String
-'    Public Property MaritalStatus As String
-'    Public Property postalcode As String
-'    Public Property Age As Integer
-'    Public Property Contact As Integer
-
-'End Class
