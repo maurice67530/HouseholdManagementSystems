@@ -397,6 +397,7 @@ Partial Class Personnel
         Me.TextBox8.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TextBox8.Location = New System.Drawing.Point(108, 61)
         Me.TextBox8.Name = "TextBox8"
+        Me.TextBox8.ReadOnly = True
         Me.TextBox8.Size = New System.Drawing.Size(268, 20)
         Me.TextBox8.TabIndex = 83
         '
