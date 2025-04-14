@@ -93,8 +93,6 @@ Public Class groceryForm
                 'Bind the data Table to the datagridview
                 DataGridView1.DataSource = dt
             End Using
-
-
         Catch ex As OleDbException
             Debug.WriteLine("Failed To Load")
             Debug.WriteLine($"Stack Trace: {ex.StackTrace}")
