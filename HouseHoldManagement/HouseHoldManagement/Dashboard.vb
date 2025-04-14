@@ -104,8 +104,6 @@ Public Class Dashboard
     End Sub
 
 
-
-
     Private Sub LoadUpcomingMeals()
         Dim query As String = "Select MealName, StartDate, Description FROM MealPlans WHERE EndDate >= StartDate"
 
