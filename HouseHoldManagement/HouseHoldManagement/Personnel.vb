@@ -28,7 +28,7 @@ Public Class Personnel
         Try
             Debug.WriteLine("User confirmed btnSubmit")
 
-            Using connect As New OleDbConnection(Module1.connectionString)
+            Using connect As New OleDbConnection(Rasta.connectionString)
                 connect.Open()
 
                 ' Update the table name if necessary  
@@ -373,3 +373,16 @@ Public Class Personnel
         ComboBox3.Text = ""
     End Sub
 End Class
+'Public Class Person
+'    Public Property FirstName As String
+'    Public Property LastName As String
+'    Public Property Gender As String
+'    Public Property Email As String
+'    Public Property DateOfBirth As DateTime
+'    Public Property Role As String
+'    Public Property MaritalStatus As String
+'    Public Property postalcode As String
+'    Public Property Age As Integer
+'    Public Property Contact As Integer
+
+'End Class
