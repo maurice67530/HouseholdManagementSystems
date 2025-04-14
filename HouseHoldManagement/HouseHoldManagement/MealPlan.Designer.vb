@@ -26,6 +26,7 @@ Partial Class MealPlan
         Me.DataGridView1 = New System.Windows.Forms.DataGridView()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.TextBox1 = New System.Windows.Forms.TextBox()
         Me.DateTimePicker2 = New System.Windows.Forms.DateTimePicker()
         Me.ComboBox1 = New System.Windows.Forms.ComboBox()
         Me.DateTimePicker1 = New System.Windows.Forms.DateTimePicker()
@@ -40,7 +41,7 @@ Partial Class MealPlan
         Me.Label11 = New System.Windows.Forms.Label()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.ComboBox2 = New System.Windows.Forms.ComboBox()
-        Me.ListBox1 = New System.Windows.Forms.ListBox()
+        Me.lstMealSuggestions = New System.Windows.Forms.ListBox()
         Me.Label6 = New System.Windows.Forms.Label()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.TextBox4 = New System.Windows.Forms.TextBox()
@@ -59,7 +60,6 @@ Partial Class MealPlan
         Me.btnFilter = New System.Windows.Forms.Button()
         Me.btnSort = New System.Windows.Forms.Button()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
-        Me.TextBox1 = New System.Windows.Forms.TextBox()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel2.SuspendLayout()
         CType(Me.NumericUpDown1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -107,6 +107,13 @@ Partial Class MealPlan
         Me.Panel2.Name = "Panel2"
         Me.Panel2.Size = New System.Drawing.Size(326, 267)
         Me.Panel2.TabIndex = 33
+        '
+        'TextBox1
+        '
+        Me.TextBox1.Location = New System.Drawing.Point(98, 237)
+        Me.TextBox1.Name = "TextBox1"
+        Me.TextBox1.Size = New System.Drawing.Size(199, 21)
+        Me.TextBox1.TabIndex = 26
         '
         'DateTimePicker2
         '
@@ -224,14 +231,14 @@ Partial Class MealPlan
         Me.ComboBox2.Size = New System.Drawing.Size(121, 23)
         Me.ComboBox2.TabIndex = 21
         '
-        'ListBox1
+        'lstMealSuggestions
         '
-        Me.ListBox1.FormattingEnabled = True
-        Me.ListBox1.ItemHeight = 15
-        Me.ListBox1.Location = New System.Drawing.Point(105, 53)
-        Me.ListBox1.Name = "ListBox1"
-        Me.ListBox1.Size = New System.Drawing.Size(120, 49)
-        Me.ListBox1.TabIndex = 26
+        Me.lstMealSuggestions.FormattingEnabled = True
+        Me.lstMealSuggestions.ItemHeight = 15
+        Me.lstMealSuggestions.Location = New System.Drawing.Point(105, 53)
+        Me.lstMealSuggestions.Name = "lstMealSuggestions"
+        Me.lstMealSuggestions.Size = New System.Drawing.Size(120, 49)
+        Me.lstMealSuggestions.TabIndex = 26
         '
         'Label6
         '
@@ -246,7 +253,7 @@ Partial Class MealPlan
         '
         Me.Panel1.BackColor = System.Drawing.SystemColors.ActiveCaption
         Me.Panel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        Me.Panel1.Controls.Add(Me.ListBox1)
+        Me.Panel1.Controls.Add(Me.lstMealSuggestions)
         Me.Panel1.Controls.Add(Me.Label6)
         Me.Panel1.Controls.Add(Me.TextBox4)
         Me.Panel1.Controls.Add(Me.Label3)
@@ -401,13 +408,6 @@ Partial Class MealPlan
         Me.btnSort.TabIndex = 37
         Me.btnSort.UseVisualStyleBackColor = True
         '
-        'TextBox1
-        '
-        Me.TextBox1.Location = New System.Drawing.Point(98, 237)
-        Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.Size = New System.Drawing.Size(97, 21)
-        Me.TextBox1.TabIndex = 26
-        '
         'MealPlan
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -453,7 +453,7 @@ Partial Class MealPlan
     Friend WithEvents DataGridView1 As DataGridView
     Friend WithEvents Label1 As Label
     Friend WithEvents Panel2 As Panel
-    Friend WithEvents ListBox1 As ListBox
+    Friend WithEvents lstMealSuggestions As ListBox
     Friend WithEvents Label6 As Label
     Friend WithEvents DateTimePicker2 As DateTimePicker
     Friend WithEvents DateTimePicker1 As DateTimePicker
