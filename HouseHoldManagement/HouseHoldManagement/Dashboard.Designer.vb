@@ -23,12 +23,12 @@ Partial Class Dashboard
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim ChartArea1 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
-        Dim Legend1 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
-        Dim Series1 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
-        Dim ChartArea2 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
-        Dim Legend2 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
-        Dim Series2 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
+        Dim ChartArea23 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
+        Dim Legend23 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
+        Dim Series23 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
+        Dim ChartArea24 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
+        Dim Legend24 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
+        Dim Series24 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Dashboard))
         Me.Chart1 = New System.Windows.Forms.DataVisualization.Charting.Chart()
         Me.Chart2 = New System.Windows.Forms.DataVisualization.Charting.Chart()
@@ -52,38 +52,43 @@ Partial Class Dashboard
         Me.Button4 = New System.Windows.Forms.Button()
         Me.Button3 = New System.Windows.Forms.Button()
         Me.Button2 = New System.Windows.Forms.Button()
+        Me.ListBox2 = New System.Windows.Forms.ListBox()
+        Me.Label3 = New System.Windows.Forms.Label()
+        Me.Label7 = New System.Windows.Forms.Label()
+        Me.Label8 = New System.Windows.Forms.Label()
         CType(Me.Chart1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.Chart2, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.FlowLayoutPanel2.SuspendLayout()
         Me.SuspendLayout()
         '
         'Chart1
         '
-        ChartArea1.Name = "ChartArea1"
-        Me.Chart1.ChartAreas.Add(ChartArea1)
-        Legend1.Name = "Legend1"
-        Me.Chart1.Legends.Add(Legend1)
+        ChartArea23.Name = "ChartArea1"
+        Me.Chart1.ChartAreas.Add(ChartArea23)
+        Legend23.Name = "Legend1"
+        Me.Chart1.Legends.Add(Legend23)
         Me.Chart1.Location = New System.Drawing.Point(482, 82)
         Me.Chart1.Name = "Chart1"
-        Series1.ChartArea = "ChartArea1"
-        Series1.Legend = "Legend1"
-        Series1.Name = "Expenses"
-        Me.Chart1.Series.Add(Series1)
+        Series23.ChartArea = "ChartArea1"
+        Series23.Legend = "Legend1"
+        Series23.Name = "Expenses"
+        Me.Chart1.Series.Add(Series23)
         Me.Chart1.Size = New System.Drawing.Size(394, 364)
         Me.Chart1.TabIndex = 0
         Me.Chart1.Text = "Chart1"
         '
         'Chart2
         '
-        ChartArea2.Name = "ChartArea1"
-        Me.Chart2.ChartAreas.Add(ChartArea2)
-        Legend2.Name = "Legend1"
-        Me.Chart2.Legends.Add(Legend2)
+        ChartArea24.Name = "ChartArea1"
+        Me.Chart2.ChartAreas.Add(ChartArea24)
+        Legend24.Name = "Legend1"
+        Me.Chart2.Legends.Add(Legend24)
         Me.Chart2.Location = New System.Drawing.Point(482, 469)
         Me.Chart2.Name = "Chart2"
-        Series2.ChartArea = "ChartArea1"
-        Series2.Legend = "Legend1"
-        Series2.Name = "Chores"
-        Me.Chart2.Series.Add(Series2)
+        Series24.ChartArea = "ChartArea1"
+        Series24.Legend = "Legend1"
+        Series24.Name = "Chores"
+        Me.Chart2.Series.Add(Series24)
         Me.Chart2.Size = New System.Drawing.Size(394, 354)
         Me.Chart2.TabIndex = 1
         Me.Chart2.Text = "Chart2"
@@ -165,7 +170,9 @@ Partial Class Dashboard
         '
         'FlowLayoutPanel2
         '
-        Me.FlowLayoutPanel2.Location = New System.Drawing.Point(932, 248)
+        Me.FlowLayoutPanel2.Controls.Add(Me.Label8)
+        Me.FlowLayoutPanel2.Controls.Add(Me.ListBox2)
+        Me.FlowLayoutPanel2.Location = New System.Drawing.Point(904, 82)
         Me.FlowLayoutPanel2.Name = "FlowLayoutPanel2"
         Me.FlowLayoutPanel2.Size = New System.Drawing.Size(221, 459)
         Me.FlowLayoutPanel2.TabIndex = 30
@@ -175,7 +182,7 @@ Partial Class Dashboard
         Me.Button10.BackColor = System.Drawing.SystemColors.ActiveCaption
         Me.Button10.ForeColor = System.Drawing.SystemColors.ControlText
         Me.Button10.Image = CType(resources.GetObject("Button10.Image"), System.Drawing.Image)
-        Me.Button10.Location = New System.Drawing.Point(106, 736)
+        Me.Button10.Location = New System.Drawing.Point(127, 726)
         Me.Button10.Name = "Button10"
         Me.Button10.Size = New System.Drawing.Size(158, 133)
         Me.Button10.TabIndex = 18
@@ -279,12 +286,49 @@ Partial Class Dashboard
         Me.Button2.TextAlign = System.Drawing.ContentAlignment.TopCenter
         Me.Button2.UseVisualStyleBackColor = False
         '
+        'ListBox2
+        '
+        Me.ListBox2.FormattingEnabled = True
+        Me.ListBox2.Location = New System.Drawing.Point(48, 3)
+        Me.ListBox2.Name = "ListBox2"
+        Me.ListBox2.Size = New System.Drawing.Size(120, 147)
+        Me.ListBox2.TabIndex = 31
+        '
+        'Label3
+        '
+        Me.Label3.AutoSize = True
+        Me.Label3.Location = New System.Drawing.Point(0, 0)
+        Me.Label3.Name = "Label3"
+        Me.Label3.Size = New System.Drawing.Size(39, 13)
+        Me.Label3.TabIndex = 32
+        Me.Label3.Text = "Label3"
+        '
+        'Label7
+        '
+        Me.Label7.AutoSize = True
+        Me.Label7.Location = New System.Drawing.Point(0, 0)
+        Me.Label7.Name = "Label7"
+        Me.Label7.Size = New System.Drawing.Size(39, 13)
+        Me.Label7.TabIndex = 33
+        Me.Label7.Text = "Label7"
+        '
+        'Label8
+        '
+        Me.Label8.AutoSize = True
+        Me.Label8.Location = New System.Drawing.Point(3, 0)
+        Me.Label8.Name = "Label8"
+        Me.Label8.Size = New System.Drawing.Size(39, 13)
+        Me.Label8.TabIndex = 34
+        Me.Label8.Text = "Label8"
+        '
         'Dashboard
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.ClientSize = New System.Drawing.Size(1284, 881)
+        Me.ClientSize = New System.Drawing.Size(1028, 749)
+        Me.Controls.Add(Me.Label7)
+        Me.Controls.Add(Me.Label3)
         Me.Controls.Add(Me.Button3)
         Me.Controls.Add(Me.ProgressBar2)
         Me.Controls.Add(Me.FlowLayoutPanel2)
@@ -310,6 +354,8 @@ Partial Class Dashboard
         Me.Text = " "
         CType(Me.Chart1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.Chart2, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.FlowLayoutPanel2.ResumeLayout(False)
+        Me.FlowLayoutPanel2.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -337,4 +383,8 @@ Partial Class Dashboard
     Friend WithEvents Label5 As Label
     Friend WithEvents Label6 As Label
     Friend WithEvents FlowLayoutPanel2 As FlowLayoutPanel
+    Friend WithEvents ListBox2 As ListBox
+    Friend WithEvents Label3 As Label
+    Friend WithEvents Label7 As Label
+    Friend WithEvents Label8 As Label
 End Class

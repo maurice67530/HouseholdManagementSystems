@@ -186,50 +186,34 @@ Public Class Notifications
         Dim summaryMessage As String = ""
         Dim notificationsToSave As New List(Of String)
 
+
         Try
-            conn.Open()
+                conn.Open()
             ' ========== INVENTORY CHECK ==========
-            Dim inventoryCmd As New OleDbCommand("SELECT ItemName, Quantity, ExpiryDate FROM Inventory", conn)
+            Dim inventoryCmd As New OleDbCommand("SELECT ItemName, Quantity FROM Inventory", conn)
             Dim inventoryReader As OleDbDataReader = inventoryCmd.ExecuteReader()
 
-            While inventoryReader.Read()
-                Dim itemName As String = inventoryReader("ItemName").ToString()
-                Dim quantity As Integer
-                Dim expiryDate As Date
 
-                ' LOW INVENTORY
-                If Integer.TryParse(inventoryReader("Quantity").ToString(), quantity) AndAlso quantity <= 60 Then
-                    Dim message As String = "Low inventory: " & itemName & " only has " & quantity.ToString()
-                    If Not NotificationExists(conn, message) Then
-                        AddNotification(conn, currentUser, message, "Inventory", dateCreated, isRead)
-                        Debug.WriteLine("Notification added for Inventory: " & message)
-                    End If
-                End If
+            Dim itemName As String = inventoryReader("ItemName").ToString()
+                    Dim quantity As Integer
 
-                ' EXPIRATION CHECK
-                If Date.TryParse(inventoryReader("ExpiryDate").ToString(), expiryDate) Then
-                    ' EXPIRED
-                    If expiryDate < Date.Today Then
-                        Dim message As String = "Expired item: " & itemName & " expired on " & expiryDate.ToShortDateString()
+
+            ' LOW INVENTORY
+            If Integer.TryParse(inventoryReader("Quantity").ToString(), quantity) AndAlso quantity <= 60 Then
+                        Dim message As String = "Low inventory: " & itemName & " only has " & quantity.ToString()
                         If Not NotificationExists(conn, message) Then
                             AddNotification(conn, currentUser, message, "Inventory", dateCreated, isRead)
-                            Debug.WriteLine("Notification added for Expired item: " & message)
-                        End If
-
-                        ' UPCOMING EXPIRY
-                    ElseIf expiryDate <= Date.Today.AddDays(3) Then
-                        Dim message As String = "Upcoming expiry: " & itemName & " expires on " & expiryDate.ToShortDateString()
-                        If Not NotificationExists(conn, message) Then
-                            AddNotification(conn, currentUser, message, "Inventory", dateCreated, isRead)
-                            Debug.WriteLine("Notification added for Upcoming Expiry: " & message)
+                            Debug.WriteLine("Notification added for Inventory: " & message)
                         End If
                     End If
-                End If
-            End While
-            inventoryReader.Close()
 
-            ' --- Check Overdue Chores ---
-            Dim choreCmd As New OleDbCommand("SELECT Title, DueDate FROM Chores", conn)
+
+
+
+
+
+                ' --- Check Overdue Chores ---
+                Dim choreCmd As New OleDbCommand("SELECT Title, DueDate FROM Chores", conn)
             Dim choreReader As OleDbDataReader = choreCmd.ExecuteReader()
             While choreReader.Read()
                 Dim title As String = choreReader("Title").ToString()
@@ -342,7 +326,7 @@ Public Class Notifications
             ' --- If any alerts found, show and save them ---
             If summaryMessage <> "" Then
                 SystemSounds.Exclamation.Play()
-                MessageBox.Show(summaryMessage, "Smart Household Alerts", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                MessageBox.Show(summaryMessage, "Household Alerts", MessageBoxButtons.OK, MessageBoxIcon.Information)
 
                 ' Save notifications shown in message box
                 For Each msg In notificationsToSave

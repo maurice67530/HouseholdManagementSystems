@@ -2,13 +2,14 @@
 Imports System.IO
 Imports System.Data.OleDb
 Public Class Dashboard
-    Public Const connectionString As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source= C:\Users\Aousy\Source\Repos\maurice67530\HouseholdManagementSystems\HMS.accdb"
+    Public Const connectionString As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Mulanga\Source\Repos\maurice67530\HouseholdManagementSystems\HMS.accdb"
+
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
         Inventory.ShowDialog()
     End Sub
 
     Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
-        'Task .ShowDialog()
+        Task_Management.ShowDialog()
     End Sub
 
     Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
@@ -24,7 +25,7 @@ Public Class Dashboard
     End Sub
 
     Private Sub Button7_Click(sender As Object, e As EventArgs) Handles Button7.Click
-        'Grocery.ShowDialog()
+        '  Grocery.ShowDialog()
     End Sub
 
     Private Sub Button8_Click(sender As Object, e As EventArgs) Handles Button8.Click
@@ -32,20 +33,20 @@ Public Class Dashboard
     End Sub
 
     Private Sub Button9_Click(sender As Object, e As EventArgs) Handles Button9.Click
-        ' photo.ShowDialog()
+        PhotoGallery.ShowDialog()
     End Sub
 
     Private Sub Button6_Click(sender As Object, e As EventArgs) Handles Button6.Click
         MealPlan.ShowDialog()
     End Sub
-
     Private Sub Button10_Click(sender As Object, e As EventArgs) Handles Button10.Click
         Notifications.ShowDialog()
     End Sub
     Private Sub Dashboard_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
         LoadUpcomingMeals()
         LoadChoresStatus()
-        '  PopulateListboxFromChores(ListBox1)
+        PopulateListboxFromChores(ListBox2)
         'LoadExpensesData()
         LoadChartData()
         SetupCharts()
@@ -61,11 +62,10 @@ Public Class Dashboard
         ToolTip1.SetToolTip(Button8, "Person")
         ToolTip1.SetToolTip(Button9, "Photos")
         ToolTip1.SetToolTip(Button10, "Notification")
-
     End Sub
     'Set up Budget Status And Chores Status charts
     Private Sub SetupCharts()
-        ' Chores Status - Pie Chart
+        'Chores Status - Pie Chart
         Chart2.Series.Clear()
         Chart2.Series.Add("Chores")
         Chart2.Series("Chores").Points.AddXY("Completed", 0)
@@ -91,18 +91,23 @@ Public Class Dashboard
                         Case "Not Started"
                             notStarted = Convert.ToInt32(reader(1))
                     End Select
+
                 End While
+
             End Using
+
         End Using
-        Label2.Text = $"   Chores: 
+
+        Label8.Text = $"   Chores: 
            -Completed: {completed}
 
            -In Progress:{inProgress}
 
            -Not Started:{notStarted}"
-    End Sub
 
+    End Sub
     Private Sub LoadUpcomingMeals()
+
         Dim query As String = "Select MealName, StartDate, Description FROM MealPlans WHERE EndDate >= StartDate"
 
         ' Fetch data from the database
@@ -157,7 +162,6 @@ Public Class Dashboard
 
     End Sub
 
-    Dim increment As Integer = 0
     Private Sub UpdateBudgetStatus()
 
         Dim query As String = "SELECT SUM(Amount) FROM Expense"
@@ -174,11 +178,12 @@ Public Class Dashboard
             ' Update a progress bar if you have one
             ProgressBar2.Value = CInt((totalExpenses / budget) * 100)
         End Using
-    End Sub
 
+    End Sub
     Private Sub LoadChartData()
+
         ' update this connection string based  on my database confirguration
-        Dim connectionString As String = "Provider = Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Aousy\Source\Repos\maurice67530\HouseholdManagementSystems\HMS.accdb"
+        Dim connectionString As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Mulanga\Source\Repos\maurice67530\HouseholdManagementSystems\HMS.accdb"
         Dim query As String = "SELECT [Amount], [Frequency] FROM [Expense]"
 
         Using conn As New OleDbConnection(connectionString)
@@ -197,10 +202,54 @@ Public Class Dashboard
                     Chart1.Series("Expenses").Points.AddXY(personnel, Budget)
 
                 End While
+
             End Using
+
         End Using
+
         Chart1.ChartAreas(0).AxisX.Title = "Frequency"
+
         Chart1.ChartAreas(0).AxisY.Title = "Amount"
+    End Sub
+
+    Public Sub PopulateListboxFromChores(ByRef Listbox As ListBox)
+        Dim conn As New OleDbConnection(connectionString)
+        Try
+            Debug.WriteLine("populate listbox successful")
+            'open the database connection
+            conn.Open()
+
+            'retrieve the firstname and surname columns from the personaldetails tabel
+            Dim query As String = "SELECT ID, Status,Title FROM Chores"
+            Dim cmd As New OleDbCommand(query, conn)
+            Dim reader As OleDbDataReader = cmd.ExecuteReader()
+
+            'bind the retrieved data to the combobox
+            ListBox2.Items.Clear()
+            While reader.Read()
+                ListBox2.Items.Add($"{reader("ID")} {reader("Status")} {reader("Title")}")
+            End While
+
+            'close the database
+            reader.Close()
+        Catch ex As Exception
+            'handle any exeptions that may occur  
+            Debug.WriteLine("failed to populate ListBox")
+            Debug.WriteLine($"Stack Trace: {ex.StackTrace}")
+            MessageBox.Show($"Error: {ex.StackTrace}")
+
+        Finally
+
+            'close the database connection
+            If conn.State = ConnectionState.Open Then
+                conn.Close()
+            End If
+        End Try
+
+    End Sub
+
+    Private Sub FlowLayoutPanel2_Paint(sender As Object, e As PaintEventArgs) Handles FlowLayoutPanel2.Paint
+
     End Sub
     'Private photoList As New List(Of String)() ' List to store photo paths
     'Private currentPhotoIndex As Integer = 0
