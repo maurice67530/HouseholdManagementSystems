@@ -83,6 +83,7 @@ Public Class Notifications
         Timer1.Start()
         Timer1.Interval = 4000
 
+
         ToolTip1.SetToolTip(Button1, "Mark As Read")
         ToolTip1.SetToolTip(Button2, "Clear Notification")
         ToolTip1.SetToolTip(Button3, "Refresh")
@@ -266,8 +267,6 @@ Public Class Notifications
             taskReader.Close()
 
 
-
-
             ' --- Check Meals That Can't Be Suggested ---
             Dim mealCmd As New OleDbCommand("SELECT  Meals FROM MealPlans", conn)
             Dim mealReader As OleDbDataReader = mealCmd.ExecuteReader()
@@ -314,9 +313,6 @@ Public Class Notifications
             End While
             mealReader.Close()
 
-
-
-
             ' --- Check Expenses Exceeding 30000 by Category ---
             Dim categoryCmd As New OleDbCommand("SELECT Category FROM Expense", conn)
             Dim categoryReader As OleDbDataReader = categoryCmd.ExecuteReader()
@@ -335,7 +331,7 @@ Public Class Notifications
                 End While
                 amountReader.Close()
 
-                If totalAmount > 30000D Then
+                If totalAmount > 10000D Then
                     Dim message As String = "High expense alert: " & category & " has exceeded R" & totalAmount.ToString("N2")
                     summaryMessage &= message & vbCrLf
                     notificationsToSave.Add(message)
@@ -369,8 +365,6 @@ Public Class Notifications
                     End If
                 Next
             End If
-
-
 
             ' --- Update Label2 with unread notifications count ---
             Dim countCmd As New OleDbCommand("SELECT COUNT(*) FROM Notifications WHERE IsRead = 'No'", conn)
@@ -408,10 +402,6 @@ Public Class Notifications
     End Function
 
     Private Sub AddNotification(conn As OleDbConnection, userID As String, message As String, category As String, dateCreated As String, isRead As String)
-
-
-
-
         Try
             Dim insertQuery As String = "INSERT INTO Notifications ([UserID], [Message], [DateCreated], [Category], [IsRead]) VALUES (?, ?, ?, ?, ?)"
 
