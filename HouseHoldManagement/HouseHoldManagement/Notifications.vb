@@ -193,7 +193,7 @@ Public Class Notifications
             While inventoryReader.Read()
                 Dim itemName As String = inventoryReader("ItemName").ToString()
                 Dim quantity As Integer
-                If Integer.TryParse(inventoryReader("Quantity").ToString(), quantity) AndAlso quantity <= 60 Then
+                If Integer.TryParse(inventoryReader("Quantity").ToString(), quantity) AndAlso quantity <= 5 Then
                     Dim message As String = "Low inventory: " & itemName & " only has " & quantity.ToString()
                     summaryMessage &= message & vbCrLf
                     notificationsToSave.Add(message)
@@ -353,11 +353,5 @@ Public Class Notifications
             Return count > 0
         End Using
     End Function
-
-
-
-
-
-
 
 End Class
