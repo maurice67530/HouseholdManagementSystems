@@ -181,24 +181,49 @@ Public Class Notifications
         Dim currentUser As String = GetCurrentUser(conn)
         Dim dateCreated As String = Date.Now.ToString("yyyy-MM-dd HH:mm:ss")
         Dim isRead As String = "No"
+        Dim UserId As String = ""
         Dim summaryMessage As String = ""
         Dim notificationsToSave As New List(Of String)
 
         Try
             conn.Open()
-
-            ' --- Check Inventory (Quantity <= 60) ---
-            Dim inventoryCmd As New OleDbCommand("SELECT ItemName, Quantity FROM Inventory", conn)
+            ' --- Check Inventory (Low Stock, Expired, Expiring Soon) ---
+            Dim inventoryCmd As New OleDbCommand("SELECT ItemName, Quantity, ExpiryDate FROM Inventory", conn)
             Dim inventoryReader As OleDbDataReader = inventoryCmd.ExecuteReader()
+
             While inventoryReader.Read()
                 Dim itemName As String = inventoryReader("ItemName").ToString()
+                Dim saveCategory As String = "Inventory"
                 Dim quantity As Integer
-                If Integer.TryParse(inventoryReader("Quantity").ToString(), quantity) AndAlso quantity <= 5 Then
-                    Dim message As String = "Low inventory: " & itemName & " only has " & quantity.ToString()
+                Dim expiryDate As Date
+                Dim message As String = ""
+
+                ' Check quantity
+                If Integer.TryParse(inventoryReader("Quantity").ToString(), quantity) Then
+                    If quantity = 0 Then
+                        message = "Out of stock: " & itemName
+                    ElseIf quantity <= 5 Then
+                        message = "Low inventory: " & itemName & " only has " & quantity.ToString()
+                    End If
+                End If
+
+                ' Check expiry
+                If Date.TryParse(inventoryReader("ExpiryDate").ToString(), expiryDate) Then
+                    If expiryDate < Date.Today Then
+                        message = "Expired item: " & itemName & " expired on " & expiryDate.ToShortDateString()
+                    ElseIf expiryDate <= Date.Today.AddDays(5) Then
+                        message = "Expiring soon: " & itemName & " will expire on " & expiryDate.ToShortDateString()
+                    End If
+                End If
+
+                If message <> "" Then
                     summaryMessage &= message & vbCrLf
                     notificationsToSave.Add(message)
+
+
                 End If
             End While
+
             inventoryReader.Close()
 
             ' --- Check Overdue Chores ---
@@ -238,6 +263,58 @@ Public Class Notifications
                 End If
             End While
             taskReader.Close()
+
+
+
+
+            ' --- Check Meals That Can't Be Suggested ---
+            Dim mealCmd As New OleDbCommand("SELECT  Meals FROM MealPlans", conn)
+            Dim mealReader As OleDbDataReader = mealCmd.ExecuteReader()
+
+            While mealReader.Read()
+                Dim mealName As String = mealReader("Meals").ToString()
+                Dim missingOrExpired As New List(Of String)
+
+                ' Get ingredients for this meal
+                Dim ingredientsCmd As New OleDbCommand("SELECT MealName FROM MealPlans WHERE MealName = ?", conn)
+                ingredientsCmd.Parameters.AddWithValue("?", mealName)
+                Dim ingredientsReader As OleDbDataReader = ingredientsCmd.ExecuteReader()
+
+                While ingredientsReader.Read()
+                    Dim ingredient As String = ingredientsReader("MealName").ToString()
+
+                    ' Check if ingredient exists in inventory
+                    Dim invCmd As New OleDbCommand("SELECT  ItemName, Quantity, ExpiryDate FROM Inventory WHERE ItemName = ?", conn)
+                    invCmd.Parameters.AddWithValue("?", ingredient)
+                    Dim invReader As OleDbDataReader = invCmd.ExecuteReader()
+
+                    If invReader.Read() Then
+                        Dim qty As Integer = Convert.ToInt32(invReader("Quantity"))
+                        Dim expiry As Date = Convert.ToDateTime(invReader("ExpiryDate"))
+
+                        If qty <= 0 OrElse expiry < Date.Today Then
+                            missingOrExpired.Add(ingredient)
+                        End If
+                    Else
+                        ' Ingredient not found in inventory at all
+                        missingOrExpired.Add(ingredient)
+                    End If
+
+                    invReader.Close()
+                End While
+                ingredientsReader.Close()
+
+                ' If any missing or expired ingredients, notify
+                If missingOrExpired.Count > 0 Then
+                    Dim message As String = "Meal '" & mealName & "' cannot be suggested due to expired or missing ingredients: " & String.Join(", ", missingOrExpired)
+                    summaryMessage &= message & vbCrLf
+                    notificationsToSave.Add(message)
+                End If
+            End While
+            mealReader.Close()
+
+
+
 
             ' --- Check Expenses Exceeding 30000 by Category ---
             Dim categoryCmd As New OleDbCommand("SELECT Category FROM Expense", conn)
@@ -282,12 +359,25 @@ Public Class Notifications
                             category = "Tasks"
                         ElseIf msg.StartsWith("High expense alert") Then
                             category = "Expense"
+                        ElseIf msg.StartsWith("Meal '") Then
+                            category = "MealPlan"
+
                         End If
                         AddNotification(conn, currentUser, msg, category, dateCreated, isRead)
                         Debug.WriteLine("Notification saved: " & msg)
                     End If
                 Next
             End If
+
+
+
+
+
+
+
+
+
+
 
             ' --- Update Label2 with unread notifications count ---
             Dim countCmd As New OleDbCommand("SELECT COUNT(*) FROM Notifications WHERE IsRead = 'No'", conn)
@@ -325,6 +415,10 @@ Public Class Notifications
     End Function
 
     Private Sub AddNotification(conn As OleDbConnection, userID As String, message As String, category As String, dateCreated As String, isRead As String)
+
+
+
+
         Try
             Dim insertQuery As String = "INSERT INTO Notifications ([UserID], [Message], [DateCreated], [Category], [IsRead]) VALUES (?, ?, ?, ?, ?)"
 
