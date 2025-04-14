@@ -49,7 +49,7 @@ Public Class MealPlan
     Private Sub MealPlan_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         ComboBox1.Items.AddRange(New String() {"<500", "500-1000", ">1000"})
         ComboBox2.Items.AddRange(New String() {"Daily", "Weekly", "Monthly"})
-        ComboBox3.Items.AddRange(New String() {"Noodles", "Chicken", "Bread"})
+
         lstMealSuggestions.Items.AddRange(New String() {"Noodles", "Chicken Curry", "Kota"})
         Dim tooltip As New ToolTip
         tooltip.SetToolTip(btnSave, "Save")
@@ -62,11 +62,71 @@ Public Class MealPlan
         tooltip.SetToolTip(btnSuggest, "Suggest")
         tooltip.SetToolTip(btnFilter, "Filter")
 
+        tooltip.SetToolTip(ComboBox3, "Select the meal")
         LoadMealPlanfromDatabase1()
         PopulateDataGridView()
 
+
+
+
+        ComboBox3.Items.Clear()
+        Using conn As New OleDbConnection(Module1.connectionString)
+            conn.Open()
+            ' Query to fetch all ItemName values from Inventory1
+            Dim fetchcommand As New OleDbCommand("SELECT ItemName FROM Inventory", conn)
+            Using Readers As OleDbDataReader = fetchcommand.ExecuteReader()
+                ' Add ItemName values to ComboBox1
+                While Readers.Read()
+                    ComboBox2.Items.Add(Readers("ItemName").ToString())
+                End While
+            End Using
+        End Using
+
         Module1.ClearControls(Me)
     End Sub
+    'Public Sub PopulatecomboBoxFromDatabase(ByRef listBox As ListBox)
+    '    Try
+    '        Dim conn As New OleDbConnection(Module1.connectionString)
+
+    '        ' 1. Open the database connection  
+    '        conn.Open()
+
+    '        ' 2. Retrieve the FirstName and LastName columns from the PersonalDetails table  
+
+    '        ' Explicit, targeted column selection  
+    '        Dim query As String = "SELECT  ItemName FROM Inventory"
+    '        Dim cmd As New OleDbCommand(query, conn)
+    '        Dim reader As OleDbDataReader = cmd.ExecuteReader()
+
+    '        ' 3. Bind the retrieved data to the combobox  
+    '        ComboBox3.Items.Clear()
+    '        'While reader.Read()
+    '        '            ListBox1.Items.Add(reader("ItemNames").ToString() & " - " & reader("Quantity").ToString())
+    '        '        End While
+    '        While reader.Read()
+    '            ComboBox3.Items.Add($"{reader("ItemName")}")
+    '        End While
+    '        Debug.WriteLine("ListBox From Database populated successful")
+    '        ' 4. Close the database connection  
+    '        reader.Close()
+    '    Catch ex As FormatException
+    '        Debug.WriteLine("Error Populating ListBox From Database")
+    '        Debug.WriteLine($"Stack Trace: {ex.StackTrace}")
+    '        MessageBox.Show("Please select the data in the dataGridView and edit.", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+    '    Catch ex As Exception
+    '        Debug.WriteLine($"Unexpected error in populating the ListBox: {ex.Message}")
+    '        Debug.WriteLine($"Stack Trace: {ex.StackTrace}")
+    '        MessageBox.Show("An unexpected error occured during population.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+
+    '        MessageBox.Show($"Error: {ex.Message}")
+    '    Finally
+    '        ' Close the database connection  
+    '        If conn.State = ConnectionState.Open Then
+    '            conn.Close()
+    '        End If
+    '    End Try
+
+    'End Sub
 
     Public Sub LoadMealPlanfromDatabase1()
         Try
