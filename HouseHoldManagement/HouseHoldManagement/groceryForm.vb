@@ -23,7 +23,6 @@ Public Class groceryForm
         Grocery.Add(Item)
 
 
-
         Debug.WriteLine("Entering btnSubmit")
 
         Using conn As New OleDbConnection(Rotondwa.connectionString)
@@ -60,7 +59,7 @@ Public Class groceryForm
             TextBox2.Text = selectedRow.Cells("Quantity").Value.ToString()
             ComboBox2.SelectedItem = selectedRow.Cells("Unit").Value.ToString()
             TextBox6.Text = selectedRow.Cells("Category").Value.ToString(
-                TextBox5.Text = selectedRow.Cells("Price").Value.ToString())
+            TextBox5.Text = selectedRow.Cells("Price").Value.ToString())
             ComboBox1.SelectedItem = selectedRow.Cells("Ispurchased").Value.ToString()
             DateTimePicker1.Value = selectedRow.Cells("ExpiryDate").Value.ToString
 
@@ -70,14 +69,9 @@ Public Class groceryForm
             btnSubmit.Enabled = False
             LoadGroceryItemDataFromDatabase()
 
-
         End If
     End Sub
     Public Sub LoadGroceryItemDataFromDatabase()
-
-
-
-
 
         Try
             Debug.WriteLine("Loading successfully")
@@ -119,7 +113,6 @@ Public Class groceryForm
         'AlertExpiringGroceries()
         Timer1.Interval = 6000
         Timer1.Start()
-
 
     End Sub
 
@@ -319,34 +312,12 @@ Public Class groceryForm
             MsgBox("No groceries have expired.", MsgBoxStyle.Information, "Expiry Check")
         End If
     End Sub
+    'Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
+    '    ToolTip1.SetToolTip(Button3, "DashBoard")
 
-    Private Sub DataGridView1_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridView1.CellContentClick
-
-        'If DataGridView1.SelectedRows.Count > 0 Then
-        '    Dim selectedRow As DataGridViewRow = DataGridView1.SelectedRows(0)
-
-        '    ' Load the data from the selected row into UI controls
-        '    TextBox1.Text = selectedRow.Cells("ItemName").Value.ToString()
-        '    TextBox2.Text = selectedRow.Cells("Quantity").Value.ToString()
-        '    ComboBox1.SelectedItem = selectedRow.Cells("Unit").Value.ToString()
-        '    TextBox6.Text = selectedRow.Cells("Category").Value.ToString(
-        '        TextBox5.Text = selectedRow.Cells("Price").Value.ToString())
-        '    TextBox6.Text = selectedRow.Cells("Ispurchased").Value.ToString()
-        '    DateTimePicker1.Value = selectedRow.Cells("ExpiryDate").Value.ToString
-
-
-        '    'Debug.WriteLine("Existing DataGridView1_SelectionChange")
-        '    ' Enable/disable the buttons based on the selected person  
-        '    btnSubmit.Enabled = False
-        '    LoadGroceryItemDataFromDatabase()
-
-
-        'End If
-    End Sub
-
-
+    'End Sub
 
     Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
-        ToolTip1.SetToolTip(Button3, "DashBoard")
+
     End Sub
 End Class
