@@ -214,13 +214,13 @@ Public Class MealPlan
             conn.Open()
 
             ' Get all meal recipes
-            Dim mealQuery As String = "SELECT MealName, Meals FROM MealPlans"
+            Dim mealQuery As String = "SELECT MealName,Ingredients FROM Recipes"
             Dim mealCommand As New OleDb.OleDbCommand(mealQuery, conn)
             Dim mealReader As OleDb.OleDbDataReader = mealCommand.ExecuteReader()
 
             While mealReader.Read()
                 Dim mealName As String = mealReader("MealName").ToString()
-                Dim requiredIngredients As String() = mealReader("Meals").ToString().Split(",")
+                Dim requiredIngredients As String() = mealReader("Ingredients").ToString().Split(",")
 
                 Dim allIngredientsAvailable As Boolean = True
 
