@@ -100,7 +100,7 @@ Public Class GroceryClass
     End Class
 
 Public Class Person
-    Public Property FistName As String
+    Public Property FirstName As String
     Public Property LastName As String
     Public Property Gender As String
     Public Property Email As String
