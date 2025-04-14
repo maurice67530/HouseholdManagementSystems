@@ -302,6 +302,8 @@ Public Class PhotoGallery
             Debug.Write($"Stack Trace: {ex.StackTrace}")
         End Try
     End Sub
+
+
     Dim currentImageIndex As Integer = 0
     Dim imagePaths As List(Of String) = New List(Of String)()
 
@@ -416,6 +418,10 @@ Public Class PhotoGallery
     End Sub
 
     Private Sub Label9_Click(sender As Object, e As EventArgs) Handles Label9.Click
+
+    End Sub
+
+    Private Sub DataGridView1_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridView1.CellContentClick
 
     End Sub
 End Class
