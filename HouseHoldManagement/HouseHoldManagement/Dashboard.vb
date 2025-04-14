@@ -2,8 +2,7 @@
 Imports System.IO
 Imports System.Data.OleDb
 Public Class Dashboard
-    Public Const connectionString As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source= C:\Users\Rinae\Source\Repos\maurice67530\HouseholdManagementSystems\HMS.accdb "
-
+    Public Const connectionString As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source= C:\Users\Aousy\Source\Repos\maurice67530\HouseholdManagementSystems\HMS.accdb"
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
         Inventory.ShowDialog()
     End Sub
@@ -179,7 +178,7 @@ Public Class Dashboard
 
     Private Sub LoadChartData()
         ' update this connection string based  on my database confirguration
-        Dim connectionString As String = "Provider = Microsoft.ACE.OLEDB.12.0;Data Source= C:\Users\Rinae\Source\Repos\maurice67530\HouseholdManagementSystems\HMS.accdb"
+        Dim connectionString As String = "Provider = Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Aousy\Source\Repos\maurice67530\HouseholdManagementSystems\HMS.accdb"
         Dim query As String = "SELECT [Amount], [Frequency] FROM [Expense]"
 
         Using conn As New OleDbConnection(connectionString)
