@@ -82,17 +82,17 @@ Public Class Dashboard
         Using conn As New OleDbConnection(connectionString), cmd As New OleDbCommand(query, conn)
             conn.Open()
             Using reader = cmd.ExecuteReader()
-            While reader.Read()
-                Select Case reader("Status").ToString()
-                    Case "Completed"
-                        completed = Convert.ToInt32(reader(1))
-                    Case "In progress"
-                        inProgress = Convert.ToInt32(reader(1))
-                    Case "Not Started"
-                        notStarted = Convert.ToInt32(reader(1))
-                End Select
-            End While
-        End Using
+                While reader.Read()
+                    Select Case reader("Status").ToString()
+                        Case "Completed"
+                            completed = Convert.ToInt32(reader(1))
+                        Case "In progress"
+                            inProgress = Convert.ToInt32(reader(1))
+                        Case "Not Started"
+                            notStarted = Convert.ToInt32(reader(1))
+                    End Select
+                End While
+            End Using
         End Using
         Label2.Text = $"   Chores: 
            -Completed: {completed}
