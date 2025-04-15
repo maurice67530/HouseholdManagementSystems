@@ -149,6 +149,7 @@ Public Class Notifications
         Using conn As New OleDbConnection(HouseHoldManagment_Module.connectionString), cmd As New OleDbCommand(query, conn)
             Dim adapter As New OleDbDataAdapter(cmd)
             Dim table As New DataTable()
+
             adapter.Fill(table)
             DataGridView1.DataSource = table
         End Using
