@@ -50,14 +50,14 @@ Partial Class PhotoGallery
         Me.Button1 = New System.Windows.Forms.Button()
         Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
         Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.Label11 = New System.Windows.Forms.Label()
+        Me.TextBox5 = New System.Windows.Forms.TextBox()
         Me.ComboBox2 = New System.Windows.Forms.ComboBox()
         Me.Label8 = New System.Windows.Forms.Label()
         Me.DataGridView1 = New System.Windows.Forms.DataGridView()
         Me.Label9 = New System.Windows.Forms.Label()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         Me.Button7 = New System.Windows.Forms.Button()
-        Me.Label11 = New System.Windows.Forms.Label()
-        Me.TextBox5 = New System.Windows.Forms.TextBox()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel1.SuspendLayout()
         Me.Panel2.SuspendLayout()
@@ -77,9 +77,10 @@ Partial Class PhotoGallery
         'Label7
         '
         Me.Label7.AutoSize = True
-        Me.Label7.Location = New System.Drawing.Point(10, 200)
+        Me.Label7.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.Label7.Location = New System.Drawing.Point(19, 195)
         Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(41, 13)
+        Me.Label7.Size = New System.Drawing.Size(43, 15)
         Me.Label7.TabIndex = 125
         Me.Label7.Text = "Search"
         '
@@ -101,9 +102,10 @@ Partial Class PhotoGallery
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(10, 65)
+        Me.Label3.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.Label3.Location = New System.Drawing.Point(19, 60)
         Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(60, 13)
+        Me.Label3.Size = New System.Drawing.Size(62, 15)
         Me.Label3.TabIndex = 122
         Me.Label3.Text = "Description"
         '
@@ -117,9 +119,10 @@ Partial Class PhotoGallery
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(10, 91)
+        Me.Label2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.Label2.Location = New System.Drawing.Point(19, 86)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(71, 13)
+        Me.Label2.Size = New System.Drawing.Size(73, 15)
         Me.Label2.TabIndex = 120
         Me.Label2.Text = "Photographer"
         '
@@ -132,7 +135,7 @@ Partial Class PhotoGallery
         '
         'PictureBox1
         '
-        Me.PictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.PictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         Me.PictureBox1.ImageLocation = ""
         Me.PictureBox1.Location = New System.Drawing.Point(14, 12)
         Me.PictureBox1.Name = "PictureBox1"
@@ -152,27 +155,30 @@ Partial Class PhotoGallery
         'Label6
         '
         Me.Label6.AutoSize = True
-        Me.Label6.Location = New System.Drawing.Point(10, 118)
+        Me.Label6.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.Label6.Location = New System.Drawing.Point(19, 113)
         Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(77, 13)
+        Me.Label6.Size = New System.Drawing.Size(79, 15)
         Me.Label6.TabIndex = 116
         Me.Label6.Text = "Family Member"
         '
         'Label5
         '
         Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(10, 38)
+        Me.Label5.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.Label5.Location = New System.Drawing.Point(19, 33)
         Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(64, 13)
+        Me.Label5.Size = New System.Drawing.Size(66, 15)
         Me.Label5.TabIndex = 115
         Me.Label5.Text = "Date Added"
         '
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(10, 12)
+        Me.Label1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.Label1.Location = New System.Drawing.Point(19, 7)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(49, 13)
+        Me.Label1.Size = New System.Drawing.Size(51, 15)
         Me.Label1.TabIndex = 114
         Me.Label1.Text = "Photo ID"
         '
@@ -269,7 +275,7 @@ Partial Class PhotoGallery
         '
         Me.Button1.BackColor = System.Drawing.Color.Silver
         Me.Button1.Image = CType(resources.GetObject("Button1.Image"), System.Drawing.Image)
-        Me.Button1.Location = New System.Drawing.Point(20, 403)
+        Me.Button1.Location = New System.Drawing.Point(17, 403)
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(63, 61)
         Me.Button1.TabIndex = 123
@@ -305,6 +311,23 @@ Partial Class PhotoGallery
         Me.Panel2.Size = New System.Drawing.Size(304, 227)
         Me.Panel2.TabIndex = 119
         '
+        'Label11
+        '
+        Me.Label11.AutoSize = True
+        Me.Label11.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.Label11.Location = New System.Drawing.Point(19, 168)
+        Me.Label11.Name = "Label11"
+        Me.Label11.Size = New System.Drawing.Size(50, 15)
+        Me.Label11.TabIndex = 131
+        Me.Label11.Text = "File Path"
+        '
+        'TextBox5
+        '
+        Me.TextBox5.Location = New System.Drawing.Point(104, 166)
+        Me.TextBox5.Name = "TextBox5"
+        Me.TextBox5.Size = New System.Drawing.Size(176, 20)
+        Me.TextBox5.TabIndex = 130
+        '
         'ComboBox2
         '
         Me.ComboBox2.FormattingEnabled = True
@@ -317,14 +340,16 @@ Partial Class PhotoGallery
         'Label8
         '
         Me.Label8.AutoSize = True
-        Me.Label8.Location = New System.Drawing.Point(10, 145)
+        Me.Label8.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.Label8.Location = New System.Drawing.Point(19, 140)
         Me.Label8.Name = "Label8"
-        Me.Label8.Size = New System.Drawing.Size(36, 13)
+        Me.Label8.Size = New System.Drawing.Size(38, 15)
         Me.Label8.TabIndex = 128
         Me.Label8.Text = "Album"
         '
         'DataGridView1
         '
+        Me.DataGridView1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DataGridView1.Location = New System.Drawing.Point(17, 296)
         Me.DataGridView1.Name = "DataGridView1"
@@ -353,22 +378,6 @@ Partial Class PhotoGallery
         Me.Button7.TabIndex = 132
         Me.Button7.Text = " "
         Me.Button7.UseVisualStyleBackColor = False
-        '
-        'Label11
-        '
-        Me.Label11.AutoSize = True
-        Me.Label11.Location = New System.Drawing.Point(10, 173)
-        Me.Label11.Name = "Label11"
-        Me.Label11.Size = New System.Drawing.Size(48, 13)
-        Me.Label11.TabIndex = 131
-        Me.Label11.Text = "File Path"
-        '
-        'TextBox5
-        '
-        Me.TextBox5.Location = New System.Drawing.Point(104, 166)
-        Me.TextBox5.Name = "TextBox5"
-        Me.TextBox5.Size = New System.Drawing.Size(176, 20)
-        Me.TextBox5.TabIndex = 130
         '
         'PhotoGallery
         '
