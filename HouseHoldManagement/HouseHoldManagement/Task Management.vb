@@ -2,7 +2,10 @@
 Imports HouseHoldManagement
 Public Class Task_Management
     Public Const connectionString As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Delicious\Source\Repos\maurice67530\HouseholdManagementSystems\HMS.accdb"
-    Dim conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
+    Public Property connect As New OleDbConnection(Ndivhuwo.connectionString)
+    Public Property connn As New OleDbConnection(Masindi.connectionString)
+    Public Property conn As New OleDbConnection(Murangi.connectionString)
+    'Dim conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
     Private Status As String
     Private Tasks As Object
     Public Property Priority As String
