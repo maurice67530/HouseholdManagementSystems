@@ -35,7 +35,7 @@ Public Class Personnel
                 'Dim tableName As String = "Personnel"
 
                 ' Create an OleDbCommand to insert the personnel data into the database  
-                Dim cmd As New OleDbCommand("INSERT INTO PersonalDetails ( FirstName, LastName, DateOfBirth, Gender, Contact, Email, Role, Age, PostalCode, MaritalStatus) VALUES ( ?, ?, ?, ?, ?, ?, ?, ? ,?, ?)", connect)
+                Dim cmd As New OleDbCommand("INSERT INTO PersonalDetails ( FirstName, LastName, DateOfBirth, Gender, Contact, Email, Role, Age, PostalCode, MaritalStatus, Photo ) VALUES ( ?, ?, ?, ?, ?, ?, ?, ? ,?, ?, ?)", connect)
 
                 ' Set the parameter values from the UI controls 
                 'Class declaretions
@@ -52,7 +52,7 @@ Public Class Personnel
                 person.Age = TextBox5.Text
                 person.postalcode = TextBox6.Text
                 person.MaritalStatus = ComboBox2.SelectedItem.ToString
-
+                person.Photo = TextBox7.Text
                 'For Each person As person In Personal
                 cmd.Parameters.Clear()
 
@@ -67,6 +67,7 @@ Public Class Personnel
                 cmd.Parameters.AddWithValue("@Age", person.Age)
                 cmd.Parameters.AddWithValue("@PostalCode", person.postalcode)
                 cmd.Parameters.AddWithValue("@MaritalStatus", person.MaritalStatus)
+                cmd.Parameters.AddWithValue("@Photo", person.Photo)
 
 
                 'cmd.Parameters.AddWithValue("@PhysicalAddres", TextBox7.Text)
@@ -82,6 +83,7 @@ Public Class Personnel
                       "Role: " & person.Role & vbCrLf &
                       "Age: " & person.Age & vbCrLf &
                       "Postal Code: " & person.postalcode & vbCrLf &
+                      "Photo: " & person.Photo & vbCrLf &
                       "Health Status: " & person.MaritalStatus & vbCrLf, vbInformation, "Credentials  confirmation")
 
                 MessageBox.Show("Personnel information saved to Database successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
@@ -350,9 +352,17 @@ Public Class Personnel
         Next
     End Sub
     Private Sub BtnAddpicture_Click(sender As Object, e As EventArgs) Handles BtnAddpicture.Click
-        OpenFileDialog1.Filter = "Bitmaps (*.bmp)|*.bmp| (*.jpg)|*.jpg"
-        If OpenFileDialog1.ShowDialog() = DialogResult.OK Then
-            PictureBox1.Image = System.Drawing.Image.FromFile(OpenFileDialog1.FileName)
+        'OpenFileDialog1.Filter = "Bitmaps (*.bmp)|*.bmp| (*.jpg)|*.jpg"
+        'If OpenFileDialog1.ShowDialog() = DialogResult.OK Then
+        '    PictureBox1.Image = System.Drawing.Image.FromFile(OpenFileDialog1.FileName)
+        '    TextBox7.Text = OpenFileDialog1.FileName
+
+        'End If
+        Dim OpenFileDialog As New OpenFileDialog()
+        OpenFileDialog.Filter = "Bitmaps (*.jpg)|*.jpg"
+        If OpenFileDialog.ShowDialog() = DialogResult.OK Then
+            PictureBox1.ImageLocation = OpenFileDialog.FileName
+            TextBox7.Text = OpenFileDialog.FileName
         End If
     End Sub
 
