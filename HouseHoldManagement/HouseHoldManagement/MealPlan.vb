@@ -369,7 +369,7 @@ Public Class MealPlan
                     cmd.Parameters.AddWithValue("@Frequency", ComboBox2.SelectedItem.ToString)
                     cmd.ExecuteNonQuery()
                 End Using
-                MessageBox.Show("Edited successfully")
+                MessageBox.Show("MealPlan Added successfully")
 
             End Using
 
