@@ -212,8 +212,8 @@ Public Class Notifications
 
 
 
-                ' --- Check Overdue Chores ---
-                Dim choreCmd As New OleDbCommand("SELECT Title, DueDate FROM Chores", conn)
+            ' --- Check Overdue Chores ---
+            Dim choreCmd As New OleDbCommand("SELECT Title, DueDate FROM Chores", conn)
             Dim choreReader As OleDbDataReader = choreCmd.ExecuteReader()
             While choreReader.Read()
                 Dim title As String = choreReader("Title").ToString()
