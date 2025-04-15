@@ -149,6 +149,7 @@ Public Class Notifications
         Using conn As New OleDbConnection(HouseHoldManagment_Module.connectionString), cmd As New OleDbCommand(query, conn)
             Dim adapter As New OleDbDataAdapter(cmd)
             Dim table As New DataTable()
+
             adapter.Fill(table)
             DataGridView1.DataSource = table
         End Using
@@ -328,7 +329,7 @@ Public Class Notifications
             ' --- If any alerts found, show and save them ---
             If summaryMessage <> "" Then
                 SystemSounds.Exclamation.Play()
-                MessageBox.Show(summaryMessage, "Household Alerts", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                MessageBox.Show(summaryMessage, "HOUSEHOLD UNREAD NOTIFICATIONS", MessageBoxButtons.OK, MessageBoxIcon.Information)
 
                 ' Save notifications shown in message box
                 For Each msg In notificationsToSave
