@@ -89,7 +89,7 @@ Public Class Notifications
         ToolTip1.SetToolTip(Button3, "Refresh")
         LoadNotifications()
 
-        'CheckInventoryAndChores()
+
 
     End Sub
 
@@ -188,32 +188,34 @@ Public Class Notifications
 
 
         Try
-                conn.Open()
-            ' ========== INVENTORY CHECK ==========
-            Dim inventoryCmd As New OleDbCommand("SELECT ItemName, Quantity FROM Inventory", conn)
+            conn.Open()
+
+            ' --- Check Low, Expired, and Expiring Inventory ---
+            Dim inventoryCmd As New OleDbCommand("SELECT ItemName, Quantity, ExpiryDate FROM Inventory", conn)
             Dim inventoryReader As OleDbDataReader = inventoryCmd.ExecuteReader()
+            While inventoryReader.Read()
+                Dim itemName As String = inventoryReader("ItemName").ToString()
+                Dim quantity As Integer = Convert.ToInt32(inventoryReader("Quantity"))
+                Dim expiryDate As Date = Convert.ToDateTime(inventoryReader("ExpiryDate"))
 
+                Dim message As String = ""
+                If quantity <= 2 Then
+                    message = "Low inventory: " & itemName & " has only " & quantity & " left."
+                ElseIf expiryDate < Date.Today Then
+                    message = "Expired inventory: " & itemName & " expired on " & expiryDate.ToShortDateString()
+                ElseIf expiryDate <= Date.Today.AddDays(7) Then
+                    message = "Expiring soon: " & itemName & " will expire on " & expiryDate.ToShortDateString()
+                End If
 
-            Dim itemName As String = inventoryReader("ItemName").ToString()
-                    Dim quantity As Integer
+                If message <> "" Then
+                    summaryMessage &= message & vbCrLf
+                    notificationsToSave.Add(message)
+                End If
+            End While
+            inventoryReader.Close()
 
-
-            ' LOW INVENTORY
-            If Integer.TryParse(inventoryReader("Quantity").ToString(), quantity) AndAlso quantity <= 60 Then
-                        Dim message As String = "Low inventory: " & itemName & " only has " & quantity.ToString()
-                        If Not NotificationExists(conn, message) Then
-                            AddNotification(conn, currentUser, message, "Inventory", dateCreated, isRead)
-                            Debug.WriteLine("Notification added for Inventory: " & message)
-                        End If
-                    End If
-
-
-
-
-
-
-                ' --- Check Overdue Chores ---
-                Dim choreCmd As New OleDbCommand("SELECT Title, DueDate FROM Chores", conn)
+            ' --- Check Overdue Chores ---
+            Dim choreCmd As New OleDbCommand("SELECT Title, DueDate FROM Chores", conn)
             Dim choreReader As OleDbDataReader = choreCmd.ExecuteReader()
             While choreReader.Read()
                 Dim title As String = choreReader("Title").ToString()
@@ -332,10 +334,10 @@ Public Class Notifications
                 For Each msg In notificationsToSave
                     If Not NotificationExists(conn, msg) Then
                         Dim category As String = ""
-                        If msg.StartsWith("Low inventory") Then
-                            category = "Inventory"
-                        ElseIf msg.StartsWith("Overdue chore") Then
+                        If msg.StartsWith("Overdue chore") Then
                             category = "Chore"
+                        ElseIf msg.StartsWith("Low inventory") OrElse msg.StartsWith("Expired inventory") OrElse msg.StartsWith("Expiring soon") Then
+                            category = "Inventory"
                         ElseIf msg.StartsWith("Overdue task") OrElse msg.StartsWith("Task due today") OrElse msg.StartsWith("Upcoming task") Then
                             category = "Tasks"
                         ElseIf msg.StartsWith("High expense alert") Then
