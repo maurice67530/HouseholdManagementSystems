@@ -110,6 +110,7 @@ Public Class Person
     Public Property postalcode As String
     Public Property Age As Integer
     Public Property Contact As Integer
+    Public Property Photo As String
 
 End Class
 
