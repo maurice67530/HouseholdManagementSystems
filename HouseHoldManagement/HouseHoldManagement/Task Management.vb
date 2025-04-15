@@ -2,7 +2,7 @@
 Imports HouseHoldManagement
 Public Class Task_Management
     Public Property connect As New OleDbConnection(Ndivhuwo.connectionString)
-    Public Property conn As New OleDbConnection(khodani.connectionString)
+    Public Property connn As New OleDbConnection(khodani.connectionString)
     Public Property conn As New OleDbConnection(Faith.connectionString)
     'Dim conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
     Private Status As String
@@ -347,6 +347,10 @@ Public Class Task_Management
     End Sub
 
     Private Sub ComboBox3_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ComboBox3.SelectedIndexChanged
+
+    End Sub
+
+    Private Sub Label1_Click(sender As Object, e As EventArgs) Handles Label1.Click
 
     End Sub
 End Class
