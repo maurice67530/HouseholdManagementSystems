@@ -57,6 +57,9 @@ Partial Class Personnel
         Me.BtnSave = New System.Windows.Forms.Button()
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
+        Me.Label12 = New System.Windows.Forms.Label()
+        Me.TextBox7 = New System.Windows.Forms.TextBox()
+        Me.Button1 = New System.Windows.Forms.Button()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -96,7 +99,7 @@ Partial Class Personnel
         '
         Me.DataGridView1.BackgroundColor = System.Drawing.SystemColors.ActiveCaption
         Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DataGridView1.Location = New System.Drawing.Point(34, 365)
+        Me.DataGridView1.Location = New System.Drawing.Point(30, 391)
         Me.DataGridView1.Name = "DataGridView1"
         Me.DataGridView1.Size = New System.Drawing.Size(705, 114)
         Me.DataGridView1.TabIndex = 107
@@ -126,7 +129,7 @@ Partial Class Personnel
         'DateTimePicker1
         '
         Me.DateTimePicker1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.DateTimePicker1.Location = New System.Drawing.Point(500, 328)
+        Me.DateTimePicker1.Location = New System.Drawing.Point(496, 361)
         Me.DateTimePicker1.Name = "DateTimePicker1"
         Me.DateTimePicker1.Size = New System.Drawing.Size(239, 21)
         Me.DateTimePicker1.TabIndex = 103
@@ -287,7 +290,7 @@ Partial Class Personnel
         Me.Label3.AutoSize = True
         Me.Label3.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         Me.Label3.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label3.Location = New System.Drawing.Point(412, 329)
+        Me.Label3.Location = New System.Drawing.Point(408, 362)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(82, 17)
         Me.Label3.TabIndex = 87
@@ -320,7 +323,7 @@ Partial Class Personnel
         Me.BtnDailyTasks.BackColor = System.Drawing.SystemColors.ActiveCaption
         Me.BtnDailyTasks.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnDailyTasks.Image = CType(resources.GetObject("BtnDailyTasks.Image"), System.Drawing.Image)
-        Me.BtnDailyTasks.Location = New System.Drawing.Point(568, 493)
+        Me.BtnDailyTasks.Location = New System.Drawing.Point(479, 515)
         Me.BtnDailyTasks.Name = "BtnDailyTasks"
         Me.BtnDailyTasks.Size = New System.Drawing.Size(66, 60)
         Me.BtnDailyTasks.TabIndex = 114
@@ -332,7 +335,7 @@ Partial Class Personnel
         Me.BtnClear.BackColor = System.Drawing.SystemColors.ActiveCaption
         Me.BtnClear.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnClear.Image = CType(resources.GetObject("BtnClear.Image"), System.Drawing.Image)
-        Me.BtnClear.Location = New System.Drawing.Point(472, 493)
+        Me.BtnClear.Location = New System.Drawing.Point(393, 515)
         Me.BtnClear.Name = "BtnClear"
         Me.BtnClear.Size = New System.Drawing.Size(61, 60)
         Me.BtnClear.TabIndex = 113
@@ -344,7 +347,7 @@ Partial Class Personnel
         Me.BtnDelete.BackColor = System.Drawing.SystemColors.ActiveCaption
         Me.BtnDelete.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnDelete.Image = CType(resources.GetObject("BtnDelete.Image"), System.Drawing.Image)
-        Me.BtnDelete.Location = New System.Drawing.Point(363, 493)
+        Me.BtnDelete.Location = New System.Drawing.Point(309, 517)
         Me.BtnDelete.Name = "BtnDelete"
         Me.BtnDelete.Size = New System.Drawing.Size(65, 60)
         Me.BtnDelete.TabIndex = 112
@@ -357,7 +360,7 @@ Partial Class Personnel
         Me.BtnAddpicture.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnAddpicture.ForeColor = System.Drawing.SystemColors.ControlText
         Me.BtnAddpicture.Image = CType(resources.GetObject("BtnAddpicture.Image"), System.Drawing.Image)
-        Me.BtnAddpicture.Location = New System.Drawing.Point(139, 491)
+        Me.BtnAddpicture.Location = New System.Drawing.Point(125, 516)
         Me.BtnAddpicture.Name = "BtnAddpicture"
         Me.BtnAddpicture.Size = New System.Drawing.Size(71, 60)
         Me.BtnAddpicture.TabIndex = 111
@@ -369,7 +372,7 @@ Partial Class Personnel
         Me.BtnBack.BackColor = System.Drawing.SystemColors.ActiveCaption
         Me.BtnBack.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnBack.Image = CType(resources.GetObject("BtnBack.Image"), System.Drawing.Image)
-        Me.BtnBack.Location = New System.Drawing.Point(34, 491)
+        Me.BtnBack.Location = New System.Drawing.Point(30, 517)
         Me.BtnBack.Name = "BtnBack"
         Me.BtnBack.Size = New System.Drawing.Size(68, 60)
         Me.BtnBack.TabIndex = 110
@@ -381,7 +384,7 @@ Partial Class Personnel
         Me.BtnEdit.BackColor = System.Drawing.SystemColors.ActiveCaption
         Me.BtnEdit.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnEdit.Image = CType(resources.GetObject("BtnEdit.Image"), System.Drawing.Image)
-        Me.BtnEdit.Location = New System.Drawing.Point(254, 493)
+        Me.BtnEdit.Location = New System.Drawing.Point(215, 517)
         Me.BtnEdit.Name = "BtnEdit"
         Me.BtnEdit.Size = New System.Drawing.Size(62, 58)
         Me.BtnEdit.TabIndex = 109
@@ -393,9 +396,9 @@ Partial Class Personnel
         Me.BtnSave.BackColor = System.Drawing.SystemColors.ActiveCaption
         Me.BtnSave.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnSave.Image = CType(resources.GetObject("BtnSave.Image"), System.Drawing.Image)
-        Me.BtnSave.Location = New System.Drawing.Point(664, 494)
+        Me.BtnSave.Location = New System.Drawing.Point(660, 519)
         Me.BtnSave.Name = "BtnSave"
-        Me.BtnSave.Size = New System.Drawing.Size(75, 59)
+        Me.BtnSave.Size = New System.Drawing.Size(75, 58)
         Me.BtnSave.TabIndex = 108
         Me.BtnSave.TextAlign = System.Drawing.ContentAlignment.BottomCenter
         Me.BtnSave.UseVisualStyleBackColor = False
@@ -406,7 +409,7 @@ Partial Class Personnel
         Me.PictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.PictureBox1.Location = New System.Drawing.Point(412, 78)
         Me.PictureBox1.Name = "PictureBox1"
-        Me.PictureBox1.Size = New System.Drawing.Size(327, 237)
+        Me.PictureBox1.Size = New System.Drawing.Size(327, 271)
         Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
         Me.PictureBox1.TabIndex = 105
         Me.PictureBox1.TabStop = False
@@ -415,11 +418,41 @@ Partial Class Personnel
         '
         Me.OpenFileDialog1.FileName = "OpenFileDialog1"
         '
-        'Person
+        'Label12
+        '
+        Me.Label12.AutoSize = True
+        Me.Label12.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.Label12.Location = New System.Drawing.Point(35, 359)
+        Me.Label12.Name = "Label12"
+        Me.Label12.Size = New System.Drawing.Size(82, 15)
+        Me.Label12.TabIndex = 118
+        Me.Label12.Text = "Image File Path"
+        '
+        'TextBox7
+        '
+        Me.TextBox7.Location = New System.Drawing.Point(127, 359)
+        Me.TextBox7.Name = "TextBox7"
+        Me.TextBox7.Size = New System.Drawing.Size(268, 20)
+        Me.TextBox7.TabIndex = 119
+        '
+        'Button1
+        '
+        Me.Button1.BackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.Button1.Image = CType(resources.GetObject("Button1.Image"), System.Drawing.Image)
+        Me.Button1.Location = New System.Drawing.Point(563, 519)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(75, 56)
+        Me.Button1.TabIndex = 120
+        Me.Button1.UseVisualStyleBackColor = False
+        '
+        'Personnel
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(762, 570)
+        Me.ClientSize = New System.Drawing.Size(747, 587)
+        Me.Controls.Add(Me.Button1)
+        Me.Controls.Add(Me.TextBox7)
+        Me.Controls.Add(Me.Label12)
         Me.Controls.Add(Me.ComboBox2)
         Me.Controls.Add(Me.TextBox8)
         Me.Controls.Add(Me.Label10)
@@ -453,7 +486,8 @@ Partial Class Personnel
         Me.Controls.Add(Me.Label3)
         Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.Label1)
-        Me.Name = "Person"
+        Me.Name = "Personnel"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Person"
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
@@ -496,4 +530,7 @@ Partial Class Personnel
     Friend WithEvents Label2 As Label
     Friend WithEvents Label1 As Label
     Friend WithEvents OpenFileDialog1 As OpenFileDialog
+    Friend WithEvents Label12 As Label
+    Friend WithEvents TextBox7 As TextBox
+    Friend WithEvents Button1 As Button
 End Class

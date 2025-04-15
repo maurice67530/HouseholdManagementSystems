@@ -4,7 +4,7 @@ Imports System.Data.OleDb
 Public Class MealPlan
     ' Dim conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
     Public Property conn As New OleDbConnection(connectionString)
-    ' Connection string using relative path to the databas
+    ' Connection string using relative path to the database
     Public Const connectionString As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Mudzunga\Source\Repos\maurice67530\HouseholdManagementSystems\HMS.accdb;Persist Security Info=False;"
 
     Private Sub btnEdit_Click(sender As Object, e As EventArgs) Handles btnEdit.Click
@@ -28,7 +28,7 @@ Public Class MealPlan
                     cmd.Parameters.AddWithValue("@Frequency", ComboBox2.SelectedItem.ToString)
                     cmd.ExecuteNonQuery()
                 End Using
-                MessageBox.Show("Edited successfully")
+                MessageBox.Show("MealPlan Updated successfully")
 
             End Using
 
@@ -43,7 +43,8 @@ Public Class MealPlan
             Debug.WriteLine($"Stack Trace: {ex.StackTrace}")
         End Try
 
-        Debug.WriteLine("Existing btnEdit_Click")
+        Debug.WriteLine("Existing btnSave_Click")
+
     End Sub
 
     Private Sub MealPlan_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -65,9 +66,6 @@ Public Class MealPlan
         tooltip.SetToolTip(ComboBox3, "Select the meal")
         LoadMealPlanfromDatabase1()
         PopulateDataGridView()
-
-
-
 
         ComboBox3.Items.Clear()
         Using conn As New OleDbConnection(Module1.connectionString)
@@ -177,6 +175,27 @@ Public Class MealPlan
             MessageBox.Show("An unexpected error occured Selecting the datagridview.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
         Debug.WriteLine("The DataGridView selected unsuccessful.")
+
+
+        If DataGridView1.SelectedRows.Count > 0 Then
+            Dim filePath As String = DataGridView1.SelectedRows(0).Cells("FilePath").Value.ToString()
+
+            If System.IO.File.Exists(filePath) Then
+                PictureBox1.Image = Image.FromFile(filePath)
+            Else
+                PictureBox1.Image = Nothing
+                MessageBox.Show("Image file not found.")
+            End If
+        End If
+
+
+
+
+
+
+
+
+
 
     End Sub
 
@@ -289,7 +308,7 @@ Public Class MealPlan
         'Module1.Mains()
 
         lstMealSuggestions.Items.Clear()
-        TextBox1.ReadOnly = True
+        TextBox4.ReadOnly = True
         Dim meals As List(Of String) = SuggestMeals()
 
         If meals.Count > 0 Then
@@ -315,83 +334,48 @@ Public Class MealPlan
 
     Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
 
-        'If lstMealSuggestions.SelectedItem Is Nothing Then
-        '    MsgBox("Please select a meal to save.", MsgBoxStyle.Exclamation, "Select Meal")
-        '    Exit Sub
-        'End If
 
-        'Dim selectedMeal As String = lstMealSuggestions.SelectedItem.ToString()
+        ''''''''SAVE''''''''''''''''''
+
 
         Try
             Debug.WriteLine("Entering btnEdit_Click")
-
-            Using conn As New OleDbConnection(connectionString)
+            Using conn As New OleDbConnection(Module1.connectionString)
                 conn.Open()
 
-                Dim query As String = "UPDATE MealPlans SET [StartDate] = @StartDate, [EndDate] = @EndDate, [Meals] = @Meals, [MealName] = @MealName, [Items] = @Items, [TotalCalories] = @TotalCalories, [Description] = @Description, [FilePath] = @FilePath, [Calories] = @Calories, [Frequency] = @Frequency WHERE [MealName] = @MealName"
+                Dim tablename As String = "MealPlans"
+                Using cmd As New OleDbCommand("INSERT INTO MealPlans ([StartDate], [EndDate], [Meals], [MealName], [Items], [TotalCalories], [Description], [FilePath], [Calories], [Frequency]) VALUES (@StartDate, @EndDate, @Meals, @MealName, @Items, @TotalCalories, @Description, @FilePath, @Calories, @Frequency)", conn)
 
-                Using cmd As New OleDbCommand(query, conn)
                     cmd.Parameters.AddWithValue("@StartDate", DateTimePicker1.Text)
                     cmd.Parameters.AddWithValue("@EndDate", DateTimePicker2.Text)
                     cmd.Parameters.AddWithValue("@Meals", lstMealSuggestions.SelectedItem.ToString)
                     cmd.Parameters.AddWithValue("@MealName", TextBox4.Text)
-                    cmd.Parameters.AddWithValue("@Items", ComboBox2.SelectedItem.ToString)
+                    cmd.Parameters.AddWithValue("@Items", ComboBox3.SelectedItem.ToString)
                     cmd.Parameters.AddWithValue("@TotalCalories", NumericUpDown1.Value)
                     cmd.Parameters.AddWithValue("@Description", TextBox2.Text)
                     cmd.Parameters.AddWithValue("@FilePath", TextBox3.Text)
-                    cmd.Parameters.AddWithValue("@Calories", ComboBox3.SelectedItem.ToString)
-                    cmd.Parameters.AddWithValue("@Frequency", ComboBox1.SelectedItem.ToString)
-
+                    cmd.Parameters.AddWithValue("@Calories", ComboBox1.SelectedItem.ToString)
+                    cmd.Parameters.AddWithValue("@Frequency", ComboBox2.SelectedItem.ToString)
                     cmd.ExecuteNonQuery()
                 End Using
-                'Dim selectedItem As String = ComboBox1.SelectedItem.ToString() ' Meal selected from ComboBox2
-
-
-                '' Fetch the item and its details from the Inventory1 table.
-                'Dim fetchcommand As New OleDbCommand("SELECT ItemName, Quantity, Price FROM GroceryItem WHERE ItemName = ?", conn)
-                'fetchcommand.Parameters.AddWithValue("@ItemName", selectedItem)
-
-                'Using Readers As OleDbDataReader = fetchcommand.ExecuteReader()
-                '    If Readers.Read() Then
-                '        Dim ItemQuantity As Integer = Convert.ToInt32(Readers("Quantity")) ' Get the available total quantity of the item
-
-                '        ' If the item is in stock
-                '        If ItemQuantity > 0 Then
-                '            ' Update the inventory by reducing quantity by 1 (the meal uses one unit of the item)
-                '            Dim updateCommand As New OleDbCommand("UPDATE GroceryItem SET Quantity = Quantity - 1 WHERE ItemName = ?", conn)
-                '            updateCommand.Parameters.AddWithValue("@ItemName", selectedItem)
-                '            updateCommand.ExecuteNonQuery()
-
-                '            ' Display confirmation message
-                '            MessageBox.Show("Item added to Meal Plan. GroceryItem updated", "complete", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
-
-                '            ' Display updated stock status
-                '            TextBox1.Text = "Available Stock: " & (ItemQuantity - 1).ToString()
-                '        Else
-                '            ' Item is out of stock
-                '            MessageBox.Show("Item is out of stock.", "Notice", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-                '    '            TextBox1.Text = "Available Stock: 0"
-                '    End If
-                '        End If
-                '    End Using
+                MessageBox.Show("MealPlan Updated successfully")
 
             End Using
 
-            MessageBox.Show("Edited successfully")
             Debug.WriteLine("The data has been edited successfully")
-
         Catch ex As OleDbException
-            Debug.WriteLine($"Database error in btnEdit_Click: {ex.Message}")
-            Debug.WriteLine($"Stack Trace: {ex.StackTrace}")
-            ' MessageBox.Show("Database error. Please check the connection.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-
+            Debug.WriteLine($"Database saving in btnEdit_Click: {ex.Message}")
+            Debug.WriteLine($"Stack Trace: {ex.StackTrace}")
+            ' MessageBox.Show("error saving expense to database. please check the connection.", "Database error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         Catch ex As Exception
             MessageBox.Show($"Unexpected error: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
             Debug.WriteLine($"General error in btnEdit_Click: {ex.Message}")
-            Debug.WriteLine($"Stack Trace: {ex.StackTrace}")
+            Debug.WriteLine($"Stack Trace: {ex.StackTrace}")
         End Try
 
-        Debug.WriteLine("Exiting btnEdit_Click")
+        Debug.WriteLine("Existing btnSave_Click")
+
+
     End Sub
 
     Private Sub btnHighlight_Click(sender As Object, e As EventArgs) Handles btnHighlight.Click
@@ -414,7 +398,7 @@ Public Class MealPlan
             incmpleteCount += 1
             '    End If
             'Next
-            Label11.Text = "Incomplete MealPlan:" & incmpleteCount.ToString
+            Label14.Text = "Incomplete MealPlan:" & incmpleteCount.ToString
         Catch ex As Exception
             MessageBox.Show("Error highlighting overdue meals")
 
@@ -426,4 +410,17 @@ Public Class MealPlan
         Dim SelectedCalories As String = If(ComboBox1.SelectedItem IsNot Nothing, ComboBox1.SelectedItem.ToString(), "")
         Module1.FilterMealPlan(SelectedCalories)
     End Sub
+
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+
+
+        Dim openFileDialog As New OpenFileDialog()
+        openFileDialog.Filter = "Image Files|*.jpg;*.*.bmp"
+
+        If openFileDialog.ShowDialog() = DialogResult.OK Then
+            PictureBox1.ImageLocation = openFileDialog.FileName
+            TextBox3.Text = openFileDialog.FileName
+        End If
+    End Sub
+
 End Class

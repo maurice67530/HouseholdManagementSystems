@@ -83,12 +83,13 @@ Public Class Notifications
         Timer1.Start()
         Timer1.Interval = 4000
 
+
         ToolTip1.SetToolTip(Button1, "Mark As Read")
         ToolTip1.SetToolTip(Button2, "Clear Notification")
         ToolTip1.SetToolTip(Button3, "Refresh")
         LoadNotifications()
 
-        'CheckInventoryAndChores()
+
 
     End Sub
 
@@ -148,6 +149,7 @@ Public Class Notifications
         Using conn As New OleDbConnection(HouseHoldManagment_Module.connectionString), cmd As New OleDbCommand(query, conn)
             Dim adapter As New OleDbDataAdapter(cmd)
             Dim table As New DataTable()
+
             adapter.Fill(table)
             DataGridView1.DataSource = table
         End Using
@@ -187,32 +189,34 @@ Public Class Notifications
 
 
         Try
-                conn.Open()
-            ' ========== INVENTORY CHECK ==========
-            Dim inventoryCmd As New OleDbCommand("SELECT ItemName, Quantity FROM Inventory", conn)
+            conn.Open()
+
+            ' --- Check Low, Expired, and Expiring Inventory ---
+            Dim inventoryCmd As New OleDbCommand("SELECT ItemName, Quantity, ExpiryDate FROM Inventory", conn)
             Dim inventoryReader As OleDbDataReader = inventoryCmd.ExecuteReader()
+            While inventoryReader.Read()
+                Dim itemName As String = inventoryReader("ItemName").ToString()
+                Dim quantity As Integer = Convert.ToInt32(inventoryReader("Quantity"))
+                Dim expiryDate As Date = Convert.ToDateTime(inventoryReader("ExpiryDate"))
 
+                Dim message As String = ""
+                If quantity <= 2 Then
+                    message = "Low inventory: " & itemName & " has only " & quantity & " left."
+                ElseIf expiryDate < Date.Today Then
+                    message = "Expired inventory: " & itemName & " expired on " & expiryDate.ToShortDateString()
+                ElseIf expiryDate <= Date.Today.AddDays(7) Then
+                    message = "Expiring soon: " & itemName & " will expire on " & expiryDate.ToShortDateString()
+                End If
 
-            Dim itemName As String = inventoryReader("ItemName").ToString()
-                    Dim quantity As Integer
+                If message <> "" Then
+                    summaryMessage &= message & vbCrLf
+                    notificationsToSave.Add(message)
+                End If
+            End While
+            inventoryReader.Close()
 
-
-            ' LOW INVENTORY
-            If Integer.TryParse(inventoryReader("Quantity").ToString(), quantity) AndAlso quantity <= 60 Then
-                        Dim message As String = "Low inventory: " & itemName & " only has " & quantity.ToString()
-                        If Not NotificationExists(conn, message) Then
-                            AddNotification(conn, currentUser, message, "Inventory", dateCreated, isRead)
-                            Debug.WriteLine("Notification added for Inventory: " & message)
-                        End If
-                    End If
-
-
-
-
-
-
-                ' --- Check Overdue Chores ---
-                Dim choreCmd As New OleDbCommand("SELECT Title, DueDate FROM Chores", conn)
+            ' --- Check Overdue Chores ---
+            Dim choreCmd As New OleDbCommand("SELECT Title, DueDate FROM Chores", conn)
             Dim choreReader As OleDbDataReader = choreCmd.ExecuteReader()
             While choreReader.Read()
                 Dim title As String = choreReader("Title").ToString()
@@ -248,8 +252,6 @@ Public Class Notifications
                 End If
             End While
             taskReader.Close()
-
-
 
 
             ' --- Check Meals That Can't Be Suggested ---
@@ -298,9 +300,6 @@ Public Class Notifications
             End While
             mealReader.Close()
 
-
-
-
             ' --- Check Expenses Exceeding 30000 by Category ---
             Dim categoryCmd As New OleDbCommand("SELECT Category FROM Expense", conn)
             Dim categoryReader As OleDbDataReader = categoryCmd.ExecuteReader()
@@ -319,7 +318,7 @@ Public Class Notifications
                 End While
                 amountReader.Close()
 
-                If totalAmount > 30000D Then
+                If totalAmount > 10000D Then
                     Dim message As String = "High expense alert: " & category & " has exceeded R" & totalAmount.ToString("N2")
                     summaryMessage &= message & vbCrLf
                     notificationsToSave.Add(message)
@@ -330,16 +329,16 @@ Public Class Notifications
             ' --- If any alerts found, show and save them ---
             If summaryMessage <> "" Then
                 SystemSounds.Exclamation.Play()
-                MessageBox.Show(summaryMessage, "Smart Household Alerts", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                MessageBox.Show(summaryMessage, "HOUSEHOLD UNREAD NOTIFICATIONS", MessageBoxButtons.OK, MessageBoxIcon.Information)
 
                 ' Save notifications shown in message box
                 For Each msg In notificationsToSave
                     If Not NotificationExists(conn, msg) Then
                         Dim category As String = ""
-                        If msg.StartsWith("Low inventory") Then
-                            category = "Inventory"
-                        ElseIf msg.StartsWith("Overdue chore") Then
+                        If msg.StartsWith("Overdue chore") Then
                             category = "Chore"
+                        ElseIf msg.StartsWith("Low inventory") OrElse msg.StartsWith("Expired inventory") OrElse msg.StartsWith("Expiring soon") Then
+                            category = "Inventory"
                         ElseIf msg.StartsWith("Overdue task") OrElse msg.StartsWith("Task due today") OrElse msg.StartsWith("Upcoming task") Then
                             category = "Tasks"
                         ElseIf msg.StartsWith("High expense alert") Then
@@ -353,8 +352,6 @@ Public Class Notifications
                     End If
                 Next
             End If
-
-
 
             ' --- Update Label2 with unread notifications count ---
             Dim countCmd As New OleDbCommand("SELECT COUNT(*) FROM Notifications WHERE IsRead = 'No'", conn)
@@ -392,10 +389,6 @@ Public Class Notifications
     End Function
 
     Private Sub AddNotification(conn As OleDbConnection, userID As String, message As String, category As String, dateCreated As String, isRead As String)
-
-
-
-
         Try
             Dim insertQuery As String = "INSERT INTO Notifications ([UserID], [Message], [DateCreated], [Category], [IsRead]) VALUES (?, ?, ?, ?, ?)"
 

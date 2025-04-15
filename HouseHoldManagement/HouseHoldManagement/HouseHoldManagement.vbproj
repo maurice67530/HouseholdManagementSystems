@@ -6,7 +6,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{DEC8BF09-6D70-450D-B49C-BFCF4DBBB6B8}</ProjectGuid>
     <OutputType>WinExe</OutputType>
+<<<<<<< HEAD
     <StartupObject>HouseHoldManagement.Task_Management</StartupObject>
+=======
+    <StartupObject>HouseHoldManagement.My.MyApplication</StartupObject>
+>>>>>>> 21304fcb71ec4d353f22a4e1bc1459e48960f9e1
     <RootNamespace>HouseHoldManagement</RootNamespace>
     <AssemblyName>HouseHoldManagement</AssemblyName>
     <FileAlignment>512</FileAlignment>
@@ -121,6 +125,10 @@
     <Compile Include="MealPlan.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="My Project\Application.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Application.myapp</DependentUpon>
+    </Compile>
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Resources.Designer.vb">
       <AutoGen>True</AutoGen>
@@ -208,6 +216,7 @@
     <None Include="My Project\app.manifest" />
     <None Include="My Project\Application.myapp">
       <Generator>MyApplicationCodeGenerator</Generator>
+      <LastGenOutput>Application.Designer.vb</LastGenOutput>
     </None>
     <None Include="My Project\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -248,6 +257,21 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\icons8-delete-321.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-submit-322.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-update-32 %281%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-delete-323.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-dashboard-321.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-next-321.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
