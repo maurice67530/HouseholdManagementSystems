@@ -104,9 +104,8 @@ Module Rinae
 End Module
 
 '[Dongola] vhasongo silinga
-Module InventoryModule
-    Public Const connectionString As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Faith\Source\Repos\maurice67530\HouseholdManagementSystems\HMS.accdb"
-
+Module Cruwza
+    Public Const connectionString As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Dongola\Source\Repos\maurice67530\HouseholdManagementSystems\HMS.accdb"
     Public Sub FilterInventory(Category As String, Unit As String)
         Dim taskTable As New DataTable
         Dim conn As New OleDbConnection(connectionString)
