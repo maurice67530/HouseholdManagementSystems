@@ -13,7 +13,9 @@ Module HouseHoldManagment_Module
 
 End Module
 
-
+Module Ndamu
+    Public Const connectionstring As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Nedzamba\Source\Repos\HouseholdManagementSystems\HMS.accdb"
+End Module
 
 Module Rasta
     ' Connection string using relative path to the database
