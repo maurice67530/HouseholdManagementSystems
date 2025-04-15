@@ -25,7 +25,7 @@ Public Class Dashboard
     End Sub
 
     Private Sub Button7_Click(sender As Object, e As EventArgs) Handles Button7.Click
-        '  Grocery.ShowDialog()
+        'Grocery.ShowDialog()
     End Sub
 
     Private Sub Button8_Click(sender As Object, e As EventArgs) Handles Button8.Click
@@ -46,7 +46,7 @@ Public Class Dashboard
 
         LoadUpcomingMeals()
         LoadChoresStatus()
-        PopulateListboxFromChores(ListBox2)
+        PopulateListboxFromChores(ListBox1)
         'LoadExpensesData()
         LoadChartData()
         SetupCharts()
@@ -91,14 +91,11 @@ Public Class Dashboard
                         Case "Not Started"
                             notStarted = Convert.ToInt32(reader(1))
                     End Select
-
                 End While
-
             End Using
-
         End Using
 
-        Label8.Text = $"   Chores: 
+        Label5.Text = $"   Chores: 
            -Completed: {completed}
 
            -In Progress:{inProgress}
@@ -210,6 +207,7 @@ Public Class Dashboard
         Chart1.ChartAreas(0).AxisX.Title = "Frequency"
 
         Chart1.ChartAreas(0).AxisY.Title = "Amount"
+
     End Sub
 
     Public Sub PopulateListboxFromChores(ByRef Listbox As ListBox)
@@ -225,9 +223,9 @@ Public Class Dashboard
             Dim reader As OleDbDataReader = cmd.ExecuteReader()
 
             'bind the retrieved data to the combobox
-            ListBox2.Items.Clear()
+            ListBox1.Items.Clear()
             While reader.Read()
-                ListBox2.Items.Add($"{reader("ID")} {reader("Status")} {reader("Title")}")
+                ListBox1.Items.Add($"{reader("ID")} {reader("Status")} {reader("Title")}")
             End While
 
             'close the database
@@ -244,6 +242,7 @@ Public Class Dashboard
             If conn.State = ConnectionState.Open Then
                 conn.Close()
             End If
+
         End Try
     End Sub
 
