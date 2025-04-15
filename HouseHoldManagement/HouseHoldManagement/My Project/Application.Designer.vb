@@ -30,16 +30,9 @@ Namespace My
             Me.ShutDownStyle = Global.Microsoft.VisualBasic.ApplicationServices.ShutdownMode.AfterMainFormCloses
         End Sub
 
-
         <Global.System.Diagnostics.DebuggerStepThroughAttribute()>
         Protected Overrides Sub OnCreateMainForm()
             Me.MainForm = Global.HouseHoldManagement.Login
         End Sub
-
-        <Global.System.Diagnostics.DebuggerStepThroughAttribute()>
-        Protected Overrides Function OnInitialize(ByVal commandLineArgs As System.Collections.ObjectModel.ReadOnlyCollection(Of String)) As Boolean
-            Me.MinimumSplashScreenDisplayTime = 0
-            Return MyBase.OnInitialize(commandLineArgs)
-        End Function
     End Class
 End Namespace
