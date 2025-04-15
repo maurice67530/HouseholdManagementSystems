@@ -2,7 +2,7 @@
 Imports System.IO
 Imports System.Data.OleDb
 Public Class Dashboard
-    Public Const connectionString As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Mulanga\Source\Repos\maurice67530\HouseholdManagementSystems\HMS.accdb"
+    Public Const connectionString As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Aousy\Source\Repos\maurice67530\HouseholdManagementSystems\HMS.accdb"
 
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
         Inventory.ShowDialog()
@@ -25,7 +25,7 @@ Public Class Dashboard
     End Sub
 
     Private Sub Button7_Click(sender As Object, e As EventArgs) Handles Button7.Click
-        'Grocery.ShowDialog()
+        GroceryItemss.ShowDialog()
     End Sub
 
     Private Sub Button8_Click(sender As Object, e As EventArgs) Handles Button8.Click
@@ -46,7 +46,7 @@ Public Class Dashboard
 
         LoadUpcomingMeals()
         LoadChoresStatus()
-        PopulateListboxFromChores(ListBox1)
+        PopulateListboxFromChores(ListBox2)
         'LoadExpensesData()
         LoadChartData()
         SetupCharts()
@@ -91,11 +91,14 @@ Public Class Dashboard
                         Case "Not Started"
                             notStarted = Convert.ToInt32(reader(1))
                     End Select
+
                 End While
+
             End Using
+
         End Using
 
-        Label5.Text = $"   Chores: 
+        Label8.Text = $"   Chores: 
            -Completed: {completed}
 
            -In Progress:{inProgress}
@@ -180,7 +183,7 @@ Public Class Dashboard
     Private Sub LoadChartData()
 
         ' update this connection string based  on my database confirguration
-        Dim connectionString As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Mulanga\Source\Repos\maurice67530\HouseholdManagementSystems\HMS.accdb"
+        Dim connectionString As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Aousy\Source\Repos\maurice67530\HouseholdManagementSystems\HMS.accdb"
         Dim query As String = "SELECT [Amount], [Frequency] FROM [Expense]"
 
         Using conn As New OleDbConnection(connectionString)
@@ -207,7 +210,6 @@ Public Class Dashboard
         Chart1.ChartAreas(0).AxisX.Title = "Frequency"
 
         Chart1.ChartAreas(0).AxisY.Title = "Amount"
-
     End Sub
 
     Public Sub PopulateListboxFromChores(ByRef Listbox As ListBox)
@@ -223,9 +225,9 @@ Public Class Dashboard
             Dim reader As OleDbDataReader = cmd.ExecuteReader()
 
             'bind the retrieved data to the combobox
-            ListBox1.Items.Clear()
+            ListBox2.Items.Clear()
             While reader.Read()
-                ListBox1.Items.Add($"{reader("ID")} {reader("Status")} {reader("Title")}")
+                ListBox2.Items.Add($"{reader("ID")} {reader("Status")} {reader("Title")}")
             End While
 
             'close the database
@@ -242,7 +244,6 @@ Public Class Dashboard
             If conn.State = ConnectionState.Open Then
                 conn.Close()
             End If
-
         End Try
 
     End Sub
