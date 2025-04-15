@@ -2,7 +2,7 @@
 Imports System.IO
 Imports System.Data.OleDb
 Public Class Dashboard
-    Public Const connectionString As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Rinae\Source\Repos\maurice67530\HouseholdManagementSystems\HMS.accdb"
+    Public Const connectionString As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Mulanga\Source\Repos\maurice67530\HouseholdManagementSystems\HMS.accdb"
 
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
         Inventory.ShowDialog()
@@ -46,7 +46,7 @@ Public Class Dashboard
 
         LoadUpcomingMeals()
         LoadChoresStatus()
-        PopulateListboxFromChores(ListBox1)
+        PopulateListboxFromChores(ListBox2)
         'LoadExpensesData()
         LoadChartData()
         SetupCharts()
@@ -183,7 +183,7 @@ Public Class Dashboard
     Private Sub LoadChartData()
 
         ' update this connection string based  on my database confirguration
-        Dim connectionString As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Rinae\Source\Repos\maurice67530\HouseholdManagementSystems\HMS.accdb"
+        Dim connectionString As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Mulanga\Source\Repos\maurice67530\HouseholdManagementSystems\HMS.accdb"
         Dim query As String = "SELECT [Amount], [Frequency] FROM [Expense]"
 
         Using conn As New OleDbConnection(connectionString)
@@ -225,9 +225,9 @@ Public Class Dashboard
             Dim reader As OleDbDataReader = cmd.ExecuteReader()
 
             'bind the retrieved data to the combobox
-            ListBox1.Items.Clear()
+            ListBox2.Items.Clear()
             While reader.Read()
-                ListBox1.Items.Add($"{reader("ID")} {reader("Status")} {reader("Title")}")
+                ListBox2.Items.Add($"{reader("ID")} {reader("Status")} {reader("Title")}")
             End While
 
             'close the database
@@ -244,10 +244,14 @@ Public Class Dashboard
             If conn.State = ConnectionState.Open Then
                 conn.Close()
             End If
+
         End Try
 
     End Sub
 
+    Private Sub FlowLayoutPanel2_Paint(sender As Object, e As PaintEventArgs) Handles FlowLayoutPanel2.Paint
+
+    End Sub
     'Private photoList As New List(Of String)() ' List to store photo paths
     'Private currentPhotoIndex As Integer = 0
     'Private WithEvents photoTimer As New Timer()
