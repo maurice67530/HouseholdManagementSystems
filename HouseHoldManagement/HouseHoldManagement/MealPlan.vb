@@ -67,9 +67,6 @@ Public Class MealPlan
         LoadMealPlanfromDatabase1()
         PopulateDataGridView()
 
-
-
-
         ComboBox3.Items.Clear()
         Using conn As New OleDbConnection(Module1.connectionString)
             conn.Open()
