@@ -13,7 +13,7 @@ Public Class PhotoGallery
         ToolTip1.SetToolTip(Button5, "Search")
         ToolTip1.SetToolTip(Button6, "Stop Images")
         ToolTip1.SetToolTip(Button8, "Upload Image")
-        'ToolTip1.SetToolTip(Button9, "Dashboard")
+        ToolTip1.SetToolTip(Button7, "Sort")
 
     End Sub
     Public Sub eish()
@@ -423,5 +423,9 @@ Public Class PhotoGallery
 
     Private Sub DataGridView1_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridView1.CellContentClick
 
+    End Sub
+
+    Private Sub Button7_Click(sender As Object, e As EventArgs) Handles Button7.Click
+        DataGridView1.Sort(DataGridView1.Columns("DateAdded"), System.ComponentModel.ListSortDirection.Ascending)
     End Sub
 End Class
