@@ -46,7 +46,7 @@ Public Class Dashboard
 
         LoadUpcomingMeals()
         LoadChoresStatus()
-        PopulateListboxFromChores(ListBox1)
+        PopulateListboxFromChores(ListBox2)
         'LoadExpensesData()
         LoadChartData()
         SetupCharts()
@@ -223,9 +223,9 @@ Public Class Dashboard
             Dim reader As OleDbDataReader = cmd.ExecuteReader()
 
             'bind the retrieved data to the combobox
-            ListBox1.Items.Clear()
+            ListBox2.Items.Clear()
             While reader.Read()
-                ListBox1.Items.Add($"{reader("ID")} {reader("Status")} {reader("Title")}")
+                ListBox2.Items.Add($"{reader("ID")} {reader("Status")} {reader("Title")}")
             End While
 
             'close the database
