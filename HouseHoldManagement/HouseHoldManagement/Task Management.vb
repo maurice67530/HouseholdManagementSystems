@@ -120,7 +120,6 @@ Public Class Task_Management
             MessageBox.Show("Please select an Task to delete.", "Deletion Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
         End If
     End Sub
-
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         Try
             Debug.WriteLine("entering btnsave")
@@ -187,7 +186,6 @@ Public Class Task_Management
         End Try
 
     End Sub
-
     Private Sub Button5_Click(sender As Object, e As EventArgs) Handles Button5.Click
         Dim conn As New OleDbConnection(Ndivhuwo.connectionString)
         Dim TasksTable As New DataTable()
@@ -228,7 +226,6 @@ Public Class Task_Management
         Dim selectedPriority As String = If(ComboBox1.SelectedItem IsNot Nothing, ComboBox1.SelectedItem.ToString(), "")
 
     End Sub
-
     Private Sub Button6_Click(sender As Object, e As EventArgs) Handles Button6.Click
         DataGridView1.Sort(DataGridView1.Columns("DueDate"), System.ComponentModel.ListSortDirection.Ascending)
     End Sub
@@ -257,7 +254,6 @@ Public Class Task_Management
     Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
         'LoadTaskDataFromDatabase()
     End Sub
-
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
         'Ensure a row Is selected in the DataGridView  
         If DataGridView1.SelectedRows.Count = 0 Then
@@ -315,14 +311,11 @@ Public Class Task_Management
 
 
     End Sub
-
     Private Sub DataGridView1_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridView1.CellContentClick
 
     End Sub
-
     Private Sub DataGridView1_SelectionChanged(sender As Object, e As EventArgs) Handles DataGridView1.SelectionChanged
         Try
-
 
             Debug.WriteLine("selecting data in the datagridview")
             If DataGridView1.SelectedRows.Count > 0 Then
@@ -336,7 +329,6 @@ Public Class Task_Management
                 ComboBox2.Text = selectedRow.Cells("Status").Value.ToString()
                 ComboBox3.Text = selectedRow.Cells("AssignedTo").Value.ToString()
 
-
             End If
         Catch ex As Exception
             Debug.WriteLine("error selection data in the database")
@@ -344,7 +336,6 @@ Public Class Task_Management
         End Try
 
     End Sub
-
     Private Sub ComboBox3_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ComboBox3.SelectedIndexChanged
 
     End Sub
