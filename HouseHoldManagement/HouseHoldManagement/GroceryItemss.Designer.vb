@@ -24,23 +24,23 @@ Partial Class GroceryItemss
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Me.Panel1 = New System.Windows.Forms.Panel()
-        Me.Panel2 = New System.Windows.Forms.Panel()
-        Me.Label1 = New System.Windows.Forms.Label()
+        Me.DateTimePicker1 = New System.Windows.Forms.DateTimePicker()
+        Me.Label5 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.Label4 = New System.Windows.Forms.Label()
-        Me.Label5 = New System.Windows.Forms.Label()
+        Me.TextBox1 = New System.Windows.Forms.TextBox()
+        Me.TextBox2 = New System.Windows.Forms.TextBox()
+        Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.TextBox6 = New System.Windows.Forms.TextBox()
+        Me.TextBox5 = New System.Windows.Forms.TextBox()
+        Me.TextBox4 = New System.Windows.Forms.TextBox()
+        Me.TextBox3 = New System.Windows.Forms.TextBox()
+        Me.Label9 = New System.Windows.Forms.Label()
         Me.Label6 = New System.Windows.Forms.Label()
         Me.Label7 = New System.Windows.Forms.Label()
         Me.Label8 = New System.Windows.Forms.Label()
-        Me.Label9 = New System.Windows.Forms.Label()
-        Me.TextBox1 = New System.Windows.Forms.TextBox()
-        Me.TextBox2 = New System.Windows.Forms.TextBox()
-        Me.TextBox3 = New System.Windows.Forms.TextBox()
-        Me.TextBox4 = New System.Windows.Forms.TextBox()
-        Me.TextBox5 = New System.Windows.Forms.TextBox()
-        Me.TextBox6 = New System.Windows.Forms.TextBox()
-        Me.DateTimePicker1 = New System.Windows.Forms.DateTimePicker()
+        Me.Label1 = New System.Windows.Forms.Label()
         Me.Button1 = New System.Windows.Forms.Button()
         Me.Button2 = New System.Windows.Forms.Button()
         Me.Button3 = New System.Windows.Forms.Button()
@@ -71,31 +71,22 @@ Partial Class GroceryItemss
         Me.Panel1.Size = New System.Drawing.Size(291, 197)
         Me.Panel1.TabIndex = 0
         '
-        'Panel2
+        'DateTimePicker1
         '
-        Me.Panel2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        Me.Panel2.Controls.Add(Me.TextBox6)
-        Me.Panel2.Controls.Add(Me.TextBox5)
-        Me.Panel2.Controls.Add(Me.TextBox4)
-        Me.Panel2.Controls.Add(Me.TextBox3)
-        Me.Panel2.Controls.Add(Me.Label9)
-        Me.Panel2.Controls.Add(Me.Label6)
-        Me.Panel2.Controls.Add(Me.Label7)
-        Me.Panel2.Controls.Add(Me.Label8)
-        Me.Panel2.Location = New System.Drawing.Point(341, 110)
-        Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(291, 197)
-        Me.Panel2.TabIndex = 0
+        Me.DateTimePicker1.Location = New System.Drawing.Point(117, 122)
+        Me.DateTimePicker1.Name = "DateTimePicker1"
+        Me.DateTimePicker1.Size = New System.Drawing.Size(155, 20)
+        Me.DateTimePicker1.TabIndex = 15
         '
-        'Label1
+        'Label5
         '
-        Me.Label1.AutoSize = True
-        Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 18.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.Location = New System.Drawing.Point(222, 41)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(209, 29)
-        Me.Label1.TabIndex = 0
-        Me.Label1.Text = "GROCERY ITEM"
+        Me.Label5.AutoSize = True
+        Me.Label5.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.Label5.Location = New System.Drawing.Point(8, 169)
+        Me.Label5.Name = "Label5"
+        Me.Label5.Size = New System.Drawing.Size(41, 15)
+        Me.Label5.TabIndex = 8
+        Me.Label5.Text = "Label5"
         '
         'Label2
         '
@@ -127,15 +118,73 @@ Partial Class GroceryItemss
         Me.Label4.TabIndex = 7
         Me.Label4.Text = "ExpiryDate"
         '
-        'Label5
+        'TextBox1
         '
-        Me.Label5.AutoSize = True
-        Me.Label5.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        Me.Label5.Location = New System.Drawing.Point(8, 169)
-        Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(41, 15)
-        Me.Label5.TabIndex = 8
-        Me.Label5.Text = "Label5"
+        Me.TextBox1.Location = New System.Drawing.Point(117, 64)
+        Me.TextBox1.Name = "TextBox1"
+        Me.TextBox1.Size = New System.Drawing.Size(155, 20)
+        Me.TextBox1.TabIndex = 13
+        '
+        'TextBox2
+        '
+        Me.TextBox2.Location = New System.Drawing.Point(117, 14)
+        Me.TextBox2.Name = "TextBox2"
+        Me.TextBox2.Size = New System.Drawing.Size(155, 20)
+        Me.TextBox2.TabIndex = 14
+        '
+        'Panel2
+        '
+        Me.Panel2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.Panel2.Controls.Add(Me.TextBox6)
+        Me.Panel2.Controls.Add(Me.TextBox5)
+        Me.Panel2.Controls.Add(Me.TextBox4)
+        Me.Panel2.Controls.Add(Me.TextBox3)
+        Me.Panel2.Controls.Add(Me.Label9)
+        Me.Panel2.Controls.Add(Me.Label6)
+        Me.Panel2.Controls.Add(Me.Label7)
+        Me.Panel2.Controls.Add(Me.Label8)
+        Me.Panel2.Location = New System.Drawing.Point(341, 110)
+        Me.Panel2.Name = "Panel2"
+        Me.Panel2.Size = New System.Drawing.Size(291, 197)
+        Me.Panel2.TabIndex = 0
+        '
+        'TextBox6
+        '
+        Me.TextBox6.Location = New System.Drawing.Point(126, 162)
+        Me.TextBox6.Name = "TextBox6"
+        Me.TextBox6.Size = New System.Drawing.Size(150, 20)
+        Me.TextBox6.TabIndex = 18
+        '
+        'TextBox5
+        '
+        Me.TextBox5.Location = New System.Drawing.Point(126, 115)
+        Me.TextBox5.Name = "TextBox5"
+        Me.TextBox5.Size = New System.Drawing.Size(150, 20)
+        Me.TextBox5.TabIndex = 17
+        '
+        'TextBox4
+        '
+        Me.TextBox4.Location = New System.Drawing.Point(126, 71)
+        Me.TextBox4.Name = "TextBox4"
+        Me.TextBox4.Size = New System.Drawing.Size(150, 20)
+        Me.TextBox4.TabIndex = 16
+        '
+        'TextBox3
+        '
+        Me.TextBox3.Location = New System.Drawing.Point(126, 14)
+        Me.TextBox3.Name = "TextBox3"
+        Me.TextBox3.Size = New System.Drawing.Size(150, 20)
+        Me.TextBox3.TabIndex = 15
+        '
+        'Label9
+        '
+        Me.Label9.AutoSize = True
+        Me.Label9.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.Label9.Location = New System.Drawing.Point(14, 169)
+        Me.Label9.Name = "Label9"
+        Me.Label9.Size = New System.Drawing.Size(68, 15)
+        Me.Label9.TabIndex = 12
+        Me.Label9.Text = "IsPurchased"
         '
         'Label6
         '
@@ -167,64 +216,15 @@ Partial Class GroceryItemss
         Me.Label8.TabIndex = 11
         Me.Label8.Text = "PricePerUnit"
         '
-        'Label9
+        'Label1
         '
-        Me.Label9.AutoSize = True
-        Me.Label9.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        Me.Label9.Location = New System.Drawing.Point(14, 169)
-        Me.Label9.Name = "Label9"
-        Me.Label9.Size = New System.Drawing.Size(68, 15)
-        Me.Label9.TabIndex = 12
-        Me.Label9.Text = "IsPurchased"
-        '
-        'TextBox1
-        '
-        Me.TextBox1.Location = New System.Drawing.Point(117, 64)
-        Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.Size = New System.Drawing.Size(155, 20)
-        Me.TextBox1.TabIndex = 13
-        '
-        'TextBox2
-        '
-        Me.TextBox2.Location = New System.Drawing.Point(117, 14)
-        Me.TextBox2.Name = "TextBox2"
-        Me.TextBox2.Size = New System.Drawing.Size(155, 20)
-        Me.TextBox2.TabIndex = 14
-        '
-        'TextBox3
-        '
-        Me.TextBox3.Location = New System.Drawing.Point(126, 14)
-        Me.TextBox3.Name = "TextBox3"
-        Me.TextBox3.Size = New System.Drawing.Size(150, 20)
-        Me.TextBox3.TabIndex = 15
-        '
-        'TextBox4
-        '
-        Me.TextBox4.Location = New System.Drawing.Point(126, 71)
-        Me.TextBox4.Name = "TextBox4"
-        Me.TextBox4.Size = New System.Drawing.Size(150, 20)
-        Me.TextBox4.TabIndex = 16
-        '
-        'TextBox5
-        '
-        Me.TextBox5.Location = New System.Drawing.Point(126, 115)
-        Me.TextBox5.Name = "TextBox5"
-        Me.TextBox5.Size = New System.Drawing.Size(150, 20)
-        Me.TextBox5.TabIndex = 17
-        '
-        'TextBox6
-        '
-        Me.TextBox6.Location = New System.Drawing.Point(126, 162)
-        Me.TextBox6.Name = "TextBox6"
-        Me.TextBox6.Size = New System.Drawing.Size(150, 20)
-        Me.TextBox6.TabIndex = 18
-        '
-        'DateTimePicker1
-        '
-        Me.DateTimePicker1.Location = New System.Drawing.Point(117, 122)
-        Me.DateTimePicker1.Name = "DateTimePicker1"
-        Me.DateTimePicker1.Size = New System.Drawing.Size(155, 20)
-        Me.DateTimePicker1.TabIndex = 15
+        Me.Label1.AutoSize = True
+        Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 18.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label1.Location = New System.Drawing.Point(222, 41)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(209, 29)
+        Me.Label1.TabIndex = 0
+        Me.Label1.Text = "GROCERY ITEM"
         '
         'Button1
         '
