@@ -9,7 +9,7 @@ Public Class MealPlan
 
     Private Sub btnEdit_Click(sender As Object, e As EventArgs) Handles btnEdit.Click
         Try
-            Debug.WriteLine("Entering btnSave_Click")
+            Debug.WriteLine("Entering btnEdit_Click")
             Using conn As New OleDbConnection(Module1.connectionString)
                 conn.Open()
 
@@ -28,7 +28,7 @@ Public Class MealPlan
                     cmd.Parameters.AddWithValue("@Frequency", ComboBox2.SelectedItem.ToString)
                     cmd.ExecuteNonQuery()
                 End Using
-                MessageBox.Show("MealPlan Added successfully")
+                MessageBox.Show("MealPlan Updated successfully")
 
             End Using
 
@@ -311,7 +311,7 @@ Public Class MealPlan
         'Module1.Mains()
 
         lstMealSuggestions.Items.Clear()
-        'TextBox1.ReadOnly = True
+        TextBox4.ReadOnly = True
         Dim meals As List(Of String) = SuggestMeals()
 
         If meals.Count > 0 Then
