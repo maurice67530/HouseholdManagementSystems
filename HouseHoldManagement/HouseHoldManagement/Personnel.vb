@@ -165,6 +165,8 @@ Public Class Personnel
             ComboBox1.Text = row.Cells("Role").Value.ToString()
             ComboBox3.Text = row.Cells("Gender").Value.ToString()
             TextBox6.Text = row.Cells("PostalCode").Value.ToString()
+            TextBox7.Text = row.Cells("Photo").Value.ToString()
+            PictureBox1.ImageLocation = row.Cells("Photo").Value.ToString()
             ComboBox2.SelectedItem = row.Cells("MaritalStatus").Value.ToString()
             'TextBox7.Text = row.Cells("Deleter").Value.ToString()
         End If
@@ -198,13 +200,14 @@ Public Class Personnel
                 Dim Age As String = TextBox5.Text
                 Dim PostalCode As String = TextBox6.Text
                 Dim MaritalStatus As String = ComboBox2.SelectedItem.ToString
+                Dim Photo As String = TextBox7.Text
 
                 ' Get the ID of the selected row (assuming your table has a primary key named "ID")  
                 Dim selectedRow As DataGridViewRow = DataGridView1.SelectedRows(0)
                 Dim ID As Integer = Convert.ToInt32(selectedRow.Cells("ID").Value) ' Change "ID" to your primary key column name  
 
                 ' Create an OleDbCommand to update the personnel data in the database  
-                Dim cmd As New OleDbCommand("UPDATE [PersonalDetails] SET [FirstName] = ?, [LastName] = ?, [Gender] = ?, [Contact] = ?, [Email] = ?, [Role] = ?, [Age] = ?, [PostalCode] = ?, [MaritalStatus] = ? WHERE ID = ?", connec)
+                Dim cmd As New OleDbCommand("UPDATE [PersonalDetails] SET [FirstName] = ?, [LastName] = ?, [Gender] = ?, [Contact] = ?, [Email] = ?, [Role] = ?, [Age] = ?, [PostalCode] = ?, [MaritalStatus] = ?, [Photo] = ? WHERE ID = ?", connec)
 
                 ' Set the parameter values from the UI controls  
                 cmd.Parameters.AddWithValue("@FirstName", FirstName)
@@ -216,6 +219,7 @@ Public Class Personnel
                 cmd.Parameters.AddWithValue("@Age", Age)
                 cmd.Parameters.AddWithValue("@PostalCode", PostalCode)
                 cmd.Parameters.AddWithValue("MaritalStatus", MaritalStatus)
+                cmd.Parameters.AddWithValue("Photo", Photo)
                 cmd.Parameters.AddWithValue("ID", ID)
 
                 ' Execute the SQL command to update the data
@@ -301,6 +305,8 @@ Public Class Personnel
                 ComboBox1.SelectedItem = row.Cells("Role").Value.ToString()
                 ComboBox3.SelectedItem = row.Cells("Gender").Value.ToString()
                 TextBox6.Text = row.Cells("PostalCode").Value.ToString()
+                TextBox7.Text = row.Cells("Photo").Value.ToString()
+                PictureBox1.ImageLocation = row.Cells("Photo").Value.ToString()
                 DateTimePicker1.Value = row.Cells("DateOfBirth").Value.ToString()
             End If
         End If
