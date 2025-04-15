@@ -24,7 +24,6 @@ Partial Class PhotoGallery
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(PhotoGallery))
-        Me.Label11 = New System.Windows.Forms.Label()
         Me.Label10 = New System.Windows.Forms.Label()
         Me.Label7 = New System.Windows.Forms.Label()
         Me.TextBox4 = New System.Windows.Forms.TextBox()
@@ -43,7 +42,6 @@ Partial Class PhotoGallery
         Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
         Me.Button6 = New System.Windows.Forms.Button()
         Me.ComboBox1 = New System.Windows.Forms.ComboBox()
-        Me.TextBox5 = New System.Windows.Forms.TextBox()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.Button5 = New System.Windows.Forms.Button()
         Me.Button4 = New System.Windows.Forms.Button()
@@ -58,20 +56,13 @@ Partial Class PhotoGallery
         Me.Label9 = New System.Windows.Forms.Label()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         Me.Button7 = New System.Windows.Forms.Button()
+        Me.Label11 = New System.Windows.Forms.Label()
+        Me.TextBox5 = New System.Windows.Forms.TextBox()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel1.SuspendLayout()
         Me.Panel2.SuspendLayout()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
-        '
-        'Label11
-        '
-        Me.Label11.AutoSize = True
-        Me.Label11.Location = New System.Drawing.Point(10, 197)
-        Me.Label11.Name = "Label11"
-        Me.Label11.Size = New System.Drawing.Size(48, 13)
-        Me.Label11.TabIndex = 107
-        Me.Label11.Text = "File Path"
         '
         'Label10
         '
@@ -86,7 +77,7 @@ Partial Class PhotoGallery
         'Label7
         '
         Me.Label7.AutoSize = True
-        Me.Label7.Location = New System.Drawing.Point(10, 171)
+        Me.Label7.Location = New System.Drawing.Point(10, 200)
         Me.Label7.Name = "Label7"
         Me.Label7.Size = New System.Drawing.Size(41, 13)
         Me.Label7.TabIndex = 125
@@ -94,7 +85,7 @@ Partial Class PhotoGallery
         '
         'TextBox4
         '
-        Me.TextBox4.Location = New System.Drawing.Point(104, 164)
+        Me.TextBox4.Location = New System.Drawing.Point(104, 193)
         Me.TextBox4.Name = "TextBox4"
         Me.TextBox4.Size = New System.Drawing.Size(176, 20)
         Me.TextBox4.TabIndex = 124
@@ -219,13 +210,6 @@ Partial Class PhotoGallery
         Me.ComboBox1.Size = New System.Drawing.Size(176, 21)
         Me.ComboBox1.TabIndex = 118
         '
-        'TextBox5
-        '
-        Me.TextBox5.Location = New System.Drawing.Point(104, 190)
-        Me.TextBox5.Name = "TextBox5"
-        Me.TextBox5.Size = New System.Drawing.Size(176, 20)
-        Me.TextBox5.TabIndex = 104
-        '
         'Panel1
         '
         Me.Panel1.BackColor = System.Drawing.Color.Silver
@@ -301,10 +285,10 @@ Partial Class PhotoGallery
         Me.Panel2.BackColor = System.Drawing.Color.Silver
         Me.Panel2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         Me.Panel2.Controls.Add(Me.Label11)
+        Me.Panel2.Controls.Add(Me.TextBox5)
         Me.Panel2.Controls.Add(Me.ComboBox2)
         Me.Panel2.Controls.Add(Me.Label8)
         Me.Panel2.Controls.Add(Me.Label7)
-        Me.Panel2.Controls.Add(Me.TextBox5)
         Me.Panel2.Controls.Add(Me.TextBox4)
         Me.Panel2.Controls.Add(Me.TextBox2)
         Me.Panel2.Controls.Add(Me.Label3)
@@ -370,6 +354,22 @@ Partial Class PhotoGallery
         Me.Button7.Text = " "
         Me.Button7.UseVisualStyleBackColor = False
         '
+        'Label11
+        '
+        Me.Label11.AutoSize = True
+        Me.Label11.Location = New System.Drawing.Point(10, 173)
+        Me.Label11.Name = "Label11"
+        Me.Label11.Size = New System.Drawing.Size(48, 13)
+        Me.Label11.TabIndex = 131
+        Me.Label11.Text = "File Path"
+        '
+        'TextBox5
+        '
+        Me.TextBox5.Location = New System.Drawing.Point(104, 166)
+        Me.TextBox5.Name = "TextBox5"
+        Me.TextBox5.Size = New System.Drawing.Size(176, 20)
+        Me.TextBox5.TabIndex = 130
+        '
         'PhotoGallery
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -389,6 +389,7 @@ Partial Class PhotoGallery
         Me.Controls.Add(Me.DataGridView1)
         Me.Controls.Add(Me.Label9)
         Me.Name = "PhotoGallery"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "PhotoGallery"
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel1.ResumeLayout(False)
@@ -399,7 +400,6 @@ Partial Class PhotoGallery
         Me.ResumeLayout(False)
 
     End Sub
-    Friend WithEvents Label11 As Label
     Friend WithEvents Label10 As Label
     Friend WithEvents Label7 As Label
     Friend WithEvents TextBox4 As TextBox
@@ -418,7 +418,6 @@ Partial Class PhotoGallery
     Friend WithEvents Timer1 As Timer
     Friend WithEvents Button6 As Button
     Friend WithEvents ComboBox1 As ComboBox
-    Friend WithEvents TextBox5 As TextBox
     Friend WithEvents Panel1 As Panel
     Friend WithEvents Button5 As Button
     Friend WithEvents Button4 As Button
@@ -433,4 +432,6 @@ Partial Class PhotoGallery
     Friend WithEvents ComboBox2 As ComboBox
     Friend WithEvents Label8 As Label
     Friend WithEvents Button7 As Button
+    Friend WithEvents Label11 As Label
+    Friend WithEvents TextBox5 As TextBox
 End Class
