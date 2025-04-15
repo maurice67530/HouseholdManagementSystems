@@ -89,7 +89,7 @@ Public Class Notifications
         ToolTip1.SetToolTip(Button3, "Refresh")
         LoadNotifications()
 
-        'CheckInventoryAndChores()
+
 
     End Sub
 

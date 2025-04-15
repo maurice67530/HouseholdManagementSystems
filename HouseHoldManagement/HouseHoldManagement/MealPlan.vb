@@ -350,7 +350,7 @@ Public Class MealPlan
     Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
 
         Try
-            Debug.WriteLine("Entering btnEdit_Click")
+            Debug.WriteLine("Entering btnSave_Click")
             Using conn As New OleDbConnection(Module1.connectionString)
                 conn.Open()
 
@@ -384,7 +384,7 @@ Public Class MealPlan
             Debug.WriteLine($"Stack Trace: {ex.StackTrace}")
         End Try
 
-        Debug.WriteLine("Existing btnEdit_Click")
+        Debug.WriteLine("Existing btnSave_Click")
 
 
     End Sub
@@ -409,7 +409,7 @@ Public Class MealPlan
             incmpleteCount += 1
             '    End If
             'Next
-            Label11.Text = "Incomplete MealPlan:" & incmpleteCount.ToString
+            Label14.Text = "Incomplete MealPlan:" & incmpleteCount.ToString
         Catch ex As Exception
             MessageBox.Show("Error highlighting overdue meals")
 
