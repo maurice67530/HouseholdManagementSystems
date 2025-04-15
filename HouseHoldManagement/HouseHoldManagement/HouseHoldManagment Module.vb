@@ -5,7 +5,7 @@ Module HouseHoldManagment_Module
 
     Public currentUser As String ' Global variable for logged-in user
     Public Property conn As New OleDbConnection(connectionString)
-    Public Const connectionString As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Mudzunga\Source\Repos\maurice67530\HouseholdManagementSystems\HMS.accdb;Persist Security Info=False;"
+    Public Const connectionString As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Muhanelwa\Source\Repos\maurice67530\HouseholdManagementSystems\HMS.accdb;Persist Security Info=False;"
 
     Public Function GetConnection() As OleDbConnection
         Return New OleDbConnection(connectionString)
@@ -13,7 +13,9 @@ Module HouseHoldManagment_Module
 
 End Module
 
-
+Module Ndamu
+    Public Const connectionstring As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Nedzamba\Source\Repos\HouseholdManagementSystems\HMS.accdb"
+End Module
 
 Module Rasta
     ' Connection string using relative path to the database
@@ -26,7 +28,7 @@ Module Rasta
 End Module
 Module Module1
     Public Property conn As New OleDbConnection(connectionString)
-    Public Const connectionString As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Zwivhuya\Source\Repos\maurice67530\HouseholdManagementSystems\HMS.accdb;Persist Security Info=False;"
+    Public Const connectionString As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Mudzunga\Source\Repos\maurice67530\HouseholdManagementSystems\HMS.accdb;Persist Security Info=False;"
 
 
 
@@ -102,9 +104,8 @@ Module Rinae
 End Module
 
 '[Dongola] vhasongo silinga
-Module InventoryModule
-    Public Const connectionString As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Faith\Source\Repos\maurice67530\HouseholdManagementSystems\HMS.accdb"
-
+Module Cruwza
+    Public Const connectionString As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Dongola\Source\Repos\maurice67530\HouseholdManagementSystems\HMS.accdb"
     Public Sub FilterInventory(Category As String, Unit As String)
         Dim taskTable As New DataTable
         Dim conn As New OleDbConnection(connectionString)
@@ -179,7 +180,6 @@ End Module
 Module Xiluva
     Public Const connectionString As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Xiluva\Source\Repos\HouseholdManagementSystems\HMS.accdb"
 End Module
-
 'Murangi (don't Touch)
 Module Murangi
     Public Const connectionString As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Murangi\Source\Repos\maurice67530\HouseholdManagementSystems\HMS.accdb"
@@ -190,7 +190,7 @@ Module Rotondwa
 End Module
 Module Ndivhuwo
     Public Property conn As New OleDbConnection(connectionString)
-    Public Const connectionString As String = " Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Ndivhuwo\Source\Repos\maurice67530\HouseholdManagementSystems\HMS.accdb;Persist Security Info=False;"
+    Public Const connectionString As String = " Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Delicious\Source\Repos\maurice67530\HouseholdManagementSystems\HMS.accdb"
 End Module
 Module Masindi
     Public Property conn As New OleDbConnection(connectionString)
@@ -199,4 +199,8 @@ End Module
 Module khodani
     Public Property conn As New OleDbConnection(connectionString)
     Public Const connectionString As String = " Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\khodani\Source\Repos\maurice67530\HouseholdManagementSystems\HMS.accdb;Persist Security Info=False;"
+End Module
+Module Faith
+    Public Property conn As New OleDbConnection(connectionString)
+    Public Const connectionString As String = " Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Faith\Source\Repos\maurice67530\HouseholdManagementSystems\HMS.accdb;Persist Security Info=False;"
 End Module

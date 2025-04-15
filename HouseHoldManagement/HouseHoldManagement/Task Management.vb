@@ -1,10 +1,9 @@
 ﻿Imports System.Data.OleDb
 Imports HouseHoldManagement
 Public Class Task_Management
-    Public Const connectionString As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Delicious\Source\Repos\maurice67530\HouseholdManagementSystems\HMS.accdb"
-    Public Property connect As New OleDbConnection(Ndivhuwo.connectionString)
-    Public Property connn As New OleDbConnection(Masindi.connectionString)
-    Public Property conn As New OleDbConnection(Murangi.connectionString)
+    Public Property conn As New OleDbConnection(Ndivhuwo.connectionString)
+    'Public Property connn As New OleDbConnection(khodani.connectionString)
+    'Public Property connect As New OleDbConnection(Faith.connectionString)
     'Dim conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
     Private Status As String
     Private Tasks As Object
@@ -12,14 +11,14 @@ Public Class Task_Management
     Public Sub LoadTasksDataFromDatabase()
 
         Debug.WriteLine("LoadTasksDataFromDatabase()")
-        Using connect As New OleDbConnection(connectionString)
-            connect.Open()
+        Using conn As New OleDbConnection(Ndivhuwo.connectionString)
+            conn.Open()
 
             ' Update the table name if necessary  
             Dim tableName As String = "Tasks"
 
             ' Create an OleDbCommand to select the data from the database  
-            Dim cmd As New OleDbCommand($"SELECT * FROM {tableName}", connect)
+            Dim cmd As New OleDbCommand($"SELECT * FROM {tableName}", conn)
 
             ' Create a DataAdapter and fill a DataTable  
             Dim da As New OleDbDataAdapter(cmd)
@@ -142,7 +141,7 @@ Public Class Task_Management
                 DateTimePicker1.Focus()
 
             End If
-            Using conn As New OleDbConnection(connectionString)
+            Using conn As New OleDbConnection(Ndivhuwo.connectionString)
                 conn.Open()
 
                 Dim tableName As String = "Tasks"
