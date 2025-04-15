@@ -2,7 +2,7 @@
 Public Class Register
     Public Property conn As New OleDbConnection(Xiluva.connectionString)
 
-    Public Const connectionString As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Xiluva\Source\Repos\maurice67530\HouseholdManagementSystems\HMS.accdb;Persist Security Info=False;"
+    Public Const connectionString As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Xiluva\Source\Repos\maurice67530\HouseholdManagementSystems\HMS.accdb"
 
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
 
