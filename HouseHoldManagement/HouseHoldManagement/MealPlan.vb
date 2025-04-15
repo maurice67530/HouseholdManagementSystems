@@ -451,7 +451,7 @@ Public Class MealPlan
 
         If openFileDialog.ShowDialog() = DialogResult.OK Then
             PictureBox1.ImageLocation = openFileDialog.FileName
-            TextBox4.Text = openFileDialog.FileName
+            TextBox3.Text = openFileDialog.FileName
         End If
     End Sub
 
