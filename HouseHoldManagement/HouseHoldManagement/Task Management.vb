@@ -4,7 +4,6 @@ Public Class Task_Management
     Public Property conn As New OleDbConnection(Ndivhuwo.connectionString)
     'Public Property connn As New OleDbConnection(khodani.connectionString)
     'Public Property connect As New OleDbConnection(Faith.connectionString)
-    'Dim conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
     Private Status As String
     Private Tasks As Object
     Public Property Priority As String
@@ -50,7 +49,7 @@ Public Class Task_Management
         PopulateComboboxFromDatabase(ComboBox3)
     End Sub
     Public Sub PopulateComboboxFromDatabase(ByRef comboBox As ComboBox)
-        Dim conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
+        Dim conn As New OleDbConnection(Ndivhuwo.connectionString)
         Try
             Debug.WriteLine("populating combobox from database successfully!")
             ' 1. Open the database connection  
@@ -94,7 +93,7 @@ Public Class Task_Management
             If confirmationResult = DialogResult.Yes Then
                 ' Proceed with deletion  
                 Try
-                    Using conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
+                    Using conn As New OleDbConnection(Ndivhuwo.connectionString)
                         conn.Open()
 
                         ' Create the delete command  
@@ -190,7 +189,7 @@ Public Class Task_Management
     End Sub
 
     Private Sub Button5_Click(sender As Object, e As EventArgs) Handles Button5.Click
-        Dim conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
+        Dim conn As New OleDbConnection(Ndivhuwo.connectionString)
         Dim TasksTable As New DataTable()
         Try
             conn.Open()
@@ -276,7 +275,7 @@ Public Class Task_Management
             Dim AssignedTo As String = ComboBox3.SelectedItem.ToString()
 
 
-            Using conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
+            Using conn As New OleDbConnection(Ndivhuwo.connectionString)
                 conn.Open()
 
                 ' Get the ID of the selected row (assuming your table has a primary key named "ID")  
