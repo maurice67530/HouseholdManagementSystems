@@ -64,6 +64,7 @@ Partial Class Expense
         Me.Label11 = New System.Windows.Forms.Label()
         Me.PrintDialog1 = New System.Windows.Forms.PrintDialog()
         Me.PrintDocument1 = New System.Drawing.Printing.PrintDocument()
+        Me.Button8 = New System.Windows.Forms.Button()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel1.SuspendLayout()
         Me.Panel2.SuspendLayout()
@@ -92,7 +93,7 @@ Partial Class Expense
         '
         Me.Button6.BackColor = System.Drawing.SystemColors.ActiveCaption
         Me.Button6.Image = CType(resources.GetObject("Button6.Image"), System.Drawing.Image)
-        Me.Button6.Location = New System.Drawing.Point(119, 462)
+        Me.Button6.Location = New System.Drawing.Point(112, 462)
         Me.Button6.Name = "Button6"
         Me.Button6.Size = New System.Drawing.Size(75, 51)
         Me.Button6.TabIndex = 102
@@ -102,7 +103,7 @@ Partial Class Expense
         '
         Me.Button5.BackColor = System.Drawing.SystemColors.ActiveCaption
         Me.Button5.Image = CType(resources.GetObject("Button5.Image"), System.Drawing.Image)
-        Me.Button5.Location = New System.Drawing.Point(227, 462)
+        Me.Button5.Location = New System.Drawing.Point(203, 462)
         Me.Button5.Name = "Button5"
         Me.Button5.Size = New System.Drawing.Size(75, 51)
         Me.Button5.TabIndex = 101
@@ -422,7 +423,7 @@ Partial Class Expense
         '
         Me.Button4.BackColor = System.Drawing.SystemColors.ActiveCaption
         Me.Button4.Image = CType(resources.GetObject("Button4.Image"), System.Drawing.Image)
-        Me.Button4.Location = New System.Drawing.Point(337, 462)
+        Me.Button4.Location = New System.Drawing.Point(299, 461)
         Me.Button4.Name = "Button4"
         Me.Button4.Size = New System.Drawing.Size(75, 51)
         Me.Button4.TabIndex = 99
@@ -432,7 +433,7 @@ Partial Class Expense
         '
         Me.Button3.BackColor = System.Drawing.SystemColors.ActiveCaption
         Me.Button3.Image = CType(resources.GetObject("Button3.Image"), System.Drawing.Image)
-        Me.Button3.Location = New System.Drawing.Point(444, 462)
+        Me.Button3.Location = New System.Drawing.Point(393, 462)
         Me.Button3.Name = "Button3"
         Me.Button3.Size = New System.Drawing.Size(75, 51)
         Me.Button3.TabIndex = 98
@@ -451,7 +452,7 @@ Partial Class Expense
         '
         Me.Button1.BackColor = System.Drawing.SystemColors.ActiveCaption
         Me.Button1.Image = CType(resources.GetObject("Button1.Image"), System.Drawing.Image)
-        Me.Button1.Location = New System.Drawing.Point(555, 462)
+        Me.Button1.Location = New System.Drawing.Point(573, 462)
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(75, 51)
         Me.Button1.TabIndex = 96
@@ -471,11 +472,22 @@ Partial Class Expense
         '
         Me.PrintDialog1.UseEXDialog = True
         '
+        'Button8
+        '
+        Me.Button8.BackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.Button8.Image = CType(resources.GetObject("Button8.Image"), System.Drawing.Image)
+        Me.Button8.Location = New System.Drawing.Point(485, 462)
+        Me.Button8.Name = "Button8"
+        Me.Button8.Size = New System.Drawing.Size(75, 51)
+        Me.Button8.TabIndex = 121
+        Me.Button8.UseVisualStyleBackColor = False
+        '
         'Expense
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(660, 519)
+        Me.Controls.Add(Me.Button8)
         Me.Controls.Add(Me.DataGridView1)
         Me.Controls.Add(Me.Button7)
         Me.Controls.Add(Me.Button6)
@@ -541,4 +553,5 @@ Partial Class Expense
     Friend WithEvents PrintDocument1 As Printing.PrintDocument
     Friend WithEvents Label16 As Label
     Friend WithEvents Label15 As Label
+    Friend WithEvents Button8 As Button
 End Class
