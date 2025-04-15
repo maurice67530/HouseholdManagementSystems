@@ -190,7 +190,7 @@ Module Rotondwa
 End Module
 Module Ndivhuwo
     Public Property conn As New OleDbConnection(connectionString)
-    Public Const connectionString As String = " Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Ndivhuwo\Source\Repos\maurice67530\HouseholdManagementSystems\HMS.accdb;Persist Security Info=False;"
+    Public Const connectionString As String = " Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Delicious\Source\Repos\maurice67530\HouseholdManagementSystems\HMS.accdb"
 End Module
 Module Masindi
     Public Property conn As New OleDbConnection(connectionString)
