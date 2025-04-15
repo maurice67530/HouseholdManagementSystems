@@ -1,9 +1,9 @@
 ﻿Imports System.Data.OleDb
 Imports HouseHoldManagement
 Public Class Task_Management
-    Public Property connect As New OleDbConnection(Ndivhuwo.connectionString)
-    Public Property connn As New OleDbConnection(khodani.connectionString)
-    Public Property conn As New OleDbConnection(Faith.connectionString)
+    Public Property conn As New OleDbConnection(Ndivhuwo.connectionString)
+    'Public Property connn As New OleDbConnection(khodani.connectionString)
+    'Public Property connect As New OleDbConnection(Faith.connectionString)
     'Dim conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
     Private Status As String
     Private Tasks As Object
@@ -11,14 +11,14 @@ Public Class Task_Management
     Public Sub LoadTasksDataFromDatabase()
 
         Debug.WriteLine("LoadTasksDataFromDatabase()")
-        Using connect As New OleDbConnection(Ndivhuwo.connectionString)
-            connect.Open()
+        Using conn As New OleDbConnection(Ndivhuwo.connectionString)
+            conn.Open()
 
             ' Update the table name if necessary  
             Dim tableName As String = "Tasks"
 
             ' Create an OleDbCommand to select the data from the database  
-            Dim cmd As New OleDbCommand($"SELECT * FROM {tableName}", connect)
+            Dim cmd As New OleDbCommand($"SELECT * FROM {tableName}", conn)
 
             ' Create a DataAdapter and fill a DataTable  
             Dim da As New OleDbDataAdapter(cmd)
@@ -347,10 +347,6 @@ Public Class Task_Management
     End Sub
 
     Private Sub ComboBox3_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ComboBox3.SelectedIndexChanged
-
-    End Sub
-
-    Private Sub Label1_Click(sender As Object, e As EventArgs) Handles Label1.Click
 
     End Sub
 End Class
