@@ -35,7 +35,7 @@ Public Class Personnel
                 'Dim tableName As String = "Personnel"
 
                 ' Create an OleDbCommand to insert the personnel data into the database  
-                Dim cmd As New OleDbCommand("INSERT INTO PersonalDetails ( FirstName, LastName, DateOfBirth, Gender, Contact, Email, Role, Age, PostalCode, MaritalStatus) VALUES ( ?, ?, ?, ?, ?, ?, ?, ? ,?, ?)", connect)
+                Dim cmd As New OleDbCommand("INSERT INTO PersonalDetails ( FirstName, LastName, DateOfBirth, Gender, Contact, Email, Role, Age, PostalCode, MaritalStatus, Photo ) VALUES ( ?, ?, ?, ?, ?, ?, ?, ? ,?, ?, ?)", connect)
 
                 ' Set the parameter values from the UI controls 
                 'Class declaretions
@@ -52,7 +52,7 @@ Public Class Personnel
                 person.Age = TextBox5.Text
                 person.postalcode = TextBox6.Text
                 person.MaritalStatus = ComboBox2.SelectedItem.ToString
-
+                person.Photo = TextBox7.Text
                 'For Each person As person In Personal
                 cmd.Parameters.Clear()
 
@@ -67,6 +67,7 @@ Public Class Personnel
                 cmd.Parameters.AddWithValue("@Age", person.Age)
                 cmd.Parameters.AddWithValue("@PostalCode", person.postalcode)
                 cmd.Parameters.AddWithValue("@MaritalStatus", person.MaritalStatus)
+                cmd.Parameters.AddWithValue("@Photo", person.Photo)
 
 
                 'cmd.Parameters.AddWithValue("@PhysicalAddres", TextBox7.Text)
@@ -82,6 +83,7 @@ Public Class Personnel
                       "Role: " & person.Role & vbCrLf &
                       "Age: " & person.Age & vbCrLf &
                       "Postal Code: " & person.postalcode & vbCrLf &
+                      "Photo: " & person.Photo & vbCrLf &
                       "Health Status: " & person.MaritalStatus & vbCrLf, vbInformation, "Credentials  confirmation")
 
                 MessageBox.Show("Personnel information saved to Database successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
@@ -163,6 +165,8 @@ Public Class Personnel
             ComboBox1.Text = row.Cells("Role").Value.ToString()
             ComboBox3.Text = row.Cells("Gender").Value.ToString()
             TextBox6.Text = row.Cells("PostalCode").Value.ToString()
+            TextBox7.Text = row.Cells("Photo").Value.ToString()
+            PictureBox1.ImageLocation = row.Cells("Photo").Value.ToString()
             ComboBox2.SelectedItem = row.Cells("MaritalStatus").Value.ToString()
             'TextBox7.Text = row.Cells("Deleter").Value.ToString()
         End If
@@ -196,13 +200,14 @@ Public Class Personnel
                 Dim Age As String = TextBox5.Text
                 Dim PostalCode As String = TextBox6.Text
                 Dim MaritalStatus As String = ComboBox2.SelectedItem.ToString
+                Dim Photo As String = TextBox7.Text
 
                 ' Get the ID of the selected row (assuming your table has a primary key named "ID")  
                 Dim selectedRow As DataGridViewRow = DataGridView1.SelectedRows(0)
                 Dim ID As Integer = Convert.ToInt32(selectedRow.Cells("ID").Value) ' Change "ID" to your primary key column name  
 
                 ' Create an OleDbCommand to update the personnel data in the database  
-                Dim cmd As New OleDbCommand("UPDATE [PersonalDetails] SET [FirstName] = ?, [LastName] = ?, [Gender] = ?, [Contact] = ?, [Email] = ?, [Role] = ?, [Age] = ?, [PostalCode] = ?, [MaritalStatus] = ? WHERE ID = ?", connec)
+                Dim cmd As New OleDbCommand("UPDATE [PersonalDetails] SET [FirstName] = ?, [LastName] = ?, [Gender] = ?, [Contact] = ?, [Email] = ?, [Role] = ?, [Age] = ?, [PostalCode] = ?, [MaritalStatus] = ?, [Photo] = ? WHERE ID = ?", connec)
 
                 ' Set the parameter values from the UI controls  
                 cmd.Parameters.AddWithValue("@FirstName", FirstName)
@@ -214,6 +219,7 @@ Public Class Personnel
                 cmd.Parameters.AddWithValue("@Age", Age)
                 cmd.Parameters.AddWithValue("@PostalCode", PostalCode)
                 cmd.Parameters.AddWithValue("MaritalStatus", MaritalStatus)
+                cmd.Parameters.AddWithValue("Photo", Photo)
                 cmd.Parameters.AddWithValue("ID", ID)
 
                 ' Execute the SQL command to update the data
@@ -299,6 +305,8 @@ Public Class Personnel
                 ComboBox1.SelectedItem = row.Cells("Role").Value.ToString()
                 ComboBox3.SelectedItem = row.Cells("Gender").Value.ToString()
                 TextBox6.Text = row.Cells("PostalCode").Value.ToString()
+                TextBox7.Text = row.Cells("Photo").Value.ToString()
+                PictureBox1.ImageLocation = row.Cells("Photo").Value.ToString()
                 DateTimePicker1.Value = row.Cells("DateOfBirth").Value.ToString()
             End If
         End If
@@ -350,9 +358,17 @@ Public Class Personnel
         Next
     End Sub
     Private Sub BtnAddpicture_Click(sender As Object, e As EventArgs) Handles BtnAddpicture.Click
-        OpenFileDialog1.Filter = "Bitmaps (*.bmp)|*.bmp| (*.jpg)|*.jpg"
-        If OpenFileDialog1.ShowDialog() = DialogResult.OK Then
-            PictureBox1.Image = System.Drawing.Image.FromFile(OpenFileDialog1.FileName)
+        'OpenFileDialog1.Filter = "Bitmaps (*.bmp)|*.bmp| (*.jpg)|*.jpg"
+        'If OpenFileDialog1.ShowDialog() = DialogResult.OK Then
+        '    PictureBox1.Image = System.Drawing.Image.FromFile(OpenFileDialog1.FileName)
+        '    TextBox7.Text = OpenFileDialog1.FileName
+
+        'End If
+        Dim OpenFileDialog As New OpenFileDialog()
+        OpenFileDialog.Filter = "Bitmaps (*.jpg)|*.jpg"
+        If OpenFileDialog.ShowDialog() = DialogResult.OK Then
+            PictureBox1.ImageLocation = OpenFileDialog.FileName
+            TextBox7.Text = OpenFileDialog.FileName
         End If
     End Sub
 
