@@ -335,6 +335,7 @@ Public Class Expense
         LoadExpenseDataFromDatabase()
         PopulateComboboxFromDatabase(ComboBox3)
     End Sub
+
     Public Sub PopulateComboboxFromDatabase(ByRef comboBox As ComboBox)
         Dim conn As New OleDbConnection(connectionString)
         Try
@@ -462,5 +463,8 @@ Public Class Expense
         Next
     End Sub
 
+    Private Sub Button8_Click(sender As Object, e As EventArgs) Handles Button8.Click
+        LoadExpenseDataFromDatabase()
+    End Sub
 End Class
 
