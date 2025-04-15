@@ -6,7 +6,6 @@ Public Class GroceryItemss
     Private Sub GroceryItemss_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Timer1.Start()
         LoadGrocerydataFromDatabase()
-
     End Sub
     Public Sub LoadGrocerydataFromDatabase()
         Try
@@ -34,8 +33,6 @@ Public Class GroceryItemss
         ToolTip1.SetToolTip(Button3, "Clear")
         ToolTip1.SetToolTip(Button1, "Submit")
         ToolTip1.SetToolTip(Button2, "Update")
-
-
     End Sub
     Private Sub Button5_Click(sender As Object, e As EventArgs) Handles Button5.Click
         Try
@@ -116,6 +113,7 @@ Public Class GroceryItemss
     End Sub
 
     Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
+
         Me.Close()
         Dashboard.Show()
     End Sub
@@ -148,7 +146,6 @@ Public Class GroceryItemss
                         "Category: " & TextBox4.Text & vbCrLf &
                         "PricePerUnit: " & TextBox5.Text & vbCrLf &
                         "IsPurchased: " & TextBox6.Text)
-
 
             End Using
         Catch ex As OleDbException
