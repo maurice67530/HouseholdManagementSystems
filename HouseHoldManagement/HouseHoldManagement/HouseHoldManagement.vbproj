@@ -6,7 +6,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{DEC8BF09-6D70-450D-B49C-BFCF4DBBB6B8}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <StartupObject>HouseHoldManagement.Task_Management</StartupObject>
+    <StartupObject>HouseHoldManagement.Dashboard</StartupObject>
     <RootNamespace>HouseHoldManagement</RootNamespace>
     <AssemblyName>HouseHoldManagement</AssemblyName>
     <FileAlignment>512</FileAlignment>
@@ -253,11 +253,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\icons8-delete-321.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="HMS.accdb">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
