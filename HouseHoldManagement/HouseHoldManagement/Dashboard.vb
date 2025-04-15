@@ -2,7 +2,7 @@
 Imports System.IO
 Imports System.Data.OleDb
 Public Class Dashboard
-    Public Const connectionString As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Aousy\Source\Repos\maurice67530\HouseholdManagementSystems\HMS.accdb"
+    Public Const connectionString As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Rinae\Source\Repos\maurice67530\HouseholdManagementSystems\HMS.accdb"
 
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
         Inventory.ShowDialog()
@@ -46,7 +46,7 @@ Public Class Dashboard
 
         LoadUpcomingMeals()
         LoadChoresStatus()
-        PopulateListboxFromChores(ListBox2)
+        PopulateListboxFromChores(ListBox1)
         'LoadExpensesData()
         LoadChartData()
         SetupCharts()
@@ -183,7 +183,7 @@ Public Class Dashboard
     Private Sub LoadChartData()
 
         ' update this connection string based  on my database confirguration
-        Dim connectionString As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Aousy\Source\Repos\maurice67530\HouseholdManagementSystems\HMS.accdb"
+        Dim connectionString As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Rinae\Source\Repos\maurice67530\HouseholdManagementSystems\HMS.accdb"
         Dim query As String = "SELECT [Amount], [Frequency] FROM [Expense]"
 
         Using conn As New OleDbConnection(connectionString)
@@ -225,9 +225,9 @@ Public Class Dashboard
             Dim reader As OleDbDataReader = cmd.ExecuteReader()
 
             'bind the retrieved data to the combobox
-            ListBox2.Items.Clear()
+            ListBox1.Items.Clear()
             While reader.Read()
-                ListBox2.Items.Add($"{reader("ID")} {reader("Status")} {reader("Title")}")
+                ListBox1.Items.Add($"{reader("ID")} {reader("Status")} {reader("Title")}")
             End While
 
             'close the database
@@ -248,9 +248,6 @@ Public Class Dashboard
 
     End Sub
 
-    Private Sub FlowLayoutPanel2_Paint(sender As Object, e As PaintEventArgs) Handles FlowLayoutPanel2.Paint
-
-    End Sub
     'Private photoList As New List(Of String)() ' List to store photo paths
     'Private currentPhotoIndex As Integer = 0
     'Private WithEvents photoTimer As New Timer()
