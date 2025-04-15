@@ -129,6 +129,8 @@ Public Class Personnel
         toolTip1.SetToolTip(BtnClear, "Clear")
         toolTip1.SetToolTip(BtnDailyTasks, "Daily tasks")
         toolTip1.SetToolTip(BtnSave, "Save")
+        toolTip1.SetToolTip(Button1, "Refresh Table")
+
     End Sub
     ' Method to load data into the DataGridView
     Private Sub LoadData()
@@ -390,17 +392,9 @@ Public Class Personnel
         TextBox7.Text = ""
         PictureBox1.ImageLocation = ""
     End Sub
-End Class
-'Public Class Person
-'    Public Property FirstName As String
-'    Public Property LastName As String
-'    Public Property Gender As String
-'    Public Property Email As String
-'    Public Property DateOfBirth As DateTime
-'    Public Property Role As String
-'    Public Property MaritalStatus As String
-'    Public Property postalcode As String
-'    Public Property Age As Integer
-'    Public Property Contact As Integer
 
-'End Class
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+        LoadData()
+    End Sub
+End Class
+
