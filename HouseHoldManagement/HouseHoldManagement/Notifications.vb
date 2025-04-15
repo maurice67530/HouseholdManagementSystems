@@ -329,7 +329,7 @@ Public Class Notifications
             ' --- If any alerts found, show and save them ---
             If summaryMessage <> "" Then
                 SystemSounds.Exclamation.Play()
-                MessageBox.Show(summaryMessage, "Household Alerts", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                MessageBox.Show(summaryMessage, "HOUSEHOLD UNREAD NOTIFICATIONS", MessageBoxButtons.OK, MessageBoxIcon.Information)
 
                 ' Save notifications shown in message box
                 For Each msg In notificationsToSave
