@@ -23,6 +23,7 @@ Partial Class MealPlan
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(MealPlan))
         Me.DataGridView1 = New System.Windows.Forms.DataGridView()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Panel2 = New System.Windows.Forms.Panel()
@@ -403,11 +404,11 @@ Partial Class MealPlan
         '
         'Button1
         '
+        Me.Button1.Image = CType(resources.GetObject("Button1.Image"), System.Drawing.Image)
         Me.Button1.Location = New System.Drawing.Point(519, 493)
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(41, 37)
         Me.Button1.TabIndex = 46
-        Me.Button1.Text = "Button1"
         Me.Button1.UseVisualStyleBackColor = True
         '
         'MealPlan
@@ -415,7 +416,7 @@ Partial Class MealPlan
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.SystemColors.Control
-        Me.ClientSize = New System.Drawing.Size(667, 545)
+        Me.ClientSize = New System.Drawing.Size(662, 545)
         Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.btnSuggest)
         Me.Controls.Add(Me.btnPrint)

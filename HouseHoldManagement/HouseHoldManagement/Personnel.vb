@@ -28,14 +28,14 @@ Public Class Personnel
         Try
             Debug.WriteLine("User confirmed btnSubmit")
 
-            Using connect As New OleDbConnection(Rasta.connectionString)
-                connect.Open()
+            Using connec As New OleDbConnection(Rasta.connectionString)
+                connec.Open()
 
                 ' Update the table name if necessary  
                 'Dim tableName As String = "Personnel"
 
                 ' Create an OleDbCommand to insert the personnel data into the database  
-                Dim cmd As New OleDbCommand("INSERT INTO PersonalDetails ( FirstName, LastName, DateOfBirth, Gender, Contact, Email, Role, Age, PostalCode, MaritalStatus, Photo ) VALUES ( ?, ?, ?, ?, ?, ?, ?, ? ,?, ?, ?)", connect)
+                Dim cmd As New OleDbCommand("INSERT INTO PersonalDetails ( FirstName, LastName, DateOfBirth, Gender, Contact, Email, Role, Age, PostalCode, MaritalStatus, Photo ) VALUES ( ?, ?, ?, ?, ?, ?, ?, ? ,?, ?, ?)", connec)
 
                 ' Set the parameter values from the UI controls 
                 'Class declaretions
@@ -387,6 +387,8 @@ Public Class Personnel
         ComboBox1.Text = ""
         ComboBox2.Text = ""
         ComboBox3.Text = ""
+        TextBox7.Text = ""
+        PictureBox1.ImageLocation = ""
     End Sub
 End Class
 'Public Class Person
