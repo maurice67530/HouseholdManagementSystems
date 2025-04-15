@@ -5,7 +5,7 @@ Public Class Inventory
             '  Dim dataTable As DataTable = HouseHold.GetData("SELECT * FROM Expense")
             ' DataGridView1.DataSource = DataTable
             Debug.WriteLine("Populate Datagridview: Datagridview populated successfully.")
-            Using conn As New OleDbConnection(InventoryModule.connectionString)
+            Using conn As New OleDbConnection(Cruwza.connectionString)
                 conn.Open()
 
                 Dim tableName As String = "Inventory"
@@ -25,7 +25,7 @@ Public Class Inventory
     End Sub
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         Try
-            Using conn As New OleDbConnection(InventoryModule.connectionString)
+            Using conn As New OleDbConnection(Cruwza.connectionString)
 
                 conn.Open()
                 Dim cmd As New OleDbCommand($"INSERT INTO Inventory ([ItemName], [Description], [Quantity], [Category], [ReorderLevel], [PricePerUnit], [DateAdded], [ExpiryDate], [Unit]) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)", conn)
@@ -81,7 +81,7 @@ Public Class Inventory
             Dim ExpiryDate As String = DateTimePicker1.Value
             Dim Unit As String = ComboBox2.Text
 
-            Using conn As New OleDbConnection(InventoryModule.connectionString)
+            Using conn As New OleDbConnection(Cruwza.connectionString)
 
                 conn.Open()
 
@@ -143,7 +143,7 @@ Public Class Inventory
                     Debug.WriteLine("Format errors in button delete")
                     Debug.WriteLine("Deleting data: Data delected")
                     Debug.WriteLine("Stack Trace: {ex.StackTrace}")
-                    Using conn As New OleDbConnection(InventoryModule.connectionString)
+                    Using conn As New OleDbConnection(Cruwza.connectionString)
                         conn.Open()
 
                         ' Create the delete command  
@@ -181,7 +181,7 @@ Public Class Inventory
         Dim selectedCategory As String = If(ComboBox1.SelectedItem IsNot Nothing, ComboBox1.SelectedItem.ToString(), "")
         Dim selectedUnit As String = If(ComboBox2.SelectedItem IsNot Nothing, ComboBox2.SelectedItem.ToString(), "")
 
-        InventoryModule.FilterInventory(selectedCategory, selectedUnit)
+        Cruwza.FilterInventory(selectedCategory, selectedUnit)
     End Sub
     Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
         TextBox1.Text = ""
