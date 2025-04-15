@@ -463,5 +463,8 @@ Public Class Expense
         Next
     End Sub
 
+    Private Sub Button8_Click(sender As Object, e As EventArgs) Handles Button8.Click
+        LoadExpenseDataFromDatabase()
+    End Sub
 End Class
 
