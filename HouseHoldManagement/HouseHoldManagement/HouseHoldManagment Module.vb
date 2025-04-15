@@ -26,7 +26,7 @@ Module Rasta
 End Module
 Module Module1
     Public Property conn As New OleDbConnection(connectionString)
-    Public Const connectionString As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Zwivhuya\Source\Repos\maurice67530\HouseholdManagementSystems\HMS.accdb;Persist Security Info=False;"
+    Public Const connectionString As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Mudzunga\Source\Repos\maurice67530\HouseholdManagementSystems\HMS.accdb;Persist Security Info=False;"
 
 
 
@@ -177,9 +177,8 @@ Module InventoryModule
 
 End Module
 Module Xiluva
-    Public Const connectionString As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Xiluva\Source\Repos\maurice67530\HouseholdManagementSystems\HMS.accdb"
+    Public Const connectionString As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Xiluva\Source\Repos\HouseholdManagementSystems\HMS.accdb"
 End Module
-
 'Murangi (don't Touch)
 Module Murangi
     Public Const connectionString As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Murangi\Source\Repos\maurice67530\HouseholdManagementSystems\HMS.accdb"
@@ -196,3 +195,11 @@ Module Masindi
     Public Property conn As New OleDbConnection(connectionString)
     Public Const connectionString As String = " Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Masindi\Source\Repos\maurice67530\HouseholdManagementSystems\HMS.accdb;Persist Security Info=False;"
 End Module
+Module khodani
+    Public Property conn As New OleDbConnection(connectionString)
+    Public Const connectionString As String = " Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\khodani\Source\Repos\maurice67530\HouseholdManagementSystems\HMS.accdb;Persist Security Info=False;"
+End Module
+'Module Faith
+'    Public Property conn As New OleDbConnection(connectionString)
+'     Public Const connectionString As String = " Provider=Microsoft.ACE.OLEDB.12.0;Data Source=
+'End Module
