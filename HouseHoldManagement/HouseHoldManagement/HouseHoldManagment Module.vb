@@ -201,7 +201,7 @@ Module khodani
     Public Property conn As New OleDbConnection(connectionString)
     Public Const connectionString As String = " Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\khodani\Source\Repos\maurice67530\HouseholdManagementSystems\HMS.accdb;Persist Security Info=False;"
 End Module
-'Module Faith
-'    Public Property conn As New OleDbConnection(connectionString)
-'     Public Const connectionString As String = " Provider=Microsoft.ACE.OLEDB.12.0;Data Source=
-'End Module
+Module Faith
+    Public Property conn As New OleDbConnection(connectionString)
+    Public Const connectionString As String = " Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Faith\Source\Repos\maurice67530\HouseholdManagementSystems\HMS.accdb;Persist Security Info=False;"
+End Module
