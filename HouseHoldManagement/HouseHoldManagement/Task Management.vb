@@ -1,9 +1,9 @@
 ﻿Imports System.Data.OleDb
 Imports HouseHoldManagement
 Public Class Task_Management
-    Public Property connect As New OleDbConnection(Ndivhuwo.connectionString)
+    Public Property conn As New OleDbConnection(Ndivhuwo.connectionString)
     Public Property connn As New OleDbConnection(khodani.connectionString)
-    Public Property connn As New OleDbConnection(Faith.connectionString)
+    Public Property connect As New OleDbConnection(Faith.connectionString)
     'Dim conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
     Private Status As String
     Private Tasks As Object
