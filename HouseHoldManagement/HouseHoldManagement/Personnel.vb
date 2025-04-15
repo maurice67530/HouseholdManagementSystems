@@ -387,6 +387,8 @@ Public Class Personnel
         ComboBox1.Text = ""
         ComboBox2.Text = ""
         ComboBox3.Text = ""
+        TextBox7.Text = ""
+        PictureBox1.ImageLocation = ""
     End Sub
 End Class
 'Public Class Person
