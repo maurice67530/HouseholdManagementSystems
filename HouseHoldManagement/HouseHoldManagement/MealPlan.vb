@@ -4,7 +4,7 @@ Imports System.Data.OleDb
 Public Class MealPlan
     ' Dim conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
     Public Property conn As New OleDbConnection(connectionString)
-    ' Connection string using relative path to the databas
+    ' Connection string using relative path to the database
     Public Const connectionString As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Mudzunga\Source\Repos\maurice67530\HouseholdManagementSystems\HMS.accdb;Persist Security Info=False;"
 
     Private Sub btnEdit_Click(sender As Object, e As EventArgs) Handles btnEdit.Click
@@ -211,6 +211,27 @@ Public Class MealPlan
             MessageBox.Show("An unexpected error occured Selecting the datagridview.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
         Debug.WriteLine("The DataGridView selected unsuccessful.")
+
+
+        If DataGridView1.SelectedRows.Count > 0 Then
+            Dim filePath As String = DataGridView1.SelectedRows(0).Cells("FilePath").Value.ToString()
+
+            If System.IO.File.Exists(filePath) Then
+                PictureBox1.Image = Image.FromFile(filePath)
+            Else
+                PictureBox1.Image = Nothing
+                MessageBox.Show("Image file not found.")
+            End If
+        End If
+
+
+
+
+
+
+
+
+
 
     End Sub
 
@@ -421,4 +442,17 @@ Public Class MealPlan
         Dim SelectedCalories As String = If(ComboBox1.SelectedItem IsNot Nothing, ComboBox1.SelectedItem.ToString(), "")
         Module1.FilterMealPlan(SelectedCalories)
     End Sub
+
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+
+
+        Dim openFileDialog As New OpenFileDialog()
+        openFileDialog.Filter = "Image Files|*.jpg;*.*.bmp"
+
+        If openFileDialog.ShowDialog() = DialogResult.OK Then
+            PictureBox1.ImageLocation = openFileDialog.FileName
+            TextBox4.Text = openFileDialog.FileName
+        End If
+    End Sub
+
 End Class
