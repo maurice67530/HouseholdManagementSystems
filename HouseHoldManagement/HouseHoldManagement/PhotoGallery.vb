@@ -27,8 +27,7 @@ Public Class PhotoGallery
         ' Set the ComboBox data source
         ComboBox2.DataSource = items
     End Sub
-
-    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
+    Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
         Debug.WriteLine("Entering button update click")
         If DataGridView1.SelectedRows.Count = 0 Then
             Debug.WriteLine("User confirmed update")
@@ -85,7 +84,6 @@ Public Class PhotoGallery
         Debug.WriteLine("Exiting button update")
 
     End Sub
-
     Private Sub Button5_Click(sender As Object, e As EventArgs) Handles Button5.Click
         Dim SearchTerm As String = TextBox4.Text
         'Dim connString As String()
@@ -123,7 +121,6 @@ Public Class PhotoGallery
             MessageBox.Show($"Error Loading photos data from database: {ex.Message}", "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
     End Sub
-
     Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
         Debug.WriteLine("Entering button delete")
         ' Check if there are any selected rows in the DataGridView for expenses  
@@ -178,7 +175,6 @@ Public Class PhotoGallery
         Debug.WriteLine("Exiting button delete")
 
     End Sub
-
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         Try
             ''validate due date is not in the past
@@ -264,7 +260,6 @@ Public Class PhotoGallery
         End Try
         Debug.WriteLine("Done with populating combobox from database")
     End Sub
-
     Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
         '  Dim selectedDateAdded As String = If(DateTimePicker1.Text IsNot Nothing, DateTimePicker1.Text.ToString(), "")
         Dim selectedFamilyMember As String = If(ComboBox1.SelectedItem IsNot Nothing, ComboBox1.SelectedItem.ToString(), "")
@@ -302,8 +297,6 @@ Public Class PhotoGallery
             Debug.Write($"Stack Trace: {ex.StackTrace}")
         End Try
     End Sub
-
-
     Dim currentImageIndex As Integer = 0
     Dim imagePaths As List(Of String) = New List(Of String)()
 
@@ -373,11 +366,9 @@ Public Class PhotoGallery
             'conn.Close()
         End Try
     End Sub
-
     Private Sub Button6_Click(sender As Object, e As EventArgs) Handles Button6.Click
         Timer1.Stop()
     End Sub
-
     Private Sub ComboBox2_SelectedIndexChanged(sender As Object, e As EventArgs)
         ' Clear previous images and reset variables
         imagePaths.Clear()
@@ -403,7 +394,6 @@ Public Class PhotoGallery
         End If
         'LoadFilteredMealPlan()
     End Sub
-
     Private Sub Button8_Click(sender As Object, e As EventArgs) Handles Button8.Click
         Dim OpenFileDialog As New OpenFileDialog()
         OpenFileDialog.Filter = "Bitmaps (*.jpg)|*.jpg"
@@ -412,19 +402,12 @@ Public Class PhotoGallery
             TextBox5.Text = OpenFileDialog.FileName
         End If
     End Sub
-
-    Private Sub Panel2_Paint(sender As Object, e As PaintEventArgs) Handles Panel2.Paint
-
-    End Sub
-
     Private Sub Label9_Click(sender As Object, e As EventArgs) Handles Label9.Click
 
     End Sub
-
     Private Sub DataGridView1_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridView1.CellContentClick
 
     End Sub
-
     Private Sub Button7_Click(sender As Object, e As EventArgs) Handles Button7.Click
         DataGridView1.Sort(DataGridView1.Columns("DateAdded"), System.ComponentModel.ListSortDirection.Ascending)
     End Sub
