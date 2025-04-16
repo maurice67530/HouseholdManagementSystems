@@ -340,4 +340,8 @@ Public Class Chores
             End If
         End Try
     End Sub
+
+    Private Sub Button8_Click(sender As Object, e As EventArgs) Handles Button8.Click
+
+    End Sub
 End Class
