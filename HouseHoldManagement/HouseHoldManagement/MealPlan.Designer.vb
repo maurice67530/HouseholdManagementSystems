@@ -29,17 +29,17 @@ Partial Class MealPlan
         Me.Panel2 = New System.Windows.Forms.Panel()
         Me.Label6 = New System.Windows.Forms.Label()
         Me.lstMealSuggestions = New System.Windows.Forms.ListBox()
-        Me.Label14 = New System.Windows.Forms.Label()
-        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.DateTimePicker2 = New System.Windows.Forms.DateTimePicker()
+        Me.Label14 = New System.Windows.Forms.Label()
+        Me.TextBox3 = New System.Windows.Forms.TextBox()
+        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
+        Me.Label9 = New System.Windows.Forms.Label()
+        Me.Label2 = New System.Windows.Forms.Label()
         Me.ComboBox1 = New System.Windows.Forms.ComboBox()
         Me.DateTimePicker1 = New System.Windows.Forms.DateTimePicker()
-        Me.TextBox3 = New System.Windows.Forms.TextBox()
         Me.NumericUpDown1 = New System.Windows.Forms.NumericUpDown()
         Me.Label8 = New System.Windows.Forms.Label()
         Me.Label10 = New System.Windows.Forms.Label()
-        Me.Label2 = New System.Windows.Forms.Label()
-        Me.Label9 = New System.Windows.Forms.Label()
         Me.Label11 = New System.Windows.Forms.Label()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.ComboBox2 = New System.Windows.Forms.ComboBox()
@@ -122,6 +122,13 @@ Partial Class MealPlan
         Me.lstMealSuggestions.Size = New System.Drawing.Size(189, 79)
         Me.lstMealSuggestions.TabIndex = 26
         '
+        'DateTimePicker2
+        '
+        Me.DateTimePicker2.Location = New System.Drawing.Point(117, 162)
+        Me.DateTimePicker2.Name = "DateTimePicker2"
+        Me.DateTimePicker2.Size = New System.Drawing.Size(200, 21)
+        Me.DateTimePicker2.TabIndex = 25
+        '
         'Label14
         '
         Me.Label14.AutoSize = True
@@ -132,6 +139,13 @@ Partial Class MealPlan
         Me.Label14.TabIndex = 23
         Me.Label14.Text = "Label14"
         '
+        'TextBox3
+        '
+        Me.TextBox3.Location = New System.Drawing.Point(117, 208)
+        Me.TextBox3.Name = "TextBox3"
+        Me.TextBox3.Size = New System.Drawing.Size(121, 21)
+        Me.TextBox3.TabIndex = 17
+        '
         'PictureBox1
         '
         Me.PictureBox1.Location = New System.Drawing.Point(6, 18)
@@ -141,12 +155,23 @@ Partial Class MealPlan
         Me.PictureBox1.TabIndex = 22
         Me.PictureBox1.TabStop = False
         '
-        'DateTimePicker2
+        'Label9
         '
-        Me.DateTimePicker2.Location = New System.Drawing.Point(117, 162)
-        Me.DateTimePicker2.Name = "DateTimePicker2"
-        Me.DateTimePicker2.Size = New System.Drawing.Size(200, 21)
-        Me.DateTimePicker2.TabIndex = 25
+        Me.Label9.AutoSize = True
+        Me.Label9.Location = New System.Drawing.Point(8, 209)
+        Me.Label9.Name = "Label9"
+        Me.Label9.Size = New System.Drawing.Size(55, 15)
+        Me.Label9.TabIndex = 10
+        Me.Label9.Text = "FilePath:"
+        '
+        'Label2
+        '
+        Me.Label2.AutoSize = True
+        Me.Label2.Location = New System.Drawing.Point(8, 160)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(61, 15)
+        Me.Label2.TabIndex = 3
+        Me.Label2.Text = "End Date:"
         '
         'ComboBox1
         '
@@ -162,13 +187,6 @@ Partial Class MealPlan
         Me.DateTimePicker1.Name = "DateTimePicker1"
         Me.DateTimePicker1.Size = New System.Drawing.Size(191, 21)
         Me.DateTimePicker1.TabIndex = 24
-        '
-        'TextBox3
-        '
-        Me.TextBox3.Location = New System.Drawing.Point(117, 208)
-        Me.TextBox3.Name = "TextBox3"
-        Me.TextBox3.Size = New System.Drawing.Size(121, 21)
-        Me.TextBox3.TabIndex = 17
         '
         'NumericUpDown1
         '
@@ -194,24 +212,6 @@ Partial Class MealPlan
         Me.Label10.Size = New System.Drawing.Size(55, 15)
         Me.Label10.TabIndex = 11
         Me.Label10.Text = "Calories:"
-        '
-        'Label2
-        '
-        Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(8, 160)
-        Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(61, 15)
-        Me.Label2.TabIndex = 3
-        Me.Label2.Text = "End Date:"
-        '
-        'Label9
-        '
-        Me.Label9.AutoSize = True
-        Me.Label9.Location = New System.Drawing.Point(8, 209)
-        Me.Label9.Name = "Label9"
-        Me.Label9.Size = New System.Drawing.Size(55, 15)
-        Me.Label9.TabIndex = 10
-        Me.Label9.Text = "FilePath:"
         '
         'Label11
         '
