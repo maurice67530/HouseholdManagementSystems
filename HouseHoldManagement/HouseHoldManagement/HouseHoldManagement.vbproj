@@ -86,9 +86,7 @@
     <Compile Include="dashboard.Designer.vb">
       <DependentUpon>dashboard.vb</DependentUpon>
     </Compile>
-    <Compile Include="dashboard.vb">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="dashboard.vb" />
     <Compile Include="Expense.Designer.vb">
       <DependentUpon>Expense.vb</DependentUpon>
     </Compile>
