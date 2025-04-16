@@ -92,8 +92,12 @@ Partial Class MealPlan
         Me.Panel2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         Me.Panel2.Controls.Add(Me.Label6)
         Me.Panel2.Controls.Add(Me.lstMealSuggestions)
+        Me.Panel2.Controls.Add(Me.DateTimePicker2)
         Me.Panel2.Controls.Add(Me.Label14)
+        Me.Panel2.Controls.Add(Me.TextBox3)
         Me.Panel2.Controls.Add(Me.PictureBox1)
+        Me.Panel2.Controls.Add(Me.Label9)
+        Me.Panel2.Controls.Add(Me.Label2)
         Me.Panel2.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Panel2.Location = New System.Drawing.Point(331, 27)
         Me.Panel2.Name = "Panel2"
@@ -103,7 +107,7 @@ Partial Class MealPlan
         'Label6
         '
         Me.Label6.AutoSize = True
-        Me.Label6.Location = New System.Drawing.Point(8, 217)
+        Me.Label6.Location = New System.Drawing.Point(8, 260)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(44, 15)
         Me.Label6.TabIndex = 7
@@ -113,7 +117,7 @@ Partial Class MealPlan
         '
         Me.lstMealSuggestions.FormattingEnabled = True
         Me.lstMealSuggestions.ItemHeight = 15
-        Me.lstMealSuggestions.Location = New System.Drawing.Point(6, 239)
+        Me.lstMealSuggestions.Location = New System.Drawing.Point(117, 263)
         Me.lstMealSuggestions.Name = "lstMealSuggestions"
         Me.lstMealSuggestions.Size = New System.Drawing.Size(189, 79)
         Me.lstMealSuggestions.TabIndex = 26
@@ -132,14 +136,14 @@ Partial Class MealPlan
         '
         Me.PictureBox1.Location = New System.Drawing.Point(6, 18)
         Me.PictureBox1.Name = "PictureBox1"
-        Me.PictureBox1.Size = New System.Drawing.Size(300, 192)
+        Me.PictureBox1.Size = New System.Drawing.Size(300, 114)
         Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
         Me.PictureBox1.TabIndex = 22
         Me.PictureBox1.TabStop = False
         '
         'DateTimePicker2
         '
-        Me.DateTimePicker2.Location = New System.Drawing.Point(94, 260)
+        Me.DateTimePicker2.Location = New System.Drawing.Point(117, 162)
         Me.DateTimePicker2.Name = "DateTimePicker2"
         Me.DateTimePicker2.Size = New System.Drawing.Size(200, 21)
         Me.DateTimePicker2.TabIndex = 25
@@ -147,28 +151,28 @@ Partial Class MealPlan
         'ComboBox1
         '
         Me.ComboBox1.FormattingEnabled = True
-        Me.ComboBox1.Location = New System.Drawing.Point(94, 153)
+        Me.ComboBox1.Location = New System.Drawing.Point(121, 206)
         Me.ComboBox1.Name = "ComboBox1"
         Me.ComboBox1.Size = New System.Drawing.Size(121, 23)
         Me.ComboBox1.TabIndex = 20
         '
         'DateTimePicker1
         '
-        Me.DateTimePicker1.Location = New System.Drawing.Point(94, 225)
+        Me.DateTimePicker1.Location = New System.Drawing.Point(121, 311)
         Me.DateTimePicker1.Name = "DateTimePicker1"
-        Me.DateTimePicker1.Size = New System.Drawing.Size(200, 21)
+        Me.DateTimePicker1.Size = New System.Drawing.Size(191, 21)
         Me.DateTimePicker1.TabIndex = 24
         '
         'TextBox3
         '
-        Me.TextBox3.Location = New System.Drawing.Point(95, 295)
+        Me.TextBox3.Location = New System.Drawing.Point(117, 208)
         Me.TextBox3.Name = "TextBox3"
         Me.TextBox3.Size = New System.Drawing.Size(121, 21)
         Me.TextBox3.TabIndex = 17
         '
         'NumericUpDown1
         '
-        Me.NumericUpDown1.Location = New System.Drawing.Point(94, 190)
+        Me.NumericUpDown1.Location = New System.Drawing.Point(121, 263)
         Me.NumericUpDown1.Name = "NumericUpDown1"
         Me.NumericUpDown1.Size = New System.Drawing.Size(120, 21)
         Me.NumericUpDown1.TabIndex = 19
@@ -176,7 +180,7 @@ Partial Class MealPlan
         'Label8
         '
         Me.Label8.AutoSize = True
-        Me.Label8.Location = New System.Drawing.Point(3, 225)
+        Me.Label8.Location = New System.Drawing.Point(4, 311)
         Me.Label8.Name = "Label8"
         Me.Label8.Size = New System.Drawing.Size(64, 15)
         Me.Label8.TabIndex = 9
@@ -185,7 +189,7 @@ Partial Class MealPlan
         'Label10
         '
         Me.Label10.AutoSize = True
-        Me.Label10.Location = New System.Drawing.Point(4, 153)
+        Me.Label10.Location = New System.Drawing.Point(4, 206)
         Me.Label10.Name = "Label10"
         Me.Label10.Size = New System.Drawing.Size(55, 15)
         Me.Label10.TabIndex = 11
@@ -194,7 +198,7 @@ Partial Class MealPlan
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(4, 261)
+        Me.Label2.Location = New System.Drawing.Point(8, 160)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(61, 15)
         Me.Label2.TabIndex = 3
@@ -203,7 +207,7 @@ Partial Class MealPlan
         'Label9
         '
         Me.Label9.AutoSize = True
-        Me.Label9.Location = New System.Drawing.Point(3, 297)
+        Me.Label9.Location = New System.Drawing.Point(8, 209)
         Me.Label9.Name = "Label9"
         Me.Label9.Size = New System.Drawing.Size(55, 15)
         Me.Label9.TabIndex = 10
@@ -212,7 +216,7 @@ Partial Class MealPlan
         'Label11
         '
         Me.Label11.AutoSize = True
-        Me.Label11.Location = New System.Drawing.Point(3, 189)
+        Me.Label11.Location = New System.Drawing.Point(4, 260)
         Me.Label11.Name = "Label11"
         Me.Label11.Size = New System.Drawing.Size(85, 15)
         Me.Label11.TabIndex = 12
@@ -221,7 +225,7 @@ Partial Class MealPlan
         'Label5
         '
         Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(18, 117)
+        Me.Label5.Location = New System.Drawing.Point(4, 160)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(40, 15)
         Me.Label5.TabIndex = 6
@@ -230,7 +234,7 @@ Partial Class MealPlan
         'ComboBox2
         '
         Me.ComboBox2.FormattingEnabled = True
-        Me.ComboBox2.Location = New System.Drawing.Point(94, 79)
+        Me.ComboBox2.Location = New System.Drawing.Point(121, 109)
         Me.ComboBox2.Name = "ComboBox2"
         Me.ComboBox2.Size = New System.Drawing.Size(121, 23)
         Me.ComboBox2.TabIndex = 21
@@ -241,14 +245,10 @@ Partial Class MealPlan
         Me.Panel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         Me.Panel1.Controls.Add(Me.ComboBox1)
         Me.Panel1.Controls.Add(Me.TextBox4)
-        Me.Panel1.Controls.Add(Me.DateTimePicker2)
-        Me.Panel1.Controls.Add(Me.TextBox3)
         Me.Panel1.Controls.Add(Me.Label3)
         Me.Panel1.Controls.Add(Me.DateTimePicker1)
-        Me.Panel1.Controls.Add(Me.Label9)
         Me.Panel1.Controls.Add(Me.NumericUpDown1)
         Me.Panel1.Controls.Add(Me.ComboBox3)
-        Me.Panel1.Controls.Add(Me.Label2)
         Me.Panel1.Controls.Add(Me.TextBox2)
         Me.Panel1.Controls.Add(Me.Label8)
         Me.Panel1.Controls.Add(Me.Label7)
@@ -265,7 +265,7 @@ Partial Class MealPlan
         '
         'TextBox4
         '
-        Me.TextBox4.Location = New System.Drawing.Point(95, 9)
+        Me.TextBox4.Location = New System.Drawing.Point(121, 18)
         Me.TextBox4.Name = "TextBox4"
         Me.TextBox4.Size = New System.Drawing.Size(120, 21)
         Me.TextBox4.TabIndex = 18
@@ -273,7 +273,7 @@ Partial Class MealPlan
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(8, 81)
+        Me.Label3.Location = New System.Drawing.Point(4, 109)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(67, 15)
         Me.Label3.TabIndex = 4
@@ -282,14 +282,14 @@ Partial Class MealPlan
         'ComboBox3
         '
         Me.ComboBox3.FormattingEnabled = True
-        Me.ComboBox3.Location = New System.Drawing.Point(94, 116)
+        Me.ComboBox3.Location = New System.Drawing.Point(120, 160)
         Me.ComboBox3.Name = "ComboBox3"
         Me.ComboBox3.Size = New System.Drawing.Size(121, 23)
         Me.ComboBox3.TabIndex = 22
         '
         'TextBox2
         '
-        Me.TextBox2.Location = New System.Drawing.Point(94, 44)
+        Me.TextBox2.Location = New System.Drawing.Point(120, 61)
         Me.TextBox2.Name = "TextBox2"
         Me.TextBox2.Size = New System.Drawing.Size(121, 21)
         Me.TextBox2.TabIndex = 16
@@ -297,7 +297,7 @@ Partial Class MealPlan
         'Label7
         '
         Me.Label7.AutoSize = True
-        Me.Label7.Location = New System.Drawing.Point(1, 45)
+        Me.Label7.Location = New System.Drawing.Point(3, 61)
         Me.Label7.Name = "Label7"
         Me.Label7.Size = New System.Drawing.Size(72, 15)
         Me.Label7.TabIndex = 8
@@ -306,7 +306,7 @@ Partial Class MealPlan
         'Label12
         '
         Me.Label12.AutoSize = True
-        Me.Label12.Location = New System.Drawing.Point(1, 9)
+        Me.Label12.Location = New System.Drawing.Point(4, 18)
         Me.Label12.Name = "Label12"
         Me.Label12.Size = New System.Drawing.Size(75, 15)
         Me.Label12.TabIndex = 13
@@ -316,7 +316,7 @@ Partial Class MealPlan
         '
         Me.btnSuggest.BackgroundImage = Global.HouseHoldManagement.My.Resources.Resources.icons8_advise_32
         Me.btnSuggest.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.btnSuggest.Location = New System.Drawing.Point(462, 493)
+        Me.btnSuggest.Location = New System.Drawing.Point(554, 493)
         Me.btnSuggest.Name = "btnSuggest"
         Me.btnSuggest.Size = New System.Drawing.Size(41, 37)
         Me.btnSuggest.TabIndex = 45
@@ -326,7 +326,7 @@ Partial Class MealPlan
         '
         Me.btnPrint.BackgroundImage = Global.HouseHoldManagement.My.Resources.Resources.icons8_print_32
         Me.btnPrint.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.btnPrint.Location = New System.Drawing.Point(291, 493)
+        Me.btnPrint.Location = New System.Drawing.Point(359, 493)
         Me.btnPrint.Name = "btnPrint"
         Me.btnPrint.Size = New System.Drawing.Size(41, 37)
         Me.btnPrint.TabIndex = 44
@@ -336,7 +336,7 @@ Partial Class MealPlan
         '
         Me.btnDelete.BackgroundImage = Global.HouseHoldManagement.My.Resources.Resources.icons8_delete_32
         Me.btnDelete.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.btnDelete.Location = New System.Drawing.Point(120, 493)
+        Me.btnDelete.Location = New System.Drawing.Point(142, 493)
         Me.btnDelete.Name = "btnDelete"
         Me.btnDelete.Size = New System.Drawing.Size(41, 37)
         Me.btnDelete.TabIndex = 43
@@ -346,7 +346,7 @@ Partial Class MealPlan
         '
         Me.btnEdit.BackgroundImage = Global.HouseHoldManagement.My.Resources.Resources.icons8_update_32__2_
         Me.btnEdit.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.btnEdit.Location = New System.Drawing.Point(63, 493)
+        Me.btnEdit.Location = New System.Drawing.Point(75, 493)
         Me.btnEdit.Name = "btnEdit"
         Me.btnEdit.Size = New System.Drawing.Size(41, 37)
         Me.btnEdit.TabIndex = 42
@@ -366,7 +366,7 @@ Partial Class MealPlan
         '
         Me.btnHighlight.BackgroundImage = Global.HouseHoldManagement.My.Resources.Resources.icons8_highlighter_32
         Me.btnHighlight.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.btnHighlight.Location = New System.Drawing.Point(348, 493)
+        Me.btnHighlight.Location = New System.Drawing.Point(433, 493)
         Me.btnHighlight.Name = "btnHighlight"
         Me.btnHighlight.Size = New System.Drawing.Size(41, 37)
         Me.btnHighlight.TabIndex = 40
@@ -376,7 +376,7 @@ Partial Class MealPlan
         '
         Me.btnRefresh.BackgroundImage = Global.HouseHoldManagement.My.Resources.Resources.icons8_refresh_32__1_
         Me.btnRefresh.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.btnRefresh.Location = New System.Drawing.Point(177, 493)
+        Me.btnRefresh.Location = New System.Drawing.Point(208, 493)
         Me.btnRefresh.Name = "btnRefresh"
         Me.btnRefresh.Size = New System.Drawing.Size(41, 37)
         Me.btnRefresh.TabIndex = 39
@@ -386,7 +386,7 @@ Partial Class MealPlan
         '
         Me.btnFilter.BackgroundImage = Global.HouseHoldManagement.My.Resources.Resources.icons8_filter_32
         Me.btnFilter.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.btnFilter.Location = New System.Drawing.Point(234, 493)
+        Me.btnFilter.Location = New System.Drawing.Point(279, 493)
         Me.btnFilter.Name = "btnFilter"
         Me.btnFilter.Size = New System.Drawing.Size(41, 37)
         Me.btnFilter.TabIndex = 38
@@ -396,7 +396,7 @@ Partial Class MealPlan
         '
         Me.btnSort.BackgroundImage = Global.HouseHoldManagement.My.Resources.Resources.icons8_sort_32
         Me.btnSort.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.btnSort.Location = New System.Drawing.Point(405, 493)
+        Me.btnSort.Location = New System.Drawing.Point(496, 493)
         Me.btnSort.Name = "btnSort"
         Me.btnSort.Size = New System.Drawing.Size(41, 37)
         Me.btnSort.TabIndex = 37
@@ -405,7 +405,7 @@ Partial Class MealPlan
         'Button1
         '
         Me.Button1.Image = CType(resources.GetObject("Button1.Image"), System.Drawing.Image)
-        Me.Button1.Location = New System.Drawing.Point(519, 493)
+        Me.Button1.Location = New System.Drawing.Point(616, 493)
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(41, 37)
         Me.Button1.TabIndex = 46
