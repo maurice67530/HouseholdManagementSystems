@@ -25,7 +25,7 @@ Public Class DashBoard_form
     End Sub
 
     Private Sub Button6_Click(sender As Object, e As EventArgs) Handles Button6.Click
-        ' GroceryItem.showdialog
+        Grocery.ShowDialog()
     End Sub
 
     Private Sub Button7_Click(sender As Object, e As EventArgs) Handles Button7.Click
