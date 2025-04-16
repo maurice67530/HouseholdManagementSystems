@@ -1,7 +1,7 @@
 ﻿
 Imports System.IO
 Imports System.Data.OleDb
-Public Class Dashboard
+Public Class jju
     Public Const connectionString As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Mulanga\Source\Repos\maurice67530\HouseholdManagementSystems\HMS.accdb"
 
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
