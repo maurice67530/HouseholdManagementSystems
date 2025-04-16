@@ -2,10 +2,10 @@
 Imports HouseHoldManagement
 Public Class Task_Management
     Public Property conn As New OleDbConnection(Ndivhuwo.connectionString)
-    'Public Property connn As New OleDbConnection(khodani.connectionString)
-    'Public Property connect As New OleDbConnection(Faith.connectionString)
     Private Status As String
     Private Tasks As Object
+    Private Dashboard As Object
+    Private query As String
     Public Property Priority As String
     Public Sub LoadTasksDataFromDatabase()
 
@@ -38,7 +38,6 @@ Public Class Task_Management
         tooltip.SetToolTip(Button3, "Delete")
         tooltip.SetToolTip(Button2, "Edit")
         tooltip.SetToolTip(Button8, "Dashboard")
-        tooltip.SetToolTip(Button5, "Filter")
         tooltip.SetToolTip(Button6, "Sort")
 
         ComboBox1.Items.AddRange(New String() {"Low", "Medium", "High"})
@@ -186,73 +185,34 @@ Public Class Task_Management
         End Try
 
     End Sub
-    Private Sub Button5_Click(sender As Object, e As EventArgs) Handles Button5.Click
-        Dim conn As New OleDbConnection(Ndivhuwo.connectionString)
-        Dim TasksTable As New DataTable()
-        Try
-            conn.Open()
-            Dim query As String = "SELECT * FROM Tasks WHERE 1=1"
-
-            ' Only add conditions if filters are selected  
-            If Not String.IsNullOrEmpty(Status) Then
-                query &= " AND Status = @Status"
-            End If
-
-            If Not String.IsNullOrEmpty(Priority) Then
-                query &= " AND Priority = @Priority"
-            End If
-
-            Dim command As New OleDb.OleDbCommand(query, conn)
-
-            ' Only add parameters if filters are selected  
-            If Not String.IsNullOrEmpty(Status) Then
-                command.Parameters.AddWithValue("@Status", Status)
-            End If
-
-            If Not String.IsNullOrEmpty(Priority) Then
-                command.Parameters.AddWithValue("@Priority", Priority)
-            End If
-
-            Dim adapter As New OleDb.OleDbDataAdapter(command)
-            adapter.Fill(TasksTable)
-            Tasks.DataGridView1.DataSource = TasksTable
-        Catch ex As Exception
-            MsgBox("Error filtering tasks: " & ex.Message, MsgBoxStyle.Critical, "Database Error")
-        Finally
-            conn.Close()
-        End Try
-        'get selected values from combobox
-        Dim selectedStatus As String = If(ComboBox2.SelectedItem IsNot Nothing, ComboBox2.SelectedItem.ToString(), "")
-        Dim selectedPriority As String = If(ComboBox1.SelectedItem IsNot Nothing, ComboBox1.SelectedItem.ToString(), "")
-
-    End Sub
     Private Sub Button6_Click(sender As Object, e As EventArgs) Handles Button6.Click
         DataGridView1.Sort(DataGridView1.Columns("DueDate"), System.ComponentModel.ListSortDirection.Ascending)
     End Sub
     Private Sub Button8_Click(sender As Object, e As EventArgs) Handles Button8.Click
-        'Dashboard.Show()
+        '    Dashboard.Show()
         Me.Close()
     End Sub
-    'Public Sub LoadTaskDataFromDatabase()
+    Public Sub LoadTaskDataFromDatabase()
 
-    '    Debug.WriteLine(" Task load has been initialised!")
-    '    Using conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
-    '        conn.Open()
+        Debug.WriteLine(" Task load has been initialised!")
+        Using conn As New OleDbConnection(Ndivhuwo.connectionString)
+            conn.Open()
 
-    '        Dim TableName As String = "Tasks"
+            Dim TableName As String = "Tasks"
 
-    '        Dim cmd As New OleDbCommand($"SELECT*FROM {TableName}", conn)
+            Dim cmd As New OleDbCommand($"SELECT*FROM {TableName}", conn)
 
-    '        Dim da As New OleDbDataAdapter(cmd)
-    '        Dim dt As New DataTable
-    '        da.Fill(dt)
+            Dim da As New OleDbDataAdapter(cmd)
+            Dim dt As New DataTable
+            da.Fill(dt)
 
-    '        DataGridView1.DataSource = dt
+            DataGridView1.DataSource = dt
 
-    '    End Using
-    'End Sub
+        End Using
+    End Sub
     Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
-        'LoadTaskDataFromDatabase()
+        LoadTaskDataFromDatabase()
+        ClearControls(Me)
     End Sub
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
         'Ensure a row Is selected in the DataGridView  
@@ -261,55 +221,54 @@ Public Class Task_Management
             Return
         End If
 
-        Try
 
+        Try
             Dim Title As String = TextBox1.Text
             Dim Description As String = TextBox2.Text
-            Dim Duedate As String = DateTimePicker1.Value
-            Dim priority As String = ComboBox1.SelectedItem.ToString()
-            Dim status As String = ComboBox2.SelectedItem.ToString()
-            Dim AssignedTo As String = ComboBox3.SelectedItem.ToString()
-
+            Dim DueDate As DateTime = DateTimePicker1.Text
+            Dim Priority As String = ComboBox1.Text
+            Dim Status As String = ComboBox2.Text
+            Dim AssignedTo As String = ComboBox3.Text
 
             Using conn As New OleDbConnection(Ndivhuwo.connectionString)
+
                 conn.Open()
 
                 ' Get the ID of the selected row (assuming your table has a primary key named "ID")  
                 Dim selectedRow As DataGridViewRow = DataGridView1.SelectedRows(0)
-                Dim id As Integer = Convert.ToInt32(selectedRow.Cells("ID").Value) ' Change "ID" to your primary key column name  
+                Dim ID As Integer = Convert.ToInt32(selectedRow.Cells("ID").Value) ' Change "ID" to your primary key column name  
 
+                ' Create an OleDbCommand to update the expense data in the database  
+                Dim cmd As New OleDbCommand("UPDATE [Tasks] SET [Title] = ?, [Description] =?, [DueDate] = ?, [Priority] = ?, [Status] = ?, [AssignedTo] = ? WHERE [ID] = ?", conn)
 
-                Dim cmd As New OleDbCommand("UPDATE [Tasks] SET [Title] = ?, [Description] = ?, [Duedate] = ?, [priority] = ?, [status] = ?, [AssigneTod] = ? WHERE ID = ?", conn)
+                ' Set the parameter values from the UI controls  
                 cmd.Parameters.AddWithValue("@Title", TextBox1.Text)
                 cmd.Parameters.AddWithValue("@Description", TextBox2.Text)
-                cmd.Parameters.AddWithValue("Duedate", DateTimePicker1.Value)
-                cmd.Parameters.AddWithValue("@priority", ComboBox1.SelectedItem.ToString)
-                cmd.Parameters.AddWithValue("@status", ComboBox2.SelectedItem.ToString)
-                cmd.Parameters.AddWithValue("@AssignedTo", ComboBox3.SelectedItem.ToString)
-                cmd.Parameters.AddWithValue("@ID", id)
-
-
-                'cmd.Parameters.AddWithValue("@ID", personalid) ' Primary key for matching record  
-
-
-                'Execute the SQL command to update the data  
+                cmd.Parameters.AddWithValue("@DueDate", DateTimePicker1.Text)
+                cmd.Parameters.AddWithValue("@Priority", ComboBox1.SelectedItem.ToString())
+                cmd.Parameters.AddWithValue("@Status", ComboBox2.SelectedItem.ToString())
+                cmd.Parameters.AddWithValue("@AssignedTo", ComboBox3.SelectedItem.ToString())
+                cmd.Parameters.AddWithValue("@ID", ID)
                 cmd.ExecuteNonQuery()
 
-
-                'Display a message box indicating the update was successful 
-
-
-                MsgBox("Task Information Updated!", vbInformation, "Update Confirmation")
-
+                MsgBox("Task Updated Successfuly!", vbInformation, "Update Confirmation")
 
             End Using
+
         Catch ex As OleDbException
-            MessageBox.Show($"Error updating Task in database: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            MessageBox.Show("please ensure all fields are filled correctly. ", "input error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         Catch ex As Exception
-            MessageBox.Show($"Unexpected error: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Debug.WriteLine($"General error in btnEdit_Click: {ex.Message}")
+            Debug.WriteLine($"Stack Trace: {ex.StackTrace}")
+            MessageBox.Show("An unexpected error occurred.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
-
-
+        'TextBox4.Text = ("expense updated at{DateTime.Now:hh:mm:ss}")
+        If DataGridView1.SelectedRows.Count > 0 Then
+            Debug.WriteLine("A row is selected for update.")
+        Else
+            Debug.WriteLine("No row selected, exiting btnEdit_click.")
+            MessageBox.Show("Please select task to update.", "update Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+        End If
     End Sub
     Private Sub DataGridView1_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridView1.CellContentClick
 
@@ -333,10 +292,13 @@ Public Class Task_Management
         Catch ex As Exception
             Debug.WriteLine("error selection data in the database")
             Debug.WriteLine($"Stack Trace: {ex.StackTrace}")
+            MessageBox.Show("Error saving inventory to database: " & ex.Message & vbNewLine & ex.StackTrace, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
 
     End Sub
     Private Sub ComboBox3_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ComboBox3.SelectedIndexChanged
 
     End Sub
+
+
 End Class
