@@ -6,6 +6,7 @@ Public Class Task_Management
     'Public Property connect As New OleDbConnection(Faith.connectionString)
     Private Status As String
     Private Tasks As Object
+    Private Dashboard As Object
     Public Property Priority As String
     Public Sub LoadTasksDataFromDatabase()
 

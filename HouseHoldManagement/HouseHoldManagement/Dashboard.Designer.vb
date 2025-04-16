@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-Partial Class Dashboard
+Partial Class jju
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
@@ -29,7 +29,7 @@ Partial Class Dashboard
         Dim ChartArea2 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
         Dim Legend2 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
         Dim Series2 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Dashboard))
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(jju))
         Me.Chart1 = New System.Windows.Forms.DataVisualization.Charting.Chart()
         Me.Chart2 = New System.Windows.Forms.DataVisualization.Charting.Chart()
         Me.Label1 = New System.Windows.Forms.Label()
