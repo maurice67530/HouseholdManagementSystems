@@ -55,6 +55,7 @@ Partial Class Inventory
         Me.ComboBox3 = New System.Windows.Forms.ComboBox()
         Me.Button9 = New System.Windows.Forms.Button()
         Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel1.SuspendLayout()
         Me.SuspendLayout()
@@ -424,4 +425,5 @@ Partial Class Inventory
     Friend WithEvents ComboBox3 As ComboBox
     Friend WithEvents Button9 As Button
     Friend WithEvents Panel1 As Panel
+    Friend WithEvents ToolTip1 As ToolTip
 End Class
