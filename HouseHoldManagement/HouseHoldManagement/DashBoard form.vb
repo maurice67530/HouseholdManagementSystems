@@ -1,68 +1,69 @@
 ﻿
 Imports System.IO
 Imports System.Data.OleDb
-Public Class jju
+
+Public Class DashBoard_form
     Public Const connectionString As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Mulanga\Source\Repos\maurice67530\HouseholdManagementSystems\HMS.accdb"
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+        MealPlan.ShowDialog()
+    End Sub
 
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
-        Inventory.ShowDialog()
-    End Sub
-
-    Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
-        Task_Management.ShowDialog()
-    End Sub
-
-    Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
-        Expense.ShowDialog()
-    End Sub
-
-    Private Sub Button5_Click(sender As Object, e As EventArgs) Handles Button5.Click
         Chores.ShowDialog()
     End Sub
 
-    Private Sub Button1_Click_1(sender As Object, e As EventArgs)
-        Login.ShowDialog()
+    Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
+        'Task.showdialog
+    End Sub
+
+    Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
+        Personnel.ShowDialog()
+    End Sub
+
+    Private Sub Button5_Click(sender As Object, e As EventArgs) Handles Button5.Click
+        Expense.ShowDialog()
+    End Sub
+
+    Private Sub Button6_Click(sender As Object, e As EventArgs) Handles Button6.Click
+        Grocery.ShowDialog()
     End Sub
 
     Private Sub Button7_Click(sender As Object, e As EventArgs) Handles Button7.Click
-        'GroceryItemss.ShowDialog()
+        Inventory.ShowDialog()
     End Sub
 
     Private Sub Button8_Click(sender As Object, e As EventArgs) Handles Button8.Click
-        Personnel.ShowDialog()
+        Notifications.ShowDialog()
     End Sub
 
     Private Sub Button9_Click(sender As Object, e As EventArgs) Handles Button9.Click
         PhotoGallery.ShowDialog()
     End Sub
 
-    Private Sub Button6_Click(sender As Object, e As EventArgs) Handles Button6.Click
-        MealPlan.ShowDialog()
-    End Sub
-    Private Sub Button10_Click(sender As Object, e As EventArgs) Handles Button10.Click
-        Notifications.ShowDialog()
-    End Sub
-    Private Sub Dashboard_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+    Private Sub DashBoard_form_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        DisplayPhoto()
+        SetupTimer()
+
+        SetupCharts()
+        LoadChoresStatus()
 
         LoadUpcomingMeals()
-        LoadChoresStatus()
-        PopulateListboxFromChores(ListBox2)
-        'LoadExpensesData()
-        LoadChartData()
-        SetupCharts()
         UpdateBudgetStatus()
-        'LoadRecentPhotos()
-        ' ToolTip1.SetToolTip(Button1, "Login")
-        ToolTip1.SetToolTip(Button2, "Inventory")
+        LoadChartData()
+
+        ToolTip1.SetToolTip(Button7, "Inventory")
         ToolTip1.SetToolTip(Button3, "Task")
-        ToolTip1.SetToolTip(Button4, "Expense")
-        ToolTip1.SetToolTip(Button5, "Chores")
-        ToolTip1.SetToolTip(Button6, "MealPlan")
-        ToolTip1.SetToolTip(Button7, "GroceryItem")
-        ToolTip1.SetToolTip(Button8, "Person")
+        ToolTip1.SetToolTip(Button5, "Expense")
+        ToolTip1.SetToolTip(Button2, "Chores")
+        ToolTip1.SetToolTip(Button1, "MealPlan")
+        ToolTip1.SetToolTip(Button6, "GroceryItem")
+        ToolTip1.SetToolTip(Button4, "Person")
         ToolTip1.SetToolTip(Button9, "Photos")
-        ToolTip1.SetToolTip(Button10, "Notification")
+
     End Sub
+
+
+
     'Set up Budget Status And Chores Status charts
     Private Sub SetupCharts()
         'Chores Status - Pie Chart
@@ -98,11 +99,11 @@ Public Class jju
 
         End Using
 
-        Label8.Text = $"   Chores: 
+        Label1.Text = $"   Chores: 
            -Completed: {completed}
-
+ 
            -In Progress:{inProgress}
-
+ 
            -Not Started:{notStarted}"
 
     End Sub
@@ -170,12 +171,12 @@ Public Class jju
             Dim cmd As New OleDbCommand(query, conn)
             Dim totalExpenses As Decimal = Convert.ToDecimal(cmd.ExecuteScalar())
             ' Assume you have a Label for Budget
-            Label5.Text = "Total Expenses: R" & totalExpenses.ToString()
+            Label2.Text = "Total Expenses: R" & totalExpenses.ToString()
             ' Assuming a fixed budget, for example $500
             Dim budget As Decimal = 500563
-            Label6.Text = "Budget Used: " & ((totalExpenses / budget) * 100).ToString("F2") & "%"
+            Label3.Text = "Budget Used: " & ((totalExpenses / budget) * 100).ToString("F2") & "%"
             ' Update a progress bar if you have one
-            ProgressBar2.Value = CInt((totalExpenses / budget) * 100)
+            ProgressBar1.Value = CInt((totalExpenses / budget) * 100)
         End Using
 
     End Sub
@@ -198,7 +199,7 @@ Public Class jju
 
                     ' add points to the chart; chage the series name added
 
-                    Chart1.Series("Expenses").Points.AddXY(personnel, Budget)
+                    Chart1.Series("Series1").Points.AddXY(personnel, Budget)
 
                 End While
 
@@ -225,9 +226,9 @@ Public Class jju
             Dim reader As OleDbDataReader = cmd.ExecuteReader()
 
             'bind the retrieved data to the combobox
-            ListBox2.Items.Clear()
+            ListBox1.Items.Clear()
             While reader.Read()
-                ListBox2.Items.Add($"{reader("ID")} {reader("Status")} {reader("Title")}")
+                ListBox1.Items.Add($"{reader("ID")} {reader("Status")} {reader("Title")}")
             End While
 
             'close the database
@@ -249,43 +250,51 @@ Public Class jju
 
     End Sub
 
-    Private Sub FlowLayoutPanel2_Paint(sender As Object, e As PaintEventArgs) Handles FlowLayoutPanel2.Paint
 
+
+
+    Private photoList As New List(Of String)() ' List to store photo paths
+    Private currentPhotoIndex As Integer = 0
+    Private WithEvents photoTimer As New Timer()
+    Private Sub LoadRecentPhotos()
+
+        photoList.Clear()
+        Dim query As String = "SELECT TOP 5 FilePath FROM Photos ORDER BY DateTaken "
+        Using conn As New OleDbConnection(connectionString)
+            Using cmd As New OleDbCommand(query, conn)
+                conn.Open()
+                Using reader As OleDbDataReader = cmd.ExecuteReader()
+                    While reader.Read()
+                        photoList.Add(reader("FilePath").ToString())
+
+                    End While
+                End Using
+            End Using
+        End Using
     End Sub
-    'Private photoList As New List(Of String)() ' List to store photo paths
-    'Private currentPhotoIndex As Integer = 0
-    'Private WithEvents photoTimer As New Timer()
-    'Private Sub LoadRecentPhotos()
+    Private Sub DisplayPhoto()
+        If photoList.Count > 0 Then
+            FlowLayoutPanel1.Controls.Clear() ' Clear previous image
+            Dim pb As New PictureBox()
+            pb.Image = Image.FromFile(photoList(currentPhotoIndex))
+            pb.SizeMode = PictureBoxSizeMode.StretchImage ' Set stretch mode
+            pb.Size = FlowLayoutPanel1.Size ' Match panel size
+            FlowLayoutPanel1.Controls.Add(pb) ' Add to FlowLayoutPanel
+        End If
+    End Sub
+    Private Sub SetupTimer()
+        photoTimer.Interval = 2000 ' 2 seconds
+        AddHandler photoTimer.Tick, AddressOf PhotoTimer_Tick
+        photoTimer.Start()
+    End Sub
+    Private Sub PhotoTimer_Tick(sender As Object, e As EventArgs)
+        If photoList.Count > 0 Then
+            currentPhotoIndex = (currentPhotoIndex + 1) Mod photoList.Count ' Loop through photos
+            DisplayPhoto()
+        End If
+    End Sub
 
-    '    photoList.Clear()
-    '    Dim query As String = "SELECT TOP 5 FilePath FROM photo ORDER BY DateAdded "
-    '    Using conn As New OleDbConnection(connectionString)
-    '        Using cmd As New OleDbCommand(query, conn)
-    '            conn.Open()
-    '            Using reader As OleDbDataReader = cmd.ExecuteReader()
-    '                While reader.Read()
-    '                    photoList.Add(reader("filepath").ToString())
-    '                End While
-    '            End Using
-    '        End Using
-    '    End Using
-    'End Sub
-    'Private Sub DisplayPhoto()
-    '    If photoList.Count > 0 Then
-    '        FlowLayoutPanel1.Controls.Clear() ' Clear previous image
-    '        Dim pb As New PictureBox()
-    '        pb.Image = Image.FromFile(photoList(currentPhotoIndex))
-    '        pb.SizeMode = PictureBoxSizeMode.StretchImage ' Set stretch mode
-    '        pb.Size = FlowLayoutPanel1.Size ' Match panel size
-    '        FlowLayoutPanel1.Controls.Add(pb) ' Add to FlowLayoutPanel
-    '    End If
-    'End Sub
-    'Private Sub SetupTimer()
-    '    photoTimer.Interval = 2000 ' 2 seconds
-    '    AddHandler photoTimer.Tick, AddressOf PhotoTimer_Tick
-    '    photoTimer.Start()
-    'End Sub
-    'Private Sub PhotoTimer_Tick(sender As Object, e As EventArgs)
+    'Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
     '    If photoList.Count > 0 Then
     '        currentPhotoIndex = (currentPhotoIndex + 1) Mod photoList.Count ' Loop through photos
     '        DisplayPhoto()

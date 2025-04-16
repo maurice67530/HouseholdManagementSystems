@@ -29,13 +29,9 @@ Public Class chores_
     Public Property DueDate As String
     Public Property Recurring As String
     Public Property Description As String
-
-
 End Class
 Public Class MealPlans
-
     'properties of the mealplan class
-
     Public Property StartDate As DateTime
     Public Property EndDate As DateTime
     Public Property Meals As String
@@ -45,12 +41,9 @@ Public Class MealPlans
     Public Property Description As String
     Public Property FilePath As String
     Public Property Calories As String
-
     Public Property Frequency As String
-
 End Class
 Public Class Inventory1
-
     Public Property ItemName As String
     Public Property Description As String
     Public Property Quantity As String
@@ -60,10 +53,8 @@ Public Class Inventory1
     Public Property DateAdded As DateTime
     Public Property ExpiryDate As DateTime
     Public Property Unit As String
-
 End Class
 Public Class Expensetracking
-
     Public Property ExpenseID As Integer
     Public Property Amount As Integer
     Public Property TotalIncome As Integer
@@ -76,7 +67,6 @@ Public Class Expensetracking
     Public Property ApprovalStatus As String
     Public Property Receiver As String
     Public Property DateOfexpenses As DateTime
-
 End Class
 Public Class DailyTask
     Public Property TaskID As String
@@ -87,18 +77,19 @@ Public Class DailyTask
     Public Property Status As String
     Public Property AssignedTo As String
 End Class
-
-Public Class GroceryClass
-        Public Property ItemID As String
-        Public Property ItemName As String
-        Public Property Unit As String
-        Public Property Quantity As String
-        Public Property ExpiryDate As DateTime
-        Public Property Category As String
-        Public Property Price As Integer
-        Public Property Ispurchased As String
-    End Class
-
+Public Class Groceryy
+    'Properties of the GroceryIteam class
+    Public Property GroceryID As String
+    Public Property ItemName As String
+    Public Property Quantity As String
+    Public Property Category As String
+    Public Property Unit As String
+    Public Property ExpiryDate As String
+    Public Property PricePerUnit As String
+    Public Property Purchase As String
+    Public Property Quality As String
+    Public Property Teamwork As String
+End Class
 Public Class Person
     Public Property FirstName As String
     Public Property LastName As String
@@ -111,6 +102,4 @@ Public Class Person
     Public Property Age As Integer
     Public Property Contact As Integer
     Public Property Photo As String
-
 End Class
-
