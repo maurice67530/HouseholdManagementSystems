@@ -174,7 +174,6 @@ Public Class Dashboard
     End Sub
 
     Private Sub UpdateBudgetStatus()
-
         Dim query As String = "SELECT SUM(Amount) FROM Expense"
 
         Using conn As New OleDbConnection(connectionString)
@@ -184,6 +183,8 @@ Public Class Dashboard
             ' Assume you have a Label for Budget
             Label5.Text = "Total Expenses: R" & totalExpenses.ToString()
             ' Assuming a fixed budget, for example $500
+
+
             Dim budget As Decimal = 500563
             Label6.Text = "Budget Used: " & ((totalExpenses / budget) * 100).ToString("F2") & "%"
             ' Update a progress bar if you have one
