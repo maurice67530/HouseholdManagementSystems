@@ -168,9 +168,7 @@ Public Class Dashboard
                 End Using
 
             End Using
-
         End Using
-
     End Sub
 
     Private Sub UpdateBudgetStatus()
