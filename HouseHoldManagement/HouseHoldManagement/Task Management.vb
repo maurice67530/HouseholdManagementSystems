@@ -231,7 +231,7 @@ Public Class Task_Management
         DataGridView1.Sort(DataGridView1.Columns("DueDate"), System.ComponentModel.ListSortDirection.Ascending)
     End Sub
     Private Sub Button8_Click(sender As Object, e As EventArgs) Handles Button8.Click
-        Dashboard.Show()
+        '    Dashboard.Show()
         Me.Close()
     End Sub
     'Public Sub LoadTaskDataFromDatabase()
