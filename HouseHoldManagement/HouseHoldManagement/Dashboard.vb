@@ -213,6 +213,7 @@ Public Class Dashboard
     End Sub
 
     Public Sub PopulateListboxFromChores(ByRef Listbox As ListBox)
+
         Dim conn As New OleDbConnection(connectionString)
         Try
             Debug.WriteLine("populate listbox successful")
