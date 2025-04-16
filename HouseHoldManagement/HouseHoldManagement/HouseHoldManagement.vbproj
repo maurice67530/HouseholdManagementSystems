@@ -11,7 +11,7 @@
     <AssemblyName>HouseHoldManagement</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <MyType>WindowsFormsWithCustomSubMain</MyType>
-    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <TargetFrameworkProfile />
   </PropertyGroup>
@@ -81,12 +81,6 @@
       <DependentUpon>Chores.vb</DependentUpon>
     </Compile>
     <Compile Include="Chores.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Dashboard.Designer.vb">
-      <DependentUpon>Dashboard.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Dashboard.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Expense.Designer.vb">
@@ -167,9 +161,6 @@
   <ItemGroup>
     <EmbeddedResource Include="Chores.resx">
       <DependentUpon>Chores.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Dashboard.resx">
-      <DependentUpon>Dashboard.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Expense.resx">
       <DependentUpon>Expense.vb</DependentUpon>
