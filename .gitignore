@@ -244,3 +244,7 @@ ModelManifest.xml
 # FAKE - F# Make
 .fake/
 /HouseholdManagement system/
+/HouseHoldManagement/HouseHoldManagement/Dashboard.Designer.vb
+/HouseHoldManagement/HouseHoldManagement/Dashboard.vb
+/.gitignore
+/HMS.accdb
