@@ -63,7 +63,7 @@ Partial Class Inventory
         '
         Me.Label1.AutoSize = True
         Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.Location = New System.Drawing.Point(215, 9)
+        Me.Label1.Location = New System.Drawing.Point(212, 9)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(111, 20)
         Me.Label1.TabIndex = 0
@@ -214,7 +214,7 @@ Partial Class Inventory
         Me.Button1.BackColor = System.Drawing.SystemColors.ActiveCaption
         Me.Button1.BackgroundImage = CType(resources.GetObject("Button1.BackgroundImage"), System.Drawing.Image)
         Me.Button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
-        Me.Button1.Location = New System.Drawing.Point(12, 326)
+        Me.Button1.Location = New System.Drawing.Point(14, 326)
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(56, 50)
         Me.Button1.TabIndex = 20
@@ -368,7 +368,7 @@ Partial Class Inventory
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.SystemColors.Control
-        Me.ClientSize = New System.Drawing.Size(543, 392)
+        Me.ClientSize = New System.Drawing.Size(534, 374)
         Me.Controls.Add(Me.Panel1)
         Me.Controls.Add(Me.Button9)
         Me.Controls.Add(Me.Button8)
