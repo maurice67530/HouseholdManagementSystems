@@ -146,6 +146,7 @@ Partial Class PhotoGallery
         '
         'TextBox1
         '
+        Me.TextBox1.Cursor = System.Windows.Forms.Cursors.No
         Me.TextBox1.Location = New System.Drawing.Point(104, 5)
         Me.TextBox1.Name = "TextBox1"
         Me.TextBox1.ReadOnly = True
