@@ -45,14 +45,22 @@ Public Class Dashboard
     Private Sub Dashboard_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
         LoadUpcomingMeals()
+
         LoadChoresStatus()
+
         PopulateListboxFromChores(ListBox2)
+
         'LoadExpensesData()
+
         LoadChartData()
+
         SetupCharts()
+
         UpdateBudgetStatus()
+
         'LoadRecentPhotos()
-        ' ToolTip1.SetToolTip(Button1, "Login")
+
+        'ToolTip1.SetToolTip(Button1, "Login")
         ToolTip1.SetToolTip(Button2, "Inventory")
         ToolTip1.SetToolTip(Button3, "Task")
         ToolTip1.SetToolTip(Button4, "Expense")
@@ -62,9 +70,11 @@ Public Class Dashboard
         ToolTip1.SetToolTip(Button8, "Person")
         ToolTip1.SetToolTip(Button9, "Photos")
         ToolTip1.SetToolTip(Button10, "Notification")
+
     End Sub
     'Set up Budget Status And Chores Status charts
     Private Sub SetupCharts()
+
         'Chores Status - Pie Chart
         Chart2.Series.Clear()
         Chart2.Series.Add("Chores")
@@ -73,6 +83,7 @@ Public Class Dashboard
         Chart2.Series("Chores").Points.AddXY("Not Started", 0)
         Chart2.Series("Chores").IsValueShownAsLabel = True
         ''Chart1.Series("Chores").ChartType = series1.Pie
+
     End Sub
     Private Sub LoadChoresStatus()
 
@@ -107,6 +118,7 @@ Public Class Dashboard
 
     End Sub
     Private Sub LoadUpcomingMeals()
+
         Dim query As String = "Select MealName, StartDate, Description FROM MealPlans WHERE EndDate >= StartDate"
 
         ' Fetch data from the database
@@ -181,7 +193,7 @@ Public Class Dashboard
     End Sub
     Private Sub LoadChartData()
 
-        ' update this connection string based  on my database confirguration
+        'update this connection string based  on my database confirguration
         Dim connectionString As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Mulanga\Source\Repos\maurice67530\HouseholdManagementSystems\HMS.accdb"
         Dim query As String = "SELECT [Amount], [Frequency] FROM [Expense]"
 
@@ -209,6 +221,7 @@ Public Class Dashboard
         Chart1.ChartAreas(0).AxisX.Title = "Frequency"
 
         Chart1.ChartAreas(0).AxisY.Title = "Amount"
+
     End Sub
 
     Public Sub PopulateListboxFromChores(ByRef Listbox As ListBox)
