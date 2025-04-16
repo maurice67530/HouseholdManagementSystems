@@ -291,7 +291,7 @@ Public Class Inventory
     End Sub
 
     Private Sub Button9_Click(sender As Object, e As EventArgs) Handles Button9.Click
-        Dashboard.ShowDialog()
+        'Dashboard.ShowDialog()
         Me.Close()
     End Sub
 
