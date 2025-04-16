@@ -26,18 +26,18 @@ Public Class Login
 
                         Case "Admin"
 
-                            Dashboard.Show()
+                           ' Dashboard.Show()
 
                         Case "Member"
 
-                            Dashboard.Show()
+                            'Dashboard.Show()
 
                         Case "Finance"
 
-                            Dashboard.Show()
+                           ' Dashboard.Show()
                         Case "Chef"
 
-                            Dashboard.Show()
+                            ' Dashboard.Show()
                         Case Else
                             MessageBox.Show("Unknown role.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
                     End Select
@@ -56,9 +56,9 @@ Public Class Login
 
         End Using
 
-        'Dashboard.TextBox1.Text = "Role"
 
-        Dashboard.ShowDialog()
+
+        ' Dashboard.ShowDialog()
 
     End Sub
     Private Sub Login_Load(sender As Object, e As EventArgs) Handles MyBase.Load
