@@ -25,6 +25,7 @@ Partial Class GroceryyItemss
         Me.components = New System.ComponentModel.Container()
         Me.Panel3 = New System.Windows.Forms.Panel()
         Me.Button4 = New System.Windows.Forms.Button()
+        Me.Button2 = New System.Windows.Forms.Button()
         Me.Button3 = New System.Windows.Forms.Button()
         Me.Button5 = New System.Windows.Forms.Button()
         Me.Button6 = New System.Windows.Forms.Button()
@@ -51,7 +52,6 @@ Partial Class GroceryyItemss
         Me.DataGridView1 = New System.Windows.Forms.DataGridView()
         Me.Label8 = New System.Windows.Forms.Label()
         Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
-        Me.Button2 = New System.Windows.Forms.Button()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         Me.Panel3.SuspendLayout()
         Me.Panel2.SuspendLayout()
@@ -81,6 +81,15 @@ Partial Class GroceryyItemss
         Me.Button4.Size = New System.Drawing.Size(74, 48)
         Me.Button4.TabIndex = 48
         Me.Button4.UseVisualStyleBackColor = True
+        '
+        'Button2
+        '
+        Me.Button2.Image = Global.HouseHoldManagement.My.Resources.Resources.icons8_chores_32
+        Me.Button2.Location = New System.Drawing.Point(4, 3)
+        Me.Button2.Name = "Button2"
+        Me.Button2.Size = New System.Drawing.Size(75, 48)
+        Me.Button2.TabIndex = 51
+        Me.Button2.UseVisualStyleBackColor = True
         '
         'Button3
         '
@@ -310,15 +319,6 @@ Partial Class GroceryyItemss
         '
         'Timer1
         '
-        '
-        'Button2
-        '
-        Me.Button2.Image = Global.HouseHoldManagement.My.Resources.Resources.icons8_chores_32
-        Me.Button2.Location = New System.Drawing.Point(4, 3)
-        Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(75, 48)
-        Me.Button2.TabIndex = 51
-        Me.Button2.UseVisualStyleBackColor = True
         '
         'GroceryyItemss
         '

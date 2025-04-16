@@ -219,46 +219,15 @@ Public Class GroceryyItemss
 
 
     End Sub
-    Public Sub notify()
-        Try
-            Using conn As New OleDbConnection(Rotondwa.connectionString)
-                ' Open connection to the database
-                conn.Open()
 
-                ' SQL Query to get tasks that are not started
-                Dim query As String = "SELECT ItemName, ExpiryDate FROM GroceryItem "
-                Dim cmd As New OleDbCommand(query, conn)
-
-                ' Execute the query and get the results
-                Dim reader As OleDbDataReader = cmd.ExecuteReader()
-
-                ' If there are any tasks not started
-                If reader.HasRows Then
-                    ' Prepare the email body
-                    Dim Notification As String = "The following Grocery has Expired:" & Environment.NewLine
-
-                    While reader.Read()
-                        Notification &= "Grocery: " & reader("ItemName").ToString() & ", By: " & reader("ExpiryDate").ToString() & Environment.NewLine
-                    End While
-                    'Timer1.Stop() : MessageBox.Show("The following Expense has ecxeeded 80%.", "Expense Alert", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-                    Timer1.Stop() : MessageBox.Show("Item Expired: " & vbCrLf & Notification, "Tasks Alert", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-
-                End If
-            End Using
-        Catch ex As Exception
-            ' Handle any errors (e.g., connection errors, query errors)
-            Console.WriteLine("Error: " & ex.Message)
-        Finally
-            ' Close the connection
-            'conn.Close()
-        End Try
-
-
-    End Sub
     Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
         Timer1 = New Timer
         Timer1.Interval = 20
         Timer1.Enabled = True
         notify() ' Check every 1 minute (60000 milliseconds)
+    End Sub
+
+    Private Sub GroceryyItemss_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        LoadGrocerydataFromDatabase()
     End Sub
 End Class
