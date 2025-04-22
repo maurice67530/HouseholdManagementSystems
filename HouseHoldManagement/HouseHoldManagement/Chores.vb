@@ -108,7 +108,6 @@ Public Class Chores
             MessageBox.Show("Error highligting overdue chores")
         End Try
     End Sub
-
     Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
         If DataGridView1.SelectedRows.Count > 0 Then
             ' Get the selected row  
@@ -194,25 +193,20 @@ Public Class Chores
             MessageBox.Show($"Error Loading Inventory data from database: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
     End Sub
-
     Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
         loadChoresFromDatabase()
     End Sub
-
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
         For Each row As DataGridViewRow In
             DataGridView1.SelectedRows
             row.Cells("Status").Value = "Completed"
         Next
     End Sub
-
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         Close()
     End Sub
-
     Private Sub Button5_Click(sender As Object, e As EventArgs) Handles Button5.Click
         Try
-
 
             Debug.WriteLine("entering button update")
 
@@ -278,19 +272,12 @@ Public Class Chores
             MessageBox.Show("Error saving inventory to database: " & ex.Message & vbNewLine & ex.StackTrace, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
     End Sub
-
-    Private Sub Button8_Click(sender As Object, e As EventArgs) Handles Button8.Click
-
-    End Sub
-
     Private Sub Button9_Click(sender As Object, e As EventArgs) Handles Button9.Click
         DataGridView1.Sort(DataGridView1.Columns("DueDate"), System.ComponentModel.ListSortDirection.Ascending)
     End Sub
-
     Private Sub DataGridView1_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridView1.CellContentClick
 
     End Sub
-
     Private Sub DataGridView1_SelectionChanged(sender As Object, e As EventArgs) Handles DataGridView1.SelectionChanged
         Try
 
@@ -352,5 +339,9 @@ Public Class Chores
                 conn.Close()
             End If
         End Try
+    End Sub
+
+    Private Sub Button8_Click(sender As Object, e As EventArgs) Handles Button8.Click
+
     End Sub
 End Class
