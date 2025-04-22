@@ -206,3 +206,10 @@ Module Faith
     Public Property conn As New OleDbConnection(connectionString)
     Public Const connectionString As String = " Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Faith\Source\Repos\maurice67530\HouseholdManagementSystems\HMS.accdb"
 End Module
+Module Mulalo
+    Public Property conn As New OleDbConnection(connectionString)
+    Public Const connectionString As String = " Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Austin\Source\Repos\maurice67530\HouseholdManagementSystems\HMS.accdb"
+
+End Module
+
+
