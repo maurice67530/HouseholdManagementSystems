@@ -81,7 +81,7 @@ Public Class Notifications
 
     Private Sub Notifications_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Timer1.Start()
-        Timer1.Interval = 5000
+        Timer1.Interval = 4000
 
 
         ToolTip1.SetToolTip(Button1, "Mark As Read")
