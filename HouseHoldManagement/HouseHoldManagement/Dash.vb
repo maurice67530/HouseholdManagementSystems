@@ -269,12 +269,12 @@ Public Class Dash
     End Sub
     Private Sub DisplayPhoto()
         If photoList.Count > 0 Then
-            FlowLayoutPanel1.Controls.Clear() ' Clear previous image
+            FlowLayoutPanel2.Controls.Clear() ' Clear previous image
             Dim pb As New PictureBox()
             pb.Image = Image.FromFile(photoList(currentPhotoIndex))
             pb.SizeMode = PictureBoxSizeMode.StretchImage ' Set stretch mode
             pb.Size = FlowLayoutPanel1.Size ' Match panel size
-            FlowLayoutPanel1.Controls.Add(pb) ' Add to FlowLayoutPanel
+            FlowLayoutPanel2.Controls.Add(pb) ' Add to FlowLayoutPanel
         End If
     End Sub
     Private Sub SetupTimer()
