@@ -38,7 +38,6 @@ Partial Class Task_Management
         Me.TextBox2 = New System.Windows.Forms.TextBox()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.Button6 = New System.Windows.Forms.Button()
-        Me.Button5 = New System.Windows.Forms.Button()
         Me.Button4 = New System.Windows.Forms.Button()
         Me.DataGridView1 = New System.Windows.Forms.DataGridView()
         Me.Button3 = New System.Windows.Forms.Button()
@@ -186,29 +185,18 @@ Partial Class Task_Management
         Me.Button6.BackColor = System.Drawing.SystemColors.ActiveCaption
         Me.Button6.BackgroundImage = CType(resources.GetObject("Button6.BackgroundImage"), System.Drawing.Image)
         Me.Button6.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
-        Me.Button6.Location = New System.Drawing.Point(425, 293)
+        Me.Button6.Location = New System.Drawing.Point(426, 293)
         Me.Button6.Name = "Button6"
         Me.Button6.Size = New System.Drawing.Size(75, 35)
         Me.Button6.TabIndex = 52
         Me.Button6.UseVisualStyleBackColor = False
-        '
-        'Button5
-        '
-        Me.Button5.BackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.Button5.BackgroundImage = CType(resources.GetObject("Button5.BackgroundImage"), System.Drawing.Image)
-        Me.Button5.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
-        Me.Button5.Location = New System.Drawing.Point(344, 293)
-        Me.Button5.Name = "Button5"
-        Me.Button5.Size = New System.Drawing.Size(75, 35)
-        Me.Button5.TabIndex = 51
-        Me.Button5.UseVisualStyleBackColor = False
         '
         'Button4
         '
         Me.Button4.BackColor = System.Drawing.SystemColors.ActiveCaption
         Me.Button4.BackgroundImage = CType(resources.GetObject("Button4.BackgroundImage"), System.Drawing.Image)
         Me.Button4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
-        Me.Button4.Location = New System.Drawing.Point(265, 293)
+        Me.Button4.Location = New System.Drawing.Point(345, 293)
         Me.Button4.Name = "Button4"
         Me.Button4.Size = New System.Drawing.Size(75, 35)
         Me.Button4.TabIndex = 50
@@ -285,7 +273,6 @@ Partial Class Task_Management
         Me.Controls.Add(Me.Panel2)
         Me.Controls.Add(Me.Panel1)
         Me.Controls.Add(Me.Button6)
-        Me.Controls.Add(Me.Button5)
         Me.Controls.Add(Me.Button4)
         Me.Controls.Add(Me.DataGridView1)
         Me.Controls.Add(Me.Button3)
@@ -319,7 +306,6 @@ Partial Class Task_Management
     Friend WithEvents TextBox2 As TextBox
     Friend WithEvents Label4 As Label
     Friend WithEvents Button6 As Button
-    Friend WithEvents Button5 As Button
     Friend WithEvents Button4 As Button
     Friend WithEvents DataGridView1 As DataGridView
     Friend WithEvents Button3 As Button
