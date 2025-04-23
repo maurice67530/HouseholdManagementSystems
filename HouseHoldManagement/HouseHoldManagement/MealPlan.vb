@@ -220,15 +220,6 @@ Public Class MealPlan
             End If
         End If
 
-
-
-
-
-
-
-
-
-
     End Sub
 
     Private Sub btnDelete_Click(sender As Object, e As EventArgs) Handles btnDelete.Click
