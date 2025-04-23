@@ -61,7 +61,7 @@ Partial Class Grocery
         '
         'Button1
         '
-        Me.Button1.Location = New System.Drawing.Point(394, 394)
+        Me.Button1.Location = New System.Drawing.Point(448, 394)
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(75, 34)
         Me.Button1.TabIndex = 55
@@ -79,9 +79,9 @@ Partial Class Grocery
         Me.Panel2.Controls.Add(Me.Label10)
         Me.Panel2.Controls.Add(Me.TextBox6)
         Me.Panel2.Controls.Add(Me.TextBox7)
-        Me.Panel2.Location = New System.Drawing.Point(245, 65)
+        Me.Panel2.Location = New System.Drawing.Point(316, 65)
         Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(200, 171)
+        Me.Panel2.Size = New System.Drawing.Size(283, 203)
         Me.Panel2.TabIndex = 54
         '
         'Label7
@@ -116,14 +116,14 @@ Partial Class Grocery
         Me.TextBox8.Location = New System.Drawing.Point(123, 150)
         Me.TextBox8.Name = "TextBox8"
         Me.TextBox8.ReadOnly = True
-        Me.TextBox8.Size = New System.Drawing.Size(100, 20)
+        Me.TextBox8.Size = New System.Drawing.Size(136, 20)
         Me.TextBox8.TabIndex = 39
         '
         'TextBox5
         '
         Me.TextBox5.Location = New System.Drawing.Point(123, 42)
         Me.TextBox5.Name = "TextBox5"
-        Me.TextBox5.Size = New System.Drawing.Size(100, 20)
+        Me.TextBox5.Size = New System.Drawing.Size(136, 20)
         Me.TextBox5.TabIndex = 35
         '
         'Label10
@@ -139,14 +139,14 @@ Partial Class Grocery
         '
         Me.TextBox6.Location = New System.Drawing.Point(123, 78)
         Me.TextBox6.Name = "TextBox6"
-        Me.TextBox6.Size = New System.Drawing.Size(100, 20)
+        Me.TextBox6.Size = New System.Drawing.Size(136, 20)
         Me.TextBox6.TabIndex = 36
         '
         'TextBox7
         '
         Me.TextBox7.Location = New System.Drawing.Point(123, 114)
         Me.TextBox7.Name = "TextBox7"
-        Me.TextBox7.Size = New System.Drawing.Size(100, 20)
+        Me.TextBox7.Size = New System.Drawing.Size(136, 20)
         Me.TextBox7.TabIndex = 37
         '
         'Panel1
@@ -162,7 +162,7 @@ Partial Class Grocery
         Me.Panel1.Controls.Add(Me.TextBox4)
         Me.Panel1.Location = New System.Drawing.Point(30, 65)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(200, 171)
+        Me.Panel1.Size = New System.Drawing.Size(280, 203)
         Me.Panel1.TabIndex = 53
         '
         'Label2
@@ -205,36 +205,36 @@ Partial Class Grocery
         '
         Me.TextBox1.Location = New System.Drawing.Point(106, 40)
         Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.Size = New System.Drawing.Size(100, 20)
+        Me.TextBox1.Size = New System.Drawing.Size(167, 20)
         Me.TextBox1.TabIndex = 31
         '
         'TextBox2
         '
         Me.TextBox2.Location = New System.Drawing.Point(106, 76)
         Me.TextBox2.Name = "TextBox2"
-        Me.TextBox2.Size = New System.Drawing.Size(100, 20)
+        Me.TextBox2.Size = New System.Drawing.Size(167, 20)
         Me.TextBox2.TabIndex = 32
         '
         'TextBox3
         '
         Me.TextBox3.Location = New System.Drawing.Point(106, 112)
         Me.TextBox3.Name = "TextBox3"
-        Me.TextBox3.Size = New System.Drawing.Size(100, 20)
+        Me.TextBox3.Size = New System.Drawing.Size(167, 20)
         Me.TextBox3.TabIndex = 33
         '
         'TextBox4
         '
         Me.TextBox4.Location = New System.Drawing.Point(106, 148)
         Me.TextBox4.Name = "TextBox4"
-        Me.TextBox4.Size = New System.Drawing.Size(100, 20)
+        Me.TextBox4.Size = New System.Drawing.Size(167, 20)
         Me.TextBox4.TabIndex = 34
         '
         'DataGridView1
         '
         Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DataGridView1.Location = New System.Drawing.Point(26, 250)
+        Me.DataGridView1.Location = New System.Drawing.Point(26, 274)
         Me.DataGridView1.Name = "DataGridView1"
-        Me.DataGridView1.Size = New System.Drawing.Size(438, 138)
+        Me.DataGridView1.Size = New System.Drawing.Size(573, 114)
         Me.DataGridView1.TabIndex = 51
         '
         'DateTimePicker1
@@ -265,7 +265,7 @@ Partial Class Grocery
         'Button6
         '
         Me.Button6.Image = CType(resources.GetObject("Button6.Image"), System.Drawing.Image)
-        Me.Button6.Location = New System.Drawing.Point(327, 394)
+        Me.Button6.Location = New System.Drawing.Point(381, 394)
         Me.Button6.Name = "Button6"
         Me.Button6.Size = New System.Drawing.Size(61, 35)
         Me.Button6.TabIndex = 52
@@ -275,7 +275,7 @@ Partial Class Grocery
         'Button5
         '
         Me.Button5.Image = CType(resources.GetObject("Button5.Image"), System.Drawing.Image)
-        Me.Button5.Location = New System.Drawing.Point(257, 394)
+        Me.Button5.Location = New System.Drawing.Point(311, 394)
         Me.Button5.Name = "Button5"
         Me.Button5.Size = New System.Drawing.Size(64, 35)
         Me.Button5.TabIndex = 50
@@ -285,7 +285,7 @@ Partial Class Grocery
         'Button4
         '
         Me.Button4.Image = CType(resources.GetObject("Button4.Image"), System.Drawing.Image)
-        Me.Button4.Location = New System.Drawing.Point(186, 394)
+        Me.Button4.Location = New System.Drawing.Point(240, 394)
         Me.Button4.Name = "Button4"
         Me.Button4.Size = New System.Drawing.Size(61, 35)
         Me.Button4.TabIndex = 47
@@ -295,7 +295,7 @@ Partial Class Grocery
         'Button3
         '
         Me.Button3.Image = CType(resources.GetObject("Button3.Image"), System.Drawing.Image)
-        Me.Button3.Location = New System.Drawing.Point(21, 394)
+        Me.Button3.Location = New System.Drawing.Point(75, 394)
         Me.Button3.Name = "Button3"
         Me.Button3.Size = New System.Drawing.Size(60, 35)
         Me.Button3.TabIndex = 49
@@ -305,7 +305,7 @@ Partial Class Grocery
         'Button2
         '
         Me.Button2.Image = CType(resources.GetObject("Button2.Image"), System.Drawing.Image)
-        Me.Button2.Location = New System.Drawing.Point(109, 394)
+        Me.Button2.Location = New System.Drawing.Point(163, 394)
         Me.Button2.Name = "Button2"
         Me.Button2.Size = New System.Drawing.Size(64, 35)
         Me.Button2.TabIndex = 48
@@ -319,7 +319,7 @@ Partial Class Grocery
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(494, 445)
+        Me.ClientSize = New System.Drawing.Size(602, 445)
         Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.Panel2)
         Me.Controls.Add(Me.Panel1)
