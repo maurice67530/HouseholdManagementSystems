@@ -120,6 +120,8 @@ Public Class Inventory
             MessageBox.Show($"Unexpected error: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
         Debug.WriteLine("Exiting button update")
+
+
     End Sub
 
     Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
@@ -207,6 +209,10 @@ Public Class Inventory
                 TextBox6.Text = selectedRow.Cells("PricePerUnit").Value.ToString()
                 ComboBox2.Text = selectedRow.Cells("Unit").Value.ToString()
             End If
+
+            ' Enable/disable the buttons based on the selected person  
+            Button1.Enabled = False
+
         Catch ex As Exception
             Debug.WriteLine("Data not selected: Error")
             Debug.Write($"Stack Trace: {ex.StackTrace}")
@@ -272,10 +278,20 @@ Public Class Inventory
 
     Private Sub Inventory_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         LoadInventorydataFromDatabase()
+
+        ToolTip1.SetToolTip(Button1, "Save")
+        ToolTip1.SetToolTip(Button2, "Edit")
+        ToolTip1.SetToolTip(Button3, "Delete")
+        ToolTip1.SetToolTip(Button4, "Clear")
+        ToolTip1.SetToolTip(Button5, "Highlight")
+        ToolTip1.SetToolTip(Button6, "Sort")
+        ToolTip1.SetToolTip(Button8, "Refresh")
+        ToolTip1.SetToolTip(Button7, "Filter")
+        ToolTip1.SetToolTip(Button9, "Dashboard")
     End Sub
 
     Private Sub Button9_Click(sender As Object, e As EventArgs) Handles Button9.Click
-        PhotoGallery.ShowDialog()
+        'Dashboard.ShowDialog()
         Me.Close()
     End Sub
 
