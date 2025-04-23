@@ -77,7 +77,7 @@ Public Class DailyTask
     Public Property Status As String
     Public Property AssignedTo As String
 End Class
-Public Class GroceryClass
+Public Class GroceryyItemssClass
     Public Property ItemID As String
     Public Property ItemName As String
     Public Property Unit As String
