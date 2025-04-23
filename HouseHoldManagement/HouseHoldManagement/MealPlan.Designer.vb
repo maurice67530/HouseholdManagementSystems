@@ -316,7 +316,7 @@ Partial Class MealPlan
         '
         Me.btnSuggest.BackgroundImage = Global.HouseHoldManagement.My.Resources.Resources.icons8_advise_32
         Me.btnSuggest.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.btnSuggest.Location = New System.Drawing.Point(554, 493)
+        Me.btnSuggest.Location = New System.Drawing.Point(522, 493)
         Me.btnSuggest.Name = "btnSuggest"
         Me.btnSuggest.Size = New System.Drawing.Size(41, 37)
         Me.btnSuggest.TabIndex = 45
@@ -326,7 +326,7 @@ Partial Class MealPlan
         '
         Me.btnPrint.BackgroundImage = Global.HouseHoldManagement.My.Resources.Resources.icons8_print_32
         Me.btnPrint.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.btnPrint.Location = New System.Drawing.Point(359, 493)
+        Me.btnPrint.Location = New System.Drawing.Point(345, 493)
         Me.btnPrint.Name = "btnPrint"
         Me.btnPrint.Size = New System.Drawing.Size(41, 37)
         Me.btnPrint.TabIndex = 44
@@ -336,7 +336,7 @@ Partial Class MealPlan
         '
         Me.btnDelete.BackgroundImage = Global.HouseHoldManagement.My.Resources.Resources.icons8_delete_32
         Me.btnDelete.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.btnDelete.Location = New System.Drawing.Point(142, 493)
+        Me.btnDelete.Location = New System.Drawing.Point(168, 493)
         Me.btnDelete.Name = "btnDelete"
         Me.btnDelete.Size = New System.Drawing.Size(41, 37)
         Me.btnDelete.TabIndex = 43
@@ -346,7 +346,7 @@ Partial Class MealPlan
         '
         Me.btnEdit.BackgroundImage = Global.HouseHoldManagement.My.Resources.Resources.icons8_update_32__2_
         Me.btnEdit.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.btnEdit.Location = New System.Drawing.Point(75, 493)
+        Me.btnEdit.Location = New System.Drawing.Point(109, 493)
         Me.btnEdit.Name = "btnEdit"
         Me.btnEdit.Size = New System.Drawing.Size(41, 37)
         Me.btnEdit.TabIndex = 42
@@ -356,7 +356,7 @@ Partial Class MealPlan
         '
         Me.btnSave.BackgroundImage = Global.HouseHoldManagement.My.Resources.Resources.icons8_approval_32
         Me.btnSave.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.btnSave.Location = New System.Drawing.Point(6, 493)
+        Me.btnSave.Location = New System.Drawing.Point(50, 493)
         Me.btnSave.Name = "btnSave"
         Me.btnSave.Size = New System.Drawing.Size(41, 37)
         Me.btnSave.TabIndex = 41
@@ -366,7 +366,7 @@ Partial Class MealPlan
         '
         Me.btnHighlight.BackgroundImage = Global.HouseHoldManagement.My.Resources.Resources.icons8_highlighter_32
         Me.btnHighlight.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.btnHighlight.Location = New System.Drawing.Point(433, 493)
+        Me.btnHighlight.Location = New System.Drawing.Point(404, 493)
         Me.btnHighlight.Name = "btnHighlight"
         Me.btnHighlight.Size = New System.Drawing.Size(41, 37)
         Me.btnHighlight.TabIndex = 40
@@ -376,7 +376,7 @@ Partial Class MealPlan
         '
         Me.btnRefresh.BackgroundImage = Global.HouseHoldManagement.My.Resources.Resources.icons8_refresh_32__1_
         Me.btnRefresh.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.btnRefresh.Location = New System.Drawing.Point(208, 493)
+        Me.btnRefresh.Location = New System.Drawing.Point(227, 493)
         Me.btnRefresh.Name = "btnRefresh"
         Me.btnRefresh.Size = New System.Drawing.Size(41, 37)
         Me.btnRefresh.TabIndex = 39
@@ -386,7 +386,7 @@ Partial Class MealPlan
         '
         Me.btnFilter.BackgroundImage = Global.HouseHoldManagement.My.Resources.Resources.icons8_filter_32
         Me.btnFilter.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.btnFilter.Location = New System.Drawing.Point(279, 493)
+        Me.btnFilter.Location = New System.Drawing.Point(286, 493)
         Me.btnFilter.Name = "btnFilter"
         Me.btnFilter.Size = New System.Drawing.Size(41, 37)
         Me.btnFilter.TabIndex = 38
@@ -396,7 +396,7 @@ Partial Class MealPlan
         '
         Me.btnSort.BackgroundImage = Global.HouseHoldManagement.My.Resources.Resources.icons8_sort_32
         Me.btnSort.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.btnSort.Location = New System.Drawing.Point(496, 493)
+        Me.btnSort.Location = New System.Drawing.Point(463, 493)
         Me.btnSort.Name = "btnSort"
         Me.btnSort.Size = New System.Drawing.Size(41, 37)
         Me.btnSort.TabIndex = 37
@@ -405,7 +405,7 @@ Partial Class MealPlan
         'Button1
         '
         Me.Button1.Image = CType(resources.GetObject("Button1.Image"), System.Drawing.Image)
-        Me.Button1.Location = New System.Drawing.Point(616, 493)
+        Me.Button1.Location = New System.Drawing.Point(581, 493)
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(41, 37)
         Me.Button1.TabIndex = 46
@@ -416,7 +416,7 @@ Partial Class MealPlan
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.SystemColors.Control
-        Me.ClientSize = New System.Drawing.Size(662, 545)
+        Me.ClientSize = New System.Drawing.Size(662, 531)
         Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.btnSuggest)
         Me.Controls.Add(Me.btnPrint)
