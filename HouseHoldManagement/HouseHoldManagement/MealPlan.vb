@@ -83,7 +83,39 @@ Public Class MealPlan
         Module1.ClearControls(Me)
     End Sub
 
+    Private mealPlanData As DataTable
+    Private currentRowIndex As Integer = 0
 
+    ' Load filtered meal plan data based on frequency
+    Private Sub LoadFilteredMealPlan()
+        Using dbConnection As New OleDbConnection(Module1.connectionString)
+            Dim selectedFilter As String = ComboBox2.SelectedItem?.ToString()
+            Dim query As String = "SELECT * FROM MealPlans WHERE Frequency = ? AND 1=1"
+            Dim startDate As Date = Date.Today
+            Dim endDate As Date = Date.Today
+
+            If Not String.IsNullOrEmpty(selectedFilter) Then
+                Select Case selectedFilter
+                    Case "Day"
+                        endDate = startDate
+                    Case "Week"
+                        endDate = startDate.AddDays(7)
+                    Case "Month"
+                        endDate = startDate.AddMonths(1)
+                End Select
+            End If
+
+            ' Create command with parameters
+            Dim cmd As New OleDbCommand(query, dbConnection)
+            cmd.Parameters.AddWithValue("?", selectedFilter) ' Bind Frequency value
+
+            Dim adapter As New OleDbDataAdapter(cmd)
+            mealPlanData = New DataTable()
+            adapter.Fill(mealPlanData)
+
+            DataGridView1.DataSource = mealPlanData ' Display filtered data in DataGridView
+        End Using
+    End Sub
     Public Sub LoadMealPlanfromDatabase1()
         Try
             Debug.WriteLine("Form loading the data")
@@ -187,15 +219,6 @@ Public Class MealPlan
                 MessageBox.Show("Image file not found.")
             End If
         End If
-
-
-
-
-
-
-
-
-
 
     End Sub
 
