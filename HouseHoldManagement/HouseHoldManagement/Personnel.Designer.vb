@@ -210,7 +210,7 @@ Partial Class Personnel
         Me.Label11.AutoSize = True
         Me.Label11.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         Me.Label11.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label11.Location = New System.Drawing.Point(32, 234)
+        Me.Label11.Location = New System.Drawing.Point(29, 238)
         Me.Label11.Name = "Label11"
         Me.Label11.Size = New System.Drawing.Size(73, 15)
         Me.Label11.TabIndex = 94
@@ -221,7 +221,7 @@ Partial Class Personnel
         Me.Label9.AutoSize = True
         Me.Label9.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         Me.Label9.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label9.Location = New System.Drawing.Point(33, 267)
+        Me.Label9.Location = New System.Drawing.Point(29, 266)
         Me.Label9.Name = "Label9"
         Me.Label9.Size = New System.Drawing.Size(63, 15)
         Me.Label9.TabIndex = 93
@@ -232,7 +232,7 @@ Partial Class Personnel
         Me.Label8.AutoSize = True
         Me.Label8.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         Me.Label8.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label8.Location = New System.Drawing.Point(34, 208)
+        Me.Label8.Location = New System.Drawing.Point(32, 206)
         Me.Label8.Name = "Label8"
         Me.Label8.Size = New System.Drawing.Size(28, 15)
         Me.Label8.TabIndex = 92
@@ -243,7 +243,7 @@ Partial Class Personnel
         Me.Label7.AutoSize = True
         Me.Label7.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         Me.Label7.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label7.Location = New System.Drawing.Point(34, 296)
+        Me.Label7.Location = New System.Drawing.Point(29, 296)
         Me.Label7.Name = "Label7"
         Me.Label7.Size = New System.Drawing.Size(31, 15)
         Me.Label7.TabIndex = 91
@@ -254,7 +254,7 @@ Partial Class Personnel
         Me.Label6.AutoSize = True
         Me.Label6.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         Me.Label6.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label6.Location = New System.Drawing.Point(34, 177)
+        Me.Label6.Location = New System.Drawing.Point(32, 176)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(34, 15)
         Me.Label6.TabIndex = 90
@@ -265,7 +265,7 @@ Partial Class Personnel
         Me.Label5.AutoSize = True
         Me.Label5.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         Me.Label5.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label5.Location = New System.Drawing.Point(34, 146)
+        Me.Label5.Location = New System.Drawing.Point(32, 146)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(46, 15)
         Me.Label5.TabIndex = 89
@@ -276,7 +276,7 @@ Partial Class Personnel
         Me.Label4.AutoSize = True
         Me.Label4.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         Me.Label4.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label4.Location = New System.Drawing.Point(34, 328)
+        Me.Label4.Location = New System.Drawing.Point(29, 328)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(44, 15)
         Me.Label4.TabIndex = 88
@@ -415,7 +415,7 @@ Partial Class Personnel
         '
         Me.OpenFileDialog1.FileName = "OpenFileDialog1"
         '
-        'Person
+        'Personnel
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
@@ -453,7 +453,7 @@ Partial Class Personnel
         Me.Controls.Add(Me.Label3)
         Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.Label1)
-        Me.Name = "Person"
+        Me.Name = "Personnel"
         Me.Text = "Person"
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
