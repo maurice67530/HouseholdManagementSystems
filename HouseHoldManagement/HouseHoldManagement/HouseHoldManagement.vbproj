@@ -89,12 +89,6 @@
     <Compile Include="Dash.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Dashboard.Designer.vb">
-      <DependentUpon>Dashboard.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Dashboard.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="Expense.Designer.vb">
       <DependentUpon>Expense.vb</DependentUpon>
     </Compile>
@@ -173,9 +167,6 @@
   <ItemGroup>
     <EmbeddedResource Include="Chores.resx">
       <DependentUpon>Chores.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Dashboard.resx">
-      <DependentUpon>Dashboard.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Expense.resx">
       <DependentUpon>Expense.vb</DependentUpon>
