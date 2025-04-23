@@ -5,7 +5,7 @@ Public Class Inventory
             '  Dim dataTable As DataTable = HouseHold.GetData("SELECT * FROM Expense")
             ' DataGridView1.DataSource = DataTable
             Debug.WriteLine("Populate Datagridview: Datagridview populated successfully.")
-            Using conn As New OleDbConnection(InventoryModule.connectionString)
+            Using conn As New OleDbConnection(Cruwza.connectionString)
                 conn.Open()
 
                 Dim tableName As String = "Inventory"
@@ -25,7 +25,7 @@ Public Class Inventory
     End Sub
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         Try
-            Using conn As New OleDbConnection(InventoryModule.connectionString)
+            Using conn As New OleDbConnection(Cruwza.connectionString)
 
                 conn.Open()
                 Dim cmd As New OleDbCommand($"INSERT INTO Inventory ([ItemName], [Description], [Quantity], [Category], [ReorderLevel], [PricePerUnit], [DateAdded], [ExpiryDate], [Unit]) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)", conn)
@@ -81,7 +81,7 @@ Public Class Inventory
             Dim ExpiryDate As String = DateTimePicker1.Value
             Dim Unit As String = ComboBox2.Text
 
-            Using conn As New OleDbConnection(InventoryModule.connectionString)
+            Using conn As New OleDbConnection(Cruwza.connectionString)
 
                 conn.Open()
 
@@ -120,6 +120,8 @@ Public Class Inventory
             MessageBox.Show($"Unexpected error: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
         Debug.WriteLine("Exiting button update")
+
+
     End Sub
 
     Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
@@ -143,7 +145,7 @@ Public Class Inventory
                     Debug.WriteLine("Format errors in button delete")
                     Debug.WriteLine("Deleting data: Data delected")
                     Debug.WriteLine("Stack Trace: {ex.StackTrace}")
-                    Using conn As New OleDbConnection(InventoryModule.connectionString)
+                    Using conn As New OleDbConnection(Cruwza.connectionString)
                         conn.Open()
 
                         ' Create the delete command  
@@ -181,7 +183,7 @@ Public Class Inventory
         Dim selectedCategory As String = If(ComboBox1.SelectedItem IsNot Nothing, ComboBox1.SelectedItem.ToString(), "")
         Dim selectedUnit As String = If(ComboBox2.SelectedItem IsNot Nothing, ComboBox2.SelectedItem.ToString(), "")
 
-        InventoryModule.FilterInventory(selectedCategory, selectedUnit)
+        Cruwza.FilterInventory(selectedCategory, selectedUnit)
     End Sub
     Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
         TextBox1.Text = ""
@@ -207,6 +209,10 @@ Public Class Inventory
                 TextBox6.Text = selectedRow.Cells("PricePerUnit").Value.ToString()
                 ComboBox2.Text = selectedRow.Cells("Unit").Value.ToString()
             End If
+
+            ' Enable/disable the buttons based on the selected person  
+            Button1.Enabled = False
+
         Catch ex As Exception
             Debug.WriteLine("Data not selected: Error")
             Debug.Write($"Stack Trace: {ex.StackTrace}")
@@ -272,10 +278,20 @@ Public Class Inventory
 
     Private Sub Inventory_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         LoadInventorydataFromDatabase()
+
+        ToolTip1.SetToolTip(Button1, "Save")
+        ToolTip1.SetToolTip(Button2, "Edit")
+        ToolTip1.SetToolTip(Button3, "Delete")
+        ToolTip1.SetToolTip(Button4, "Clear")
+        ToolTip1.SetToolTip(Button5, "Highlight")
+        ToolTip1.SetToolTip(Button6, "Sort")
+        ToolTip1.SetToolTip(Button8, "Refresh")
+        ToolTip1.SetToolTip(Button7, "Filter")
+        ToolTip1.SetToolTip(Button9, "Dashboard")
     End Sub
 
     Private Sub Button9_Click(sender As Object, e As EventArgs) Handles Button9.Click
-        PhotoGallery.ShowDialog()
+        'Dashboard.ShowDialog()
         Me.Close()
     End Sub
 

@@ -3,6 +3,8 @@ Imports System.Data.OleDb
 Public Class PhotoGallery
 
     Private Sub PhotoGallery_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
+
         PopulateComboboxFromDatabase(ComboBox1)
         LoadPhotodataFromDatabase()
 
@@ -10,10 +12,10 @@ Public Class PhotoGallery
         ToolTip1.SetToolTip(Button2, "Update")
         ToolTip1.SetToolTip(Button3, "Filter")
         ToolTip1.SetToolTip(Button4, "Delete")
-        ToolTip1.SetToolTip(Button5, "Search")
+        ToolTip1.SetToolTip(Button5, "Search by Family Member")
         ToolTip1.SetToolTip(Button6, "Stop Images")
         ToolTip1.SetToolTip(Button8, "Upload Image")
-        'ToolTip1.SetToolTip(Button9, "Dashboard")
+        ToolTip1.SetToolTip(Button7, "Sort")
 
     End Sub
     Public Sub eish()
@@ -27,8 +29,7 @@ Public Class PhotoGallery
         ' Set the ComboBox data source
         ComboBox2.DataSource = items
     End Sub
-
-    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
+    Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
         Debug.WriteLine("Entering button update click")
         If DataGridView1.SelectedRows.Count = 0 Then
             Debug.WriteLine("User confirmed update")
@@ -47,7 +48,7 @@ Public Class PhotoGallery
             Dim Album As String = ComboBox2.SelectedItem.ToString()
 
 
-            Using conn As New OleDbConnection(InventoryModule.connectionString)
+            Using conn As New OleDbConnection(Cruwza.connectionString)
                 conn.Open()
 
                 ' Get the ID of the selected row (assuming your table has a primary key named "ID")  
@@ -85,11 +86,10 @@ Public Class PhotoGallery
         Debug.WriteLine("Exiting button update")
 
     End Sub
-
     Private Sub Button5_Click(sender As Object, e As EventArgs) Handles Button5.Click
         Dim SearchTerm As String = TextBox4.Text
         'Dim connString As String()
-        Using conn As New OleDb.OleDbConnection(InventoryModule.connectionString)
+        Using conn As New OleDb.OleDbConnection(Cruwza.connectionString)
             conn.Open()
 
             Dim cmd As New OleDb.OleDbCommand("SELECT * FROM Photos WHERE Familymember LIKE ?", conn)
@@ -105,7 +105,7 @@ Public Class PhotoGallery
             '  Dim dataTable As DataTable = HouseHold.GetData("SELECT * FROM Expense")
             ' DataGridView1.DataSource = DataTable
             Debug.WriteLine("Populate Datagridview: Datagridview populated successfully.")
-            Using conn As New OleDbConnection(InventoryModule.connectionString)
+            Using conn As New OleDbConnection(Cruwza.connectionString)
                 conn.Open()
 
                 Dim tableName As String = "Photos"
@@ -123,7 +123,6 @@ Public Class PhotoGallery
             MessageBox.Show($"Error Loading photos data from database: {ex.Message}", "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
     End Sub
-
     Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
         Debug.WriteLine("Entering button delete")
         ' Check if there are any selected rows in the DataGridView for expenses  
@@ -145,7 +144,7 @@ Public Class PhotoGallery
                     Debug.WriteLine("Format errors in button delete")
                     Debug.WriteLine("Deleting data: Data delected")
                     Debug.WriteLine("Stack Trace: {ex.StackTrace}")
-                    Using conn As New OleDbConnection(InventoryModule.connectionString)
+                    Using conn As New OleDbConnection(Cruwza.connectionString)
                         conn.Open()
 
                         ' Create the delete command  
@@ -178,7 +177,6 @@ Public Class PhotoGallery
         Debug.WriteLine("Exiting button delete")
 
     End Sub
-
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         Try
             ''validate due date is not in the past
@@ -193,7 +191,7 @@ Public Class PhotoGallery
             '    Return
             'End If
 
-            Using conn As New OleDbConnection(InventoryModule.connectionString)
+            Using conn As New OleDbConnection(Cruwza.connectionString)
 
                 conn.Open()
                 Dim cmd As New OleDbCommand($"INSERT INTO Photos ([Description], [FilePath], [DateAdded], [FamilyMember], [Photographer], [Album]) VALUES (?, ?, ?, ?, ?, ?)", conn)
@@ -231,7 +229,7 @@ Public Class PhotoGallery
         End Try
     End Sub
     Public Sub PopulateComboboxFromDatabase(ByRef comboBox As ComboBox)
-        Dim conn As New OleDbConnection(InventoryModule.connectionString)
+        Dim conn As New OleDbConnection(Cruwza.connectionString)
         Try
             Debug.WriteLine("Populating combobox: combobox populated from database")
             'open the database connection
@@ -264,12 +262,11 @@ Public Class PhotoGallery
         End Try
         Debug.WriteLine("Done with populating combobox from database")
     End Sub
-
     Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
         '  Dim selectedDateAdded As String = If(DateTimePicker1.Text IsNot Nothing, DateTimePicker1.Text.ToString(), "")
         Dim selectedFamilyMember As String = If(ComboBox1.SelectedItem IsNot Nothing, ComboBox1.SelectedItem.ToString(), "")
 
-        InventoryModule.FilterPhoto(selectedFamilyMember) ', selectedDateAdded)
+        Cruwza.FilterPhoto(selectedFamilyMember) ', selectedDateAdded)
     End Sub
     Private Sub DataGridView1_SelectionChanged(sender As Object, e As EventArgs) Handles DataGridView1.SelectionChanged
         Try
@@ -304,10 +301,122 @@ Public Class PhotoGallery
     End Sub
 
 
+    'Dim currentImageIndex As Integer = 0
+    'Dim imagePaths As List(Of String) = New List(Of String)()
+
+    'Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
+    '    Timer1.Start()
+    '    Timer1.Interval = 2000
+
+    '    ' Ensure there are images to display
+    '    If imagePaths.Count > 0 Then
+
+    '        ' Check if the current image index is within the list range
+    '        If currentImageIndex < imagePaths.Count Then
+
+    '            ' Display the current image           
+    '            Dim photoPath As String = imagePaths(currentImageIndex)
+
+    '            ' Check if the photo exists
+    '            If File.Exists(photoPath) Then
+    '                PictureBox1.Image = Image.FromFile(photoPath)
+    '                PictureBox1.SizeMode = PictureBoxSizeMode.Zoom
+
+    '            Else
+    '                MessageBox.Show("Image not found: " & photoPath)
+    '            End If
+    '            ' Optionally, display the date taken (this assumes you want to display the date of the current image)
+    '            ' This will need to be adjusted to fetch the DateTaken from the database for each image
+    '            ' Currently, we're assuming you fetch the photo's DateTaken in the LoadPhotosFromDatabase function.
+
+    '            Dim dateTaken As String = DateTimePicker1.Value
+    '            Label10.Text = "Date Taken: " & dateTaken
+    '        End If
+    '        ' Move to the next image in the list
+    '        currentImageIndex += 1
+
+    '        ' Reset to the first image once all images have been shown
+    '        If currentImageIndex >= imagePaths.Count Then
+    '            currentImageIndex = 0
+    '        End If
+    '    End If
+    'End Sub
+    '' Function to fetch photo paths from the database based on the selected description
+    'Private Sub LoadPhotosFromDatabase(description As String)
+    '    Try
+    '        Using conn As New OleDbConnection(Cruwza.connectionString)
+
+    '            Dim query As String = "SELECT FilePath, DateAdded FROM Photos WHERE Album = @Album"
+
+    '            Using cmd As New OleDbCommand(query, conn)
+    '                cmd.Parameters.AddWithValue("@Album", description)
+
+    '                ' Open the database connection
+    '                conn.Open()
+    '                ' Execute the query and retrieve data
+    '                Dim reader As OleDbDataReader = cmd.ExecuteReader()
+    '                ' Loop through the results and populate the imagePaths list
+    '                While reader.Read()
+
+    '                    Dim photoPath As String = reader("FilePath").ToString()
+    '                    imagePaths.Add(photoPath)
+    '                End While
+    '            End Using
+    '        End Using
+    '    Catch ex As Exception
+    '        MessageBox.Show("Error: " & ex.Message)
+    '    Finally
+    '        ' Close the database connection
+    '        'conn.Close()
+    '    End Try
+    'End Sub
+    'Private Sub Button6_Click(sender As Object, e As EventArgs) Handles Button6.Click
+    '    Timer1.Stop()
+    'End Sub
+    'Private Sub ComboBox2_SelectedIndexChanged(sender As Object, e As EventArgs)
+    '    ' Clear previous images and reset variables
+    '    imagePaths.Clear()
+
+    '    PictureBox1.Image = Nothing
+    '    currentImageIndex = 0
+    '    Label10.Text = String.Empty
+
+    '    ' Check if a description is selected
+
+    '    If ComboBox2.SelectedIndex <> -1 Then
+
+    '        ' Get the selected description from ComboBox
+    '        Dim selectedDescription As String = ComboBox2.SelectedItem.ToString()
+
+    '        ' Get the photo paths based on the selected description
+    '        LoadPhotosFromDatabase(selectedDescription)
+
+    '        ' Start the timer to slide through the photos
+    '        If imagePaths.Count > 0 Then
+    '            Timer1.Start()
+    '        End If
+    '    End If
+    '    'LoadFilteredMealPlan()
+    'End Sub
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    ' Timer variables
     Dim currentImageIndex As Integer = 0
     Dim imagePaths As List(Of String) = New List(Of String)()
-
     Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
+
         Timer1.Start()
         Timer1.Interval = 2000
 
@@ -347,7 +456,7 @@ Public Class PhotoGallery
     ' Function to fetch photo paths from the database based on the selected description
     Private Sub LoadPhotosFromDatabase(description As String)
         Try
-            Using conn As New OleDbConnection(InventoryModule.connectionString)
+            Using conn As New OleDbConnection(Cruwza.connectionString)
 
                 Dim query As String = "SELECT FilePath, DateAdded FROM Photos WHERE Album = @Album"
 
@@ -373,12 +482,11 @@ Public Class PhotoGallery
             'conn.Close()
         End Try
     End Sub
-
+    ' Stop the timer when you no longer want to slide the images
     Private Sub Button6_Click(sender As Object, e As EventArgs) Handles Button6.Click
         Timer1.Stop()
     End Sub
-
-    Private Sub ComboBox2_SelectedIndexChanged(sender As Object, e As EventArgs)
+    Private Sub ComboBox2_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ComboBox2.SelectedIndexChanged
         ' Clear previous images and reset variables
         imagePaths.Clear()
 
@@ -402,7 +510,19 @@ Public Class PhotoGallery
             End If
         End If
         'LoadFilteredMealPlan()
+
     End Sub
+
+
+
+
+
+
+
+
+
+
+
 
     Private Sub Button8_Click(sender As Object, e As EventArgs) Handles Button8.Click
         Dim OpenFileDialog As New OpenFileDialog()
@@ -412,16 +532,13 @@ Public Class PhotoGallery
             TextBox5.Text = OpenFileDialog.FileName
         End If
     End Sub
-
-    Private Sub Panel2_Paint(sender As Object, e As PaintEventArgs) Handles Panel2.Paint
-
-    End Sub
-
     Private Sub Label9_Click(sender As Object, e As EventArgs) Handles Label9.Click
 
     End Sub
-
     Private Sub DataGridView1_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridView1.CellContentClick
 
+    End Sub
+    Private Sub Button7_Click(sender As Object, e As EventArgs) Handles Button7.Click
+        DataGridView1.Sort(DataGridView1.Columns("DateAdded"), System.ComponentModel.ListSortDirection.Ascending)
     End Sub
 End Class

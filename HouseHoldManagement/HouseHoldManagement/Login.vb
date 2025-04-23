@@ -3,7 +3,7 @@ Imports System.Data.OleDb
 Public Class Login
     Public Property conn As New OleDbConnection(Xiluva.connectionString)
 
-    Public Const connectionString As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Xiluva\Source\Repos\maurice67530\HouseholdManagementSystems\HMS.accdb;Persist Security Info=False;"
+    Public Const connectionString As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Xiluva\Source\Repos\maurice67530\HouseholdManagementSystems\HMS.accdb"
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
 
@@ -23,14 +23,21 @@ Public Class Login
                     MessageBox.Show("Login Successful!", "Welcome", MessageBoxButtons.OK, MessageBoxIcon.Information)
 
                     Select Case Role.ToString()
+
                         Case "Admin"
+
+                           ' Dashboard.Show()
+
+                        Case "Member"
+
                             'Dashboard.Show()
-                        Case "Members"
-                            'Dashboard.Show()
+
                         Case "Finance"
-                            'Dashboard.Show()
+
+                           ' Dashboard.Show()
                         Case "Chef"
-                            'Dashboard.Show()
+
+                            ' Dashboard.Show()
                         Case Else
                             MessageBox.Show("Unknown role.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
                     End Select
@@ -49,7 +56,8 @@ Public Class Login
 
         End Using
 
-        'Dashboard.ShowDialog()
+
+        ' Dashboard.ShowDialog()
 
     End Sub
     Private Sub Login_Load(sender As Object, e As EventArgs) Handles MyBase.Load
