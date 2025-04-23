@@ -83,10 +83,12 @@
     <Compile Include="Chores.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Dashboard.Designer.vb">
-      <DependentUpon>Dashboard.vb</DependentUpon>
+    <Compile Include="Dash.Designer.vb">
+      <DependentUpon>Dash.vb</DependentUpon>
     </Compile>
-    <Compile Include="Dashboard.vb" />
+    <Compile Include="Dash.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Expense.Designer.vb">
       <DependentUpon>Expense.vb</DependentUpon>
     </Compile>
@@ -172,8 +174,8 @@
     <EmbeddedResource Include="Chores.resx">
       <DependentUpon>Chores.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Dashboard.resx">
-      <DependentUpon>Dashboard.vb</DependentUpon>
+    <EmbeddedResource Include="Dash.resx">
+      <DependentUpon>Dash.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Expense.resx">
       <DependentUpon>Expense.vb</DependentUpon>
