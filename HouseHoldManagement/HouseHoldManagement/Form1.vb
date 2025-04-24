@@ -1,7 +1,7 @@
 ﻿Imports System.IO
 Imports System.Data.OleDb
 Public Class Form1
-    Public Const connectionString As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Rinae\Source\Repos\maurice67530\HouseholdManagementSystems\HMS.accdb"
+    Public Const connectionString As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Aousy\Source\Repos\maurice67530\HouseholdManagementSystems\HMS.accdb"
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         DisplayPhoto()
         SetupTimer()
@@ -57,7 +57,7 @@ Public Class Form1
     End Sub
 
     Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
-        '  DailyTask.ShowDialog()
+        Task_Management.ShowDialog()
     End Sub
 
     Private Sub Button5_Click(sender As Object, e As EventArgs) Handles Button5.Click
@@ -109,7 +109,7 @@ Public Class Form1
 
         ' update this connection string based  on my database confirguration
 
-        Dim connectionString As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Rinae\Source\Repos\maurice67530\HouseholdManagementSystems\HMS.accdb"
+        Dim connectionString As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Aousy\Source\Repos\maurice67530\HouseholdManagementSystems\HMS.accdb"
 
         Dim query As String = "SELECT [Amount], [Frequency] FROM [Expense]"
 
@@ -131,7 +131,7 @@ Public Class Form1
 
                     ' add points to the chart; chage the series name added
 
-                    Chart1.Series("Series1").Points.AddXY(personnel, Budget)
+                    Chart1.Series("Expense").Points.AddXY(personnel, Budget)
 
                 End While
 
@@ -145,63 +145,63 @@ Public Class Form1
 
     End Sub
 
-    Public Sub PopulateListboxFromChores(ByRef Listbox As ListBox)
+    'Public Sub PopulateListboxFromChores(ByRef Listbox As ListBox)
 
-        Dim conn As New OleDbConnection(connectionString)
+    '    Dim conn As New OleDbConnection(connectionString)
 
-        Try
+    '    Try
 
-            Debug.WriteLine("populate listbox successful")
+    '        Debug.WriteLine("populate listbox successful")
 
-            'open the database connection
+    '        'open the database connection
 
-            conn.Open()
+    '        conn.Open()
 
-            'retrieve the firstname and surname columns from the personaldetails tabel
+    '        'retrieve the firstname and surname columns from the personaldetails tabel
 
-            Dim query As String = "SELECT ID, Status,Title FROM Chores"
+    '        Dim query As String = "SELECT ID, Status,Title FROM Chores"
 
-            Dim cmd As New OleDbCommand(query, conn)
+    '        Dim cmd As New OleDbCommand(query, conn)
 
-            Dim reader As OleDbDataReader = cmd.ExecuteReader()
+    '        Dim reader As OleDbDataReader = cmd.ExecuteReader()
 
-            'bind the retrieved data to the combobox
+    '        'bind the retrieved data to the combobox
 
-            ListBox1.Items.Clear()
+    '        ListBox1.Items.Clear()
 
-            While reader.Read()
+    '        While reader.Read()
 
-                ListBox1.Items.Add($"{reader("ID")} {reader("Status")} {reader("Title")}")
+    '            ListBox1.Items.Add($"{reader("ID")} {reader("Status")} {reader("Title")}")
 
-            End While
+    '        End While
 
-            'close the database
+    '        'close the database
 
-            reader.Close()
+    '        reader.Close()
 
-        Catch ex As Exception
+    '    Catch ex As Exception
 
-            'handle any exeptions that may occur  
+    '        'handle any exeptions that may occur  
 
-            Debug.WriteLine("failed to populate ListBox")
+    '        Debug.WriteLine("failed to populate ListBox")
 
-            Debug.WriteLine($"Stack Trace: {ex.StackTrace}")
+    '        Debug.WriteLine($"Stack Trace: {ex.StackTrace}")
 
-            MessageBox.Show($"Error: {ex.StackTrace}")
+    '        MessageBox.Show($"Error: {ex.StackTrace}")
 
-        Finally
+    '    Finally
 
-            'close the database connection
+    '        'close the database connection
 
-            If conn.State = ConnectionState.Open Then
+    '        If conn.State = ConnectionState.Open Then
 
-                conn.Close()
+    '            conn.Close()
 
-            End If
+    '        End If
 
-        End Try
+    '    End Try
 
-    End Sub
+    'End Sub
 
 
 
@@ -363,5 +363,13 @@ Public Class Form1
            -Completed: {completed}
            -In Progress:{inProgress}
            -Not Started:{notStarted}"
+    End Sub
+
+    Private Sub ListBox1_SelectedIndexChanged(sender As Object, e As EventArgs)
+
+    End Sub
+
+    Private Sub Label1_Click(sender As Object, e As EventArgs) 
+
     End Sub
 End Class
