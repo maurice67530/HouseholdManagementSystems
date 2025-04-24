@@ -74,7 +74,8 @@ Public Class Family_Schedule
                 conn.Open()
 
                 ' Update the table name if necessary  
-                Dim tableName As String = "Chores"
+                Dim tableName As String = "FamilySchedule
+"
 
                 ' Create an OleDbCommand to select the data from the database  
                 Dim cmd As New OleDbCommand($"SELECT * FROM {tableName}", conn)
@@ -95,5 +96,72 @@ Public Class Family_Schedule
             Debug.WriteLine($"Stack Trace: {ex.StackTrace}")
             MessageBox.Show("An error occurred while loading data into the grid.", "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
+    End Sub
+    Private Sub Family_Schedule_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        Dim tooltip As New ToolTip
+        tooltip.SetToolTip(btnSave, "Submit")
+        tooltip.SetToolTip(btnUpdate, "Update")
+        tooltip.SetToolTip(btnDelete, "Delete")
+
+        LoadScheduleFromDatabase()
+    End Sub
+    Private Sub btnDelete_Click(sender As Object, e As EventArgs) Handles btnDelete.Click
+        If DataGridView1.SelectedRows.Count > 0 Then
+            ' Get the selected row  
+            Dim selectedRow As DataGridViewRow = DataGridView1.SelectedRows(0)
+
+            ' Assuming there is an "ID" column which is the primary key in the database  
+            Dim ID As Integer = Convert.ToInt32(selectedRow.Cells("ID").Value) ' Replace "ID" with your actual column name  
+
+            ' Confirm deletion  
+
+            ' Proceed with deletion  
+            Try
+                If DataGridView1.SelectedRows.Count > 0 Then
+                    Debug.WriteLine("A row is selected for deletion")
+                    Dim confirmationResults As DialogResult = MessageBox.Show("Are you sure you want o delete this Schedule?", "Confirm Deletion", MessageBoxButtons.YesNo, MessageBoxIcon.Warning)
+                    If confirmationResults = DialogResult.Yes Then
+                        Debug.WriteLine("User confirmed deletion.")
+
+                    Else
+                        Debug.WriteLine("User cancelled deletion.")
+                    End If
+
+                Else
+                    Debug.WriteLine("No row selected, Exiting Button delete")
+
+                    MessageBox.Show("Please Select chore to delete", "Deletion Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                End If
+
+                Using conn As New OleDbConnection(Ndamu.connectionstring)
+                    conn.Open()
+
+
+                    ' Create the delete command  
+                    Dim cmd As New OleDbCommand("DELETE FROM [FamilySchedule] WHERE [ID] = ?", conn)
+                    cmd.Parameters.AddWithValue("@ID", ID) ' Primary key for matching record  
+
+                    ' Execute the delete command  
+                    Dim rowsAffected As Integer = cmd.ExecuteNonQuery()
+
+                    If rowsAffected > 0 Then
+                        MessageBox.Show("Task deleted successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                        ' Optionally refresh DataGridView or reload from database  
+                        LoadScheduleFromDatabase()
+                    Else
+                        MessageBox.Show("No chores deleted. Please check if the ID exists.", "Deletion Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                    End If
+
+                End Using
+
+            Catch ex As Exception
+                MessageBox.Show($"An error occurred while deleting the expense: {ex.Message}", "Deletion Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            End Try
+        Else
+
+            MessageBox.Show("Please select chores to delete.", "Deletion Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+
+            LoadScheduleFromDatabase()
+        End If
     End Sub
 End Class
