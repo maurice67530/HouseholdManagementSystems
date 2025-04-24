@@ -26,18 +26,20 @@ Public Class Login
 
                         Case "Admin"
 
-                           ' Dashboard.Show()
+                            Form1.Show()
 
                         Case "Member"
 
-                            'Dashboard.Show()
+                            Form1.Show()
 
                         Case "Finance"
 
-                           ' Dashboard.Show()
+                            Form1.Show()
+
                         Case "Chef"
 
-                            ' Dashboard.Show()
+                            Form1.Show()
+
                         Case Else
                             MessageBox.Show("Unknown role.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
                     End Select
@@ -46,6 +48,8 @@ Public Class Login
                 Else
                     MessageBox.Show("Invalid Username or Password.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
                 End If
+
+                ' Form1.TextBox1.Text = $"{UserName} ,{Password}"
 
             Catch ex As Exception
 
@@ -56,8 +60,7 @@ Public Class Login
 
         End Using
 
-
-        ' Dashboard.ShowDialog()
+        Form1.ShowDialog()
 
     End Sub
     Private Sub Login_Load(sender As Object, e As EventArgs) Handles MyBase.Load
