@@ -13,14 +13,15 @@ Public Class Form1
         UpdateBudgetStatus()
         LoadChartData()
 
-        ToolTip1.SetToolTip(Button7, "Inventory")
-        ToolTip1.SetToolTip(Button3, "Task")
-        ToolTip1.SetToolTip(Button5, "Expense")
+        ToolTip1.SetToolTip(Button7, "Task")
+        ToolTip1.SetToolTip(Button3, "Inventory")
+        ToolTip1.SetToolTip(Button8, "Expense")
         ToolTip1.SetToolTip(Button2, "Chores")
         ToolTip1.SetToolTip(Button1, "MealPlan")
         ToolTip1.SetToolTip(Button6, "GroceryItem")
-        ToolTip1.SetToolTip(Button4, "Person")
-        ToolTip1.SetToolTip(Button9, "Photos")
+        ToolTip1.SetToolTip(Button4, "Notification")
+        ToolTip1.SetToolTip(Button9, "Personel")
+        ToolTip1.SetToolTip(Button5, "PhotoGallery")
 
     End Sub
 
