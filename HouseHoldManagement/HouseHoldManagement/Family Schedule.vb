@@ -99,6 +99,7 @@ Public Class Family_Schedule
         tooltip.SetToolTip(btnUpdate, "Update")
         tooltip.SetToolTip(btnDelete, "Delete")
 
+        PopulateComboboxFromDatabase(ComboBox1)
         LoadScheduleFromDatabase()
     End Sub
     Private Sub btnDelete_Click(sender As Object, e As EventArgs) Handles btnDelete.Click
@@ -159,5 +160,124 @@ Public Class Family_Schedule
 
             LoadScheduleFromDatabase()
         End If
+    End Sub
+
+    Private Sub btnUpdate_Click(sender As Object, e As EventArgs) Handles btnUpdate.Click
+
+        'Ensure a row Is selected in the DataGridView  
+        If DataGridView1.SelectedRows.Count = 0 Then
+            MessageBox.Show("Please select a record to update.", "No Selection", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            Return
+        End If
+
+
+        Try
+            Dim Title As String = TextBox1.Text
+            Dim Notes As String = TextBox2.Text
+            Dim DateOfEvent As DateTime = DateTimePicker1.Text
+            Dim StartTime As String = DateTimePicker2.Text
+            Dim EndTime As String = DateTimePicker3.Text
+            Dim AssignedTo As String = ComboBox1.Text
+            Dim EventType As String = ComboBox2.Text
+
+            Using conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
+
+                conn.Open()
+
+                ' Get the ID of the selected row (assuming your table has a primary key named "ID")  
+                Dim selectedRow As DataGridViewRow = DataGridView1.SelectedRows(0)
+                Dim ID As Integer = Convert.ToInt32(selectedRow.Cells("ID").Value) ' Change "ID" to your primary key column name  
+
+                ' Create an OleDbCommand to update the expense data in the database  
+                Dim cmd As New OleDbCommand("UPDATE [FamilySchedule] SET [Title] = ?, [Notes] =?, [DateOfEvent] = ?, [StartTime] = ?, [EndTime] = ?, [AssignedTo] = ?, [EventType] = ? WHERE [ID] = ?", conn)
+
+                ' Set the parameter values from the UI controls  
+                cmd.Parameters.AddWithValue("@Title", TextBox1.Text)
+                cmd.Parameters.AddWithValue("@Notes", TextBox2.Text)
+                cmd.Parameters.AddWithValue("@DateOfEvent", DateTimePicker1.Text)
+                cmd.Parameters.AddWithValue("@StartTime", DateTimePicker2.Text)
+                cmd.Parameters.AddWithValue("@EndTime", DateTimePicker3.Text)
+                cmd.Parameters.AddWithValue("@AssignedTo", ComboBox1.SelectedItem.ToString())
+                cmd.Parameters.AddWithValue("@EventType", ComboBox2.SelectedItem.ToString())
+                cmd.Parameters.AddWithValue("@ID", ID)
+                cmd.ExecuteNonQuery()
+
+                MsgBox("Task Updated Successfuly!", vbInformation, "Update Confirmation")
+
+            End Using
+
+        Catch ex As OleDbException
+            MessageBox.Show("please ensure all fields are filled correctly. ", "input error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        Catch ex As Exception
+            Debug.WriteLine($"General error in btnEdit_Click: {ex.Message}")
+            Debug.WriteLine($"Stack Trace: {ex.StackTrace}")
+            MessageBox.Show("An unexpected error occurred.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
+        'TextBox4.Text = ("expense updated at{DateTime.Now:hh:mm:ss}")
+        If DataGridView1.SelectedRows.Count > 0 Then
+            Debug.WriteLine("A row is selected for update.")
+        Else
+            Debug.WriteLine("No row selected, exiting btnEdit_click.")
+            MessageBox.Show("Please select task to update.", "update Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+        End If
+    End Sub
+
+    Private Sub DataGridView1_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridView1.CellContentClick
+
+    End Sub
+
+    Private Sub DataGridView1_SelectionChanged(sender As Object, e As EventArgs) Handles DataGridView1.SelectionChanged
+        Try
+
+            Debug.WriteLine("selecting data in the datagridview")
+            If DataGridView1.SelectedRows.Count > 0 Then
+                Dim selectedRow As DataGridViewRow = DataGridView1.SelectedRows(0)
+
+                ' Load the data from the selected row into UI controls  
+                TextBox1.Text = selectedRow.Cells("Title").Value.ToString()
+                TextBox2.Text = selectedRow.Cells("Notes").Value.ToString()
+                DateTimePicker1.Text = selectedRow.Cells("DateOfEvent").Value.ToString()
+                DateTimePicker2.Text = selectedRow.Cells("StartTime").Value.ToString()
+                DateTimePicker3.Text = selectedRow.Cells("EndTime").Value.ToString()
+                ComboBox1.Text = selectedRow.Cells("AssignedTo").Value.ToString()
+                ComboBox2.Text = selectedRow.Cells("EventType").Value.ToString()
+            End If
+        Catch ex As Exception
+            Debug.WriteLine("error selection data in the database")
+            Debug.WriteLine($"Stack Trace: {ex.StackTrace}")
+            MessageBox.Show("Error saving inventory to database: " & ex.Message & vbNewLine & ex.StackTrace, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
+
+    End Sub
+    Public Sub PopulateComboboxFromDatabase(ByRef comboBox As ComboBox)
+        Dim conn As New OleDbConnection(Ndivhuwo.connectionString)
+        Try
+            Debug.WriteLine("populating combobox from database successfully!")
+            ' 1. Open the database connection  
+            conn.Open()
+
+            ' 2. Retrieve the FirstName and LastName columns from the PersonalDetails table  
+            Dim query As String = "SELECT FirstName, LastName FROM PersonalDetails"
+            Dim cmd As New OleDbCommand(query, conn)
+            Dim reader As OleDbDataReader = cmd.ExecuteReader()
+
+            ' 3. Bind the retrieved data to the combobox  
+            comboBox.Items.Clear()
+            While reader.Read()
+                comboBox.Items.Add($"{reader("FirstName")} {reader("LastName")}")
+            End While
+
+            ' 4. Close the database connection  
+            reader.Close()
+
+        Catch ex As Exception
+            Debug.WriteLine($"form loaded unsuccessful")
+            Debug.WriteLine($"Stack Trace: {ex.StackTrace}")
+        Finally
+            ' Close the database connection  
+            If conn.State = ConnectionState.Open Then
+                conn.Close()
+            End If
+        End Try
     End Sub
 End Class
