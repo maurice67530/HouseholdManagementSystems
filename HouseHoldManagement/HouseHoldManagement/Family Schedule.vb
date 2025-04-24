@@ -1,7 +1,9 @@
 ﻿Imports System.Data.OleDb
 
 Public Class Family_Schedule
-    Public Const connectionstring As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Nedzamba\Source\Repos\HouseholdManagementSystems\HMS.accdb"
+    Public Property conn As New OleDbConnection(connectionString)
+    Public Const connectionString As String = " Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Delicious\Source\Repos\maurice67530\HouseholdManagementSystems\HMS.accdb"
+
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles btnSave.Click
         Try
 
@@ -53,18 +55,12 @@ Public Class Family_Schedule
 
             End Using
 
-
-        Catch ex As OleDbException
-            Debug.WriteLine($"Database error in btnSAdd_Click: {ex.Message}")
-            Debug.WriteLine($"Stack Trace: {ex.StackTrace}")
-            MessageBox.Show("Error saving Chores to database. Please check the connection.", "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         Catch ex As Exception
+            Debug.WriteLine($"Database error in btnAdd_Click: {ex.Message}")
+            MessageBox.Show("Error saving Schedule to database: " & ex.Message & vbNewLine & ex.StackTrace, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Debug.WriteLine("Exiting btnAdd")
 
-            Debug.WriteLine($"General error in btnAdd_Click: {ex.Message}")
-            Debug.WriteLine($"Stack Trace: {ex.StackTrace}")
-            MessageBox.Show("An unexpected error occurred.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
-        Debug.WriteLine("Exiting btnAdd")
         LoadScheduleFromDatabase()
     End Sub
     Public Sub LoadScheduleFromDatabase()
@@ -94,7 +90,7 @@ Public Class Family_Schedule
             Debug.WriteLine($"Unexpected error in DataGridView: {ex.Message}")
             Debug.WriteLine($"Error in PopulateDataGridView: {ex.Message}")
             Debug.WriteLine($"Stack Trace: {ex.StackTrace}")
-            MessageBox.Show("An error occurred while loading data into the grid.", "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            'MessageBox.Show("An error occurred while loading data into the grid.", "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
     End Sub
     Private Sub Family_Schedule_Load(sender As Object, e As EventArgs) Handles MyBase.Load
