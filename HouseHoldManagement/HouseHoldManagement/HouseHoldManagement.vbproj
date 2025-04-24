@@ -89,6 +89,18 @@
     <Compile Include="Expense.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Family Schedule.Designer.vb">
+      <DependentUpon>Family Schedule.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Family Schedule.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FamilySchedule.Designer.vb">
+      <DependentUpon>FamilySchedule.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FamilySchedule.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Form1.vb">
       <SubType>Form</SubType>
     </Compile>
