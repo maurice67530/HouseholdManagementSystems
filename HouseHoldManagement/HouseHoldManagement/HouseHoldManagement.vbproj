@@ -6,7 +6,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{DEC8BF09-6D70-450D-B49C-BFCF4DBBB6B8}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <StartupObject>HouseHoldManagement.Family_Schedule</StartupObject>
+    <StartupObject>HouseHoldManagement.Form1</StartupObject>
     <RootNamespace>HouseHoldManagement</RootNamespace>
     <AssemblyName>HouseHoldManagement</AssemblyName>
     <FileAlignment>512</FileAlignment>
@@ -87,12 +87,6 @@
       <DependentUpon>Expense.vb</DependentUpon>
     </Compile>
     <Compile Include="Expense.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Family Schedule.Designer.vb">
-      <DependentUpon>Family Schedule.vb</DependentUpon>
-    </Compile>
-    <Compile Include="Family Schedule.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Form1.vb">
@@ -183,8 +177,8 @@
     <EmbeddedResource Include="Expense.resx">
       <DependentUpon>Expense.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Family Schedule.resx">
-      <DependentUpon>Family Schedule.vb</DependentUpon>
+    <EmbeddedResource Include="Form1.resx">
+      <DependentUpon>Form1.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Grocery.resx">
       <DependentUpon>Grocery.vb</DependentUpon>
@@ -279,6 +273,33 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\icons8-next-321.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-meal-papercut-96.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-chores-481.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-task-961.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-inventory-papercut-961.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-photo-96.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-notification-961.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-person-961.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-expense-96.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-chores-96 %281%29.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
