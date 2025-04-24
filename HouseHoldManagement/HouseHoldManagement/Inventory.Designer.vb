@@ -369,7 +369,7 @@ Partial Class Inventory
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.SystemColors.Control
-        Me.ClientSize = New System.Drawing.Size(534, 374)
+        Me.ClientSize = New System.Drawing.Size(542, 388)
         Me.Controls.Add(Me.Panel1)
         Me.Controls.Add(Me.Button9)
         Me.Controls.Add(Me.Button8)
