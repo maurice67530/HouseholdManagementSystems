@@ -79,16 +79,15 @@ Public Class DailyTask
 End Class
 Public Class Groceryy
     'Properties of the GroceryIteam class
-    Public Property GroceryID As String
     Public Property ItemName As String
     Public Property Quantity As String
     Public Property Category As String
     Public Property Unit As String
     Public Property ExpiryDate As String
     Public Property PricePerUnit As String
-    Public Property Purchase As String
-    Public Property Quality As String
-    Public Property Teamwork As String
+    Public Property PurchaseDate As String
+    Public Property Period As String
+
 End Class
 Public Class Person
     Public Property FirstName As String

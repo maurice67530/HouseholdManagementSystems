@@ -6,7 +6,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{DEC8BF09-6D70-450D-B49C-BFCF4DBBB6B8}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <StartupObject>HouseHoldManagement.Form1</StartupObject>
+    <StartupObject>HouseHoldManagement.Family_Schedule</StartupObject>
     <RootNamespace>HouseHoldManagement</RootNamespace>
     <AssemblyName>HouseHoldManagement</AssemblyName>
     <FileAlignment>512</FileAlignment>
@@ -87,6 +87,12 @@
       <DependentUpon>Expense.vb</DependentUpon>
     </Compile>
     <Compile Include="Expense.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Family Schedule.Designer.vb">
+      <DependentUpon>Family Schedule.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Family Schedule.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Form1.vb">
@@ -176,6 +182,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Expense.resx">
       <DependentUpon>Expense.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Family Schedule.resx">
+      <DependentUpon>Family Schedule.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.vb</DependentUpon>
