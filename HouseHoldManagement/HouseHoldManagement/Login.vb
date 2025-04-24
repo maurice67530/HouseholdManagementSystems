@@ -7,6 +7,8 @@ Public Class Login
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
 
+        Dim Username As String = TextBox1.Text
+
         Using conn As New OleDbConnection(Xiluva.connectionString)
             Try
                 conn.Open()
@@ -44,12 +46,13 @@ Public Class Login
                             MessageBox.Show("Unknown role.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
                     End Select
 
+                    Form1.TextBox1.Text = $"{Username}"
+
+                    Form1.ShowDialog()
                     Me.Hide()
                 Else
                     MessageBox.Show("Invalid Username or Password.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
                 End If
-
-                ' Form1.TextBox1.Text = $"{UserName} ,{Password}"
 
             Catch ex As Exception
 
@@ -59,8 +62,6 @@ Public Class Login
             End Try
 
         End Using
-
-        Form1.ShowDialog()
 
     End Sub
     Private Sub Login_Load(sender As Object, e As EventArgs) Handles MyBase.Load
