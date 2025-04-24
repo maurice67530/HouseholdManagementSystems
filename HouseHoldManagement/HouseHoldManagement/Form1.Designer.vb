@@ -68,7 +68,7 @@ Partial Class Form1
         '
         Me.FlowLayoutPanel2.Location = New System.Drawing.Point(877, 33)
         Me.FlowLayoutPanel2.Name = "FlowLayoutPanel2"
-        Me.FlowLayoutPanel2.Size = New System.Drawing.Size(166, 486)
+        Me.FlowLayoutPanel2.Size = New System.Drawing.Size(139, 486)
         Me.FlowLayoutPanel2.TabIndex = 62
         '
         'Chart1
@@ -264,7 +264,7 @@ Partial Class Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1077, 661)
+        Me.ClientSize = New System.Drawing.Size(1028, 661)
         Me.Controls.Add(Me.FlowLayoutPanel2)
         Me.Controls.Add(Me.Label4)
         Me.Controls.Add(Me.ListBox1)

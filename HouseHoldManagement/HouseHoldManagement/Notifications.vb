@@ -87,6 +87,8 @@ Public Class Notifications
         ToolTip1.SetToolTip(Button1, "Mark As Read")
         ToolTip1.SetToolTip(Button2, "Clear Notification")
         ToolTip1.SetToolTip(Button3, "Refresh")
+        ToolTip1.SetToolTip(BtnSort, "Sort")
+        ToolTip1.SetToolTip(BtnFilter, "Filter")
         LoadNotifications()
 
 
@@ -418,4 +420,7 @@ Public Class Notifications
         End Using
     End Function
 
+    Private Sub BtnSort_Click(sender As Object, e As EventArgs) Handles BtnSort.Click
+        DataGridView1.Sort(DataGridView1.Columns("Category"), System.ComponentModel.ListSortDirection.Ascending)
+    End Sub
 End Class
