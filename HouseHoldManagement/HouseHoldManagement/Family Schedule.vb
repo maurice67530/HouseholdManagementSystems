@@ -96,4 +96,117 @@ Public Class Family_Schedule
             MessageBox.Show("An error occurred while loading data into the grid.", "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
     End Sub
+
+    Private Sub btnUpdate_Click(sender As Object, e As EventArgs) Handles btnUpdate.Click
+        If DataGridView1.SelectedRows.Count = 0 Then
+            MessageBox.Show("Please select a record to update.", "No Selection", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            Return
+        End If
+        Try
+            Dim Title As String = TextBox1.Text
+            Dim Notes As String = TextBox2.Text
+            Dim DateOfEvent As String = DateTimePicker1.Text
+            Dim StartTime As String = DateTimePicker2.Text
+            Dim EndTime As String = DateTimePicker3.Text
+            Dim AssignedTo As String = ComboBox1.Text
+            Dim EventType As String = ComboBox2.Text
+
+            Using conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
+                conn.Open()
+
+                ' Get the ID of the selected row (assuming your table has a primary key named "ID")  
+                Dim selectedRow As DataGridViewRow = DataGridView1.SelectedRows(0)
+                Dim ID As Integer = Convert.ToInt32(selectedRow.Cells("ID").Value) ' Change "ID" to your primary key column name  
+
+                ' Create an OleDbCommand to update the personnel data in the database  
+                Dim cmd As New OleDbCommand("UPDATE [FamilySchedule] SET [Title] = ?, [Notes] = ?, [DateOfEvent] = ?, [StartTime] =?, [EndTime] =?, [AssignedTo] = ?, [EventType] = ? WHERE [ID] = ?", conn)
+
+                ' Set the parameter values from the UI controls  
+
+                cmd.Parameters.AddWithValue("@Title", TextBox1.Text)
+                cmd.Parameters.AddWithValue("@Notes", TextBox2.Text)
+                cmd.Parameters.AddWithValue("@DateOfEvent", DateTimePicker1.Text)
+                cmd.Parameters.AddWithValue("@StartTime", DateTimePicker2.Text)
+                cmd.Parameters.AddWithValue("@EndTime", DateTimePicker3.Text)
+                cmd.Parameters.AddWithValue("@AssignedTo", ComboBox1.SelectedItem.ToString())
+                cmd.Parameters.AddWithValue("@EventType", ComboBox2.SelectedItem.ToString())
+
+                cmd.Parameters.AddWithValue("@ID", ID)
+
+
+                cmd.ExecuteNonQuery()
+
+
+                MsgBox("Chores Updated Successfuly!", vbInformation, "Update Confirmation")
+            End Using
+        Catch ex As OleDbException
+            MessageBox.Show($"Error updating Chores in database: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        Catch ex As Exception
+            MessageBox.Show($"Unexpected error: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
+        LoadScheduleFromDatabase()
+
+
+    End Sub
+    Public Sub PopulateComboboxFromDatabase(ByRef comboBox As ComboBox)
+        Dim conn As New OleDbConnection(connectionstring)
+        Try
+            Debug.WriteLine("populating combobox from database successfully!")
+            ' 1. Open the database connection  
+            conn.Open()
+
+            ' 2. Retrieve the FirstName and LastName columns from the PersonalDetails table  
+            Dim query As String = "SELECT FirstName, LastName FROM PersonalDetails"
+            Dim cmd As New OleDbCommand(query, conn)
+            Dim reader As OleDbDataReader = cmd.ExecuteReader()
+
+            ' 3. Bind the retrieved data to the combobox  
+            comboBox.Items.Clear()
+            While reader.Read()
+                comboBox.Items.Add($"{reader("FirstName")} {reader("LastName")}")
+            End While
+
+            ' 4. Close the database connection  
+            reader.Close()
+
+        Catch ex As Exception
+            Debug.WriteLine($"form loaded unsuccessful")
+            Debug.WriteLine($"Stack Trace: {ex.StackTrace}")
+        Finally
+            ' Close the database connection  
+            If conn.State = ConnectionState.Open Then
+                conn.Close()
+            End If
+        End Try
+    End Sub
+    Private Sub Family_Schedule_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        PopulateComboboxFromDatabase(ComboBox1)
+    End Sub
+
+    Private Sub DataGridView1_SelectionChanged(sender As Object, e As EventArgs) Handles DataGridView1.SelectionChanged
+        Try
+
+            Debug.WriteLine("selecting data in the datagridview")
+            If DataGridView1.SelectedRows.Count > 0 Then
+                Dim selectedRow As DataGridViewRow = DataGridView1.SelectedRows(0)
+
+                ' Load the data from the selected row into UI controls  
+                TextBox1.Text = selectedRow.Cells("Title").Value.ToString()
+                TextBox2.Text = selectedRow.Cells("Notes").Value.ToString()
+                DateTimePicker1.Text = selectedRow.Cells("DateOfEvent").Value.ToString()
+                DateTimePicker2.Text = selectedRow.Cells("StartTime").Value.ToString()
+                DateTimePicker3.Text = selectedRow.Cells("EndTime").Value.ToString()
+                ComboBox1.Text = selectedRow.Cells("AssignedTo").Value.ToString()
+                ComboBox2.Text = selectedRow.Cells("EventType").Value.ToString()
+
+
+            End If
+        Catch ex As Exception
+            Debug.WriteLine("error selection data in the database")
+            Debug.WriteLine($"Stack Trace: {ex.StackTrace}")
+            MessageBox.Show("Error family schedule to database: " & ex.Message & vbNewLine & ex.StackTrace, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
+
+    End Sub
+
 End Class
