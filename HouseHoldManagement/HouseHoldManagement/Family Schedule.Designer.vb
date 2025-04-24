@@ -275,6 +275,7 @@ Partial Class Family_Schedule
         Me.Controls.Add(Me.Panel1)
         Me.Controls.Add(Me.Label1)
         Me.Name = "Family_Schedule"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Family_Schedule"
         Me.Panel1.ResumeLayout(False)
         Me.Panel1.PerformLayout()

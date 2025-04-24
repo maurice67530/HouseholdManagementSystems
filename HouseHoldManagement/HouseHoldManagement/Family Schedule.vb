@@ -180,7 +180,7 @@ Public Class Family_Schedule
             Dim AssignedTo As String = ComboBox1.Text
             Dim EventType As String = ComboBox2.Text
 
-            Using conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
+            Using conn As New OleDbConnection(Ndamu.connectionstring)
 
                 conn.Open()
 
@@ -202,16 +202,19 @@ Public Class Family_Schedule
                 cmd.Parameters.AddWithValue("@ID", ID)
                 cmd.ExecuteNonQuery()
 
-                MsgBox("Task Updated Successfuly!", vbInformation, "Update Confirmation")
+                MsgBox("Schedule Updated Successfuly!", vbInformation, "Update Confirmation")
 
             End Using
 
         Catch ex As OleDbException
             MessageBox.Show("please ensure all fields are filled correctly. ", "input error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            MessageBox.Show("Error saving Chores to database: " & ex.Message & vbNewLine & ex.StackTrace, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         Catch ex As Exception
             Debug.WriteLine($"General error in btnEdit_Click: {ex.Message}")
             Debug.WriteLine($"Stack Trace: {ex.StackTrace}")
             MessageBox.Show("An unexpected error occurred.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            MessageBox.Show("Error saving Chores to database: " & ex.Message & vbNewLine & ex.StackTrace, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+
         End Try
         'TextBox4.Text = ("expense updated at{DateTime.Now:hh:mm:ss}")
         If DataGridView1.SelectedRows.Count > 0 Then
@@ -220,6 +223,7 @@ Public Class Family_Schedule
             Debug.WriteLine("No row selected, exiting btnEdit_click.")
             MessageBox.Show("Please select task to update.", "update Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
         End If
+        LoadScheduleFromDatabase()
     End Sub
 
     Private Sub DataGridView1_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridView1.CellContentClick
@@ -250,7 +254,7 @@ Public Class Family_Schedule
 
     End Sub
     Public Sub PopulateComboboxFromDatabase(ByRef comboBox As ComboBox)
-        Dim conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
+        Dim conn As New OleDbConnection(Ndamu.connectionstring)
         Try
             Debug.WriteLine("populating combobox from database successfully!")
             ' 1. Open the database connection  
