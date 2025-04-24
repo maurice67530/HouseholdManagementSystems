@@ -13,14 +13,15 @@ Public Class Form1
         UpdateBudgetStatus()
         LoadChartData()
 
-        ToolTip1.SetToolTip(Button7, "Inventory")
-        ToolTip1.SetToolTip(Button3, "Task")
-        ToolTip1.SetToolTip(Button5, "Expense")
+        ToolTip1.SetToolTip(Button7, "Task")
+        ToolTip1.SetToolTip(Button3, "Inventory")
+        ToolTip1.SetToolTip(Button8, "Expense")
         ToolTip1.SetToolTip(Button2, "Chores")
         ToolTip1.SetToolTip(Button1, "MealPlan")
         ToolTip1.SetToolTip(Button6, "GroceryItem")
-        ToolTip1.SetToolTip(Button4, "Person")
-        ToolTip1.SetToolTip(Button9, "Photos")
+        ToolTip1.SetToolTip(Button4, "Notification")
+        ToolTip1.SetToolTip(Button9, "Personel")
+        ToolTip1.SetToolTip(Button5, "PhotoGallery")
 
     End Sub
 
@@ -44,35 +45,35 @@ Public Class Form1
     End Sub
 
     Private Sub Button6_Click(sender As Object, e As EventArgs) Handles Button6.Click
-        MealPlan.ShowDialog()
+        Grocery.ShowDialog()
     End Sub
 
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
-        'Groceryy.ShowDialog()
-    End Sub
-
-    Private Sub Button7_Click(sender As Object, e As EventArgs) Handles Button7.Click
         Chores.ShowDialog()
     End Sub
 
+    Private Sub Button7_Click(sender As Object, e As EventArgs) Handles Button7.Click
+        TaskManagement.ShowDialog()
+    End Sub
+
     Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
-        '  DailyTask.ShowDialog()
+        Inventory.ShowDialog()
     End Sub
 
     Private Sub Button5_Click(sender As Object, e As EventArgs) Handles Button5.Click
-        Expense.ShowDialog()
-    End Sub
-
-    Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
         PhotoGallery.ShowDialog()
     End Sub
 
+    Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
+        Notifications.ShowDialog()
+    End Sub
+
     Private Sub Button9_Click(sender As Object, e As EventArgs) Handles Button9.Click
-        MealPlan.ShowDialog()
+        Personnel.ShowDialog()
     End Sub
 
     Private Sub Button8_Click(sender As Object, e As EventArgs) Handles Button8.Click
-        Notifications.ShowDialog()
+        Expense.ShowDialog()
     End Sub
     Private Sub UpdateBudgetStatus()
 
@@ -209,6 +210,7 @@ Public Class Form1
     Private currentPhotoIndex As Integer = 0
 
     Private WithEvents photoTimer As New Timer()
+    Private TaskManagement As Object
 
     Private Sub LoadRecentPhotos()
 
