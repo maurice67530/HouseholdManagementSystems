@@ -6,7 +6,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{DEC8BF09-6D70-450D-B49C-BFCF4DBBB6B8}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <StartupObject>HouseHoldManagement.Inventory</StartupObject>
+    <StartupObject>HouseHoldManagement.Form1</StartupObject>
     <RootNamespace>HouseHoldManagement</RootNamespace>
     <AssemblyName>HouseHoldManagement</AssemblyName>
     <FileAlignment>512</FileAlignment>
@@ -273,6 +273,30 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\icons8-next-321.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-meal-papercut-96.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-chores-481.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-task-961.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-inventory-papercut-961.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-photo-96.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-notification-961.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-person-961.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-expense-96.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
