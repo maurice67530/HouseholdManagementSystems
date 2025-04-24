@@ -177,6 +177,9 @@
     <EmbeddedResource Include="Expense.resx">
       <DependentUpon>Expense.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Form1.resx">
+      <DependentUpon>Form1.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Grocery.resx">
       <DependentUpon>Grocery.vb</DependentUpon>
     </EmbeddedResource>

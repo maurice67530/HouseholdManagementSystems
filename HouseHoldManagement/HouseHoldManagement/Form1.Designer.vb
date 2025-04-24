@@ -23,13 +23,12 @@ Partial Class Form1
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Form1))
-        Dim ChartArea21 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
-        Dim Legend21 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
-        Dim Series21 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
-        Dim ChartArea22 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
-        Dim Legend22 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
-        Dim Series22 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
+        Dim ChartArea1 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
+        Dim Legend1 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
+        Dim Series1 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
+        Dim ChartArea2 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
+        Dim Legend2 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
+        Dim Series2 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.Button1 = New System.Windows.Forms.Button()
         Me.Button2 = New System.Windows.Forms.Button()
@@ -67,7 +66,6 @@ Partial Class Form1
         'Button1
         '
         Me.Button1.BackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.Button1.Image = CType(resources.GetObject("Button1.Image"), System.Drawing.Image)
         Me.Button1.Location = New System.Drawing.Point(22, 33)
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(170, 109)
@@ -78,7 +76,6 @@ Partial Class Form1
         'Button2
         '
         Me.Button2.BackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.Button2.Image = CType(resources.GetObject("Button2.Image"), System.Drawing.Image)
         Me.Button2.Location = New System.Drawing.Point(22, 148)
         Me.Button2.Name = "Button2"
         Me.Button2.Size = New System.Drawing.Size(170, 109)
@@ -89,7 +86,6 @@ Partial Class Form1
         'Button3
         '
         Me.Button3.BackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.Button3.Image = CType(resources.GetObject("Button3.Image"), System.Drawing.Image)
         Me.Button3.Location = New System.Drawing.Point(22, 263)
         Me.Button3.Name = "Button3"
         Me.Button3.Size = New System.Drawing.Size(170, 109)
@@ -100,7 +96,6 @@ Partial Class Form1
         'Button4
         '
         Me.Button4.BackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.Button4.Image = CType(resources.GetObject("Button4.Image"), System.Drawing.Image)
         Me.Button4.Location = New System.Drawing.Point(22, 378)
         Me.Button4.Name = "Button4"
         Me.Button4.Size = New System.Drawing.Size(170, 100)
@@ -112,7 +107,6 @@ Partial Class Form1
         'Button5
         '
         Me.Button5.BackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.Button5.Image = CType(resources.GetObject("Button5.Image"), System.Drawing.Image)
         Me.Button5.Location = New System.Drawing.Point(219, 274)
         Me.Button5.Name = "Button5"
         Me.Button5.Size = New System.Drawing.Size(170, 109)
@@ -130,7 +124,6 @@ Partial Class Form1
         'Button7
         '
         Me.Button7.BackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.Button7.Image = CType(resources.GetObject("Button7.Image"), System.Drawing.Image)
         Me.Button7.Location = New System.Drawing.Point(219, 159)
         Me.Button7.Name = "Button7"
         Me.Button7.Size = New System.Drawing.Size(170, 109)
@@ -142,7 +135,6 @@ Partial Class Form1
         'Button8
         '
         Me.Button8.BackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.Button8.Image = CType(resources.GetObject("Button8.Image"), System.Drawing.Image)
         Me.Button8.Location = New System.Drawing.Point(22, 484)
         Me.Button8.Name = "Button8"
         Me.Button8.Size = New System.Drawing.Size(170, 109)
@@ -154,7 +146,6 @@ Partial Class Form1
         'Button9
         '
         Me.Button9.BackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.Button9.Image = CType(resources.GetObject("Button9.Image"), System.Drawing.Image)
         Me.Button9.Location = New System.Drawing.Point(219, 401)
         Me.Button9.Name = "Button9"
         Me.Button9.Size = New System.Drawing.Size(170, 100)
@@ -165,32 +156,32 @@ Partial Class Form1
         '
         'Chart1
         '
-        ChartArea21.Name = "ChartArea1"
-        Me.Chart1.ChartAreas.Add(ChartArea21)
-        Legend21.Name = "Legend1"
-        Me.Chart1.Legends.Add(Legend21)
+        ChartArea1.Name = "ChartArea1"
+        Me.Chart1.ChartAreas.Add(ChartArea1)
+        Legend1.Name = "Legend1"
+        Me.Chart1.Legends.Add(Legend1)
         Me.Chart1.Location = New System.Drawing.Point(412, 288)
         Me.Chart1.Name = "Chart1"
-        Series21.ChartArea = "ChartArea1"
-        Series21.Legend = "Legend1"
-        Series21.Name = "Series1"
-        Me.Chart1.Series.Add(Series21)
+        Series1.ChartArea = "ChartArea1"
+        Series1.Legend = "Legend1"
+        Series1.Name = "Series1"
+        Me.Chart1.Series.Add(Series1)
         Me.Chart1.Size = New System.Drawing.Size(260, 231)
         Me.Chart1.TabIndex = 51
         Me.Chart1.Text = "Chart1"
         '
         'Chart2
         '
-        ChartArea22.Name = "ChartArea1"
-        Me.Chart2.ChartAreas.Add(ChartArea22)
-        Legend22.Name = "Legend1"
-        Me.Chart2.Legends.Add(Legend22)
+        ChartArea2.Name = "ChartArea1"
+        Me.Chart2.ChartAreas.Add(ChartArea2)
+        Legend2.Name = "Legend1"
+        Me.Chart2.Legends.Add(Legend2)
         Me.Chart2.Location = New System.Drawing.Point(412, 33)
         Me.Chart2.Name = "Chart2"
-        Series22.ChartArea = "ChartArea1"
-        Series22.Legend = "Legend1"
-        Series22.Name = "Series1"
-        Me.Chart2.Series.Add(Series22)
+        Series2.ChartArea = "ChartArea1"
+        Series2.Legend = "Legend1"
+        Series2.Name = "Series1"
+        Me.Chart2.Series.Add(Series2)
         Me.Chart2.Size = New System.Drawing.Size(260, 249)
         Me.Chart2.TabIndex = 52
         Me.Chart2.Text = "Chart2"
@@ -251,7 +242,6 @@ Partial Class Form1
         'Button6
         '
         Me.Button6.BackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.Button6.Image = CType(resources.GetObject("Button6.Image"), System.Drawing.Image)
         Me.Button6.Location = New System.Drawing.Point(219, 33)
         Me.Button6.Name = "Button6"
         Me.Button6.Size = New System.Drawing.Size(170, 109)
@@ -285,7 +275,7 @@ Partial Class Form1
         Me.Controls.Add(Me.Button2)
         Me.Controls.Add(Me.Button1)
         Me.Name = "Form1"
-        Me.Text = "Form1"
+        Me.Text = " "
         CType(Me.Chart1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.Chart2, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
