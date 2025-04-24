@@ -177,6 +177,40 @@ Module Cruwza
         End Try
     End Sub
 
+    Public Sub FilterGrocery(Period As String) ', DateAdded As DateTime)
+        Dim taskTable As New DataTable
+        Dim conn As New OleDbConnection(connectionString)
+        Try
+            conn.Open()
+            Dim query As String = "SELECT * FROM GroceryItems WHERE 1=1"
+
+            If Not String.IsNullOrEmpty(Period) Then
+                query &= " AND Period = @Period"
+            End If
+
+            'If Not String.IsNullOrEmpty(DateAdded) Then
+            '    query &= " AND DateAdded = @DateAdded"
+            'End If
+
+            Dim command As New OleDb.OleDbCommand(query, conn)
+
+            If Not String.IsNullOrEmpty(Period) Then
+                command.Parameters.AddWithValue("@Period", Period)
+            End If
+
+            'If Not String.IsNullOrEmpty(DateAdded) Then
+            '    command.Parameters.AddWithValue("@DateAdded", DateAdded)
+            'End If
+
+            Dim adapter As New OleDb.OleDbDataAdapter(command)
+            adapter.Fill(taskTable)
+            Grocery.DataGridView1.DataSource = taskTable
+        Catch ex As Exception
+            MsgBox("Error filtering grocery: " & ex.Message, MsgBoxStyle.Critical, "Database Error")
+        Finally
+            conn.Close()
+        End Try
+    End Sub
 End Module
 Module Xiluva
     Public Const connectionString As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Xiluva\Source\Repos\maurice67530\HouseholdManagementSystems\HMS.accdb"
