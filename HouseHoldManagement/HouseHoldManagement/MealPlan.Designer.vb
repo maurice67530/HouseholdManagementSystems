@@ -133,7 +133,8 @@ Partial Class MealPlan
         '
         Me.Label14.AutoSize = True
         Me.Label14.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label14.Location = New System.Drawing.Point(8, 0)
+        Me.Label14.ForeColor = System.Drawing.Color.Blue
+        Me.Label14.Location = New System.Drawing.Point(8, 131)
         Me.Label14.Name = "Label14"
         Me.Label14.Size = New System.Drawing.Size(59, 15)
         Me.Label14.TabIndex = 23
@@ -148,7 +149,8 @@ Partial Class MealPlan
         '
         'PictureBox1
         '
-        Me.PictureBox1.Location = New System.Drawing.Point(6, 18)
+        Me.PictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
+        Me.PictureBox1.Location = New System.Drawing.Point(6, 3)
         Me.PictureBox1.Name = "PictureBox1"
         Me.PictureBox1.Size = New System.Drawing.Size(300, 114)
         Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage

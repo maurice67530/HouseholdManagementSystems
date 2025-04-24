@@ -356,11 +356,6 @@ Public Class MealPlan
     End Sub
 
     Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
-
-
-        ''''''''SAVE''''''''''''''''''
-
-
         Try
             Debug.WriteLine("Entering btnEdit_Click")
             Using conn As New OleDbConnection(Module1.connectionString)
@@ -444,6 +439,196 @@ Public Class MealPlan
             PictureBox1.ImageLocation = openFileDialog.FileName
             TextBox3.Text = openFileDialog.FileName
         End If
+    End Sub
+
+    Private Sub ComboBox3_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ComboBox3.SelectedIndexChanged
+        If ComboBox3.SelectedItem.ToString().StartsWith("juice") Then
+            PictureBox1.Image = System.Drawing.Image.FromFile _
+        ("C:\Users\Zwivhuya\Pictures\Birthdays\download (3).jfif")
+            TextBox3.Text = "C:\Users\Zwivhuya\Pictures\Birthdays\download (3).jfif"
+        End If
+
+        If ComboBox3.SelectedItem.ToString().StartsWith("chicken feet") Then
+            PictureBox1.Image = System.Drawing.Image.FromFile _
+        ("C:\Users\Zwivhuya\Pictures\Birthdays\download (5).jfif")
+            TextBox3.Text = "C:\Users\Zwivhuya\Pictures\Birthdays\download (5).jfif"
+        End If
+
+        If ComboBox3.SelectedItem.ToString().StartsWith("milk") Then
+            PictureBox1.Image = System.Drawing.Image.FromFile _
+        ("C:\Users\Zwivhuya\Pictures\download (4).jfif")
+            TextBox3.Text = "C:\Users\Zwivhuya\Pictures\download (4).jfif"
+        End If
+
+
+        If ComboBox3.SelectedItem.ToString().StartsWith("chicken") Then
+            PictureBox1.Image = System.Drawing.Image.FromFile _
+        ("C:\Users\Zwivhuya\Pictures\Birthdays\download (4).jfif")
+            TextBox3.Text = "C:\Users\Zwivhuya\Pictures\Birthdays\download (4).jfif"
+        End If
+
+        If ComboBox3.SelectedItem.ToString().StartsWith("coke") Then
+            PictureBox1.Image = System.Drawing.Image.FromFile _
+        ("C:\Users\Zwivhuya\Pictures\Birthdays\download (6).jfif")
+            TextBox3.Text = "C:\Users\Zwivhuya\Pictures\Birthdays\download (6).jfif"
+        End If
+
+        Dim Item As String = ComboBox3.SelectedItem.ToString() ' Meal selected from ComboBox2
+
+        Using conn As New OleDbConnection(Module1.connectionString)
+
+
+            conn.Open() ' Fetch item details from Inventory1, including ExpiryDate
+
+
+            Dim fetchcommand As New OleDbCommand("SELECT ItemName, Quantity, expiryDate FROM Inventory WHERE ItemName = ?", conn)
+
+
+            fetchcommand.Parameters.AddWithValue("@ItemName", Item)
+
+            Using Readers As OleDbDataReader = fetchcommand.ExecuteReader()
+
+
+                If Readers.Read() Then
+
+
+                    Dim ItemQuantity As Integer = Convert.ToInt32(Readers("Quantity")) ' Available total quantity
+
+
+                    Dim ExpiryDate As Date
+
+
+                    ' Check if ExpiryDate is valid
+
+
+                    If Date.TryParse(Readers("expiryDate").ToString(), ExpiryDate) Then
+
+
+                        ' If item is expired, show a message and prevent submission
+
+
+                        If ExpiryDate < Date.Today Then
+
+
+                            MessageBox.Show("The Item Is already Expired.", "WARNING", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+
+
+                            Label14.Text = "Available Stock:" & ItemQuantity & "(Expired)"
+
+                            'btnSubmit.Enabled = False
+                            ' MessageBox.Show("The Item Is already Expired & cannot be submitted.", "WARNING", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                            ' btnSuggestIngredients.Enabled = False
+
+                            Exit Sub
+
+
+                        End If
+
+
+                    End If
+
+
+                    If ItemQuantity > 0 Then
+                        '  btnSubmit.Enabled = True
+                        ' btnSuggestIngredients.Enabled = True
+                        ' Show warning if stock is below 6
+
+
+                        If ItemQuantity < 6 Then
+
+
+                            MessageBox.Show("Warning: Stock is below 6 for this item.", "WARNING", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+
+
+                        End If
+
+
+                        ' Display available stock
+
+
+                        Label14.Text = "Available Stock: " & ItemQuantity.ToString()
+
+
+                        btnSuggest.Enabled = True
+
+                    Else
+
+
+                        ' Item is out of stock
+
+
+                        MessageBox.Show("Item is out of stock.", "WARNING", MessageBoxButtons.OK, MessageBoxIcon.Stop)
+
+
+                        Label14.Text = "Available Stock: " & ItemQuantity.ToString()
+
+
+
+                    End If
+
+
+                End If
+
+
+            End Using
+
+
+        End Using
+
+
+        Dim listItems As New List(Of String)
+
+        ' Open connection again to fetch all items for ListBox excluding expired ones
+
+
+        Using conn As New OleDbConnection(Module1.connectionString)
+
+
+            conn.Open()
+
+
+            Dim fetchcommand As New OleDbCommand("SELECT ItemName, expiryDate FROM Inventory", conn)
+
+            Using Readers As OleDbDataReader = fetchcommand.ExecuteReader()
+
+
+                While Readers.Read()
+
+
+                    Dim itemName As String = Readers("ItemName").ToString()
+
+
+                    Dim itemExpiry As Date
+
+
+                    If Date.TryParse(Readers("expiryDate").ToString(), itemExpiry) Then
+
+
+                        ' Only add non-expired items to the list
+
+
+                        If itemExpiry >= Date.Today Then
+
+
+                            listItems.Add(itemName)
+
+
+                        End If
+
+
+                    End If
+
+
+                End While
+
+
+            End Using
+
+
+        End Using
+
+
+
     End Sub
 
 End Class
