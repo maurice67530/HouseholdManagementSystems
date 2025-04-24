@@ -254,7 +254,7 @@ Public Class Family_Schedule
 
     End Sub
     Public Sub PopulateComboboxFromDatabase(ByRef comboBox As ComboBox)
-        Dim conn As New OleDbConnection(Ndivhuwo.connectionString)
+        Dim conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
         Try
             Debug.WriteLine("populating combobox from database successfully!")
             ' 1. Open the database connection  
@@ -283,5 +283,9 @@ Public Class Family_Schedule
                 conn.Close()
             End If
         End Try
+    End Sub
+
+    Private Sub ComboBox1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ComboBox1.SelectedIndexChanged
+
     End Sub
 End Class
