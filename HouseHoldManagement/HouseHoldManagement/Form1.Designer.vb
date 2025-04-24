@@ -31,7 +31,6 @@ Partial Class Form1
         Dim Series2 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.FlowLayoutPanel2 = New System.Windows.Forms.FlowLayoutPanel()
-        Me.Button8 = New System.Windows.Forms.Button()
         Me.Chart1 = New System.Windows.Forms.DataVisualization.Charting.Chart()
         Me.Chart2 = New System.Windows.Forms.DataVisualization.Charting.Chart()
         Me.Label1 = New System.Windows.Forms.Label()
@@ -42,6 +41,7 @@ Partial Class Form1
         Me.ListBox1 = New System.Windows.Forms.ListBox()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         Me.Button9 = New System.Windows.Forms.Button()
+        Me.Button8 = New System.Windows.Forms.Button()
         Me.Button7 = New System.Windows.Forms.Button()
         Me.Button6 = New System.Windows.Forms.Button()
         Me.Button5 = New System.Windows.Forms.Button()
@@ -49,6 +49,7 @@ Partial Class Form1
         Me.Button3 = New System.Windows.Forms.Button()
         Me.Button2 = New System.Windows.Forms.Button()
         Me.Button1 = New System.Windows.Forms.Button()
+        Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
         CType(Me.Chart1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.Chart2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -69,18 +70,6 @@ Partial Class Form1
         Me.FlowLayoutPanel2.Name = "FlowLayoutPanel2"
         Me.FlowLayoutPanel2.Size = New System.Drawing.Size(166, 486)
         Me.FlowLayoutPanel2.TabIndex = 62
-        '
-        'Button8
-        '
-        Me.Button8.BackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.Button8.Image = Global.HouseHoldManagement.My.Resources.Resources.icons8_expense_96
-        Me.Button8.Location = New System.Drawing.Point(22, 484)
-        Me.Button8.Name = "Button8"
-        Me.Button8.Size = New System.Drawing.Size(170, 109)
-        Me.Button8.TabIndex = 49
-        Me.Button8.Text = " "
-        Me.Button8.TextAlign = System.Drawing.ContentAlignment.TopCenter
-        Me.Button8.UseVisualStyleBackColor = False
         '
         'Chart1
         '
@@ -178,6 +167,18 @@ Partial Class Form1
         Me.Button9.Text = " "
         Me.Button9.TextAlign = System.Drawing.ContentAlignment.TopCenter
         Me.Button9.UseVisualStyleBackColor = False
+        '
+        'Button8
+        '
+        Me.Button8.BackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.Button8.Image = Global.HouseHoldManagement.My.Resources.Resources.icons8_expense_96
+        Me.Button8.Location = New System.Drawing.Point(22, 484)
+        Me.Button8.Name = "Button8"
+        Me.Button8.Size = New System.Drawing.Size(170, 109)
+        Me.Button8.TabIndex = 49
+        Me.Button8.Text = " "
+        Me.Button8.TextAlign = System.Drawing.ContentAlignment.TopCenter
+        Me.Button8.UseVisualStyleBackColor = False
         '
         'Button7
         '
@@ -312,4 +313,5 @@ Partial Class Form1
     Friend WithEvents ListBox1 As ListBox
     Friend WithEvents Button6 As Button
     Friend WithEvents ToolTip1 As ToolTip
+    Friend WithEvents Timer1 As Timer
 End Class
