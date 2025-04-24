@@ -1,10 +1,13 @@
 ﻿Imports System.IO
 Imports System.Data.OleDb
 Public Class Form1
-    Public Const connectionString As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Rinae\Source\Repos\maurice67530\HouseholdManagementSystems\HMS.accdb"
+    Public Const connectionString As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Murangi\Source\Repos\maurice67530\HouseholdManagementSystems\HMS.accdb"
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        DisplayPhoto()
-        SetupTimer()
+        LoadRecentPhotos()
+        If photoList.Count > 0 Then
+            DisplayPhoto() ' Show the first photo
+            SetupTimer() ' Start timer for slideshow
+        End If
 
         SetupCharts()
         LoadChoresStatus()
@@ -23,7 +26,49 @@ Public Class Form1
         ToolTip1.SetToolTip(Button9, "Photos")
 
     End Sub
+    Private photoList As New List(Of String)() ' List to store photo paths
+    Private currentPhotoIndex As Integer = 0
+    Private WithEvents photoTimer As New Timer()
+    Private Sub LoadRecentPhotos()
 
+        photoList.Clear()
+        Dim query As String = "SELECT TOP 5 FilePath FROM Photos ORDER BY DateAdded "
+        Using conn As New OleDbConnection(connectionString)
+            Using cmd As New OleDbCommand(query, conn)
+                conn.Open()
+                Using reader As OleDbDataReader = cmd.ExecuteReader()
+                    While reader.Read()
+                        photoList.Add(reader("FilePath").ToString())
+
+                    End While
+                End Using
+            End Using
+        End Using
+    End Sub
+    Private Sub DisplayPhoto()
+        If photoList.Count > 0 Then
+            FlowLayoutPanel2.Controls.Clear() ' Clear previous image
+            Dim pb As New PictureBox()
+            pb.Image = Image.FromFile(photoList(currentPhotoIndex))
+            pb.SizeMode = PictureBoxSizeMode.StretchImage ' Set stretch mode
+            pb.Size = FlowLayoutPanel2.Size ' Match panel size
+            FlowLayoutPanel2.Controls.Add(pb) ' Add to FlowLayoutPanel
+        End If
+    End Sub
+
+    Private Sub SetupTimer()
+        photoTimer.Interval = 4000 ' 2 seconds
+        AddHandler photoTimer.Tick, AddressOf PhotoTimer_Tick
+        photoTimer.Start()
+    End Sub
+
+    Private Sub PhotoTimer_Tick(sender As Object, e As EventArgs)
+        If photoList.Count > 0 Then
+            currentPhotoIndex = (currentPhotoIndex + 1) Mod photoList.Count ' Loop through photos
+            DisplayPhoto()
+        End If
+
+    End Sub
 
     'Set up Budget Status And Chores Status charts
     Private Sub SetupCharts()
@@ -108,7 +153,7 @@ Public Class Form1
 
         ' update this connection string based  on my database confirguration
 
-        Dim connectionString As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Rinae\Source\Repos\maurice67530\HouseholdManagementSystems\HMS.accdb"
+        Dim connectionString As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Murangi\Source\Repos\maurice67530\HouseholdManagementSystems\HMS.accdb"
 
         Dim query As String = "SELECT [Amount], [Frequency] FROM [Expense]"
 
@@ -204,81 +249,81 @@ Public Class Form1
 
 
 
-    Private photoList As New List(Of String)() ' List to store photo paths
+    'Private photoList As New List(Of String)() ' List to store photo paths
 
-    Private currentPhotoIndex As Integer = 0
+    'Private currentPhotoIndex As Integer = 0
 
-    Private WithEvents photoTimer As New Timer()
+    'Private WithEvents photoTimer As New Timer()
 
-    Private Sub LoadRecentPhotos()
+    'Private Sub LoadRecentPhotos()
 
-        photoList.Clear()
+    '    photoList.Clear()
 
-        Dim query As String = "SELECT TOP 5 FilePath FROM Photos ORDER BY DateTaken "
+    '    Dim query As String = "SELECT TOP 5 FilePath FROM Photos ORDER BY DateTaken "
 
-        Using conn As New OleDbConnection(connectionString)
+    '    Using conn As New OleDbConnection(connectionString)
 
-            Using cmd As New OleDbCommand(query, conn)
+    '        Using cmd As New OleDbCommand(query, conn)
 
-                conn.Open()
+    '            conn.Open()
 
-                Using reader As OleDbDataReader = cmd.ExecuteReader()
+    '            Using reader As OleDbDataReader = cmd.ExecuteReader()
 
-                    While reader.Read()
+    '                While reader.Read()
 
-                        photoList.Add(reader("FilePath").ToString())
+    '                    photoList.Add(reader("FilePath").ToString())
 
-                    End While
+    '                End While
 
-                End Using
+    '            End Using
 
-            End Using
+    '        End Using
 
-        End Using
+    '    End Using
 
-    End Sub
+    'End Sub
 
-    Private Sub DisplayPhoto()
+    'Private Sub DisplayPhoto()
 
-        If photoList.Count > 0 Then
+    '    If photoList.Count > 0 Then
 
-            FlowLayoutPanel1.Controls.Clear() ' Clear previous image
+    '        FlowLayoutPanel1.Controls.Clear() ' Clear previous image
 
-            Dim pb As New PictureBox()
+    '        Dim pb As New PictureBox()
 
-            pb.Image = Image.FromFile(photoList(currentPhotoIndex))
+    '        pb.Image = Image.FromFile(photoList(currentPhotoIndex))
 
-            pb.SizeMode = PictureBoxSizeMode.StretchImage ' Set stretch mode
+    '        pb.SizeMode = PictureBoxSizeMode.StretchImage ' Set stretch mode
 
-            pb.Size = FlowLayoutPanel1.Size ' Match panel size
+    '        pb.Size = FlowLayoutPanel1.Size ' Match panel size
 
-            FlowLayoutPanel1.Controls.Add(pb) ' Add to FlowLayoutPanel
+    '        FlowLayoutPanel1.Controls.Add(pb) ' Add to FlowLayoutPanel
 
-        End If
+    '    End If
 
-    End Sub
+    'End Sub
 
-    Private Sub SetupTimer()
+    'Private Sub SetupTimer()
 
-        photoTimer.Interval = 2000 ' 2 seconds
+    '    photoTimer.Interval = 2000 ' 2 seconds
 
-        AddHandler photoTimer.Tick, AddressOf PhotoTimer_Tick
+    '    AddHandler photoTimer.Tick, AddressOf PhotoTimer_Tick
 
-        photoTimer.Start()
+    '    photoTimer.Start()
 
-    End Sub
+    'End Sub
 
-    Private Sub PhotoTimer_Tick(sender As Object, e As EventArgs)
+    'Private Sub PhotoTimer_Tick(sender As Object, e As EventArgs)
 
-        If photoList.Count > 0 Then
+    '    If photoList.Count > 0 Then
 
-            currentPhotoIndex = (currentPhotoIndex + 1) Mod photoList.Count ' Loop through photos
+    '        currentPhotoIndex = (currentPhotoIndex + 1) Mod photoList.Count ' Loop through photos
 
-            DisplayPhoto()
+    '        DisplayPhoto()
 
-        End If
+    '    End If
 
-    End Sub
+    'End Sub
     Private Sub LoadUpcomingMeals()
         Dim query As String = "Select MealName, StartDate, Description FROM MealPlans WHERE EndDate >= StartDate"
 
