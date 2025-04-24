@@ -48,7 +48,7 @@ Public Class PhotoGallery
             Dim Album As String = ComboBox2.SelectedItem.ToString()
 
 
-            Using conn As New OleDbConnection(Cruwza.connectionString)
+            Using conn As New OleDbConnection(Murangi.connectionString)
                 conn.Open()
 
                 ' Get the ID of the selected row (assuming your table has a primary key named "ID")  
@@ -89,7 +89,7 @@ Public Class PhotoGallery
     Private Sub Button5_Click(sender As Object, e As EventArgs) Handles Button5.Click
         Dim SearchTerm As String = TextBox4.Text
         'Dim connString As String()
-        Using conn As New OleDb.OleDbConnection(Cruwza.connectionString)
+        Using conn As New OleDb.OleDbConnection(Murangi.connectionString)
             conn.Open()
 
             Dim cmd As New OleDb.OleDbCommand("SELECT * FROM Photos WHERE Familymember LIKE ?", conn)
@@ -105,7 +105,7 @@ Public Class PhotoGallery
             '  Dim dataTable As DataTable = HouseHold.GetData("SELECT * FROM Expense")
             ' DataGridView1.DataSource = DataTable
             Debug.WriteLine("Populate Datagridview: Datagridview populated successfully.")
-            Using conn As New OleDbConnection(Cruwza.connectionString)
+            Using conn As New OleDbConnection(Murangi.connectionString)
                 conn.Open()
 
                 Dim tableName As String = "Photos"
@@ -191,7 +191,7 @@ Public Class PhotoGallery
             '    Return
             'End If
 
-            Using conn As New OleDbConnection(Cruwza.connectionString)
+            Using conn As New OleDbConnection(Murangi.connectionString)
 
                 conn.Open()
                 Dim cmd As New OleDbCommand($"INSERT INTO Photos ([Description], [FilePath], [DateAdded], [FamilyMember], [Photographer], [Album]) VALUES (?, ?, ?, ?, ?, ?)", conn)
@@ -229,7 +229,7 @@ Public Class PhotoGallery
         End Try
     End Sub
     Public Sub PopulateComboboxFromDatabase(ByRef comboBox As ComboBox)
-        Dim conn As New OleDbConnection(Cruwza.connectionString)
+        Dim conn As New OleDbConnection(Murangi.connectionString)
         Try
             Debug.WriteLine("Populating combobox: combobox populated from database")
             'open the database connection
@@ -456,7 +456,7 @@ Public Class PhotoGallery
     ' Function to fetch photo paths from the database based on the selected description
     Private Sub LoadPhotosFromDatabase(description As String)
         Try
-            Using conn As New OleDbConnection(Cruwza.connectionString)
+            Using conn As New OleDbConnection(Murangi.connectionString)
 
                 Dim query As String = "SELECT FilePath, DateAdded FROM Photos WHERE Album = @Album"
 
