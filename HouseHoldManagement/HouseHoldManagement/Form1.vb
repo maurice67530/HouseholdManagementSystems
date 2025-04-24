@@ -1,7 +1,9 @@
 ﻿Imports System.IO
 Imports System.Data.OleDb
 Public Class Form1
-    Public Const connectionString As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Aousy\Source\Repos\maurice67530\HouseholdManagementSystems\HMS.accdb"
+    'Public Const connectionString As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Aousy\Source\Repos\maurice67530\HouseholdManagementSystems\HMS.accdb"
+    Public Const connectionString As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Raphalalani\Source\Repos\maurice67530\HouseholdManagementSystems\HMS.accdb"
+
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         DisplayPhoto()
         SetupTimer()
@@ -370,6 +372,10 @@ Public Class Form1
     End Sub
 
     Private Sub Label1_Click(sender As Object, e As EventArgs) 
+
+    End Sub
+
+    Private Sub Chart1_Click(sender As Object, e As EventArgs) Handles Chart1.Click
 
     End Sub
 End Class
