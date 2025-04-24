@@ -46,6 +46,7 @@ Partial Class Family_Schedule
         Me.btnUpdate = New System.Windows.Forms.Button()
         Me.btnDelete = New System.Windows.Forms.Button()
         Me.DataGridView1 = New System.Windows.Forms.DataGridView()
+        Me.CheckBox1 = New System.Windows.Forms.CheckBox()
         Me.Panel1.SuspendLayout()
         Me.Panel2.SuspendLayout()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -262,11 +263,22 @@ Partial Class Family_Schedule
         Me.DataGridView1.Size = New System.Drawing.Size(628, 119)
         Me.DataGridView1.TabIndex = 15
         '
+        'CheckBox1
+        '
+        Me.CheckBox1.AutoSize = True
+        Me.CheckBox1.Location = New System.Drawing.Point(525, 524)
+        Me.CheckBox1.Name = "CheckBox1"
+        Me.CheckBox1.Size = New System.Drawing.Size(81, 17)
+        Me.CheckBox1.TabIndex = 9
+        Me.CheckBox1.Text = "CheckBox1"
+        Me.CheckBox1.UseVisualStyleBackColor = True
+        '
         'Family_Schedule
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(662, 565)
+        Me.Controls.Add(Me.CheckBox1)
         Me.Controls.Add(Me.DataGridView1)
         Me.Controls.Add(Me.btnSave)
         Me.Controls.Add(Me.btnUpdate)
@@ -309,4 +321,5 @@ Partial Class Family_Schedule
     Friend WithEvents btnUpdate As Button
     Friend WithEvents btnDelete As Button
     Friend WithEvents DataGridView1 As DataGridView
+    Friend WithEvents CheckBox1 As CheckBox
 End Class
