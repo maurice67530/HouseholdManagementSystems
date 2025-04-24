@@ -102,3 +102,13 @@ Public Class Person
     Public Property Contact As Integer
     Public Property Photo As String
 End Class
+Public Class FamilySchedule
+    Public Property ScheduleID As String
+    Public Property Title As String
+    Public Property Notes As String
+    Public Property DateOfEvent As String
+    Public Property StartTime As String
+    Public Property EndTime As String
+    Public Property AssignedTo As String
+    Public Property EventType As String
+End Class
