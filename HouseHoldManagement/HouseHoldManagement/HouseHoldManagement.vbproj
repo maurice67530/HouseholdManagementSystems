@@ -6,7 +6,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{DEC8BF09-6D70-450D-B49C-BFCF4DBBB6B8}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <StartupObject>HouseHoldManagement.dashboard</StartupObject>
+    <StartupObject>HouseHoldManagement.MealPlan</StartupObject>
     <RootNamespace>HouseHoldManagement</RootNamespace>
     <AssemblyName>HouseHoldManagement</AssemblyName>
     <FileAlignment>512</FileAlignment>
@@ -83,10 +83,7 @@
     <Compile Include="Chores.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="dashboard.Designer.vb">
-      <DependentUpon>dashboard.vb</DependentUpon>
-    </Compile>
-    <Compile Include="dashboard.vb" />
+    <Compile Include="Dash.Designer.vb" />
     <Compile Include="Expense.Designer.vb">
       <DependentUpon>Expense.vb</DependentUpon>
     </Compile>
@@ -165,9 +162,6 @@
   <ItemGroup>
     <EmbeddedResource Include="Chores.resx">
       <DependentUpon>Chores.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="dashboard.resx">
-      <DependentUpon>dashboard.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Expense.resx">
       <DependentUpon>Expense.vb</DependentUpon>
