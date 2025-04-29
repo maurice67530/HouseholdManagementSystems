@@ -33,7 +33,7 @@ Public Class Expense
                 Dim tableName As String = "Expense"
 
                 ' Create an OleDbCommand to insert the Expense data into the database 
-                Dim cmd As New OleDbCommand("INSERT INTO [Expense] ([Amount], [TotalIncome], [Description], [Tags], [Currency], [Category], [Paymentmethod], [Frequency], [ApprovalStatus], [DateOfexpenses]) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", conn)
+                Dim cmd As New OleDbCommand("INSERT INTO [Expense] ([Amount], [TotalIncome], [Description], [Tags], [Currency], [Category], [Paymentmethod], [Frequency], [ApprovalStatus], [DateOfexpenses], {Person}) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", conn)
 
                 ' Set the parameter values from the UI controls 
                 'Class declaretions
@@ -48,6 +48,7 @@ Public Class Expense
                     .Paymentmethod = ComboBox1.SelectedItem.ToString,
                 .Frequency = ComboBox5.SelectedItem.ToString(),
                     .ApprovalStatus = ComboBox4.SelectedItem.ToString(),
+                    .Person = ComboBox3.SelectedItem.ToString(),
                     .DateOfexpenses = DateTimePicker1.Value}
 
                 'txtRecentUpdate.Text = $" Expense updated at {DateTime.Now:HH:MM}"
@@ -65,7 +66,7 @@ Public Class Expense
                 cmd.Parameters.AddWithValue("@PaymentMethod", expense.PaymentMethod)
                 cmd.Parameters.AddWithValue("@Frequency", expense.Frequency)
                 cmd.Parameters.AddWithValue("@ApprovalStatus", expense.ApprovalStatus)
-                'cmd.Parameters.AddWithValue("@Receiver", expense.Receiver)
+                cmd.Parameters.AddWithValue("@Person ", expense.Person)
                 cmd.Parameters.AddWithValue("@DateOfexpenses", expense.DateOfexpenses)
 
 
@@ -80,7 +81,7 @@ Public Class Expense
                         "PaymentMethod: " & expense.Paymentmethod & vbCrLf &
                          "Frequency: " & expense.Frequency & vbCrLf &
                          "ApprovalStatus: " & expense.ApprovalStatus & vbCrLf &
-                          "Receiver: " & expense.Receiver & vbCrLf &
+                          "Receiver: " & expense.Person & vbCrLf &
                           "DateOfExpense: " & expense.DateOfexpenses.ToString, vbInformation, "Expense Confirmation")
 
                 ' Execute the SQL command to insert the data 
@@ -154,7 +155,7 @@ Public Class Expense
                 Dim Paymentmethod As String = ComboBox1.SelectedItem.ToString
                 Dim Frequency As String = ComboBox5.SelectedItem.ToString()
                 Dim ApprovalStatus As String = ComboBox4.SelectedItem.ToString()
-                'Dim Receiver As String = ComboBox5.SelectedItem.ToString()
+                Dim Person As String = ComboBox3.SelectedItem.ToString()
                 Dim DateOfexpenses As String = DateTimePicker1.Value
 
 
@@ -163,7 +164,7 @@ Public Class Expense
                 Dim ID As Integer = Convert.ToInt32(selectedRow.Cells("ID").Value) ' Change "ID" to your primary key column name  
 
                 ' Create an OleDbCommand to update the Expense data in the database  
-                Dim cmd As New OleDbCommand("UPDATE [Expense] SET [Amount] = ?, [TotalIncome] = ?, [Description] = ?, [Tags] = ?, [Currency] =?, [Category] = ?, [Paymentmethod] = ?, [Frequency] = ?, [ApprovalStatus] = ?, [DateOfexpenses] = ? WHERE [ID] = ?", connect)
+                Dim cmd As New OleDbCommand("UPDATE [Expense] SET [Amount] = ?, [TotalIncome] = ?, [Description] = ?, [Tags] = ?, [Currency] =?, [Category] = ?, [Paymentmethod] = ?, [Frequency] = ?, [ApprovalStatus] = ?, [DateOfexpenses] = ?, [Person] = ? WHERE [ID] = ?", connect)
 
                 ' Set the parameter values from the UI controls  
 
@@ -177,7 +178,7 @@ Public Class Expense
                 cmd.Parameters.AddWithValue("@PaymentMethod", Paymentmethod)
                 cmd.Parameters.AddWithValue("Frequency", Frequency)
                 cmd.Parameters.AddWithValue("ApprovalStatus", ApprovalStatus)
-                'cmd.Parameters.AddWithValue("Receiver", Receiver)
+                cmd.Parameters.AddWithValue("Person ", Person)
                 cmd.Parameters.AddWithValue("DateOfexpense", DateOfexpenses)
                 cmd.Parameters.AddWithValue("ID", ID)
 
@@ -433,7 +434,7 @@ Public Class Expense
                 ComboBox5.SelectedItem = selectedRow.Cells("Frequency").Value.ToString()
                 ComboBox4.SelectedItem = selectedRow.Cells("Approvalstatus").Value.ToString()
                 DateTimePicker1.Text = selectedRow.Cells("Dateofexpenses").Value.ToString()
-
+                ComboBox3.SelectedItem = selectedRow.Cells("Person").Value.ToString()
             End If
         Catch ex As Exception
             Debug.WriteLine("error selection data in the database")
