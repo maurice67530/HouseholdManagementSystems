@@ -100,6 +100,32 @@ End Module
 Module Rinae
     Public Const connectionString As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Rinae\Source\Repos\maurice67530\HouseholdManagementSystems\HMS.accdb"
 
+    Public Sub ClearControls(ByVal form As Form)
+
+        'clear TextBoxes
+        For Each ctrl As Control In form.Controls
+            If TypeOf ctrl Is TextBox Then
+                CType(ctrl, TextBox).Clear()
+            End If
+
+
+        Next
+
+        'clear comboBoxes
+        For Each ctrl As Control In form.Controls
+            If TypeOf ctrl Is ComboBox Then
+                CType(ctrl, ComboBox).ResetText()
+            End If
+        Next
+
+        'clear DateTimePicker
+        For Each ctrl As Control In form.Controls
+            If TypeOf ctrl Is DateTimePicker Then
+                CType(ctrl, DateTimePicker).Value = DateTimePicker.MinimumDateTime
+            End If
+        Next
+
+    End Sub
 End Module
 
 '[Dongola] vhasongo silinga
