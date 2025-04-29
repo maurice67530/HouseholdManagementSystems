@@ -76,6 +76,9 @@ Public Class Chores
         'End Try
         'Debug.WriteLine("Existing button Save")
 
+
+        'Add to FamilySchedule
+        Ndamu.AddChoreEvent(TXTtitle.Text, cmbassi.SelectedItem.ToString, DateTimePicker1.Text)
     End Sub
     Private Sub Button7_Click(sender As Object, e As EventArgs) Handles Button7.Click
         Try

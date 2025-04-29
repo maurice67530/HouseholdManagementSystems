@@ -227,6 +227,8 @@ Public Class PhotoGallery
             MessageBox.Show("Unexpected Error: " & ex.Message & vbNewLine & ex.StackTrace, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         Finally
         End Try
+        'Tags as Photo Day in Calender
+        Ndamu.MarkPhotoDay(DateTimePicker1.Text, TextBox2.Text)
     End Sub
     Public Sub PopulateComboboxFromDatabase(ByRef comboBox As ComboBox)
         Dim conn As New OleDbConnection(Rinae.connectionString)
