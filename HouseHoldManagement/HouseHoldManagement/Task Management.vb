@@ -187,8 +187,8 @@ Public Class Task_Management
             MessageBox.Show("An unexpected error occurred.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
 
         End Try
-        'Auto generate reminder in calender
-        Ndamu.AddTaskReminder(TextBox1.Text, ComboBox3.Text, DateTimePicker1.Text)
+        ''Auto generate reminder in calender
+        'Ndamu.AddTaskReminder(TextBox1.Text, ComboBox3.Text, DateTimePicker1.Text)
     End Sub
     Private Sub Button6_Click(sender As Object, e As EventArgs) Handles Button6.Click
         DataGridView1.Sort(DataGridView1.Columns("DueDate"), System.ComponentModel.ListSortDirection.Ascending)
