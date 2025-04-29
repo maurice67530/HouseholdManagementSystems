@@ -1,7 +1,9 @@
 ﻿Imports System.Data.OleDb
 Imports HouseHoldManagement
 Public Class Task_Management
-    Public Property conn As New OleDbConnection(Rinae.connectionString)
+    Public Property conn As New OleDbConnection(Ndivhuwo.connectionString)
+    Public Const connectionString As String = " Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Delicious\Source\Repos\maurice67530\HouseholdManagementSystems\HMS.accdb"
+    'Public Property conn As New OleDbConnection(Rinae.connectionString)
     Private Status As String
     Private Tasks As Object
     Private Dashboard As Object
@@ -10,24 +12,25 @@ Public Class Task_Management
     Public Sub LoadTasksDataFromDatabase()
 
         Debug.WriteLine("LoadTasksDataFromDatabase()")
-        Using conn As New OleDbConnection(Rinae.connectionString)
-            conn.Open()
+        'Using conn As New OleDbConnection(Rinae.connectionString)
+        Using conn As New OleDbConnection(Ndivhuwo.connectionString)
+                conn.Open()
 
-            ' Update the table name if necessary  
-            Dim tableName As String = "Tasks"
+                ' Update the table name if necessary  
+                Dim tableName As String = "Tasks"
 
-            ' Create an OleDbCommand to select the data from the database  
-            Dim cmd As New OleDbCommand($"SELECT * FROM {tableName}", conn)
+                ' Create an OleDbCommand to select the data from the database  
+                Dim cmd As New OleDbCommand($"SELECT * FROM {tableName}", conn)
 
-            ' Create a DataAdapter and fill a DataTable  
-            Dim da As New OleDbDataAdapter(cmd)
-            Dim dt As New DataTable()
-            da.Fill(dt)
+                ' Create a DataAdapter and fill a DataTable  
+                Dim da As New OleDbDataAdapter(cmd)
+                Dim dt As New DataTable()
+                da.Fill(dt)
 
-            ' Bind the DataTable to the DataGridView  
-            DataGridView1.DataSource = dt
-            'HighlightExpiredItemss()
-        End Using
+                ' Bind the DataTable to the DataGridView  
+                DataGridView1.DataSource = dt
+                'HighlightExpiredItemss()
+            End Using
     End Sub
     Private Sub Task_Management_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
@@ -48,7 +51,8 @@ Public Class Task_Management
         PopulateComboboxFromDatabase(ComboBox3)
     End Sub
     Public Sub PopulateComboboxFromDatabase(ByRef comboBox As ComboBox)
-        Dim conn As New OleDbConnection(Rinae.connectionString)
+        Dim conn As New OleDbConnection(Ndivhuwo.connectionString)
+        'Dim conn As New OleDbConnection(Rinae.connectionString)
         Try
             Debug.WriteLine("populating combobox from database successfully!")
             ' 1. Open the database connection  
