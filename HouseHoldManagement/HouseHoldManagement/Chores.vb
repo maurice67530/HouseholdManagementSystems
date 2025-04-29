@@ -1,8 +1,8 @@
 ﻿Imports System.Data.OleDb
 Public Class Chores
-    Public Property connect As New OleDbConnection(Ndivhuwo.connectionString)
-    Public Property connn As New OleDbConnection(Masindi.connectionString)
-    Public Property conn As New OleDbConnection(Murangi.connectionString)
+    Public Property conn As New OleDbConnection(Rinae.connectionString)
+    'Public Property connn As New OleDbConnection(Masindi.connectionString)
+    'Public Property conn As New OleDbConnection(Murangi.connectionString)
     Private Sub Chores_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         cmbpri.Items.AddRange(New String() {"Low", "Medium", "High"})
         cmbstatus.Items.AddRange(New String() {"Not started", "In progress", "Completed"})
@@ -139,7 +139,7 @@ Public Class Chores
                     MessageBox.Show("Please Select chore to delete", "Deletion Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
                 End If
 
-                Using conn As New OleDbConnection(Murangi.connectionString)
+                Using conn As New OleDbConnection(Rinae.connectionString)
                     conn.Open()
 
 
@@ -175,7 +175,7 @@ Public Class Chores
 
             Debug.WriteLine("Datagridview: populated successfully.")
 
-            Using conn As New OleDbConnection(Murangi.connectionString)
+            Using conn As New OleDbConnection(Rinae.connectionString)
                 conn.Open()
 
                 Dim tableName As String = "Chores"
@@ -236,7 +236,7 @@ Public Class Chores
             Dim Recurring As String = NumericUpDown1.Value
             Dim Description As String = txtdes.Text
 
-            Using conn As New OleDbConnection(Murangi.connectionString)
+            Using conn As New OleDbConnection(Rinae.connectionString)
                 conn.Open()
 
                 'Get the ID of the selected row (assuming your table has a primary key named "ID")  
@@ -310,7 +310,7 @@ Public Class Chores
         End Try
     End Sub
     Public Sub PopulateComboboxFromDatabase(ByRef comboBox As ComboBox)
-        Dim conn As New OleDbConnection(Murangi.connectionString)
+        Dim conn As New OleDbConnection(Rinae.connectionString)
         Try
             Debug.WriteLine("populate combobox successful")
             'open the database connection

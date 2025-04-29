@@ -65,7 +65,7 @@ Public Class Expensetracking
     Public Property Paymentmethod As String
     Public Property Frequency As String
     Public Property ApprovalStatus As String
-    Public Property Receiver As String
+    Public Property Person As String
     Public Property DateOfexpenses As DateTime
 End Class
 Public Class DailyTask
