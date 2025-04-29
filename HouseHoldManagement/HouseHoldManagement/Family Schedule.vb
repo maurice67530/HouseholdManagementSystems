@@ -1,5 +1,4 @@
 ﻿Imports System.Data.OleDb
-
 Public Class Family_Schedule
     Public Property conn As New OleDbConnection(connectionString)
     Public Const connectionString As String = " Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Delicious\Source\Repos\maurice67530\HouseholdManagementSystems\HMS.accdb"
@@ -8,14 +7,14 @@ Public Class Family_Schedule
         Try
 
             Dim schedule As New FamilySchedule() With {
-        .Title = (TextBox1.Text),
-        .Notes = TextBox2.Text,
-        .DateOfEvent = DateTimePicker1.Text,
-        .StartTime = DateTimePicker2.Text,
-        .EndTime = DateTimePicker3.Text,
-        .AssignedTo = ComboBox1.SelectedItem.ToString,
-        .EventType = ComboBox1.SelectedItem.ToString
-        }
+    .Title = (TextBox1.Text),
+    .Notes = TextBox2.Text,
+    .DateOfEvent = DateTimePicker1.Text,
+    .StartTime = DateTimePicker2.Text,
+    .EndTime = DateTimePicker3.Text,
+    .AssignedTo = ComboBox1.SelectedItem.ToString,
+    .EventType = ComboBox2.SelectedItem.ToString
+    }
 
 
             Using conn As New OleDbConnection(Ndamu.connectionstring)
@@ -45,13 +44,13 @@ Public Class Family_Schedule
                 Dim rowsAffected As Integer = cmd.ExecuteNonQuery()
                 'Display a confirmation messageBox  
                 MsgBox("Schedule Information Added!" & vbCrLf &
-                    "Title: " & schedule.Title.ToString & vbCrLf &
-                    "Notes: " & schedule.Notes.ToString & vbCrLf &
-                    "DateOfEvent: " & schedule.DateOfEvent & vbCrLf &
-                    "StartTime: " & schedule.StartTime & vbCrLf &
-                    "EndTime: " & schedule.EndTime & vbCrLf &
-                    "AssignedTo: " & schedule.AssignedTo & vbCrLf &
-                    "EventType: " & schedule.EventType.ToString(), vbInformation, "Schedule confirmation")
+                "Title: " & schedule.Title.ToString & vbCrLf &
+                "Notes: " & schedule.Notes.ToString & vbCrLf &
+                "DateOfEvent: " & schedule.DateOfEvent & vbCrLf &
+                "StartTime: " & schedule.StartTime & vbCrLf &
+                "EndTime: " & schedule.EndTime & vbCrLf &
+                "AssignedTo: " & schedule.AssignedTo & vbCrLf &
+                "EventType: " & schedule.EventType.ToString(), vbInformation, "Schedule confirmation")
 
             End Using
 
@@ -70,8 +69,8 @@ Public Class Family_Schedule
                 conn.Open()
 
                 ' Update the table name if necessary  
-                Dim tableName As String = "FamilySchedule
-"
+                Dim tableName As String = "FamilySchedule"
+
 
                 ' Create an OleDbCommand to select the data from the database  
                 Dim cmd As New OleDbCommand($"SELECT * FROM {tableName}", conn)
@@ -253,6 +252,7 @@ Public Class Family_Schedule
         End Try
 
     End Sub
+
     Public Sub PopulateComboboxFromDatabase(ByRef comboBox As ComboBox)
         Dim conn As New OleDbConnection(Ndamu.connectionstring)
         Try
@@ -284,8 +284,6 @@ Public Class Family_Schedule
             End If
         End Try
     End Sub
-
-    Private Sub ComboBox1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ComboBox1.SelectedIndexChanged
-
-    End Sub
 End Class
+
+

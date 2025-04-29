@@ -393,6 +393,9 @@ Public Class MealPlan
 
         Debug.WriteLine("Existing btnSave_Click")
 
+        'Add meal time to family calender
+        Ndamu.AddMealEvent(TextBox4.Text, DateTimePicker1.Text)
+
 
     End Sub
 
