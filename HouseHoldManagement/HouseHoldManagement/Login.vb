@@ -1,15 +1,19 @@
 ﻿Imports System.IO
 Imports System.Data.OleDb
 Public Class Login
-    Public Property conn As New OleDbConnection(Xiluva.connectionString)
+    Public Property conn As New OleDbConnection(Rinae.connectionString)
 
-    Public Const connectionString As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Xiluva\Source\Repos\maurice67530\HouseholdManagementSystems\HMS.accdb"
+    Public Const connectionString As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Rinae\Source\Repos\maurice67530\HouseholdManagementSystems\HMS.accdb"
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
 
-        Dim Username As String = TextBox1.Text
 
-        Using conn As New OleDbConnection(Xiluva.connectionString)
+        Dim Username As String = TextBox1.Text
+        '''''''''' 'Dim Role As String = TextBox2.Text
+
+
+
+        Using conn As New OleDbConnection(Rinae.connectionString)
             Try
                 conn.Open()
 
@@ -37,18 +41,14 @@ Public Class Login
                         Case "Finance"
 
                             Form1.Show()
-
                         Case "Chef"
 
                             Form1.Show()
-
                         Case Else
                             MessageBox.Show("Unknown role.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
                     End Select
-
+                    Form1.TextBox2.Text = Role.ToString() ' Assign role
                     Form1.TextBox1.Text = $"{Username}"
-
-                    Form1.ShowDialog()
                     Me.Hide()
                 Else
                     MessageBox.Show("Invalid Username or Password.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
@@ -63,6 +63,9 @@ Public Class Login
 
         End Using
 
+
+        Form1.Show()
+
     End Sub
     Private Sub Login_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
@@ -73,5 +76,9 @@ Public Class Login
     End Sub
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
         Register.ShowDialog()
+    End Sub
+
+    Private Sub Panel1_Paint(sender As Object, e As PaintEventArgs) Handles Panel1.Paint
+
     End Sub
 End Class
