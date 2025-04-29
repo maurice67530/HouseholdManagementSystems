@@ -1,21 +1,22 @@
 ﻿Imports System.Data.OleDb
 Public Class Grocery
-    Public Const connectionString As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Mulanga\Source\Repos\maurice67530\HouseholdManagementSystems\HMS.accdb"
+    Public Const connectionString As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Rinae\Source\Repos\maurice67530\HouseholdManagementSystems\HMS.accdb"
     Private Sub Grocery_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
         LoadGroceryItemDataFromDatabase()
         '  notify()
 
         'Set tooltips for buttons
-        ToolTip1.SetToolTip(Button4, "Save")
-        ToolTip1.SetToolTip(Button5, "Update")
-        ToolTip1.SetToolTip(Button6, "Delete")
-        ToolTip1.SetToolTip(Button2, "Photo")
-        ToolTip1.SetToolTip(Button3, "Dashboard")
-
+        ToolTip1.SetToolTip(btnSave, "Save")
+        ToolTip1.SetToolTip(btnEdit, "Update")
+        ToolTip1.SetToolTip(btnDelete, "Delete")
+        ToolTip1.SetToolTip(btnSort, "Sort")
+        ToolTip1.SetToolTip(btnFilter, "Filter")
+        ToolTip1.SetToolTip(btnRefresh, "Refresh")
+        ToolTip1.SetToolTip(btnHighlight, "Highlight")
     End Sub
 
-    Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
+    Private Sub Button4_Click(sender As Object, e As EventArgs) Handles btnSave.Click
         Try
 
             Dim Item As New Groceryy() With {
@@ -23,24 +24,24 @@ Public Class Grocery
             .Quantity = TextBox2.Text,
             .Category = TextBox3.Text,
             .Unit = TextBox4.Text,
-            .Teamwork = TextBox5.Text,
             .PricePerUnit = TextBox6.Text,
-            .Purchase = TextBox7.Text,
-            .ExpiryDate = DateTimePicker1.Text
+            .Period = ComboBox2.SelectedItem,
+            .PurchaseDate = DateTimePicker1.Text,
+            .ExpiryDate = DateTimePicker2.Text
              }
 
-            Using conn As New OleDbConnection(connectionString)
+            Using conn As New OleDbConnection(Rinae.connectionString)
                 conn.Open()
 
-                Dim cmd As New OleDbCommand($"INSERT INTO GroceryItem ([ItemName], [Quantity], [Category], [Unit], [Teamwork], [PricePerUnit], [Purchase], [ExpiryDate]) VALUES (?, ?, ?, ?, ?, ?, ?, ?)", conn)
+                Dim cmd As New OleDbCommand($"INSERT INTO GroceryItems ([ItemName], [Quantity], [Category], [Unit], [Period], [PricePerUnit], [PurchaseDate], [ExpiryDate]) VALUES (?, ?, ?, ?, ?, ?, ?, ?)", conn)
                 cmd.Parameters.AddWithValue("@ItemName", TextBox1.Text)
                 cmd.Parameters.AddWithValue("@Quantity", TextBox2.Text)
                 cmd.Parameters.AddWithValue("@Category", TextBox3.Text)
                 cmd.Parameters.AddWithValue("@Unit", TextBox4.Text)
-                cmd.Parameters.AddWithValue("@Teamwork", TextBox5.Text)
+                cmd.Parameters.AddWithValue("@Period", ComboBox2.SelectedItem.ToString)
                 cmd.Parameters.AddWithValue("@PricePerUnit", TextBox6.Text)
-                cmd.Parameters.AddWithValue("@Purchase", TextBox7.Text)
-                cmd.Parameters.AddWithValue("@ExpiryDate", DateTimePicker1.Text)
+                cmd.Parameters.AddWithValue("@PurchaseDate", DateTimePicker1.Value.ToString)
+                cmd.Parameters.AddWithValue("@ExpiryDate", DateTimePicker2.Value.ToString)
 
                 'Execute the SQL command to insert the data
                 cmd.ExecuteNonQuery()
@@ -71,11 +72,11 @@ Public Class Grocery
 
             Debug.WriteLine("DataGridView loaded succesful")
 
-            Using conn As New OleDbConnection(connectionString)
+            Using conn As New OleDbConnection(Rinae.connectionString)
                 conn.Open()
 
                 ' Update the table name if necessary  
-                Dim tableName As String = "GroceryItem"
+                Dim tableName As String = "GroceryItems"
 
                 ' Create an OleDbCommand to select the data from the database  
                 Dim cmd As New OleDbCommand($"SELECT * FROM {tableName}", conn)
@@ -104,68 +105,65 @@ Public Class Grocery
         Debug.WriteLine("Exiting  PopulateDataGridView")
     End Sub
 
-    Private Sub Button5_Click(sender As Object, e As EventArgs) Handles Button5.Click
+    Private Sub Button5_Click(sender As Object, e As EventArgs) Handles btnEdit.Click
+        Debug.WriteLine("Entering button update click")
+        If DataGridView1.SelectedRows.Count = 0 Then
+            Debug.WriteLine("User confirmed update")
+            MessageBox.Show("Please select a record to update.", "No Selection", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            Return
+        End If
+
         Try
+            Debug.WriteLine($"Format error in button update:")
+            Debug.WriteLine("Updating data: data updated")
             Dim ItemName As String = TextBox1.Text
             Dim Quantity As String = TextBox2.Text
             Dim Category As String = TextBox3.Text
             Dim Unit As String = TextBox4.Text
-            Dim Ingredient As String = TextBox5.Text
             Dim PricePerUnit As String = TextBox6.Text
-            Dim Purchase As String = TextBox7.Text
-            Dim ExpiryDate As String = DateTimePicker1.Text
-            Using conn As New OleDbConnection(connectionString)
+            Dim Period As String = ComboBox2.SelectedItem.ToString
+            Dim PurchaseDate As String = DateTimePicker1.Value
+            Dim ExpiryDate As String = DateTimePicker2.Value
+
+            Using conn As New OleDbConnection(Rinae.connectionString)
                 conn.Open()
 
+                ' Get the ID of the selected row (assuming your table has a primary key named "ID")  
                 Dim selectedRow As DataGridViewRow = DataGridView1.SelectedRows(0)
-                Dim id As Integer = Convert.ToInt32(selectedRow.Cells("ID").Value) ' Change "ID" to your primary key column name 
-                Dim cmd As New OleDbCommand("UPDATE [GroceryItem] SET [ItemName] = ?, [Quantity] = ?, [Category] = ?,  [Unit] = ?, [Ingredient] = ?, [PricePerUnit] = ?, [Purchase] = ?, [ExpiryDate] = ?  WHERE [ID] = ?", conn)
+                Dim ID As Integer = Convert.ToInt32(selectedRow.Cells("ID").Value) ' Change "ID" to your primary key column name  
 
-                cmd.Parameters.AddWithValue("@ItemName", TextBox1.Text)
-                cmd.Parameters.AddWithValue("@Quantity", TextBox2.Text)
-                cmd.Parameters.AddWithValue("@Category", TextBox3.Text)
-                cmd.Parameters.AddWithValue("@Unit", TextBox4.Text)
-                cmd.Parameters.AddWithValue("@Ingredient", TextBox5.Text)
-                cmd.Parameters.AddWithValue("@PricePerUnit", TextBox6.Text)
-                cmd.Parameters.AddWithValue("@Purchase", TextBox7.Text)
-                cmd.Parameters.AddWithValue("@ExpiryDate", DateTimePicker1.Text)
-                cmd.Parameters.AddWithValue("@id", id)
+                ' Create an OleDbCommand to update the personnel data in the database  
+                Dim cmd As New OleDbCommand("UPDATE [GroceryItems] SET [ItemName] = ?, [Quantity] = ?, [Category] = ?, [Unit] = ?, [PricePerUnit] = ?, [Period] = ?, [PurchaseDate] = ?, [ExpiryDate] = ? WHERE [ID] = ?", conn)
 
-                ' cmd.Parameters.AddWithValue("@ID", ItemID) ' Primary key for matching record  
+                ' Set the parameter values from the UI controls  
 
-                'Execute the SQL command to update the data  
+                'cmd.Parameters.AddWithValue("@PhotoID", PhotoID.textbox1.Text)
+                cmd.Parameters.AddWithValue("@ItemName", ItemName)
+                cmd.Parameters.AddWithValue("@Quantity", Quantity)
+                cmd.Parameters.AddWithValue("@Category", Category)
+                cmd.Parameters.AddWithValue("@Unit", Unit)
+                cmd.Parameters.AddWithValue("@PricePerUnit", PricePerUnit)
+                cmd.Parameters.AddWithValue("@Period", Period)
+                cmd.Parameters.AddWithValue("@PurchaseDate", PurchaseDate)
+                cmd.Parameters.AddWithValue("@ExpiryDate", ExpiryDate)
+
+                cmd.Parameters.AddWithValue("@ID", ID)
+
                 cmd.ExecuteNonQuery()
 
-                'Display a message box indicating the update was successful 
-
-                MsgBox("grocery Information Updated!" & vbCrLf &
-                "ItemName:" & TextBox1.Text & vbCrLf &
-                "Quantity:" & TextBox2.Text & vbCrLf &
-                 "Category:" & TextBox3.Text & vbCrLf &
-                 "Unit:" & TextBox4.Text & vbCrLf &
-                  "PricePerUnit:" & TextBox6.Text & vbCrLf &
-                   "Ingredient: " & TextBox5.Text & vbCrLf &
-                  "Purchase:" & TextBox7.Text & vbCrLf &
-                 "ExpiryDate:" & DateTimePicker1.Text & vbCrLf & vbCrLf, vbInformation, "Update Confirmation")
+                MsgBox("Grocery Items Updated Successfuly!", vbInformation, "Update Confirmation")
+                LoadGroceryItemDataFromDatabase()
+                '   Cruwza.ClearControls(Me)
             End Using
-
         Catch ex As OleDbException
-            Debug.WriteLine($"Format error in btnUpdate_Click: {ex.Message}")
-            Debug.WriteLine($"Stack Trace: {ex.StackTrace}")
-            MessageBox.Show("Please ensure all fields are filled correctly.", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-
-            Debug.WriteLine("Data failed to Update")
-            MessageBox.Show($"Error updating Grocery in database: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Debug.WriteLine("User cancelled update")
+            Debug.WriteLine("Unexpected error in button update")
+            Debug.Write($"Stack Trace: {ex.StackTrace}")
+            MessageBox.Show($"Error updating grocery in database: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         Catch ex As Exception
-            Debug.WriteLine($"Unexpected error in btnUpdate_Click: {ex.Message}")
-            Debug.WriteLine($"Stack Trace: {ex.StackTrace}")
-            MessageBox.Show($"An error occurred: {ex.Message}", "Update Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-
+            MessageBox.Show($"Unexpected error: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
-        Debug.WriteLine("Exiting btnUpdate_Click")
-        ' Clear the controls and refresh the DataGridView  
-        ' HouseHold.ClearControls(Me)
-        LoadGroceryItemDataFromDatabase()
+        Debug.WriteLine("Exiting button update")
     End Sub
     Private Sub DataGridView1_SelectionChanged(sender As Object, e As EventArgs) Handles DataGridView1.SelectionChanged
 
@@ -176,14 +174,14 @@ Public Class Grocery
             TextBox2.Text = selectedRow.Cells("Quantity").Value.ToString()
             TextBox3.Text = selectedRow.Cells("Category").Value.ToString()
             TextBox4.Text = selectedRow.Cells("Unit").Value.ToString()
-            TextBox5.Text = selectedRow.Cells("Ingredient").Value.ToString()
+            ComboBox2.SelectedItem = selectedRow.Cells("Period").Value.ToString()
             TextBox6.Text = selectedRow.Cells("PricePerUnit").Value.ToString()
-            TextBox7.Text = selectedRow.Cells("Purchase").Value.ToString()
-
+            DateTimePicker1.Value = selectedRow.Cells("PurchaseDate").Value.ToString()
+            DateTimePicker2.Value = selectedRow.Cells("ExpiryDate").Value.ToString()
         End If
     End Sub
 
-    Private Sub Button6_Click(sender As Object, e As EventArgs) Handles Button6.Click
+    Private Sub Button6_Click(sender As Object, e As EventArgs) Handles btnDelete.Click
 
         ' Check if there are any selected rows in the DataGridView for expenses  
         If DataGridView1.SelectedRows.Count > 0 Then
@@ -203,7 +201,7 @@ Public Class Grocery
                     Debug.WriteLine("Format errors in button delete")
                     Debug.WriteLine("Deleting data: Data delected")
                     Debug.WriteLine("Stack Trace: {ex.StackTrace}")
-                    Using conn As New OleDbConnection(connectionString)
+                    Using conn As New OleDbConnection(Rinae.connectionString)
                         conn.Open()
 
                         Dim cmd As New OleDbCommand("DELETE FROM [GroceryItem] WHERE [ID] = ?", conn)
@@ -236,7 +234,7 @@ Public Class Grocery
         Debug.WriteLine("Exiting btnDelete_Click")
     End Sub
 
-    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles btnHighlight.Click
         HighlightExpiredItems()
     End Sub
     Private Sub HighlightExpiredItems()
@@ -269,5 +267,20 @@ Public Class Grocery
         Timer1.Enabled = True
         ' notify() ' Check every 1 minute (60000 milliseconds)
 
+    End Sub
+
+    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles btnSort.Click
+        DataGridView1.Sort(DataGridView1.Columns("PurchaseDate"), System.ComponentModel.ListSortDirection.Ascending)
+    End Sub
+
+    Private Sub btnRefresh_Click(sender As Object, e As EventArgs) Handles btnRefresh.Click
+        LoadGroceryItemDataFromDatabase()
+    End Sub
+
+    Private Sub btnFilter_Click(sender As Object, e As EventArgs) Handles btnFilter.Click
+        '  Dim selectedDateAdded As String = If(DateTimePicker1.Text IsNot Nothing, DateTimePicker1.Text.ToString(), "")
+        Dim selectedGrocery As String = If(ComboBox2.SelectedItem IsNot Nothing, ComboBox2.SelectedItem.ToString(), "")
+
+        Rinae.FilterGrocery(selectedGrocery) ', selectedDateAdded)
     End Sub
 End Class

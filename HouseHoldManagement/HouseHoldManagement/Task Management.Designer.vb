@@ -280,6 +280,7 @@ Partial Class Task_Management
         Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.Label1)
         Me.Name = "Task_Management"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Task Manangement"
         Me.Panel2.ResumeLayout(False)
         Me.Panel2.PerformLayout()
