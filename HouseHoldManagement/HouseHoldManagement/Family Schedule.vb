@@ -70,8 +70,8 @@ Public Class Family_Schedule
                 conn.Open()
 
                 ' Update the table name if necessary  
-                Dim tableName As String = "FamilySchedule
-"
+                Dim tableName As String = "FamilySchedule"
+
 
                 ' Create an OleDbCommand to select the data from the database  
                 Dim cmd As New OleDbCommand($"SELECT * FROM {tableName}", conn)
