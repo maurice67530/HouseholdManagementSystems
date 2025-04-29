@@ -5,12 +5,12 @@ Public Class MealPlan
     ' Dim conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
     Public Property conn As New OleDbConnection(connectionString)
     ' Connection string using relative path to the database
-    Public Const connectionString As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Mudzunga\Source\Repos\maurice67530\HouseholdManagementSystems\HMS.accdb;Persist Security Info=False;"
+    Public Const connectionString As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Rinae\Source\Repos\maurice67530\HouseholdManagementSystems\HMS.accdb;Persist Security Info=False;"
 
     Private Sub btnEdit_Click(sender As Object, e As EventArgs) Handles btnEdit.Click
         Try
             Debug.WriteLine("Entering btnEdit_Click")
-            Using conn As New OleDbConnection(Module1.connectionString)
+            Using conn As New OleDbConnection(Rinae.connectionString)
                 conn.Open()
 
                 Dim tablename As String = "MealPlans"
@@ -68,7 +68,7 @@ Public Class MealPlan
         PopulateDataGridView()
 
         ComboBox3.Items.Clear()
-        Using conn As New OleDbConnection(Module1.connectionString)
+        Using conn As New OleDbConnection(Rinae.connectionString)
             conn.Open()
             ' Query to fetch all ItemName values from Inventory1
             Dim fetchcommand As New OleDbCommand("SELECT ItemName FROM Inventory", conn)
@@ -80,7 +80,7 @@ Public Class MealPlan
             End Using
         End Using
 
-        Module1.ClearControls(Me)
+        Rinae.ClearControls(Me)
     End Sub
 
     Private mealPlanData As DataTable
@@ -88,7 +88,7 @@ Public Class MealPlan
 
     ' Load filtered meal plan data based on frequency
     Private Sub LoadFilteredMealPlan()
-        Using dbConnection As New OleDbConnection(Module1.connectionString)
+        Using dbConnection As New OleDbConnection(Rinae.connectionString)
             Dim selectedFilter As String = ComboBox2.SelectedItem?.ToString()
             Dim query As String = "SELECT * FROM MealPlans WHERE Frequency = ? AND 1=1"
             Dim startDate As Date = Date.Today
@@ -121,7 +121,7 @@ Public Class MealPlan
             Debug.WriteLine("Form loading the data")
             Debug.WriteLine("Form loading  data failed")
 
-            Using conn As New OleDbConnection(Module1.connectionString)
+            Using conn As New OleDbConnection(Rinae.connectionString)
                 conn.Open()
 
                 'Update the table name if neccessary
@@ -237,7 +237,7 @@ Public Class MealPlan
             If confirmationResult = DialogResult.Yes Then
                 ' Proceed with deletion  
                 Try
-                    Using conn As New OleDbConnection(Module1.connectionString)
+                    Using conn As New OleDbConnection(Rinae.connectionString)
                         conn.Open()
 
                         ' Create the delete command  
@@ -347,7 +347,7 @@ Public Class MealPlan
     End Sub
     Private Sub btnRefresh_Click(sender As Object, e As EventArgs) Handles btnRefresh.Click
         LoadMealPlanfromDatabase1()
-        Module1.ClearControls(Me)
+        Rinae.ClearControls(Me)
     End Sub
 
     Private Sub btnSort_Click(sender As Object, e As EventArgs) Handles btnSort.Click
@@ -363,7 +363,7 @@ Public Class MealPlan
 
         Try
             Debug.WriteLine("Entering btnEdit_Click")
-            Using conn As New OleDbConnection(Module1.connectionString)
+            Using conn As New OleDbConnection(Rinae.connectionString)
                 conn.Open()
 
                 Dim tablename As String = "MealPlans"
@@ -446,4 +446,7 @@ Public Class MealPlan
         End If
     End Sub
 
+    Private Sub Panel2_Paint(sender As Object, e As PaintEventArgs) Handles Panel2.Paint
+
+    End Sub
 End Class

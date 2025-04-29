@@ -2,12 +2,12 @@
 Imports System.Data.OleDb
 Public Class Form1
     'Public Const connectionString As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Aousy\Source\Repos\maurice67530\HouseholdManagementSystems\HMS.accdb"
-    Public Const connectionString As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Raphalalani\Source\Repos\maurice67530\HouseholdManagementSystems\HMS.accdb"
-
+    ' Public Const connectionString As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Raphalalani\Source\Repos\maurice67530\HouseholdManagementSystems\HMS.accdb"
+    Public Const connectionString As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Rinae\Source\Repos\maurice67530\HouseholdManagementSystems\HMS.accdb"
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         DisplayPhoto()
         SetupTimer()
-
+        LoadRecentPhotos()
         SetupCharts()
         LoadChoresStatus()
 
@@ -24,9 +24,10 @@ Public Class Form1
         ToolTip1.SetToolTip(Button4, "Notification")
         ToolTip1.SetToolTip(Button9, "Personel")
         ToolTip1.SetToolTip(Button5, "PhotoGallery")
+        ToolTip1.SetToolTip(Button10, "Family Event")
+
 
     End Sub
-
 
     'Set up Budget Status And Chores Status charts
     Private Sub SetupCharts()
@@ -40,42 +41,40 @@ Public Class Form1
         ''Chart1.Series("Chores").ChartType = series1.Pie
     End Sub
 
-
-
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         MealPlan.ShowDialog()
     End Sub
 
     Private Sub Button6_Click(sender As Object, e As EventArgs) Handles Button6.Click
-        MealPlan.ShowDialog()
+        Grocery.ShowDialog()
     End Sub
 
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
-        'Groceryy.ShowDialog()
-    End Sub
-
-    Private Sub Button7_Click(sender As Object, e As EventArgs) Handles Button7.Click
         Chores.ShowDialog()
     End Sub
 
-    Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
+    Private Sub Button7_Click(sender As Object, e As EventArgs) Handles Button7.Click
         Task_Management.ShowDialog()
     End Sub
 
-    Private Sub Button5_Click(sender As Object, e As EventArgs) Handles Button5.Click
-        Expense.ShowDialog()
+    Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
+        Inventory.ShowDialog()
     End Sub
 
-    Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
+    Private Sub Button5_Click(sender As Object, e As EventArgs) Handles Button5.Click
         PhotoGallery.ShowDialog()
     End Sub
 
+    Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
+        Notifications.ShowDialog()
+    End Sub
+
     Private Sub Button9_Click(sender As Object, e As EventArgs) Handles Button9.Click
-        MealPlan.ShowDialog()
+        Personnel.ShowDialog()
     End Sub
 
     Private Sub Button8_Click(sender As Object, e As EventArgs) Handles Button8.Click
-        Notifications.ShowDialog()
+        Expense.ShowDialog()
     End Sub
     Private Sub UpdateBudgetStatus()
 
@@ -111,7 +110,7 @@ Public Class Form1
 
         ' update this connection string based  on my database confirguration
 
-        Dim connectionString As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Aousy\Source\Repos\maurice67530\HouseholdManagementSystems\HMS.accdb"
+        Dim connectionString As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source= C:\Users\Rinae\Source\Repos\maurice67530\HouseholdManagementSystems\HMS.accdb"
 
         Dim query As String = "SELECT [Amount], [Frequency] FROM [Expense]"
 
@@ -217,7 +216,7 @@ Public Class Form1
 
         photoList.Clear()
 
-        Dim query As String = "SELECT TOP 5 FilePath FROM Photos ORDER BY DateTaken "
+        Dim query As String = "SELECT TOP 5 FilePath FROM Photos ORDER BY DateAdded "
 
         Using conn As New OleDbConnection(connectionString)
 
@@ -245,7 +244,7 @@ Public Class Form1
 
         If photoList.Count > 0 Then
 
-            FlowLayoutPanel1.Controls.Clear() ' Clear previous image
+            FlowLayoutPanel2.Controls.Clear() ' Clear previous image
 
             Dim pb As New PictureBox()
 
@@ -253,9 +252,9 @@ Public Class Form1
 
             pb.SizeMode = PictureBoxSizeMode.StretchImage ' Set stretch mode
 
-            pb.Size = FlowLayoutPanel1.Size ' Match panel size
+            pb.Size = FlowLayoutPanel2.Size ' Match panel size
 
-            FlowLayoutPanel1.Controls.Add(pb) ' Add to FlowLayoutPanel
+            FlowLayoutPanel2.Controls.Add(pb) ' Add to FlowLayoutPanel
 
         End If
 
@@ -377,5 +376,9 @@ Public Class Form1
 
     Private Sub Chart1_Click(sender As Object, e As EventArgs) Handles Chart1.Click
 
+    End Sub
+
+    Private Sub Button10_Click(sender As Object, e As EventArgs) Handles Button10.Click
+        Family_Schedule.ShowDialog()
     End Sub
 End Class

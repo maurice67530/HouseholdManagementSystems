@@ -1,7 +1,7 @@
 ﻿Imports System.Data.OleDb
 Imports HouseHoldManagement
 Public Class Task_Management
-    Public Property conn As New OleDbConnection(Ndivhuwo.connectionString)
+    Public Property conn As New OleDbConnection(Rinae.connectionString)
     Private Status As String
     Private Tasks As Object
     Private Dashboard As Object
@@ -10,7 +10,7 @@ Public Class Task_Management
     Public Sub LoadTasksDataFromDatabase()
 
         Debug.WriteLine("LoadTasksDataFromDatabase()")
-        Using conn As New OleDbConnection(Ndivhuwo.connectionString)
+        Using conn As New OleDbConnection(Rinae.connectionString)
             conn.Open()
 
             ' Update the table name if necessary  
@@ -48,7 +48,7 @@ Public Class Task_Management
         PopulateComboboxFromDatabase(ComboBox3)
     End Sub
     Public Sub PopulateComboboxFromDatabase(ByRef comboBox As ComboBox)
-        Dim conn As New OleDbConnection(Ndivhuwo.connectionString)
+        Dim conn As New OleDbConnection(Rinae.connectionString)
         Try
             Debug.WriteLine("populating combobox from database successfully!")
             ' 1. Open the database connection  

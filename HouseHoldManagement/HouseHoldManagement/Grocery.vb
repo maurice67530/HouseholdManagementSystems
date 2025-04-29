@@ -1,6 +1,6 @@
 ﻿Imports System.Data.OleDb
 Public Class Grocery
-    Public Const connectionString As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Dongola\Source\Repos\maurice67530\HouseholdManagementSystems\HMS.accdb"
+    Public Const connectionString As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Rinae\Source\Repos\maurice67530\HouseholdManagementSystems\HMS.accdb"
     Private Sub Grocery_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
         LoadGroceryItemDataFromDatabase()
@@ -30,7 +30,7 @@ Public Class Grocery
             .ExpiryDate = DateTimePicker2.Text
              }
 
-            Using conn As New OleDbConnection(Cruwza.connectionString)
+            Using conn As New OleDbConnection(Rinae.connectionString)
                 conn.Open()
 
                 Dim cmd As New OleDbCommand($"INSERT INTO GroceryItems ([ItemName], [Quantity], [Category], [Unit], [Period], [PricePerUnit], [PurchaseDate], [ExpiryDate]) VALUES (?, ?, ?, ?, ?, ?, ?, ?)", conn)
@@ -72,7 +72,7 @@ Public Class Grocery
 
             Debug.WriteLine("DataGridView loaded succesful")
 
-            Using conn As New OleDbConnection(Cruwza.connectionString)
+            Using conn As New OleDbConnection(Rinae.connectionString)
                 conn.Open()
 
                 ' Update the table name if necessary  
@@ -125,7 +125,7 @@ Public Class Grocery
             Dim PurchaseDate As String = DateTimePicker1.Value
             Dim ExpiryDate As String = DateTimePicker2.Value
 
-            Using conn As New OleDbConnection(Cruwza.connectionString)
+            Using conn As New OleDbConnection(Rinae.connectionString)
                 conn.Open()
 
                 ' Get the ID of the selected row (assuming your table has a primary key named "ID")  
@@ -201,7 +201,7 @@ Public Class Grocery
                     Debug.WriteLine("Format errors in button delete")
                     Debug.WriteLine("Deleting data: Data delected")
                     Debug.WriteLine("Stack Trace: {ex.StackTrace}")
-                    Using conn As New OleDbConnection(Cruwza.connectionString)
+                    Using conn As New OleDbConnection(Rinae.connectionString)
                         conn.Open()
 
                         Dim cmd As New OleDbCommand("DELETE FROM [GroceryItem] WHERE [ID] = ?", conn)
@@ -281,6 +281,6 @@ Public Class Grocery
         '  Dim selectedDateAdded As String = If(DateTimePicker1.Text IsNot Nothing, DateTimePicker1.Text.ToString(), "")
         Dim selectedGrocery As String = If(ComboBox2.SelectedItem IsNot Nothing, ComboBox2.SelectedItem.ToString(), "")
 
-        Cruwza.FilterGrocery(selectedGrocery) ', selectedDateAdded)
+        Rinae.FilterGrocery(selectedGrocery) ', selectedDateAdded)
     End Sub
 End Class

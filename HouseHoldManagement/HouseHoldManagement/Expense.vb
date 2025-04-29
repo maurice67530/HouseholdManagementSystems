@@ -3,8 +3,8 @@ Imports System.Net.Mail
 Imports System.Net
 Imports System.Data.OleDb
 Public Class Expense
-    Public Const connectionString As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\khodani\Source\Repos\maurice67530\HouseholdManagementSystems\HMS.accdb"
-    Dim conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
+    'Public Const connectionString As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\khodani\Source\Repos\maurice67530\HouseholdManagementSystems\HMS.accdb"
+    Dim conn As New OleDbConnection(Rinae.connectionString)
 
     ' Create a ToolTip object
     Private toolTip As New ToolTip()
@@ -26,7 +26,7 @@ Public Class Expense
             'Me.Controls.Add(txtRecentUpdate)
 
             Debug.WriteLine("User confirmed btnSubmit")
-            Using conn As New OleDbConnection(connectionString)
+            Using conn As New OleDbConnection(Rinae.connectionString)
                 conn.Open()
 
                 ' Update the table name if necessary  
@@ -62,7 +62,7 @@ Public Class Expense
                 cmd.Parameters.AddWithValue("@Tags", expense.Tags)
                 cmd.Parameters.AddWithValue("@Currency", expense.Currency)
                 cmd.Parameters.AddWithValue("@Category", expense.Category)
-                cmd.Parameters.AddWithValue("@PaymentMethod", expense.PaymentMethod)
+                cmd.Parameters.AddWithValue("@PaymentMethod", expense.Paymentmethod)
                 cmd.Parameters.AddWithValue("@Frequency", expense.Frequency)
                 cmd.Parameters.AddWithValue("@ApprovalStatus", expense.ApprovalStatus)
                 'cmd.Parameters.AddWithValue("@Receiver", expense.Receiver)
@@ -139,7 +139,7 @@ Public Class Expense
 
             Debug.WriteLine("User confirmed btnEdit")
             'Dim expenseId As Integer = Convert.ToInt32(selectedRow.Cells("ID").Value) ' Replace "ID" with your actual column name  
-            Using connect As New OleDbConnection(connectionString)
+            Using connect As New OleDbConnection(Rinae.connectionString)
                 connect.Open()
 
                 ' Get the ID of the selected row (assuming your table has a primary key named "ID")  
@@ -228,7 +228,7 @@ Public Class Expense
                 Try
                     TextBox7.Text = $" Expense updated at {DateTime.Now:HH:MM}"
 
-                    Using connect As New OleDbConnection(connectionString)
+                    Using connect As New OleDbConnection(Rinae.connectionString)
                         connect.Open()
                         Debug.WriteLine("User confirmed deletion")
                         ' Create the delete command  
@@ -297,7 +297,7 @@ Public Class Expense
     Public Sub LoadExpenseDataFromDatabase()
 
         Debug.WriteLine("LoadMealPlansDataFromDatabase")
-        Using connect As New OleDbConnection(connectionString)
+        Using connect As New OleDbConnection(Rinae.connectionString)
             connect.Open()
 
             ' Update the table name if necessary  
@@ -337,7 +337,7 @@ Public Class Expense
     End Sub
 
     Public Sub PopulateComboboxFromDatabase(ByRef comboBox As ComboBox)
-        Dim conn As New OleDbConnection(connectionString)
+        Dim conn As New OleDbConnection(Rinae.connectionString)
         Try
             Debug.WriteLine("populate combobox successful")
             'open the database connection

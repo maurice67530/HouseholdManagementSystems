@@ -1,7 +1,7 @@
 ﻿Imports System.Data.OleDb
 
 Public Class Family_Schedule
-    Public Const connectionstring As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Nedzamba\Source\Repos\HouseholdManagementSystems\HMS.accdb"
+    Public Const connectionstring As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Rinae\Source\Repos\HouseholdManagementSystems\HMS.accdb"
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles btnSave.Click
         Try
 
@@ -16,7 +16,7 @@ Public Class Family_Schedule
         }
 
 
-            Using conn As New OleDbConnection(Ndamu.connectionstring)
+            Using conn As New OleDbConnection(Rinae.connectionString)
                 conn.Open()
 
                 ' Update the table name if necessary  
@@ -70,7 +70,7 @@ Public Class Family_Schedule
     Public Sub LoadScheduleFromDatabase()
         Try
             Debug.WriteLine("DataGridview populated successfully ChoresForm_Load")
-            Using conn As New OleDbConnection(Ndamu.connectionstring)
+            Using conn As New OleDbConnection(Rinae.connectionString)
                 conn.Open()
 
                 ' Update the table name if necessary  
@@ -133,7 +133,7 @@ Public Class Family_Schedule
                     MessageBox.Show("Please Select chore to delete", "Deletion Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
                 End If
 
-                Using conn As New OleDbConnection(Ndamu.connectionstring)
+                Using conn As New OleDbConnection(Rinae.connectionString)
                     conn.Open()
 
 
