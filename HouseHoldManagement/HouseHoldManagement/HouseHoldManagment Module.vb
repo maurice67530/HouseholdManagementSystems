@@ -15,6 +15,43 @@ End Module
 
 Module Ndamu
     Public Const connectionstring As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Nedzamba\Source\Repos\HouseholdManagementSystems\HMS.accdb"
+    Public Sub AddEvent(Title As String, Notes As String, EventDate As Date, StartTime As Date, Endtime As Date, AssignedTo As String, EventType As String)
+        Try
+            Using conn As New OleDbConnection(Ndamu.connectionstring)
+                conn.Open()
+                Dim query As String = "INSERT INTO FamilySchedule ([Title],[ Notes], [DateOfEvent], [StartTime], [EndTime], [AssignedTo], [EventType])" & "VALUES (?, ?, ?, ?, ?, ?, ?)"
+                Using cmd As New OleDbCommand(query, conn)
+                    cmd.Parameters.AddWithValue("?", Title)
+                    cmd.Parameters.AddWithValue("?", Notes)
+                    cmd.Parameters.AddWithValue("?", EventDate)
+                    cmd.Parameters.AddWithValue("?", StartTime)
+                    cmd.Parameters.AddWithValue("?", Endtime)
+                    cmd.Parameters.AddWithValue("?", AssignedTo)
+                    cmd.Parameters.AddWithValue("?", EventType)
+                    cmd.ExecuteNonQuery()
+
+                End Using
+            End Using
+        Catch ex As Exception
+            MessageBox.Show("Error adding schedule: " & ex.Message)
+        End Try
+    End Sub
+    Public Sub AddChoreEvent(Title As String, AssignedTo As String, DueDate As Date)
+        'Add Chore Event
+        AddEvent(Title, "Chores automatically added", DueDate, DueDate, DueDate.AddHours(1), AssignedTo, "Chores")
+    End Sub
+    Public Sub AddMealEvent(MealName As String, StartDate As Date)
+        'Add Meal Event
+        AddEvent(MealName, "MealPlans", StartDate, StartDate.AddHours(12), StartDate.AddHours(13), "all", "Meal")
+    End Sub
+    Public Sub AddTaskReminder(Title As String, AssignedTo As String, DueDate As Date)
+        'Add Task Reminder
+        AddEvent(Title, "Task Due Reminder", DueDate, DueDate, DueDate.AddHours(1), AssignedTo, "Task")
+    End Sub
+    Public Sub MarkPhotoDay(DateAdded As Date, Description As String)
+        'Add Photo Day Event
+        AddEvent("Photo Day", Description, DateAdded, DateAdded.AddHours(15), DateAdded.AddHours(16), "Family", "Photo")
+    End Sub
 End Module
 
 Module Rasta
@@ -240,4 +277,5 @@ End Module
 Module Faith
     Public Property conn As New OleDbConnection(connectionString)
     Public Const connectionString As String = " Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Faith\Source\Repos\maurice67530\HouseholdManagementSystems\HMS.accdb"
+
 End Module

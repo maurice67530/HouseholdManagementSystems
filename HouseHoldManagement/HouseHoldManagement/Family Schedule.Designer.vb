@@ -144,7 +144,7 @@ Partial Class Family_Schedule
         'ComboBox2
         '
         Me.ComboBox2.FormattingEnabled = True
-        Me.ComboBox2.Items.AddRange(New Object() {"Chores", "Meal", "Task", "Personal"})
+        Me.ComboBox2.Items.AddRange(New Object() {"Chore", "Meal", "Task", "Personal"})
         Me.ComboBox2.Location = New System.Drawing.Point(94, 151)
         Me.ComboBox2.Name = "ComboBox2"
         Me.ComboBox2.Size = New System.Drawing.Size(121, 21)
@@ -185,7 +185,7 @@ Partial Class Family_Schedule
         Me.Panel2.Controls.Add(Me.Label8)
         Me.Panel2.Location = New System.Drawing.Point(304, 57)
         Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(330, 290)
+        Me.Panel2.Size = New System.Drawing.Size(319, 290)
         Me.Panel2.TabIndex = 0
         '
         'MonthCalendar1
@@ -228,7 +228,7 @@ Partial Class Family_Schedule
         '
         Me.btnSave.BackColor = System.Drawing.SystemColors.ActiveCaption
         Me.btnSave.Image = CType(resources.GetObject("btnSave.Image"), System.Drawing.Image)
-        Me.btnSave.Location = New System.Drawing.Point(18, 509)
+        Me.btnSave.Location = New System.Drawing.Point(18, 504)
         Me.btnSave.Name = "btnSave"
         Me.btnSave.Size = New System.Drawing.Size(75, 44)
         Me.btnSave.TabIndex = 12
@@ -238,7 +238,7 @@ Partial Class Family_Schedule
         '
         Me.btnUpdate.BackColor = System.Drawing.SystemColors.ActiveCaption
         Me.btnUpdate.Image = CType(resources.GetObject("btnUpdate.Image"), System.Drawing.Image)
-        Me.btnUpdate.Location = New System.Drawing.Point(215, 509)
+        Me.btnUpdate.Location = New System.Drawing.Point(287, 504)
         Me.btnUpdate.Name = "btnUpdate"
         Me.btnUpdate.Size = New System.Drawing.Size(75, 44)
         Me.btnUpdate.TabIndex = 13
@@ -248,7 +248,7 @@ Partial Class Family_Schedule
         '
         Me.btnDelete.BackColor = System.Drawing.SystemColors.ActiveCaption
         Me.btnDelete.Image = CType(resources.GetObject("btnDelete.Image"), System.Drawing.Image)
-        Me.btnDelete.Location = New System.Drawing.Point(412, 509)
+        Me.btnDelete.Location = New System.Drawing.Point(548, 504)
         Me.btnDelete.Name = "btnDelete"
         Me.btnDelete.Size = New System.Drawing.Size(75, 44)
         Me.btnDelete.TabIndex = 14
@@ -259,14 +259,14 @@ Partial Class Family_Schedule
         Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DataGridView1.Location = New System.Drawing.Point(12, 369)
         Me.DataGridView1.Name = "DataGridView1"
-        Me.DataGridView1.Size = New System.Drawing.Size(628, 119)
+        Me.DataGridView1.Size = New System.Drawing.Size(611, 119)
         Me.DataGridView1.TabIndex = 15
         '
         'Family_Schedule
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(662, 565)
+        Me.ClientSize = New System.Drawing.Size(662, 549)
         Me.Controls.Add(Me.DataGridView1)
         Me.Controls.Add(Me.btnSave)
         Me.Controls.Add(Me.btnUpdate)
