@@ -245,7 +245,7 @@ Public Class Form1
 
         If photoList.Count > 0 Then
 
-            FlowLayoutPanel1.Controls.Clear() ' Clear previous image
+            FlowLayoutPanel2.Controls.Clear() ' Clear previous image
 
             Dim pb As New PictureBox()
 
@@ -253,9 +253,9 @@ Public Class Form1
 
             pb.SizeMode = PictureBoxSizeMode.StretchImage ' Set stretch mode
 
-            pb.Size = FlowLayoutPanel1.Size ' Match panel size
+            pb.Size = FlowLayoutPanel2.Size ' Match panel size
 
-            FlowLayoutPanel1.Controls.Add(pb) ' Add to FlowLayoutPanel
+            FlowLayoutPanel2.Controls.Add(pb) ' Add to FlowLayoutPanel
 
         End If
 
