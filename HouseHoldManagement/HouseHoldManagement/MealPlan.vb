@@ -68,7 +68,7 @@ Public Class MealPlan
         PopulateDataGridView()
 
         ComboBox3.Items.Clear()
-        Using conn As New OleDbConnection(Rinae.connectionString)
+        Using conn As New OleDbConnection(Ndivhuwo.connectionString)
             conn.Open()
             ' Query to fetch all ItemName values from Inventory1
             Dim fetchcommand As New OleDbCommand("SELECT ItemName FROM Inventory", conn)
@@ -80,7 +80,7 @@ Public Class MealPlan
             End Using
         End Using
 
-        Rinae.ClearControls(Me)
+        'Ndivhuwo.ClearControls(Me)
     End Sub
 
     Private mealPlanData As DataTable
@@ -348,7 +348,7 @@ Public Class MealPlan
     End Sub
     Private Sub btnRefresh_Click(sender As Object, e As EventArgs) Handles btnRefresh.Click
         LoadMealPlanfromDatabase1()
-        Rinae.ClearControls(Me)
+        'Rinae.ClearControls(Me)
     End Sub
 
     Private Sub btnSort_Click(sender As Object, e As EventArgs) Handles btnSort.Click

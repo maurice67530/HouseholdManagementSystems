@@ -47,7 +47,7 @@ Public Class Login
                         Case Else
                             MessageBox.Show("Unknown role.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
                     End Select
-                    Form1.TextBox2.Text = Role.ToString() ' Assign role
+                    'Form1.TextBox1.Text = Role.ToString() ' Assign role
                     Form1.TextBox1.Text = $"{Username}"
                     Me.Hide()
                 Else

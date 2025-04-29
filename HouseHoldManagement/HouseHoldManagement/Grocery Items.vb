@@ -1,5 +1,5 @@
 ﻿Imports System.Data.OleDb
-Public Class btnDelete
+Public Class Form3
     Public Property conn As New OleDbConnection(connectionString)
     Public Const connectionString As String = " Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Delicious\Source\Repos\maurice67530\HouseholdManagementSystems\HMS.accdb"
     Private Sub Grocery_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -9,9 +9,9 @@ Public Class btnDelete
 
         'Set tooltips for buttons
         ToolTip1.SetToolTip(btnSubmit, "Submit")
-        ToolTip1.SetToolTip(btnEdit, "Update")
-        ToolTip1.SetToolTip(Button4, "Delete")
-        ToolTip1.SetToolTip(btnSort, "Sort")
+        ToolTip1.SetToolTip(Button5, "Update")
+        ToolTip1.SetToolTip(Button1, "Delete")
+        ToolTip1.SetToolTip(Button2, "Sort")
         ToolTip1.SetToolTip(btnFilter, "Filter")
         ToolTip1.SetToolTip(Button3, "Refresh")
         ToolTip1.SetToolTip(btnHighlight, "Highlight")
@@ -101,57 +101,6 @@ Public Class btnDelete
         Timer1.Interval = 20
         Timer1.Enabled = True
         ' notify() ' Check every 1 minute (60000 milliseconds)
-    End Sub
-    Private Sub Button6_Click_1(sender As Object, e As EventArgs) Handles btnSubmit.Click
-        Try
-
-            Dim Item As New Groceryy() With {
-            .ItemName = TextBox1.Text,
-            .Quantity = TextBox2.Text,
-            .Category = TextBox3.Text,
-            .Unit = TextBox4.Text,
-            .PricePerUnit = TextBox5.Text,
-            .Period = ComboBox1.SelectedItem,
-            .PurchaseDate = DateTimePicker1.Text,
-            .ExpiryDate = DateTimePicker2.Text
-             }
-
-            Using conn As New OleDbConnection(Ndivhuwo.connectionString)
-                conn.Open()
-
-                Dim cmd As New OleDbCommand($"INSERT INTO GroceryItems ([ItemName], [Quantity], [Category], [Unit], [Period], [PricePerUnit], [PurchaseDate], [ExpiryDate]) VALUES (?, ?, ?, ?, ?, ?, ?, ?)", conn)
-                cmd.Parameters.AddWithValue("@ItemName", TextBox1.Text)
-                cmd.Parameters.AddWithValue("@Quantity", TextBox2.Text)
-                cmd.Parameters.AddWithValue("@Category", TextBox3.Text)
-                cmd.Parameters.AddWithValue("@Unit", TextBox4.Text)
-                cmd.Parameters.AddWithValue("@Period", ComboBox1.SelectedItem.ToString)
-                cmd.Parameters.AddWithValue("@PricePerUnit", TextBox5.Text)
-                cmd.Parameters.AddWithValue("@PurchaseDate", DateTimePicker1.Value.ToString)
-                cmd.Parameters.AddWithValue("@ExpiryDate", DateTimePicker2.Value.ToString)
-
-                'Execute the SQL command to insert the data
-                cmd.ExecuteNonQuery()
-                LoadGroceryItemDataFromDatabase()
-                conn.Close()
-
-            End Using
-
-            'Display a Confirmation Message  
-            MessageBox.Show("Names details added successfully")
-
-        Catch ex As OleDbException
-            Debug.WriteLine($"Database error in btnSubmit_Click: {ex.Message}")
-            Debug.WriteLine($"Stack Trace: {ex.StackTrace}")
-            MessageBox.Show("Error saving GroceryItem to database. Please check the connection.", "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-
-        Catch ex As Exception
-            Debug.WriteLine($"General error in btnSubmit_Click: {ex.Message}")
-            Debug.WriteLine($"Stack Trace: {ex.StackTrace}")
-            MessageBox.Show("An unexpected error occurred.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-
-        End Try
-        LoadGroceryItemDataFromDatabase()
-        Debug.WriteLine("Exiting btnSubmit_Click ")
     End Sub
     Private Sub Button1_Click_1(sender As Object, e As EventArgs) Handles Button1.Click
         ' Check if there are any selected rows in the DataGridView for expenses  
@@ -276,32 +225,55 @@ Public Class btnDelete
     Private Sub Button2_Click_1(sender As Object, e As EventArgs) Handles Button2.Click
         DataGridView1.Sort(DataGridView1.Columns("PurchaseDate"), System.ComponentModel.ListSortDirection.Ascending)
     End Sub
+    Private Sub btnSubmit_Click(sender As Object, e As EventArgs) Handles btnSubmit.Click
+        Try
 
-    Private Sub Panel3_Paint(sender As Object, e As PaintEventArgs) Handles Panel3.Paint
+            Dim Item As New Groceryy() With {
+            .ItemName = TextBox1.Text,
+            .Quantity = TextBox2.Text,
+            .Category = TextBox3.Text,
+            .Unit = TextBox4.Text,
+            .PricePerUnit = TextBox5.Text,
+            .Period = ComboBox1.SelectedItem,
+            .PurchaseDate = DateTimePicker1.Text,
+            .ExpiryDate = DateTimePicker2.Text
+             }
 
-    End Sub
+            Using conn As New OleDbConnection(Ndivhuwo.connectionString)
+                conn.Open()
 
-    Private Sub Panel2_Paint(sender As Object, e As PaintEventArgs) Handles Panel2.Paint
+                Dim cmd As New OleDbCommand($"INSERT INTO GroceryItems ([ItemName], [Quantity], [Category], [Unit], [Period], [PricePerUnit], [PurchaseDate], [ExpiryDate]) VALUES (?, ?, ?, ?, ?, ?, ?, ?)", conn)
+                cmd.Parameters.AddWithValue("@ItemName", TextBox1.Text)
+                cmd.Parameters.AddWithValue("@Quantity", TextBox2.Text)
+                cmd.Parameters.AddWithValue("@Category", TextBox3.Text)
+                cmd.Parameters.AddWithValue("@Unit", TextBox4.Text)
+                cmd.Parameters.AddWithValue("@Period", ComboBox1.SelectedItem.ToString)
+                cmd.Parameters.AddWithValue("@PricePerUnit", TextBox5.Text)
+                cmd.Parameters.AddWithValue("@PurchaseDate", DateTimePicker1.Value.ToString)
+                cmd.Parameters.AddWithValue("@ExpiryDate", DateTimePicker2.Value.ToString)
 
-    End Sub
+                'Execute the SQL command to insert the data
+                cmd.ExecuteNonQuery()
+                LoadGroceryItemDataFromDatabase()
+                conn.Close()
 
-    Private Sub DataGridView1_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridView1.CellContentClick
+            End Using
 
-    End Sub
+            'Display a Confirmation Message  
+            MessageBox.Show("Names details added successfully")
 
-    Private Sub btnSort_Click(sender As Object, e As EventArgs) Handles btnSort.Click
+        Catch ex As OleDbException
+            Debug.WriteLine($"Database error in btnSubmit_Click: {ex.Message}")
+            Debug.WriteLine($"Stack Trace: {ex.StackTrace}")
+            MessageBox.Show("Error saving GroceryItem to database. Please check the connection.", "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
 
-    End Sub
+        Catch ex As Exception
+            Debug.WriteLine($"General error in btnSubmit_Click: {ex.Message}")
+            Debug.WriteLine($"Stack Trace: {ex.StackTrace}")
+            MessageBox.Show("An unexpected error occurred.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
 
-    Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
-
-    End Sub
-
-    Private Sub btnEdit_Click(sender As Object, e As EventArgs) Handles btnEdit.Click
-
-    End Sub
-
-    Private Sub Panel1_Paint(sender As Object, e As PaintEventArgs) Handles Panel1.Paint
-
+        End Try
+        LoadGroceryItemDataFromDatabase()
+        Debug.WriteLine("Exiting btnSubmit_Click ")
     End Sub
 End Class
