@@ -286,12 +286,13 @@ Public Class Inventory
             ToolTip1.SetToolTip(Button6, "Sort")
             ToolTip1.SetToolTip(Button8, "Refresh")
             ToolTip1.SetToolTip(Button7, "Filter")
-            ToolTip1.SetToolTip(Button9, "Dashboard")
-        End Sub
+        ToolTip1.SetToolTip(Button9, "Close form")
+    End Sub
 
         Private Sub Button9_Click(sender As Object, e As EventArgs) Handles Button9.Click
-            'Dashboard.ShowDialog()
-            Me.Close()
-        End Sub
+        'Dashboard.ShowDialog()
+        'Me.Close()
+        End
+    End Sub
 
     End Class
