@@ -100,6 +100,12 @@ Public Class Family_Schedule
 
         PopulateComboboxFromDatabase(ComboBox1)
         LoadScheduleFromDatabase()
+        AutoCreateChoreEvents()
+        AutoAddMealTimes()
+        AutoCreateTaskReminders()
+        MarkPhotoDayEvents()
+        'Timer1.Interval = 60000 ' 1 minute
+        'Timer1.Start()
     End Sub
     Private Sub btnDelete_Click(sender As Object, e As EventArgs) Handles btnDelete.Click
         If DataGridView1.SelectedRows.Count > 0 Then
@@ -283,6 +289,114 @@ Public Class Family_Schedule
                 conn.Close()
             End If
         End Try
+    End Sub
+    Private Sub AutoCreateChoreEvents()
+        Dim con As New OleDbConnection(Ndamu.connectionstring)
+        Dim da As New OleDbDataAdapter("SELECT Tasks, DueDate FROM Tasks", con)
+        Dim dt As New DataTable
+        da.Fill(dt)
+
+        Dim count As Integer = 0
+        For Each row As DataRow In dt.Rows
+            Dim cmd As New OleDbCommand("INSERT INTO FamilySchedule (Title, Notes, DateOfEvent, StartTime, EndTime, AssignedTo, EventType) VALUES (?, ?, ?, ?, ?, ?, ?)", conn)
+            cmd.Parameters.AddWithValue("?", row("TaskName").ToString())
+            cmd.Parameters.AddWithValue("?", "Auto-scheduled chore")
+            cmd.Parameters.AddWithValue("?", CDate(row("NextDueDate")))
+            cmd.Parameters.AddWithValue("?", #9:00:00 AM#)
+            cmd.Parameters.AddWithValue("?", #10:00:00 AM#)
+            cmd.Parameters.AddWithValue("?", "Family")
+            cmd.Parameters.AddWithValue("?", "Chore")
+
+            con.Open()
+            cmd.ExecuteNonQuery()
+            con.Close()
+            count += 1
+        Next
+
+        MessageBox.Show(count.ToString() & " chore event(s) added to the schedule.", "Chore Integration Complete")
+    End Sub
+
+
+    Private Sub AutoAddMealTimes()
+        Dim conn As New OleDbConnection(Ndamu.connectionstring)
+        Dim da As New OleDbDataAdapter("SELECT MealName, StartDate FROM MealPlans", conn)
+        Dim dt As New DataTable
+        da.Fill(dt)
+
+        Dim count As Integer = 0
+        For Each row As DataRow In dt.Rows
+            Dim cmd As New OleDbCommand("INSERT INTO FamilySchedule (Title, Notes, DateOfEvent, StartTime, EndTime, AssignedTo, EventType) VALUES (?, ?, ?, ?, ?, ?, ?)", conn)
+            cmd.Parameters.AddWithValue("?", row("MealName").ToString())
+            cmd.Parameters.AddWithValue("?", "Scheduled Meal")
+            cmd.Parameters.AddWithValue("?", CDate(row("MealDate")))
+            cmd.Parameters.AddWithValue("?", #1:00:00 PM#)
+            cmd.Parameters.AddWithValue("?", #2:00:00 PM#)
+            cmd.Parameters.AddWithValue("?", "Family")
+            cmd.Parameters.AddWithValue("?", "Meal")
+
+            conn.Open()
+            cmd.ExecuteNonQuery()
+            conn.Close()
+            count += 1
+        Next
+
+        MessageBox.Show(count.ToString() & " meal(s) added to the family calendar.", "Meal Plan Integration Complete")
+    End Sub
+
+
+    Private Sub AutoCreateTaskReminders()
+        Dim conn As New OleDbConnection(Ndamu.connectionstring)
+        Dim da As New OleDbDataAdapter("SELECT Title, DueDate FROM Tasks WHERE Completed = False", conn)
+        Dim dt As New DataTable
+        da.Fill(dt)
+
+        Dim count As Integer = 0
+        For Each row As DataRow In dt.Rows
+            Dim cmd As New OleDbCommand("INSERT INTO FamilySchedule (Title, Notes, DateOfEvent, StartTime, EndTime, AssignedTo, EventType) VALUES (?, ?, ?, ?, ?, ?, ?)", conn)
+            cmd.Parameters.AddWithValue("?", row("TaskTitle").ToString())
+            cmd.Parameters.AddWithValue("?", "Task due soon")
+            cmd.Parameters.AddWithValue("?", CDate(row("DueDate")).AddDays(-1)) ' Reminder 1 day before
+            cmd.Parameters.AddWithValue("?", #8:00:00 AM#)
+            cmd.Parameters.AddWithValue("?", #8:30:00 AM#)
+            cmd.Parameters.AddWithValue("?", "Family")
+            cmd.Parameters.AddWithValue("?", "Task")
+
+            conn.Open()
+            cmd.ExecuteNonQuery()
+            conn.Close()
+            count += 1
+        Next
+
+        MessageBox.Show(count.ToString() & " task reminder(s) scheduled.", "Task Reminder Integration")
+    End Sub
+
+
+    Private Sub MarkPhotoDayEvents()
+        Dim count As Integer = 0
+
+        For Each row As DataGridViewRow In DataGridView1.Rows
+            If Not row.IsNewRow AndAlso
+           row.Cells("Notes").Value IsNot Nothing AndAlso
+           Not IsDBNull(row.Cells("Notes").Value) AndAlso
+           row.Cells("Notes").Value.ToString().ToLower().Contains("photo day") Then
+
+                row.DefaultCellStyle.BackColor = Color.LightGoldenrodYellow
+                count += 1
+            End If
+        Next
+
+        If count > 0 Then
+            MessageBox.Show(count.ToString() & " Photo Day event(s) highlighted!", "Photo Album Integration")
+        Else
+            MessageBox.Show("No Photo Day events found.", "Photo Album Integration")
+        End If
+    End Sub
+
+    Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
+        'AutoCreateChoreEvents()
+        'AutoAddMealTimes()
+        'AutoCreateTaskReminders()
+        'MarkPhotoDayEvents()
     End Sub
 End Class
 

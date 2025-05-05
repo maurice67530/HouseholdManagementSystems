@@ -91,8 +91,6 @@ Public Class Notifications
         ToolTip1.SetToolTip(BtnFilter, "Filter")
         LoadNotifications()
 
-
-
     End Sub
 
     Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
@@ -422,5 +420,21 @@ Public Class Notifications
 
     Private Sub BtnSort_Click(sender As Object, e As EventArgs) Handles BtnSort.Click
         DataGridView1.Sort(DataGridView1.Columns("Category"), System.ComponentModel.ListSortDirection.Ascending)
+    End Sub
+
+    Private Sub Label1_Click(sender As Object, e As EventArgs) Handles Label1.Click
+
+    End Sub
+
+    Private Sub Label2_Click(sender As Object, e As EventArgs) Handles Label2.Click
+
+    End Sub
+
+    Private Sub BtnFilter_Click(sender As Object, e As EventArgs) Handles BtnFilter.Click
+
+    End Sub
+
+    Private Sub ToolTip1_Popup(sender As Object, e As PopupEventArgs) Handles ToolTip1.Popup
+
     End Sub
 End Class

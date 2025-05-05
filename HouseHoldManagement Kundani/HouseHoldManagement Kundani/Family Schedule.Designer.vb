@@ -22,7 +22,7 @@ Partial Class Family_Schedule
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Family_Schedule))
+        Me.components = New System.ComponentModel.Container()
         Me.DataGridView1 = New System.Windows.Forms.DataGridView()
         Me.btnSave = New System.Windows.Forms.Button()
         Me.btnUpdate = New System.Windows.Forms.Button()
@@ -46,6 +46,7 @@ Partial Class Family_Schedule
         Me.Label4 = New System.Windows.Forms.Label()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
+        Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel2.SuspendLayout()
         Me.Panel1.SuspendLayout()
@@ -62,7 +63,6 @@ Partial Class Family_Schedule
         'btnSave
         '
         Me.btnSave.BackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.btnSave.Image = CType(resources.GetObject("btnSave.Image"), System.Drawing.Image)
         Me.btnSave.Location = New System.Drawing.Point(1, 496)
         Me.btnSave.Name = "btnSave"
         Me.btnSave.Size = New System.Drawing.Size(75, 44)
@@ -72,7 +72,6 @@ Partial Class Family_Schedule
         'btnUpdate
         '
         Me.btnUpdate.BackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.btnUpdate.Image = CType(resources.GetObject("btnUpdate.Image"), System.Drawing.Image)
         Me.btnUpdate.Location = New System.Drawing.Point(270, 496)
         Me.btnUpdate.Name = "btnUpdate"
         Me.btnUpdate.Size = New System.Drawing.Size(75, 44)
@@ -82,7 +81,6 @@ Partial Class Family_Schedule
         'btnDelete
         '
         Me.btnDelete.BackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.btnDelete.Image = CType(resources.GetObject("btnDelete.Image"), System.Drawing.Image)
         Me.btnDelete.Location = New System.Drawing.Point(531, 496)
         Me.btnDelete.Name = "btnDelete"
         Me.btnDelete.Size = New System.Drawing.Size(75, 44)
@@ -262,6 +260,9 @@ Partial Class Family_Schedule
         Me.Label1.TabIndex = 17
         Me.Label1.Text = "Family Schedule"
         '
+        'Timer1
+        '
+        '
         'Family_Schedule
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -309,4 +310,5 @@ Partial Class Family_Schedule
     Friend WithEvents Label4 As Label
     Friend WithEvents Label5 As Label
     Friend WithEvents Label1 As Label
+    Friend WithEvents Timer1 As Timer
 End Class
