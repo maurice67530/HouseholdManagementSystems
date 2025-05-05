@@ -179,6 +179,9 @@
     <EmbeddedResource Include="Chores.resx">
       <DependentUpon>Chores.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Inventory.resx">
+      <DependentUpon>Inventory.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
@@ -190,6 +193,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="PhotoGallery.resx">
       <DependentUpon>PhotoGallery.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Task Management.resx">
+      <DependentUpon>Task Management.vb</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
