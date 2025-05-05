@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-Partial Class Grocery
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
+Partial Class btnDelete
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,12 +20,20 @@ Partial Class Grocery
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Grocery))
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(btnDelete))
         Me.btnHighlight = New System.Windows.Forms.Button()
         Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.DateTimePicker2 = New System.Windows.Forms.DateTimePicker()
+        Me.ComboBox1 = New System.Windows.Forms.ComboBox()
+        Me.Label7 = New System.Windows.Forms.Label()
+        Me.Label8 = New System.Windows.Forms.Label()
+        Me.Label9 = New System.Windows.Forms.Label()
+        Me.TextBox5 = New System.Windows.Forms.TextBox()
+        Me.Label10 = New System.Windows.Forms.Label()
+        Me.DateTimePicker1 = New System.Windows.Forms.DateTimePicker()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label3 = New System.Windows.Forms.Label()
@@ -36,56 +44,115 @@ Partial Class Grocery
         Me.TextBox3 = New System.Windows.Forms.TextBox()
         Me.TextBox4 = New System.Windows.Forms.TextBox()
         Me.DataGridView1 = New System.Windows.Forms.DataGridView()
-        Me.DateTimePicker1 = New System.Windows.Forms.DateTimePicker()
         Me.Label1 = New System.Windows.Forms.Label()
-        Me.btnDelete = New System.Windows.Forms.Button()
-        Me.btnEdit = New System.Windows.Forms.Button()
-        Me.btnSave = New System.Windows.Forms.Button()
         Me.btnFilter = New System.Windows.Forms.Button()
         Me.btnSort = New System.Windows.Forms.Button()
+        Me.Button4 = New System.Windows.Forms.Button()
+        Me.btnEdit = New System.Windows.Forms.Button()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
-        Me.Panel5 = New System.Windows.Forms.Panel()
-        Me.ComboBox2 = New System.Windows.Forms.ComboBox()
-        Me.DateTimePicker2 = New System.Windows.Forms.DateTimePicker()
-        Me.Label8 = New System.Windows.Forms.Label()
-        Me.TextBox6 = New System.Windows.Forms.TextBox()
-        Me.Label7 = New System.Windows.Forms.Label()
-        Me.Label5 = New System.Windows.Forms.Label()
-        Me.Label9 = New System.Windows.Forms.Label()
-        Me.btnRefresh = New System.Windows.Forms.Button()
+        Me.Panel3 = New System.Windows.Forms.Panel()
+        Me.Button2 = New System.Windows.Forms.Button()
+        Me.btnSubmit = New System.Windows.Forms.Button()
+        Me.Button5 = New System.Windows.Forms.Button()
+        Me.Button1 = New System.Windows.Forms.Button()
+        Me.Button3 = New System.Windows.Forms.Button()
         Me.Panel2.SuspendLayout()
         Me.Panel1.SuspendLayout()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.Panel5.SuspendLayout()
+        Me.Panel3.SuspendLayout()
         Me.SuspendLayout()
         '
         'btnHighlight
         '
-        Me.btnHighlight.Image = CType(resources.GetObject("btnHighlight.Image"), System.Drawing.Image)
-        Me.btnHighlight.Location = New System.Drawing.Point(459, 344)
+        Me.btnHighlight.Location = New System.Drawing.Point(475, 396)
         Me.btnHighlight.Name = "btnHighlight"
-        Me.btnHighlight.Size = New System.Drawing.Size(63, 45)
+        Me.btnHighlight.Size = New System.Drawing.Size(75, 31)
         Me.btnHighlight.TabIndex = 55
-        Me.btnHighlight.Text = " "
+        Me.btnHighlight.Text = "HighLight"
         Me.btnHighlight.UseVisualStyleBackColor = True
         '
         'Panel2
         '
         Me.Panel2.BackColor = System.Drawing.SystemColors.InactiveCaption
         Me.Panel2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        Me.Panel2.Controls.Add(Me.Label7)
-        Me.Panel2.Controls.Add(Me.Label5)
-        Me.Panel2.Controls.Add(Me.Label9)
-        Me.Panel2.Controls.Add(Me.Label8)
-        Me.Panel2.Controls.Add(Me.TextBox6)
         Me.Panel2.Controls.Add(Me.DateTimePicker2)
-        Me.Panel2.Controls.Add(Me.ComboBox2)
+        Me.Panel2.Controls.Add(Me.ComboBox1)
+        Me.Panel2.Controls.Add(Me.Label7)
+        Me.Panel2.Controls.Add(Me.Label8)
+        Me.Panel2.Controls.Add(Me.Label9)
+        Me.Panel2.Controls.Add(Me.TextBox5)
+        Me.Panel2.Controls.Add(Me.Label10)
         Me.Panel2.Controls.Add(Me.DateTimePicker1)
-        Me.Panel2.Location = New System.Drawing.Point(282, 65)
+        Me.Panel2.Location = New System.Drawing.Point(338, 65)
         Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(240, 155)
+        Me.Panel2.Size = New System.Drawing.Size(318, 179)
         Me.Panel2.TabIndex = 54
+        '
+        'DateTimePicker2
+        '
+        Me.DateTimePicker2.Location = New System.Drawing.Point(130, 153)
+        Me.DateTimePicker2.Name = "DateTimePicker2"
+        Me.DateTimePicker2.Size = New System.Drawing.Size(177, 20)
+        Me.DateTimePicker2.TabIndex = 41
+        '
+        'ComboBox1
+        '
+        Me.ComboBox1.FormattingEnabled = True
+        Me.ComboBox1.Location = New System.Drawing.Point(130, 73)
+        Me.ComboBox1.Name = "ComboBox1"
+        Me.ComboBox1.Size = New System.Drawing.Size(121, 21)
+        Me.ComboBox1.TabIndex = 40
+        '
+        'Label7
+        '
+        Me.Label7.AutoSize = True
+        Me.Label7.Location = New System.Drawing.Point(42, 42)
+        Me.Label7.Name = "Label7"
+        Me.Label7.Size = New System.Drawing.Size(72, 13)
+        Me.Label7.TabIndex = 28
+        Me.Label7.Text = "Price Per Unit"
+        '
+        'Label8
+        '
+        Me.Label8.AutoSize = True
+        Me.Label8.Location = New System.Drawing.Point(40, 81)
+        Me.Label8.Name = "Label8"
+        Me.Label8.Size = New System.Drawing.Size(37, 13)
+        Me.Label8.TabIndex = 29
+        Me.Label8.Text = "Period"
+        '
+        'Label9
+        '
+        Me.Label9.AutoSize = True
+        Me.Label9.Location = New System.Drawing.Point(40, 120)
+        Me.Label9.Name = "Label9"
+        Me.Label9.Size = New System.Drawing.Size(84, 13)
+        Me.Label9.TabIndex = 30
+        Me.Label9.Text = "Purchased Date"
+        '
+        'TextBox5
+        '
+        Me.TextBox5.Location = New System.Drawing.Point(130, 40)
+        Me.TextBox5.Name = "TextBox5"
+        Me.TextBox5.Size = New System.Drawing.Size(100, 20)
+        Me.TextBox5.TabIndex = 35
+        '
+        'Label10
+        '
+        Me.Label10.AutoSize = True
+        Me.Label10.Location = New System.Drawing.Point(40, 159)
+        Me.Label10.Name = "Label10"
+        Me.Label10.Size = New System.Drawing.Size(61, 13)
+        Me.Label10.TabIndex = 38
+        Me.Label10.Text = "Expiry Date"
+        '
+        'DateTimePicker1
+        '
+        Me.DateTimePicker1.Location = New System.Drawing.Point(130, 112)
+        Me.DateTimePicker1.Name = "DateTimePicker1"
+        Me.DateTimePicker1.Size = New System.Drawing.Size(177, 20)
+        Me.DateTimePicker1.TabIndex = 46
         '
         'Panel1
         '
@@ -99,24 +166,24 @@ Partial Class Grocery
         Me.Panel1.Controls.Add(Me.TextBox2)
         Me.Panel1.Controls.Add(Me.TextBox3)
         Me.Panel1.Controls.Add(Me.TextBox4)
-        Me.Panel1.Location = New System.Drawing.Point(30, 65)
+        Me.Panel1.Location = New System.Drawing.Point(26, 65)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(240, 155)
+        Me.Panel1.Size = New System.Drawing.Size(306, 179)
         Me.Panel1.TabIndex = 53
         '
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(11, 19)
+        Me.Label2.Location = New System.Drawing.Point(40, 43)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(58, 13)
+        Me.Label2.Size = New System.Drawing.Size(55, 13)
         Me.Label2.TabIndex = 24
-        Me.Label2.Text = "Item Name"
+        Me.Label2.Text = "ItemName"
         '
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(11, 55)
+        Me.Label3.Location = New System.Drawing.Point(40, 78)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(39, 13)
         Me.Label3.TabIndex = 25
@@ -125,7 +192,7 @@ Partial Class Grocery
         'Label4
         '
         Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(11, 91)
+        Me.Label4.Location = New System.Drawing.Point(40, 115)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(49, 13)
         Me.Label4.TabIndex = 26
@@ -134,7 +201,7 @@ Partial Class Grocery
         'Label6
         '
         Me.Label6.AutoSize = True
-        Me.Label6.Location = New System.Drawing.Point(11, 127)
+        Me.Label6.Location = New System.Drawing.Point(40, 153)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(26, 13)
         Me.Label6.TabIndex = 27
@@ -142,218 +209,188 @@ Partial Class Grocery
         '
         'TextBox1
         '
-        Me.TextBox1.Location = New System.Drawing.Point(77, 12)
+        Me.TextBox1.Location = New System.Drawing.Point(106, 40)
         Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.Size = New System.Drawing.Size(130, 20)
+        Me.TextBox1.Size = New System.Drawing.Size(134, 20)
         Me.TextBox1.TabIndex = 31
         '
         'TextBox2
         '
-        Me.TextBox2.Location = New System.Drawing.Point(77, 48)
+        Me.TextBox2.Location = New System.Drawing.Point(106, 76)
         Me.TextBox2.Name = "TextBox2"
-        Me.TextBox2.Size = New System.Drawing.Size(130, 20)
+        Me.TextBox2.Size = New System.Drawing.Size(134, 20)
         Me.TextBox2.TabIndex = 32
         '
         'TextBox3
         '
-        Me.TextBox3.Location = New System.Drawing.Point(77, 84)
+        Me.TextBox3.Location = New System.Drawing.Point(106, 112)
         Me.TextBox3.Name = "TextBox3"
-        Me.TextBox3.Size = New System.Drawing.Size(130, 20)
+        Me.TextBox3.Size = New System.Drawing.Size(134, 20)
         Me.TextBox3.TabIndex = 33
         '
         'TextBox4
         '
-        Me.TextBox4.Location = New System.Drawing.Point(77, 120)
+        Me.TextBox4.Location = New System.Drawing.Point(106, 148)
         Me.TextBox4.Name = "TextBox4"
-        Me.TextBox4.Size = New System.Drawing.Size(130, 20)
+        Me.TextBox4.Size = New System.Drawing.Size(134, 20)
         Me.TextBox4.TabIndex = 34
         '
         'DataGridView1
         '
         Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DataGridView1.Location = New System.Drawing.Point(30, 226)
+        Me.DataGridView1.Location = New System.Drawing.Point(26, 250)
         Me.DataGridView1.Name = "DataGridView1"
-        Me.DataGridView1.Size = New System.Drawing.Size(492, 112)
+        Me.DataGridView1.Size = New System.Drawing.Size(630, 138)
         Me.DataGridView1.TabIndex = 51
-        '
-        'DateTimePicker1
-        '
-        Me.DateTimePicker1.Location = New System.Drawing.Point(98, 120)
-        Me.DateTimePicker1.Name = "DateTimePicker1"
-        Me.DateTimePicker1.Size = New System.Drawing.Size(130, 20)
-        Me.DateTimePicker1.TabIndex = 46
         '
         'Label1
         '
         Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.Location = New System.Drawing.Point(180, 4)
+        Me.Label1.Location = New System.Drawing.Point(249, 4)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(139, 31)
         Me.Label1.TabIndex = 44
         Me.Label1.Text = "Grocery Items"
-        '
-        'btnDelete
-        '
-        Me.btnDelete.Image = CType(resources.GetObject("btnDelete.Image"), System.Drawing.Image)
-        Me.btnDelete.Location = New System.Drawing.Point(174, 344)
-        Me.btnDelete.Name = "btnDelete"
-        Me.btnDelete.Size = New System.Drawing.Size(63, 45)
-        Me.btnDelete.TabIndex = 52
-        Me.btnDelete.Text = " "
-        Me.btnDelete.UseVisualStyleBackColor = True
-        '
-        'btnEdit
-        '
-        Me.btnEdit.Image = CType(resources.GetObject("btnEdit.Image"), System.Drawing.Image)
-        Me.btnEdit.Location = New System.Drawing.Point(104, 344)
-        Me.btnEdit.Name = "btnEdit"
-        Me.btnEdit.Size = New System.Drawing.Size(63, 45)
-        Me.btnEdit.TabIndex = 50
-        Me.btnEdit.Text = " "
-        Me.btnEdit.UseVisualStyleBackColor = True
-        '
-        'btnSave
-        '
-        Me.btnSave.Image = CType(resources.GetObject("btnSave.Image"), System.Drawing.Image)
-        Me.btnSave.Location = New System.Drawing.Point(30, 344)
-        Me.btnSave.Name = "btnSave"
-        Me.btnSave.Size = New System.Drawing.Size(63, 45)
-        Me.btnSave.TabIndex = 47
-        Me.btnSave.Text = " "
-        Me.btnSave.UseVisualStyleBackColor = True
+        Me.Label1.TextAlign = System.Drawing.ContentAlignment.TopCenter
         '
         'btnFilter
         '
-        Me.btnFilter.Image = CType(resources.GetObject("btnFilter.Image"), System.Drawing.Image)
-        Me.btnFilter.Location = New System.Drawing.Point(314, 344)
+        Me.btnFilter.Location = New System.Drawing.Point(394, 395)
         Me.btnFilter.Name = "btnFilter"
-        Me.btnFilter.Size = New System.Drawing.Size(63, 45)
-        Me.btnFilter.TabIndex = 49
-        Me.btnFilter.Text = " "
+        Me.btnFilter.Size = New System.Drawing.Size(75, 30)
+        Me.btnFilter.TabIndex = 52
+        Me.btnFilter.Text = "Filter"
         Me.btnFilter.UseVisualStyleBackColor = True
         '
         'btnSort
         '
-        Me.btnSort.Image = CType(resources.GetObject("btnSort.Image"), System.Drawing.Image)
-        Me.btnSort.Location = New System.Drawing.Point(244, 344)
+        Me.btnSort.Location = New System.Drawing.Point(366, 263)
         Me.btnSort.Name = "btnSort"
-        Me.btnSort.Size = New System.Drawing.Size(63, 45)
-        Me.btnSort.TabIndex = 48
+        Me.btnSort.Size = New System.Drawing.Size(75, 34)
+        Me.btnSort.TabIndex = 50
+        Me.btnSort.Text = "Sort"
         Me.btnSort.UseVisualStyleBackColor = True
+        '
+        'Button4
+        '
+        Me.Button4.Location = New System.Drawing.Point(354, 290)
+        Me.Button4.Name = "Button4"
+        Me.Button4.Size = New System.Drawing.Size(75, 34)
+        Me.Button4.TabIndex = 47
+        Me.Button4.Text = "Delete"
+        Me.Button4.UseVisualStyleBackColor = True
+        '
+        'btnEdit
+        '
+        Me.btnEdit.Location = New System.Drawing.Point(338, 250)
+        Me.btnEdit.Name = "btnEdit"
+        Me.btnEdit.Size = New System.Drawing.Size(75, 34)
+        Me.btnEdit.TabIndex = 48
+        Me.btnEdit.Text = "Edit"
+        Me.btnEdit.UseVisualStyleBackColor = True
         '
         'Timer1
         '
         '
-        'Panel5
+        'Panel3
         '
-        Me.Panel5.BackColor = System.Drawing.SystemColors.InactiveCaption
-        Me.Panel5.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        Me.Panel5.Controls.Add(Me.Label1)
-        Me.Panel5.Location = New System.Drawing.Point(30, 17)
-        Me.Panel5.Name = "Panel5"
-        Me.Panel5.Size = New System.Drawing.Size(492, 42)
-        Me.Panel5.TabIndex = 40
+        Me.Panel3.BackColor = System.Drawing.SystemColors.InactiveCaption
+        Me.Panel3.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.Panel3.Controls.Add(Me.Label1)
+        Me.Panel3.ForeColor = System.Drawing.SystemColors.ControlText
+        Me.Panel3.Location = New System.Drawing.Point(26, 12)
+        Me.Panel3.Name = "Panel3"
+        Me.Panel3.Size = New System.Drawing.Size(630, 40)
+        Me.Panel3.TabIndex = 57
         '
-        'ComboBox2
+        'Button2
         '
-        Me.ComboBox2.FormattingEnabled = True
-        Me.ComboBox2.Items.AddRange(New Object() {"Daily", "Weekly", "Monthly"})
-        Me.ComboBox2.Location = New System.Drawing.Point(98, 47)
-        Me.ComboBox2.Name = "ComboBox2"
-        Me.ComboBox2.Size = New System.Drawing.Size(130, 21)
-        Me.ComboBox2.TabIndex = 38
+        Me.Button2.Location = New System.Drawing.Point(556, 396)
+        Me.Button2.Name = "Button2"
+        Me.Button2.Size = New System.Drawing.Size(75, 29)
+        Me.Button2.TabIndex = 50
+        Me.Button2.Text = "Sort"
+        Me.Button2.UseVisualStyleBackColor = True
         '
-        'DateTimePicker2
+        'btnSubmit
         '
-        Me.DateTimePicker2.Location = New System.Drawing.Point(98, 84)
-        Me.DateTimePicker2.Name = "DateTimePicker2"
-        Me.DateTimePicker2.Size = New System.Drawing.Size(130, 20)
-        Me.DateTimePicker2.TabIndex = 47
+        Me.btnSubmit.BackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.btnSubmit.Image = CType(resources.GetObject("btnSubmit.Image"), System.Drawing.Image)
+        Me.btnSubmit.Location = New System.Drawing.Point(20, 393)
+        Me.btnSubmit.Name = "btnSubmit"
+        Me.btnSubmit.Size = New System.Drawing.Size(87, 32)
+        Me.btnSubmit.TabIndex = 63
+        Me.btnSubmit.Text = " "
+        Me.btnSubmit.UseVisualStyleBackColor = False
         '
-        'Label8
+        'Button5
         '
-        Me.Label8.AutoSize = True
-        Me.Label8.Location = New System.Drawing.Point(9, 15)
-        Me.Label8.Name = "Label8"
-        Me.Label8.Size = New System.Drawing.Size(72, 13)
-        Me.Label8.TabIndex = 48
-        Me.Label8.Text = "Price Per Unit"
+        Me.Button5.BackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.Button5.Image = CType(resources.GetObject("Button5.Image"), System.Drawing.Image)
+        Me.Button5.Location = New System.Drawing.Point(114, 393)
+        Me.Button5.Name = "Button5"
+        Me.Button5.Size = New System.Drawing.Size(87, 32)
+        Me.Button5.TabIndex = 62
+        Me.Button5.UseVisualStyleBackColor = False
         '
-        'TextBox6
+        'Button1
         '
-        Me.TextBox6.Location = New System.Drawing.Point(98, 12)
-        Me.TextBox6.Name = "TextBox6"
-        Me.TextBox6.Size = New System.Drawing.Size(130, 20)
-        Me.TextBox6.TabIndex = 49
+        Me.Button1.BackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.Button1.Image = CType(resources.GetObject("Button1.Image"), System.Drawing.Image)
+        Me.Button1.Location = New System.Drawing.Point(208, 394)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(87, 32)
+        Me.Button1.TabIndex = 61
+        Me.Button1.UseVisualStyleBackColor = False
         '
-        'Label7
+        'Button3
         '
-        Me.Label7.AutoSize = True
-        Me.Label7.Location = New System.Drawing.Point(9, 55)
-        Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(37, 13)
-        Me.Label7.TabIndex = 50
-        Me.Label7.Text = "Period"
+        Me.Button3.BackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.Button3.Image = CType(resources.GetObject("Button3.Image"), System.Drawing.Image)
+        Me.Button3.Location = New System.Drawing.Point(301, 395)
+        Me.Button3.Name = "Button3"
+        Me.Button3.Size = New System.Drawing.Size(87, 32)
+        Me.Button3.TabIndex = 60
+        Me.Button3.UseVisualStyleBackColor = False
         '
-        'Label5
-        '
-        Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(9, 126)
-        Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(58, 13)
-        Me.Label5.TabIndex = 52
-        Me.Label5.Text = "ExpiryDate"
-        '
-        'Label9
-        '
-        Me.Label9.AutoSize = True
-        Me.Label9.Location = New System.Drawing.Point(8, 91)
-        Me.Label9.Name = "Label9"
-        Me.Label9.Size = New System.Drawing.Size(84, 13)
-        Me.Label9.TabIndex = 51
-        Me.Label9.Text = "Purchased Date"
-        '
-        'btnRefresh
-        '
-        Me.btnRefresh.Image = CType(resources.GetObject("btnRefresh.Image"), System.Drawing.Image)
-        Me.btnRefresh.Location = New System.Drawing.Point(384, 344)
-        Me.btnRefresh.Name = "btnRefresh"
-        Me.btnRefresh.Size = New System.Drawing.Size(63, 45)
-        Me.btnRefresh.TabIndex = 56
-        Me.btnRefresh.Text = " "
-        Me.btnRefresh.UseVisualStyleBackColor = True
-        '
-        'Grocery
+        'btnDelete
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(547, 398)
-        Me.Controls.Add(Me.btnRefresh)
-        Me.Controls.Add(Me.Panel5)
+        Me.ClientSize = New System.Drawing.Size(677, 478)
+        Me.Controls.Add(Me.Button2)
+        Me.Controls.Add(Me.btnSubmit)
+        Me.Controls.Add(Me.Button5)
+        Me.Controls.Add(Me.Button1)
+        Me.Controls.Add(Me.Button3)
+        Me.Controls.Add(Me.Panel3)
         Me.Controls.Add(Me.btnHighlight)
         Me.Controls.Add(Me.Panel2)
         Me.Controls.Add(Me.Panel1)
-        Me.Controls.Add(Me.btnDelete)
-        Me.Controls.Add(Me.DataGridView1)
-        Me.Controls.Add(Me.btnEdit)
-        Me.Controls.Add(Me.btnSave)
         Me.Controls.Add(Me.btnFilter)
+        Me.Controls.Add(Me.DataGridView1)
         Me.Controls.Add(Me.btnSort)
-        Me.Name = "Grocery"
-        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
+        Me.Controls.Add(Me.Button4)
+        Me.Controls.Add(Me.btnEdit)
+        Me.Name = "btnDelete"
         Me.Text = "Grocery"
         Me.Panel2.ResumeLayout(False)
         Me.Panel2.PerformLayout()
         Me.Panel1.ResumeLayout(False)
         Me.Panel1.PerformLayout()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.Panel5.ResumeLayout(False)
+        Me.Panel3.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
 
     Friend WithEvents btnHighlight As Button
     Friend WithEvents Panel2 As Panel
+    Friend WithEvents Label7 As Label
+    Friend WithEvents Label8 As Label
+    Friend WithEvents Label9 As Label
+    Friend WithEvents TextBox5 As TextBox
+    Friend WithEvents Label10 As Label
     Friend WithEvents Panel1 As Panel
     Friend WithEvents Label2 As Label
     Friend WithEvents Label3 As Label
@@ -363,23 +400,21 @@ Partial Class Grocery
     Friend WithEvents TextBox2 As TextBox
     Friend WithEvents TextBox3 As TextBox
     Friend WithEvents TextBox4 As TextBox
-    Friend WithEvents btnDelete As Button
-    Friend WithEvents DataGridView1 As DataGridView
-    Friend WithEvents btnEdit As Button
-    Friend WithEvents btnSave As Button
     Friend WithEvents btnFilter As Button
+    Friend WithEvents DataGridView1 As DataGridView
     Friend WithEvents btnSort As Button
+    Friend WithEvents Button4 As Button
+    Friend WithEvents btnEdit As Button
     Friend WithEvents DateTimePicker1 As DateTimePicker
     Friend WithEvents Label1 As Label
     Friend WithEvents ToolTip1 As ToolTip
     Friend WithEvents Timer1 As Timer
-    Friend WithEvents Label7 As Label
-    Friend WithEvents Label5 As Label
-    Friend WithEvents Label9 As Label
-    Friend WithEvents Label8 As Label
-    Friend WithEvents TextBox6 As TextBox
     Friend WithEvents DateTimePicker2 As DateTimePicker
-    Friend WithEvents ComboBox2 As ComboBox
-    Friend WithEvents Panel5 As Panel
-    Friend WithEvents btnRefresh As Button
+    Friend WithEvents ComboBox1 As ComboBox
+    Friend WithEvents Panel3 As Panel
+    Friend WithEvents btnSubmit As Button
+    Friend WithEvents Button5 As Button
+    Friend WithEvents Button1 As Button
+    Friend WithEvents Button3 As Button
+    Friend WithEvents Button2 As Button
 End Class

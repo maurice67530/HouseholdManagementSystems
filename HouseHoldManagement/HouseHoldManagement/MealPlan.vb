@@ -5,12 +5,12 @@ Public Class MealPlan
     ' Dim conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
     Public Property conn As New OleDbConnection(connectionString)
     ' Connection string using relative path to the database
-    Public Const connectionString As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Mudzunga\Source\Repos\maurice67530\HouseholdManagementSystems\HMS.accdb;Persist Security Info=False;"
+    Public Const connectionString As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Rinae\Source\Repos\maurice67530\HouseholdManagementSystems\HMS.accdb;Persist Security Info=False;"
 
     Private Sub btnEdit_Click(sender As Object, e As EventArgs) Handles btnEdit.Click
         Try
             Debug.WriteLine("Entering btnEdit_Click")
-            Using conn As New OleDbConnection(Module1.connectionString)
+            Using conn As New OleDbConnection(Rinae.connectionString)
                 conn.Open()
 
                 Dim tablename As String = "MealPlans"
@@ -68,7 +68,7 @@ Public Class MealPlan
         PopulateDataGridView()
 
         ComboBox3.Items.Clear()
-        Using conn As New OleDbConnection(Module1.connectionString)
+        Using conn As New OleDbConnection(Ndivhuwo.connectionString)
             conn.Open()
             ' Query to fetch all ItemName values from Inventory1
             Dim fetchcommand As New OleDbCommand("SELECT ItemName FROM Inventory", conn)
@@ -80,7 +80,7 @@ Public Class MealPlan
             End Using
         End Using
 
-        Module1.ClearControls(Me)
+        'Ndivhuwo.ClearControls(Me)
     End Sub
 
     Private mealPlanData As DataTable
@@ -88,7 +88,7 @@ Public Class MealPlan
 
     ' Load filtered meal plan data based on frequency
     Private Sub LoadFilteredMealPlan()
-        Using dbConnection As New OleDbConnection(Module1.connectionString)
+        Using dbConnection As New OleDbConnection(Rinae.connectionString)
             Dim selectedFilter As String = ComboBox2.SelectedItem?.ToString()
             Dim query As String = "SELECT * FROM MealPlans WHERE Frequency = ? AND 1=1"
             Dim startDate As Date = Date.Today
@@ -121,7 +121,7 @@ Public Class MealPlan
             Debug.WriteLine("Form loading the data")
             Debug.WriteLine("Form loading  data failed")
 
-            Using conn As New OleDbConnection(Module1.connectionString)
+            Using conn As New OleDbConnection(Rinae.connectionString)
                 conn.Open()
 
                 'Update the table name if neccessary
@@ -220,6 +220,7 @@ Public Class MealPlan
             End If
         End If
 
+
     End Sub
 
     Private Sub btnDelete_Click(sender As Object, e As EventArgs) Handles btnDelete.Click
@@ -237,7 +238,7 @@ Public Class MealPlan
             If confirmationResult = DialogResult.Yes Then
                 ' Proceed with deletion  
                 Try
-                    Using conn As New OleDbConnection(Module1.connectionString)
+                    Using conn As New OleDbConnection(Rinae.connectionString)
                         conn.Open()
 
                         ' Create the delete command  
@@ -347,7 +348,7 @@ Public Class MealPlan
     End Sub
     Private Sub btnRefresh_Click(sender As Object, e As EventArgs) Handles btnRefresh.Click
         LoadMealPlanfromDatabase1()
-        Module1.ClearControls(Me)
+        'Rinae.ClearControls(Me)
     End Sub
 
     Private Sub btnSort_Click(sender As Object, e As EventArgs) Handles btnSort.Click
@@ -356,9 +357,14 @@ Public Class MealPlan
     End Sub
 
     Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
+
+
+        ''''''''SAVE''''''''''''''''''
+
+
         Try
             Debug.WriteLine("Entering btnEdit_Click")
-            Using conn As New OleDbConnection(Module1.connectionString)
+            Using conn As New OleDbConnection(Rinae.connectionString)
                 conn.Open()
 
                 Dim tablename As String = "MealPlans"
@@ -392,9 +398,6 @@ Public Class MealPlan
         End Try
 
         Debug.WriteLine("Existing btnSave_Click")
-
-        'Add meal time to family calender
-        Ndamu.AddMealEvent(TextBox4.Text, DateTimePicker1.Text)
 
 
     End Sub
@@ -444,194 +447,7 @@ Public Class MealPlan
         End If
     End Sub
 
-    Private Sub ComboBox3_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ComboBox3.SelectedIndexChanged
-        If ComboBox3.SelectedItem.ToString().StartsWith("juice") Then
-            PictureBox1.Image = System.Drawing.Image.FromFile _
-        ("C:\Users\Zwivhuya\Pictures\Birthdays\download (3).jfif")
-            TextBox3.Text = "C:\Users\Zwivhuya\Pictures\Birthdays\download (3).jfif"
-        End If
-
-        If ComboBox3.SelectedItem.ToString().StartsWith("chicken feet") Then
-            PictureBox1.Image = System.Drawing.Image.FromFile _
-        ("C:\Users\Zwivhuya\Pictures\Birthdays\download (5).jfif")
-            TextBox3.Text = "C:\Users\Zwivhuya\Pictures\Birthdays\download (5).jfif"
-        End If
-
-        If ComboBox3.SelectedItem.ToString().StartsWith("milk") Then
-            PictureBox1.Image = System.Drawing.Image.FromFile _
-        ("C:\Users\Zwivhuya\Pictures\download (4).jfif")
-            TextBox3.Text = "C:\Users\Zwivhuya\Pictures\download (4).jfif"
-        End If
-
-
-        If ComboBox3.SelectedItem.ToString().StartsWith("chicken") Then
-            PictureBox1.Image = System.Drawing.Image.FromFile _
-        ("C:\Users\Zwivhuya\Pictures\Birthdays\download (4).jfif")
-            TextBox3.Text = "C:\Users\Zwivhuya\Pictures\Birthdays\download (4).jfif"
-        End If
-
-        If ComboBox3.SelectedItem.ToString().StartsWith("coke") Then
-            PictureBox1.Image = System.Drawing.Image.FromFile _
-        ("C:\Users\Zwivhuya\Pictures\Birthdays\download (6).jfif")
-            TextBox3.Text = "C:\Users\Zwivhuya\Pictures\Birthdays\download (6).jfif"
-        End If
-
-        Dim Item As String = ComboBox3.SelectedItem.ToString() ' Meal selected from ComboBox2
-
-        Using conn As New OleDbConnection(Module1.connectionString)
-
-
-            conn.Open() ' Fetch item details from Inventory1, including ExpiryDate
-
-
-            Dim fetchcommand As New OleDbCommand("SELECT ItemName, Quantity, expiryDate FROM Inventory WHERE ItemName = ?", conn)
-
-
-            fetchcommand.Parameters.AddWithValue("@ItemName", Item)
-
-            Using Readers As OleDbDataReader = fetchcommand.ExecuteReader()
-
-
-                If Readers.Read() Then
-
-
-                    Dim ItemQuantity As Integer = Convert.ToInt32(Readers("Quantity")) ' Available total quantity
-
-
-                    Dim ExpiryDate As Date
-
-
-                    ' Check if ExpiryDate is valid
-
-
-                    If Date.TryParse(Readers("expiryDate").ToString(), ExpiryDate) Then
-
-
-                        ' If item is expired, show a message and prevent submission
-
-
-                        If ExpiryDate < Date.Today Then
-
-
-                            MessageBox.Show("The Item Is already Expired.", "WARNING", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-
-
-                            Label14.Text = "Available Stock:" & ItemQuantity & "(Expired)"
-
-                            'btnSubmit.Enabled = False
-                            ' MessageBox.Show("The Item Is already Expired & cannot be submitted.", "WARNING", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-                            ' btnSuggestIngredients.Enabled = False
-
-                            Exit Sub
-
-
-                        End If
-
-
-                    End If
-
-
-                    If ItemQuantity > 0 Then
-                        '  btnSubmit.Enabled = True
-                        ' btnSuggestIngredients.Enabled = True
-                        ' Show warning if stock is below 6
-
-
-                        If ItemQuantity < 6 Then
-
-
-                            MessageBox.Show("Warning: Stock is below 6 for this item.", "WARNING", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-
-
-                        End If
-
-
-                        ' Display available stock
-
-
-                        Label14.Text = "Available Stock: " & ItemQuantity.ToString()
-
-
-                        btnSuggest.Enabled = True
-
-                    Else
-
-
-                        ' Item is out of stock
-
-
-                        MessageBox.Show("Item is out of stock.", "WARNING", MessageBoxButtons.OK, MessageBoxIcon.Stop)
-
-
-                        Label14.Text = "Available Stock: " & ItemQuantity.ToString()
-
-
-
-                    End If
-
-
-                End If
-
-
-            End Using
-
-
-        End Using
-
-
-        Dim listItems As New List(Of String)
-
-        ' Open connection again to fetch all items for ListBox excluding expired ones
-
-
-        Using conn As New OleDbConnection(Module1.connectionString)
-
-
-            conn.Open()
-
-
-            Dim fetchcommand As New OleDbCommand("SELECT ItemName, expiryDate FROM Inventory", conn)
-
-            Using Readers As OleDbDataReader = fetchcommand.ExecuteReader()
-
-
-                While Readers.Read()
-
-
-                    Dim itemName As String = Readers("ItemName").ToString()
-
-
-                    Dim itemExpiry As Date
-
-
-                    If Date.TryParse(Readers("expiryDate").ToString(), itemExpiry) Then
-
-
-                        ' Only add non-expired items to the list
-
-
-                        If itemExpiry >= Date.Today Then
-
-
-                            listItems.Add(itemName)
-
-
-                        End If
-
-
-                    End If
-
-
-                End While
-
-
-            End Using
-
-
-        End Using
-
-
+    Private Sub Panel2_Paint(sender As Object, e As PaintEventArgs) Handles Panel2.Paint
 
     End Sub
-
 End Class

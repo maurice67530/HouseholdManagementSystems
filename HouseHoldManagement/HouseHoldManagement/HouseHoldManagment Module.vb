@@ -137,6 +137,32 @@ End Module
 Module Rinae
     Public Const connectionString As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Rinae\Source\Repos\maurice67530\HouseholdManagementSystems\HMS.accdb"
 
+    Public Sub ClearControls(ByVal form As Form)
+
+        'clear TextBoxes
+        For Each ctrl As Control In form.Controls
+            If TypeOf ctrl Is TextBox Then
+                CType(ctrl, TextBox).Clear()
+            End If
+
+
+        Next
+
+        'clear comboBoxes
+        For Each ctrl As Control In form.Controls
+            If TypeOf ctrl Is ComboBox Then
+                CType(ctrl, ComboBox).ResetText()
+            End If
+        Next
+
+        'clear DateTimePicker
+        For Each ctrl As Control In form.Controls
+            If TypeOf ctrl Is DateTimePicker Then
+                CType(ctrl, DateTimePicker).Value = DateTimePicker.MinimumDateTime
+            End If
+        Next
+
+    End Sub
 End Module
 
 '[Dongola] vhasongo silinga
@@ -214,40 +240,6 @@ Module Cruwza
         End Try
     End Sub
 
-    Public Sub FilterGrocery(Period As String) ', DateAdded As DateTime)
-        Dim taskTable As New DataTable
-        Dim conn As New OleDbConnection(connectionString)
-        Try
-            conn.Open()
-            Dim query As String = "SELECT * FROM GroceryItems WHERE 1=1"
-
-            If Not String.IsNullOrEmpty(Period) Then
-                query &= " AND Period = @Period"
-            End If
-
-            'If Not String.IsNullOrEmpty(DateAdded) Then
-            '    query &= " AND DateAdded = @DateAdded"
-            'End If
-
-            Dim command As New OleDb.OleDbCommand(query, conn)
-
-            If Not String.IsNullOrEmpty(Period) Then
-                command.Parameters.AddWithValue("@Period", Period)
-            End If
-
-            'If Not String.IsNullOrEmpty(DateAdded) Then
-            '    command.Parameters.AddWithValue("@DateAdded", DateAdded)
-            'End If
-
-            Dim adapter As New OleDb.OleDbDataAdapter(command)
-            adapter.Fill(taskTable)
-            Grocery.DataGridView1.DataSource = taskTable
-        Catch ex As Exception
-            MsgBox("Error filtering grocery: " & ex.Message, MsgBoxStyle.Critical, "Database Error")
-        Finally
-            conn.Close()
-        End Try
-    End Sub
 End Module
 Module Xiluva
     Public Const connectionString As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Xiluva\Source\Repos\maurice67530\HouseholdManagementSystems\HMS.accdb"
@@ -277,5 +269,11 @@ End Module
 Module Faith
     Public Property conn As New OleDbConnection(connectionString)
     Public Const connectionString As String = " Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Faith\Source\Repos\maurice67530\HouseholdManagementSystems\HMS.accdb"
+End Module
+Module Mulalo
+    Public Property conn As New OleDbConnection(connectionString)
+    Public Const connectionString As String = " Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Austin\Source\Repos\maurice67530\HouseholdManagementSystems\HMS.accdb"
 
 End Module
+
+

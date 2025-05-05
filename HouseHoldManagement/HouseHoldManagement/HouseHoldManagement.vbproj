@@ -6,7 +6,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{DEC8BF09-6D70-450D-B49C-BFCF4DBBB6B8}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <StartupObject>HouseHoldManagement.Task_Management</StartupObject>
+    <StartupObject>HouseHoldManagement.Form3</StartupObject>
     <RootNamespace>HouseHoldManagement</RootNamespace>
     <AssemblyName>HouseHoldManagement</AssemblyName>
     <FileAlignment>512</FileAlignment>
@@ -108,6 +108,12 @@
     <Compile Include="Form2.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Grocery Items.Designer.vb">
+      <DependentUpon>Grocery Items.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Grocery Items.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Grocery.Designer.vb">
       <DependentUpon>Grocery.vb</DependentUpon>
     </Compile>
@@ -185,6 +191,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Family Schedule.resx">
       <DependentUpon>Family Schedule.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form1.resx">
+      <DependentUpon>Form1.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form2.resx">
+      <DependentUpon>Form2.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Grocery Items.resx">
+      <DependentUpon>Grocery Items.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Grocery.resx">
       <DependentUpon>Grocery.vb</DependentUpon>

@@ -241,7 +241,7 @@ Partial Class Chores
         '
         Me.NumericUpDown1.Location = New System.Drawing.Point(83, 50)
         Me.NumericUpDown1.Name = "NumericUpDown1"
-        Me.NumericUpDown1.Size = New System.Drawing.Size(192, 20)
+        Me.NumericUpDown1.Size = New System.Drawing.Size(176, 20)
         Me.NumericUpDown1.TabIndex = 16
         '
         'Label2
@@ -288,21 +288,21 @@ Partial Class Chores
         '
         Me.TXTtitle.Location = New System.Drawing.Point(83, 14)
         Me.TXTtitle.Name = "TXTtitle"
-        Me.TXTtitle.Size = New System.Drawing.Size(192, 20)
+        Me.TXTtitle.Size = New System.Drawing.Size(176, 20)
         Me.TXTtitle.TabIndex = 8
         '
         'DateTimePicker1
         '
         Me.DateTimePicker1.Location = New System.Drawing.Point(83, 123)
         Me.DateTimePicker1.Name = "DateTimePicker1"
-        Me.DateTimePicker1.Size = New System.Drawing.Size(192, 20)
+        Me.DateTimePicker1.Size = New System.Drawing.Size(203, 20)
         Me.DateTimePicker1.TabIndex = 15
         '
         'txtdes
         '
         Me.txtdes.Location = New System.Drawing.Point(83, 86)
         Me.txtdes.Name = "txtdes"
-        Me.txtdes.Size = New System.Drawing.Size(192, 20)
+        Me.txtdes.Size = New System.Drawing.Size(176, 20)
         Me.txtdes.TabIndex = 14
         '
         'Label9
@@ -361,7 +361,7 @@ Partial Class Chores
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(676, 449)
+        Me.ClientSize = New System.Drawing.Size(672, 449)
         Me.Controls.Add(Me.Label10)
         Me.Controls.Add(Me.Button9)
         Me.Controls.Add(Me.Button8)
@@ -377,6 +377,7 @@ Partial Class Chores
         Me.Controls.Add(Me.Panel2)
         Me.Controls.Add(Me.Panel1)
         Me.Name = "Chores"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Chores"
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel2.ResumeLayout(False)

@@ -1,8 +1,8 @@
 ﻿Imports System.Data.OleDb
 Public Class Register
-    Public Property conn As New OleDbConnection(Xiluva.connectionString)
+    Public Property conn As New OleDbConnection(Rinae.connectionString)
 
-    Public Const connectionString As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Xiluva\Source\Repos\maurice67530\HouseholdManagementSystems\HMS.accdb"
+    Public Const connectionString As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Rinae\Source\Repos\maurice67530\HouseholdManagementSystems\HMS.accdb"
 
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
 

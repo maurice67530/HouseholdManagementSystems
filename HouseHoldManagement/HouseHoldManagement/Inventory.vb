@@ -5,7 +5,7 @@ Public Class Inventory
             '  Dim dataTable As DataTable = HouseHold.GetData("SELECT * FROM Expense")
             ' DataGridView1.DataSource = DataTable
             Debug.WriteLine("Populate Datagridview: Datagridview populated successfully.")
-            Using conn As New OleDbConnection(Cruwza.connectionString)
+            Using conn As New OleDbConnection(Rinae.connectionString)
                 conn.Open()
 
                 Dim tableName As String = "Inventory"
@@ -25,7 +25,7 @@ Public Class Inventory
     End Sub
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         Try
-            Using conn As New OleDbConnection(Cruwza.connectionString)
+            Using conn As New OleDbConnection(Rinae.connectionString)
 
                 conn.Open()
                 Dim cmd As New OleDbCommand($"INSERT INTO Inventory ([ItemName], [Description], [Quantity], [Category], [ReorderLevel], [PricePerUnit], [DateAdded], [ExpiryDate], [Unit]) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)", conn)
@@ -81,7 +81,7 @@ Public Class Inventory
             Dim ExpiryDate As String = DateTimePicker1.Value
             Dim Unit As String = ComboBox2.Text
 
-            Using conn As New OleDbConnection(Cruwza.connectionString)
+            Using conn As New OleDbConnection(Rinae.connectionString)
 
                 conn.Open()
 
@@ -145,7 +145,7 @@ Public Class Inventory
                     Debug.WriteLine("Format errors in button delete")
                     Debug.WriteLine("Deleting data: Data delected")
                     Debug.WriteLine("Stack Trace: {ex.StackTrace}")
-                    Using conn As New OleDbConnection(Cruwza.connectionString)
+                    Using conn As New OleDbConnection(Rinae.connectionString)
                         conn.Open()
 
                         ' Create the delete command  

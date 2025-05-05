@@ -185,9 +185,9 @@ Partial Class Task_Management
         Me.Button6.BackColor = System.Drawing.SystemColors.ActiveCaption
         Me.Button6.BackgroundImage = CType(resources.GetObject("Button6.BackgroundImage"), System.Drawing.Image)
         Me.Button6.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
-        Me.Button6.Location = New System.Drawing.Point(382, 293)
+        Me.Button6.Location = New System.Drawing.Point(426, 293)
         Me.Button6.Name = "Button6"
-        Me.Button6.Size = New System.Drawing.Size(100, 35)
+        Me.Button6.Size = New System.Drawing.Size(75, 35)
         Me.Button6.TabIndex = 52
         Me.Button6.UseVisualStyleBackColor = False
         '
@@ -196,9 +196,9 @@ Partial Class Task_Management
         Me.Button4.BackColor = System.Drawing.SystemColors.ActiveCaption
         Me.Button4.BackgroundImage = CType(resources.GetObject("Button4.BackgroundImage"), System.Drawing.Image)
         Me.Button4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
-        Me.Button4.Location = New System.Drawing.Point(268, 293)
+        Me.Button4.Location = New System.Drawing.Point(345, 293)
         Me.Button4.Name = "Button4"
-        Me.Button4.Size = New System.Drawing.Size(108, 35)
+        Me.Button4.Size = New System.Drawing.Size(75, 35)
         Me.Button4.TabIndex = 50
         Me.Button4.UseVisualStyleBackColor = False
         '
@@ -258,9 +258,9 @@ Partial Class Task_Management
         '
         Me.Button8.BackColor = System.Drawing.SystemColors.ActiveCaption
         Me.Button8.Image = CType(resources.GetObject("Button8.Image"), System.Drawing.Image)
-        Me.Button8.Location = New System.Drawing.Point(488, 293)
+        Me.Button8.Location = New System.Drawing.Point(507, 293)
         Me.Button8.Name = "Button8"
-        Me.Button8.Size = New System.Drawing.Size(93, 35)
+        Me.Button8.Size = New System.Drawing.Size(74, 35)
         Me.Button8.TabIndex = 55
         Me.Button8.UseVisualStyleBackColor = False
         '
@@ -280,6 +280,7 @@ Partial Class Task_Management
         Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.Label1)
         Me.Name = "Task_Management"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Task Manangement"
         Me.Panel2.ResumeLayout(False)
         Me.Panel2.PerformLayout()

@@ -3,7 +3,7 @@ Imports System.Data.OleDb
 Public Class Personnel
     ' Connection to the database
     'Dim conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
-    Dim connec As New OleDbConnection(Rasta.connectionString)
+    Dim connec As New OleDbConnection(Rinae.connectionString)
 
     ' Create a ToolTip object
     Private toolTip As New ToolTip()
@@ -28,7 +28,7 @@ Public Class Personnel
         Try
             Debug.WriteLine("User confirmed btnSubmit")
 
-            Using connec As New OleDbConnection(Rasta.connectionString)
+            Using connec As New OleDbConnection(Rinae.connectionString)
                 connec.Open()
 
                 ' Update the table name if necessary  
@@ -189,7 +189,7 @@ Public Class Personnel
         Try
             Debug.WriteLine("User confirmed btnEdit")
 
-            Using connec As New OleDbConnection(Rasta.connectionString)
+            Using connec As New OleDbConnection(Rinae.connectionString)
                 connec.Open()
 
 
@@ -395,6 +395,10 @@ Public Class Personnel
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         LoadData()
+    End Sub
+
+    Private Sub Label13_Click(sender As Object, e As EventArgs) Handles Label13.Click
+
     End Sub
 End Class
 
