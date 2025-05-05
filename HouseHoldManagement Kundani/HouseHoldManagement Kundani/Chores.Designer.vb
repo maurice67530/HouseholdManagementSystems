@@ -52,6 +52,7 @@ Partial Class Chores
         Me.TXTtitle = New System.Windows.Forms.TextBox()
         Me.DateTimePicker1 = New System.Windows.Forms.DateTimePicker()
         Me.txtdes = New System.Windows.Forms.TextBox()
+        Me.Label10 = New System.Windows.Forms.Label()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel2.SuspendLayout()
         Me.Panel1.SuspendLayout()
@@ -345,11 +346,21 @@ Partial Class Chores
         Me.txtdes.Size = New System.Drawing.Size(176, 20)
         Me.txtdes.TabIndex = 14
         '
+        'Label10
+        '
+        Me.Label10.AutoSize = True
+        Me.Label10.ForeColor = System.Drawing.Color.Maroon
+        Me.Label10.Location = New System.Drawing.Point(12, 261)
+        Me.Label10.Name = "Label10"
+        Me.Label10.Size = New System.Drawing.Size(0, 13)
+        Me.Label10.TabIndex = 62
+        '
         'Chores
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(686, 446)
+        Me.Controls.Add(Me.Label10)
         Me.Controls.Add(Me.Button9)
         Me.Controls.Add(Me.Button8)
         Me.Controls.Add(Me.Button7)
@@ -405,4 +416,5 @@ Partial Class Chores
     Friend WithEvents TXTtitle As TextBox
     Friend WithEvents DateTimePicker1 As DateTimePicker
     Friend WithEvents txtdes As TextBox
+    Friend WithEvents Label10 As Label
 End Class
