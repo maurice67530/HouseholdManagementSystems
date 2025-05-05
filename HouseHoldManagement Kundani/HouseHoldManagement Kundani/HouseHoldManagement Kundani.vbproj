@@ -192,6 +192,9 @@
     <EmbeddedResource Include="Personnel.resx">
       <DependentUpon>Personnel.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="PhotoGallery.resx">
+      <DependentUpon>PhotoGallery.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Task Management.resx">
       <DependentUpon>Task Management.vb</DependentUpon>
     </EmbeddedResource>

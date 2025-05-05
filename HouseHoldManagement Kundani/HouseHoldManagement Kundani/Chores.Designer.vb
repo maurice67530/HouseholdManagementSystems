@@ -72,7 +72,7 @@ Partial Class Chores
         '
         Me.Button8.BackColor = System.Drawing.SystemColors.ActiveCaption
         Me.Button8.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
-        Me.Button8.Location = New System.Drawing.Point(542, 242)
+        Me.Button8.Location = New System.Drawing.Point(391, 242)
         Me.Button8.Name = "Button8"
         Me.Button8.Size = New System.Drawing.Size(87, 32)
         Me.Button8.TabIndex = 60
