@@ -22,7 +22,6 @@ Partial Class Chores
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Chores))
         Me.Button9 = New System.Windows.Forms.Button()
         Me.Button8 = New System.Windows.Forms.Button()
         Me.Button7 = New System.Windows.Forms.Button()
@@ -62,7 +61,6 @@ Partial Class Chores
         'Button9
         '
         Me.Button9.BackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.Button9.BackgroundImage = CType(resources.GetObject("Button9.BackgroundImage"), System.Drawing.Image)
         Me.Button9.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
         Me.Button9.Location = New System.Drawing.Point(205, 242)
         Me.Button9.Name = "Button9"
@@ -73,9 +71,8 @@ Partial Class Chores
         'Button8
         '
         Me.Button8.BackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.Button8.BackgroundImage = CType(resources.GetObject("Button8.BackgroundImage"), System.Drawing.Image)
         Me.Button8.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
-        Me.Button8.Location = New System.Drawing.Point(391, 242)
+        Me.Button8.Location = New System.Drawing.Point(542, 242)
         Me.Button8.Name = "Button8"
         Me.Button8.Size = New System.Drawing.Size(87, 32)
         Me.Button8.TabIndex = 60
@@ -84,7 +81,6 @@ Partial Class Chores
         'Button7
         '
         Me.Button7.BackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.Button7.BackgroundImage = CType(resources.GetObject("Button7.BackgroundImage"), System.Drawing.Image)
         Me.Button7.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
         Me.Button7.Location = New System.Drawing.Point(298, 242)
         Me.Button7.Name = "Button7"
@@ -114,7 +110,6 @@ Partial Class Chores
         'Button6
         '
         Me.Button6.BackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.Button6.Image = CType(resources.GetObject("Button6.Image"), System.Drawing.Image)
         Me.Button6.Location = New System.Drawing.Point(585, 405)
         Me.Button6.Name = "Button6"
         Me.Button6.Size = New System.Drawing.Size(87, 32)
@@ -125,7 +120,6 @@ Partial Class Chores
         'Button5
         '
         Me.Button5.BackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.Button5.Image = CType(resources.GetObject("Button5.Image"), System.Drawing.Image)
         Me.Button5.Location = New System.Drawing.Point(492, 405)
         Me.Button5.Name = "Button5"
         Me.Button5.Size = New System.Drawing.Size(87, 32)
@@ -135,7 +129,6 @@ Partial Class Chores
         'Button4
         '
         Me.Button4.BackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.Button4.Image = CType(resources.GetObject("Button4.Image"), System.Drawing.Image)
         Me.Button4.Location = New System.Drawing.Point(399, 405)
         Me.Button4.Name = "Button4"
         Me.Button4.Size = New System.Drawing.Size(87, 32)
@@ -145,7 +138,6 @@ Partial Class Chores
         'Button3
         '
         Me.Button3.BackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.Button3.Image = CType(resources.GetObject("Button3.Image"), System.Drawing.Image)
         Me.Button3.Location = New System.Drawing.Point(202, 405)
         Me.Button3.Name = "Button3"
         Me.Button3.Size = New System.Drawing.Size(87, 32)
@@ -155,7 +147,6 @@ Partial Class Chores
         'Button2
         '
         Me.Button2.BackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.Button2.Image = CType(resources.GetObject("Button2.Image"), System.Drawing.Image)
         Me.Button2.Location = New System.Drawing.Point(109, 405)
         Me.Button2.Name = "Button2"
         Me.Button2.Size = New System.Drawing.Size(87, 32)
@@ -165,7 +156,6 @@ Partial Class Chores
         'Button1
         '
         Me.Button1.BackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.Button1.Image = CType(resources.GetObject("Button1.Image"), System.Drawing.Image)
         Me.Button1.Location = New System.Drawing.Point(15, 405)
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(88, 32)

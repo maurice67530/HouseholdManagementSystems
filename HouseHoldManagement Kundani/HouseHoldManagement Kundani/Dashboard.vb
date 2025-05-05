@@ -1,5 +1,7 @@
 ﻿Imports System.IO
 Imports System.Data.OleDb
+Imports System.Net.Mail
+Imports System.Net
 Public Class Dashboard
     Public Const connectionString As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Rinae\Source\Repos\maurice67530\HouseholdManagementSystems\HMS.accdb"
     Private Sub Dashboard_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -25,6 +27,8 @@ Public Class Dashboard
         ToolTip1.SetToolTip(Button8, "PhotoGallery")
         ToolTip1.SetToolTip(Button6, "Family Event")
 
+        Timer1.Start()
+        Timer1.Interval = 3000
 
     End Sub
 
@@ -369,4 +373,244 @@ Public Class Dashboard
     Private Sub Button5_Click_1(sender As Object, e As EventArgs) Handles Button5.Click
         Personnel.ShowDialog()
     End Sub
+
+    Private Function CheckExpense() As Boolean
+
+        Dim BudgetLimit As Decimal = 150169
+
+        Dim TotalExpense As Decimal = 0
+
+
+        Try
+
+            Dim Conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
+
+            Conn.Open()
+
+            Dim cmd As New OleDbCommand("SELECT Amount From Expense", Conn)
+
+            Dim Reader As OleDbDataReader = cmd.ExecuteReader
+
+            While Reader.Read()
+
+                TotalExpense += Convert.ToDecimal(Reader("Amount"))
+
+            End While
+
+            Reader.Close()
+
+            Conn.Close()
+
+            If TotalExpense >= (BudgetLimit * 0.8D) Then
+
+                MessageBox.Show("Alert! you have used more that 80% of your budget", "Budget Alert", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+
+            End If
+
+
+            ' Send the email with the expired items
+
+            Dim messageBody As String = $"Alert! Budget Alert:{vbCrLf}{vbCrLf}{BudgetLimit}"
+
+            SendEmail("nethonondamudzunga45@gmail.com", "Budget Alert", messageBody)
+
+            ' Notify that the email was sent
+
+            MessageBox.Show("Budget Alert Alert Sent Successfully!", "Budget Alert", MessageBoxButtons.OK, MessageBoxIcon.Information)
+
+        Catch ex As Exception
+
+        End Try
+
+        Return False
+
+    End Function
+
+    ' Function to check expired groceries from Inventory table
+
+    Private Function CheckOverdueChores() As Boolean
+
+        Dim overdueChore As String = ""
+
+        ' Modify the query to retrieve expired groceries
+
+        Dim query As String = "SELECT Status, DueDate FROM Chores" ' Adjust query based on your table
+
+        Using connection As New OleDbConnection(HouseHoldManagment_Module.connectionString)
+
+            Try
+
+                connection.Open()
+
+                Using command As New OleDbCommand(query, connection)
+
+                    Using reader As OleDbDataReader = command.ExecuteReader()
+
+                        While reader.Read()
+
+                            Dim Status As String = reader("Status").ToString()
+
+                            Dim DueDate As Date = Convert.ToDateTime(reader("DueDate"))
+
+                            overdueChore &= $"{Status} Due on {DueDate.ToShortDateString()}" & vbCrLf
+
+                        End While
+
+                    End Using
+
+                End Using
+
+            Catch ex As Exception
+
+                'MessageBox.Show("Error retrieving expired overdueChore: " & ex.Message)
+
+                Return False
+
+            End Try
+
+        End Using
+
+        If Not String.IsNullOrEmpty(overdueChore) Then
+
+            ' Display MessageBox showing expired items
+
+            MessageBox.Show($"overdueChores:{vbCrLf}{vbCrLf}{overdueChore}", "overdueChore", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+
+
+            ' Send the email with the expired items
+
+            Dim messageBody As String = $"Alert! overdueChore:{vbCrLf}{vbCrLf}{overdueChore}"
+
+            SendEmail("nethonondamudzunga45@gmail.com", "overdueChore Alert", messageBody)
+
+            ' Notify that the email was sent
+
+            MessageBox.Show("overdueChore Alert Sent Successfully!", "overdueChore", MessageBoxButtons.OK, MessageBoxIcon.Information)
+
+        End If
+
+
+        Return False
+
+    End Function
+
+
+    ' Function to check expired groceries from Inventory table
+
+    Private Function CheckExpiredGroceries() As Boolean
+
+        Dim expiredGroceries As String = ""
+
+        ' Modify the query to retrieve expired groceries
+
+        Dim query As String = "SELECT ItemName, ExpiryDate FROM Inventory" ' Adjust query based on your table
+
+        Using connection As New OleDbConnection(HouseHoldManagment_Module.connectionString)
+
+            Try
+
+                connection.Open()
+
+                Using command As New OleDbCommand(query, connection)
+
+                    Using reader As OleDbDataReader = command.ExecuteReader()
+
+                        While reader.Read()
+
+                            Dim itemName As String = reader("ItemName").ToString()
+
+                            Dim expiryDate As Date = Convert.ToDateTime(reader("ExpiryDate"))
+
+                            expiredGroceries &= $"{itemName} expired on {expiryDate.ToShortDateString()}" & vbCrLf
+
+                        End While
+
+                    End Using
+
+                End Using
+
+            Catch ex As Exception
+
+                MessageBox.Show("Error retrieving expired groceries: " & ex.Message)
+
+                Return False
+
+            End Try
+
+        End Using
+
+        If Not String.IsNullOrEmpty(expiredGroceries) Then
+
+            ' Display MessageBox showing expired items
+
+            MessageBox.Show($"The following grocery items have expired:{vbCrLf}{vbCrLf}{expiredGroceries}", "Expired Groceries", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+
+
+            ' Send the email with the expired items
+
+            Dim messageBody As String = $"Alert! The following grocery items have expired:{vbCrLf}{vbCrLf}{expiredGroceries}"
+
+            SendEmail("nethonondamudzunga45@gmail.com", "Grocery Expiry Alert", messageBody)
+
+            ' Notify that the email was sent
+
+            MessageBox.Show("Expired Groceries Alert Sent Successfully!", "Expired Groceries", MessageBoxButtons.OK, MessageBoxIcon.Information)
+
+        End If
+
+
+        Return False
+
+    End Function
+
+    ' Function to send email
+
+    Private Sub SendEmail(recipient As String, subject As String, messageBody As String)
+
+        Try
+
+            ' Configure SMTP client
+
+            Dim smtpClient As New SmtpClient("smtp.gmail.com") With {.Port = 587, .EnableSsl = True, .Credentials = New NetworkCredential("nethonondamudzunga45@gmail.com", "slwo xavj lool amzu")}
+
+
+            ' Create the email message
+
+            Dim mailMessage As New MailMessage() With {.From = New MailAddress("nethonondamudzunga45@gmail.com"), .Subject = subject, .Body = messageBody}
+
+
+
+            ' Add recipient
+
+            mailMessage.To.Add(recipient)
+
+            ' Send the email
+
+            smtpClient.Send(mailMessage)
+
+        Catch ex As Exception
+
+            MessageBox.Show("Error sending email: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+
+        End Try
+
+    End Sub
+
+    Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
+
+        Timer1.Stop()
+
+        CheckExpiredGroceries()
+
+        CheckOverdueChores()
+
+        CheckExpense()
+
+    End Sub
+
+
+
+
+
+
 End Class
