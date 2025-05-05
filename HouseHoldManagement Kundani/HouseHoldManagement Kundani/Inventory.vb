@@ -224,11 +224,10 @@ Public Class Inventory
         Private Sub Button8_Click(sender As Object, e As EventArgs) Handles Button8.Click
             LoadInventorydataFromDatabase()
         End Sub
-        Private Sub Button5_Click(sender As Object, e As EventArgs) Handles Button5.Click
-            HighlightExpiredItems()
-        End Sub
-
-        Private Sub DataGridView1_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridView1.CellContentClick
+    Private Sub Button5_Click(sender As Object, e As EventArgs) Handles Button5.Click
+        HighlightExpiredItems()
+    End Sub
+    Private Sub DataGridView1_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridView1.CellContentClick
             ' Initially, mark expired groceries in red
             For Each row As DataGridViewRow In DataGridView1.Rows
                 If Not row.IsNewRow Then
