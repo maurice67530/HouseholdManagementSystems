@@ -110,6 +110,11 @@
     <Compile Include="Grocery Items.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="HMSDataSet.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>HMSDataSet.xsd</DependentUpon>
+    </Compile>
     <Compile Include="Household Class.vb" />
     <Compile Include="HouseHoldManagement Module.vb" />
     <Compile Include="Inventory.Designer.vb">
@@ -203,6 +208,17 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <None Include="HMSDataSet.xsc">
+      <DependentUpon>HMSDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="HMSDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>HMSDataSet.Designer.vb</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="HMSDataSet.xss">
+      <DependentUpon>HMSDataSet.xsd</DependentUpon>
+    </None>
     <None Include="My Project\Application.myapp">
       <Generator>MyApplicationCodeGenerator</Generator>
       <LastGenOutput>Application.Designer.vb</LastGenOutput>
