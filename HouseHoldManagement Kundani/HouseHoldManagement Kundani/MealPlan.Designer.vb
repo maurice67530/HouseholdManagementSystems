@@ -77,7 +77,6 @@ Partial Class MealPlan
         '
         'btnSuggest
         '
-        Me.btnSuggest.BackgroundImage = CType(resources.GetObject("btnSuggest.BackgroundImage"), System.Drawing.Image)
         Me.btnSuggest.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.btnSuggest.Image = CType(resources.GetObject("btnSuggest.Image"), System.Drawing.Image)
         Me.btnSuggest.Location = New System.Drawing.Point(570, 495)
