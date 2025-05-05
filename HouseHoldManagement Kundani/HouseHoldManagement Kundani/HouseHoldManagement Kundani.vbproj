@@ -182,6 +182,9 @@
     <EmbeddedResource Include="Expense.resx">
       <DependentUpon>Expense.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Inventory.resx">
+      <DependentUpon>Inventory.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
