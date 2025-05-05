@@ -193,8 +193,8 @@ Partial Class Task_Management
         'Button6
         '
         Me.Button6.BackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.Button6.BackgroundImage = CType(resources.GetObject("Button6.BackgroundImage"), System.Drawing.Image)
         Me.Button6.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.Button6.Image = CType(resources.GetObject("Button6.Image"), System.Drawing.Image)
         Me.Button6.Location = New System.Drawing.Point(325, 309)
         Me.Button6.Name = "Button6"
         Me.Button6.Size = New System.Drawing.Size(75, 35)
@@ -204,8 +204,8 @@ Partial Class Task_Management
         'Button4
         '
         Me.Button4.BackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.Button4.BackgroundImage = CType(resources.GetObject("Button4.BackgroundImage"), System.Drawing.Image)
         Me.Button4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.Button4.Image = CType(resources.GetObject("Button4.Image"), System.Drawing.Image)
         Me.Button4.Location = New System.Drawing.Point(235, 309)
         Me.Button4.Name = "Button4"
         Me.Button4.Size = New System.Drawing.Size(75, 35)
@@ -224,8 +224,8 @@ Partial Class Task_Management
         'Button3
         '
         Me.Button3.BackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.Button3.BackgroundImage = CType(resources.GetObject("Button3.BackgroundImage"), System.Drawing.Image)
         Me.Button3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.Button3.Image = CType(resources.GetObject("Button3.Image"), System.Drawing.Image)
         Me.Button3.Location = New System.Drawing.Point(145, 309)
         Me.Button3.Name = "Button3"
         Me.Button3.Size = New System.Drawing.Size(75, 35)
@@ -235,8 +235,8 @@ Partial Class Task_Management
         'Button2
         '
         Me.Button2.BackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.Button2.BackgroundImage = CType(resources.GetObject("Button2.BackgroundImage"), System.Drawing.Image)
         Me.Button2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.Button2.Image = CType(resources.GetObject("Button2.Image"), System.Drawing.Image)
         Me.Button2.Location = New System.Drawing.Point(75, 309)
         Me.Button2.Name = "Button2"
         Me.Button2.Size = New System.Drawing.Size(64, 35)
@@ -246,8 +246,8 @@ Partial Class Task_Management
         'Button1
         '
         Me.Button1.BackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.Button1.BackgroundImage = CType(resources.GetObject("Button1.BackgroundImage"), System.Drawing.Image)
         Me.Button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
+        Me.Button1.Image = CType(resources.GetObject("Button1.Image"), System.Drawing.Image)
         Me.Button1.Location = New System.Drawing.Point(12, 309)
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(57, 35)

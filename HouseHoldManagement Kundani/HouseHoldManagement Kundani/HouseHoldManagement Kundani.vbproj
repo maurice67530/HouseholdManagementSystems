@@ -179,8 +179,8 @@
     <EmbeddedResource Include="Chores.resx">
       <DependentUpon>Chores.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Expense.resx">
-      <DependentUpon>Expense.vb</DependentUpon>
+    <EmbeddedResource Include="Inventory.resx">
+      <DependentUpon>Inventory.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Inventory.resx">
       <DependentUpon>Inventory.vb</DependentUpon>
@@ -196,6 +196,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="PhotoGallery.resx">
       <DependentUpon>PhotoGallery.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Task Management.resx">
+      <DependentUpon>Task Management.vb</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
