@@ -189,6 +189,9 @@
     <EmbeddedResource Include="Personnel.resx">
       <DependentUpon>Personnel.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Task Management.resx">
+      <DependentUpon>Task Management.vb</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <None Include="My Project\Application.myapp">
