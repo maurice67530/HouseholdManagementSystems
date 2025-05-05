@@ -109,8 +109,6 @@
     <Compile Include="Grocery Items.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Household Class.vb" />
-    <Compile Include="HouseHoldManagement Module.vb" />
     <Compile Include="Inventory.Designer.vb">
       <DependentUpon>Inventory.vb</DependentUpon>
     </Compile>
@@ -176,8 +174,8 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Chores.resx">
-      <DependentUpon>Chores.vb</DependentUpon>
+    <EmbeddedResource Include="Inventory.resx">
+      <DependentUpon>Inventory.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
@@ -185,8 +183,8 @@
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="PhotoGallery.resx">
-      <DependentUpon>PhotoGallery.vb</DependentUpon>
+    <EmbeddedResource Include="Task Management.resx">
+      <DependentUpon>Task Management.vb</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
