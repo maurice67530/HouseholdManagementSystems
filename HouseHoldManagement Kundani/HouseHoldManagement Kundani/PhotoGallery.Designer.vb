@@ -24,17 +24,8 @@ Partial Class PhotoGallery
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(PhotoGallery))
-        Me.Button7 = New System.Windows.Forms.Button()
-        Me.Button8 = New System.Windows.Forms.Button()
-        Me.Button6 = New System.Windows.Forms.Button()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.Label10 = New System.Windows.Forms.Label()
-        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
-        Me.Button5 = New System.Windows.Forms.Button()
-        Me.Button4 = New System.Windows.Forms.Button()
-        Me.Button3 = New System.Windows.Forms.Button()
-        Me.Button2 = New System.Windows.Forms.Button()
-        Me.Button1 = New System.Windows.Forms.Button()
         Me.Panel2 = New System.Windows.Forms.Panel()
         Me.Label11 = New System.Windows.Forms.Label()
         Me.TextBox5 = New System.Windows.Forms.TextBox()
@@ -58,44 +49,20 @@ Partial Class PhotoGallery
         Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
         Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
+        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
+        Me.Button6 = New System.Windows.Forms.Button()
+        Me.Button4 = New System.Windows.Forms.Button()
+        Me.Button7 = New System.Windows.Forms.Button()
+        Me.Button1 = New System.Windows.Forms.Button()
+        Me.Button2 = New System.Windows.Forms.Button()
+        Me.Button8 = New System.Windows.Forms.Button()
+        Me.Button3 = New System.Windows.Forms.Button()
+        Me.Button5 = New System.Windows.Forms.Button()
         Me.Panel1.SuspendLayout()
-        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel2.SuspendLayout()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
-        '
-        'Button7
-        '
-        Me.Button7.BackColor = System.Drawing.Color.Silver
-        Me.Button7.Image = CType(resources.GetObject("Button7.Image"), System.Drawing.Image)
-        Me.Button7.Location = New System.Drawing.Point(331, 403)
-        Me.Button7.Name = "Button7"
-        Me.Button7.Size = New System.Drawing.Size(63, 61)
-        Me.Button7.TabIndex = 144
-        Me.Button7.Text = " "
-        Me.Button7.UseVisualStyleBackColor = False
-        '
-        'Button8
-        '
-        Me.Button8.BackColor = System.Drawing.Color.Silver
-        Me.Button8.Image = CType(resources.GetObject("Button8.Image"), System.Drawing.Image)
-        Me.Button8.Location = New System.Drawing.Point(252, 403)
-        Me.Button8.Name = "Button8"
-        Me.Button8.Size = New System.Drawing.Size(63, 61)
-        Me.Button8.TabIndex = 142
-        Me.Button8.Text = " "
-        Me.Button8.UseVisualStyleBackColor = False
-        '
-        'Button6
-        '
-        Me.Button6.BackColor = System.Drawing.Color.Silver
-        Me.Button6.Image = CType(resources.GetObject("Button6.Image"), System.Drawing.Image)
-        Me.Button6.Location = New System.Drawing.Point(568, 403)
-        Me.Button6.Name = "Button6"
-        Me.Button6.Size = New System.Drawing.Size(63, 61)
-        Me.Button6.TabIndex = 143
-        Me.Button6.Text = " "
-        Me.Button6.UseVisualStyleBackColor = False
         '
         'Panel1
         '
@@ -117,73 +84,6 @@ Partial Class PhotoGallery
         Me.Label10.Size = New System.Drawing.Size(10, 13)
         Me.Label10.TabIndex = 106
         Me.Label10.Text = " "
-        '
-        'PictureBox1
-        '
-        Me.PictureBox1.BackColor = System.Drawing.SystemColors.Control
-        Me.PictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        Me.PictureBox1.ImageLocation = ""
-        Me.PictureBox1.Location = New System.Drawing.Point(14, 12)
-        Me.PictureBox1.Name = "PictureBox1"
-        Me.PictureBox1.Size = New System.Drawing.Size(262, 186)
-        Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
-        Me.PictureBox1.TabIndex = 93
-        Me.PictureBox1.TabStop = False
-        '
-        'Button5
-        '
-        Me.Button5.BackColor = System.Drawing.Color.Silver
-        Me.Button5.Image = CType(resources.GetObject("Button5.Image"), System.Drawing.Image)
-        Me.Button5.Location = New System.Drawing.Point(489, 403)
-        Me.Button5.Name = "Button5"
-        Me.Button5.Size = New System.Drawing.Size(63, 61)
-        Me.Button5.TabIndex = 140
-        Me.Button5.Text = " "
-        Me.Button5.UseVisualStyleBackColor = False
-        '
-        'Button4
-        '
-        Me.Button4.BackColor = System.Drawing.Color.Silver
-        Me.Button4.Image = CType(resources.GetObject("Button4.Image"), System.Drawing.Image)
-        Me.Button4.Location = New System.Drawing.Point(173, 403)
-        Me.Button4.Name = "Button4"
-        Me.Button4.Size = New System.Drawing.Size(63, 61)
-        Me.Button4.TabIndex = 139
-        Me.Button4.Text = " "
-        Me.Button4.UseVisualStyleBackColor = False
-        '
-        'Button3
-        '
-        Me.Button3.BackColor = System.Drawing.Color.Silver
-        Me.Button3.Image = CType(resources.GetObject("Button3.Image"), System.Drawing.Image)
-        Me.Button3.Location = New System.Drawing.Point(410, 403)
-        Me.Button3.Name = "Button3"
-        Me.Button3.Size = New System.Drawing.Size(63, 61)
-        Me.Button3.TabIndex = 138
-        Me.Button3.Text = "  "
-        Me.Button3.UseVisualStyleBackColor = False
-        '
-        'Button2
-        '
-        Me.Button2.BackColor = System.Drawing.Color.Silver
-        Me.Button2.Image = CType(resources.GetObject("Button2.Image"), System.Drawing.Image)
-        Me.Button2.Location = New System.Drawing.Point(94, 403)
-        Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(63, 61)
-        Me.Button2.TabIndex = 137
-        Me.Button2.Text = " "
-        Me.Button2.UseVisualStyleBackColor = False
-        '
-        'Button1
-        '
-        Me.Button1.BackColor = System.Drawing.Color.Silver
-        Me.Button1.Image = CType(resources.GetObject("Button1.Image"), System.Drawing.Image)
-        Me.Button1.Location = New System.Drawing.Point(12, 403)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(63, 61)
-        Me.Button1.TabIndex = 136
-        Me.Button1.Text = " "
-        Me.Button1.UseVisualStyleBackColor = False
         '
         'Panel2
         '
@@ -374,9 +274,112 @@ Partial Class PhotoGallery
         Me.Label9.Text = "Gallery"
         Me.Label9.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
+        'Timer1
+        '
+        '
         'OpenFileDialog1
         '
         Me.OpenFileDialog1.FileName = "OpenFileDialog1"
+        '
+        'PictureBox1
+        '
+        Me.PictureBox1.BackColor = System.Drawing.SystemColors.Control
+        Me.PictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.PictureBox1.ImageLocation = ""
+        Me.PictureBox1.Location = New System.Drawing.Point(14, 12)
+        Me.PictureBox1.Name = "PictureBox1"
+        Me.PictureBox1.Size = New System.Drawing.Size(262, 186)
+        Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
+        Me.PictureBox1.TabIndex = 93
+        Me.PictureBox1.TabStop = False
+        '
+        'Button6
+        '
+        Me.Button6.BackColor = System.Drawing.Color.Silver
+        Me.Button6.Image = CType(resources.GetObject("Button6.Image"), System.Drawing.Image)
+        Me.Button6.Location = New System.Drawing.Point(568, 403)
+        Me.Button6.Name = "Button6"
+        Me.Button6.Size = New System.Drawing.Size(63, 61)
+        Me.Button6.TabIndex = 143
+        Me.Button6.Text = " "
+        Me.Button6.UseVisualStyleBackColor = False
+        '
+        'Button4
+        '
+        Me.Button4.BackColor = System.Drawing.Color.Silver
+        Me.Button4.Image = CType(resources.GetObject("Button4.Image"), System.Drawing.Image)
+        Me.Button4.Location = New System.Drawing.Point(173, 403)
+        Me.Button4.Name = "Button4"
+        Me.Button4.Size = New System.Drawing.Size(63, 61)
+        Me.Button4.TabIndex = 139
+        Me.Button4.Text = " "
+        Me.Button4.UseVisualStyleBackColor = False
+        '
+        'Button7
+        '
+        Me.Button7.BackColor = System.Drawing.Color.Silver
+        Me.Button7.Image = CType(resources.GetObject("Button7.Image"), System.Drawing.Image)
+        Me.Button7.Location = New System.Drawing.Point(331, 403)
+        Me.Button7.Name = "Button7"
+        Me.Button7.Size = New System.Drawing.Size(63, 61)
+        Me.Button7.TabIndex = 144
+        Me.Button7.Text = " "
+        Me.Button7.UseVisualStyleBackColor = False
+        '
+        'Button1
+        '
+        Me.Button1.BackColor = System.Drawing.Color.Silver
+        Me.Button1.Image = CType(resources.GetObject("Button1.Image"), System.Drawing.Image)
+        Me.Button1.Location = New System.Drawing.Point(12, 403)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(63, 61)
+        Me.Button1.TabIndex = 136
+        Me.Button1.Text = " "
+        Me.Button1.UseVisualStyleBackColor = False
+        '
+        'Button2
+        '
+        Me.Button2.BackColor = System.Drawing.Color.Silver
+        Me.Button2.Image = CType(resources.GetObject("Button2.Image"), System.Drawing.Image)
+        Me.Button2.Location = New System.Drawing.Point(94, 403)
+        Me.Button2.Name = "Button2"
+        Me.Button2.Size = New System.Drawing.Size(63, 61)
+        Me.Button2.TabIndex = 137
+        Me.Button2.Text = " "
+        Me.Button2.UseVisualStyleBackColor = False
+        '
+        'Button8
+        '
+        Me.Button8.BackColor = System.Drawing.Color.Silver
+        Me.Button8.Image = CType(resources.GetObject("Button8.Image"), System.Drawing.Image)
+        Me.Button8.Location = New System.Drawing.Point(252, 403)
+        Me.Button8.Name = "Button8"
+        Me.Button8.Size = New System.Drawing.Size(63, 61)
+        Me.Button8.TabIndex = 142
+        Me.Button8.Text = " "
+        Me.Button8.UseVisualStyleBackColor = False
+        '
+        'Button3
+        '
+        Me.Button3.BackColor = System.Drawing.Color.Silver
+        Me.Button3.Image = CType(resources.GetObject("Button3.Image"), System.Drawing.Image)
+        Me.Button3.Location = New System.Drawing.Point(410, 403)
+        Me.Button3.Name = "Button3"
+        Me.Button3.Size = New System.Drawing.Size(63, 61)
+        Me.Button3.TabIndex = 138
+        Me.Button3.Text = "  "
+        Me.Button3.UseVisualStyleBackColor = False
+        '
+        'Button5
+        '
+        Me.Button5.BackColor = System.Drawing.Color.Silver
+        Me.Button5.Image = CType(resources.GetObject("Button5.Image"), System.Drawing.Image)
+        Me.Button5.Location = New System.Drawing.Point(489, 403)
+        Me.Button5.Name = "Button5"
+        Me.Button5.Size = New System.Drawing.Size(63, 61)
+        Me.Button5.TabIndex = 140
+        Me.Button5.Text = " "
+        Me.Button5.UseVisualStyleBackColor = False
         '
         'PhotoGallery
         '
@@ -400,25 +403,16 @@ Partial Class PhotoGallery
         Me.Text = "PhotoGallery"
         Me.Panel1.ResumeLayout(False)
         Me.Panel1.PerformLayout()
-        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel2.ResumeLayout(False)
         Me.Panel2.PerformLayout()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
-
-    Friend WithEvents Button7 As Button
-    Friend WithEvents Button8 As Button
-    Friend WithEvents Button6 As Button
     Friend WithEvents Panel1 As Panel
     Friend WithEvents Label10 As Label
     Friend WithEvents PictureBox1 As PictureBox
-    Friend WithEvents Button5 As Button
-    Friend WithEvents Button4 As Button
-    Friend WithEvents Button3 As Button
-    Friend WithEvents Button2 As Button
-    Friend WithEvents Button1 As Button
     Friend WithEvents Panel2 As Panel
     Friend WithEvents Label11 As Label
     Friend WithEvents TextBox5 As TextBox
@@ -442,4 +436,12 @@ Partial Class PhotoGallery
     Friend WithEvents Timer1 As Timer
     Friend WithEvents OpenFileDialog1 As OpenFileDialog
     Friend WithEvents ToolTip1 As ToolTip
+    Friend WithEvents Button6 As Button
+    Friend WithEvents Button4 As Button
+    Friend WithEvents Button7 As Button
+    Friend WithEvents Button1 As Button
+    Friend WithEvents Button2 As Button
+    Friend WithEvents Button8 As Button
+    Friend WithEvents Button3 As Button
+    Friend WithEvents Button5 As Button
 End Class
