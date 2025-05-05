@@ -52,6 +52,7 @@
     <Reference Include="System.Deployment" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Windows.Forms.DataVisualization" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -176,11 +177,8 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Chores.resx">
-      <DependentUpon>Chores.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Family Schedule.resx">
-      <DependentUpon>Family Schedule.vb</DependentUpon>
+    <EmbeddedResource Include="Dashboard.resx">
+      <DependentUpon>Dashboard.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
@@ -190,9 +188,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Personnel.resx">
       <DependentUpon>Personnel.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="PhotoGallery.resx">
-      <DependentUpon>PhotoGallery.vb</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
@@ -206,6 +201,36 @@
       <LastGenOutput>Settings.Designer.vb</LastGenOutput>
     </None>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-task-96.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-grocery-96.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-chores-48.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-inventory-papercut-96.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-meal-papercut-96.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-photo-96.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-notification-96.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-person-96.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-expense-96.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-register-blue-ui-96.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
