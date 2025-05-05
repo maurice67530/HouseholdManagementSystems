@@ -248,7 +248,6 @@ Partial Class Inventory
         'Button9
         '
         Me.Button9.BackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.Button9.Image = CType(resources.GetObject("Button9.Image"), System.Drawing.Image)
         Me.Button9.Location = New System.Drawing.Point(503, 316)
         Me.Button9.Name = "Button9"
         Me.Button9.Size = New System.Drawing.Size(43, 50)
@@ -269,7 +268,6 @@ Partial Class Inventory
         'Button7
         '
         Me.Button7.BackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.Button7.Image = CType(resources.GetObject("Button7.Image"), System.Drawing.Image)
         Me.Button7.Location = New System.Drawing.Point(451, 316)
         Me.Button7.Name = "Button7"
         Me.Button7.Size = New System.Drawing.Size(46, 50)
@@ -280,7 +278,6 @@ Partial Class Inventory
         'Button6
         '
         Me.Button6.BackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.Button6.Image = CType(resources.GetObject("Button6.Image"), System.Drawing.Image)
         Me.Button6.Location = New System.Drawing.Point(389, 316)
         Me.Button6.Name = "Button6"
         Me.Button6.Size = New System.Drawing.Size(56, 50)
@@ -313,8 +310,8 @@ Partial Class Inventory
         'Button3
         '
         Me.Button3.BackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.Button3.BackgroundImage = CType(resources.GetObject("Button3.BackgroundImage"), System.Drawing.Image)
         Me.Button3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
+        Me.Button3.Image = CType(resources.GetObject("Button3.Image"), System.Drawing.Image)
         Me.Button3.Location = New System.Drawing.Point(145, 316)
         Me.Button3.Name = "Button3"
         Me.Button3.Size = New System.Drawing.Size(56, 50)
@@ -324,8 +321,8 @@ Partial Class Inventory
         'Button2
         '
         Me.Button2.BackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.Button2.BackgroundImage = CType(resources.GetObject("Button2.BackgroundImage"), System.Drawing.Image)
         Me.Button2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
+        Me.Button2.Image = CType(resources.GetObject("Button2.Image"), System.Drawing.Image)
         Me.Button2.Location = New System.Drawing.Point(86, 316)
         Me.Button2.Name = "Button2"
         Me.Button2.Size = New System.Drawing.Size(56, 50)
@@ -335,8 +332,8 @@ Partial Class Inventory
         'Button1
         '
         Me.Button1.BackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.Button1.BackgroundImage = CType(resources.GetObject("Button1.BackgroundImage"), System.Drawing.Image)
         Me.Button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
+        Me.Button1.Image = CType(resources.GetObject("Button1.Image"), System.Drawing.Image)
         Me.Button1.Location = New System.Drawing.Point(29, 316)
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(56, 50)

@@ -109,6 +109,8 @@
     <Compile Include="Grocery Items.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Household Class.vb" />
+    <Compile Include="HouseHoldManagement Module.vb" />
     <Compile Include="Inventory.Designer.vb">
       <DependentUpon>Inventory.vb</DependentUpon>
     </Compile>
@@ -148,10 +150,10 @@
     <Compile Include="Notifications.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Personel.Designer.vb">
-      <DependentUpon>Personel.vb</DependentUpon>
+    <Compile Include="Personnel.Designer.vb">
+      <DependentUpon>Personnel.vb</DependentUpon>
     </Compile>
-    <Compile Include="Personel.vb">
+    <Compile Include="Personnel.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="PhotoGallery.Designer.vb">
@@ -174,6 +176,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Chores.resx">
+      <DependentUpon>Chores.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Inventory.resx">
       <DependentUpon>Inventory.vb</DependentUpon>
     </EmbeddedResource>
@@ -182,6 +187,12 @@
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Personnel.resx">
+      <DependentUpon>Personnel.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PhotoGallery.resx">
+      <DependentUpon>PhotoGallery.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Task Management.resx">
       <DependentUpon>Task Management.vb</DependentUpon>

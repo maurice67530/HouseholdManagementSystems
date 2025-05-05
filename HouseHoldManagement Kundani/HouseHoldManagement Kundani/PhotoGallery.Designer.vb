@@ -28,7 +28,7 @@ Partial Class PhotoGallery
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(597, 483)
+        Me.ClientSize = New System.Drawing.Size(500, 364)
         Me.Name = "PhotoGallery"
         Me.Text = "PhotoGallery"
         Me.ResumeLayout(False)
