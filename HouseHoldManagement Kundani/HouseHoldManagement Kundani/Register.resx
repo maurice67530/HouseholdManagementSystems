@@ -117,35 +117,24 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="icons8-expense-96" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\icons8-expense-96.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="icons8-notification-96" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\icons8-notification-96.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="icons8-photo-96" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\icons8-photo-96.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="icons8-inventory-papercut-96" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\icons8-inventory-papercut-96.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="icons8-person-96" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\icons8-person-96.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="icons8-task-96" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\icons8-task-96.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="icons8-chores-48" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\icons8-chores-48.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="icons8-meal-papercut-96" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\icons8-meal-papercut-96.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="icons8-grocery-96" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\icons8-grocery-96.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="icons8-register-blue-ui-96" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\icons8-register-blue-ui-96.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="Button2.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
+        EwAACxMBAJqcGAAAAx1JREFUWEftlV1IU3EYxkdQRBdFEEIXKgldJFGoRRGRCUuM5qbQkjA0IsaGgUjm
+        RxQZkUaEmpYZjmR+lGVtc3ObOm1NYjnzog8vUlKZysLUJYXimvi0Hf/ttJ1tHbdFF/XAc3V23t+Pved/
+        Dud/vFNptgsr++0Ipp1jjsnOD9hGRgWXUARM1iW8n12aD0kiVAHL/HJoEuEQCEkiXAJBS4RTICiJcAus
+        WiIUgYbB72gdcvhs46D9GUEETigCgVr6YlwZL4nSJ0gix/ZIorgEx8yfELhlmkNSceJMgiQKVMVROoJj
+        xp+AWD7DuteM8+77KszzEJRmr4DpFhAcM/4Etha8Y12XhOueCvMiMsrPe8EjmzlXOGsIjplwruB0bZk3
+        vCdWGLuOoHzHn8DhqrGA5VaP4EFTLfraSjDcU4qaukwPOL8ofkFYGLOJYPwnGIGkqlFoH18HdKlUrfoD
+        2JcT7Yan5W/HrPKo61oLBkRrCcp3glnBgEHqhg9pUzFu24zJ0Qgk5kaDmxsDy9Nk93Voee0wJK4nOGZW
+        +xBerr7vHj6hScNJRTpOqHkYnIrAtGULhhsP0XC6nVDxNhCkZ/wJeB81V6VtGizr+NTQL1oBMhTZ4CnS
+        qAoVAlhku2Gt3gG7nOst4PwnUnuhTdlIsHTYCpQrX8KhS6eGLTolzrSJ3HBX38r2U3BXZ+rimQKkBEuH
+        zQoiC9/ApsqgBiw7K36U6QE3yg644Z/u7sS3hwedv+V5gH+WYOmweQhvO18wc11nqQGlujz06E5huCML
+        Jg0f/fJkTNfFYap2F2akcXCoUhjQX0uwdNgIuHqvz4YbBiVuqgSAuQvorfAJ+F0Jlg5bgXLzAoQqEXLa
+        BHA8LwI6Vlay2hIsHbYCxUaDe+cX1CJMOfe8KD+CZa3vXfsrwdJhI+D6yGQ3l4GvFOJct4z64rXoDWju
+        eQVzSz5s9XvxtTUFS2rq7RewBEuHjcDV9o84nleCMuME41qN6TM06gZIe0cw0CSGtT4Rr/V3YOm+aHGe
+        hEvO8y+iqjmWBR1fSLB02K4giD4hiMD56wL/WDicHxRQM2dAI5SvAAAAAElFTkSuQmCC
+</value>
   </data>
 </root>

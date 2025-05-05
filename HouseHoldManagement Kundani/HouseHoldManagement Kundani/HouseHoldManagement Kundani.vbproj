@@ -52,6 +52,7 @@
     <Reference Include="System.Deployment" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Windows.Forms.DataVisualization" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -109,6 +110,8 @@
     <Compile Include="Grocery Items.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Household Class.vb" />
+    <Compile Include="HouseHoldManagement Module.vb" />
     <Compile Include="Inventory.Designer.vb">
       <DependentUpon>Inventory.vb</DependentUpon>
     </Compile>
@@ -148,10 +151,10 @@
     <Compile Include="Notifications.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Personel.Designer.vb">
-      <DependentUpon>Personel.vb</DependentUpon>
+    <Compile Include="Personnel.Designer.vb">
+      <DependentUpon>Personnel.vb</DependentUpon>
     </Compile>
-    <Compile Include="Personel.vb">
+    <Compile Include="Personnel.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="PhotoGallery.Designer.vb">
@@ -174,11 +177,23 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Dashboard.resx">
+      <DependentUpon>Dashboard.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Notifications.resx">
+      <DependentUpon>Notifications.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Personnel.resx">
+      <DependentUpon>Personnel.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Task Management.resx">
+      <DependentUpon>Task Management.vb</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
@@ -192,6 +207,36 @@
       <LastGenOutput>Settings.Designer.vb</LastGenOutput>
     </None>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-task-96.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-grocery-96.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-chores-48.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-inventory-papercut-96.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-meal-papercut-96.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-photo-96.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-notification-96.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-person-96.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-expense-96.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-register-blue-ui-96.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

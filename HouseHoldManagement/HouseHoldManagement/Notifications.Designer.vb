@@ -26,6 +26,8 @@ Partial Class Notifications
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Notifications))
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.BtnSort = New System.Windows.Forms.Button()
+        Me.BtnFilter = New System.Windows.Forms.Button()
         Me.Button3 = New System.Windows.Forms.Button()
         Me.Button1 = New System.Windows.Forms.Button()
         Me.Button2 = New System.Windows.Forms.Button()
@@ -33,8 +35,6 @@ Partial Class Notifications
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
-        Me.BtnSort = New System.Windows.Forms.Button()
-        Me.BtnFilter = New System.Windows.Forms.Button()
         Me.Panel1.SuspendLayout()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -61,6 +61,24 @@ Partial Class Notifications
         Me.Panel1.Name = "Panel1"
         Me.Panel1.Size = New System.Drawing.Size(422, 82)
         Me.Panel1.TabIndex = 1
+        '
+        'BtnSort
+        '
+        Me.BtnSort.Image = CType(resources.GetObject("BtnSort.Image"), System.Drawing.Image)
+        Me.BtnSort.Location = New System.Drawing.Point(259, 17)
+        Me.BtnSort.Name = "BtnSort"
+        Me.BtnSort.Size = New System.Drawing.Size(64, 48)
+        Me.BtnSort.TabIndex = 4
+        Me.BtnSort.UseVisualStyleBackColor = True
+        '
+        'BtnFilter
+        '
+        Me.BtnFilter.Image = CType(resources.GetObject("BtnFilter.Image"), System.Drawing.Image)
+        Me.BtnFilter.Location = New System.Drawing.Point(345, 17)
+        Me.BtnFilter.Name = "BtnFilter"
+        Me.BtnFilter.Size = New System.Drawing.Size(64, 48)
+        Me.BtnFilter.TabIndex = 5
+        Me.BtnFilter.UseVisualStyleBackColor = True
         '
         'Button3
         '
@@ -110,23 +128,8 @@ Partial Class Notifications
         'Timer1
         '
         '
-        'BtnSort
+        'ToolTip1
         '
-        Me.BtnSort.Image = CType(resources.GetObject("BtnSort.Image"), System.Drawing.Image)
-        Me.BtnSort.Location = New System.Drawing.Point(259, 17)
-        Me.BtnSort.Name = "BtnSort"
-        Me.BtnSort.Size = New System.Drawing.Size(64, 48)
-        Me.BtnSort.TabIndex = 4
-        Me.BtnSort.UseVisualStyleBackColor = True
-        '
-        'BtnFilter
-        '
-        Me.BtnFilter.Image = CType(resources.GetObject("BtnFilter.Image"), System.Drawing.Image)
-        Me.BtnFilter.Location = New System.Drawing.Point(345, 17)
-        Me.BtnFilter.Name = "BtnFilter"
-        Me.BtnFilter.Size = New System.Drawing.Size(64, 48)
-        Me.BtnFilter.TabIndex = 5
-        Me.BtnFilter.UseVisualStyleBackColor = True
         '
         'Notifications
         '
