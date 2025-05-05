@@ -110,6 +110,8 @@
     <Compile Include="Grocery Items.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Household Class.vb" />
+    <Compile Include="HouseHoldManagement Module.vb" />
     <Compile Include="Inventory.Designer.vb">
       <DependentUpon>Inventory.vb</DependentUpon>
     </Compile>

@@ -367,6 +367,6 @@ Public Class Dashboard
     End Sub
 
     Private Sub Button5_Click_1(sender As Object, e As EventArgs) Handles Button5.Click
-        Personel.ShowDialog()
+        Personnel.ShowDialog()
     End Sub
 End Class
