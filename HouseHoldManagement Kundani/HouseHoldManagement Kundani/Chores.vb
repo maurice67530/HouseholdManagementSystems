@@ -23,7 +23,7 @@ Public Class Chores
 
         loadChoresFromDatabase()
     End Sub
-    Private Sub Button6_Click(sender As Object, e As EventArgs) Handles Button6.Click
+    Private Sub Button6_Click(sender As Object, e As EventArgs)
         conn.Open()
 
         'Try
@@ -80,7 +80,7 @@ Public Class Chores
         'Add to FamilySchedule
         Ndamu.AddChoreEvent(TXTtitle.Text, cmbassi.SelectedItem.ToString, DateTimePicker1.Text)
     End Sub
-    Private Sub Button7_Click(sender As Object, e As EventArgs) Handles Button7.Click
+    Private Sub Button7_Click(sender As Object, e As EventArgs)
         Try
             For Each row As DataGridViewRow In DataGridView1.Rows
                 If row.Cells("DueDate").Value IsNot Nothing Then
@@ -111,7 +111,7 @@ Public Class Chores
             MessageBox.Show("Error highligting overdue chores")
         End Try
     End Sub
-    Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
+    Private Sub Button4_Click(sender As Object, e As EventArgs)
         If DataGridView1.SelectedRows.Count > 0 Then
             ' Get the selected row  
             Dim selectedRow As DataGridViewRow = DataGridView1.SelectedRows(0)
@@ -196,19 +196,19 @@ Public Class Chores
             MessageBox.Show($"Error Loading Inventory data from database: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
     End Sub
-    Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
+    Private Sub Button3_Click(sender As Object, e As EventArgs)
         loadChoresFromDatabase()
     End Sub
-    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
+    Private Sub Button2_Click(sender As Object, e As EventArgs)
         For Each row As DataGridViewRow In
             DataGridView1.SelectedRows
             row.Cells("Status").Value = "Completed"
         Next
     End Sub
-    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+    Private Sub Button1_Click(sender As Object, e As EventArgs)
         Close()
     End Sub
-    Private Sub Button5_Click(sender As Object, e As EventArgs) Handles Button5.Click
+    Private Sub Button5_Click(sender As Object, e As EventArgs)
         Try
 
             Debug.WriteLine("entering button update")
@@ -275,13 +275,13 @@ Public Class Chores
             MessageBox.Show("Error saving inventory to database: " & ex.Message & vbNewLine & ex.StackTrace, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
     End Sub
-    Private Sub Button9_Click(sender As Object, e As EventArgs) Handles Button9.Click
+    Private Sub Button9_Click(sender As Object, e As EventArgs)
         DataGridView1.Sort(DataGridView1.Columns("DueDate"), System.ComponentModel.ListSortDirection.Ascending)
     End Sub
-    Private Sub DataGridView1_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridView1.CellContentClick
+    Private Sub DataGridView1_CellContentClick(sender As Object, e As DataGridViewCellEventArgs)
 
     End Sub
-    Private Sub DataGridView1_SelectionChanged(sender As Object, e As EventArgs) Handles DataGridView1.SelectionChanged
+    Private Sub DataGridView1_SelectionChanged(sender As Object, e As EventArgs)
         Try
 
             'Button1.Enabled = False
@@ -344,7 +344,7 @@ Public Class Chores
         End Try
     End Sub
 
-    Private Sub Button8_Click(sender As Object, e As EventArgs) Handles Button8.Click
+    Private Sub Button8_Click(sender As Object, e As EventArgs)
 
     End Sub
 End Class
