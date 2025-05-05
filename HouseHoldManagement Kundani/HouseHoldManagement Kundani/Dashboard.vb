@@ -3,7 +3,7 @@ Imports System.Data.OleDb
 Imports System.Net.Mail
 Imports System.Net
 Public Class Dashboard
-    Public Const connectionString As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Rinae\Source\Repos\maurice67530\HouseholdManagementSystems\HMS.accdb"
+    Public Const connectionString As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Mudzunga\Source\Repos\maurice67530\HouseholdManagementSystems\HMS.accdb"
     Private Sub Dashboard_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
         DisplayPhoto()
@@ -78,7 +78,7 @@ Public Class Dashboard
 
         ' update this connection string based  on my database confirguration
 
-        Dim connectionString As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source= C:\Users\Rinae\Source\Repos\maurice67530\HouseholdManagementSystems\HMS.accdb"
+        Dim connectionString As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source= C:\Users\Mudzunga\Source\Repos\maurice67530\HouseholdManagementSystems\HMS.accdb"
 
         Dim query As String = "SELECT [Amount], [Frequency] FROM [Expense]"
 

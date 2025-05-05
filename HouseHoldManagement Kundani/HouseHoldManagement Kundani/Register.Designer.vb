@@ -33,14 +33,14 @@ Partial Class Register
         Me.Label5 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.Label8 = New System.Windows.Forms.Label()
+        Me.TextBox5 = New System.Windows.Forms.TextBox()
         Me.ComboBox1 = New System.Windows.Forms.ComboBox()
         Me.TextBox4 = New System.Windows.Forms.TextBox()
         Me.TextBox1 = New System.Windows.Forms.TextBox()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
-        Me.TextBox5 = New System.Windows.Forms.TextBox()
-        Me.Label8 = New System.Windows.Forms.Label()
         Me.Panel2.SuspendLayout()
         Me.Panel1.SuspendLayout()
         Me.SuspendLayout()
@@ -49,6 +49,7 @@ Partial Class Register
         '
         Me.Button2.BackgroundImage = CType(resources.GetObject("Button2.BackgroundImage"), System.Drawing.Image)
         Me.Button2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
+        Me.Button2.Image = CType(resources.GetObject("Button2.Image"), System.Drawing.Image)
         Me.Button2.Location = New System.Drawing.Point(5, 220)
         Me.Button2.Name = "Button2"
         Me.Button2.Size = New System.Drawing.Size(51, 40)
@@ -143,6 +144,22 @@ Partial Class Register
         Me.Panel1.Size = New System.Drawing.Size(247, 174)
         Me.Panel1.TabIndex = 13
         '
+        'Label8
+        '
+        Me.Label8.AutoSize = True
+        Me.Label8.Location = New System.Drawing.Point(9, 143)
+        Me.Label8.Name = "Label8"
+        Me.Label8.Size = New System.Drawing.Size(39, 13)
+        Me.Label8.TabIndex = 16
+        Me.Label8.Text = "Family:"
+        '
+        'TextBox5
+        '
+        Me.TextBox5.Location = New System.Drawing.Point(76, 136)
+        Me.TextBox5.Name = "TextBox5"
+        Me.TextBox5.Size = New System.Drawing.Size(156, 20)
+        Me.TextBox5.TabIndex = 16
+        '
         'ComboBox1
         '
         Me.ComboBox1.FormattingEnabled = True
@@ -191,22 +208,6 @@ Partial Class Register
         Me.Label2.Size = New System.Drawing.Size(59, 13)
         Me.Label2.TabIndex = 1
         Me.Label2.Text = "FullNames:"
-        '
-        'TextBox5
-        '
-        Me.TextBox5.Location = New System.Drawing.Point(76, 136)
-        Me.TextBox5.Name = "TextBox5"
-        Me.TextBox5.Size = New System.Drawing.Size(156, 20)
-        Me.TextBox5.TabIndex = 16
-        '
-        'Label8
-        '
-        Me.Label8.AutoSize = True
-        Me.Label8.Location = New System.Drawing.Point(9, 143)
-        Me.Label8.Name = "Label8"
-        Me.Label8.Size = New System.Drawing.Size(39, 13)
-        Me.Label8.TabIndex = 16
-        Me.Label8.Text = "Family:"
         '
         'Register
         '
