@@ -217,7 +217,7 @@ Public Class Task_Management
     End Sub
     Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
         LoadTaskDataFromDatabase()
-        ClearControls(Me)
+        'ClearControls(Me)
     End Sub
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
         'Ensure a row Is selected in the DataGridView  
