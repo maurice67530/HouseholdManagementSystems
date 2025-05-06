@@ -1,10 +1,10 @@
 ﻿Imports System.Data.OleDb
 'Imports HouseHoldManagement
 Public Class Task_Management
-        Public Property conn As New OleDbConnection(Ndivhuwo.connectionString)
-        Public Const connectionString As String = " Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Delicious\Source\Repos\maurice67530\HouseholdManagementSystems\HMS.accdb"
-        'Public Property conn As New OleDbConnection(Rinae.connectionString)
-        Private Status As String
+    Public Property conn As New OleDbConnection(Murangi.connectionString)
+    Public Const connectionString As String = " Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Murangi\Source\Repos\maurice67530\HouseholdManagementSystems\HMS.accdb"
+    'Public Property conn As New OleDbConnection(Rinae.connectionString)
+    Private Status As String
         Private Tasks As Object
         Private Dashboard As Object
         Private query As String
@@ -12,26 +12,26 @@ Public Class Task_Management
         Public Sub LoadTasksDataFromDatabase()
 
             Debug.WriteLine("LoadTasksDataFromDatabase()")
-            'Using conn As New OleDbConnection(Rinae.connectionString)
-            Using conn As New OleDbConnection(Ndivhuwo.connectionString)
-                conn.Open()
+        'Using conn As New OleDbConnection(Rinae.connectionString)
+        Using conn As New OleDbConnection(Murangi.connectionString)
+            conn.Open()
 
-                ' Update the table name if necessary  
-                Dim tableName As String = "Tasks"
+            ' Update the table name if necessary  
+            Dim tableName As String = "Tasks"
 
-                ' Create an OleDbCommand to select the data from the database  
-                Dim cmd As New OleDbCommand($"SELECT * FROM {tableName}", conn)
+            ' Create an OleDbCommand to select the data from the database  
+            Dim cmd As New OleDbCommand($"SELECT * FROM {tableName}", conn)
 
-                ' Create a DataAdapter and fill a DataTable  
-                Dim da As New OleDbDataAdapter(cmd)
-                Dim dt As New DataTable()
-                da.Fill(dt)
+            ' Create a DataAdapter and fill a DataTable  
+            Dim da As New OleDbDataAdapter(cmd)
+            Dim dt As New DataTable()
+            da.Fill(dt)
 
-                ' Bind the DataTable to the DataGridView  
-                DataGridView1.DataSource = dt
-                'HighlightExpiredItemss()
-            End Using
-        End Sub
+            ' Bind the DataTable to the DataGridView  
+            DataGridView1.DataSource = dt
+            'HighlightExpiredItemss()
+        End Using
+    End Sub
         Private Sub Task_Management_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
             LoadTasksDataFromDatabase()
@@ -51,9 +51,9 @@ Public Class Task_Management
             PopulateComboboxFromDatabase(ComboBox3)
         End Sub
         Public Sub PopulateComboboxFromDatabase(ByRef comboBox As ComboBox)
-            Dim conn As New OleDbConnection(Ndivhuwo.connectionString)
-            'Dim conn As New OleDbConnection(Rinae.connectionString)
-            Try
+        Dim conn As New OleDbConnection(Murangi.connectionString)
+        'Dim conn As New OleDbConnection(Rinae.connectionString)
+        Try
                 Debug.WriteLine("populating combobox from database successfully!")
                 ' 1. Open the database connection  
                 conn.Open()
@@ -96,26 +96,26 @@ Public Class Task_Management
                 If confirmationResult = DialogResult.Yes Then
                     ' Proceed with deletion  
                     Try
-                        Using conn As New OleDbConnection(Ndivhuwo.connectionString)
-                            conn.Open()
+                    Using conn As New OleDbConnection(Murangi.connectionString)
+                        conn.Open()
 
-                            ' Create the delete command  
-                            Dim cmd As New OleDbCommand("DELETE FROM [Tasks] WHERE [ID] = ?", conn)
-                            cmd.Parameters.AddWithValue("@ID", ID) ' Primary key for matching record  
+                        ' Create the delete command  
+                        Dim cmd As New OleDbCommand("DELETE FROM [Tasks] WHERE [ID] = ?", conn)
+                        cmd.Parameters.AddWithValue("@ID", ID) ' Primary key for matching record  
 
-                            ' Execute the delete command  
-                            Dim rowsAffected As Integer = cmd.ExecuteNonQuery()
+                        ' Execute the delete command  
+                        Dim rowsAffected As Integer = cmd.ExecuteNonQuery()
 
-                            If rowsAffected > 0 Then
-                                MessageBox.Show("task deleted successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
-                                ' Optionally refresh DataGridView or reload from database  
-                                'PopulateDataGridView1()
-                            Else
-                                MessageBox.Show("No Task was deleted. Please check if the ID exists.", "Deletion Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-                            End If
-                        End Using
+                        If rowsAffected > 0 Then
+                            MessageBox.Show("task deleted successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                            ' Optionally refresh DataGridView or reload from database  
+                            'PopulateDataGridView1()
+                        Else
+                            MessageBox.Show("No Task was deleted. Please check if the ID exists.", "Deletion Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                        End If
+                    End Using
 
-                    Catch ex As Exception
+                Catch ex As Exception
                         MessageBox.Show($"An error occurred while deleting the Task:  {ex.Message}", "Deletion Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
                     End Try
                 End If
@@ -142,13 +142,13 @@ Public Class Task_Management
                     DateTimePicker1.Focus()
 
                 End If
-                Using conn As New OleDbConnection(Ndivhuwo.connectionString)
-                    conn.Open()
+            Using conn As New OleDbConnection(Murangi.connectionString)
+                conn.Open()
 
-                    Dim tableName As String = "Tasks"
-                    Dim cmd As New OleDbCommand("INSERT INTO Tasks ([Title],[Description],[DueDate],[Priority],[Status],[AssignedTo]) VALUES (@Title, @Description, @DueDate, @Priority, @Status, @AssignedTo)", conn)
+                Dim tableName As String = "Tasks"
+                Dim cmd As New OleDbCommand("INSERT INTO Tasks ([Title],[Description],[DueDate],[Priority],[Status],[AssignedTo]) VALUES (@Title, @Description, @DueDate, @Priority, @Status, @AssignedTo)", conn)
 
-                    Dim Task As New DailyTask() With {
+                Dim Task As New DailyTask() With {
                  .Title = TextBox1.Text,
                   .Description = TextBox2.Text,
                 .DueDate = DateTimePicker1.Text,
@@ -157,18 +157,18 @@ Public Class Task_Management
                 .AssignedTo = ComboBox3.Text}
 
 
-                    'parameters
+                'parameters
 
-                    cmd.Parameters.AddWithValue("@Title", Task.Title)
-                    cmd.Parameters.AddWithValue("@Description", Task.Description)
-                    cmd.Parameters.AddWithValue("@DueDate", Task.DueDate)
-                    cmd.Parameters.AddWithValue("@Priority", Task.Priority)
-                    cmd.Parameters.AddWithValue("@Status", Task.Status)
-                    cmd.Parameters.AddWithValue("@AssignedTo", Task.AssignedTo)
+                cmd.Parameters.AddWithValue("@Title", Task.Title)
+                cmd.Parameters.AddWithValue("@Description", Task.Description)
+                cmd.Parameters.AddWithValue("@DueDate", Task.DueDate)
+                cmd.Parameters.AddWithValue("@Priority", Task.Priority)
+                cmd.Parameters.AddWithValue("@Status", Task.Status)
+                cmd.Parameters.AddWithValue("@AssignedTo", Task.AssignedTo)
 
-                    cmd.ExecuteNonQuery()
+                cmd.ExecuteNonQuery()
 
-                    MsgBox("tasks Added!" & vbCrLf &
+                MsgBox("tasks Added!" & vbCrLf &
                        "Title: " & Task.Title.ToString() & vbCrLf &
                        "Description: " & Task.Description & vbCrLf &
                        "DueDate: " & Task.DueDate & vbCrLf &
@@ -177,8 +177,8 @@ Public Class Task_Management
                        "Assignedto: " & Task.AssignedTo, vbInformation, "Tasks Confirmation")
 
 
-                End Using
-            Catch ex As OleDbException
+            End Using
+        Catch ex As OleDbException
                 Debug.WriteLine($"database error: {ex.Message}")
                 MessageBox.Show("error saving test to database. please check the connection.", "Database error", MessageBoxButtons.OK, MessageBoxIcon.Error)
 
@@ -200,21 +200,21 @@ Public Class Task_Management
         Public Sub LoadTaskDataFromDatabase()
 
             Debug.WriteLine(" Task load has been initialised!")
-            Using conn As New OleDbConnection(Ndivhuwo.connectionString)
-                conn.Open()
+        Using conn As New OleDbConnection(Murangi.connectionString)
+            conn.Open()
 
-                Dim TableName As String = "Tasks"
+            Dim TableName As String = "Tasks"
 
-                Dim cmd As New OleDbCommand($"SELECT*FROM {TableName}", conn)
+            Dim cmd As New OleDbCommand($"SELECT*FROM {TableName}", conn)
 
-                Dim da As New OleDbDataAdapter(cmd)
-                Dim dt As New DataTable
-                da.Fill(dt)
+            Dim da As New OleDbDataAdapter(cmd)
+            Dim dt As New DataTable
+            da.Fill(dt)
 
-                DataGridView1.DataSource = dt
+            DataGridView1.DataSource = dt
 
-            End Using
-        End Sub
+        End Using
+    End Sub
         Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
             LoadTaskDataFromDatabase()
             'ClearControls(Me)
@@ -235,32 +235,32 @@ Public Class Task_Management
                 Dim Status As String = ComboBox2.Text
                 Dim AssignedTo As String = ComboBox3.Text
 
-                Using conn As New OleDbConnection(Ndivhuwo.connectionString)
+            Using conn As New OleDbConnection(Murangi.connectionString)
 
-                    conn.Open()
+                conn.Open()
 
-                    ' Get the ID of the selected row (assuming your table has a primary key named "ID")  
-                    Dim selectedRow As DataGridViewRow = DataGridView1.SelectedRows(0)
-                    Dim ID As Integer = Convert.ToInt32(selectedRow.Cells("ID").Value) ' Change "ID" to your primary key column name  
+                ' Get the ID of the selected row (assuming your table has a primary key named "ID")  
+                Dim selectedRow As DataGridViewRow = DataGridView1.SelectedRows(0)
+                Dim ID As Integer = Convert.ToInt32(selectedRow.Cells("ID").Value) ' Change "ID" to your primary key column name  
 
-                    ' Create an OleDbCommand to update the expense data in the database  
-                    Dim cmd As New OleDbCommand("UPDATE [Tasks] SET [Title] = ?, [Description] =?, [DueDate] = ?, [Priority] = ?, [Status] = ?, [AssignedTo] = ? WHERE [ID] = ?", conn)
+                ' Create an OleDbCommand to update the expense data in the database  
+                Dim cmd As New OleDbCommand("UPDATE [Tasks] SET [Title] = ?, [Description] =?, [DueDate] = ?, [Priority] = ?, [Status] = ?, [AssignedTo] = ? WHERE [ID] = ?", conn)
 
-                    ' Set the parameter values from the UI controls  
-                    cmd.Parameters.AddWithValue("@Title", TextBox1.Text)
-                    cmd.Parameters.AddWithValue("@Description", TextBox2.Text)
-                    cmd.Parameters.AddWithValue("@DueDate", DateTimePicker1.Text)
-                    cmd.Parameters.AddWithValue("@Priority", ComboBox1.SelectedItem.ToString())
-                    cmd.Parameters.AddWithValue("@Status", ComboBox2.SelectedItem.ToString())
-                    cmd.Parameters.AddWithValue("@AssignedTo", ComboBox3.SelectedItem.ToString())
-                    cmd.Parameters.AddWithValue("@ID", ID)
-                    cmd.ExecuteNonQuery()
+                ' Set the parameter values from the UI controls  
+                cmd.Parameters.AddWithValue("@Title", TextBox1.Text)
+                cmd.Parameters.AddWithValue("@Description", TextBox2.Text)
+                cmd.Parameters.AddWithValue("@DueDate", DateTimePicker1.Text)
+                cmd.Parameters.AddWithValue("@Priority", ComboBox1.SelectedItem.ToString())
+                cmd.Parameters.AddWithValue("@Status", ComboBox2.SelectedItem.ToString())
+                cmd.Parameters.AddWithValue("@AssignedTo", ComboBox3.SelectedItem.ToString())
+                cmd.Parameters.AddWithValue("@ID", ID)
+                cmd.ExecuteNonQuery()
 
-                    MsgBox("Task Updated Successfuly!", vbInformation, "Update Confirmation")
+                MsgBox("Task Updated Successfuly!", vbInformation, "Update Confirmation")
 
-                End Using
+            End Using
 
-            Catch ex As OleDbException
+        Catch ex As OleDbException
                 MessageBox.Show("please ensure all fields are filled correctly. ", "input error", MessageBoxButtons.OK, MessageBoxIcon.Error)
             Catch ex As Exception
                 Debug.WriteLine($"General error in btnEdit_Click: {ex.Message}")

@@ -29,7 +29,7 @@ Public Class PhotoGallery
         ' Set the ComboBox data source
         ComboBox2.DataSource = items
     End Sub
-    Sub Button2_Click(sender As Object, e As EventArgs)
+    Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
         Debug.WriteLine("Entering button update click")
         If DataGridView1.SelectedRows.Count = 0 Then
             Debug.WriteLine("User confirmed update")
@@ -86,7 +86,7 @@ Public Class PhotoGallery
         Debug.WriteLine("Exiting button update")
 
     End Sub
-    Private Sub Button5_Click(sender As Object, e As EventArgs)
+    Private Sub Button5_Click(sender As Object, e As EventArgs) Handles Button5.Click
         Dim SearchTerm As String = TextBox4.Text
         'Dim connString As String()
         Using conn As New OleDb.OleDbConnection(Rinae.connectionString)
@@ -123,7 +123,7 @@ Public Class PhotoGallery
             MessageBox.Show($"Error Loading photos data from database: {ex.Message}", "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
     End Sub
-    Private Sub Button4_Click(sender As Object, e As EventArgs)
+    Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
         Debug.WriteLine("Entering button delete")
         ' Check if there are any selected rows in the DataGridView for expenses  
         If DataGridView1.SelectedRows.Count > 0 Then
@@ -177,7 +177,7 @@ Public Class PhotoGallery
         Debug.WriteLine("Exiting button delete")
 
     End Sub
-    Private Sub Button1_Click(sender As Object, e As EventArgs)
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         Try
             ''validate due date is not in the past
             'If TaskForm.DateTimePicker1.Value = DateTime.Now Then
@@ -264,13 +264,13 @@ Public Class PhotoGallery
         End Try
         Debug.WriteLine("Done with populating combobox from database")
     End Sub
-    Private Sub Button3_Click(sender As Object, e As EventArgs)
+    Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
         '  Dim selectedDateAdded As String = If(DateTimePicker1.Text IsNot Nothing, DateTimePicker1.Text.ToString(), "")
         Dim selectedFamilyMember As String = If(ComboBox1.SelectedItem IsNot Nothing, ComboBox1.SelectedItem.ToString(), "")
 
         Cruwza.FilterPhoto(selectedFamilyMember) ', selectedDateAdded)
     End Sub
-    Private Sub DataGridView1_SelectionChanged(sender As Object, e As EventArgs)
+    Private Sub DataGridView1_SelectionChanged(sender As Object, e As EventArgs) Handles DataGridView1.SelectionChanged
         Try
             Debug.WriteLine("Selecting data in the GDV: Data selected")
             If DataGridView1.SelectedRows.Count > 0 Then
@@ -419,6 +419,41 @@ Public Class PhotoGallery
     Dim imagePaths As List(Of String) = New List(Of String)()
     Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
 
+        Timer1.Start()
+        Timer1.Interval = 2000
+
+        ' Ensure there are images to display
+        If imagePaths.Count > 0 Then
+
+            ' Check if the current image index is within the list range
+            If currentImageIndex < imagePaths.Count Then
+
+                ' Display the current image           
+                Dim photoPath As String = imagePaths(currentImageIndex)
+
+                ' Check if the photo exists
+                If File.Exists(photoPath) Then
+                    PictureBox1.Image = Image.FromFile(photoPath)
+                    PictureBox1.SizeMode = PictureBoxSizeMode.Zoom
+
+                Else
+                    MessageBox.Show("Image not found: " & photoPath)
+                End If
+                ' Optionally, display the date taken (this assumes you want to display the date of the current image)
+                ' This will need to be adjusted to fetch the DateTaken from the database for each image
+                ' Currently, we're assuming you fetch the photo's DateTaken in the LoadPhotosFromDatabase function.
+
+                Dim dateTaken As String = DateTimePicker1.Value
+                Label10.Text = "Date Taken: " & dateTaken
+            End If
+            ' Move to the next image in the list
+            currentImageIndex += 1
+
+            ' Reset to the first image once all images have been shown
+            If currentImageIndex >= imagePaths.Count Then
+                currentImageIndex = 0
+            End If
+        End If
     End Sub
     ' Function to fetch photo paths from the database based on the selected description
     Private Sub LoadPhotosFromDatabase(description As String)
@@ -450,10 +485,10 @@ Public Class PhotoGallery
         End Try
     End Sub
     ' Stop the timer when you no longer want to slide the images
-    Private Sub Button6_Click(sender As Object, e As EventArgs)
+    Private Sub Button6_Click(sender As Object, e As EventArgs) Handles Button6.Click
         Timer1.Stop()
     End Sub
-    Private Sub ComboBox2_SelectedIndexChanged(sender As Object, e As EventArgs)
+    Private Sub ComboBox2_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ComboBox2.SelectedIndexChanged
         ' Clear previous images and reset variables
         imagePaths.Clear()
 
@@ -491,7 +526,7 @@ Public Class PhotoGallery
 
 
 
-    Private Sub Button8_Click(sender As Object, e As EventArgs)
+    Private Sub Button8_Click(sender As Object, e As EventArgs) Handles Button8.Click
         Dim OpenFileDialog As New OpenFileDialog()
         OpenFileDialog.Filter = "Bitmaps (*.jpg)|*.jpg"
         If OpenFileDialog.ShowDialog() = DialogResult.OK Then
@@ -499,17 +534,13 @@ Public Class PhotoGallery
             TextBox5.Text = OpenFileDialog.FileName
         End If
     End Sub
-    Private Sub Label9_Click(sender As Object, e As EventArgs)
+    Private Sub Label9_Click(sender As Object, e As EventArgs) Handles Label9.Click
 
     End Sub
-    Private Sub DataGridView1_CellContentClick(sender As Object, e As DataGridViewCellEventArgs)
+    Private Sub DataGridView1_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridView1.CellContentClick
 
     End Sub
-    Private Sub Button7_Click(sender As Object, e As EventArgs)
+    Private Sub Button7_Click(sender As Object, e As EventArgs) Handles Button7.Click
         DataGridView1.Sort(DataGridView1.Columns("DateAdded"), System.ComponentModel.ListSortDirection.Ascending)
-    End Sub
-
-    Private Sub Button2_Click_1(sender As Object, e As EventArgs) Handles Button2.Click
-
     End Sub
 End Class
