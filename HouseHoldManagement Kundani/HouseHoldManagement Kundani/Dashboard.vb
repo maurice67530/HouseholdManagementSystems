@@ -22,7 +22,15 @@ Public Class Dashboard
 
 
     Private Sub Dashboard_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        lblbadge.Region = New Region(New Drawing.Drawing2D.GraphicsPath())
+        Dim gp As New Drawing.Drawing2D.GraphicsPath()
+        gp.AddEllipse(0, 0, lblbadge.Width, lblbadge.Height)
+        lblbadge.Region = New Region(gp)
+        StyleBadge()
 
+
+        UpdateNotificationCount()
+        LoadChoresStatus()
 
 
         LoadChoresStatus()
@@ -69,7 +77,7 @@ Public Class Dashboard
         ToolTip1.SetToolTip(Button5, "Personel")
         ToolTip1.SetToolTip(Button8, "PhotoGallery")
         ToolTip1.SetToolTip(Button6, "Family Event")
-        ToolTip1.SetToolTip(Button9, "Notifications Status")
+        ToolTip1.SetToolTip(btnInAppMessages, "Notifications Status")
         ToolTip1.SetToolTip(Button17, "Budget")
         Timer1.Interval = 100
         Timer1.Start()
@@ -406,7 +414,7 @@ Public Class Dashboard
         PhotoGallery.ShowDialog()
     End Sub
 
-    Private Sub Button9_Click_1(sender As Object, e As EventArgs) Handles Button9.Click
+    Private Sub Button9_Click_1(sender As Object, e As EventArgs) Handles btnInAppMessages.Click
         In_App_Message.ShowDialog()
     End Sub
 
@@ -1057,4 +1065,100 @@ Public Class Dashboard
         Notifications.ShowDialog()
 
     End Sub
+
+
+    Private Sub UpdateNotificationCount()
+
+        StyleBadge()
+
+        Dim con As New OleDbConnection(HouseHoldManagment_Module.connectionString)
+
+        Dim lastViewedChores As DateTime = GetLastViewed(con, "Chores")
+
+        Dim lastViewedExpenses As DateTime = GetLastViewed(con, "Expenses")
+
+        Dim totalCount As Integer = 0
+
+        Dim cmdChores As New OleDbCommand("SELECT COUNT(*) FROM Chores WHERE DueDate > ? AND DueDate > ?", con)
+
+        cmdChores.Parameters.AddWithValue("?", Date.Today)
+
+        cmdChores.Parameters.AddWithValue("?", lastViewedChores)
+
+        Dim cmdExpenses As New OleDbCommand("SELECT COUNT(*) FROM Expense WHERE Amount > ? AND DateOfexpenses > ?", con)
+
+        cmdExpenses.Parameters.AddWithValue("?", 1000)
+
+        cmdExpenses.Parameters.AddWithValue("?", lastViewedExpenses)
+
+        con.Open()
+
+        Dim choreCount As Integer = CInt(cmdChores.ExecuteScalar())
+
+        Dim expenseCount As Integer = CInt(cmdExpenses.ExecuteScalar())
+
+        con.Close()
+
+        totalCount = choreCount + expenseCount
+
+        If totalCount > 0 Then
+
+            lblbadge.Text = totalCount.ToString()
+
+            lblbadge.Visible = True
+
+        Else
+
+            lblbadge.Visible = False
+
+        End If
+
+    End Sub
+
+    Private Function GetLastViewed(con As OleDbConnection, viewType As String) As DateTime
+
+        Dim cmd As New OleDbCommand("SELECT LastViewed FROM NotificationStatus WHERE ViewType = ?", con)
+
+        cmd.Parameters.AddWithValue("?", viewType)
+
+        con.Open()
+
+        Dim result As Object = cmd.ExecuteScalar()
+
+        con.Close()
+
+        If result IsNot Nothing Then
+
+            Return CDate(result)
+
+        Else
+
+            Return DateTime.MinValue
+
+        End If
+
+    End Function
+
+    Private Sub btnInAppMessages_Click(sender As Object, e As EventArgs) Handles btnInAppMessages.Click
+
+        In_App_Message.ShowDialog()
+
+        UpdateNotificationCount() ' Refresh count after closing
+
+    End Sub
+
+    Private Sub StyleBadge()
+
+        lblbadge.Width = 20
+
+        lblbadge.Height = 20
+
+        Dim path As New Drawing2D.GraphicsPath()
+
+        path.AddEllipse(0, 0, lblbadge.Width, lblbadge.Height)
+
+        lblbadge.Region = New Region(path)
+
+    End Sub
+
 End Class

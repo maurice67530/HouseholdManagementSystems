@@ -23,12 +23,12 @@ Partial Class Dashboard
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim ChartArea27 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
-        Dim Legend27 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
-        Dim Series27 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
-        Dim ChartArea28 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
-        Dim Legend28 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
-        Dim Series28 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
+        Dim ChartArea1 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
+        Dim Legend1 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
+        Dim Series1 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
+        Dim ChartArea2 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
+        Dim Legend2 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
+        Dim Series2 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Dashboard))
         Me.Label7 = New System.Windows.Forms.Label()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
@@ -65,7 +65,7 @@ Partial Class Dashboard
         Me.Chart2 = New System.Windows.Forms.DataVisualization.Charting.Chart()
         Me.Chart1 = New System.Windows.Forms.DataVisualization.Charting.Chart()
         Me.Button5 = New System.Windows.Forms.Button()
-        Me.Button9 = New System.Windows.Forms.Button()
+        Me.btnInAppMessages = New System.Windows.Forms.Button()
         Me.Button6 = New System.Windows.Forms.Button()
         Me.Button7 = New System.Windows.Forms.Button()
         Me.Button8 = New System.Windows.Forms.Button()
@@ -86,6 +86,7 @@ Partial Class Dashboard
         Me.Label19 = New System.Windows.Forms.Label()
         Me.Timer3 = New System.Windows.Forms.Timer(Me.components)
         Me.Label21 = New System.Windows.Forms.Label()
+        Me.lblbadge = New System.Windows.Forms.Label()
         Me.GroupBox1.SuspendLayout()
         Me.Panel2.SuspendLayout()
         Me.Panel1.SuspendLayout()
@@ -410,33 +411,33 @@ Partial Class Dashboard
         '
         'Chart2
         '
-        ChartArea27.Name = "ChartArea1"
-        Me.Chart2.ChartAreas.Add(ChartArea27)
-        Legend27.Name = "Legend1"
-        Me.Chart2.Legends.Add(Legend27)
+        ChartArea1.Name = "ChartArea1"
+        Me.Chart2.ChartAreas.Add(ChartArea1)
+        Legend1.Name = "Legend1"
+        Me.Chart2.Legends.Add(Legend1)
         Me.Chart2.Location = New System.Drawing.Point(441, 274)
         Me.Chart2.Name = "Chart2"
-        Series27.ChartArea = "ChartArea1"
-        Series27.Legend = "Legend1"
-        Series27.Name = "Expense"
-        Me.Chart2.Series.Add(Series27)
+        Series1.ChartArea = "ChartArea1"
+        Series1.Legend = "Legend1"
+        Series1.Name = "Expense"
+        Me.Chart2.Series.Add(Series1)
         Me.Chart2.Size = New System.Drawing.Size(236, 265)
         Me.Chart2.TabIndex = 103
         Me.Chart2.Text = "Chart2"
         '
         'Chart1
         '
-        ChartArea28.Name = "ChartArea1"
-        Me.Chart1.ChartAreas.Add(ChartArea28)
-        Legend28.Name = "Legend1"
-        Me.Chart1.Legends.Add(Legend28)
+        ChartArea2.Name = "ChartArea1"
+        Me.Chart1.ChartAreas.Add(ChartArea2)
+        Legend2.Name = "Legend1"
+        Me.Chart1.Legends.Add(Legend2)
         Me.Chart1.Location = New System.Drawing.Point(848, 545)
         Me.Chart1.Name = "Chart1"
-        Series28.ChartArea = "ChartArea1"
-        Series28.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Pie
-        Series28.Legend = "Legend1"
-        Series28.Name = "Expense"
-        Me.Chart1.Series.Add(Series28)
+        Series2.ChartArea = "ChartArea1"
+        Series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Pie
+        Series2.Legend = "Legend1"
+        Series2.Name = "Expense"
+        Me.Chart1.Series.Add(Series2)
         Me.Chart1.Size = New System.Drawing.Size(350, 290)
         Me.Chart1.TabIndex = 102
         Me.Chart1.Text = "Chart1"
@@ -444,6 +445,7 @@ Partial Class Dashboard
         'Button5
         '
         Me.Button5.BackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.Button5.Cursor = System.Windows.Forms.Cursors.Hand
         Me.Button5.ForeColor = System.Drawing.SystemColors.ActiveCaption
         Me.Button5.Image = CType(resources.GetObject("Button5.Image"), System.Drawing.Image)
         Me.Button5.Location = New System.Drawing.Point(2, 233)
@@ -452,21 +454,23 @@ Partial Class Dashboard
         Me.Button5.TabIndex = 108
         Me.Button5.UseVisualStyleBackColor = False
         '
-        'Button9
+        'btnInAppMessages
         '
-        Me.Button9.BackColor = System.Drawing.SystemColors.GradientActiveCaption
-        Me.Button9.Image = CType(resources.GetObject("Button9.Image"), System.Drawing.Image)
-        Me.Button9.Location = New System.Drawing.Point(210, 233)
-        Me.Button9.Name = "Button9"
-        Me.Button9.Size = New System.Drawing.Size(199, 109)
-        Me.Button9.TabIndex = 101
-        Me.Button9.Text = " "
-        Me.Button9.TextAlign = System.Drawing.ContentAlignment.TopCenter
-        Me.Button9.UseVisualStyleBackColor = False
+        Me.btnInAppMessages.BackColor = System.Drawing.SystemColors.GradientActiveCaption
+        Me.btnInAppMessages.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.btnInAppMessages.Image = CType(resources.GetObject("btnInAppMessages.Image"), System.Drawing.Image)
+        Me.btnInAppMessages.Location = New System.Drawing.Point(210, 233)
+        Me.btnInAppMessages.Name = "btnInAppMessages"
+        Me.btnInAppMessages.Size = New System.Drawing.Size(199, 109)
+        Me.btnInAppMessages.TabIndex = 101
+        Me.btnInAppMessages.Text = " "
+        Me.btnInAppMessages.TextAlign = System.Drawing.ContentAlignment.TopCenter
+        Me.btnInAppMessages.UseVisualStyleBackColor = False
         '
         'Button6
         '
         Me.Button6.BackColor = System.Drawing.SystemColors.GradientActiveCaption
+        Me.Button6.Cursor = System.Windows.Forms.Cursors.Hand
         Me.Button6.Image = CType(resources.GetObject("Button6.Image"), System.Drawing.Image)
         Me.Button6.Location = New System.Drawing.Point(3, 118)
         Me.Button6.Name = "Button6"
@@ -479,6 +483,7 @@ Partial Class Dashboard
         'Button7
         '
         Me.Button7.BackColor = System.Drawing.SystemColors.GradientActiveCaption
+        Me.Button7.Cursor = System.Windows.Forms.Cursors.Hand
         Me.Button7.Image = Global.HouseHoldManagement_Kundani.My.Resources.Resources.icons8_task_96
         Me.Button7.Location = New System.Drawing.Point(208, 118)
         Me.Button7.Name = "Button7"
@@ -491,6 +496,7 @@ Partial Class Dashboard
         'Button8
         '
         Me.Button8.BackColor = System.Drawing.SystemColors.GradientActiveCaption
+        Me.Button8.Cursor = System.Windows.Forms.Cursors.Hand
         Me.Button8.Image = Global.HouseHoldManagement_Kundani.My.Resources.Resources.icons8_photo_96
         Me.Button8.Location = New System.Drawing.Point(208, 233)
         Me.Button8.Name = "Button8"
@@ -503,6 +509,7 @@ Partial Class Dashboard
         'Button11
         '
         Me.Button11.BackColor = System.Drawing.SystemColors.GradientActiveCaption
+        Me.Button11.Cursor = System.Windows.Forms.Cursors.Hand
         Me.Button11.Image = Global.HouseHoldManagement_Kundani.My.Resources.Resources.icons8_chores_48
         Me.Button11.Location = New System.Drawing.Point(208, 3)
         Me.Button11.Name = "Button11"
@@ -514,6 +521,7 @@ Partial Class Dashboard
         'Button12
         '
         Me.Button12.BackColor = System.Drawing.SystemColors.GradientActiveCaption
+        Me.Button12.Cursor = System.Windows.Forms.Cursors.Hand
         Me.Button12.Image = CType(resources.GetObject("Button12.Image"), System.Drawing.Image)
         Me.Button12.Location = New System.Drawing.Point(5, 3)
         Me.Button12.Name = "Button12"
@@ -526,6 +534,7 @@ Partial Class Dashboard
         'Button13
         '
         Me.Button13.BackColor = System.Drawing.SystemColors.GradientActiveCaption
+        Me.Button13.Cursor = System.Windows.Forms.Cursors.Hand
         Me.Button13.Image = Global.HouseHoldManagement_Kundani.My.Resources.Resources.icons8_grocery_96
         Me.Button13.Location = New System.Drawing.Point(3, 118)
         Me.Button13.Name = "Button13"
@@ -537,6 +546,7 @@ Partial Class Dashboard
         'Button14
         '
         Me.Button14.BackColor = System.Drawing.SystemColors.GradientActiveCaption
+        Me.Button14.Cursor = System.Windows.Forms.Cursors.Hand
         Me.Button14.Image = Global.HouseHoldManagement_Kundani.My.Resources.Resources.icons8_meal_papercut_96
         Me.Button14.Location = New System.Drawing.Point(3, 233)
         Me.Button14.Name = "Button14"
@@ -548,6 +558,7 @@ Partial Class Dashboard
         'Button15
         '
         Me.Button15.BackColor = System.Drawing.SystemColors.GradientActiveCaption
+        Me.Button15.Cursor = System.Windows.Forms.Cursors.Hand
         Me.Button15.Image = Global.HouseHoldManagement_Kundani.My.Resources.Resources.icons8_inventory_papercut_96
         Me.Button15.Location = New System.Drawing.Point(3, 3)
         Me.Button15.Name = "Button15"
@@ -559,6 +570,7 @@ Partial Class Dashboard
         'Button16
         '
         Me.Button16.BackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.Button16.Cursor = System.Windows.Forms.Cursors.Hand
         Me.Button16.Image = CType(resources.GetObject("Button16.Image"), System.Drawing.Image)
         Me.Button16.Location = New System.Drawing.Point(210, 120)
         Me.Button16.Name = "Button16"
@@ -585,9 +597,10 @@ Partial Class Dashboard
         'Panel5
         '
         Me.Panel5.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.Panel5.Controls.Add(Me.lblbadge)
         Me.Panel5.Controls.Add(Me.Button17)
         Me.Panel5.Controls.Add(Me.Button12)
-        Me.Panel5.Controls.Add(Me.Button9)
+        Me.Panel5.Controls.Add(Me.btnInAppMessages)
         Me.Panel5.Controls.Add(Me.Button6)
         Me.Panel5.Controls.Add(Me.Button16)
         Me.Panel5.Controls.Add(Me.Button5)
@@ -599,6 +612,7 @@ Partial Class Dashboard
         'Button17
         '
         Me.Button17.BackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.Button17.Cursor = System.Windows.Forms.Cursors.Hand
         Me.Button17.ForeColor = System.Drawing.SystemColors.ActiveCaption
         Me.Button17.Image = CType(resources.GetObject("Button17.Image"), System.Drawing.Image)
         Me.Button17.Location = New System.Drawing.Point(208, 5)
@@ -666,6 +680,19 @@ Partial Class Dashboard
         Me.Label21.Name = "Label21"
         Me.Label21.Size = New System.Drawing.Size(0, 16)
         Me.Label21.TabIndex = 115
+        '
+        'lblbadge
+        '
+        Me.lblbadge.BackColor = System.Drawing.Color.Red
+        Me.lblbadge.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.lblbadge.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblbadge.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.lblbadge.Location = New System.Drawing.Point(387, 237)
+        Me.lblbadge.Name = "lblbadge"
+        Me.lblbadge.Size = New System.Drawing.Size(20, 20)
+        Me.lblbadge.TabIndex = 112
+        Me.lblbadge.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.lblbadge.Visible = False
         '
         'Dashboard
         '
@@ -740,7 +767,7 @@ Partial Class Dashboard
     Friend WithEvents FlowLayoutPanel1 As FlowLayoutPanel
     Friend WithEvents Chart2 As DataVisualization.Charting.Chart
     Friend WithEvents Chart1 As DataVisualization.Charting.Chart
-    Friend WithEvents Button9 As Button
+    Friend WithEvents btnInAppMessages As Button
     Friend WithEvents Button6 As Button
     Friend WithEvents Button7 As Button
     Friend WithEvents Button8 As Button
@@ -768,4 +795,5 @@ Partial Class Dashboard
     Friend WithEvents Timer3 As Timer
     Friend WithEvents Label20 As Label
     Friend WithEvents Label21 As Label
+    Friend WithEvents lblbadge As Label
 End Class
