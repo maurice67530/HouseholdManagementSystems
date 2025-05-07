@@ -1,7 +1,7 @@
 ﻿Imports System.Data.OleDb
 Public Class In_App_Message
 
-    Dim conn As New OleDbConnection(Masindi.connectionString)
+    Dim conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
     Private Sub TextBox1_TextChanged(sender As Object, e As EventArgs) Handles TextBox1.TextChanged
 
     End Sub

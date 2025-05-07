@@ -664,7 +664,7 @@ Public Class Dashboard
 
     '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
 
-    Dim budgetLimit As Double = 6000
+    Dim budgetLimit As Double = 150300
     Dim blinkState As Boolean = True
 
     Private Sub Timer2_Tick(sender As Object, e As EventArgs) Handles Timer2.Tick
@@ -1054,5 +1054,9 @@ Public Class Dashboard
     Private Sub Timer3_Tick(sender As Object, e As EventArgs) Handles Timer3.Tick
         blinkState = Not blinkState
         Label19.Visible = blinkState
+    End Sub
+
+    Private Sub Button16_Click(sender As Object, e As EventArgs) Handles Button16.Click
+        In_App_Message.ShowDialog()
     End Sub
 End Class
