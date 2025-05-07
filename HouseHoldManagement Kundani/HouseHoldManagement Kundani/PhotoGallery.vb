@@ -231,7 +231,7 @@ Public Class PhotoGallery
         'Ndamu.MarkPhotoDay(DateTimePicker1.Text, TextBox2.Text)
     End Sub
     Public Sub PopulateComboboxFromDatabase(ByRef comboBox As ComboBox)
-        Dim conn As New OleDbConnection(Rinae.connectionString)
+        Dim conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
         Try
             Debug.WriteLine("Populating combobox: combobox populated from database")
             'open the database connection
@@ -423,7 +423,7 @@ Public Class PhotoGallery
     ' Function to fetch photo paths from the database based on the selected description
     Private Sub LoadPhotosFromDatabase(description As String)
         Try
-            Using conn As New OleDbConnection(Rinae.connectionString)
+            Using conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
 
                 Dim query As String = "SELECT FilePath, DateAdded FROM Photos WHERE Album = @Album"
 
