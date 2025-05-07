@@ -77,7 +77,7 @@ Partial Class In_App_Message
         '
         'Label2
         '
-        Me.Label2.BackColor = System.Drawing.Color.FloralWhite
+        Me.Label2.BackColor = System.Drawing.Color.Azure
         Me.Label2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.Label2.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label2.Location = New System.Drawing.Point(0, 9)
@@ -169,6 +169,7 @@ Partial Class In_App_Message
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.BackColor = System.Drawing.SystemColors.ActiveCaption
         Me.ClientSize = New System.Drawing.Size(592, 482)
         Me.Controls.Add(Me.Label5)
         Me.Controls.Add(Me.Label4)

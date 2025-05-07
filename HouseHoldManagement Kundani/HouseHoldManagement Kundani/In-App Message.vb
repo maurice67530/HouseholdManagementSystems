@@ -29,7 +29,7 @@ Public Class In_App_Message
             Dim message As String = $"Last viewed {viewType}: {lastViewed}"
 
             ' Show MessageBox
-            'MessageBox.Show(message, "Notification Info", MessageBoxButtons.OK, MessageBoxIcon.Information)
+            MessageBox.Show(message, "Notification Info", MessageBoxButtons.OK, MessageBoxIcon.Information)
 
             ' Append for NotifyIcon
             notifyMsg &= message & vbCrLf
@@ -122,7 +122,7 @@ Public Class In_App_Message
 
     End Sub
     Public Sub PopulateComboboxFromDatabase(ByRef comboBox As ComboBox)
-        Dim conn As New OleDbConnection(Masindi.connectionString)
+        Dim conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
         Try
             Debug.WriteLine("populate combobox successful")
             'open the database connection
