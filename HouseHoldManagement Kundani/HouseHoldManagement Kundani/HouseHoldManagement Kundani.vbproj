@@ -117,6 +117,12 @@
     </Compile>
     <Compile Include="Household Class.vb" />
     <Compile Include="HouseHoldManagement Module.vb" />
+    <Compile Include="In-App Message.Designer.vb">
+      <DependentUpon>In-App Message.vb</DependentUpon>
+    </Compile>
+    <Compile Include="In-App Message.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Inventory.Designer.vb">
       <DependentUpon>Inventory.vb</DependentUpon>
     </Compile>
@@ -182,11 +188,20 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Chores.resx">
+      <DependentUpon>Chores.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Dashboard.resx">
       <DependentUpon>Dashboard.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Expense.resx">
+      <DependentUpon>Expense.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Grocery Items.resx">
       <DependentUpon>Grocery Items.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="In-App Message.resx">
+      <DependentUpon>In-App Message.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Login.resx">
       <DependentUpon>Login.vb</DependentUpon>

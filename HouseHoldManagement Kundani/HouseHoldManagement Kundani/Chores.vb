@@ -347,4 +347,8 @@ Public Class Chores
     Private Sub Button8_Click(sender As Object, e As EventArgs)
 
     End Sub
+
+    Private Sub cmbassi_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbassi.SelectedIndexChanged
+
+    End Sub
 End Class
