@@ -13,12 +13,14 @@ Public Class Dashboard
 
 
     Private Sub Dashboard_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        lblbadge.Region = New Region(New Drawing.Drawing2D.GraphicsPath())
+        Dim gp As New Drawing.Drawing2D.GraphicsPath()
+        gp.AddEllipse(0, 0, lblbadge.Width, lblbadge.Height)
+        lblbadge.Region = New Region(gp)
+        StyleBadge()
 
 
-
-
-
-
+        UpdateNotificationCount()
         LoadChoresStatus()
         LoadChart()
         LoadUpcomingMeals()
@@ -94,266 +96,13 @@ Public Class Dashboard
         'LoadExpensesData()
     End Sub
 
-    ''Set up Budget Status And Chores Status charts
-    'Private Sub SetupCharts()
-    '    'Chores Status - Pie Chart
-    '    Chart2.Series.Clear()
-    '    Chart2.Series.Add("Chores")
-    '    Chart2.Series("Chores").Points.AddXY("Completed", 0)
-    '    Chart2.Series("Chores").Points.AddXY("In progress", 1)
-    '    Chart2.Series("Chores").Points.AddXY("Not Started", 0)
-    '    Chart2.Series("Chores").IsValueShownAsLabel = True
-    '    ''Chart1.Series("Chores").ChartType = series1.Pie
-    'End Sub
-
-
-
-
-
-
-
-
-
-
-
-
-
-    'Private Sub LoadChartData()
-
-    '    ' update this connection string based  on my database confirguration
-
-    '    Dim connectionString As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source= C:\Users\Mudzunga\Source\Repos\maurice67530\HouseholdManagementSystems\HMS.accdb"
-
-    '    Dim query As String = "SELECT [Amount], [Frequency] FROM [Expense]"
-
-    '    Using conn As New OleDbConnection(connectionString)
-
-    '        Dim command As New OleDbCommand(query, conn)
-
-    '        conn.Open()
-
-    '        Using reader As OleDbDataReader = command.ExecuteReader
-
-    '            While reader.Read
-
-    '                ' assuming ColumnX is a string (category)  and columnY is numeric value
-
-    '                Dim personnel As String = reader("Frequency").ToString
-
-    '                Dim Budget As String = reader("Amount").ToString
-
-    '                ' add points to the chart; chage the series name added
-
-    '                Chart1.Series("Expense").Points.AddXY(personnel, Budget)
-
-    '            End While
-
-    '        End Using
-
-    '    End Using
-
-    '    Chart1.ChartAreas(0).AxisX.Title = "Frequency"
-
-    '    Chart1.ChartAreas(0).AxisY.Title = "Amount"
-
-    'End Sub
-
-    'Public Sub PopulateListboxFromChores(ByRef Listbox As ListBox)
-
-    '    Dim conn As New OleDbConnection(connectionString)
-
-    '    Try
-
-    '        Debug.WriteLine("populate listbox successful")
-
-    '        'open the database connection
-
-    '        conn.Open()
-
-    '        'retrieve the firstname and surname columns from the personaldetails tabel
-
-    '        Dim query As String = "SELECT ID, Status,Title FROM Chores"
-
-    '        Dim cmd As New OleDbCommand(query, conn)
-
-    '        Dim reader As OleDbDataReader = cmd.ExecuteReader()
-
-    '        'bind the retrieved data to the combobox
-
-    '        ListBox1.Items.Clear()
-
-    '        While reader.Read()
-
-    '            ListBox1.Items.Add($"{reader("ID")} {reader("Status")} {reader("Title")}")
-
-    '        End While
-
-    '        'close the database
-
-    '        reader.Close()
-
-    '    Catch ex As Exception
-
-    '        'handle any exeptions that may occur  
-
-    '        Debug.WriteLine("failed to populate ListBox")
-
-    '        Debug.WriteLine($"Stack Trace: {ex.StackTrace}")
-
-    '        MessageBox.Show($"Error: {ex.StackTrace}")
-
-    '    Finally
-
-    '        'close the database connection
-
-    '        If conn.State = ConnectionState.Open Then
-
-    '            conn.Close()
-
-    '        End If
-
-    '    End Try
-
-    'End Sub
-
-
-
-    'Private photoList As New List(Of String)() ' List to store photo paths
-
-    'Private currentPhotoIndex As Integer = 0
-
-    'Private WithEvents photoTimer As New Timer()
-
-    'Private Sub LoadRecentPhotos()
-
-    '    photoList.Clear()
-
-    '    Dim query As String = "SELECT TOP 5 FilePath FROM Photos ORDER BY DateAdded "
-
-    '    Using conn As New OleDbConnection(connectionString)
-
-    '        Using cmd As New OleDbCommand(query, conn)
-
-    '            conn.Open()
-
-    '            Using reader As OleDbDataReader = cmd.ExecuteReader()
-
-    '                While reader.Read()
-
-    '                    photoList.Add(reader("FilePath").ToString())
-
-    '                End While
-
-    '            End Using
-
-    '        End Using
-
-    '    End Using
-
-    'End Sub
-
-    'Private Sub DisplayPhoto()
-
-    '    'If photoList.Count > 0 Then
-
-    '    '    FlowLayoutPanel2.Controls.Clear() ' Clear previous image
-
-    '    '    Dim pb As New PictureBox()
-
-    '    '    pb.Image = Image.FromFile(photoList(currentPhotoIndex))
-
-    '    '    pb.SizeMode = PictureBoxSizeMode.StretchImage ' Set stretch mode
-
-    '    '    pb.Size = FlowLayoutPanel2.Size ' Match panel size
-
-    '    '    FlowLayoutPanel2.Controls.Add(pb) ' Add to FlowLayoutPanel
-
-    '    'End If
-
-    'End Sub
-
-    'Private Sub SetupTimer()
-
-    '    photoTimer.Interval = 2000 ' 2 seconds
-
-    '    AddHandler photoTimer.Tick, AddressOf PhotoTimer_Tick
-
-    '    photoTimer.Start()
-
-    'End Sub
-
-    'Private Sub PhotoTimer_Tick(sender As Object, e As EventArgs)
-
-    '    If photoList.Count > 0 Then
-
-    '        currentPhotoIndex = (currentPhotoIndex + 1) Mod photoList.Count ' Loop through photos
-
-    '        DisplayPhoto()
-
-    '    End If
-
-    'End Sub
-    'Private Sub LoadUpcomingMeals()
-    '    Dim query As String = "Select MealName, StartDate, Description FROM MealPlans WHERE EndDate >= StartDate"
-
-    '    ' Fetch data from the database
-
-    '    Using conn As New OleDbConnection(connectionString)
-
-    '        Using cmd As New OleDbCommand(query, conn)
-
-    '            conn.Open()
-
-    '            Using reader As OleDbDataReader = cmd.ExecuteReader()
-
-    '                ' Clear existing controls
-
-    '                FlowLayoutPanel1.Controls.Clear()
-
-    '                ' Loop through the data and create controls for each meal
-
-    '                While reader.Read()
-
-    '                    Dim mealName As String = reader("MealName").ToString()
-
-    '                    Dim startDate As DateTime = Convert.ToDateTime(reader("StartDate"))
-
-    '                    Dim Description As String = reader("Description").ToString()
-
-    '                    ' Create a new Label for each meal
-
-    '                    Dim lblMeal As New Label()
-
-    '                    lblMeal.Text = $"{mealName} on {startDate.ToShortDateString()} - {Description}"
-
-    '                    lblMeal.AutoSize = True
-
-    '                    lblMeal.Margin = New Padding(10)
-
-    '                    lblMeal.BorderStyle = BorderStyle.FixedSingle
-
-    '                    lblMeal.ForeColor = Color.Black
-
-    '                    ' Add the label to the FlowLayoutPanel
-
-    '                    FlowLayoutPanel1.Controls.Add(lblMeal)
-
-    '                End While
-
-    '            End Using
-
-    '        End Using
-
-    '    End Using
-
-    'End Sub
 
     Private Sub LoadChoresStatus()
 
         Dim completed As Integer = 0, inProgress As Integer = 0, notStarted As Integer = 0
         Dim query As String = "SELECT Status, COUNT(*) FROM Chores GROUP BY Status"
 
-        Using conn As New OleDbConnection(connectionString), cmd As New OleDbCommand(query, conn)
+        Using conn As New OleDbConnection(HouseHoldManagment_Module.connectionString), cmd As New OleDbCommand(query, conn)
             conn.Open()
             Using reader = cmd.ExecuteReader()
                 While reader.Read()
@@ -1055,4 +804,72 @@ Public Class Dashboard
         blinkState = Not blinkState
         Label19.Visible = blinkState
     End Sub
+
+    Private Sub Button16_Click(sender As Object, e As EventArgs) Handles btnInAppMessages.Click
+
+    End Sub
+    Private Sub UpdateNotificationCount()
+        StyleBadge()
+        Dim con As New OleDbConnection(HouseHoldManagment_Module.connectionString)
+        Dim lastViewedChores As DateTime = GetLastViewed(con, "Chores")
+        Dim lastViewedExpenses As DateTime = GetLastViewed(con, "Expenses")
+        Dim totalCount As Integer = 0
+
+        Dim cmdChores As New OleDbCommand("SELECT COUNT(*) FROM Chores WHERE DueDate > ? AND DueDate > ?", con)
+        cmdChores.Parameters.AddWithValue("?", Date.Today)
+        cmdChores.Parameters.AddWithValue("?", lastViewedChores)
+
+        Dim cmdExpenses As New OleDbCommand("SELECT COUNT(*) FROM Expense WHERE Amount > ? AND DateOfexpenses > ?", con)
+        cmdExpenses.Parameters.AddWithValue("?", 1000)
+        cmdExpenses.Parameters.AddWithValue("?", lastViewedExpenses)
+
+        con.Open()
+        Dim choreCount As Integer = CInt(cmdChores.ExecuteScalar())
+        Dim expenseCount As Integer = CInt(cmdExpenses.ExecuteScalar())
+        con.Close()
+
+        totalCount = choreCount + expenseCount
+
+        If totalCount > 0 Then
+            lblbadge.Text = totalCount.ToString()
+            lblbadge.Visible = True
+        Else
+            lblbadge.Visible = False
+        End If
+    End Sub
+
+    Private Function GetLastViewed(con As OleDbConnection, viewType As String) As DateTime
+        Dim cmd As New OleDbCommand("SELECT LastViewed FROM NotificationStatus WHERE ViewType = ?", con)
+        cmd.Parameters.AddWithValue("?", viewType)
+
+        con.Open()
+        Dim result As Object = cmd.ExecuteScalar()
+        con.Close()
+
+        If result IsNot Nothing Then
+            Return CDate(result)
+        Else
+            Return DateTime.MinValue
+        End If
+    End Function
+
+    Private Sub btnInAppMessages_Click(sender As Object, e As EventArgs) Handles btnInAppMessages.Click
+
+        In_App_Message.ShowDialog()
+        UpdateNotificationCount() ' Refresh count after closing
+    End Sub
+    Private Sub StyleBadge()
+        lblbadge.Width = 20
+        lblbadge.Height = 20
+        Dim path As New Drawing2D.GraphicsPath()
+        path.AddEllipse(0, 0, lblbadge.Width, lblbadge.Height)
+        lblbadge.Region = New Region(path)
+    End Sub
 End Class
+
+
+
+
+
+
+
