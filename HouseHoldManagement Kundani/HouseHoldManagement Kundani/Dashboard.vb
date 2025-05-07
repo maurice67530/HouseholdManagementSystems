@@ -8,14 +8,20 @@ Imports System.Windows.Forms.DataVisualization.Charting
 Public Class Dashboard
     Public Const connectionString As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Mudzunga\Source\Repos\maurice67530\HouseholdManagementSystems\HMS.accdb"
 
-
-
+    ' Daily tips list
+    Dim tips As New List(Of String) From {
+    "Stay organized and save time.",
+    "Complete one task at a time.",
+    "Keep your groceries fresh and updated.",
+    "A clean home is a happy home.",
+    "Plan your meals to avoid waste.",
+    "Track your expenses to stay on budget.",
+    "Small tasks done daily keep chores away.",
+    "Involve everyone – teamwork works best!"
+}
 
 
     Private Sub Dashboard_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-
-
-
 
 
 
@@ -25,9 +31,9 @@ Public Class Dashboard
         LoadExpiringGroceries()
         PopulateListboxFromTasks(Tasks)
         ShowChoreStatusPieChart()
-        'LoadRecentPhotos()
-        'DisplayPhoto()
-        'SetupTimer()
+        LoadRecentPhotos()
+        DisplayPhoto()
+        SetupTimer()
 
 
 
@@ -40,30 +46,18 @@ Public Class Dashboard
 
         Dim hour As Integer = DateTime.Now.Hour
         If hour < 12 Then
-            Label18.Text = "Good morning!"
+            Label18.Text = "Good morning , Have a great day! 😊"
         ElseIf hour < 18 Then
-            Label18.Text = "Good afternoon!"
+            Label18.Text = "Good afternoon , Have a great day! 😊"
         Else
-            Label18.Text = "Good evening!"
+            Label18.Text = "Good evening ,  Have a great day! 😊"
         End If
 
+        'Show Random tip
+        Dim rnd As New Random()
+        Dim index As Integer = rnd.Next(tips.Count)
+        Label21.Text = "Tip of the Day: " & tips(index)
 
-
-
-
-
-
-
-
-        'DisplayPhoto()
-        'SetupTimer()
-        'LoadRecentPhotos()
-        'SetupCharts()
-        'LoadChoresStatus()
-
-        'LoadUpcomingMeals()
-        'UpdateBudgetStatus()
-        'LoadChartData()
 
         ToolTip1.SetToolTip(Button7, "Task")
         ToolTip1.SetToolTip(Button15, "Inventory")
@@ -71,11 +65,12 @@ Public Class Dashboard
         ToolTip1.SetToolTip(Button11, "Chores")
         ToolTip1.SetToolTip(Button14, "MealPlan")
         ToolTip1.SetToolTip(Button13, "GroceryItem")
-        ToolTip1.SetToolTip(Button9, "Notification")
+        ToolTip1.SetToolTip(Button16, "Notification")
         ToolTip1.SetToolTip(Button5, "Personel")
         ToolTip1.SetToolTip(Button8, "PhotoGallery")
         ToolTip1.SetToolTip(Button6, "Family Event")
-
+        ToolTip1.SetToolTip(Button9, "Notifications Status")
+        ToolTip1.SetToolTip(Button17, "Budget")
         Timer1.Interval = 100
         Timer1.Start()
         If photoList.Count > 0 Then
@@ -412,7 +407,7 @@ Public Class Dashboard
     End Sub
 
     Private Sub Button9_Click_1(sender As Object, e As EventArgs) Handles Button9.Click
-        Notifications.ShowDialog()
+        In_App_Message.ShowDialog()
     End Sub
 
     Private Sub Button12_Click(sender As Object, e As EventArgs) Handles Button12.Click
@@ -876,7 +871,7 @@ Public Class Dashboard
 
                         ' Only add groceries that have already expired (expiry date before today)
                         If expiryDate < today Then
-                            displayText &= groceryName & " Expired on " & expiryDate.ToShortDateString() & Environment.NewLine
+                            displayText &= "Expired Grocery: " & groceryName & " (Expired on " & expiryDate.ToShortDateString() & ")" & Environment.NewLine
                         End If
                     Next
 
@@ -1057,6 +1052,9 @@ Public Class Dashboard
     End Sub
 
     Private Sub Button16_Click(sender As Object, e As EventArgs) Handles Button16.Click
-        In_App_Message.ShowDialog()
+
+
+        Notifications.ShowDialog()
+
     End Sub
 End Class
