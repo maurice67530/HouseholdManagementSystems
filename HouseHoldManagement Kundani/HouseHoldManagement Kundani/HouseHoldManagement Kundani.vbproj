@@ -73,6 +73,12 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Budget.Designer.vb">
+      <DependentUpon>Budget.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Budget.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Chores.Designer.vb">
       <DependentUpon>Chores.vb</DependentUpon>
     </Compile>
@@ -182,6 +188,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Budget.resx">
+      <DependentUpon>Budget.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Dashboard.resx">
       <DependentUpon>Dashboard.vb</DependentUpon>
     </EmbeddedResource>
@@ -190,6 +199,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Login.resx">
       <DependentUpon>Login.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MealPlan.resx">
+      <DependentUpon>MealPlan.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>

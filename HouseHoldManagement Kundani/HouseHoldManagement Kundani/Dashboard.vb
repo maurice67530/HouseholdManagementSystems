@@ -3,7 +3,11 @@ Imports System.Data.OleDb
 Imports System.Net.Mail
 Imports System.Net
 Public Class Dashboard
-    Public Const connectionString As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Mudzunga\Source\Repos\maurice67530\HouseholdManagementSystems\HMS.accdb"
+    Public Property conn As New OleDbConnection(connectionString)
+    Public Const connectionString As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Zwivhuya\Source\Repos\maurice67530\HouseholdManagementSystems\HMS.accdb"
+
+
+    ' Public Const connectionString As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Mudzunga\Source\Repos\maurice67530\HouseholdManagementSystems\HMS.accdb"
     Private Sub Dashboard_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
         DisplayPhoto()
@@ -78,7 +82,7 @@ Public Class Dashboard
 
         ' update this connection string based  on my database confirguration
 
-        Dim connectionString As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source= C:\Users\Mudzunga\Source\Repos\maurice67530\HouseholdManagementSystems\HMS.accdb"
+        '   Dim connectionString As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source= C:\Users\Mudzunga\Source\Repos\maurice67530\HouseholdManagementSystems\HMS.accdb"
 
         Dim query As String = "SELECT [Amount], [Frequency] FROM [Expense]"
 
@@ -436,7 +440,7 @@ Public Class Dashboard
 
         Dim query As String = "SELECT Status, DueDate FROM Chores" ' Adjust query based on your table
 
-        Using connection As New OleDbConnection(HouseHoldManagment_Module.connectionString)
+        Using connection As New OleDbConnection(connectionString)
 
             Try
 
@@ -505,7 +509,7 @@ Public Class Dashboard
 
         Dim query As String = "SELECT ItemName, ExpiryDate FROM Inventory" ' Adjust query based on your table
 
-        Using connection As New OleDbConnection(HouseHoldManagment_Module.connectionString)
+        Using connection As New OleDbConnection(connectionString)
 
             Try
 
