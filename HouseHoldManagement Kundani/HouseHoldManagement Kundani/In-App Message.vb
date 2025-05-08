@@ -118,43 +118,43 @@ Public Class In_App_Message
     End Sub
 
 
-    Private Sub ComboBox1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ComboBox1.SelectedIndexChanged
+    Private Sub ComboBox1_SelectedIndexChanged(sender As Object, e As EventArgs)
 
     End Sub
-    Public Sub PopulateComboboxFromDatabase(ByRef comboBox As ComboBox)
-        Dim conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
-        Try
-            Debug.WriteLine("populate combobox successful")
-            'open the database connection
-            conn.Open()
+    'Public Sub PopulateComboboxFromDatabase(ByRef comboBox As ComboBox)
+    '    Dim conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
+    '    Try
+    '        Debug.WriteLine("populate combobox successful")
+    '        'open the database connection
+    '        conn.Open()
 
-            'retrieve the firstname and surname columns from the personaldetails tabel
-            Dim query As String = "SELECT FirstName, LastName FROM Users"
-            Dim cmd As New OleDbCommand(query, conn)
-            Dim reader As OleDbDataReader = cmd.ExecuteReader()
+    '        'retrieve the firstname and surname columns from the personaldetails tabel
+    '        Dim query As String = "SELECT FirstName, LastName FROM Users"
+    '        Dim cmd As New OleDbCommand(query, conn)
+    '        Dim reader As OleDbDataReader = cmd.ExecuteReader()
 
-            'bind the retrieved data to the combobox
-            ComboBox1.Items.Clear()
-            While reader.Read()
-                ComboBox1.Items.Add($"{reader("FullNames")} {reader("UserName")}")
-            End While
+    '        'bind the retrieved data to the combobox
+    '        ComboBox1.Items.Clear()
+    '        While reader.Read()
+    '            ComboBox1.Items.Add($"{reader("FullNames")} {reader("UserName")}")
+    '        End While
 
-            'close the database
-            reader.Close()
+    '        'close the database
+    '        reader.Close()
 
-        Catch ex As Exception
-            'handle any exeptions that may occur  
-            Debug.WriteLine("failed to populate combobox")
-            Debug.WriteLine($"Stack Trace: {ex.StackTrace}")
-            MessageBox.Show($"Error: {ex.StackTrace}")
+    '    Catch ex As Exception
+    '        'handle any exeptions that may occur  
+    '        Debug.WriteLine("failed to populate combobox")
+    '        Debug.WriteLine($"Stack Trace: {ex.StackTrace}")
+    '        MessageBox.Show($"Error: {ex.StackTrace}")
 
-        Finally
-            'close the database connection
-            If conn.State = ConnectionState.Open Then
-                conn.Close()
-            End If
-        End Try
-    End Sub
+    '    Finally
+    '        'close the database connection
+    '        If conn.State = ConnectionState.Open Then
+    '            conn.Close()
+    '        End If
+    '    End Try
+    'End Sub
 
     Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
         LoadNotifications()
