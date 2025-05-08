@@ -149,8 +149,38 @@ Public Class Dashboard
         PhotoGallery.ShowDialog()
     End Sub
 
+    Dim con As New OleDbConnection
     Private Sub Button9_Click_1(sender As Object, e As EventArgs) Handles btnInAppMessages.Click
-        In_App_Message.ShowDialog()
+
+
+
+        Dim FullNames = TextBox2.Text.Trim()
+
+
+        Dim cmd As New OleDbCommand("SELECT FullNames FROM Users WHERE Username = ? AND [Password] = ?", con)
+        cmd.Parameters.AddWithValue("?", FullNames)
+
+
+        con.Open()
+        Dim reader As OleDbDataReader = cmd.ExecuteReader()
+
+        If reader.Read() Then
+            Dim family As String = reader("FullNames").ToString()
+
+
+            MessageBox.Show("Login successful. Family: " & family, "Welcome!", MessageBoxButtons.OK, MessageBoxIcon.Information)
+
+
+            In_App_Message.TextBox2.Text = FullNames
+
+
+            In_App_Message.ShowDialog()
+            Me.Hide()
+        Else
+            MessageBox.Show("cannot show Notification.")
+        End If
+
+        con.Close()
     End Sub
 
     Private Sub Button12_Click(sender As Object, e As EventArgs) Handles Button12.Click

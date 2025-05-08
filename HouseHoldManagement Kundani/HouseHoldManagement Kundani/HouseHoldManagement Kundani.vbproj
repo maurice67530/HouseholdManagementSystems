@@ -123,6 +123,12 @@
     </Compile>
     <Compile Include="Household Class.vb" />
     <Compile Include="HouseHoldManagement Module.vb" />
+    <Compile Include="In-App Message.Designer.vb">
+      <DependentUpon>In-App Message.vb</DependentUpon>
+    </Compile>
+    <Compile Include="In-App Message.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Inventory.Designer.vb">
       <DependentUpon>Inventory.vb</DependentUpon>
     </Compile>
