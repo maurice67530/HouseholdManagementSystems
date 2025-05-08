@@ -276,4 +276,44 @@ Module Mulalo
 
 End Module
 
+Module Mulanga
+    Public Property conn As New OleDbConnection(connectionString)
+    Public Const connectionString As String = " Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Mulanga\Source\Repos\maurice67530\HouseholdManagementSystems\HMS.accdb"
+
+
+    Public Sub FilterChores(Frequency As String, Priority As String)
+        Dim taskTable As New DataTable()
+        Try
+            Dim Query As String = "SELECT * FROM Chores WHERE 1 = 1"
+
+            If Not String.IsNullOrEmpty(Frequency) Then
+                Query &= " AND Frequency = @Frequency"
+            End If
+            If Not String.IsNullOrEmpty(Priority) Then
+                Query &= " AND Priority = @Priority"
+            End If
+
+            Dim Command As New OleDb.OleDbCommand(Query, conn)
+
+            If Not String.IsNullOrEmpty(Frequency) Then
+                Command.Parameters.AddWithValue("@Frequency", Frequency)
+            End If
+
+
+            If Not String.IsNullOrEmpty(Priority) Then
+                Command.Parameters.AddWithValue("@Priority", Priority)
+            End If
+
+            Dim Adapter As New OleDb.OleDbDataAdapter(Command)
+            Adapter.Fill(taskTable)
+            chores.DGVChores.DataSource = taskTable
+
+        Catch ex As Exception
+            MsgBox("Error Filtering tasks: " & ex.Message, MsgBoxStyle.Critical, "Database error")
+        Finally
+            conn.Close()
+        End Try
+    End Sub
+End Module
+
 
