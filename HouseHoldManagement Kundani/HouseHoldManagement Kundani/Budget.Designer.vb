@@ -29,6 +29,7 @@ Partial Class Budget
         Me.TextBox2 = New System.Windows.Forms.TextBox()
         Me.TextBox3 = New System.Windows.Forms.TextBox()
         Me.Label7 = New System.Windows.Forms.Label()
+        Me.Label6 = New System.Windows.Forms.Label()
         Me.TextBox4 = New System.Windows.Forms.TextBox()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Label3 = New System.Windows.Forms.Label()
@@ -39,7 +40,6 @@ Partial Class Budget
         Me.DateTimePicker2 = New System.Windows.Forms.DateTimePicker()
         Me.Label13 = New System.Windows.Forms.Label()
         Me.TextBox7 = New System.Windows.Forms.TextBox()
-        Me.Label6 = New System.Windows.Forms.Label()
         Me.DateTimePicker1 = New System.Windows.Forms.DateTimePicker()
         Me.Label10 = New System.Windows.Forms.Label()
         Me.ComboBox1 = New System.Windows.Forms.ComboBox()
@@ -110,6 +110,16 @@ Partial Class Budget
         Me.Label7.Size = New System.Drawing.Size(41, 15)
         Me.Label7.TabIndex = 48
         Me.Label7.Text = "Label7"
+        '
+        'Label6
+        '
+        Me.Label6.AutoSize = True
+        Me.Label6.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.Label6.Location = New System.Drawing.Point(16, 153)
+        Me.Label6.Name = "Label6"
+        Me.Label6.Size = New System.Drawing.Size(41, 15)
+        Me.Label6.TabIndex = 47
+        Me.Label6.Text = "Label6"
         '
         'TextBox4
         '
@@ -212,16 +222,6 @@ Partial Class Budget
         Me.TextBox7.Size = New System.Drawing.Size(161, 20)
         Me.TextBox7.TabIndex = 46
         '
-        'Label6
-        '
-        Me.Label6.AutoSize = True
-        Me.Label6.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        Me.Label6.Location = New System.Drawing.Point(16, 153)
-        Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(41, 15)
-        Me.Label6.TabIndex = 47
-        Me.Label6.Text = "Label6"
-        '
         'DateTimePicker1
         '
         Me.DateTimePicker1.Location = New System.Drawing.Point(85, 103)
@@ -300,7 +300,7 @@ Partial Class Budget
         'Button2
         '
         Me.Button2.Image = CType(resources.GetObject("Button2.Image"), System.Drawing.Image)
-        Me.Button2.Location = New System.Drawing.Point(25, 403)
+        Me.Button2.Location = New System.Drawing.Point(34, 389)
         Me.Button2.Name = "Button2"
         Me.Button2.Size = New System.Drawing.Size(75, 51)
         Me.Button2.TabIndex = 43
