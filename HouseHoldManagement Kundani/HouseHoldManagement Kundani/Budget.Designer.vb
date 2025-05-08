@@ -300,7 +300,7 @@ Partial Class Budget
         'Button2
         '
         Me.Button2.Image = CType(resources.GetObject("Button2.Image"), System.Drawing.Image)
-        Me.Button2.Location = New System.Drawing.Point(34, 389)
+        Me.Button2.Location = New System.Drawing.Point(28, 403)
         Me.Button2.Name = "Button2"
         Me.Button2.Size = New System.Drawing.Size(75, 51)
         Me.Button2.TabIndex = 43
