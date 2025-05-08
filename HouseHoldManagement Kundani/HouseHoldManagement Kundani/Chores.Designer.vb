@@ -52,6 +52,7 @@ Partial Class Chores
         Me.DateTimePicker1 = New System.Windows.Forms.DateTimePicker()
         Me.txtdes = New System.Windows.Forms.TextBox()
         Me.Label10 = New System.Windows.Forms.Label()
+        Me.cmbChore = New System.Windows.Forms.ComboBox()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel2.SuspendLayout()
         Me.Panel1.SuspendLayout()
@@ -255,6 +256,7 @@ Partial Class Chores
         '
         Me.Panel1.BackColor = System.Drawing.SystemColors.ActiveCaption
         Me.Panel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.Panel1.Controls.Add(Me.cmbChore)
         Me.Panel1.Controls.Add(Me.NumericUpDown1)
         Me.Panel1.Controls.Add(Me.Label2)
         Me.Panel1.Controls.Add(Me.Label1)
@@ -345,6 +347,15 @@ Partial Class Chores
         Me.Label10.Size = New System.Drawing.Size(0, 13)
         Me.Label10.TabIndex = 62
         '
+        'cmbChore
+        '
+        Me.cmbChore.FormattingEnabled = True
+        Me.cmbChore.Location = New System.Drawing.Point(265, 14)
+        Me.cmbChore.Name = "cmbChore"
+        Me.cmbChore.Size = New System.Drawing.Size(50, 21)
+        Me.cmbChore.TabIndex = 28
+        Me.cmbChore.Visible = False
+        '
         'Chores
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -407,4 +418,5 @@ Partial Class Chores
     Friend WithEvents DateTimePicker1 As DateTimePicker
     Friend WithEvents txtdes As TextBox
     Friend WithEvents Label10 As Label
+    Friend WithEvents cmbChore As ComboBox
 End Class

@@ -1,27 +1,146 @@
 ﻿Imports System.Data.OleDb
 Public Class Chores
     Public Property conn As New OleDbConnection(Rinae.connectionString)
+    Dim tooltip As New ToolTip
     'Public Property connn As New OleDbConnection(Masindi.connectionString)
     'Public Property conn As New OleDbConnection(Murangi.connectionString)
-    Private Sub Chores_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        cmbpri.Items.AddRange(New String() {"Low", "Medium", "High"})
-        cmbstatus.Items.AddRange(New String() {"Not started", "In progress", "Completed"})
-        cmbfre.Items.AddRange(New String() {"Daily", "Weekly", "Monthly"})
+    Private Sub chores_Load(sender As System.Object, e As System.EventArgs) Handles MyBase.Load
+        Dim connection As New OleDbConnection(Murangi.connectionString)
 
-        Dim tooltip As New ToolTip
-        tooltip.SetToolTip(Button1, "Dashboard")
-        tooltip.SetToolTip(Button2, "Mark All as Complete")
-        tooltip.SetToolTip(Button3, "Refresh")
+        tooltip.SetToolTip(Button1, "Save")
+        tooltip.SetToolTip(Button2, "Edit")
         tooltip.SetToolTip(Button4, "Delete")
-        tooltip.SetToolTip(Button5, "Edit")
-        tooltip.SetToolTip(Button6, "Submit")
-        tooltip.SetToolTip(Button7, "Highlight")
-        tooltip.SetToolTip(Button8, "Filter")
-        tooltip.SetToolTip(Button9, "Sort")
+        tooltip.SetToolTip(Button5, "Refresh")
+        tooltip.SetToolTip(Button9, "Mark All As complete")
+        tooltip.SetToolTip(Button3, "Dashboard")
 
-        PopulateComboboxFromDatabase(cmbassi)
+        ' Check database connectivity 
 
-        loadChoresFromDatabase()
+        Try
+            Debug.WriteLine("form load initialized successfully")
+
+            ' Create a new OleDbConnection object and open the connection  
+
+            connection.Open()
+
+            ' Display the connection status on a button with a green background  
+            'Label11.Text = "Connected"
+            'Label11.BackColor = Color.Green
+            'Label11.ForeColor = Color.White
+
+
+
+        Catch ex As Exception
+
+            ' Display an error message  
+            Debug.WriteLine($"Failed to initialize components from database: {ex.Message}")
+            Debug.WriteLine($"Stack Trace: {ex.StackTrace}")
+            MessageBox.Show("Error connecting to the database" & ex.Message, "Database Connection Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+
+            ' Display the connection status on a button with a red background  
+            'Label11.Text = "Not Connected"
+            'Label11.BackColor = Color.Red
+            'Label11.ForeColor = Color.White
+
+
+
+        Finally
+
+
+            PopulateComboboxFromDatabase(cmbassi)
+            loadChoresFromDatabase()
+            ' Close the database connection  
+            connection.Close()
+        End Try
+
+        'chores
+        LoadChores()
+        CheckRecurringChores()
+        CheckPendingChores() ' Check pending chores when the form opens
+
+
+
+    End Sub
+    Private Sub LoadChores()
+        Using conn As New OleDbConnection(Murangi.connectionString)
+            Dim query As String = "SELECT Title FROM Chores"
+            Dim cmd As New OleDbCommand(query, conn)
+            Dim adapter As New OleDbDataAdapter(cmd)
+            Dim table As New DataTable()
+            adapter.Fill(table)
+
+            cmbChore.DataSource = table
+            cmbChore.ValueMember = "Title"
+
+
+        End Using
+    End Sub
+    Private Sub CheckPendingChores()
+
+        Using con As New OleDbConnection(Murangi.connectionString)
+            Dim query As String = "SELECT Title, DueDate FROM Chores WHERE Status = 'In Progress' AND DueDate"
+
+            Using cmd As New OleDbCommand(query, con)
+                Try
+                    con.Open()
+                    Dim reader As OleDbDataReader = cmd.ExecuteReader()
+
+                    Dim pendingChores As New List(Of String)
+
+                    While reader.Read()
+                        Dim choreName As String = reader("Title").ToString()
+                        Dim dueDate As DateTime = Convert.ToDateTime(reader("DueDate"))
+                        pendingChores.Add(choreName & " (Due: " & dueDate.ToString("yyyy-MM-dd") & ")")
+                    End While
+
+                    reader.Close()
+
+                    ' Display reminder if there are pending chores
+                    If pendingChores.Count > 0 Then
+                        Dim message As String = "Pending Chores Reminder:" & vbCrLf & String.Join(vbCrLf, pendingChores)
+                        MessageBox.Show(message, "Chore Reminder", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                    End If
+
+                Catch ex As Exception
+                    MessageBox.Show("Error: " & ex.Message)
+                End Try
+            End Using
+        End Using
+    End Sub
+    Private Sub CheckRecurringChores()
+
+
+        Using con As New OleDbConnection(Murangi.connectionString)
+            Dim query As String = "SELECT Title FROM Chores WHERE Frequency <> 'One-Time' AND Frequency IS NOT NULL"
+
+            Using cmd As New OleDbCommand(query, con)
+
+                Try
+
+                    con.Open()
+                    Dim reader As OleDbDataReader = cmd.ExecuteReader()
+
+                    Dim recurringChores As New List(Of String)
+
+                    While reader.Read()
+                        recurringChores.Add(reader("Title").ToString())
+
+                    End While
+
+                    reader.Close()
+
+                    ' Display message if there are recurring chores
+                    If recurringChores.Count > 0 Then
+                        Dim message As String = "Recurring Chores Found:" & vbCrLf & String.Join(vbCrLf, recurringChores)
+                        MessageBox.Show(message, "Recurring Chores", MessageBoxButtons.OK, MessageBoxIcon.Information)
+
+                    End If
+
+                Catch ex As Exception
+                    MessageBox.Show("Error: " & ex.Message)
+                End Try
+            End Using
+        End Using
     End Sub
     Private Sub Button6_Click(sender As Object, e As EventArgs)
         conn.Open()
@@ -351,4 +470,160 @@ Public Class Chores
     Private Sub cmbassi_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbassi.SelectedIndexChanged
 
     End Sub
+
+    Private Sub Button9_Click_1(sender As Object, e As EventArgs) Handles Button9.Click
+
+        Dim choreID As Integer = GetSelectedChoreID()
+
+        If choreID = 0 Then
+
+            MsgBox("Please select a chore first.", MsgBoxStyle.Exclamation, "Selection Required")
+
+            Return
+
+        End If
+
+        CompleteChore(choreID)
+
+        ' Refresh DataGridView after updating
+        loadChoresFromDatabase()
+        CheckPendingChores()
+    End Sub
+    Private Function GetSelectedChoreID() As Integer
+        If DataGridView1.SelectedRows.Count > 0 Then
+            Return Convert.ToInt32(DataGridView1.SelectedRows(0).Cells("ID").Value)
+        End If
+        Return 0 ' Return 0 if no row is selected
+    End Function
+    Private Sub UpdateChoreStatus(choreID As Integer, status As String)
+        Dim connString As String = Murangi.connectionString
+        Using conn As New OleDb.OleDbConnection(connString)
+            Try
+                conn.Open()
+                Dim query As String = "UPDATE Chores SET Status = @Status WHERE ID = @ID"
+                Using cmd As New OleDb.OleDbCommand(query, conn)
+                    cmd.Parameters.AddWithValue("@Status", status)
+                    cmd.Parameters.AddWithValue("@ID", choreID)
+                    cmd.ExecuteNonQuery()
+                End Using
+            Catch ex As Exception
+                MsgBox("Error updating chore status: " & ex.Message, MsgBoxStyle.Critical, "Error")
+            End Try
+        End Using
+    End Sub
+    ' Method to complete the selected chore and auto-assign the next available person
+    Private Sub CompleteChore(choreID As Integer)
+        Dim connString As String = Murangi.connectionString
+        Using conn As New OleDb.OleDbConnection(connString)
+            Try
+                conn.Open()
+
+                ' Get chore details
+                Dim query As String = "SELECT Title, AssignedTo, Frequency, Recurring, DueDate FROM Chores WHERE ID = @ID"
+                Using cmd As New OleDb.OleDbCommand(query, conn)
+                    cmd.Parameters.AddWithValue("@ID", choreID)
+                    Using reader As OleDb.OleDbDataReader = cmd.ExecuteReader()
+                        If reader.Read() Then
+                            Dim title As String = reader("Title").ToString()
+                            Dim assignedTo As String = reader("AssignedTo").ToString()
+                            Dim frequency As String = reader("Frequency").ToString()
+                            Dim recurring As String = reader("Recurring").ToString()
+                            Dim dueDate As Date = Convert.ToDateTime(reader("DueDate"))
+
+                            ' Mark as completed
+                            UpdateChoreStatus(choreID, "Completed")
+
+                            If recurring.ToLower() = "yes" Then
+                                ' Get the next available person
+                                Dim nextPerson As String = GetNextAvailablePerson()
+
+                                ' Calculate the next due date
+                                Dim nextDueDate As Date = CalculateNextDueDate(frequency, dueDate)
+
+                                ' Update only the selected chore with the next person and due date
+                                UpdateRecurringChore(choreID, nextPerson, nextDueDate)
+
+                                MsgBox($"Following Chore: '{title}' completed. Assigned to {nextPerson} with new due date {nextDueDate.ToShortDateString()}.", MsgBoxStyle.Information, "Chore Updated")
+                            Else
+                                MsgBox($"Following Chore: '{title}' completed and not recurring.", MsgBoxStyle.Information, "Chore Completed")
+                            End If
+                        End If
+                    End Using
+                End Using
+            Catch ex As Exception
+                MsgBox("Error: " & ex.Message, MsgBoxStyle.Critical, "Error")
+            End Try
+        End Using
+    End Sub
+
+
+
+    Private Function GetNextAvailablePerson() As String
+        Dim connString As String = Murangi.connectionString
+        Dim availablePerson As String = String.Empty
+        Dim assignedPeople As New List(Of String)
+
+        ' Get already assigned people from DataGridView  
+        For Each row As DataGridViewRow In DataGridView1.Rows
+            If row.Cells("AssignedTo").Value IsNot Nothing Then
+                assignedPeople.Add(row.Cells("AssignedTo").Value.ToString())
+            End If
+        Next
+
+        ' Get an available person from the database who is NOT in DataGridView or already assigned  
+        Using conn As New OleDb.OleDbConnection(connString)
+            Try
+                conn.Open()
+                Dim query As String = "SELECT TOP 1 FirstName, LastName FROM PersonalDetails " &
+                                  "WHERE FirstName + ' ' + LastName NOT IN (" &
+                                  String.Join(",", assignedPeople.Select(Function(p) "'" & p & "'")) & ") " &
+                                  "ORDER BY FirstName, LastName"
+
+                Using cmd As New OleDb.OleDbCommand(query, conn)
+                    Dim reader As OleDb.OleDbDataReader = cmd.ExecuteReader()
+                    If reader.Read() Then
+                        availablePerson = reader("FirstName").ToString() & " " & reader("LastName").ToString()
+                    End If
+                End Using
+            Catch ex As Exception
+                MsgBox("Error retrieving next available person: " & ex.Message, MsgBoxStyle.Critical, "Error")
+            End Try
+        End Using
+
+        Return availablePerson
+    End Function
+
+    ' Calculate the next due date based on frequency (Daily, Weekly, Monthly)
+    Private Function CalculateNextDueDate(frequency As String, lastDueDate As Date) As Date
+        Select Case frequency.ToLower()
+            Case "daily"
+                Return lastDueDate.AddDays(1)
+            Case "weekly"
+                Return lastDueDate.AddDays(7)
+            Case "monthly"
+                Return lastDueDate.AddMonths(1)
+            Case Else
+                Return lastDueDate
+        End Select
+    End Function
+
+    ' Update only the selected chore with the next person and new due date
+    Private Sub UpdateRecurringChore(choreID As Integer, nextPerson As String, nextDueDate As Date)
+        Dim connString As String = Murangi.connectionString
+        Using conn As New OleDb.OleDbConnection(connString)
+            Try
+                conn.Open()
+                Dim query As String = "UPDATE Chores SET AssignedTo = @AssignedTo, DueDate = @DueDate WHERE ID = @ID"
+                Using cmd As New OleDb.OleDbCommand(query, conn)
+                    cmd.Parameters.AddWithValue("@AssignedTo", nextPerson)
+                    cmd.Parameters.AddWithValue("@DueDate", nextDueDate)
+                    cmd.Parameters.AddWithValue("@ID", choreID)
+                    cmd.ExecuteNonQuery()
+                End Using
+            Catch ex As Exception
+                MsgBox("Error updating recurring chore: " & ex.Message, MsgBoxStyle.Critical, "Error")
+            End Try
+        End Using
+    End Sub
+
 End Class
