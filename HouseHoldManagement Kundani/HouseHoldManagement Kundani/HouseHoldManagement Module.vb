@@ -66,7 +66,42 @@ End Module
 Module Module1
     Public Property conn As New OleDbConnection(connectionString)
     Public Const connectionString As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Zwivhuya\Source\Repos\maurice67530\HouseholdManagementSystems\HMS.accdb"
+    Public Sub FilterBudget(Frequency As String)
+        Dim BudgetTable As New DataTable()
 
+
+        Try
+            conn.Open()
+            Dim query As String = "Select * FROM Budget WHERE 1=1"
+
+            If Not String.IsNullOrEmpty(Frequency) Then
+                query &= " AND Frequency = @Frequency"
+            End If
+
+            'If Not String.IsNullOrEmpty(StartDate) Then
+            '    query &= " AND StartDate = @StartDate"
+            'End If
+
+            Dim command As New OleDb.OleDbCommand(query, conn)
+
+            If Not String.IsNullOrEmpty(Frequency) Then
+                command.Parameters.AddWithValue("@Frequency", Frequency)
+            End If
+
+            'If Not String.IsNullOrEmpty(Calories) Then
+            '    command.Parameters.AddWithValue("@StartDate", StartDate)
+            'End If
+
+            Dim adapter As New OleDb.OleDbDataAdapter(command)
+            adapter.Fill(BudgetTable)
+            Budget.DataGridView1.DataSource = BudgetTable
+
+        Catch ex As Exception
+            MsgBox("Error filtering Budget: " & ex.Message, MsgBoxStyle.Critical, "Database Error")
+        Finally
+            conn.Close()
+        End Try
+    End Sub
 
 
     Public Sub ClearControls(ByVal form As Form)
@@ -239,7 +274,42 @@ Module Cruwza
             conn.Close()
         End Try
     End Sub
+    'Public Sub FilterBudget(Frequency As String)
+    '    Dim BudgetTable As New DataTable()
 
+
+    '    Try
+    '        conn.Open()
+    '        Dim query As String = "Select * FROM Budget WHERE 1=1"
+
+    '        If Not String.IsNullOrEmpty(Frequency) Then
+    '            query &= " AND Frequency = @Frequency"
+    '        End If
+
+    '        'If Not String.IsNullOrEmpty(StartDate) Then
+    '        '    query &= " AND StartDate = @StartDate"
+    '        'End If
+
+    '        Dim command As New OleDb.OleDbCommand(query, conn)
+
+    '        If Not String.IsNullOrEmpty(Frequency) Then
+    '            command.Parameters.AddWithValue("@Frequency", Frequency)
+    '        End If
+
+    '        'If Not String.IsNullOrEmpty(Calories) Then
+    '        '    command.Parameters.AddWithValue("@StartDate", StartDate)
+    '        'End If
+
+    '        Dim adapter As New OleDb.OleDbDataAdapter(command)
+    '        adapter.Fill(BudgetTable)
+    '        Budget.DataGridView1.DataSource = BudgetTable
+
+    '    Catch ex As Exception
+    '        MsgBox("Error filtering Budget: " & ex.Message, MsgBoxStyle.Critical, "Database Error")
+    '    Finally
+    '        conn.Close()
+    '    End Try
+    'End Sub
 End Module
 Module Xiluva
     Public Const connectionString As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Xiluva\Source\Repos\maurice67530\HouseholdManagementSystems\HMS.accdb"
@@ -274,6 +344,46 @@ Module Mulalo
     Public Property conn As New OleDbConnection(connectionString)
     Public Const connectionString As String = " Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Austin\Source\Repos\maurice67530\HouseholdManagementSystems\HMS.accdb"
 
+End Module
+
+Module Mulanga
+    Public Property conn As New OleDbConnection(connectionString)
+    Public Const connectionString As String = " Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Mulanga\Source\Repos\maurice67530\HouseholdManagementSystems\HMS.accdb"
+
+
+    Public Sub FilterChores(Frequency As String, Priority As String)
+        Dim taskTable As New DataTable()
+        Try
+            Dim Query As String = "SELECT * FROM Chores WHERE 1 = 1"
+
+            If Not String.IsNullOrEmpty(Frequency) Then
+                Query &= " AND Frequency = @Frequency"
+            End If
+            If Not String.IsNullOrEmpty(Priority) Then
+                Query &= " AND Priority = @Priority"
+            End If
+
+            Dim Command As New OleDb.OleDbCommand(Query, conn)
+
+            If Not String.IsNullOrEmpty(Frequency) Then
+                Command.Parameters.AddWithValue("@Frequency", Frequency)
+            End If
+
+
+            If Not String.IsNullOrEmpty(Priority) Then
+                Command.Parameters.AddWithValue("@Priority", Priority)
+            End If
+
+            Dim Adapter As New OleDb.OleDbDataAdapter(Command)
+            Adapter.Fill(taskTable)
+            chores.DGVChores.DataSource = taskTable
+
+        Catch ex As Exception
+            MsgBox("Error Filtering tasks: " & ex.Message, MsgBoxStyle.Critical, "Database error")
+        Finally
+            conn.Close()
+        End Try
+    End Sub
 End Module
 
 
