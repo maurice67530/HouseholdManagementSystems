@@ -6,7 +6,7 @@ Imports System.Runtime.InteropServices
 Imports System.Windows.Forms.DataVisualization.Charting
 
 Public Class Dashboard
-    Public Const connectionString As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Mudzunga\Source\Repos\maurice67530\HouseholdManagementSystems\HMS.accdb"
+    Public Const connectionString As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=\\MUDAUMURANGI\Users\Murangi\Source\Repos\maurice67530\HouseholdManagementSystems\HMS.accdb"
 
     ' Daily tips list
     Dim tips As New List(Of String) From {
@@ -851,7 +851,7 @@ Public Class Dashboard
         backupScheduleAlerts.Clear()
         Label19.Text = ""
 
-        Dim con As New OleDbConnection("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Mudzunga\Source\Repos\maurice67530\HouseholdManagementSystems\HMS.accdb")
+        Dim con As New OleDbConnection("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=\\MUDAUMURANGI\Users\Murangi\Source\Repos\maurice67530\HouseholdManagementSystems\HMS.accdb")
         con.Open()
         Dim query As String = "SELECT EventType, DateOfEvent, AssignedTo FROM FamilySchedule"
         Dim cmd As New OleDbCommand(query, con)
