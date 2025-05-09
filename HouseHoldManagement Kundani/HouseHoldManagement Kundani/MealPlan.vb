@@ -8,7 +8,7 @@ Public Class MealPlan
     ' Dim conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
     Public Property conn As New OleDbConnection(connectionString)
     ' Connection string using relative path to the database
-    Public Const connectionString As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Zwivhuya\Source\Repos\maurice67530\HouseholdManagementSystems\HMS.accdb;Persist Security Info=False;"
+    Public Const connectionString As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=\\MUDAUMURANGI\Users\Murangi\Source\Repos\maurice67530\HouseholdManagementSystems\HMS.accdb"
 
     Private Sub btnEdit_Click(sender As Object, e As EventArgs) Handles btnEdit.Click
         Try
@@ -241,7 +241,7 @@ Public Class MealPlan
             If confirmationResult = DialogResult.Yes Then
                 ' Proceed with deletion  
                 Try
-                    Using conn As New OleDbConnection(Rinae.connectionString)
+                    Using conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
                         conn.Open()
 
                         ' Create the delete command  
@@ -435,7 +435,7 @@ Public Class MealPlan
     Private Sub btnFilter_Click(sender As Object, e As EventArgs) Handles btnFilter.Click
 
         Dim SelectedCalories As String = If(ComboBox1.SelectedItem IsNot Nothing, ComboBox1.SelectedItem.ToString(), "")
-        Module1.FilterMealPlan(SelectedCalories)
+        HouseHoldManagment_Module.FilterMealPlan(SelectedCalories)
     End Sub
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click

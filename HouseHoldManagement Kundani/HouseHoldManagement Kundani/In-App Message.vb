@@ -177,7 +177,7 @@ Public Class In_App_Message
             Exit Sub
         End If
 
-        Dim con As New OleDbConnection(Murangi.connectionString)
+        Dim con As New OleDbConnection(HouseHoldManagment_Module.connectionString)
         Dim cmd As New OleDbCommand("INSERT INTO NotificationReplies (NotificationType, OriginalMessage, ReplyMessage, ReplyDate) VALUES (?, ?, ?, ?)", con)
         'cmd.Parameters.AddWithValue("?", currentUserName)
         cmd.Parameters.AddWithValue("?", selectedMessageType)

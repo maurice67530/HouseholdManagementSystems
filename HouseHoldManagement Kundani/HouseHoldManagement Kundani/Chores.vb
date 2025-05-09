@@ -6,7 +6,7 @@ Imports System.Net.Mail
 Public Class chores
     Private toolTip1 As New ToolTip()
     Public Property conn As New OleDbConnection(connectionString)
-    Public Const connectionString As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Murangi\Documents\Visual Studio 2010\Projects\HouseHoldManagement\Rangies.accdb"
+    Public Const connectionString As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=\\MUDAUMURANGI\Users\Murangi\Source\Repos\maurice67530\HouseholdManagementSystems\HMS.accdb"
     Private Sub chores_Load(sender As System.Object, e As System.EventArgs) Handles MyBase.Load
         Dim connection As New OleDbConnection(connectionString)
 
@@ -404,7 +404,7 @@ Public Class chores
         Dim selectedFrequency As String = If(Cmbfre.SelectedItem IsNot Nothing, Cmbfre.SelectedItem.ToString(), "")
         Dim selectedPriority As String = If(cmbpriority.SelectedItem IsNot Nothing, cmbpriority.SelectedItem.ToString(), "")
 
-        Mulanga.FilterChores(selectedFrequency, selectedPriority)
+        HouseHoldManagment_Module.FilterChores(selectedFrequency, selectedPriority)
     End Sub
 
     Private Sub Button8_Click(sender As Object, e As EventArgs) Handles Button8.Click
@@ -625,7 +625,7 @@ Public Class chores
 
     ' Method to complete the selected chore and auto-assign the next available person
     Private Sub CompleteChore(choreID As Integer)
-        Dim connString As String = Mulanga.connectionString
+        Dim connString As String = HouseHoldManagment_Module.connectionString
         Using conn As New OleDb.OleDbConnection(connString)
             Try
                 conn.Open()
@@ -670,7 +670,7 @@ Public Class chores
 
     ' Update only the selected chore status to "Completed"
     Private Sub UpdateChoreStatus(choreID As Integer, status As String)
-        Dim connString As String = Mulanga.connectionString
+        Dim connString As String = HouseHoldManagment_Module.connectionString
         Using conn As New OleDb.OleDbConnection(connString)
             Try
                 conn.Open()
@@ -688,7 +688,7 @@ Public Class chores
 
     ' Get the next available person who is not already assigned in DataGridView or database  
     Private Function GetNextAvailablePerson() As String
-        Dim connString As String = Mulanga.connectionString
+        Dim connString As String = HouseHoldManagment_Module.connectionString
         Dim availablePerson As String = String.Empty
         Dim assignedPeople As New List(Of String)
 
@@ -738,7 +738,7 @@ Public Class chores
 
     ' Update only the selected chore with the next person and new due date
     Private Sub UpdateRecurringChore(choreID As Integer, nextPerson As String, nextDueDate As Date)
-        Dim connString As String = Mulanga.connectionString
+        Dim connString As String = HouseHoldManagment_Module.connectionString
         Using conn As New OleDb.OleDbConnection(connString)
             Try
                 conn.Open()
