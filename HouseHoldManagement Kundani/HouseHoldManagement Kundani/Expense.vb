@@ -3,7 +3,7 @@ Imports System.Net.Mail
 Imports System.Net
 Imports System.Data.OleDb
 Public Class Expense
-    'Public Const connectionString As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\khodani\Source\Repos\maurice67530\HouseholdManagementSystems\HMS.accdb"
+
     Dim conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
 
     ' Create a ToolTip object

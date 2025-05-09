@@ -2,7 +2,7 @@
 Imports System.Data.OleDb
 Public Class Budget
     Public Property conn As New OleDbConnection(connectionString)
-    Public Const connectionString As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=\\MUDAUMURANGI\Users\Murangi\Source\Repos\maurice67530\HouseholdManagementSystems\HMS.accdb"
+
 
     Private Sub Button1_Click(sender As Object, e As EventArgs)
         Dim income, rent, utilities, groceries, otherExpenses As Decimal

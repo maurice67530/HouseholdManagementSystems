@@ -6,7 +6,6 @@ Imports System.Runtime.InteropServices
 Imports System.Windows.Forms.DataVisualization.Charting
 
 Public Class Dashboard
-    Public Const connectionString As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=\\MUDAUMURANGI\Users\Murangi\Source\Repos\maurice67530\HouseholdManagementSystems\HMS.accdb"
 
     ' Daily tips list
     Dim tips As New List(Of String) From {
@@ -19,6 +18,7 @@ Public Class Dashboard
     "Small tasks done daily keep chores away.",
     "Involve everyone – teamwork works best!"
 }
+
 
 
     Private Sub Dashboard_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -149,39 +149,39 @@ Public Class Dashboard
         PhotoGallery.ShowDialog()
     End Sub
 
-    Dim con As New OleDbConnection
-    Private Sub Button9_Click_1(sender As Object, e As EventArgs) Handles btnInAppMessages.Click
+    'Private Sub Button9_Click_1(sender As Object, e As EventArgs) Handles btnInAppMessages.Click
+    '    Using con As OleDbConnection = Getconnection()
 
 
-
-        Dim FullNames = TextBox2.Text.Trim()
-
-
-        Dim cmd As New OleDbCommand("SELECT FullNames FROM Users WHERE Username = ? AND [Password] = ?", con)
-        cmd.Parameters.AddWithValue("?", FullNames)
+    '        Dim FullNames = TextBox2.Text.Trim()
 
 
-        con.Open()
-        Dim reader As OleDbDataReader = cmd.ExecuteReader()
-
-        If reader.Read() Then
-            Dim family As String = reader("FullNames").ToString()
+    '        Dim cmd As New OleDbCommand("SELECT FullNames FROM Users WHERE Username = ? AND [Password] = ?", con)
+    '        cmd.Parameters.AddWithValue("?", FullNames)
 
 
-            MessageBox.Show("Login successful. Family: " & family, "Welcome!", MessageBoxButtons.OK, MessageBoxIcon.Information)
+    '        con.Open()
+    '        Dim reader As OleDbDataReader = cmd.ExecuteReader()
+
+    '        If reader.Read() Then
+    '            Dim family As String = reader("FullNames").ToString()
 
 
-            In_App_Message.TextBox2.Text = FullNames
+    '            MessageBox.Show("Login successful. Family: " & family, "Welcome!", MessageBoxButtons.OK, MessageBoxIcon.Information)
 
 
-            In_App_Message.ShowDialog()
-            Me.Hide()
-        Else
-            MessageBox.Show("cannot show Notification.")
-        End If
+    '            In_App_Message.TextBox2.Text = FullNames
 
-        con.Close()
-    End Sub
+
+    '            In_App_Message.ShowDialog()
+    '            Me.Hide()
+    '        Else
+    '            MessageBox.Show("cannot show Notification.")
+    '        End If
+
+    '        con.Close()
+    '    End Using
+    'End Sub
 
     Private Sub Button12_Click(sender As Object, e As EventArgs) Handles Button12.Click
         Expense.ShowDialog()
@@ -479,7 +479,8 @@ Public Class Dashboard
 
     Private Function GetTotalExpenses() As Double
         Try
-            Using con As New OleDbConnection("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=\\MUDAUMURANGI\Users\Murangi\Source\Repos\maurice67530\HouseholdManagementSystems\HMS.accdb")
+
+            Using con As OleDbConnection = Getconnection()
                 con.Open()
                 Dim cmd As New OleDbCommand("SELECT SUM(Amount) FROM Expense", con)
                 Dim result = cmd.ExecuteScalar()
@@ -493,7 +494,7 @@ Public Class Dashboard
 
     Private Function GetTotalIncome() As Double
         Try
-            Using con As New OleDbConnection("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\\MUDAUMURANGI\Users\Murangi\Source\Repos\maurice67530\HouseholdManagementSystems\HMS.accdb")
+            Using con As OleDbConnection = Getconnection()
                 con.Open()
                 Dim cmd As New OleDbCommand("SELECT SUM(Totalincome) FROM Expense", con)
                 Dim result = cmd.ExecuteScalar()
@@ -527,29 +528,29 @@ Public Class Dashboard
     Private Sub LoadChart()
 
 
-        Dim con As New OleDbConnection("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=\\MUDAUMURANGI\Users\Murangi\Source\Repos\maurice67530\HouseholdManagementSystems\HMS.accdb")
-        Dim cmd As New OleDbCommand("SELECT Tags, SUM(Amount) AS Total FROM Expense GROUP BY Tags", con)
-        Dim reader As OleDbDataReader
+        Using con As OleDbConnection = Getconnection()
+            Dim cmd As New OleDbCommand("SELECT Tags, SUM(Amount) AS Total FROM Expense GROUP BY Tags", con)
+            Dim reader As OleDbDataReader
 
-        Chart2.Series.Clear()
-        Dim series As New Series("Expense")
-        series.ChartType = SeriesChartType.Bar ' Set to Bar chart
+            Chart2.Series.Clear()
+            Dim series As New Series("Expense")
+            series.ChartType = SeriesChartType.Bar ' Set to Bar chart
 
-        Try
-            con.Open()
-            reader = cmd.ExecuteReader()
-            While reader.Read()
-                If Not IsDBNull(reader("Tags")) AndAlso Not IsDBNull(reader("Total")) Then
-                    series.Points.AddXY(reader("Tags").ToString(), Convert.ToDouble(reader("Total")))
-                End If
-            End While
-            Chart2.Series.Add(series)
-        Catch ex As Exception
-            MessageBox.Show("Error loading chart: " & ex.Message)
-        Finally
-            con.Close()
-        End Try
-
+            Try
+                con.Open()
+                reader = cmd.ExecuteReader()
+                While reader.Read()
+                    If Not IsDBNull(reader("Tags")) AndAlso Not IsDBNull(reader("Total")) Then
+                        series.Points.AddXY(reader("Tags").ToString(), Convert.ToDouble(reader("Total")))
+                    End If
+                End While
+                Chart2.Series.Add(series)
+            Catch ex As Exception
+                MessageBox.Show("Error loading chart: " & ex.Message)
+            Finally
+                con.Close()
+            End Try
+        End Using
     End Sub
 
     Private Sub LoadUpcomingMeals()
@@ -851,28 +852,29 @@ Public Class Dashboard
         backupScheduleAlerts.Clear()
         Label19.Text = ""
 
-        Dim con As New OleDbConnection("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=\\MUDAUMURANGI\Users\Murangi\Source\Repos\maurice67530\HouseholdManagementSystems\HMS.accdb")
-        con.Open()
-        Dim query As String = "SELECT EventType, DateOfEvent, AssignedTo FROM FamilySchedule"
-        Dim cmd As New OleDbCommand(query, con)
-        Dim reader As OleDbDataReader = cmd.ExecuteReader()
+        Using con As OleDbConnection = Getconnection()
+            con.Open()
+            Dim query As String = "SELECT EventType, DateOfEvent, AssignedTo FROM FamilySchedule"
+            Dim cmd As New OleDbCommand(query, con)
+            Dim reader As OleDbDataReader = cmd.ExecuteReader()
 
-        While reader.Read()
-            Dim eventText As String = $"Family Schedule:{reader("DateOfEvent"):dd MMM} - {reader("EventType")} ({reader("AssignedTo")})"
-            scheduleAlerts.Enqueue(eventText)
-            backupScheduleAlerts.Add(eventText)
-        End While
+            While reader.Read()
+                Dim eventText As String = $"Family Schedule:{reader("DateOfEvent"):dd MMM} - {reader("EventType")} ({reader("AssignedTo")})"
+                scheduleAlerts.Enqueue(eventText)
+                backupScheduleAlerts.Add(eventText)
+            End While
 
-        reader.Close()
-        con.Close()
+            reader.Close()
+            con.Close()
 
-        If scheduleAlerts.Count > 0 Then
-            alertTimer.Interval = 2000 ' 2 seconds
-            AddHandler alertTimer.Tick, AddressOf ShowNextAlert
-            alertTimer.Start()
-        Else
-            Label19.Text = "No upcoming family events."
-        End If
+            If scheduleAlerts.Count > 0 Then
+                alertTimer.Interval = 2000 ' 2 seconds
+                AddHandler alertTimer.Tick, AddressOf ShowNextAlert
+                alertTimer.Start()
+            Else
+                Label19.Text = "No upcoming family events."
+            End If
+        End Using
     End Sub
 
     Private Sub ShowNextAlert(sender As Object, e As EventArgs)

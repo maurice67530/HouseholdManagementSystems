@@ -2,7 +2,7 @@
 Public Class Grocery_Items
 
     Public Property conn As New OleDbConnection(connectionString)
-    Public Const connectionString As String = " Provider=Microsoft.ACE.OLEDB.12.0;Data Source=\\MUDAUMURANGI\Users\Murangi\Source\Repos\maurice67530\HouseholdManagementSystems\HMS.accdb"
+
     Private Sub Grocery_Items_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         LoadGroceryItemDataFromDatabase()
         '  notify()

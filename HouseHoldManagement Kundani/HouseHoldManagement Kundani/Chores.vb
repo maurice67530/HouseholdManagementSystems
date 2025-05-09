@@ -6,7 +6,7 @@ Imports System.Net.Mail
 Public Class chores
     Private toolTip1 As New ToolTip()
     Public Property conn As New OleDbConnection(connectionString)
-    Public Const connectionString As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=\\MUDAUMURANGI\Users\Murangi\Source\Repos\maurice67530\HouseholdManagementSystems\HMS.accdb"
+
     Private Sub chores_Load(sender As System.Object, e As System.EventArgs) Handles MyBase.Load
         Dim connection As New OleDbConnection(connectionString)
 

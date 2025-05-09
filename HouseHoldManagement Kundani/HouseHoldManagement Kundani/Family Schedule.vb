@@ -1,7 +1,6 @@
 ﻿Imports System.Data.OleDb
 Public Class Family_Schedule
     Public Property conn As New OleDbConnection(connectionString)
-    Public Const connectionString As String = " Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Nedzamba\Source\Repos\maurice67530\HouseholdManagementSystems\HMS.accdb"
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles btnSave.Click
         Try

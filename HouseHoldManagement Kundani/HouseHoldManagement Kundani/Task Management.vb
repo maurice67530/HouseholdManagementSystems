@@ -2,7 +2,7 @@
 'Imports HouseHoldManagement
 Public Class Task_Management
     Public Property conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
-    Public Const connectionString As String = " Provider=Microsoft.ACE.OLEDB.12.0;Data Source=\\MUDAUMURANGI\Users\Murangi\Source\Repos\maurice67530\HouseholdManagementSystems\HMS.accdb"
+
     'Public Property conn As New OleDbConnection(Rinae.connectionString)
     Private Status As String
         Private Tasks As Object
