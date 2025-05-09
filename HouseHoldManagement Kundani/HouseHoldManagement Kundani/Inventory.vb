@@ -146,26 +146,26 @@ Public Class Inventory
                         Debug.WriteLine("Format errors in button delete")
                         Debug.WriteLine("Deleting data: Data delected")
                         Debug.WriteLine("Stack Trace: {ex.StackTrace}")
-                        Using conn As New OleDbConnection(Rinae.connectionString)
-                            conn.Open()
+                    Using conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
+                        conn.Open()
 
-                            ' Create the delete command  
-                            Dim cmd As New OleDbCommand("DELETE FROM [Inventory] WHERE [ID] = ?", conn)
-                            cmd.Parameters.AddWithValue("@ID", InventoryID) ' Primary key for matching record  
+                        ' Create the delete command  
+                        Dim cmd As New OleDbCommand("DELETE FROM [Inventory] WHERE [ID] = ?", conn)
+                        cmd.Parameters.AddWithValue("@ID", InventoryID) ' Primary key for matching record  
 
-                            ' Execute the delete command  
-                            Dim rowsAffected As Integer = cmd.ExecuteNonQuery()
+                        ' Execute the delete command  
+                        Dim rowsAffected As Integer = cmd.ExecuteNonQuery()
 
-                            If rowsAffected > 0 Then
-                                MessageBox.Show("Inventory deleted successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
-                                ' Optionally refresh DataGridView or reload from database  
-                                ' PopulateDataGridView()
-                                LoadInventorydataFromDatabase()
-                            Else
-                                MessageBox.Show("No Inventory was deleted. Please check if the ID exists.", "Deletion Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-                            End If
-                        End Using
-                        LoadInventorydataFromDatabase()
+                        If rowsAffected > 0 Then
+                            MessageBox.Show("Inventory deleted successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                            ' Optionally refresh DataGridView or reload from database  
+                            ' PopulateDataGridView()
+                            LoadInventorydataFromDatabase()
+                        Else
+                            MessageBox.Show("No Inventory was deleted. Please check if the ID exists.", "Deletion Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                        End If
+                    End Using
+                    LoadInventorydataFromDatabase()
                     Catch ex As Exception
                         Debug.WriteLine("Failed to delete data")
                         Debug.Write($"Stack Trace: {ex.StackTrace}")
@@ -184,8 +184,8 @@ Public Class Inventory
             Dim selectedCategory As String = If(ComboBox1.SelectedItem IsNot Nothing, ComboBox1.SelectedItem.ToString(), "")
             Dim selectedUnit As String = If(ComboBox2.SelectedItem IsNot Nothing, ComboBox2.SelectedItem.ToString(), "")
 
-            Cruwza.FilterInventory(selectedCategory, selectedUnit)
-        End Sub
+        HouseHoldManagment_Module.FilterInventory(selectedCategory, selectedUnit)
+    End Sub
         Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
             TextBox1.Text = ""
             TextBox3.Text = ""
@@ -296,4 +296,7 @@ Public Class Inventory
         End
     End Sub
 
-    End Class
+    Private Sub Label1_Click(sender As Object, e As EventArgs) Handles Label1.Click
+
+    End Sub
+End Class

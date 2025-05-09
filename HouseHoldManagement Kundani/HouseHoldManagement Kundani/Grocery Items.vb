@@ -2,7 +2,7 @@
 Public Class Grocery_Items
 
     Public Property conn As New OleDbConnection(connectionString)
-    Public Const connectionString As String = " Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Delicious\Source\Repos\maurice67530\HouseholdManagementSystems\HMS.accdb"
+
     Private Sub Grocery_Items_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         LoadGroceryItemDataFromDatabase()
         '  notify()
@@ -22,7 +22,7 @@ Public Class Grocery_Items
 
             Debug.WriteLine("DataGridView loaded succesful")
 
-            Using conn As New OleDbConnection(Ndivhuwo.connectionString)
+            Using conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
                 conn.Open()
 
                 ' Update the table name if necessary  
@@ -127,7 +127,7 @@ Public Class Grocery_Items
                     Debug.WriteLine("Format errors in button delete")
                     Debug.WriteLine("Deleting data: Data delected")
                     Debug.WriteLine("Stack Trace: {ex.StackTrace}")
-                    Using conn As New OleDbConnection(Ndivhuwo.connectionString)
+                    Using conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
                         conn.Open()
 
                         Dim cmd As New OleDbCommand("DELETE FROM [GroceryItem] WHERE [ID] = ?", conn)
@@ -180,7 +180,7 @@ Public Class Grocery_Items
             Dim PurchaseDate As String = DateTimePicker1.Value
             Dim ExpiryDate As String = DateTimePicker2.Value
 
-            Using conn As New OleDbConnection(Ndivhuwo.connectionString)
+            Using conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
                 conn.Open()
 
                 ' Get the ID of the selected row (assuming your table has a primary key named "ID")  
@@ -250,7 +250,7 @@ Public Class Grocery_Items
             .ExpiryDate = DateTimePicker2.Text
              }
 
-            Using conn As New OleDbConnection(Ndivhuwo.connectionString)
+            Using conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
                 conn.Open()
 
                 Dim cmd As New OleDbCommand($"INSERT INTO GroceryItems ([ItemName], [Quantity], [Category], [Unit], [Period], [PricePerUnit], [PurchaseDate], [ExpiryDate]) VALUES (?, ?, ?, ?, ?, ?, ?, ?)", conn)

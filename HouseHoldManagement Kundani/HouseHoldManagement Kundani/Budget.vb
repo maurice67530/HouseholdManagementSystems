@@ -2,7 +2,7 @@
 Imports System.Data.OleDb
 Public Class Budget
     Public Property conn As New OleDbConnection(connectionString)
-    Public Const connectionString As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Zwivhuya\Source\Repos\maurice67530\HouseholdManagementSystems\HMS.accdb"
+
 
     Private Sub Button1_Click(sender As Object, e As EventArgs)
         Dim income, rent, utilities, groceries, otherExpenses As Decimal
@@ -80,7 +80,7 @@ Public Class Budget
         Try
 
             Debug.WriteLine("User confirmed btnSubmit")
-            Using conn As New OleDbConnection(Module1.connectionString)
+            Using conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
                 conn.Open()
 
                 ' Update the table name if necessary  
@@ -159,7 +159,7 @@ Public Class Budget
             '  Dim dataTable As DataTable = HouseHold.GetData("SELECT * FROM Budget")
             ' DataGridView1.DataSource = DataTable
             Debug.WriteLine("Populate Datagridview: Datagridview populated successfully.")
-            Using conn As New OleDbConnection(Module1.connectionString)
+            Using conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
                 conn.Open()
 
                 Dim tableName As String = "Budget"
@@ -234,7 +234,7 @@ Public Class Budget
             Dim EndDate As String = DateTimePicker2.Value
 
 
-            Using conn As New OleDbConnection(Rinae.connectionString)
+            Using conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
 
                 conn.Open()
 
@@ -312,7 +312,7 @@ Public Class Budget
                     Debug.WriteLine("Format errors in button delete")
                     Debug.WriteLine("Deleting data: Data delected")
                     Debug.WriteLine("Stack Trace: {ex.StackTrace}")
-                    Using conn As New OleDbConnection(Rinae.connectionString)
+                    Using conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
                         conn.Open()
 
                         ' Create the delete command  
@@ -350,7 +350,7 @@ Public Class Budget
         Dim selectedFrequency As String = If(ComboBox1.SelectedItem IsNot Nothing, ComboBox1.SelectedItem.ToString(), "")
         '  Dim selectedUnit As String = If(ComboBox2.SelectedItem IsNot Nothing, ComboBox2.SelectedItem.ToString(), "")
 
-        Module1.FilterBudget(selectedFrequency) ', selectedUnit)
+        HouseHoldManagment_Module.FilterBudget(selectedFrequency) ', selectedUnit)
     End Sub
 
     Private Sub Button6_Click_1(sender As Object, e As EventArgs) Handles Button6.Click

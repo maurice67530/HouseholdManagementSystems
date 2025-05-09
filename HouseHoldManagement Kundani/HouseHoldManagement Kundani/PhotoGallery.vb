@@ -268,7 +268,7 @@ Public Class PhotoGallery
         '  Dim selectedDateAdded As String = If(DateTimePicker1.Text IsNot Nothing, DateTimePicker1.Text.ToString(), "")
         Dim selectedFamilyMember As String = If(ComboBox1.SelectedItem IsNot Nothing, ComboBox1.SelectedItem.ToString(), "")
 
-        Cruwza.FilterPhoto(selectedFamilyMember) ', selectedDateAdded)
+        HouseHoldManagment_Module.FilterPhoto(selectedFamilyMember) ', selectedDateAdded)
     End Sub
     Private Sub DataGridView1_SelectionChanged(sender As Object, e As EventArgs) Handles DataGridView1.SelectionChanged
         Try

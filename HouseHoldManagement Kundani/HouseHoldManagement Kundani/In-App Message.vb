@@ -2,7 +2,7 @@
 Public Class In_App_Message
 
     Dim conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
-    Private Sub TextBox1_TextChanged(sender As Object, e As EventArgs) Handles TextBox1.TextChanged
+    Private Sub TextBox1_TextChanged(sender As Object, e As EventArgs) Handles txtReply.TextChanged
 
     End Sub
 
@@ -171,8 +171,52 @@ Public Class In_App_Message
         End If
     End Sub
 
+    Private Sub btnSendReply_Click(sender As Object, e As EventArgs) Handles btnSendReply.Click
+        If originalMessage = "" Or txtReply.Text.Trim() = "" Then
+            MessageBox.Show("Please select a message and write a reply.", "Missing Info", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            Exit Sub
+        End If
+
+        Dim con As New OleDbConnection(HouseHoldManagment_Module.connectionString)
+        Dim cmd As New OleDbCommand("INSERT INTO NotificationReplies (NotificationType, OriginalMessage, ReplyMessage, ReplyDate) VALUES (?, ?, ?, ?)", con)
+        'cmd.Parameters.AddWithValue("?", currentUserName)
+        cmd.Parameters.AddWithValue("?", selectedMessageType)
+        cmd.Parameters.AddWithValue("?", originalMessage)
+        cmd.Parameters.AddWithValue("?", txtReply.Text.Trim())
+        cmd.Parameters.AddWithValue("?", DateTime.Now)
+
+        con.Open()
+        cmd.ExecuteNonQuery()
+        con.Close()
+
+        MessageBox.Show("Reply sent and saved successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
+        txtReply.Clear()
+    End Sub
 
 
+
+    Private selectedMessageType As String = ""
+    Private originalMessage As String = ""
+
+    Private Sub ListBox1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ListBox1.SelectedIndexChanged
+        If ListBox1.SelectedItem IsNot Nothing Then
+            selectedMessageType = "Chores"
+            originalMessage = ListBox1.SelectedItem.ToString()
+            txtReply.Text = "" ' Clear old reply
+        End If
+    End Sub
+
+    Private Sub ListBox2_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ListBox2.SelectedIndexChanged
+        If ListBox2.SelectedItem IsNot Nothing Then
+            selectedMessageType = "Expenses"
+            originalMessage = ListBox2.SelectedItem.ToString()
+            txtReply.Text = ""
+        End If
+    End Sub
+
+    Private Sub NotifyIcon1_MouseDoubleClick(sender As Object, e As MouseEventArgs) Handles NotifyIcon1.MouseDoubleClick
+
+    End Sub
 End Class
 
 
