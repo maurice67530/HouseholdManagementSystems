@@ -514,18 +514,6 @@ Public Class PhotoGallery
         'LoadFilteredMealPlan()
 
     End Sub
-
-
-
-
-
-
-
-
-
-
-
-
     Private Sub Button8_Click(sender As Object, e As EventArgs) Handles Button8.Click
         Dim OpenFileDialog As New OpenFileDialog()
         OpenFileDialog.Filter = "Bitmaps (*.jpg)|*.jpg"

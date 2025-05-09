@@ -94,7 +94,10 @@ Public Class Dashboard
 
         LoadFamilyScheduleAlerts()
 
+
         ShowInternetSpeed()
+
+
 
     End Sub
 
@@ -149,38 +152,8 @@ Public Class Dashboard
         PhotoGallery.ShowDialog()
     End Sub
 
-    Dim con As New OleDbConnection
     Private Sub Button9_Click_1(sender As Object, e As EventArgs) Handles btnInAppMessages.Click
-
-
-
-        Dim FullNames = TextBox2.Text.Trim()
-
-
-        Dim cmd As New OleDbCommand("SELECT FullNames FROM Users WHERE Username = ? AND [Password] = ?", con)
-        cmd.Parameters.AddWithValue("?", FullNames)
-
-
-        con.Open()
-        Dim reader As OleDbDataReader = cmd.ExecuteReader()
-
-        If reader.Read() Then
-            Dim family As String = reader("FullNames").ToString()
-
-
-            MessageBox.Show("Login successful. Family: " & family, "Welcome!", MessageBoxButtons.OK, MessageBoxIcon.Information)
-
-
-            In_App_Message.TextBox2.Text = FullNames
-
-
-            In_App_Message.ShowDialog()
-            Me.Hide()
-        Else
-            MessageBox.Show("cannot show Notification.")
-        End If
-
-        con.Close()
+        In_App_Message.ShowDialog()
     End Sub
 
     Private Sub Button12_Click(sender As Object, e As EventArgs) Handles Button12.Click
@@ -520,7 +493,7 @@ Public Class Dashboard
         FlashWindow(Me.Handle, True)
     End Sub
 
-    Private Sub Label15_Click(sender As Object, e As EventArgs)
+    Private Sub Label15_Click(sender As Object, e As EventArgs) Handles Label15.Click
 
     End Sub
 
@@ -606,7 +579,6 @@ Public Class Dashboard
         End Using
 
     End Sub
-
 
 
 
@@ -858,7 +830,7 @@ Public Class Dashboard
         Dim reader As OleDbDataReader = cmd.ExecuteReader()
 
         While reader.Read()
-            Dim eventText As String = $"Family Schedule:{reader("DateOfEvent"):dd MMM} - {reader("EventType")} ({reader("AssignedTo")})"
+            Dim eventText As String = $"Family Schedule: {reader("DateOfEvent"):dd MMM} - {reader("EventType")} ({reader("AssignedTo")})"
             scheduleAlerts.Enqueue(eventText)
             backupScheduleAlerts.Add(eventText)
         End While
@@ -1024,88 +996,178 @@ Public Class Dashboard
     End Sub
 
     ' === Core subroutine for delay, blink, and open form ===
+    'Private Sub RunSearchAndBlink()
+    '    ' Wait for 2 seconds
+    '    If delayCounter < delayBeforeBlinking Then
+    '        delayCounter += 1
+    '        Return
+    '    End If
+
+    '    ' Set up blinking on first tick
+    '    If blinkCounter = 0 Then
+    '        Dim keyword As String = TextBox1.Text.ToLower()
+
+    '        If keyword.Contains("mealplan") Then
+    '            currentButtonToBlink = Button14
+    '            formToOpen = New MealPlan()
+    '        ElseIf keyword.Contains("expense") Then
+    '            currentButtonToBlink = Button12
+    '            formToOpen = New Expense()
+    '        ElseIf keyword.Contains("Inventory") Then
+    '            currentButtonToBlink = Button15
+    '            formToOpen = New Inventory()
+    '        ElseIf keyword.Contains("chore") Then
+    '            currentButtonToBlink = Button11
+    '            formToOpen = New Chores()
+    '        ElseIf keyword.Contains("photo") Then
+    '            currentButtonToBlink = Button8
+    '            formToOpen = New PhotoGallery()
+    '        ElseIf keyword.Contains("Task") Then
+    '            currentButtonToBlink = Button7
+    '            formToOpen = New Task_Management
+    '        ElseIf keyword.Contains("Personnel") Then
+    '            currentButtonToBlink = Button5
+    '            formToOpen = New Personnel()
+    '        ElseIf keyword.Contains("notification") Then
+    '            currentButtonToBlink = Button16
+    '            formToOpen = New Notifications()
+    '        ElseIf keyword.Contains("grocery") Then
+    '            currentButtonToBlink = Button13
+    '            formToOpen = New Grocery_Items()
+    '        ElseIf keyword.Contains("status") Then
+    '            currentButtonToBlink = btnInAppMessages
+    '            formToOpen = New In_App_Message()
+    '        ElseIf keyword.Contains("Family") Then
+    '            currentButtonToBlink = Button6
+    '            formToOpen = New Family_Schedule()
+    '            'ElseIf keyword.Contains("budget") Then
+    '            '    currentButtonToBlink = Button17
+    '            '    formToOpen = New Budget()
+    '        Else
+    '            Timer3.Stop()
+    '            Exit Sub
+    '        End If
+    '    End If
+
+    '    ' Toggle button color
+    '    If currentButtonToBlink IsNot Nothing Then
+    '        If blinkState Then
+    '            currentButtonToBlink.BackColor = Color.LightGreen
+    '        Else
+    '            currentButtonToBlink.BackColor = Color.Red
+    '        End If
+    '        blinkState = Not blinkState
+    '        blinkCounter += 1
+    '    End If
+
+    '    ' After blinking, reset and open
+    '    If blinkCounter >= totalBlinkTicks Then
+    '        Timer3.Stop()
+    '        If currentButtonToBlink IsNot Nothing Then
+    '            currentButtonToBlink.BackColor = SystemColors.Control
+    '        End If
+    '        If formToOpen IsNot Nothing Then
+    '            MessageBox.Show("Opening " & formToOpen.Name, "Search Result", MessageBoxButtons.OK, MessageBoxIcon.Information)
+    '            formToOpen.Show()
+    '        End If
+    '    End If
+    'End Sub
+
+
     Private Sub RunSearchAndBlink()
-        ' Wait for 2 seconds
         If delayCounter < delayBeforeBlinking Then
             delayCounter += 1
             Return
         End If
 
-        ' Set up blinking on first tick
         If blinkCounter = 0 Then
             Dim keyword As String = TextBox1.Text.ToLower()
-
-            If keyword.Contains("mealplan") Then
-                currentButtonToBlink = Button14
-                formToOpen = New MealPlan()
-            ElseIf keyword.Contains("expense") Then
-                currentButtonToBlink = Button12
-                formToOpen = New Expense()
-            ElseIf keyword.Contains("inventory") Then
-                currentButtonToBlink = Button15
-                formToOpen = New Inventory()
-            ElseIf keyword.Contains("chore") Then
-                currentButtonToBlink = Button11
-                formToOpen = New Chores()
-            ElseIf keyword.Contains("photo") Then
-                currentButtonToBlink = Button8
-                formToOpen = New PhotoGallery()
-            ElseIf keyword.Contains("Task") Then
-                currentButtonToBlink = Button7
-                formToOpen = New Task_Management
-            ElseIf keyword.Contains("Personnel") Then
-                currentButtonToBlink = Button5
-                formToOpen = New Personnel()
-            ElseIf keyword.Contains("notification") Then
-                currentButtonToBlink = Button16
-                formToOpen = New Notifications()
-            ElseIf keyword.Contains("grocery") Then
-                currentButtonToBlink = Button13
-                formToOpen = New Grocery_Items()
-            ElseIf keyword.Contains("notificationstatus") Then
-                currentButtonToBlink = btnInAppMessages
-                formToOpen = New In_App_Message()
-            ElseIf keyword.Contains("Family") Then
-                currentButtonToBlink = Button6
-                formToOpen = New Family_Schedule()
-                'ElseIf keyword.Contains("budget") Then
-                '    currentButtonToBlink = Button17
-                '    formToOpen = New Budget()
-            Else
+            Try
+                If keyword.Contains("mealplan") Then
+                    currentButtonToBlink = Button14
+                    formToOpen = New MealPlan()
+                ElseIf keyword.Contains("expense") Then
+                    currentButtonToBlink = Button12
+                    formToOpen = New Expense()
+                ElseIf keyword.Contains("inventory") Then
+                    currentButtonToBlink = Button15
+                    formToOpen = New Inventory()
+                ElseIf keyword.Contains("chore") Then
+                    currentButtonToBlink = Button11
+                    formToOpen = New chores()
+                ElseIf keyword.Contains("photo") Then
+                    currentButtonToBlink = Button8
+                    formToOpen = New PhotoGallery()
+                ElseIf keyword.Contains("task") Then
+                    currentButtonToBlink = Button7
+                    formToOpen = New Task_Management()
+                ElseIf keyword.Contains("personnel") Then
+                    currentButtonToBlink = Button5
+                    formToOpen = New Personnel()
+                ElseIf keyword.Contains("notificationstatus") Then
+                    currentButtonToBlink = btnInAppMessages
+                    formToOpen = New In_App_Message()
+                ElseIf keyword.Contains("notification") Then
+                    currentButtonToBlink = Button16
+                    formToOpen = New Notifications()
+                ElseIf keyword.Contains("grocery") Then
+                    currentButtonToBlink = Button13
+                    formToOpen = New Grocery_Items()
+                ElseIf keyword.Contains("family") Then
+                    currentButtonToBlink = Button6
+                    formToOpen = New Family_Schedule()
+                Else
+                    Timer3.Stop()
+                    Exit Sub
+                End If
+            Catch ex As Exception
                 Timer3.Stop()
+                MessageBox.Show("Error: Could not prepare the form for blinking. " &
+                            vbCrLf & "Reason: " & ex.Message,
+                            "Form Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
                 Exit Sub
-            End If
+            End Try
         End If
 
-        ' Toggle button color
         If currentButtonToBlink IsNot Nothing Then
-            If blinkState Then
-                currentButtonToBlink.BackColor = Color.LightGreen
-            Else
-                currentButtonToBlink.BackColor = Color.Red
-            End If
-            blinkState = Not blinkState
-            blinkCounter += 1
+            Try
+                If blinkState Then
+                    currentButtonToBlink.BackColor = Color.LightGreen
+                Else
+                    currentButtonToBlink.BackColor = Color.Red
+                End If
+                blinkState = Not blinkState
+                blinkCounter += 1
+            Catch ex As Exception
+                Timer3.Stop()
+                MessageBox.Show("Error while blinking the button: " & ex.Message,
+                            "Blink Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                Exit Sub
+            End Try
         End If
 
-        ' After blinking, reset and open
         If blinkCounter >= totalBlinkTicks Then
             Timer3.Stop()
             If currentButtonToBlink IsNot Nothing Then
                 currentButtonToBlink.BackColor = SystemColors.Control
             End If
-            If formToOpen IsNot Nothing Then
-                MessageBox.Show("Opening " & formToOpen.Name, "Search Result", MessageBoxButtons.OK, MessageBoxIcon.Information)
-                formToOpen.Show()
-            End If
+            Try
+                If formToOpen IsNot Nothing Then
+                    MessageBox.Show("Opening " & formToOpen.Name, "Search Result",
+                                MessageBoxButtons.OK, MessageBoxIcon.Information)
+                    formToOpen.Show()
+                End If
+            Catch ex As Exception
+                MessageBox.Show("Error: Could not open the form." & vbCrLf &
+                            "Reason: " & ex.Message,
+                            "Form Open Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            End Try
         End If
     End Sub
-
     Dim speedLevels As New List(Of String) From {
     "Fast", "Medium", "Slow", "Disconnected"
 }
     Dim rand As New Random()
-
     Private Sub ShowInternetSpeed()
         Dim index As Integer = rand.Next(speedLevels.Count)
         Dim speed As String = speedLevels(index)
@@ -1123,7 +1185,7 @@ Public Class Dashboard
         End Select
     End Sub
 
-    Private Sub ToolTip1_Popup(sender As Object, e As PopupEventArgs) Handles ToolTip1.Popup
+    Private Sub FlowLayoutPanel1_Paint(sender As Object, e As PaintEventArgs) Handles FlowLayoutPanel1.Paint
 
     End Sub
 End Class

@@ -1,11 +1,12 @@
 ﻿Imports System.Data.OleDb
+Imports System.IO
 Public Class Inventory
     Public Sub LoadInventorydataFromDatabase()
         Try
             '  Dim dataTable As DataTable = HouseHold.GetData("SELECT * FROM Expense")
             ' DataGridView1.DataSource = DataTable
             Debug.WriteLine("Populate Datagridview: Datagridview populated successfully.")
-            Using conn As New OleDbConnection(Rinae.connectionString)
+            Using conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
                 conn.Open()
 
                 Dim tableName As String = "Inventory"
@@ -25,30 +26,30 @@ Public Class Inventory
     End Sub
         Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
             Try
-                Using conn As New OleDbConnection(Rinae.connectionString)
+            Using conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
 
-                    conn.Open()
-                    Dim cmd As New OleDbCommand($"INSERT INTO Inventory ([ItemName], [Description], [Quantity], [Category], [ReorderLevel], [PricePerUnit], [DateAdded], [ExpiryDate], [Unit]) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)", conn)
+                conn.Open()
+                Dim cmd As New OleDbCommand($"INSERT INTO Inventory ([ItemName], [Description], [Quantity], [Category], [ReorderLevel], [PricePerUnit], [DateAdded], [ExpiryDate], [Unit]) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)", conn)
 
-                    cmd.Parameters.Clear()
-                    cmd.Parameters.AddWithValue("@ItemName", TextBox1.Text)
-                    cmd.Parameters.AddWithValue("@Description", TextBox2.Text)
-                    cmd.Parameters.AddWithValue("@Quantity", TextBox3.Text)
-                    cmd.Parameters.AddWithValue("@Category", ComboBox1.SelectedItem)
-                    cmd.Parameters.AddWithValue("@ReorderLevel", ComboBox2.SelectedItem)
-                    cmd.Parameters.AddWithValue("@PricePerUnit", TextBox6.Text)
-                    cmd.Parameters.AddWithValue("@DateAdded", DateTimePicker1.Value)
-                    cmd.Parameters.AddWithValue("@ExpiryDate", DateTimePicker2.Value)
-                    cmd.Parameters.AddWithValue("@Unit", ComboBox3.SelectedItem)
+                cmd.Parameters.Clear()
+                cmd.Parameters.AddWithValue("@ItemName", TextBox1.Text)
+                cmd.Parameters.AddWithValue("@Description", TextBox2.Text)
+                cmd.Parameters.AddWithValue("@Quantity", TextBox3.Text)
+                cmd.Parameters.AddWithValue("@Category", ComboBox1.SelectedItem)
+                cmd.Parameters.AddWithValue("@ReorderLevel", ComboBox2.SelectedItem)
+                cmd.Parameters.AddWithValue("@PricePerUnit", TextBox6.Text)
+                cmd.Parameters.AddWithValue("@DateAdded", DateTimePicker1.Value)
+                cmd.Parameters.AddWithValue("@ExpiryDate", DateTimePicker2.Value)
+                cmd.Parameters.AddWithValue("@Unit", ComboBox3.SelectedItem)
 
-                    cmd.ExecuteNonQuery()
-                    conn.Close()
-                    LoadInventorydataFromDatabase()
+                cmd.ExecuteNonQuery()
+                conn.Close()
+                LoadInventorydataFromDatabase()
 
-                    MsgBox("Inventory Items Saved Successfuly!", vbInformation, "Inventory Saved")
+                MsgBox("Inventory Items Saved Successfuly!", vbInformation, "Inventory Saved")
 
-                End Using
-            Catch ex As OleDbException
+            End Using
+        Catch ex As OleDbException
                 Debug.WriteLine($"Database error: {ex.Message}")
                 Debug.Write($"Stack Trace: {ex.StackTrace}")
                 MessageBox.Show("Error saving inventory to database: Please check the connectivity." & ex.Message & vbNewLine & ex.StackTrace, "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
@@ -81,37 +82,37 @@ Public Class Inventory
                 Dim ExpiryDate As String = DateTimePicker1.Value
                 Dim Unit As String = ComboBox2.Text
 
-                Using conn As New OleDbConnection(Rinae.connectionString)
+            Using conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
 
-                    conn.Open()
+                conn.Open()
 
-                    ' Get the ID of the selected row (assuming your table has a primary key named "ID")  
-                    Dim selectedRow As DataGridViewRow = DataGridView1.SelectedRows(0)
-                    Dim ID As Integer = Convert.ToInt32(selectedRow.Cells("ID").Value) ' Change "ID" to your primary key column name  
+                ' Get the ID of the selected row (assuming your table has a primary key named "ID")  
+                Dim selectedRow As DataGridViewRow = DataGridView1.SelectedRows(0)
+                Dim ID As Integer = Convert.ToInt32(selectedRow.Cells("ID").Value) ' Change "ID" to your primary key column name  
 
-                    ' Create an OleDbCommand to update the personnel data in the database  
-                    Dim cmd As New OleDbCommand("UPDATE [Inventory] SET [ItemName] = ?, [Description] = ?, [Quantity] = ?, [Category] = ?, [ReorderLevel] = ?, [PricePerUnit] = ?, [DateAdded] = ?,  [ExpiryDate] = ?, [Unit] = ? WHERE [ID] = ?", conn)
+                ' Create an OleDbCommand to update the personnel data in the database  
+                Dim cmd As New OleDbCommand("UPDATE [Inventory] SET [ItemName] = ?, [Description] = ?, [Quantity] = ?, [Category] = ?, [ReorderLevel] = ?, [PricePerUnit] = ?, [DateAdded] = ?,  [ExpiryDate] = ?, [Unit] = ? WHERE [ID] = ?", conn)
 
-                    ' Set the parameter values from the UI controls  
-                    cmd.Parameters.AddWithValue("@ItemName", ItemName)
-                    cmd.Parameters.AddWithValue("@Description", Description)
-                    cmd.Parameters.AddWithValue("@Quantity", Quantity)
-                    cmd.Parameters.AddWithValue("@Category", Category)
-                    cmd.Parameters.AddWithValue("@ReorderLevel", ReorderLevel)
-                    cmd.Parameters.AddWithValue("@PricePerUnit", PricePerUnit)
-                    cmd.Parameters.AddWithValue("@DateAdded", DateAdded)
-                    cmd.Parameters.AddWithValue("@ExpiryDate", ExpiryDate)
-                    cmd.Parameters.AddWithValue("@Unit", Unit)
-                    cmd.Parameters.AddWithValue("@ID", ID)
-                    cmd.ExecuteNonQuery()
+                ' Set the parameter values from the UI controls  
+                cmd.Parameters.AddWithValue("@ItemName", ItemName)
+                cmd.Parameters.AddWithValue("@Description", Description)
+                cmd.Parameters.AddWithValue("@Quantity", Quantity)
+                cmd.Parameters.AddWithValue("@Category", Category)
+                cmd.Parameters.AddWithValue("@ReorderLevel", ReorderLevel)
+                cmd.Parameters.AddWithValue("@PricePerUnit", PricePerUnit)
+                cmd.Parameters.AddWithValue("@DateAdded", DateAdded)
+                cmd.Parameters.AddWithValue("@ExpiryDate", ExpiryDate)
+                cmd.Parameters.AddWithValue("@Unit", Unit)
+                cmd.Parameters.AddWithValue("@ID", ID)
+                cmd.ExecuteNonQuery()
 
-                    MsgBox("Inventory Items Updated Successfuly!", vbInformation, "Update Confirmation")
-                    LoadInventorydataFromDatabase()
-                    '  InventoryModule.ClearControls(Me)
+                MsgBox("Inventory Items Updated Successfuly!", vbInformation, "Update Confirmation")
+                LoadInventorydataFromDatabase()
+                '  InventoryModule.ClearControls(Me)
 
-                End Using
+            End Using
 
-            Catch ex As OleDbException
+        Catch ex As OleDbException
                 Debug.WriteLine("User cancelled update")
                 Debug.WriteLine("Unexpected error in button update")
                 Debug.Write($"Stack Trace: {ex.StackTrace}")
