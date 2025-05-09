@@ -479,7 +479,7 @@ Public Class Dashboard
 
     Private Function GetTotalExpenses() As Double
         Try
-            Using con As New OleDbConnection("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Mudzunga\Source\Repos\maurice67530\HouseholdManagementSystems\HMS.accdb")
+            Using con As New OleDbConnection("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=\\MUDAUMURANGI\Users\Murangi\Source\Repos\maurice67530\HouseholdManagementSystems\HMS.accdb")
                 con.Open()
                 Dim cmd As New OleDbCommand("SELECT SUM(Amount) FROM Expense", con)
                 Dim result = cmd.ExecuteScalar()
@@ -493,7 +493,7 @@ Public Class Dashboard
 
     Private Function GetTotalIncome() As Double
         Try
-            Using con As New OleDbConnection("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Mudzunga\Source\Repos\maurice67530\HouseholdManagementSystems\HMS.accdb")
+            Using con As New OleDbConnection("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\\MUDAUMURANGI\Users\Murangi\Source\Repos\maurice67530\HouseholdManagementSystems\HMS.accdb")
                 con.Open()
                 Dim cmd As New OleDbCommand("SELECT SUM(Totalincome) FROM Expense", con)
                 Dim result = cmd.ExecuteScalar()
@@ -527,7 +527,7 @@ Public Class Dashboard
     Private Sub LoadChart()
 
 
-        Dim con As New OleDbConnection("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Mudzunga\Source\Repos\maurice67530\HouseholdManagementSystems\HMS.accdb")
+        Dim con As New OleDbConnection("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=\\MUDAUMURANGI\Users\Murangi\Source\Repos\maurice67530\HouseholdManagementSystems\HMS.accdb")
         Dim cmd As New OleDbCommand("SELECT Tags, SUM(Amount) AS Total FROM Expense GROUP BY Tags", con)
         Dim reader As OleDbDataReader
 
