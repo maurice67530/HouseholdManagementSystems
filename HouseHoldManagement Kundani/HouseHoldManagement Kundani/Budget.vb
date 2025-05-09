@@ -208,6 +208,15 @@ Public Class Budget
         Label6.Text = "Total Expenses: R" & totalExpenses.ToString("F2")
         Label7.Text = "Remaining Balance: R" & remaining.ToString("F2")
 
+        If remaining < 0 Then
+            Label7.ForeColor = Color.Black
+            Timer1.Start()
+        Else
+            Label7.ForeColor = Color.Black
+            Timer1.Stop()
+            Label7.Visible = True ' Ensure it's visible when not blinking
+        End If
+
     End Sub
 
     Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
