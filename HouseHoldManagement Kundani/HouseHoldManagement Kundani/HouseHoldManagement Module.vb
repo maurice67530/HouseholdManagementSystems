@@ -5,96 +5,47 @@ Module HouseHoldManagment_Module
 
     Public currentUser As String ' Global variable for logged-in user
     Public Property conn As New OleDbConnection(connectionString)
-    Public Const connectionString As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Mudzunga\Source\Repos\maurice67530\HouseholdManagementSystems\HMS.accdb;Persist Security Info=False;"
-
-    Public Function GetConnection() As OleDbConnection
+    Public Const connectionString As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=\\MUDAUMURANGI\Users\Murangi\Source\Repos\maurice67530\HouseholdManagementSystems\HMS.accdb"
+    Public Function Getconnection() As OleDbConnection
         Return New OleDbConnection(connectionString)
     End Function
-
-End Module
-
-Module Ndamu
-    Public Const connectionstring As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Nedzamba\Source\Repos\HouseholdManagementSystems\HMS.accdb"
-    'Public Sub AddEvent(Title As String, Notes As String, EventDate As Date, StartTime As Date, Endtime As Date, AssignedTo As String, EventType As String)
-    '    Try
-    '        Using conn As New OleDbConnection(Ndamu.connectionstring)
-    '            conn.Open()
-    '            Dim query As String = "INSERT INTO FamilySchedule ([Title],[ Notes], [DateOfEvent], [StartTime], [EndTime], [AssignedTo], [EventType])" & "VALUES (?, ?, ?, ?, ?, ?, ?)"
-    '            Using cmd As New OleDbCommand(query, conn)
-    '                cmd.Parameters.AddWithValue("?", Title)
-    '                cmd.Parameters.AddWithValue("?", Notes)
-    '                cmd.Parameters.AddWithValue("?", EventDate)
-    '                cmd.Parameters.AddWithValue("?", StartTime)
-    '                cmd.Parameters.AddWithValue("?", Endtime)
-    '                cmd.Parameters.AddWithValue("?", AssignedTo)
-    '                cmd.Parameters.AddWithValue("?", EventType)
-    '                cmd.ExecuteNonQuery()
-
-    '            End Using
-    '        End Using
-    '    Catch ex As Exception
-    '        MessageBox.Show("Error adding schedule: " & ex.Message)
-    '    End Try
-    'End Sub
-    'Public Sub AddChoreEvent(Title As String, AssignedTo As String, DueDate As Date)
-    '    'Add Chore Event
-    '    AddEvent(Title, "Chores automatically added", DueDate, DueDate, DueDate.AddHours(1), AssignedTo, "Chores")
-    'End Sub
-    'Public Sub AddMealEvent(MealName As String, StartDate As Date)
-    '    'Add Meal Event
-    '    AddEvent(MealName, "MealPlans", StartDate, StartDate.AddHours(12), StartDate.AddHours(13), "all", "Meal")
-    'End Sub
-    'Public Sub AddTaskReminder(Title As String, AssignedTo As String, DueDate As Date)
-    '    'Add Task Reminder
-    '    AddEvent(Title, "Task Due Reminder", DueDate, DueDate, DueDate.AddHours(1), AssignedTo, "Task")
-    'End Sub
-    'Public Sub MarkPhotoDay(DateAdded As Date, Description As String)
-    '    'Add Photo Day Event
-    '    AddEvent("Photo Day", Description, DateAdded, DateAdded.AddHours(15), DateAdded.AddHours(16), "Family", "Photo")
-    'End Sub
-End Module
-
-Module Rasta
-    ' Connection string using relative path to the database
-    Public Const connectionString As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Raphalalani\Source\Repos\maurice67530\HouseholdManagementSystems\HMS.accdb"
-
-    ' Function to create and return a connection object
-    Public Function GetConnection() As OleDbConnection
-        Return New OleDbConnection(connectionString)
-    End Function
-End Module
-Module Module1
-    Public Property conn As New OleDbConnection(connectionString)
-    Public Const connectionString As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Zwivhuya\Source\Repos\maurice67530\HouseholdManagementSystems\HMS.accdb"
+    Public Sub FilterBudget(Frequency As String)
+        Dim BudgetTable As New DataTable()
 
 
+        Try
+            conn.Open()
+            Dim query As String = "Select * FROM Budget WHERE 1=1"
 
-    Public Sub ClearControls(ByVal form As Form)
-
-        'clear TextBoxes
-        For Each ctrl As Control In form.Controls
-            If TypeOf ctrl Is TextBox Then
-                CType(ctrl, TextBox).Clear()
+            If Not String.IsNullOrEmpty(Frequency) Then
+                query &= " AND Frequency = @Frequency"
             End If
 
+            'If Not String.IsNullOrEmpty(StartDate) Then
+            '    query &= " AND StartDate = @StartDate"
+            'End If
 
-        Next
+            Dim command As New OleDb.OleDbCommand(query, conn)
 
-        'clear comboBoxes
-        For Each ctrl As Control In form.Controls
-            If TypeOf ctrl Is ComboBox Then
-                CType(ctrl, ComboBox).ResetText()
+            If Not String.IsNullOrEmpty(Frequency) Then
+                command.Parameters.AddWithValue("@Frequency", Frequency)
             End If
-        Next
 
-        'clear DateTimePicker
-        For Each ctrl As Control In form.Controls
-            If TypeOf ctrl Is DateTimePicker Then
-                CType(ctrl, DateTimePicker).Value = DateTimePicker.MinimumDateTime
-            End If
-        Next
+            'If Not String.IsNullOrEmpty(Calories) Then
+            '    command.Parameters.AddWithValue("@StartDate", StartDate)
+            'End If
 
+            Dim adapter As New OleDb.OleDbDataAdapter(command)
+            adapter.Fill(BudgetTable)
+            Budget.DataGridView1.DataSource = BudgetTable
+
+        Catch ex As Exception
+            MsgBox("Error filtering Budget: " & ex.Message, MsgBoxStyle.Critical, "Database Error")
+        Finally
+            conn.Close()
+        End Try
     End Sub
+
     Public Sub FilterMealPlan(Calories As String)
         Dim Mealtable As New DataTable()
 
@@ -132,10 +83,6 @@ Module Module1
         End Try
     End Sub
 
-End Module
-
-Module Rinae
-    Public Const connectionString As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Rinae\Source\Repos\maurice67530\HouseholdManagementSystems\HMS.accdb"
 
     Public Sub ClearControls(ByVal form As Form)
 
@@ -163,12 +110,6 @@ Module Rinae
         Next
 
     End Sub
-End Module
-
-'[Dongola] vhasongo silinga
-Module Cruwza
-    Public Property conn As New OleDbConnection(connectionString)
-    Public Const connectionString As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Dongola\Source\Repos\maurice67530\HouseholdManagementSystems\HMS.accdb"
 
     Public Sub FilterInventory(Category As String, Unit As String)
         Dim taskTable As New DataTable
@@ -240,40 +181,46 @@ Module Cruwza
         End Try
     End Sub
 
-End Module
-Module Xiluva
-    Public Const connectionString As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Xiluva\Source\Repos\maurice67530\HouseholdManagementSystems\HMS.accdb"
-End Module
-'Murangi (don't Touch)
-Module Murangi
-    Public Const connectionString As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Murangi\Source\Repos\maurice67530\HouseholdManagementSystems\HMS.accdb"
-End Module
-Module Rotondwa
-    Public Property conn As New OleDbConnection(connectionString)
-    Public Const connectionString As String = " Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Rotondwa\Source\Repos\maurice67530\HouseholdManagementSystems\HMS.accdb;Persist Security Info=False;"
+    Public Sub FilterChores(Frequency As String, Priority As String)
+        Dim taskTable As New DataTable()
+        Try
+            Dim Query As String = "SELECT * FROM Chores WHERE 1 = 1"
 
-End Module
-Module Ndivhuwo
-    Public Property conn As New OleDbConnection(connectionString)
-    Public Const connectionString As String = " Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Delicious\Source\Repos\maurice67530\HouseholdManagementSystems\HMS.accdb"
+            If Not String.IsNullOrEmpty(Frequency) Then
+                Query &= " AND Frequency = @Frequency"
+            End If
+            If Not String.IsNullOrEmpty(Priority) Then
+                Query &= " AND Priority = @Priority"
+            End If
 
-End Module
-Module Masindi
-    Public Property conn As New OleDbConnection(connectionString)
-    Public Const connectionString As String = " Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Masindi\Source\Repos\maurice67530\HouseholdManagementSystems\HMS.accdb;Persist Security Info=False;"
-End Module
-Module khodani
-    Public Property conn As New OleDbConnection(connectionString)
-    Public Const connectionString As String = " Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\khodani\Source\Repos\maurice67530\HouseholdManagementSystems\HMS.accdb"
-End Module
-Module Faith
-    Public Property conn As New OleDbConnection(connectionString)
-    Public Const connectionString As String = " Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Faith\Source\Repos\maurice67530\HouseholdManagementSystems\HMS.accdb"
-End Module
-Module Mulalo
-    Public Property conn As New OleDbConnection(connectionString)
-    Public Const connectionString As String = " Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Austin\Source\Repos\maurice67530\HouseholdManagementSystems\HMS.accdb"
+            Dim Command As New OleDb.OleDbCommand(Query, conn)
 
+            If Not String.IsNullOrEmpty(Frequency) Then
+                Command.Parameters.AddWithValue("@Frequency", Frequency)
+            End If
+
+
+            If Not String.IsNullOrEmpty(Priority) Then
+                Command.Parameters.AddWithValue("@Priority", Priority)
+            End If
+
+            Dim Adapter As New OleDb.OleDbDataAdapter(Command)
+            Adapter.Fill(taskTable)
+            chores.DGVChores.DataSource = taskTable
+
+        Catch ex As Exception
+            MsgBox("Error Filtering tasks: " & ex.Message, MsgBoxStyle.Critical, "Database error")
+        Finally
+            conn.Close()
+        End Try
+    End Sub
 End Module
+
+
+
+
+
+
+
 
 

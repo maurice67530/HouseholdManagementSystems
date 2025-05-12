@@ -1,8 +1,8 @@
 ﻿Imports System.Data.OleDb
 'Imports HouseHoldManagement
 Public Class Task_Management
-    Public Property conn As New OleDbConnection(Murangi.connectionString)
-    Public Const connectionString As String = " Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Murangi\Source\Repos\maurice67530\HouseholdManagementSystems\HMS.accdb"
+    Public Property conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
+
     'Public Property conn As New OleDbConnection(Rinae.connectionString)
     Private Status As String
         Private Tasks As Object
@@ -13,7 +13,7 @@ Public Class Task_Management
 
             Debug.WriteLine("LoadTasksDataFromDatabase()")
         'Using conn As New OleDbConnection(Rinae.connectionString)
-        Using conn As New OleDbConnection(Murangi.connectionString)
+        Using conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
             conn.Open()
 
             ' Update the table name if necessary  
@@ -51,7 +51,7 @@ Public Class Task_Management
             PopulateComboboxFromDatabase(ComboBox3)
         End Sub
         Public Sub PopulateComboboxFromDatabase(ByRef comboBox As ComboBox)
-        Dim conn As New OleDbConnection(Murangi.connectionString)
+        Dim conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
         'Dim conn As New OleDbConnection(Rinae.connectionString)
         Try
                 Debug.WriteLine("populating combobox from database successfully!")
@@ -96,7 +96,7 @@ Public Class Task_Management
                 If confirmationResult = DialogResult.Yes Then
                     ' Proceed with deletion  
                     Try
-                    Using conn As New OleDbConnection(Murangi.connectionString)
+                    Using conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
                         conn.Open()
 
                         ' Create the delete command  
@@ -142,7 +142,7 @@ Public Class Task_Management
                     DateTimePicker1.Focus()
 
                 End If
-            Using conn As New OleDbConnection(Murangi.connectionString)
+            Using conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
                 conn.Open()
 
                 Dim tableName As String = "Tasks"
@@ -200,7 +200,7 @@ Public Class Task_Management
         Public Sub LoadTaskDataFromDatabase()
 
             Debug.WriteLine(" Task load has been initialised!")
-        Using conn As New OleDbConnection(Murangi.connectionString)
+        Using conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
             conn.Open()
 
             Dim TableName As String = "Tasks"
@@ -235,7 +235,7 @@ Public Class Task_Management
                 Dim Status As String = ComboBox2.Text
                 Dim AssignedTo As String = ComboBox3.Text
 
-            Using conn As New OleDbConnection(Murangi.connectionString)
+            Using conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
 
                 conn.Open()
 

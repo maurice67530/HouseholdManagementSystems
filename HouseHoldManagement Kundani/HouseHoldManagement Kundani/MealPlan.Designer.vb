@@ -22,7 +22,6 @@ Partial Class MealPlan
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(MealPlan))
         Me.Button1 = New System.Windows.Forms.Button()
         Me.btnSuggest = New System.Windows.Forms.Button()
         Me.btnPrint = New System.Windows.Forms.Button()
@@ -59,6 +58,8 @@ Partial Class MealPlan
         Me.Label11 = New System.Windows.Forms.Label()
         Me.Label10 = New System.Windows.Forms.Label()
         Me.Label12 = New System.Windows.Forms.Label()
+        Me.Label4 = New System.Windows.Forms.Label()
+        Me.ComboBox4 = New System.Windows.Forms.ComboBox()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel2.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -68,7 +69,6 @@ Partial Class MealPlan
         '
         'Button1
         '
-        Me.Button1.Image = CType(resources.GetObject("Button1.Image"), System.Drawing.Image)
         Me.Button1.Location = New System.Drawing.Point(632, 495)
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(41, 37)
@@ -78,7 +78,6 @@ Partial Class MealPlan
         'btnSuggest
         '
         Me.btnSuggest.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.btnSuggest.Image = CType(resources.GetObject("btnSuggest.Image"), System.Drawing.Image)
         Me.btnSuggest.Location = New System.Drawing.Point(570, 495)
         Me.btnSuggest.Name = "btnSuggest"
         Me.btnSuggest.Size = New System.Drawing.Size(41, 37)
@@ -88,7 +87,6 @@ Partial Class MealPlan
         'btnPrint
         '
         Me.btnPrint.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.btnPrint.Image = CType(resources.GetObject("btnPrint.Image"), System.Drawing.Image)
         Me.btnPrint.Location = New System.Drawing.Point(375, 495)
         Me.btnPrint.Name = "btnPrint"
         Me.btnPrint.Size = New System.Drawing.Size(41, 37)
@@ -98,7 +96,6 @@ Partial Class MealPlan
         'btnDelete
         '
         Me.btnDelete.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.btnDelete.Image = CType(resources.GetObject("btnDelete.Image"), System.Drawing.Image)
         Me.btnDelete.Location = New System.Drawing.Point(158, 495)
         Me.btnDelete.Name = "btnDelete"
         Me.btnDelete.Size = New System.Drawing.Size(41, 37)
@@ -108,7 +105,6 @@ Partial Class MealPlan
         'btnEdit
         '
         Me.btnEdit.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.btnEdit.Image = CType(resources.GetObject("btnEdit.Image"), System.Drawing.Image)
         Me.btnEdit.Location = New System.Drawing.Point(91, 495)
         Me.btnEdit.Name = "btnEdit"
         Me.btnEdit.Size = New System.Drawing.Size(41, 37)
@@ -118,7 +114,6 @@ Partial Class MealPlan
         'btnSave
         '
         Me.btnSave.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.btnSave.Image = CType(resources.GetObject("btnSave.Image"), System.Drawing.Image)
         Me.btnSave.Location = New System.Drawing.Point(22, 495)
         Me.btnSave.Name = "btnSave"
         Me.btnSave.Size = New System.Drawing.Size(41, 37)
@@ -128,7 +123,6 @@ Partial Class MealPlan
         'btnHighlight
         '
         Me.btnHighlight.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.btnHighlight.Image = CType(resources.GetObject("btnHighlight.Image"), System.Drawing.Image)
         Me.btnHighlight.Location = New System.Drawing.Point(449, 495)
         Me.btnHighlight.Name = "btnHighlight"
         Me.btnHighlight.Size = New System.Drawing.Size(41, 37)
@@ -138,7 +132,6 @@ Partial Class MealPlan
         'btnRefresh
         '
         Me.btnRefresh.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.btnRefresh.Image = CType(resources.GetObject("btnRefresh.Image"), System.Drawing.Image)
         Me.btnRefresh.Location = New System.Drawing.Point(224, 495)
         Me.btnRefresh.Name = "btnRefresh"
         Me.btnRefresh.Size = New System.Drawing.Size(41, 37)
@@ -148,7 +141,6 @@ Partial Class MealPlan
         'btnFilter
         '
         Me.btnFilter.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.btnFilter.Image = CType(resources.GetObject("btnFilter.Image"), System.Drawing.Image)
         Me.btnFilter.Location = New System.Drawing.Point(295, 495)
         Me.btnFilter.Name = "btnFilter"
         Me.btnFilter.Size = New System.Drawing.Size(41, 37)
@@ -158,7 +150,6 @@ Partial Class MealPlan
         'btnSort
         '
         Me.btnSort.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.btnSort.Image = CType(resources.GetObject("btnSort.Image"), System.Drawing.Image)
         Me.btnSort.Location = New System.Drawing.Point(512, 495)
         Me.btnSort.Name = "btnSort"
         Me.btnSort.Size = New System.Drawing.Size(41, 37)
@@ -187,6 +178,8 @@ Partial Class MealPlan
         '
         Me.Panel2.BackColor = System.Drawing.SystemColors.ActiveCaption
         Me.Panel2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.Panel2.Controls.Add(Me.ComboBox4)
+        Me.Panel2.Controls.Add(Me.Label4)
         Me.Panel2.Controls.Add(Me.Label6)
         Me.Panel2.Controls.Add(Me.lstMealSuggestions)
         Me.Panel2.Controls.Add(Me.DateTimePicker2)
@@ -411,6 +404,23 @@ Partial Class MealPlan
         Me.Label12.TabIndex = 13
         Me.Label12.Text = "Meal Name:"
         '
+        'Label4
+        '
+        Me.Label4.AutoSize = True
+        Me.Label4.Location = New System.Drawing.Point(26, 244)
+        Me.Label4.Name = "Label4"
+        Me.Label4.Size = New System.Drawing.Size(45, 15)
+        Me.Label4.TabIndex = 27
+        Me.Label4.Text = "Label4"
+        '
+        'ComboBox4
+        '
+        Me.ComboBox4.FormattingEnabled = True
+        Me.ComboBox4.Location = New System.Drawing.Point(117, 236)
+        Me.ComboBox4.Name = "ComboBox4"
+        Me.ComboBox4.Size = New System.Drawing.Size(121, 23)
+        Me.ComboBox4.TabIndex = 28
+        '
         'MealPlan
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -480,4 +490,6 @@ Partial Class MealPlan
     Friend WithEvents Label11 As Label
     Friend WithEvents Label10 As Label
     Friend WithEvents Label12 As Label
+    Friend WithEvents ComboBox4 As ComboBox
+    Friend WithEvents Label4 As Label
 End Class

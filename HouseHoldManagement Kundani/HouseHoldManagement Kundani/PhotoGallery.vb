@@ -48,7 +48,7 @@ Public Class PhotoGallery
             Dim Album As String = ComboBox2.SelectedItem.ToString()
 
 
-            Using conn As New OleDbConnection(Rinae.connectionString)
+            Using conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
                 conn.Open()
 
                 ' Get the ID of the selected row (assuming your table has a primary key named "ID")  
@@ -89,7 +89,7 @@ Public Class PhotoGallery
     Private Sub Button5_Click(sender As Object, e As EventArgs) Handles Button5.Click
         Dim SearchTerm As String = TextBox4.Text
         'Dim connString As String()
-        Using conn As New OleDb.OleDbConnection(Rinae.connectionString)
+        Using conn As New OleDb.OleDbConnection(HouseHoldManagment_Module.connectionString)
             conn.Open()
 
             Dim cmd As New OleDb.OleDbCommand("SELECT * FROM Photos WHERE Familymember LIKE ?", conn)
@@ -105,7 +105,7 @@ Public Class PhotoGallery
             '  Dim dataTable As DataTable = HouseHold.GetData("SELECT * FROM Expense")
             ' DataGridView1.DataSource = DataTable
             Debug.WriteLine("Populate Datagridview: Datagridview populated successfully.")
-            Using conn As New OleDbConnection(Rinae.connectionString)
+            Using conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
                 conn.Open()
 
                 Dim tableName As String = "Photos"
@@ -144,7 +144,7 @@ Public Class PhotoGallery
                     Debug.WriteLine("Format errors in button delete")
                     Debug.WriteLine("Deleting data: Data delected")
                     Debug.WriteLine("Stack Trace: {ex.StackTrace}")
-                    Using conn As New OleDbConnection(Rinae.connectionString)
+                    Using conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
                         conn.Open()
 
                         ' Create the delete command  
@@ -191,7 +191,7 @@ Public Class PhotoGallery
             '    Return
             'End If
 
-            Using conn As New OleDbConnection(Rinae.connectionString)
+            Using conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
 
                 conn.Open()
                 Dim cmd As New OleDbCommand($"INSERT INTO Photos ([Description], [FilePath], [DateAdded], [FamilyMember], [Photographer], [Album]) VALUES (?, ?, ?, ?, ?, ?)", conn)
@@ -268,7 +268,7 @@ Public Class PhotoGallery
         '  Dim selectedDateAdded As String = If(DateTimePicker1.Text IsNot Nothing, DateTimePicker1.Text.ToString(), "")
         Dim selectedFamilyMember As String = If(ComboBox1.SelectedItem IsNot Nothing, ComboBox1.SelectedItem.ToString(), "")
 
-        Cruwza.FilterPhoto(selectedFamilyMember) ', selectedDateAdded)
+        HouseHoldManagment_Module.FilterPhoto(selectedFamilyMember) ', selectedDateAdded)
     End Sub
     Private Sub DataGridView1_SelectionChanged(sender As Object, e As EventArgs) Handles DataGridView1.SelectionChanged
         Try

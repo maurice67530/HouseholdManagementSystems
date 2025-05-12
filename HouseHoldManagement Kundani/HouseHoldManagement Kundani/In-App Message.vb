@@ -1,8 +1,8 @@
 ﻿Imports System.Data.OleDb
 Public Class In_App_Message
 
-    Dim conn As New OleDbConnection(Masindi.connectionString)
-    Private Sub TextBox1_TextChanged(sender As Object, e As EventArgs) Handles TextBox1.TextChanged
+    Dim conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
+    Private Sub TextBox1_TextChanged(sender As Object, e As EventArgs) Handles txtReply.TextChanged
 
     End Sub
 
@@ -33,7 +33,7 @@ Public Class In_App_Message
             Dim message As String = $"Last viewed {viewType}: {lastViewed}"
 
             ' Show MessageBox
-            'MessageBox.Show(message, "Notification Info", MessageBoxButtons.OK, MessageBoxIcon.Information)
+            MessageBox.Show(message, "Notification Info", MessageBoxButtons.OK, MessageBoxIcon.Information)
 
             ' Append for NotifyIcon
             notifyMsg &= message & vbCrLf
@@ -122,43 +122,43 @@ Public Class In_App_Message
     End Sub
 
 
-    Private Sub ComboBox1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ComboBox1.SelectedIndexChanged
+    Private Sub ComboBox1_SelectedIndexChanged(sender As Object, e As EventArgs)
 
     End Sub
-    Public Sub PopulateComboboxFromDatabase(ByRef comboBox As ComboBox)
-        Dim conn As New OleDbConnection(Masindi.connectionString)
-        Try
-            Debug.WriteLine("populate combobox successful")
-            'open the database connection
-            conn.Open()
+    'Public Sub PopulateComboboxFromDatabase(ByRef comboBox As ComboBox)
+    '    Dim conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
+    '    Try
+    '        Debug.WriteLine("populate combobox successful")
+    '        'open the database connection
+    '        conn.Open()
 
-            'retrieve the firstname and surname columns from the personaldetails tabel
-            Dim query As String = "SELECT FirstName, LastName FROM Users"
-            Dim cmd As New OleDbCommand(query, conn)
-            Dim reader As OleDbDataReader = cmd.ExecuteReader()
+    '        'retrieve the firstname and surname columns from the personaldetails tabel
+    '        Dim query As String = "SELECT FirstName, LastName FROM Users"
+    '        Dim cmd As New OleDbCommand(query, conn)
+    '        Dim reader As OleDbDataReader = cmd.ExecuteReader()
 
-            'bind the retrieved data to the combobox
-            ComboBox1.Items.Clear()
-            While reader.Read()
-                ComboBox1.Items.Add($"{reader("FullNames")} {reader("UserName")}")
-            End While
+    '        'bind the retrieved data to the combobox
+    '        ComboBox1.Items.Clear()
+    '        While reader.Read()
+    '            ComboBox1.Items.Add($"{reader("FullNames")} {reader("UserName")}")
+    '        End While
 
-            'close the database
-            reader.Close()
+    '        'close the database
+    '        reader.Close()
 
-        Catch ex As Exception
-            'handle any exeptions that may occur  
-            Debug.WriteLine("failed to populate combobox")
-            Debug.WriteLine($"Stack Trace: {ex.StackTrace}")
-            MessageBox.Show($"Error: {ex.StackTrace}")
+    '    Catch ex As Exception
+    '        'handle any exeptions that may occur  
+    '        Debug.WriteLine("failed to populate combobox")
+    '        Debug.WriteLine($"Stack Trace: {ex.StackTrace}")
+    '        MessageBox.Show($"Error: {ex.StackTrace}")
 
-        Finally
-            'close the database connection
-            If conn.State = ConnectionState.Open Then
-                conn.Close()
-            End If
-        End Try
-    End Sub
+    '    Finally
+    '        'close the database connection
+    '        If conn.State = ConnectionState.Open Then
+    '            conn.Close()
+    '        End If
+    '    End Try
+    'End Sub
 
     Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
         LoadNotifications()
@@ -175,8 +175,52 @@ Public Class In_App_Message
         End If
     End Sub
 
+    Private Sub btnSendReply_Click(sender As Object, e As EventArgs) Handles btnSendReply.Click
+        If originalMessage = "" Or txtReply.Text.Trim() = "" Then
+            MessageBox.Show("Please select a message and write a reply.", "Missing Info", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            Exit Sub
+        End If
+
+        Dim con As New OleDbConnection(HouseHoldManagment_Module.connectionString)
+        Dim cmd As New OleDbCommand("INSERT INTO NotificationReplies (NotificationType, OriginalMessage, ReplyMessage, ReplyDate) VALUES (?, ?, ?, ?)", con)
+        'cmd.Parameters.AddWithValue("?", currentUserName)
+        cmd.Parameters.AddWithValue("?", selectedMessageType)
+        cmd.Parameters.AddWithValue("?", originalMessage)
+        cmd.Parameters.AddWithValue("?", txtReply.Text.Trim())
+        cmd.Parameters.AddWithValue("?", DateTime.Now)
+
+        con.Open()
+        cmd.ExecuteNonQuery()
+        con.Close()
+
+        MessageBox.Show("Reply sent and saved successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
+        txtReply.Clear()
+    End Sub
 
 
+
+    Private selectedMessageType As String = ""
+    Private originalMessage As String = ""
+
+    Private Sub ListBox1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ListBox1.SelectedIndexChanged
+        If ListBox1.SelectedItem IsNot Nothing Then
+            selectedMessageType = "Chores"
+            originalMessage = ListBox1.SelectedItem.ToString()
+            txtReply.Text = "" ' Clear old reply
+        End If
+    End Sub
+
+    Private Sub ListBox2_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ListBox2.SelectedIndexChanged
+        If ListBox2.SelectedItem IsNot Nothing Then
+            selectedMessageType = "Expenses"
+            originalMessage = ListBox2.SelectedItem.ToString()
+            txtReply.Text = ""
+        End If
+    End Sub
+
+    Private Sub NotifyIcon1_MouseDoubleClick(sender As Object, e As MouseEventArgs) Handles NotifyIcon1.MouseDoubleClick
+
+    End Sub
 End Class
 
 

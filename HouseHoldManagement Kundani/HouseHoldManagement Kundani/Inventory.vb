@@ -5,7 +5,7 @@ Public Class Inventory
             '  Dim dataTable As DataTable = HouseHold.GetData("SELECT * FROM Expense")
             ' DataGridView1.DataSource = DataTable
             Debug.WriteLine("Populate Datagridview: Datagridview populated successfully.")
-            Using conn As New OleDbConnection(Rinae.connectionString)
+            Using conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
                 conn.Open()
 
                 Dim tableName As String = "Inventory"
@@ -25,30 +25,30 @@ Public Class Inventory
     End Sub
         Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
             Try
-                Using conn As New OleDbConnection(Rinae.connectionString)
+            Using conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
 
-                    conn.Open()
-                    Dim cmd As New OleDbCommand($"INSERT INTO Inventory ([ItemName], [Description], [Quantity], [Category], [ReorderLevel], [PricePerUnit], [DateAdded], [ExpiryDate], [Unit]) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)", conn)
+                conn.Open()
+                Dim cmd As New OleDbCommand($"INSERT INTO Inventory ([ItemName], [Description], [Quantity], [Category], [ReorderLevel], [PricePerUnit], [DateAdded], [ExpiryDate], [Unit]) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)", conn)
 
-                    cmd.Parameters.Clear()
-                    cmd.Parameters.AddWithValue("@ItemName", TextBox1.Text)
-                    cmd.Parameters.AddWithValue("@Description", TextBox2.Text)
-                    cmd.Parameters.AddWithValue("@Quantity", TextBox3.Text)
-                    cmd.Parameters.AddWithValue("@Category", ComboBox1.SelectedItem)
-                    cmd.Parameters.AddWithValue("@ReorderLevel", ComboBox2.SelectedItem)
-                    cmd.Parameters.AddWithValue("@PricePerUnit", TextBox6.Text)
-                    cmd.Parameters.AddWithValue("@DateAdded", DateTimePicker1.Value)
-                    cmd.Parameters.AddWithValue("@ExpiryDate", DateTimePicker2.Value)
-                    cmd.Parameters.AddWithValue("@Unit", ComboBox3.SelectedItem)
+                cmd.Parameters.Clear()
+                cmd.Parameters.AddWithValue("@ItemName", TextBox1.Text)
+                cmd.Parameters.AddWithValue("@Description", TextBox2.Text)
+                cmd.Parameters.AddWithValue("@Quantity", TextBox3.Text)
+                cmd.Parameters.AddWithValue("@Category", ComboBox1.SelectedItem)
+                cmd.Parameters.AddWithValue("@ReorderLevel", ComboBox2.SelectedItem)
+                cmd.Parameters.AddWithValue("@PricePerUnit", TextBox6.Text)
+                cmd.Parameters.AddWithValue("@DateAdded", DateTimePicker1.Value)
+                cmd.Parameters.AddWithValue("@ExpiryDate", DateTimePicker2.Value)
+                cmd.Parameters.AddWithValue("@Unit", ComboBox3.SelectedItem)
 
-                    cmd.ExecuteNonQuery()
-                    conn.Close()
-                    LoadInventorydataFromDatabase()
+                cmd.ExecuteNonQuery()
+                conn.Close()
+                LoadInventorydataFromDatabase()
 
-                    MsgBox("Inventory Items Saved Successfuly!", vbInformation, "Inventory Saved")
+                MsgBox("Inventory Items Saved Successfuly!", vbInformation, "Inventory Saved")
 
-                End Using
-            Catch ex As OleDbException
+            End Using
+        Catch ex As OleDbException
                 Debug.WriteLine($"Database error: {ex.Message}")
                 Debug.Write($"Stack Trace: {ex.StackTrace}")
                 MessageBox.Show("Error saving inventory to database: Please check the connectivity." & ex.Message & vbNewLine & ex.StackTrace, "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
@@ -81,37 +81,37 @@ Public Class Inventory
                 Dim ExpiryDate As String = DateTimePicker1.Value
                 Dim Unit As String = ComboBox2.Text
 
-                Using conn As New OleDbConnection(Rinae.connectionString)
+            Using conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
 
-                    conn.Open()
+                conn.Open()
 
-                    ' Get the ID of the selected row (assuming your table has a primary key named "ID")  
-                    Dim selectedRow As DataGridViewRow = DataGridView1.SelectedRows(0)
-                    Dim ID As Integer = Convert.ToInt32(selectedRow.Cells("ID").Value) ' Change "ID" to your primary key column name  
+                ' Get the ID of the selected row (assuming your table has a primary key named "ID")  
+                Dim selectedRow As DataGridViewRow = DataGridView1.SelectedRows(0)
+                Dim ID As Integer = Convert.ToInt32(selectedRow.Cells("ID").Value) ' Change "ID" to your primary key column name  
 
-                    ' Create an OleDbCommand to update the personnel data in the database  
-                    Dim cmd As New OleDbCommand("UPDATE [Inventory] SET [ItemName] = ?, [Description] = ?, [Quantity] = ?, [Category] = ?, [ReorderLevel] = ?, [PricePerUnit] = ?, [DateAdded] = ?,  [ExpiryDate] = ?, [Unit] = ? WHERE [ID] = ?", conn)
+                ' Create an OleDbCommand to update the personnel data in the database  
+                Dim cmd As New OleDbCommand("UPDATE [Inventory] SET [ItemName] = ?, [Description] = ?, [Quantity] = ?, [Category] = ?, [ReorderLevel] = ?, [PricePerUnit] = ?, [DateAdded] = ?,  [ExpiryDate] = ?, [Unit] = ? WHERE [ID] = ?", conn)
 
-                    ' Set the parameter values from the UI controls  
-                    cmd.Parameters.AddWithValue("@ItemName", ItemName)
-                    cmd.Parameters.AddWithValue("@Description", Description)
-                    cmd.Parameters.AddWithValue("@Quantity", Quantity)
-                    cmd.Parameters.AddWithValue("@Category", Category)
-                    cmd.Parameters.AddWithValue("@ReorderLevel", ReorderLevel)
-                    cmd.Parameters.AddWithValue("@PricePerUnit", PricePerUnit)
-                    cmd.Parameters.AddWithValue("@DateAdded", DateAdded)
-                    cmd.Parameters.AddWithValue("@ExpiryDate", ExpiryDate)
-                    cmd.Parameters.AddWithValue("@Unit", Unit)
-                    cmd.Parameters.AddWithValue("@ID", ID)
-                    cmd.ExecuteNonQuery()
+                ' Set the parameter values from the UI controls  
+                cmd.Parameters.AddWithValue("@ItemName", ItemName)
+                cmd.Parameters.AddWithValue("@Description", Description)
+                cmd.Parameters.AddWithValue("@Quantity", Quantity)
+                cmd.Parameters.AddWithValue("@Category", Category)
+                cmd.Parameters.AddWithValue("@ReorderLevel", ReorderLevel)
+                cmd.Parameters.AddWithValue("@PricePerUnit", PricePerUnit)
+                cmd.Parameters.AddWithValue("@DateAdded", DateAdded)
+                cmd.Parameters.AddWithValue("@ExpiryDate", ExpiryDate)
+                cmd.Parameters.AddWithValue("@Unit", Unit)
+                cmd.Parameters.AddWithValue("@ID", ID)
+                cmd.ExecuteNonQuery()
 
-                    MsgBox("Inventory Items Updated Successfuly!", vbInformation, "Update Confirmation")
-                    LoadInventorydataFromDatabase()
-                    '  InventoryModule.ClearControls(Me)
+                MsgBox("Inventory Items Updated Successfuly!", vbInformation, "Update Confirmation")
+                LoadInventorydataFromDatabase()
+                '  InventoryModule.ClearControls(Me)
 
-                End Using
+            End Using
 
-            Catch ex As OleDbException
+        Catch ex As OleDbException
                 Debug.WriteLine("User cancelled update")
                 Debug.WriteLine("Unexpected error in button update")
                 Debug.Write($"Stack Trace: {ex.StackTrace}")
@@ -145,26 +145,26 @@ Public Class Inventory
                         Debug.WriteLine("Format errors in button delete")
                         Debug.WriteLine("Deleting data: Data delected")
                         Debug.WriteLine("Stack Trace: {ex.StackTrace}")
-                        Using conn As New OleDbConnection(Rinae.connectionString)
-                            conn.Open()
+                    Using conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
+                        conn.Open()
 
-                            ' Create the delete command  
-                            Dim cmd As New OleDbCommand("DELETE FROM [Inventory] WHERE [ID] = ?", conn)
-                            cmd.Parameters.AddWithValue("@ID", InventoryID) ' Primary key for matching record  
+                        ' Create the delete command  
+                        Dim cmd As New OleDbCommand("DELETE FROM [Inventory] WHERE [ID] = ?", conn)
+                        cmd.Parameters.AddWithValue("@ID", InventoryID) ' Primary key for matching record  
 
-                            ' Execute the delete command  
-                            Dim rowsAffected As Integer = cmd.ExecuteNonQuery()
+                        ' Execute the delete command  
+                        Dim rowsAffected As Integer = cmd.ExecuteNonQuery()
 
-                            If rowsAffected > 0 Then
-                                MessageBox.Show("Inventory deleted successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
-                                ' Optionally refresh DataGridView or reload from database  
-                                ' PopulateDataGridView()
-                                LoadInventorydataFromDatabase()
-                            Else
-                                MessageBox.Show("No Inventory was deleted. Please check if the ID exists.", "Deletion Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-                            End If
-                        End Using
-                        LoadInventorydataFromDatabase()
+                        If rowsAffected > 0 Then
+                            MessageBox.Show("Inventory deleted successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                            ' Optionally refresh DataGridView or reload from database  
+                            ' PopulateDataGridView()
+                            LoadInventorydataFromDatabase()
+                        Else
+                            MessageBox.Show("No Inventory was deleted. Please check if the ID exists.", "Deletion Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                        End If
+                    End Using
+                    LoadInventorydataFromDatabase()
                     Catch ex As Exception
                         Debug.WriteLine("Failed to delete data")
                         Debug.Write($"Stack Trace: {ex.StackTrace}")
@@ -183,8 +183,8 @@ Public Class Inventory
             Dim selectedCategory As String = If(ComboBox1.SelectedItem IsNot Nothing, ComboBox1.SelectedItem.ToString(), "")
             Dim selectedUnit As String = If(ComboBox2.SelectedItem IsNot Nothing, ComboBox2.SelectedItem.ToString(), "")
 
-            Cruwza.FilterInventory(selectedCategory, selectedUnit)
-        End Sub
+        HouseHoldManagment_Module.FilterInventory(selectedCategory, selectedUnit)
+    End Sub
         Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
             TextBox1.Text = ""
             TextBox3.Text = ""
@@ -295,4 +295,7 @@ Public Class Inventory
         End
     End Sub
 
-    End Class
+    Private Sub Label1_Click(sender As Object, e As EventArgs) Handles Label1.Click
+
+    End Sub
+End Class

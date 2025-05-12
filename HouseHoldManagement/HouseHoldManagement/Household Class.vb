@@ -12,7 +12,18 @@ Public Class Registration
     Public Property Role As String
     Public Property DateCreated As String
 End Class
+Public Class HouseholdDocuments
 
+    Public Property SelectHouseHold As String
+    Public Property FileName As String
+    Public Property FilePath As String
+    Public Property UploadedBy As String
+    Public Property UploadedDate As DateTime
+
+
+
+
+End Class
 Public Class Logging
     ' Properties of the Login class
     Public Property Username As String
