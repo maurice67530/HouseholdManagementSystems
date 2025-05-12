@@ -27,7 +27,7 @@ Public Class Dashboard
         gp.AddEllipse(0, 0, lblbadge.Width, lblbadge.Height)
         lblbadge.Region = New Region(gp)
         StyleBadge()
-
+        In_App_Message.NotifyIcon1.ShowBalloonTip(5000) ' 5 seconds
 
         UpdateNotificationCount()
         LoadChoresStatus()
@@ -1141,6 +1141,10 @@ Public Class Dashboard
     End Sub
 
     Private Sub ToolTip1_Popup(sender As Object, e As PopupEventArgs) Handles ToolTip1.Popup
+
+    End Sub
+
+    Private Sub NotifyIcon1_MouseDoubleClick(sender As Object, e As MouseEventArgs) Handles NotifyIcon1.MouseDoubleClick
 
     End Sub
 End Class
