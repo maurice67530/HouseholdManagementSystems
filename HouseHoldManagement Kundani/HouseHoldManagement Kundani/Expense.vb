@@ -33,7 +33,7 @@ Public Class Expense
                 Dim tableName As String = "Expense"
 
                 ' Create an OleDbCommand to insert the Expense data into the database 
-                Dim cmd As New OleDbCommand("INSERT INTO [Expense] ([Amount], [TotalIncome], [Description], [Tags], [Currency], [Category], [Paymentmethod], [Frequency], [ApprovalStatus], [DateOfexpenses], [Person], [BillName], [StartDate], [Recurring]) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", conn)
+                Dim cmd As New OleDbCommand("INSERT INTO [Expense] ([Amount], [TotalIncome], [Description], [Tags], [Currency], [Category], [Paymentmethod], [Frequency], [ApprovalStatus], [DateOfexpenses], [Person], [BillName], [StartDate], [Recurring], [Paid]) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", conn)
 
                 ' Set the parameter values from the UI controls 
                 'Class declaretions
@@ -52,7 +52,8 @@ Public Class Expense
                      .Person = ComboBox3.SelectedItem.ToString(),
                     .BillName = TextBox8.Text,
                     .StartDate = DateTimePicker2.Value,
-                    .Recurring = CheckBox1.Checked}
+                    .Recurring = CheckBox1.Checked,
+                    .Paid = ComboBox6.SelectedItem.ToString}
 
                 'txtRecentUpdate.Text = $" Expense updated at {DateTime.Now:HH:MM}"
 
@@ -74,6 +75,7 @@ Public Class Expense
                 cmd.Parameters.AddWithValue("@BillName", expense.BillName)
                 cmd.Parameters.AddWithValue("@StartDate", expense.StartDate)
                 cmd.Parameters.AddWithValue("@Recurring", expense.Recurring)
+                cmd.Parameters.AddWithValue("@Paid", expense.Paid)
 
 
                 MsgBox("Expense Information Saved!" & vbCrLf &
@@ -91,6 +93,7 @@ Public Class Expense
                             "DateOfExpense: " & expense.DateOfexpenses.ToString & vbCrLf &
                             "BillName: " & expense.BillName & vbCrLf &
                              "Recurring: " & expense.Recurring & vbCrLf &
+                             "Paid: " & expense.Paid & vbCrLf &
                           "StartDate: " & expense.StartDate.ToString, vbInformation, "Expense Confirmation")
 
                 ' Execute the SQL command to insert the data 
@@ -169,6 +172,7 @@ Public Class Expense
                 Dim BillName As String = TextBox8.Text
                 Dim StartDate As String = DateTimePicker2.Value
                 Dim Recurring As String = CheckBox1.Checked
+                Dim Paid As String = ComboBox6.SelectedItem.ToString
 
 
                 ' Get the ID of the selected row (assuming your table has a primary key named "ID")  
@@ -176,7 +180,7 @@ Public Class Expense
                 Dim ID As Integer = Convert.ToInt32(selectedRow.Cells("ID").Value) ' Change "ID" to your primary key column name  
 
                 ' Create an OleDbCommand to update the Expense data in the database  
-                Dim cmd As New OleDbCommand("UPDATE [Expense] SET [Amount] = ?, [TotalIncome] = ?, [Description] = ?, [Tags] = ?, [Currency] =?, [Category] = ?, [Paymentmethod] = ?, [Frequency] = ?, [ApprovalStatus] = ?, [DateOfexpenses] = ?, [Person] = ?, [BillName] = ?, [StartDate] = ?, [Recurring] = ? WHERE [ID] = ?", conn)
+                Dim cmd As New OleDbCommand("UPDATE [Expense] SET [Amount] = ?, [TotalIncome] = ?, [Description] = ?, [Tags] = ?, [Currency] =?, [Category] = ?, [Paymentmethod] = ?, [Frequency] = ?, [ApprovalStatus] = ?, [DateOfexpenses] = ?, [Person] = ?, [BillName] = ?, [StartDate] = ?, [Recurring] = ?, [Paid] = ? WHERE [ID] = ?", conn)
 
                 ' Set the parameter values from the UI controls  
 
@@ -195,6 +199,7 @@ Public Class Expense
                 cmd.Parameters.AddWithValue("BillName", BillName)
                 cmd.Parameters.AddWithValue("StartDate", StartDate)
                 cmd.Parameters.AddWithValue("Recurring", Recurring)
+                cmd.Parameters.AddWithValue("Paid", Paid)
                 cmd.Parameters.AddWithValue("ID", ID)
 
 
@@ -309,6 +314,7 @@ Public Class Expense
         ComboBox3.SelectedItem = ""
         TextBox8.Text = ""
         CheckBox1.Checked = ""
+        ComboBox6.SelectedItem = ""
     End Sub
 
     Public Sub LoadExpenseDataFromDatabase()
@@ -534,6 +540,7 @@ Public Class Expense
                 TextBox8.Text = selectedRow.Cells("BillName").Value.ToString()
                 DateTimePicker2.Text = selectedRow.Cells("StartDate").Value.ToString()
                 CheckBox1.Text = selectedRow.Cells("Recurring").Value.ToString()
+                ComboBox6.SelectedItem = selectedRow.Cells("Paid").Value.ToString()
 
             End If
         Catch ex As Exception

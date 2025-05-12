@@ -73,6 +73,8 @@ Public Class Expensetracking
     Public Property BillName As String
     Public Property StartDate As DateTime
     Public Property Recurring As String
+    Public Property Paid As String
+
 
 End Class
 Public Class DailyTask
