@@ -130,4 +130,6 @@ Public Class BudgetClass
     Public Property EndDate As String
     Public Property Groceries As String
     Public Property StartDate As String
+    Public Property Remaining As String
+    Public Property Amount As String
 End Class
