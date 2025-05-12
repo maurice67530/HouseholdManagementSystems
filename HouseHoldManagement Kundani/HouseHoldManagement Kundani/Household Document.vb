@@ -2,7 +2,8 @@
 Imports System.IO
 
 Public Class Household_Document
-    Public Property conn As New OleDbConnection(khodani.connectionString)
+    Public Property conn As New OleDbConnection(connectionString)
+
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
 
 
@@ -30,8 +31,8 @@ Public Class Household_Document
             File.Copy(sourcePath, targetPath, True)
 
             ' Connection string to Access DB
-            Dim connStr As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\khodani\Source\Repos\maurice67530\HouseholdManagementSystems\HMS.accdb;"
-            Using conn As New OleDbConnection(connStr)
+
+            Using conn As New OleDbConnection(connectionString)
                 conn.Open()
                 Dim cmd As New OleDbCommand("INSERT INTO HouseholdDocument (SelectHouseHold, FileName, FilePath, UploadedDate, UploadedBy) " &
                                             "VALUES (@SelectHouseHold, @FileName, @FilePath, @UploadedDate, @UploadedBy)", conn)
@@ -51,7 +52,7 @@ Public Class Household_Document
     Public Sub LoadhouseholddocumentDataFromDatabase()
         Try
             Debug.WriteLine("DataGridview populated successfully ChoresForm_Load")
-            Using conn As New OleDbConnection(khodani.connectionString)
+            Using conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
                 conn.Open()
 
                 ' Update the table name if necessary  
@@ -81,7 +82,7 @@ Public Class Household_Document
     Private Sub LoadDocuments()
         If ComboBox1.SelectedIndex = -1 Then Exit Sub
 
-        Dim conn As New OleDbConnection("khodani.connectionstring")
+        Dim conn As New OleDbConnection("HouseHoldManagment_Module.connectionstring")
         Dim cmd As New OleDbCommand("SELECT SelectHouseHold, FileName, FilePath, UploadedDate FROM HouseholdDocuments WHERE ID= @ID", conn)
         cmd.Parameters.AddWithValue("@SelectHouseHold", ComboBox1.SelectedValue)
 
@@ -121,58 +122,24 @@ Public Class Household_Document
         End If
     End Sub
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
-
-        If DataGridView1.CurrentRow IsNot Nothing Then
-            Dim filePath As String = DataGridView1.CurrentRow.Cells("FilePath").Value.ToString()
-
-            If System.IO.File.Exists(filePath) Then
-                Try
-                    Process.Start(filePath)
-                Catch ex As Exception
-                    MessageBox.Show("Error opening file: " & ex.Message)
-                End Try
-            Else
-                MessageBox.Show("File not found: " & filePath)
-            End If
-        Else
-            MessageBox.Show("Please select a document to open.")
-        End If
-
-
-
-        'Dim SelectHousehold As String = ComboBox1.Text ' or get from selected row
-        'ViewDocument(SelectHousehold)
-
-
-
-
         Try
+            If DataGridView1.CurrentRow IsNot Nothing Then
+                Dim filePath As String = DataGridView1.CurrentRow.Cells("FilePath").Value.ToString()
 
-            '    ' Example: retrieve file path from a selected item in a ListBox or database
-            '    Dim filePath As String = "C:\Users\khodani\Source\Repos\maurice67530\HouseholdManagementSystems\HouseHoldManagement Kundani\HouseHoldManagement Kundani" ' replace this with dynamic value
+                If System.IO.File.Exists(filePath) Then
+                    Try
+                        Process.Start(filePath)
+                    Catch ex As Exception
+                        MessageBox.Show("Error opening file: " & ex.Message)
+                    End Try
+                Else
+                    MessageBox.Show("File not found: " & filePath)
+                End If
+            Else
+                MessageBox.Show("Please select a document to open.")
+            End If
 
-            '    If File.Exists(filePath) Then
-            '        Process.Start(filePath)
-            '    Else
-            '        MessageBox.Show("File not found: " & filePath)
-            '    End If
 
-            '    ' Get dynamic values from UI controls or environment
-            '    Dim SelectHouseHold As String = ComboBox1.SelectedItem.ToString()
-            '    Dim FileName As String = Path.GetFileName(OpenFileDialog1.FileName) ' assuming a file was selected
-            '    'Dim FilePath As String = "C:\Uploads\" & FileName ' or your actual path logic
-            '    Dim UploadedDate As DateTime = DateTime.Now
-            '    Dim UploadedBy As String = Environment.UserName
-            '    'Dim DocumentType As String = TextBoxDocumentType.Text ' assuming you have this TextBox on form
-
-            '    Dim cmd As New OleDbCommand("INSERT INTO HouseholdDocument (SelectHouseHold, FileName, FilePath, UploadedDate, UploadedBy) " &
-            '                                "VALUES (@SelectHouseHold, @FileName, @FilePath, @UploadedDate, @UploadedBy)", conn)
-
-            '    cmd.Parameters.AddWithValue("@SelectHouseHold", SelectHouseHold)
-            '    cmd.Parameters.AddWithValue("@FileName", FileName)
-            '    cmd.Parameters.AddWithValue("@FilePath", filePath)
-            '    cmd.Parameters.AddWithValue("@UploadedDate", UploadedDate)
-            '    cmd.Parameters.AddWithValue("@UploadedBy", UploadedBy)
 
         Catch ex As Exception
             'Debug.WriteLine("error selection data in the database")
@@ -198,7 +165,7 @@ Public Class Household_Document
             If confirmationResult = DialogResult.Yes Then
                 ' Proceed with deletion  
                 Try
-                    Using conn As New OleDbConnection(khodani.connectionString)
+                    Using conn As New OleDbConnection(connectionString)
                         conn.Open()
 
                         ' Create the delete command  
