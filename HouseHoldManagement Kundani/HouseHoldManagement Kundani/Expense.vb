@@ -333,6 +333,52 @@ Public Class Expense
         toolTip1.SetToolTip(Button7, "Calculate Budget")
         'toolTip1.SetToolTip(Button7, "Daily tasks")
         toolTip1.SetToolTip(Button1, "Save")
+
+        Try
+            ' Dynamic label creation
+            Dim lblDateTime As New Label()
+            lblDateTime.Name = "lblDateTime"
+            lblDateTime.Text = "Today: " & DateTime.Now.ToString("dddd, dd MMMM yyyy HH:mm:ss")
+            lblDateTime.Location = New Point(10, 10) ' Adjust position as needed
+            lblDateTime.AutoSize = True
+            lblDateTime.Font = New Font("Arial", 10, FontStyle.Bold)
+            lblDateTime.ForeColor = Color.Blue
+
+
+            ' Add the label to the forms controls
+            Me.Controls.Add(lblDateTime)
+            Debug.WriteLine("Expense Load: Datetime label added.")
+
+
+            Debug.WriteLine("Form loaded successfully")
+            ' Create a new OleDbConnection object and open the connection  
+
+            conn.Open()
+
+            ' Display the connection status on a button with a green background  
+            Label7.Text = "Connected"
+            Label7.BackColor = Color.Green
+            Label7.ForeColor = Color.White
+        Catch ex As Exception
+            ' Display the connection status on a button with a red background  
+            Label7.Text = "Not Connected"
+            Label7.BackColor = Color.Red
+            Label7.ForeColor = Color.White
+
+            ' Display an error message  
+            Debug.WriteLine(" Failed loading the Expense data  from DataBase")
+            Debug.WriteLine($"Stack Trace : {ex.StackTrace}")
+            MessageBox.Show("Error connecting to the database" & ex.Message, "Database Connection Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+
+        Finally
+            ' Close the database connection  
+            conn.Close()
+        End Try
+
+        ' Disable certain buttons if the connection is not established  
+        Button1.Enabled = Label7.Text = "Connected"
+        Button1.Enabled = Label7.Text = "Connected"
+
         LoadExpenseDataFromDatabase()
         PopulateComboboxFromDatabase(ComboBox3)
     End Sub

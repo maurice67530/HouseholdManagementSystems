@@ -66,6 +66,7 @@ Partial Class Expense
         Me.Button9 = New System.Windows.Forms.Button()
         Me.PrintDialog1 = New System.Windows.Forms.PrintDialog()
         Me.PrintDocument1 = New System.Drawing.Printing.PrintDocument()
+        Me.Label17 = New System.Windows.Forms.Label()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel1.SuspendLayout()
         Me.Panel2.SuspendLayout()
@@ -465,10 +466,10 @@ Partial Class Expense
         'Label11
         '
         Me.Label11.AutoSize = True
-        Me.Label11.Font = New System.Drawing.Font("Kristen ITC", 24.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label11.Location = New System.Drawing.Point(229, -2)
+        Me.Label11.Font = New System.Drawing.Font("Kristen ITC", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label11.Location = New System.Drawing.Point(296, 19)
         Me.Label11.Name = "Label11"
-        Me.Label11.Size = New System.Drawing.Size(166, 44)
+        Me.Label11.Size = New System.Drawing.Size(99, 27)
         Me.Label11.TabIndex = 123
         Me.Label11.Text = "Expenses"
         '
@@ -488,11 +489,21 @@ Partial Class Expense
         '
         Me.PrintDialog1.UseEXDialog = True
         '
+        'Label17
+        '
+        Me.Label17.AutoSize = True
+        Me.Label17.Location = New System.Drawing.Point(557, 9)
+        Me.Label17.Name = "Label17"
+        Me.Label17.Size = New System.Drawing.Size(45, 13)
+        Me.Label17.TabIndex = 135
+        Me.Label17.Text = "Label17"
+        '
         'Expense
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(669, 573)
+        Me.Controls.Add(Me.Label17)
         Me.Controls.Add(Me.Button9)
         Me.Controls.Add(Me.Button8)
         Me.Controls.Add(Me.DataGridView1)
@@ -561,4 +572,5 @@ Partial Class Expense
     Friend WithEvents Button9 As Button
     Friend WithEvents PrintDialog1 As PrintDialog
     Friend WithEvents PrintDocument1 As Printing.PrintDocument
+    Friend WithEvents Label17 As Label
 End Class
