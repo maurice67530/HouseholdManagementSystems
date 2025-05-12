@@ -14,7 +14,7 @@ Module HouseHoldManagment_Module
 End Module
 
 Module Ndamu
-    Public Const connectionstring As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Nedzamba\Source\Repos\HouseholdManagementSystems\HMS.accdb"
+    Public Const connectionstring As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Nedzamba\Source\Repos\maurice67530\HouseholdManagementSystems\HMS.accdb"
     'Public Sub AddEvent(Title As String, Notes As String, EventDate As Date, StartTime As Date, Endtime As Date, AssignedTo As String, EventType As String)
     '    Try
     '        Using conn As New OleDbConnection(Ndamu.connectionstring)
@@ -52,6 +52,8 @@ Module Ndamu
     '    'Add Photo Day Event
     '    AddEvent("Photo Day", Description, DateAdded, DateAdded.AddHours(15), DateAdded.AddHours(16), "Family", "Photo")
     'End Sub
+
+
 End Module
 
 Module Rasta
