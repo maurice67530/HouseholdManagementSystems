@@ -73,6 +73,12 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Budget.Designer.vb">
+      <DependentUpon>Budget.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Budget.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Chores.Designer.vb">
       <DependentUpon>Chores.vb</DependentUpon>
     </Compile>
@@ -117,6 +123,12 @@
     </Compile>
     <Compile Include="Household Class.vb" />
     <Compile Include="HouseHoldManagement Module.vb" />
+    <Compile Include="In-App Message.Designer.vb">
+      <DependentUpon>In-App Message.vb</DependentUpon>
+    </Compile>
+    <Compile Include="In-App Message.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Inventory.Designer.vb">
       <DependentUpon>Inventory.vb</DependentUpon>
     </Compile>
@@ -182,11 +194,20 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Budget.resx">
+      <DependentUpon>Budget.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Dashboard.resx">
       <DependentUpon>Dashboard.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Grocery Items.resx">
       <DependentUpon>Grocery Items.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="In-App Message.resx">
+      <DependentUpon>In-App Message.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Inventory.resx">
+      <DependentUpon>Inventory.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Login.resx">
       <DependentUpon>Login.vb</DependentUpon>

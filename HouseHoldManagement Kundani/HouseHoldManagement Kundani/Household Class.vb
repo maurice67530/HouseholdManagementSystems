@@ -11,6 +11,9 @@ Public Class Registration
     Public Property Email As String
     Public Property Role As String
     Public Property DateCreated As String
+    Public Property Age As String
+    Public Property Picture As String
+
 End Class
 
 Public Class Logging
@@ -114,4 +117,17 @@ Public Class FamilySchedule
     Public Property EndTime As String
     Public Property AssignedTo As String
     Public Property EventType As String
+End Class
+Public Class BudgetClass
+    Public Property Person As String
+    Public Property Role As String
+    'Public Property EndDate As String
+    Public Property Income As String
+    Public Property Utilities As String
+    Public Property Rent As String
+    Public Property Expenses As String
+    Public Property Frequency As String
+    Public Property EndDate As String
+    Public Property Groceries As String
+    Public Property StartDate As String
 End Class

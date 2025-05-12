@@ -22,6 +22,7 @@ Partial Class Expense
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Expense))
         Me.Button8 = New System.Windows.Forms.Button()
         Me.DataGridView1 = New System.Windows.Forms.DataGridView()
         Me.Button7 = New System.Windows.Forms.Button()
@@ -70,6 +71,7 @@ Partial Class Expense
         'Button8
         '
         Me.Button8.BackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.Button8.Image = CType(resources.GetObject("Button8.Image"), System.Drawing.Image)
         Me.Button8.Location = New System.Drawing.Point(487, 451)
         Me.Button8.Name = "Button8"
         Me.Button8.Size = New System.Drawing.Size(75, 51)
@@ -88,6 +90,7 @@ Partial Class Expense
         'Button7
         '
         Me.Button7.BackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.Button7.Image = CType(resources.GetObject("Button7.Image"), System.Drawing.Image)
         Me.Button7.Location = New System.Drawing.Point(19, 451)
         Me.Button7.Name = "Button7"
         Me.Button7.Size = New System.Drawing.Size(75, 51)
@@ -97,6 +100,7 @@ Partial Class Expense
         'Button6
         '
         Me.Button6.BackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.Button6.Image = CType(resources.GetObject("Button6.Image"), System.Drawing.Image)
         Me.Button6.Location = New System.Drawing.Point(114, 451)
         Me.Button6.Name = "Button6"
         Me.Button6.Size = New System.Drawing.Size(75, 51)
@@ -106,6 +110,7 @@ Partial Class Expense
         'Button5
         '
         Me.Button5.BackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.Button5.Image = CType(resources.GetObject("Button5.Image"), System.Drawing.Image)
         Me.Button5.Location = New System.Drawing.Point(205, 451)
         Me.Button5.Name = "Button5"
         Me.Button5.Size = New System.Drawing.Size(75, 51)
@@ -425,6 +430,7 @@ Partial Class Expense
         'Button4
         '
         Me.Button4.BackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.Button4.Image = CType(resources.GetObject("Button4.Image"), System.Drawing.Image)
         Me.Button4.Location = New System.Drawing.Point(301, 450)
         Me.Button4.Name = "Button4"
         Me.Button4.Size = New System.Drawing.Size(75, 51)
@@ -434,6 +440,7 @@ Partial Class Expense
         'Button3
         '
         Me.Button3.BackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.Button3.Image = CType(resources.GetObject("Button3.Image"), System.Drawing.Image)
         Me.Button3.Location = New System.Drawing.Point(395, 451)
         Me.Button3.Name = "Button3"
         Me.Button3.Size = New System.Drawing.Size(75, 51)
@@ -452,6 +459,7 @@ Partial Class Expense
         'Button1
         '
         Me.Button1.BackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.Button1.Image = CType(resources.GetObject("Button1.Image"), System.Drawing.Image)
         Me.Button1.Location = New System.Drawing.Point(575, 451)
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(75, 51)

@@ -3,7 +3,7 @@ Imports System.Data.OleDb
 Imports System.Media
 Public Class Notifications
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
-        Dim Conn As New OleDbConnection(Rinae.connectionString)
+        Dim Conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
 
         If DataGridView1.SelectedRows.Count = 0 Then
             MsgBox("Please select a notification.", MsgBoxStyle.Exclamation, "No Selection")
@@ -47,7 +47,7 @@ Public Class Notifications
             Return
         End If
 
-        Using conn As New OleDbConnection(Rinae.connectionString)
+        Using conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
             conn.Open()
             For Each row As DataGridViewRow In DataGridView1.SelectedRows
                 Dim notificationID As Integer = Convert.ToInt32(row.Cells("ID").Value)
@@ -89,7 +89,7 @@ Public Class Notifications
 
     Sub UpdateUnreadCount()
         Try
-            Using Conn As New OleDbConnection(Rinae.connectionString)
+            Using Conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
                 Conn.Open()
                 Dim query As String = "SELECT COUNT(*) FROM Notifications WHERE IsRead = 'No'"
                 Using cmd As New OleDbCommand(query, Conn)
@@ -119,7 +119,7 @@ Public Class Notifications
         Dim query As String = "SELECT COUNT(*) FROM Notifications WHERE IsRead = 'No'"
 
         ' Create a new connection to the database
-        Dim conn As New OleDbConnection(Rinae.connectionString)
+        Dim conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
 
         Try
             ' Open the connection
@@ -149,7 +149,7 @@ Public Class Notifications
     End Sub
     Private Sub LoadNotifications()
         Dim query As String = "SELECT * FROM Notifications ORDER BY DateCreated DESC"
-        Using conn As New OleDbConnection(Rinae.connectionString), cmd As New OleDbCommand(query, conn)
+        Using conn As New OleDbConnection(HouseHoldManagment_Module.connectionString), cmd As New OleDbCommand(query, conn)
             Dim adapter As New OleDbDataAdapter(cmd)
             Dim table As New DataTable()
 
@@ -158,7 +158,7 @@ Public Class Notifications
         End Using
     End Sub
     Private Sub ExecuteQuery(query As String)
-        Using conn As New OleDbConnection(Rinae.connectionString), cmd As New OleDbCommand(query, conn)
+        Using conn As New OleDbConnection(HouseHoldManagment_Module.connectionString), cmd As New OleDbCommand(query, conn)
             conn.Open()
             cmd.ExecuteNonQuery()
         End Using
@@ -167,7 +167,7 @@ Public Class Notifications
     End Sub
     Private Sub ShowNewNotifications()
         Dim query As String = "SELECT Message FROM Notifications WHERE IsRead = False"
-        Using conn As New OleDbConnection(Rinae.connectionString), cmd As New OleDbCommand(query, conn)
+        Using conn As New OleDbConnection(HouseHoldManagment_Module.connectionString), cmd As New OleDbCommand(query, conn)
             conn.Open()
             Using reader As OleDbDataReader = cmd.ExecuteReader()
                 Dim messages As String = ""
@@ -182,7 +182,7 @@ Public Class Notifications
     End Sub
 
     Private Sub CheckInventoryAndChores()
-        Dim conn As New OleDbConnection(Rinae.connectionString)
+        Dim conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
         Dim currentUser As String = GetCurrentUser(conn)
         Dim dateCreated As String = Date.Now.ToString("yyyy-MM-dd HH:mm:ss")
         Dim isRead As String = "No"
