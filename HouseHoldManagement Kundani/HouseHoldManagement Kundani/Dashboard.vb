@@ -22,7 +22,7 @@ Public Class Dashboard
 
 
     Private Sub Dashboard_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        lblbadge.Region = New Region(New Drawing.Drawing2D.GraphicsPath())
+        lblbadge.Region = New Region(New Drawing2D.GraphicsPath())
         Dim gp As New Drawing.Drawing2D.GraphicsPath()
         gp.AddEllipse(0, 0, lblbadge.Width, lblbadge.Height)
         lblbadge.Region = New Region(gp)
