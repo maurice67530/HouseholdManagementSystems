@@ -5,11 +5,11 @@ Public Class Budget
 
 
     Private Sub Button1_Click(sender As Object, e As EventArgs)
-        Dim income, rent, utilities, groceries, otherExpenses As Decimal
+        Dim BudgetAmount, rent, utilities, groceries, otherExpenses As Decimal
         Dim totalExpenses, remaining As Decimal
 
         ' Validate and convert inputs
-        If Not Decimal.TryParse(TextBox1.Text, income) Then
+        If Not Decimal.TryParse(TextBox1.Text, BudgetAmount) Then
             MessageBox.Show("Enter a valid number for income.")
             Exit Sub
         End If
@@ -20,7 +20,7 @@ Public Class Budget
 
         ' Calculate
         totalExpenses = rent + utilities + groceries + otherExpenses
-        remaining = income - totalExpenses
+        remaining = BudgetAmount - totalExpenses
 
         ' Display results
         Label6.Text = "Budget: R" & totalExpenses.ToString("F2")
@@ -87,7 +87,7 @@ Public Class Budget
                 Dim tableName As String = "Budget"
 
                 ' Create an OleDbCommand to insert the Budget data into the database 
-                Dim cmd As New OleDbCommand("INSERT INTO [Budget] ([Person], [Role], [Frequency], [Income], [Utilities], [Groceries], [Expenses], [StartDate], [EndDate]) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)", conn)
+                Dim cmd As New OleDbCommand("INSERT INTO [Budget] ([Person], [Role], [Frequency], [BudgetAmount], [Utilities], [Groceries], [Expenses], [StartDate], [EndDate]) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)", conn)
 
                 ' Set the parameter values from the UI controls 
                 'Class declaretions
@@ -96,7 +96,7 @@ Public Class Budget
                     .Person = TextBox6.Text,
                     .Role = TextBox7.Text,
                     .Frequency = ComboBox1.SelectedItem.ToString,
-                    .Income = TextBox1.Text,
+                    .BudgetAmount = TextBox1.Text,
                     .Expenses = TextBox2.Text,
                     .Utilities = TextBox3.Text,
                     .Groceries = TextBox4.Text,
@@ -110,7 +110,7 @@ Public Class Budget
                 cmd.Parameters.AddWithValue("@Person", budgets.Person)
                 cmd.Parameters.AddWithValue("@Role", budgets.Role)
                 cmd.Parameters.AddWithValue("@Frequency", budgets.Frequency)
-                cmd.Parameters.AddWithValue("@Income", budgets.Income)
+                cmd.Parameters.AddWithValue("@BudgetAmount", budgets.BudgetAmount)
                 ' cmd.Parameters.AddWithValue("@Rent", budgets.Rent)
                 cmd.Parameters.AddWithValue("@Utilities", budgets.Utilities)
                 cmd.Parameters.AddWithValue("@Groceries", budgets.Groceries)
@@ -124,7 +124,7 @@ Public Class Budget
                         "Person: " & budgets.Person & vbCrLf &
                         "Role: " & budgets.Role & vbCrLf &
                         "Frequency: " & budgets.Frequency & vbCrLf &
-                        "Income: " & budgets.Income & vbCrLf &
+                        "BudgetAmount: " & budgets.BudgetAmount & vbCrLf &
                         "Utilities: " & budgets.Utilities & vbCrLf &
                         "Groceries: " & budgets.Groceries & vbCrLf &
                          "Expenses: " & budgets.Expenses & vbCrLf &
@@ -187,11 +187,11 @@ Public Class Budget
     End Sub
 
     Private Sub Button1_Click_1(sender As Object, e As EventArgs) Handles Button1.Click
-        Dim income, rent, utilities, groceries, otherExpenses As Decimal
+        Dim BudgetAmount, rent, utilities, groceries, otherExpenses As Decimal
         Dim totalExpenses, remaining As Decimal
 
         ' Validate and convert inputs
-        If Not Decimal.TryParse(TextBox1.Text, income) Then
+        If Not Decimal.TryParse(TextBox1.Text, BudgetAmount) Then
             MessageBox.Show("Enter a valid number for income.")
             Exit Sub
         End If
@@ -202,7 +202,7 @@ Public Class Budget
 
         ' Calculate
         totalExpenses = rent + utilities + groceries + otherExpenses
-        remaining = income - totalExpenses
+        remaining = BudgetAmount - totalExpenses
 
         ' Display results
         Label6.Text = "Total Expenses: R" & totalExpenses.ToString("F2")
@@ -234,7 +234,7 @@ Public Class Budget
             Dim Person As String = TextBox6.Text
             Dim Role As String = TextBox7.Text
             Dim Frequency As String = ComboBox1.SelectedItem.ToString
-            Dim Income As String = TextBox1.Text
+            Dim BudgetAmount As String = TextBox1.Text
             'Dim Rent As String = TextBox2.Text
             Dim Utilities As String = TextBox3.Text
             Dim Groceries As String = TextBox4.Text
@@ -258,7 +258,7 @@ Public Class Budget
                 cmd.Parameters.AddWithValue("@Person", Person)
                 cmd.Parameters.AddWithValue("@Role", Role)
                 cmd.Parameters.AddWithValue("@Frequency", Frequency)
-                cmd.Parameters.AddWithValue("@Income", Income)
+                cmd.Parameters.AddWithValue("@BudgetAmount", BudgetAmount)
                 cmd.Parameters.AddWithValue("@Expenses", Expenses)
                 cmd.Parameters.AddWithValue("@Utilities", Utilities)
                 cmd.Parameters.AddWithValue("@Groceries", Groceries)
@@ -267,7 +267,7 @@ Public Class Budget
                 cmd.Parameters.AddWithValue("@EndDate", EndDate)
 
 
-                MsgBox("Inventory Items Updated Successfuly!", vbInformation, "Update Confirmation")
+                MsgBox("Budget Items Updated Successfuly!", vbInformation, "Update Confirmation")
                 LoadBudgetDataFromDatabase()
                 '  InventoryModule.ClearControls(Me)
 
