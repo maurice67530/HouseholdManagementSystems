@@ -48,8 +48,8 @@ Public Class Expense
                     .Paymentmethod = ComboBox1.SelectedItem.ToString,
                 .Frequency = ComboBox5.SelectedItem.ToString(),
                     .ApprovalStatus = ComboBox4.SelectedItem.ToString(),
-                    .Person = ComboBox3.SelectedItem.ToString(),
                     .DateOfexpenses = DateTimePicker1.Value,
+                     .Person = ComboBox3.SelectedItem.ToString(),
                     .BillName = TextBox8.Text,
                     .StartDate = DateTimePicker2.Value,
                     .Recurring = CheckBox1.Checked}
@@ -69,8 +69,8 @@ Public Class Expense
                 cmd.Parameters.AddWithValue("@PaymentMethod", expense.Paymentmethod)
                 cmd.Parameters.AddWithValue("@Frequency", expense.Frequency)
                 cmd.Parameters.AddWithValue("@ApprovalStatus", expense.ApprovalStatus)
-                cmd.Parameters.AddWithValue("@Person ", expense.Person)
                 cmd.Parameters.AddWithValue("@DateOfexpenses", expense.DateOfexpenses)
+                cmd.Parameters.AddWithValue("@Person ", expense.Person)
                 cmd.Parameters.AddWithValue("@BillName", expense.BillName)
                 cmd.Parameters.AddWithValue("@StartDate", expense.StartDate)
                 cmd.Parameters.AddWithValue("@Recurring", expense.Recurring)
