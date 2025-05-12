@@ -122,7 +122,7 @@ Public Class BudgetClass
     Public Property Person As String
     Public Property Role As String
     'Public Property EndDate As String
-    Public Property Income As String
+    Public Property BudgetAmount As String
     Public Property Utilities As String
     Public Property Rent As String
     Public Property Expenses As String
