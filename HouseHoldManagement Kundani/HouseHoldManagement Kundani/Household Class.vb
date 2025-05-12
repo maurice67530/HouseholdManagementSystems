@@ -70,6 +70,10 @@ Public Class Expensetracking
     Public Property ApprovalStatus As String
     Public Property Person As String
     Public Property DateOfexpenses As DateTime
+    Public Property BillName As String
+    Public Property StartDate As DateTime
+    Public Property Recurring As String
+
 End Class
 Public Class DailyTask
     Public Property TaskID As String
