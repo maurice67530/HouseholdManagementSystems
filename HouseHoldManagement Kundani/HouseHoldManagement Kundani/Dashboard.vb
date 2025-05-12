@@ -22,7 +22,7 @@ Public Class Dashboard
 
 
     Private Sub Dashboard_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        lblbadge.Region = New Region(New Drawing.Drawing2D.GraphicsPath())
+        lblbadge.Region = New Region(New Drawing2D.GraphicsPath())
         Dim gp As New Drawing.Drawing2D.GraphicsPath()
         gp.AddEllipse(0, 0, lblbadge.Width, lblbadge.Height)
         lblbadge.Region = New Region(gp)
@@ -122,7 +122,7 @@ Public Class Dashboard
             End Using
 
         End Using
-
+        conn.Close()
         Label15.Text = $"   Chores: -Completed: {completed} -In Progress:{inProgress} -Not Started:{notStarted}"
     End Sub
     Private Sub Button7_Click_1(sender As Object, e As EventArgs) Handles Button7.Click
@@ -257,13 +257,13 @@ Public Class Dashboard
 
         Dim query As String = "SELECT Status, DueDate FROM Chores" ' Adjust query based on your table
 
-        Using connection As New OleDbConnection(HouseHoldManagment_Module.connectionString)
+        Using conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
 
             Try
 
-                connection.Open()
+                conn.Open()
 
-                Using command As New OleDbCommand(query, connection)
+                Using command As New OleDbCommand(query, conn)
 
                     Using reader As OleDbDataReader = command.ExecuteReader()
 
@@ -286,7 +286,7 @@ Public Class Dashboard
                 'MessageBox.Show("Error retrieving expired overdueChore: " & ex.Message)
 
                 Return False
-
+                conn.Close()
             End Try
 
         End Using
@@ -326,13 +326,13 @@ Public Class Dashboard
 
         Dim query As String = "SELECT ItemName, ExpiryDate FROM Inventory" ' Adjust query based on your table
 
-        Using connection As New OleDbConnection(HouseHoldManagment_Module.connectionString)
+        Using conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
 
             Try
 
-                connection.Open()
+                conn.Open()
 
-                Using command As New OleDbCommand(query, connection)
+                Using command As New OleDbCommand(query, conn)
 
                     Using reader As OleDbDataReader = command.ExecuteReader()
 
@@ -355,6 +355,7 @@ Public Class Dashboard
                 MessageBox.Show("Error retrieving expired groceries: " & ex.Message)
 
                 Return False
+                conn.Close()
 
             End Try
 
@@ -480,9 +481,9 @@ Public Class Dashboard
     Private Function GetTotalExpenses() As Double
         Try
 
-            Using con As OleDbConnection = Getconnection()
-                con.Open()
-                Dim cmd As New OleDbCommand("SELECT SUM(Amount) FROM Expense", con)
+            Using conn As OleDbConnection = Getconnection()
+                conn.Open()
+                Dim cmd As New OleDbCommand("SELECT SUM(Amount) FROM Expense", conn)
                 Dim result = cmd.ExecuteScalar()
                 Return If(IsDBNull(result), 0, Convert.ToDouble(result))
             End Using
@@ -490,13 +491,15 @@ Public Class Dashboard
             Debug.WriteLine("Error fetching expenses: " & ex.Message)
             Return 0
         End Try
+        conn.Close()
+
     End Function
 
     Private Function GetTotalIncome() As Double
         Try
-            Using con As OleDbConnection = Getconnection()
-                con.Open()
-                Dim cmd As New OleDbCommand("SELECT SUM(Totalincome) FROM Expense", con)
+            Using conn As OleDbConnection = Getconnection()
+                conn.Open()
+                Dim cmd As New OleDbCommand("SELECT SUM(Totalincome) FROM Expense", conn)
                 Dim result = cmd.ExecuteScalar()
                 Return If(IsDBNull(result), 0, Convert.ToDouble(result))
             End Using
@@ -504,6 +507,8 @@ Public Class Dashboard
             Debug.WriteLine("Error fetching income: " & ex.Message)
             Return 0
         End Try
+        conn.Close()
+
     End Function
 
     Private Sub ShowToast(message As String)
@@ -528,8 +533,8 @@ Public Class Dashboard
     Private Sub LoadChart()
 
 
-        Using con As OleDbConnection = Getconnection()
-            Dim cmd As New OleDbCommand("SELECT Tags, SUM(Amount) AS Total FROM Expense GROUP BY Tags", con)
+        Using conn As OleDbConnection = Getconnection()
+            Dim cmd As New OleDbCommand("SELECT Tags, SUM(Amount) AS Total FROM Expense GROUP BY Tags", conn)
             Dim reader As OleDbDataReader
 
             Chart2.Series.Clear()
@@ -537,7 +542,7 @@ Public Class Dashboard
             series.ChartType = SeriesChartType.Bar ' Set to Bar chart
 
             Try
-                con.Open()
+                conn.Open()
                 reader = cmd.ExecuteReader()
                 While reader.Read()
                     If Not IsDBNull(reader("Tags")) AndAlso Not IsDBNull(reader("Total")) Then
@@ -548,7 +553,7 @@ Public Class Dashboard
             Catch ex As Exception
                 MessageBox.Show("Error loading chart: " & ex.Message)
             Finally
-                con.Close()
+                conn.Close()
             End Try
         End Using
     End Sub
@@ -605,7 +610,7 @@ Public Class Dashboard
             End Using
 
         End Using
-
+        conn.Close()
     End Sub
 
 
@@ -622,12 +627,12 @@ Public Class Dashboard
 
         Dim query As String = "SELECT [ItemName], [ExpiryDate] FROM [Inventory]"
         Try
-            Using con As New OleDbConnection(connectionString)
-                Using cmd As New OleDbCommand(query, con)
+            Using conn As New OleDbConnection(connectionString)
+                Using cmd As New OleDbCommand(query, conn)
                     Dim adapter As New OleDbDataAdapter(cmd)
                     Dim dt As New DataTable()
                     adapter.Fill(dt)
-
+                    conn.Open()
                     Dim today As Date = DateTime.Today
 
                     For Each row As DataRow In dt.Rows
@@ -651,6 +656,8 @@ Public Class Dashboard
                     End If
                 End Using
             End Using
+            conn.Close()
+
         Catch ex As Exception
             Debug.WriteLine("Error: " & ex.Message)
             MessageBox.Show("Failed to load expired groceries.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
@@ -705,8 +712,11 @@ Public Class Dashboard
             Debug.WriteLine($"Stack Trace: {ex.StackTrace}")
             MessageBox.Show("Error: " & ex.Message)
         Finally
-            If conn.State = ConnectionState.Open Then conn.Close()
+            'If conn.State = ConnectionState.Open Then conn.Close()
+            conn.Close()
         End Try
+
+
     End Sub
 
     ' Function to show the pie chart for chore status
@@ -715,12 +725,12 @@ Public Class Dashboard
         Dim statusCounts As New Dictionary(Of String, Integer)
 
         ' Create a connection to the database
-        Using con As New OleDbConnection(connectionString)
+        Using conn As New OleDbConnection(connectionString)
             Try
-                con.Open()
+                conn.Open()
                 ' Query to get the count of chores by their status
                 Dim query As String = "SELECT Status, COUNT(*) FROM Chores GROUP BY Status"
-                Using cmd As New OleDbCommand(query, con)
+                Using cmd As New OleDbCommand(query, conn)
                     Using reader As OleDbDataReader = cmd.ExecuteReader()
                         ' Loop through each row of the result set
                         While reader.Read()
@@ -737,7 +747,9 @@ Public Class Dashboard
                 End Using
             Catch ex As Exception
                 MessageBox.Show("Error: " & ex.Message)
+                conn.Close()
             End Try
+
         End Using
 
         ' Clear any previous data on the chart
@@ -778,6 +790,8 @@ Public Class Dashboard
                 End Using
             End Using
         End Using
+        conn.Close()
+
     End Sub
     Private Sub DisplayPhoto()
         If photoList.Count > 0 Then
@@ -848,14 +862,15 @@ Public Class Dashboard
     'Dim alertTimer As New Timer()
 
     Private Sub LoadFamilyScheduleAlerts()
+
         scheduleAlerts.Clear()
         backupScheduleAlerts.Clear()
         Label19.Text = ""
 
-        Using con As OleDbConnection = Getconnection()
-            con.Open()
+        Using conn As OleDbConnection = Getconnection()
+            conn.Open()
             Dim query As String = "SELECT EventType, DateOfEvent, AssignedTo FROM FamilySchedule"
-            Dim cmd As New OleDbCommand(query, con)
+            Dim cmd As New OleDbCommand(query, conn)
             Dim reader As OleDbDataReader = cmd.ExecuteReader()
 
             While reader.Read()
@@ -865,7 +880,7 @@ Public Class Dashboard
             End While
 
             reader.Close()
-            con.Close()
+            conn.Close()
 
             If scheduleAlerts.Count > 0 Then
                 alertTimer.Interval = 2000 ' 2 seconds
@@ -907,33 +922,33 @@ Public Class Dashboard
 
         StyleBadge()
 
-        Dim con As New OleDbConnection(HouseHoldManagment_Module.connectionString)
+        Dim conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
 
-        Dim lastViewedChores As DateTime = GetLastViewed(con, "Chores")
+        Dim lastViewedChores As DateTime = GetLastViewed(conn, "Chores")
 
-        Dim lastViewedExpenses As DateTime = GetLastViewed(con, "Expenses")
+        Dim lastViewedExpenses As DateTime = GetLastViewed(conn, "Expenses")
 
         Dim totalCount As Integer = 0
 
-        Dim cmdChores As New OleDbCommand("SELECT COUNT(*) FROM Chores WHERE DueDate > ? AND DueDate > ?", con)
+        Dim cmdChores As New OleDbCommand("SELECT COUNT(*) FROM Chores WHERE DueDate > ? AND DueDate > ?", conn)
 
         cmdChores.Parameters.AddWithValue("?", Date.Today)
 
         cmdChores.Parameters.AddWithValue("?", lastViewedChores)
 
-        Dim cmdExpenses As New OleDbCommand("SELECT COUNT(*) FROM Expense WHERE Amount > ? AND DateOfexpenses > ?", con)
+        Dim cmdExpenses As New OleDbCommand("SELECT COUNT(*) FROM Expense WHERE Amount > ? AND DateOfexpenses > ?", conn)
 
         cmdExpenses.Parameters.AddWithValue("?", 1000)
 
         cmdExpenses.Parameters.AddWithValue("?", lastViewedExpenses)
 
-        con.Open()
+        conn.Open()
 
         Dim choreCount As Integer = CInt(cmdChores.ExecuteScalar())
 
         Dim expenseCount As Integer = CInt(cmdExpenses.ExecuteScalar())
 
-        con.Close()
+        conn.Close()
 
         totalCount = choreCount + expenseCount
 
@@ -953,15 +968,15 @@ Public Class Dashboard
 
     Private Function GetLastViewed(con As OleDbConnection, viewType As String) As DateTime
 
-        Dim cmd As New OleDbCommand("SELECT LastViewed FROM NotificationStatus WHERE ViewType = ?", con)
+        Dim cmd As New OleDbCommand("SELECT LastViewed FROM NotificationStatus WHERE ViewType = ?", conn)
 
         cmd.Parameters.AddWithValue("?", viewType)
 
-        con.Open()
+        conn.Open()
 
         Dim result As Object = cmd.ExecuteScalar()
 
-        con.Close()
+        conn.Close()
 
         If result IsNot Nothing Then
 
