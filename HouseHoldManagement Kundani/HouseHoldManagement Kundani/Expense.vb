@@ -372,14 +372,14 @@ Public Class Expense
             conn.Open()
 
             ' Display the connection status on a button with a green background  
-            Label7.Text = "Connected"
-            Label7.BackColor = Color.Green
-            Label7.ForeColor = Color.White
+            Label17.Text = "Connected"
+            Label17.BackColor = Color.Green
+            Label17.ForeColor = Color.White
         Catch ex As Exception
             ' Display the connection status on a button with a red background  
-            Label7.Text = "Not Connected"
-            Label7.BackColor = Color.Red
-            Label7.ForeColor = Color.White
+            Label17.Text = "Not Connected"
+            Label17.BackColor = Color.Red
+            Label17.ForeColor = Color.White
 
             ' Display an error message  
             Debug.WriteLine(" Failed loading the Expense data  from DataBase")
@@ -391,10 +391,13 @@ Public Class Expense
             conn.Close()
         End Try
 
-        ' Disable certain buttons if the connection is not established  
-        Button1.Enabled = Label7.Text = "Connected"
-        Button1.Enabled = Label7.Text = "Connected"
+        '' Disable certain buttons if the connection is not established  
+        'Button1.Enabled = Label17.Text = "Connected"
+        'Button1.Enabled = Label17.Text = "Connected"
 
+
+        CheckDueDates()
+        ProcessDueBills()
         LoadExpenseDataFromDatabase()
         PopulateComboboxFromDatabase(ComboBox3)
     End Sub
@@ -552,7 +555,7 @@ Public Class Expense
     End Sub
 
     Private Sub Button10_Click(sender As Object, e As EventArgs) Handles Button10.Click
-        'CheckDueDates()
+        CheckDueDates()
         ProcessDueBills()
     End Sub
     Private Sub CheckDueDates()
