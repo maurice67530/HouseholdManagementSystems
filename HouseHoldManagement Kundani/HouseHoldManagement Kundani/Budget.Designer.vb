@@ -55,6 +55,7 @@ Partial Class Budget
         Me.Button5 = New System.Windows.Forms.Button()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         Me.Button6 = New System.Windows.Forms.Button()
+        Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
         Me.Panel2.SuspendLayout()
         Me.Panel1.SuspendLayout()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -354,6 +355,9 @@ Partial Class Budget
         Me.Button6.TabIndex = 50
         Me.Button6.UseVisualStyleBackColor = True
         '
+        'Timer1
+        '
+        '
         'Budget
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -414,4 +418,5 @@ Partial Class Budget
     Friend WithEvents Button5 As Button
     Friend WithEvents ToolTip1 As ToolTip
     Friend WithEvents Button6 As Button
+    Friend WithEvents Timer1 As Timer
 End Class
