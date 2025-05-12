@@ -27,7 +27,7 @@ Partial Class In_App_Message
         Me.ListBox2 = New System.Windows.Forms.ListBox()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
-        Me.TextBox1 = New System.Windows.Forms.TextBox()
+        Me.txtReply = New System.Windows.Forms.TextBox()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.ComboBox1 = New System.Windows.Forms.ComboBox()
         Me.ListBox1 = New System.Windows.Forms.ListBox()
@@ -36,7 +36,7 @@ Partial Class In_App_Message
         Me.Label5 = New System.Windows.Forms.Label()
         Me.chkShowAll = New System.Windows.Forms.CheckBox()
         Me.Button3 = New System.Windows.Forms.Button()
-        Me.Button2 = New System.Windows.Forms.Button()
+        Me.btnSendReply = New System.Windows.Forms.Button()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         Me.SuspendLayout()
         '
@@ -70,12 +70,12 @@ Partial Class In_App_Message
         Me.Label2.Text = "Text Messages:"
         Me.Label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
-        'TextBox1
+        'txtReply
         '
-        Me.TextBox1.Location = New System.Drawing.Point(115, 77)
-        Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.Size = New System.Drawing.Size(281, 20)
-        Me.TextBox1.TabIndex = 6
+        Me.txtReply.Location = New System.Drawing.Point(115, 77)
+        Me.txtReply.Name = "txtReply"
+        Me.txtReply.Size = New System.Drawing.Size(281, 20)
+        Me.txtReply.TabIndex = 6
         '
         'Label3
         '
@@ -154,14 +154,14 @@ Partial Class In_App_Message
         Me.Button3.TabIndex = 9
         Me.Button3.UseVisualStyleBackColor = True
         '
-        'Button2
+        'btnSendReply
         '
-        Me.Button2.Image = Global.HouseHoldManagement_Kundani.My.Resources.Resources.WhatsApp_Image_2025_05_07_at_09_58_32__1_
-        Me.Button2.Location = New System.Drawing.Point(460, 431)
-        Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(106, 86)
-        Me.Button2.TabIndex = 1
-        Me.Button2.UseVisualStyleBackColor = True
+        Me.btnSendReply.Image = Global.HouseHoldManagement_Kundani.My.Resources.Resources.WhatsApp_Image_2025_05_07_at_09_58_32__1_
+        Me.btnSendReply.Location = New System.Drawing.Point(460, 431)
+        Me.btnSendReply.Name = "btnSendReply"
+        Me.btnSendReply.Size = New System.Drawing.Size(106, 86)
+        Me.btnSendReply.TabIndex = 1
+        Me.btnSendReply.UseVisualStyleBackColor = True
         '
         'In_App_Message
         '
@@ -176,22 +176,22 @@ Partial Class In_App_Message
         Me.Controls.Add(Me.Button3)
         Me.Controls.Add(Me.ComboBox1)
         Me.Controls.Add(Me.Label3)
-        Me.Controls.Add(Me.TextBox1)
+        Me.Controls.Add(Me.txtReply)
         Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.ListBox2)
-        Me.Controls.Add(Me.Button2)
+        Me.Controls.Add(Me.btnSendReply)
         Me.Name = "In_App_Message"
         Me.Text = "In_App_Message"
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
     End Sub
-    Friend WithEvents Button2 As Button
+    Friend WithEvents btnSendReply As Button
     Friend WithEvents ListBox2 As ListBox
     Friend WithEvents Label1 As Label
     Friend WithEvents Label2 As Label
-    Friend WithEvents TextBox1 As TextBox
+    Friend WithEvents txtReply As TextBox
     Friend WithEvents Label3 As Label
     Friend WithEvents ComboBox1 As ComboBox
     Friend WithEvents Button3 As Button

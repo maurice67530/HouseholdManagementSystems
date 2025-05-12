@@ -17,7 +17,7 @@ Public Class In_App_Message
 
         Dim tooltip As New ToolTip
         ToolTip1.SetToolTip(Button3, "Mark as Read")
-        ToolTip1.SetToolTip(Button2, "Reply")
+        ToolTip1.SetToolTip(btnSendReply, "Reply")
     End Sub
 
     Private Sub ShowLastViewedMessages()
