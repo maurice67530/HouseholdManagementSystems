@@ -122,6 +122,12 @@
       <DependentUpon>HMSDataSet.xsd</DependentUpon>
     </Compile>
     <Compile Include="Household Class.vb" />
+    <Compile Include="Household Document.Designer.vb">
+      <DependentUpon>Household Document.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Household Document.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="HouseHoldManagement Module.vb" />
     <Compile Include="In-App Message.Designer.vb">
       <DependentUpon>In-App Message.vb</DependentUpon>
@@ -197,11 +203,23 @@
     <EmbeddedResource Include="Budget.resx">
       <DependentUpon>Budget.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Chores.resx">
+      <DependentUpon>Chores.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Dashboard.resx">
       <DependentUpon>Dashboard.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Expense.resx">
+      <DependentUpon>Expense.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Family Schedule.resx">
+      <DependentUpon>Family Schedule.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Grocery Items.resx">
       <DependentUpon>Grocery Items.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Household Document.resx">
+      <DependentUpon>Household Document.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="In-App Message.resx">
       <DependentUpon>In-App Message.vb</DependentUpon>
@@ -223,6 +241,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Personnel.resx">
       <DependentUpon>Personnel.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PhotoGallery.resx">
+      <DependentUpon>PhotoGallery.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Register.resx">
       <DependentUpon>Register.vb</DependentUpon>

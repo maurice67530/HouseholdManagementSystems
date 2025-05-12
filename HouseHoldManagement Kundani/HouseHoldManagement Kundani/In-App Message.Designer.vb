@@ -37,11 +37,12 @@ Partial Class In_App_Message
         Me.Label5 = New System.Windows.Forms.Label()
         Me.chkShowAll = New System.Windows.Forms.CheckBox()
         Me.TextBox2 = New System.Windows.Forms.TextBox()
+        Me.Label6 = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'btnSendReply
         '
-        Me.btnSendReply.Location = New System.Drawing.Point(120, 396)
+        Me.btnSendReply.Location = New System.Drawing.Point(82, 388)
         Me.btnSendReply.Name = "btnSendReply"
         Me.btnSendReply.Size = New System.Drawing.Size(75, 23)
         Me.btnSendReply.TabIndex = 1
@@ -51,7 +52,7 @@ Partial Class In_App_Message
         'ListBox2
         '
         Me.ListBox2.FormattingEnabled = True
-        Me.ListBox2.Location = New System.Drawing.Point(120, 295)
+        Me.ListBox2.Location = New System.Drawing.Point(82, 281)
         Me.ListBox2.Name = "ListBox2"
         Me.ListBox2.Size = New System.Drawing.Size(430, 95)
         Me.ListBox2.TabIndex = 3
@@ -72,7 +73,7 @@ Partial Class In_App_Message
         Me.Label2.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label2.Location = New System.Drawing.Point(0, 9)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(591, 40)
+        Me.Label2.Size = New System.Drawing.Size(577, 40)
         Me.Label2.TabIndex = 5
         Me.Label2.Text = "Text Messages:"
         Me.Label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -95,7 +96,7 @@ Partial Class In_App_Message
         '
         'Button3
         '
-        Me.Button3.Location = New System.Drawing.Point(440, 396)
+        Me.Button3.Location = New System.Drawing.Point(402, 388)
         Me.Button3.Name = "Button3"
         Me.Button3.Size = New System.Drawing.Size(110, 23)
         Me.Button3.TabIndex = 9
@@ -105,7 +106,7 @@ Partial Class In_App_Message
         'ListBox1
         '
         Me.ListBox1.FormattingEnabled = True
-        Me.ListBox1.Location = New System.Drawing.Point(120, 175)
+        Me.ListBox1.Location = New System.Drawing.Point(82, 167)
         Me.ListBox1.Name = "ListBox1"
         Me.ListBox1.Size = New System.Drawing.Size(430, 95)
         Me.ListBox1.TabIndex = 10
@@ -122,7 +123,7 @@ Partial Class In_App_Message
         'Label4
         '
         Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(121, 279)
+        Me.Label4.Location = New System.Drawing.Point(83, 265)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(94, 13)
         Me.Label4.TabIndex = 12
@@ -131,7 +132,7 @@ Partial Class In_App_Message
         'Label5
         '
         Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(121, 159)
+        Me.Label5.Location = New System.Drawing.Point(83, 151)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(86, 13)
         Me.Label5.TabIndex = 13
@@ -154,12 +155,24 @@ Partial Class In_App_Message
         Me.TextBox2.Size = New System.Drawing.Size(100, 20)
         Me.TextBox2.TabIndex = 14
         '
+        'Label6
+        '
+        Me.Label6.AutoSize = True
+        Me.Label6.BackColor = System.Drawing.Color.Transparent
+        Me.Label6.Font = New System.Drawing.Font("Lucida Bright", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label6.ForeColor = System.Drawing.Color.Red
+        Me.Label6.Location = New System.Drawing.Point(-3, 415)
+        Me.Label6.Name = "Label6"
+        Me.Label6.Size = New System.Drawing.Size(0, 15)
+        Me.Label6.TabIndex = 15
+        '
         'In_App_Message
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.ClientSize = New System.Drawing.Size(576, 434)
+        Me.ClientSize = New System.Drawing.Size(578, 428)
+        Me.Controls.Add(Me.Label6)
         Me.Controls.Add(Me.TextBox2)
         Me.Controls.Add(Me.Label5)
         Me.Controls.Add(Me.Label4)
@@ -191,4 +204,5 @@ Partial Class In_App_Message
     Friend WithEvents Label5 As Label
     Friend WithEvents chkShowAll As CheckBox
     Friend WithEvents TextBox2 As TextBox
+    Friend WithEvents Label6 As Label
 End Class
