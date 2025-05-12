@@ -20,7 +20,7 @@ Public Class Family_Schedule
     }
 
 
-            Using conn As New OleDbConnection(Ndamu.connectionstring)
+            Using conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
                 conn.Open()
 
                 ' Update the table name if necessary  
@@ -68,7 +68,7 @@ Public Class Family_Schedule
     Public Sub LoadScheduleFromDatabase()
         Try
             Debug.WriteLine("DataGridview populated successfully ChoresForm_Load")
-            Using conn As New OleDbConnection(Ndamu.connectionstring)
+            Using conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
                 conn.Open()
 
                 ' Update the table name if necessary  
@@ -114,7 +114,7 @@ Public Class Family_Schedule
         LoadFamilyCalendar()
     End Sub
     Private Sub LoadFamilyCalendar()
-        Dim conStr As String = (Ndamu.connectionstring)
+        Dim conStr As String = (HouseHoldManagment_Module.connectionString)
         Dim con As New OleDbConnection(conStr)
         Dim dt As New DataTable()
 
@@ -186,7 +186,7 @@ Public Class Family_Schedule
                     MessageBox.Show("Please Select chore to delete", "Deletion Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
                 End If
 
-                Using conn As New OleDbConnection(Ndamu.connectionstring)
+                Using conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
                     conn.Open()
 
 
@@ -236,7 +236,7 @@ Public Class Family_Schedule
             Dim AssignedTo As String = ComboBox1.Text
             Dim EventType As String = ComboBox3.Text
 
-            Using conn As New OleDbConnection(Ndamu.connectionstring)
+            Using conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
 
                 conn.Open()
 
@@ -307,7 +307,7 @@ Public Class Family_Schedule
     End Sub
 
     Public Sub PopulateComboboxFromDatabase(ByRef comboBox As ComboBox)
-        Dim conn As New OleDbConnection(Ndamu.connectionstring)
+        Dim conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
         Try
             Debug.WriteLine("populating combobox from database successfully!")
             ' 1. Open the database connection  
@@ -338,7 +338,7 @@ Public Class Family_Schedule
         End Try
     End Sub
     Private Sub AutoCreateChoreEvents()
-        Dim conn As New OleDbConnection(Ndamu.connectionstring)
+        Dim conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
         Dim da As New OleDbDataAdapter("SELECT Title, DueDate FROM Chores", conn)
         Dim dt As New DataTable
         da.Fill(dt)
@@ -365,7 +365,7 @@ Public Class Family_Schedule
 
 
     Private Sub AutoAddMealTimes()
-        Dim conn As New OleDbConnection(Ndamu.connectionstring)
+        Dim conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
         Dim da As New OleDbDataAdapter("SELECT MealName, StartDate FROM MealPlans", conn)
         Dim dt As New DataTable
         da.Fill(dt)
@@ -392,7 +392,7 @@ Public Class Family_Schedule
 
 
     Private Sub AutoCreateTaskReminders()
-        Dim conn As New OleDbConnection(Ndamu.connectionstring)
+        Dim conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
         Dim da As New OleDbDataAdapter("SELECT Title, DueDate FROM Tasks", conn)
         Dim dt As New DataTable
         da.Fill(dt)
@@ -532,7 +532,7 @@ Public Class Family_Schedule
 
 
 
-        Using conn As New OleDbConnection(Ndamu.connectionstring)
+        Using conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
             conn.Open()
             Dim query As String = ""
             Dim cmd As OleDbCommand
@@ -609,7 +609,7 @@ Public Class Family_Schedule
     Private Sub HighlightEventsOnCalendar()
         Dim eventDates As New List(Of Date)()
 
-        Using conn As New OleDbConnection(Ndamu.connectionstring)
+        Using conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
             conn.Open()
             Dim query As String = ""
             Dim cmd As OleDbCommand
@@ -672,7 +672,7 @@ Public Class Family_Schedule
         ListView1.Items.Clear()
         Dim dt As New DataTable()
 
-        Using conn As New OleDbConnection(Ndamu.connectionstring)
+        Using conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
             conn.Open()
             Dim query As String = "SELECT FirstName, LastName, DateOfBirth FROM PersonalDetails ORDER BY DateOfBirth"
             Dim cmd As New OleDbCommand(query, conn)
@@ -710,7 +710,7 @@ Public Class Family_Schedule
         ListView1.Items.Clear()
         Dim dt As New DataTable()
 
-        Using conn As New OleDbConnection(Ndamu.connectionstring)
+        Using conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
             conn.Open()
             Dim query As String = "SELECT AssignedTo, DueDate, Status FROM Chores ORDER BY DueDate"
             Dim cmd As New OleDbCommand(query, conn)
@@ -732,7 +732,7 @@ Public Class Family_Schedule
         Next
     End Sub
     Private Sub IntegrateChores()
-        Using conn As New OleDbConnection(Ndamu.connectionstring)
+        Using conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
             conn.Open()
             Dim query As String = "SELECT AssignedTo, DueDate FROM Chores WHERE Status <> 'Completed'"
             Using cmd As New OleDbCommand(query, conn)
