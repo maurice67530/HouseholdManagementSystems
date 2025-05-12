@@ -22,6 +22,7 @@ Partial Class Expense
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Expense))
         Me.Button8 = New System.Windows.Forms.Button()
         Me.DataGridView1 = New System.Windows.Forms.DataGridView()
         Me.Button7 = New System.Windows.Forms.Button()
@@ -62,6 +63,9 @@ Partial Class Expense
         Me.Button2 = New System.Windows.Forms.Button()
         Me.Button1 = New System.Windows.Forms.Button()
         Me.Label11 = New System.Windows.Forms.Label()
+        Me.Button9 = New System.Windows.Forms.Button()
+        Me.PrintDialog1 = New System.Windows.Forms.PrintDialog()
+        Me.PrintDocument1 = New System.Drawing.Printing.PrintDocument()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel1.SuspendLayout()
         Me.Panel2.SuspendLayout()
@@ -88,7 +92,7 @@ Partial Class Expense
         'Button7
         '
         Me.Button7.BackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.Button7.Location = New System.Drawing.Point(19, 451)
+        Me.Button7.Location = New System.Drawing.Point(10, 450)
         Me.Button7.Name = "Button7"
         Me.Button7.Size = New System.Drawing.Size(75, 51)
         Me.Button7.TabIndex = 131
@@ -192,7 +196,7 @@ Partial Class Expense
         'TextBox5
         '
         Me.TextBox5.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox5.Location = New System.Drawing.Point(113, 135)
+        Me.TextBox5.Location = New System.Drawing.Point(113, 112)
         Me.TextBox5.Name = "TextBox5"
         Me.TextBox5.Size = New System.Drawing.Size(198, 22)
         Me.TextBox5.TabIndex = 82
@@ -468,11 +472,28 @@ Partial Class Expense
         Me.Label11.TabIndex = 123
         Me.Label11.Text = "Expenses"
         '
+        'Button9
+        '
+        Me.Button9.BackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.Button9.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Button9.Image = CType(resources.GetObject("Button9.Image"), System.Drawing.Image)
+        Me.Button9.Location = New System.Drawing.Point(10, 509)
+        Me.Button9.Name = "Button9"
+        Me.Button9.Size = New System.Drawing.Size(72, 52)
+        Me.Button9.TabIndex = 134
+        Me.Button9.TextAlign = System.Drawing.ContentAlignment.BottomCenter
+        Me.Button9.UseVisualStyleBackColor = False
+        '
+        'PrintDialog1
+        '
+        Me.PrintDialog1.UseEXDialog = True
+        '
         'Expense
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(663, 503)
+        Me.ClientSize = New System.Drawing.Size(669, 573)
+        Me.Controls.Add(Me.Button9)
         Me.Controls.Add(Me.Button8)
         Me.Controls.Add(Me.DataGridView1)
         Me.Controls.Add(Me.Button7)
@@ -537,4 +558,7 @@ Partial Class Expense
     Friend WithEvents Button2 As Button
     Friend WithEvents Button1 As Button
     Friend WithEvents Label11 As Label
+    Friend WithEvents Button9 As Button
+    Friend WithEvents PrintDialog1 As PrintDialog
+    Friend WithEvents PrintDocument1 As Printing.PrintDocument
 End Class

@@ -471,5 +471,18 @@ Public Class Expense
     Private Sub ComboBox3_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ComboBox3.SelectedIndexChanged
 
     End Sub
+
+    Private Sub Button9_Click(sender As Object, e As EventArgs) Handles Button9.Click
+
+        PrintDialog1.Document = PrintDocument1
+        If PrintDialog1.ShowDialog() = DialogResult.OK Then
+            LoadExpenseDataFromDatabase() ' Load filtered data based on selected frequency
+            If mealPlanData.Rows.Count > 0 Then
+                PrintDocument1.Print()
+            Else
+                MessageBox.Show("No meal plans found for the selected period.", "Print Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            End If
+        End If
+    End Sub
 End Class
 
