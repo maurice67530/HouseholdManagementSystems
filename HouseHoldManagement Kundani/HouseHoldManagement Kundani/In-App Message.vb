@@ -14,6 +14,10 @@ Public Class In_App_Message
         LoadNewOverdueChores()
         LoadNewHighExpenses()
         UpdateLastViewed() ' Mark as read after loading
+
+        Dim tooltip As New ToolTip
+        ToolTip1.SetToolTip(Button3, "Mark as Read")
+        ToolTip1.SetToolTip(Button2, "Reply")
     End Sub
 
     Private Sub ShowLastViewedMessages()
