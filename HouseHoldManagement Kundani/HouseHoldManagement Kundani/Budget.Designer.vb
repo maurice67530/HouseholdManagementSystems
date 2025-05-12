@@ -355,6 +355,9 @@ Partial Class Budget
         Me.Button6.TabIndex = 50
         Me.Button6.UseVisualStyleBackColor = True
         '
+        'Timer1
+        '
+        '
         'Budget
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)

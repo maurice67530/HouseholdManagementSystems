@@ -364,6 +364,25 @@ Public Class Budget
 
     Private Sub Button6_Click_1(sender As Object, e As EventArgs) Handles Button6.Click
         DataGridView1.Sort(DataGridView1.Columns("StartDate"), System.ComponentModel.ListSortDirection.Ascending)
+    End Sub
 
+    'BLINK
+    ' Declare a variable to track the label visibility
+    Private labelBlinkState As Boolean = True
+    Private Sub CheckBalanceAndBlink()
+        ' Assume remainingBalance is a variable storing your current balance
+        Dim remainingBalance As Decimal = Decimal.Parse(Label7.Text)
+
+        If remainingBalance < 0 Then
+            Timer1.Start()
+        Else
+            Timer1.Stop()
+            Label7.Visible = True ' Reset visibility
+        End If
+    End Sub
+
+    Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
+        Label7.Visible = labelBlinkState
+        labelBlinkState = Not labelBlinkState
     End Sub
 End Class
