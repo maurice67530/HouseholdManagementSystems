@@ -119,7 +119,7 @@ Public Class Expense
             MessageBox.Show("An Unexpected error occured.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
         conn.Close()
-        LoadExpenseDataFromDatabase()
+        'LoadExpenseDataFromDatabase()
         Debug.WriteLine("Exiting btnSubmit")
     End Sub
 
@@ -313,25 +313,37 @@ Public Class Expense
 
     Public Sub LoadExpenseDataFromDatabase()
 
-        Debug.WriteLine("LoadMealPlansDataFromDatabase")
-        Using conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
-            conn.Open()
 
-            ' Update the table name if necessary  
-            Dim tableName As String = "Expense"
+        Try
+            Debug.WriteLine("LoadExpenseDataFromDatabase")
+            Using connect As New OleDbConnection(HouseHoldManagment_Module.connectionString)
+                connect.Open()
 
-            ' Create an OleDbCommand to select the data from the database  
-            Dim cmd As New OleDbCommand($"SELECT * FROM {tableName}", conn)
+                ' Update the table name if necessary  
+                Dim tableName As String = "Expense"
 
-            ' Create a DataAdapter and fill a DataTable  
-            Dim da As New OleDbDataAdapter(cmd)
-            Dim dt As New DataTable()
-            da.Fill(dt)
+                ' Create an OleDbCommand to select the data from the database  
+                Dim cmd As New OleDbCommand($"SELECT * FROM {tableName}", connect)
 
-            ' Bind the DataTable to the DataGridView  
-            DataGridView1.DataSource = dt
-            'HighlightExpiredItemss()
-        End Using
+                ' Create a DataAdapter and fill a DataTable  
+                Dim da As New OleDbDataAdapter(cmd)
+                Dim dt As New DataTable()
+                da.Fill(dt)
+
+                ' Bind the DataTable to the DataGridView  
+                DataGridView1.DataSource = dt
+            End Using
+        Catch ex As OleDbException
+
+            Debug.WriteLine($"Stack Trace : {ex.StackTrace}")
+            Debug.WriteLine($"Error loading ExpenseDataFromDatabase : {ex.Message}")
+            MessageBox.Show($"Error loading Expense data from database: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        Catch ex As Exception
+            Debug.WriteLine($"Stack Trace : {ex.StackTrace}")
+            Debug.WriteLine($" General error in loading ExpenseDataFromDatabase: {ex.Message}")
+            MessageBox.Show($"Unexpected error: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
+
 
     End Sub
     Private Sub Expense_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -396,12 +408,31 @@ Public Class Expense
         'Button1.Enabled = Label17.Text = "Connected"
 
 
-        CheckDueDates()
-        ProcessDueBills()
+        'LoadData()
         LoadExpenseDataFromDatabase()
         PopulateComboboxFromDatabase(ComboBox3)
     End Sub
+    Private Sub LoadData()
+        Dim query As String = "SELECT * FROM Expense" ' Replace with your table name
+        Dim dt As New DataTable()
 
+        Try
+            Using conn As New OleDbConnection(connectionString)
+                Using cmd As New OleDbCommand(query, conn)
+                    conn.Open()
+                    Using reader As OleDbDataReader = cmd.ExecuteReader()
+                        dt.Load(reader) ' Load data into DataTable
+                    End Using
+                End Using
+            End Using
+
+            ' Bind DataTable to DataGridView (assuming you have a DataGridView named dataGridView1)
+            DataGridView1.DataSource = dt
+
+        Catch ex As Exception
+            MessageBox.Show("Error loading data: " & ex.Message)
+        End Try
+    End Sub
     Public Sub PopulateComboboxFromDatabase(ByRef comboBox As ComboBox)
         Dim conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
         Try
@@ -555,7 +586,7 @@ Public Class Expense
     End Sub
 
     Private Sub Button10_Click(sender As Object, e As EventArgs) Handles Button10.Click
-        CheckDueDates()
+        'CheckDueDates()
         ProcessDueBills()
     End Sub
     Private Sub CheckDueDates()
@@ -587,12 +618,12 @@ Public Class Expense
 
                 ' Select bills where due date is today or past due and not yet paid
                 Dim query As String = "
-                    SELECT ID, Amount, StartDate, Paid
+                    SELECT ID, Amount, StartDate
                     FROM Expense
-                    WHERE Paid = No AND StartDate <= @Today"
+                    WHERE Paid = No AND StartDate <= ?"
 
                 Using command As New OleDbCommand(query, conn)
-                    command.Parameters.AddWithValue("@Today", DateTime.Today)
+                    command.Parameters.AddWithValue("?", DateTime.Today)
 
                     Using reader As OleDbDataReader = command.ExecuteReader()
                         While reader.Read()
@@ -628,12 +659,12 @@ Public Class Expense
 
                 Dim updateQuery As String = "
                     UPDATE  Expense
-                    SET Paid = Yes, DateOfexpenses = @DateOfexpenses
-                    WHERE ID = @ID"
+                    SET Paid = Yes, DateOfexpenses = ?
+                    WHERE ID = ?"
 
                 Using cmd As New OleDbCommand(updateQuery, conn)
-                    cmd.Parameters.AddWithValue("@DateOfexpenses", DateTime.Now)
-                    cmd.Parameters.AddWithValue("@ID", billID)
+                    cmd.Parameters.AddWithValue("?", DateTime.Now)
+                    cmd.Parameters.AddWithValue("?", billID)
                     cmd.ExecuteNonQuery()
                 End Using
             End Using
