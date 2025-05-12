@@ -187,6 +187,8 @@ Partial Class Household_Document
         'Button2
         '
         Me.Button2.BackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.Button2.BackgroundImage = CType(resources.GetObject("Button2.BackgroundImage"), System.Drawing.Image)
+        Me.Button2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
         Me.Button2.Location = New System.Drawing.Point(10, 342)
         Me.Button2.Name = "Button2"
         Me.Button2.Size = New System.Drawing.Size(75, 48)
@@ -196,6 +198,8 @@ Partial Class Household_Document
         'Button1
         '
         Me.Button1.BackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.Button1.BackgroundImage = CType(resources.GetObject("Button1.BackgroundImage"), System.Drawing.Image)
+        Me.Button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
         Me.Button1.Location = New System.Drawing.Point(245, 342)
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(75, 48)

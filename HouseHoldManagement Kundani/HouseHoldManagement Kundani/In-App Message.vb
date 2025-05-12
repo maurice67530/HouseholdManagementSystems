@@ -1,4 +1,8 @@
 ﻿Imports System.Data.OleDb
+Public Module session
+    Public LoggedinUsername As String
+
+End Module
 Public Class In_App_Message
 
     Dim conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
@@ -9,6 +13,9 @@ Public Class In_App_Message
     Private Sub In_App_Message_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         'ShowLastViewedMessages()
         NotifyIcon1.ShowBalloonTip(5000) ' 5 seconds
+
+        session.LoggedinUsername = Label6.Text
+
 
 
         LoadNewOverdueChores()
