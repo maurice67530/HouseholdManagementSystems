@@ -40,8 +40,8 @@ Public Class Login
             Me.Hide()
 
 
-            'Dashboard.Show()
-            Budget.Show()
+            Dashboard.Show()
+            '   Budget.Show()
             Me.Hide()
         Else
             MessageBox.Show("Invalid username or password.")
