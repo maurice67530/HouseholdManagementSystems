@@ -140,26 +140,26 @@ Public Class Household_Document
         ToolTip1.SetToolTip(Button3, "Delete")
     End Sub
 
-    Private Sub ViewDocument(SelectHouseHold As String)
-        Dim connStr As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\khodani\Documents\yourdb.accdb"
-        Dim filePath As String = ""
+    'Private Sub ViewDocument(SelectHouseHold As String)
+    '    Dim connStr As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\khodani\Documents\yourdb.accdb"
+    '    Dim filePath As String = ""
 
-        Using conn As New OleDbConnection(connStr)
-            conn.Open()
-            Dim cmd As New OleDbCommand("SELECT FilePath FROM HouseholdDocument WHERE ID = @ID", conn)
-            cmd.Parameters.AddWithValue("@ID", SelectHouseHold)
-            Dim reader As OleDbDataReader = cmd.ExecuteReader()
-            If reader.Read() Then
-                filePath = reader("FilePath").ToString()
-            End If
-        End Using
+    '    Using conn As New OleDbConnection(connStr)
+    '        conn.Open()
+    '        Dim cmd As New OleDbCommand("SELECT FilePath FROM HouseholdDocument WHERE ID = @ID", conn)
+    '        cmd.Parameters.AddWithValue("@ID", SelectHouseHold)
+    '        Dim reader As OleDbDataReader = cmd.ExecuteReader()
+    '        If reader.Read() Then
+    '            filePath = reader("FilePath").ToString()
+    '        End If
+    '    End Using
 
-        If System.IO.File.Exists(filePath) Then
-            Process.Start(filePath)
-        Else
-            MessageBox.Show("File not found: " & filePath)
-        End If
-    End Sub
+    '    If System.IO.File.Exists(filePath) Then
+    '        Process.Start(filePath)
+    '    Else
+    '        MessageBox.Show("File not found: " & filePath)
+    '    End If
+    'End Sub
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
 
         If ListBox1.SelectedItem Is Nothing Then Exit Sub
@@ -268,9 +268,10 @@ Public Class Household_Document
                 Dim selectedRow As DataGridViewRow = DataGridView1.SelectedRows(0)
 
                 ' Load the data from the selected row into UI controls  
-                ComboBox1.Text = selectedRow.Cells("SelectHouseHold").Value.ToString()
-                TextBox1.Text = selectedRow.Cells("FileName").Value.ToString()
-                TextBox2.Text = selectedRow.Cells("FilePath").Value.ToString()
+                ComboBox1.Text = selectedRow.Cells("Category").Value.ToString()
+                TextBox1.Text = selectedRow.Cells("Title").Value.ToString()
+                TextBox2.Text = selectedRow.Cells("Notes").Value.ToString()
+                TextBox3.Text = selectedRow.Cells("FilePath").Value.ToString()
                 DateTimePicker1.Text = selectedRow.Cells("UploadedDate").Value.ToString()
                 ComboBox3.Text = selectedRow.Cells("UploadedBy").Value.ToString()
 
@@ -278,7 +279,7 @@ Public Class Household_Document
         Catch ex As Exception
             Debug.WriteLine("error selection data in the database")
             Debug.WriteLine($"Stack Trace: {ex.StackTrace}")
-            MessageBox.Show("Error saving inventory to database: " & ex.Message & vbNewLine & ex.StackTrace, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            MessageBox.Show("Error saving document to database: " & ex.Message & vbNewLine & ex.StackTrace, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
     End Sub
 
