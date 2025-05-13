@@ -55,6 +55,7 @@ Partial Class Budget
         Me.Button5 = New System.Windows.Forms.Button()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         Me.Button6 = New System.Windows.Forms.Button()
+        Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
         Me.Panel2.SuspendLayout()
         Me.Panel1.SuspendLayout()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -107,9 +108,9 @@ Partial Class Budget
         Me.Label7.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         Me.Label7.Location = New System.Drawing.Point(16, 129)
         Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(41, 15)
+        Me.Label7.Size = New System.Drawing.Size(12, 15)
         Me.Label7.TabIndex = 48
-        Me.Label7.Text = "Label7"
+        Me.Label7.Text = " "
         '
         'Label6
         '
@@ -117,9 +118,9 @@ Partial Class Budget
         Me.Label6.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         Me.Label6.Location = New System.Drawing.Point(16, 153)
         Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(41, 15)
+        Me.Label6.Size = New System.Drawing.Size(12, 15)
         Me.Label6.TabIndex = 47
-        Me.Label6.Text = "Label6"
+        Me.Label6.Text = " "
         '
         'TextBox4
         '
@@ -354,6 +355,9 @@ Partial Class Budget
         Me.Button6.TabIndex = 50
         Me.Button6.UseVisualStyleBackColor = True
         '
+        'Timer1
+        '
+        '
         'Budget
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -414,4 +418,5 @@ Partial Class Budget
     Friend WithEvents Button5 As Button
     Friend WithEvents ToolTip1 As ToolTip
     Friend WithEvents Button6 As Button
+    Friend WithEvents Timer1 As Timer
 End Class

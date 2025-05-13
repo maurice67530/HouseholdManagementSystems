@@ -5,11 +5,11 @@ Public Class Budget
 
 
     Private Sub Button1_Click(sender As Object, e As EventArgs)
-        Dim income, rent, utilities, groceries, otherExpenses As Decimal
+        Dim BudgetAmount, rent, utilities, groceries, otherExpenses As Decimal
         Dim totalExpenses, remaining As Decimal
 
         ' Validate and convert inputs
-        If Not Decimal.TryParse(TextBox1.Text, income) Then
+        If Not Decimal.TryParse(TextBox1.Text, BudgetAmount) Then
             MessageBox.Show("Enter a valid number for income.")
             Exit Sub
         End If
@@ -20,7 +20,7 @@ Public Class Budget
 
         ' Calculate
         totalExpenses = rent + utilities + groceries + otherExpenses
-        remaining = income - totalExpenses
+        remaining = BudgetAmount - totalExpenses
 
         ' Display results
         Label6.Text = "Budget: R" & totalExpenses.ToString("F2")
@@ -38,7 +38,7 @@ Public Class Budget
 
     Public currentUsername As String
     Private Sub Budget_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-
+        'CheckBalanceAndBlink()
         LoadBudgetDataFromDatabase()
         ToolTip1.SetToolTip(Button2, "Save")
         ToolTip1.SetToolTip(Button3, "Edit")
@@ -87,7 +87,7 @@ Public Class Budget
                 Dim tableName As String = "Budget"
 
                 ' Create an OleDbCommand to insert the Budget data into the database 
-                Dim cmd As New OleDbCommand("INSERT INTO [Budget] ([Person], [Role], [Frequency], [Income], [Utilities], [Groceries], [Expenses], [StartDate], [EndDate]) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)", conn)
+                Dim cmd As New OleDbCommand("INSERT INTO [Budget] ([Person], [Role], [Frequency], [BudgetAmount], [Utilities], [Groceries], [Expenses], [StartDate], [EndDate], [Remaining], [Amount]) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", conn)
 
                 ' Set the parameter values from the UI controls 
                 'Class declaretions
@@ -96,12 +96,14 @@ Public Class Budget
                     .Person = TextBox6.Text,
                     .Role = TextBox7.Text,
                     .Frequency = ComboBox1.SelectedItem.ToString,
-                    .Income = TextBox1.Text,
+                    .BudgetAmount = TextBox1.Text,
                     .Expenses = TextBox2.Text,
                     .Utilities = TextBox3.Text,
                     .Groceries = TextBox4.Text,
                     .StartDate = DateTimePicker1.Value,
-                          .EndDate = DateTimePicker2.Value}
+                          .EndDate = DateTimePicker2.Value,
+                          .Remaining = Label7.Text,
+                          .Amount = Label6.Text}
 
                 cmd.Parameters.Clear()
 
@@ -110,7 +112,7 @@ Public Class Budget
                 cmd.Parameters.AddWithValue("@Person", budgets.Person)
                 cmd.Parameters.AddWithValue("@Role", budgets.Role)
                 cmd.Parameters.AddWithValue("@Frequency", budgets.Frequency)
-                cmd.Parameters.AddWithValue("@Income", budgets.Income)
+                cmd.Parameters.AddWithValue("@BudgetAmount", budgets.BudgetAmount)
                 ' cmd.Parameters.AddWithValue("@Rent", budgets.Rent)
                 cmd.Parameters.AddWithValue("@Utilities", budgets.Utilities)
                 cmd.Parameters.AddWithValue("@Groceries", budgets.Groceries)
@@ -119,12 +121,14 @@ Public Class Budget
 
                 cmd.Parameters.AddWithValue("@EndDate", budgets.EndDate)
 
+                cmd.Parameters.AddWithValue("@Remaining", budgets.Remaining)
+                cmd.Parameters.AddWithValue("@Amount", budgets.Amount)
 
                 MsgBox("Expense Information Saved!" & vbCrLf &
                         "Person: " & budgets.Person & vbCrLf &
                         "Role: " & budgets.Role & vbCrLf &
                         "Frequency: " & budgets.Frequency & vbCrLf &
-                        "Income: " & budgets.Income & vbCrLf &
+                        "BudgetAmount: " & budgets.BudgetAmount & vbCrLf &
                         "Utilities: " & budgets.Utilities & vbCrLf &
                         "Groceries: " & budgets.Groceries & vbCrLf &
                          "Expenses: " & budgets.Expenses & vbCrLf &
@@ -187,11 +191,11 @@ Public Class Budget
     End Sub
 
     Private Sub Button1_Click_1(sender As Object, e As EventArgs) Handles Button1.Click
-        Dim income, rent, utilities, groceries, otherExpenses As Decimal
+        Dim BudgetAmount, rent, utilities, groceries, otherExpenses As Decimal
         Dim totalExpenses, remaining As Decimal
 
         ' Validate and convert inputs
-        If Not Decimal.TryParse(TextBox1.Text, income) Then
+        If Not Decimal.TryParse(TextBox1.Text, BudgetAmount) Then
             MessageBox.Show("Enter a valid number for income.")
             Exit Sub
         End If
@@ -202,11 +206,20 @@ Public Class Budget
 
         ' Calculate
         totalExpenses = rent + utilities + groceries + otherExpenses
-        remaining = income - totalExpenses
+        remaining = BudgetAmount - totalExpenses
 
         ' Display results
         Label6.Text = "Total Expenses: R" & totalExpenses.ToString("F2")
         Label7.Text = "Remaining Balance: R" & remaining.ToString("F2")
+
+        If remaining < 0 Then
+            Label7.ForeColor = Color.Black
+            Timer1.Start()
+        Else
+            Label7.ForeColor = Color.Black
+            Timer1.Stop()
+            Label7.Visible = True ' Ensure it's visible when not blinking
+        End If
 
     End Sub
 
@@ -225,13 +238,15 @@ Public Class Budget
             Dim Person As String = TextBox6.Text
             Dim Role As String = TextBox7.Text
             Dim Frequency As String = ComboBox1.SelectedItem.ToString
-            Dim Income As String = TextBox1.Text
+            Dim BudgetAmount As String = TextBox1.Text
             'Dim Rent As String = TextBox2.Text
             Dim Utilities As String = TextBox3.Text
             Dim Groceries As String = TextBox4.Text
             Dim Expenses As String = TextBox2.Text
             Dim StartDate As String = DateTimePicker1.Value
             Dim EndDate As String = DateTimePicker2.Value
+            Dim Remaining As String = Label7.Text
+            Dim Amount As String = Label6.Text
 
 
             Using conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
@@ -249,16 +264,18 @@ Public Class Budget
                 cmd.Parameters.AddWithValue("@Person", Person)
                 cmd.Parameters.AddWithValue("@Role", Role)
                 cmd.Parameters.AddWithValue("@Frequency", Frequency)
-                cmd.Parameters.AddWithValue("@Income", Income)
+                cmd.Parameters.AddWithValue("@BudgetAmount", BudgetAmount)
                 cmd.Parameters.AddWithValue("@Expenses", Expenses)
                 cmd.Parameters.AddWithValue("@Utilities", Utilities)
                 cmd.Parameters.AddWithValue("@Groceries", Groceries)
                 'cmd.Parameters.AddWithValue("@Expenses", Expenses)
                 cmd.Parameters.AddWithValue("@StartDate", StartDate)
                 cmd.Parameters.AddWithValue("@EndDate", EndDate)
+                cmd.Parameters.AddWithValue("@Remaining", Remaining)
+                cmd.Parameters.AddWithValue("@Amount", Amount)
 
 
-                MsgBox("Inventory Items Updated Successfuly!", vbInformation, "Update Confirmation")
+                MsgBox("Budget Items Updated Successfuly!", vbInformation, "Update Confirmation")
                 LoadBudgetDataFromDatabase()
                 '  InventoryModule.ClearControls(Me)
 
@@ -355,6 +372,49 @@ Public Class Budget
 
     Private Sub Button6_Click_1(sender As Object, e As EventArgs) Handles Button6.Click
         DataGridView1.Sort(DataGridView1.Columns("StartDate"), System.ComponentModel.ListSortDirection.Ascending)
+    End Sub
+
+    'BLINK
+    ' Declare a variable to track the label visibility
+    Private labelBlinkState As Boolean = True
+    Private Sub CheckBalanceAndBlink()
+        ' Assume remainingBalance is a variable storing your current balance
+        Dim remainingBalance As Decimal = Decimal.Parse(Label7.Text)
+
+        If remainingBalance < 0 Then
+            Timer1.Start()
+        Else
+            Timer1.Stop()
+            Label7.Visible = True ' Reset visibility
+        End If
+    End Sub
+
+    Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
+        Label7.Visible = labelBlinkState
+        labelBlinkState = Not labelBlinkState
+    End Sub
+    Private Sub DataGridView1_SelectionChanged(sender As Object, e As EventArgs) Handles DataGridView1.SelectionChanged
+        If DataGridView1.SelectedRows.Count > 0 Then
+            Dim selectedRow As DataGridViewRow = DataGridView1.SelectedRows(0)
+
+
+            ' Load the data from the selected row into UI controls  
+            TextBox6.Text = selectedRow.Cells("Person").Value.ToString()
+            TextBox7.Text = selectedRow.Cells("Role").Value.ToString()
+            TextBox1.Text = selectedRow.Cells("BudgetAmount").Value.ToString()
+            TextBox2.Text = selectedRow.Cells("Expenses").Value.ToString()
+            ComboBox1.SelectedItem = selectedRow.Cells("Frequency").Value.ToString()
+            TextBox3.Text = selectedRow.Cells("Utilities").Value.ToString()
+            TextBox4.Text = selectedRow.Cells("Groceries").Value.ToString()
+            DateTimePicker1.Value = selectedRow.Cells("StartDate").Value.ToString()
+            DateTimePicker2.Value = selectedRow.Cells("EndDate").Value.ToString()
+
+            Label7.Text = selectedRow.Cells("Remaining").Value.ToString()
+            Label6.Text = selectedRow.Cells("Amount").Value.ToString()
+
+            Label7.Visible = labelBlinkState
+            labelBlinkState = Not labelBlinkState
+        End If
 
     End Sub
 End Class

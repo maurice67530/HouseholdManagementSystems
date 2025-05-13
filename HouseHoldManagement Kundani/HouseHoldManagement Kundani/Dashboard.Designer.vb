@@ -440,9 +440,9 @@ Partial Class Dashboard
         '
         'FlowLayoutPanel2
         '
-        Me.FlowLayoutPanel2.Location = New System.Drawing.Point(848, 277)
+        Me.FlowLayoutPanel2.Location = New System.Drawing.Point(833, 279)
         Me.FlowLayoutPanel2.Name = "FlowLayoutPanel2"
-        Me.FlowLayoutPanel2.Size = New System.Drawing.Size(350, 262)
+        Me.FlowLayoutPanel2.Size = New System.Drawing.Size(365, 260)
         Me.FlowLayoutPanel2.TabIndex = 107
         '
         'FlowLayoutPanel1

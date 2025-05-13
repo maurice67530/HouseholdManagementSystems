@@ -34,11 +34,14 @@ Public Class Login
             Budget.TextBox6.Text = FullNames
             Budget.TextBox7.Text = role
 
+
+            In_App_Message.TextBox1.Text = username
+            In_App_Message.Label6.Text = "Logged in as:" & username
             Me.Hide()
 
 
-            'Dashboard.Show()
-            Budget.Show()
+            Dashboard.Show()
+            '   Budget.Show()
             Me.Hide()
         Else
             MessageBox.Show("Invalid username or password.")
