@@ -109,7 +109,7 @@ Public Class Household_Document
     Private Sub LoadDocuments()
         ListBox1.Items.Clear()
         Using con As New OleDbConnection(connectionString)
-            Dim cmd As New OleDbCommand("SELECT Title FROM HouseholdDocument WHERE HouseholdID = 1", con)
+            Dim cmd As New OleDbCommand("SELECT Title FROM HouseholdDocument WHERE HouseholdID = ID", con)
             con.Open()
             Using reader = cmd.ExecuteReader()
                 While reader.Read()
@@ -162,39 +162,39 @@ Public Class Household_Document
     'End Sub
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
 
-        If ListBox1.SelectedItem Is Nothing Then Exit Sub
-        Dim title = ListBox1.SelectedItem.ToString()
-        Using con As New OleDbConnection(connectionString)
-            Dim cmd As New OleDbCommand("SELECT FilePath FROM HouseholdDocuments WHERE Title = @Title", con)
-            cmd.Parameters.AddWithValue("@Title", title)
-            con.Open()
-            Dim path = cmd.ExecuteScalar().ToString()
-            Process.Start(path)
-        End Using
-        'Try
-        '    If DataGridView1.CurrentRow IsNot Nothing Then
-        '        Dim filePath As String = DataGridView1.CurrentRow.Cells("FilePath").Value.ToString()
+        'If ListBox1.SelectedItem Is Nothing Then Exit Sub
+        'Dim title = ListBox1.SelectedItem.ToString()
+        'Using con As New OleDbConnection(connectionString)
+        '    Dim cmd As New OleDbCommand("SELECT FilePath FROM HouseholdDocument WHERE Title = @Title", con)
+        '    cmd.Parameters.AddWithValue("@Title", title)
+        '    con.Open()
+        '    Dim path = cmd.ExecuteScalar().ToString()
+        '    Process.Start(path)
+        'End Using
+        Try
+            If DataGridView1.CurrentRow IsNot Nothing Then
+                Dim filePath As String = DataGridView1.CurrentRow.Cells("FilePath").Value.ToString()
 
-        '        If System.IO.File.Exists(filePath) Then
-        '            Try
-        '                Process.Start(filePath)
-        '            Catch ex As Exception
-        '                MessageBox.Show("Error opening file: " & ex.Message)
-        '            End Try
-        '        Else
-        '            MessageBox.Show("File not found: " & filePath)
-        '        End If
-        '    Else
-        '        MessageBox.Show("Please select a document to open.")
-        '    End If
+                If System.IO.File.Exists(filePath) Then
+                    Try
+                        Process.Start(filePath)
+                    Catch ex As Exception
+                        MessageBox.Show("Error opening file: " & ex.Message)
+                    End Try
+                Else
+                    MessageBox.Show("File not found: " & filePath)
+                End If
+            Else
+                MessageBox.Show("Please select a document to open.")
+            End If
 
 
 
-        'Catch ex As Exception
-        '    'Debug.WriteLine("error selection data in the database")
-        '    Debug.WriteLine($"Stack Trace: {ex.StackTrace}")
-        '    MessageBox.Show("Error opening document to database: " & ex.Message & vbNewLine & ex.StackTrace, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-        'End Try
+        Catch ex As Exception
+            'Debug.WriteLine("error selection data in the database")
+            Debug.WriteLine($"Stack Trace: {ex.StackTrace}")
+            MessageBox.Show("Error opening document to database: " & ex.Message & vbNewLine & ex.StackTrace, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
 
 
 
@@ -272,7 +272,7 @@ Public Class Household_Document
                 TextBox1.Text = selectedRow.Cells("Title").Value.ToString()
                 TextBox2.Text = selectedRow.Cells("Notes").Value.ToString()
                 TextBox3.Text = selectedRow.Cells("FilePath").Value.ToString()
-                DateTimePicker1.Text = selectedRow.Cells("UploadedDate").Value.ToString()
+                'DateTimePicker1.Text = selectedRow.Cells("UploadedDate").Value.ToString()
                 ComboBox3.Text = selectedRow.Cells("UploadedBy").Value.ToString()
 
             End If
@@ -311,7 +311,7 @@ Public Class Household_Document
         Dim category = ComboBox2.Text
 
         Using con As New OleDbConnection(connectionString)
-            Dim query = "SELECT Title FROM HouseholdDocument WHERE HouseholdID = 1"
+            Dim query = "SELECT Title FROM HouseholdDocument WHERE HouseholdID = ID"
             If keyword <> "" Then query &= " AND (Title LIKE @kw OR Notes LIKE @kw)"
             If category <> "" Then query &= " AND Category = @cat"
             Dim cmd As New OleDbCommand(query, con)
