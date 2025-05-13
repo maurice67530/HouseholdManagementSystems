@@ -414,7 +414,7 @@ Public Class Expense
         'Button1.Enabled = Label17.Text = "Connected"
 
 
-        PopulateMessagesFromDatabase()
+        'PopulateMessagesFromDatabase()
         LoadExpenseDataFromDatabase()
         PopulateComboboxFromDatabase(ComboBox3)
     End Sub
