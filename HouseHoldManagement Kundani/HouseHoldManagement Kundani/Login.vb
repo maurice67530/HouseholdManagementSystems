@@ -35,7 +35,7 @@ Public Class Login
             Budget.TextBox7.Text = role
 
 
-            In_App_Message.TextBox2.Text = username
+            In_App_Message.TextBox1.Text = username
             In_App_Message.Label6.Text = "Logged in as:" & username
             Me.Hide()
 

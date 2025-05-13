@@ -29,7 +29,6 @@ Partial Class In_App_Message
         Me.Label2 = New System.Windows.Forms.Label()
         Me.txtReply = New System.Windows.Forms.TextBox()
         Me.Label3 = New System.Windows.Forms.Label()
-        Me.ComboBox1 = New System.Windows.Forms.ComboBox()
         Me.ListBox1 = New System.Windows.Forms.ListBox()
         Me.NotifyIcon1 = New System.Windows.Forms.NotifyIcon(Me.components)
         Me.Label4 = New System.Windows.Forms.Label()
@@ -38,6 +37,8 @@ Partial Class In_App_Message
         Me.Button3 = New System.Windows.Forms.Button()
         Me.btnSendReply = New System.Windows.Forms.Button()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
+        Me.Label6 = New System.Windows.Forms.Label()
+        Me.TextBox1 = New System.Windows.Forms.TextBox()
         Me.SuspendLayout()
         '
         'ListBox2
@@ -86,14 +87,6 @@ Partial Class In_App_Message
         Me.Label3.Size = New System.Drawing.Size(48, 16)
         Me.Label3.TabIndex = 7
         Me.Label3.Text = "Send:"
-        '
-        'ComboBox1
-        '
-        Me.ComboBox1.FormattingEnabled = True
-        Me.ComboBox1.Location = New System.Drawing.Point(111, 368)
-        Me.ComboBox1.Name = "ComboBox1"
-        Me.ComboBox1.Size = New System.Drawing.Size(163, 21)
-        Me.ComboBox1.TabIndex = 8
         '
         'ListBox1
         '
@@ -163,18 +156,34 @@ Partial Class In_App_Message
         Me.btnSendReply.TabIndex = 1
         Me.btnSendReply.UseVisualStyleBackColor = True
         '
+        'Label6
+        '
+        Me.Label6.AutoSize = True
+        Me.Label6.Location = New System.Drawing.Point(-3, 49)
+        Me.Label6.Name = "Label6"
+        Me.Label6.Size = New System.Drawing.Size(0, 13)
+        Me.Label6.TabIndex = 14
+        '
+        'TextBox1
+        '
+        Me.TextBox1.Location = New System.Drawing.Point(115, 369)
+        Me.TextBox1.Name = "TextBox1"
+        Me.TextBox1.Size = New System.Drawing.Size(118, 20)
+        Me.TextBox1.TabIndex = 15
+        '
         'In_App_Message
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.SystemColors.ActiveCaption
         Me.ClientSize = New System.Drawing.Size(592, 528)
+        Me.Controls.Add(Me.TextBox1)
+        Me.Controls.Add(Me.Label6)
         Me.Controls.Add(Me.Label5)
         Me.Controls.Add(Me.Label4)
         Me.Controls.Add(Me.chkShowAll)
         Me.Controls.Add(Me.ListBox1)
         Me.Controls.Add(Me.Button3)
-        Me.Controls.Add(Me.ComboBox1)
         Me.Controls.Add(Me.Label3)
         Me.Controls.Add(Me.txtReply)
         Me.Controls.Add(Me.Label2)
@@ -193,7 +202,6 @@ Partial Class In_App_Message
     Friend WithEvents Label2 As Label
     Friend WithEvents txtReply As TextBox
     Friend WithEvents Label3 As Label
-    Friend WithEvents ComboBox1 As ComboBox
     Friend WithEvents Button3 As Button
     Friend WithEvents ListBox1 As ListBox
     Friend WithEvents NotifyIcon1 As NotifyIcon
@@ -201,4 +209,6 @@ Partial Class In_App_Message
     Friend WithEvents Label5 As Label
     Friend WithEvents chkShowAll As CheckBox
     Friend WithEvents ToolTip1 As ToolTip
+    Friend WithEvents Label6 As Label
+    Friend WithEvents TextBox1 As TextBox
 End Class
