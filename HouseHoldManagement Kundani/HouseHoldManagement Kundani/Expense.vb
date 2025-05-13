@@ -629,9 +629,10 @@ Public Class Expense
 
     Private Sub Button10_Click(sender As Object, e As EventArgs) Handles Button10.Click
         'CheckDueDates()
-        'ProcessDueBills()
-        Dim ID As Integer = "" ' replace with the actual ID you want to update
-        ScheduleNextExpenseDate(ID)
+        'P
+        ProcessRecurringExpenses()
+        'Dim ID As Integer = "" ' replace with the actual ID you want to update
+        'ScheduleNextExpenseDate(ID)
     End Sub
     Private Sub CheckDueDates()
         Dim query As String = "SELECT ID, BillName, StartDate FROM Expense WHERE StartDate <= @Today"
