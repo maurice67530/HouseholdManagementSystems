@@ -22,6 +22,7 @@ Partial Class Expense
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Expense))
         Me.Button8 = New System.Windows.Forms.Button()
         Me.DataGridView1 = New System.Windows.Forms.DataGridView()
@@ -75,6 +76,7 @@ Partial Class Expense
         Me.PrintDocument1 = New System.Drawing.Printing.PrintDocument()
         Me.Label17 = New System.Windows.Forms.Label()
         Me.Button10 = New System.Windows.Forms.Button()
+        Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel1.SuspendLayout()
         Me.Panel2.SuspendLayout()
@@ -587,8 +589,13 @@ Partial Class Expense
         Me.Button10.Name = "Button10"
         Me.Button10.Size = New System.Drawing.Size(75, 41)
         Me.Button10.TabIndex = 136
-        Me.Button10.Text = "Button10"
+        Me.Button10.Text = "                                                                                 " &
+    "              "
         Me.Button10.UseVisualStyleBackColor = True
+        '
+        'Timer1
+        '
+        Me.Timer1.Interval = 8000
         '
         'Expense
         '
@@ -611,6 +618,7 @@ Partial Class Expense
         Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.Label11)
         Me.Name = "Expense"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Expense"
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel1.ResumeLayout(False)
@@ -674,4 +682,5 @@ Partial Class Expense
     Friend WithEvents Label19 As Label
     Friend WithEvents ComboBox6 As ComboBox
     Friend WithEvents Label20 As Label
+    Friend WithEvents Timer1 As Timer
 End Class
