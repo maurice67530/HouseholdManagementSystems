@@ -73,9 +73,7 @@ Public Class Expensetracking
     Public Property BillName As String
     Public Property StartDate As DateTime
     Public Property Recurring As String
-    Public Property Paid As String
-
-
+    Public Property paid As String
 End Class
 Public Class DailyTask
     Public Property TaskID As String
@@ -124,7 +122,7 @@ Public Class BudgetClass
     Public Property Person As String
     Public Property Role As String
     'Public Property EndDate As String
-    Public Property BudgetAmount As String
+    Public Property Income As String
     Public Property Utilities As String
     Public Property Rent As String
     Public Property Expenses As String
@@ -133,5 +131,17 @@ Public Class BudgetClass
     Public Property Groceries As String
     Public Property StartDate As String
     Public Property Remaining As String
+    Public Property BudgetAmount As String
     Public Property Amount As String
+
+End Class
+Public Class HouseholdDocument
+    Public Property HouseholdID As String
+    Public Property Title As String
+    Public Property Notes As String
+    Public Property Category As String
+    Public Property FilePath As String
+    Public Property UploadedBy As String
+    Public Property UploadDate As String
+
 End Class
