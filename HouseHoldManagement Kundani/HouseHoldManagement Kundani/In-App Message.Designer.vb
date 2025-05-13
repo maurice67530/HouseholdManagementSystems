@@ -24,35 +24,26 @@ Partial Class In_App_Message
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(In_App_Message))
-        Me.btnSendReply = New System.Windows.Forms.Button()
         Me.ListBox2 = New System.Windows.Forms.ListBox()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.txtReply = New System.Windows.Forms.TextBox()
         Me.Label3 = New System.Windows.Forms.Label()
-        Me.Button3 = New System.Windows.Forms.Button()
+        Me.ComboBox1 = New System.Windows.Forms.ComboBox()
         Me.ListBox1 = New System.Windows.Forms.ListBox()
         Me.NotifyIcon1 = New System.Windows.Forms.NotifyIcon(Me.components)
         Me.Label4 = New System.Windows.Forms.Label()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.chkShowAll = New System.Windows.Forms.CheckBox()
-        Me.TextBox2 = New System.Windows.Forms.TextBox()
-        Me.Label6 = New System.Windows.Forms.Label()
+        Me.Button3 = New System.Windows.Forms.Button()
+        Me.btnSendReply = New System.Windows.Forms.Button()
+        Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         Me.SuspendLayout()
-        '
-        'btnSendReply
-        '
-        Me.btnSendReply.Location = New System.Drawing.Point(82, 388)
-        Me.btnSendReply.Name = "btnSendReply"
-        Me.btnSendReply.Size = New System.Drawing.Size(75, 23)
-        Me.btnSendReply.TabIndex = 1
-        Me.btnSendReply.Text = "Reply"
-        Me.btnSendReply.UseVisualStyleBackColor = True
         '
         'ListBox2
         '
         Me.ListBox2.FormattingEnabled = True
-        Me.ListBox2.Location = New System.Drawing.Point(82, 281)
+        Me.ListBox2.Location = New System.Drawing.Point(111, 267)
         Me.ListBox2.Name = "ListBox2"
         Me.ListBox2.Size = New System.Drawing.Size(430, 95)
         Me.ListBox2.TabIndex = 3
@@ -60,53 +51,54 @@ Partial Class In_App_Message
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(79, 81)
+        Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label1.Location = New System.Drawing.Point(31, 369)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(55, 13)
+        Me.Label1.Size = New System.Drawing.Size(78, 16)
         Me.Label1.TabIndex = 4
         Me.Label1.Text = "Recipient:"
         '
         'Label2
         '
-        Me.Label2.BackColor = System.Drawing.Color.Azure
+        Me.Label2.BackColor = System.Drawing.SystemColors.GradientActiveCaption
         Me.Label2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.Label2.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label2.Location = New System.Drawing.Point(0, 9)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(577, 40)
+        Me.Label2.Size = New System.Drawing.Size(591, 40)
         Me.Label2.TabIndex = 5
         Me.Label2.Text = "Text Messages:"
         Me.Label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'txtReply
         '
-        Me.txtReply.Location = New System.Drawing.Point(140, 115)
+        Me.txtReply.Location = New System.Drawing.Point(115, 77)
         Me.txtReply.Name = "txtReply"
-        Me.txtReply.Size = New System.Drawing.Size(174, 20)
+        Me.txtReply.Size = New System.Drawing.Size(281, 20)
         Me.txtReply.TabIndex = 6
         '
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(79, 118)
+        Me.Label3.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label3.Location = New System.Drawing.Point(61, 80)
         Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(35, 13)
+        Me.Label3.Size = New System.Drawing.Size(48, 16)
         Me.Label3.TabIndex = 7
         Me.Label3.Text = "Send:"
         '
-        'Button3
+        'ComboBox1
         '
-        Me.Button3.Location = New System.Drawing.Point(402, 388)
-        Me.Button3.Name = "Button3"
-        Me.Button3.Size = New System.Drawing.Size(110, 23)
-        Me.Button3.TabIndex = 9
-        Me.Button3.Text = "Mark All As Read"
-        Me.Button3.UseVisualStyleBackColor = True
+        Me.ComboBox1.FormattingEnabled = True
+        Me.ComboBox1.Location = New System.Drawing.Point(111, 368)
+        Me.ComboBox1.Name = "ComboBox1"
+        Me.ComboBox1.Size = New System.Drawing.Size(163, 21)
+        Me.ComboBox1.TabIndex = 8
         '
         'ListBox1
         '
         Me.ListBox1.FormattingEnabled = True
-        Me.ListBox1.Location = New System.Drawing.Point(82, 167)
+        Me.ListBox1.Location = New System.Drawing.Point(111, 137)
         Me.ListBox1.Name = "ListBox1"
         Me.ListBox1.Size = New System.Drawing.Size(430, 95)
         Me.ListBox1.TabIndex = 10
@@ -123,62 +115,66 @@ Partial Class In_App_Message
         'Label4
         '
         Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(83, 265)
+        Me.Label4.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label4.Location = New System.Drawing.Point(112, 248)
         Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(94, 13)
+        Me.Label4.Size = New System.Drawing.Size(136, 16)
         Me.Label4.TabIndex = 12
         Me.Label4.Text = "Expense Message"
         '
         'Label5
         '
         Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(83, 151)
+        Me.Label5.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label5.Location = New System.Drawing.Point(108, 118)
         Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(86, 13)
+        Me.Label5.Size = New System.Drawing.Size(125, 16)
         Me.Label5.TabIndex = 13
         Me.Label5.Text = "Chores Message"
         '
         'chkShowAll
         '
         Me.chkShowAll.AutoSize = True
-        Me.chkShowAll.Location = New System.Drawing.Point(469, 118)
+        Me.chkShowAll.BackColor = System.Drawing.SystemColors.GradientActiveCaption
+        Me.chkShowAll.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.chkShowAll.ForeColor = System.Drawing.SystemColors.InactiveCaptionText
+        Me.chkShowAll.Location = New System.Drawing.Point(437, 77)
         Me.chkShowAll.Name = "chkShowAll"
-        Me.chkShowAll.Size = New System.Drawing.Size(81, 17)
+        Me.chkShowAll.Size = New System.Drawing.Size(104, 20)
         Me.chkShowAll.TabIndex = 11
         Me.chkShowAll.Text = "CheckBox1"
-        Me.chkShowAll.UseVisualStyleBackColor = True
+        Me.chkShowAll.UseVisualStyleBackColor = False
         '
-        'TextBox2
+        'Button3
         '
-        Me.TextBox2.Location = New System.Drawing.Point(140, 78)
-        Me.TextBox2.Name = "TextBox2"
-        Me.TextBox2.Size = New System.Drawing.Size(100, 20)
-        Me.TextBox2.TabIndex = 14
+        Me.Button3.Image = CType(resources.GetObject("Button3.Image"), System.Drawing.Image)
+        Me.Button3.Location = New System.Drawing.Point(31, 432)
+        Me.Button3.Name = "Button3"
+        Me.Button3.Size = New System.Drawing.Size(102, 84)
+        Me.Button3.TabIndex = 9
+        Me.Button3.UseVisualStyleBackColor = True
         '
-        'Label6
+        'btnSendReply
         '
-        Me.Label6.AutoSize = True
-        Me.Label6.BackColor = System.Drawing.Color.Transparent
-        Me.Label6.Font = New System.Drawing.Font("Lucida Bright", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label6.ForeColor = System.Drawing.Color.Red
-        Me.Label6.Location = New System.Drawing.Point(-3, 415)
-        Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(0, 15)
-        Me.Label6.TabIndex = 15
+        Me.btnSendReply.Image = Global.HouseHoldManagement_Kundani.My.Resources.Resources.WhatsApp_Image_2025_05_07_at_09_58_32__1_
+        Me.btnSendReply.Location = New System.Drawing.Point(460, 431)
+        Me.btnSendReply.Name = "btnSendReply"
+        Me.btnSendReply.Size = New System.Drawing.Size(106, 86)
+        Me.btnSendReply.TabIndex = 1
+        Me.btnSendReply.UseVisualStyleBackColor = True
         '
         'In_App_Message
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.ClientSize = New System.Drawing.Size(578, 428)
-        Me.Controls.Add(Me.Label6)
-        Me.Controls.Add(Me.TextBox2)
+        Me.ClientSize = New System.Drawing.Size(592, 528)
         Me.Controls.Add(Me.Label5)
         Me.Controls.Add(Me.Label4)
         Me.Controls.Add(Me.chkShowAll)
         Me.Controls.Add(Me.ListBox1)
         Me.Controls.Add(Me.Button3)
+        Me.Controls.Add(Me.ComboBox1)
         Me.Controls.Add(Me.Label3)
         Me.Controls.Add(Me.txtReply)
         Me.Controls.Add(Me.Label2)
@@ -197,12 +193,12 @@ Partial Class In_App_Message
     Friend WithEvents Label2 As Label
     Friend WithEvents txtReply As TextBox
     Friend WithEvents Label3 As Label
+    Friend WithEvents ComboBox1 As ComboBox
     Friend WithEvents Button3 As Button
     Friend WithEvents ListBox1 As ListBox
     Friend WithEvents NotifyIcon1 As NotifyIcon
     Friend WithEvents Label4 As Label
     Friend WithEvents Label5 As Label
     Friend WithEvents chkShowAll As CheckBox
-    Friend WithEvents TextBox2 As TextBox
-    Friend WithEvents Label6 As Label
+    Friend WithEvents ToolTip1 As ToolTip
 End Class
