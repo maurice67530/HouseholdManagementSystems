@@ -22,12 +22,12 @@ Public Class Dashboard
 
 
     Private Sub Dashboard_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        lblbadge.Region = New Region(New Drawing.Drawing2D.GraphicsPath())
+        lblbadge.Region = New Region(New Drawing2D.GraphicsPath())
         Dim gp As New Drawing.Drawing2D.GraphicsPath()
         gp.AddEllipse(0, 0, lblbadge.Width, lblbadge.Height)
         lblbadge.Region = New Region(gp)
         StyleBadge()
-
+        In_App_Message.NotifyIcon1.ShowBalloonTip(5000) ' 5 seconds
 
         UpdateNotificationCount()
         LoadChoresStatus()
@@ -1141,6 +1141,14 @@ Public Class Dashboard
     End Sub
 
     Private Sub ToolTip1_Popup(sender As Object, e As PopupEventArgs) Handles ToolTip1.Popup
+
+    End Sub
+
+    Private Sub NotifyIcon1_MouseDoubleClick(sender As Object, e As MouseEventArgs) Handles NotifyIcon1.MouseDoubleClick
+
+    End Sub
+
+    Private Sub Chart2_Click(sender As Object, e As EventArgs) Handles Chart2.Click
 
     End Sub
 End Class

@@ -1,4 +1,8 @@
 ﻿Imports System.Data.OleDb
+Public Module session
+    Public LoggedinUsername As String
+
+End Module
 Public Class In_App_Message
 
     Dim conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
@@ -10,10 +14,17 @@ Public Class In_App_Message
         'ShowLastViewedMessages()
         NotifyIcon1.ShowBalloonTip(5000) ' 5 seconds
 
+        session.LoggedinUsername = Label6.Text
+
+
 
         LoadNewOverdueChores()
         LoadNewHighExpenses()
         UpdateLastViewed() ' Mark as read after loading
+
+        Dim tooltip As New ToolTip
+        ToolTip1.SetToolTip(Button3, "Mark as Read")
+        ToolTip1.SetToolTip(btnSendReply, "Reply")
     End Sub
 
     Private Sub ShowLastViewedMessages()
