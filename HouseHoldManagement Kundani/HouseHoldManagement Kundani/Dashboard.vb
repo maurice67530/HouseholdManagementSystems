@@ -36,10 +36,10 @@ Public Class Dashboard
         LoadExpiringGroceries()
         PopulateListboxFromTasks(Tasks)
         ShowChoreStatusPieChart()
-        LoadRecentPhotos()
+        'LoadRecentPhotos()
         DisplayPhoto()
-        SetupTimer()
-
+        'SetupTimer()
+        StartPhotoSlideshow
 
         ' Show current date, month, and time
         Label17.Text = DateTime.Now.ToString("dddd, dd MMMM yyyy - hh:mm tt")
@@ -79,7 +79,7 @@ Public Class Dashboard
         Timer1.Start()
         If photoList.Count > 0 Then
             DisplayPhoto() ' Show the first photo
-            SetupTimer() ' Start timer for slideshow
+            'SetupTimer() ' Start timer for slideshow
         End If
 
         Timer2.Interval = 200
@@ -256,7 +256,7 @@ Public Class Dashboard
 
     Private Function CheckExpense() As Boolean
 
-        Dim BudgetLimit As Decimal = 150169
+        Dim BudgetLimit As Decimal = 700
 
         Dim TotalExpense As Decimal = 0
 
@@ -489,7 +489,7 @@ Public Class Dashboard
 
     '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
 
-    Dim budgetLimit As Double = 150300
+    Dim budgetLimit As Double = 700
     Dim blinkState As Boolean = True
 
     Private Sub Timer2_Tick(sender As Object, e As EventArgs) Handles Timer2.Tick
@@ -538,7 +538,7 @@ Public Class Dashboard
 
             Using conn As OleDbConnection = Getconnection()
                 conn.Open()
-                Dim cmd As New OleDbCommand("SELECT SUM(Amount) FROM Expense", conn)
+                Dim cmd As New OleDbCommand("SELECT Amount FROM Expense", conn)
                 Dim result = cmd.ExecuteScalar()
                 Return If(IsDBNull(result), 0, Convert.ToDouble(result))
             End Using
@@ -554,7 +554,7 @@ Public Class Dashboard
         Try
             Using conn As OleDbConnection = Getconnection()
                 conn.Open()
-                Dim cmd As New OleDbCommand("SELECT SUM(Totalincome) FROM Expense", conn)
+                Dim cmd As New OleDbCommand("SELECT Amount FROM Expense", conn)
                 Dim result = cmd.ExecuteScalar()
                 Return If(IsDBNull(result), 0, Convert.ToDouble(result))
             End Using
@@ -820,40 +820,83 @@ Public Class Dashboard
     Private photoList As New List(Of String)() ' List to store photo paths
     Private currentPhotoIndex As Integer = 0
     Private WithEvents photoTimer As New Timer()
-    Private Sub LoadRecentPhotos()
+    'Private Sub LoadRecentPhotos()
 
+    '    photoList.Clear()
+    '    Dim query As String = "SELECT TOP 4 FilePath FROM Photos ORDER BY DateAdded"
+    '    Using conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
+    '        Using cmd As New OleDbCommand(query, conn)
+    '            conn.Open()
+    '            Using reader As OleDbDataReader = cmd.ExecuteReader()
+    '                While reader.Read()
+    '                    photoList.Add(reader("FilePath").ToString())
+
+    '                End While
+    '            End Using
+    '        End Using
+    '    End Using
+    '    conn.Close()
+    Private Sub LoadRecentPhotoPathsFromDatabase()
         photoList.Clear()
-        Dim query As String = "SELECT TOP 4 FilePath FROM Photos ORDER BY DateAdded"
-        Using conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
-            Using cmd As New OleDbCommand(query, conn)
-                conn.Open()
-                Using reader As OleDbDataReader = cmd.ExecuteReader()
-                    While reader.Read()
-                        photoList.Add(reader("FilePath").ToString())
 
-                    End While
-                End Using
-            End Using
+        'Dim connStr As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=yourdb.accdb;"
+        Using conn As New OleDb.OleDbConnection(connectionString)
+            conn.Open()
+
+            ' ORDER BY DateAdded DESC or ID DESC to get recent photos
+            Dim cmd As New OleDb.OleDbCommand("SELECT TOP 5 FilePath FROM Photos ORDER BY DateAdded", conn)
+            ' If you're using ID instead of DateAdded:
+            ' Dim cmd As New OleDb.OleDbCommand("SELECT PhotoPath FROM Gallery ORDER BY ID DESC", conn)
+
+            Dim reader As OleDb.OleDbDataReader = cmd.ExecuteReader()
+
+            While reader.Read()
+                Dim path As String = reader("FilePath").ToString()
+                If IO.File.Exists(path) Then
+                    photoList.Add(path)
+                End If
+            End While
         End Using
-        conn.Close()
 
     End Sub
+    'Private Sub DisplayPhoto()
+    '    If photoList.Count > 0 Then
+    '        FlowLayoutPanel2.Controls.Clear() ' Clear previous image
+    '        Dim pb As New PictureBox()
+    '        pb.Image = Image.FromFile(photoList(currentPhotoIndex))
+    '        pb.SizeMode = PictureBoxSizeMode.StretchImage ' Set stretch mode
+    '        pb.Size = FlowLayoutPanel2.Size ' Match panel size
+    '        FlowLayoutPanel2.Controls.Add(pb) ' Add to FlowLayoutPanel
+    '    End If
+    'End Sub
+
     Private Sub DisplayPhoto()
         If photoList.Count > 0 Then
-            FlowLayoutPanel2.Controls.Clear() ' Clear previous image
+            FlowLayoutPanel2.Controls.Clear()
+
             Dim pb As New PictureBox()
             pb.Image = Image.FromFile(photoList(currentPhotoIndex))
-            pb.SizeMode = PictureBoxSizeMode.StretchImage ' Set stretch mode
-            pb.Size = FlowLayoutPanel2.Size ' Match panel size
-            FlowLayoutPanel2.Controls.Add(pb) ' Add to FlowLayoutPanel
+            pb.SizeMode = PictureBoxSizeMode.StretchImage
+            pb.Size = FlowLayoutPanel2.Size
+
+            FlowLayoutPanel2.Controls.Add(pb)
+
+            ' Loop to the first image after the last
+            currentPhotoIndex = (currentPhotoIndex + 1) Mod photoList.Count
         End If
     End Sub
+    Private Sub StartPhotoSlideshow()
+        LoadRecentPhotoPathsFromDatabase()
+        DisplayPhoto()
 
-    Private Sub SetupTimer()
-        photoTimer.Interval = 1000 ' 2 seconds
-        AddHandler photoTimer.Tick, AddressOf PhotoTimer_Tick
+        photoTimer.Interval = 2000 ' 2 seconds
         photoTimer.Start()
     End Sub
+    'Private Sub SetupTimer()
+    '    photoTimer.Interval = 1000 ' 2 seconds
+    '    AddHandler photoTimer.Tick, AddressOf PhotoTimer_Tick
+    '    photoTimer.Start()
+    'End Sub
 
     Private Sub PhotoTimer_Tick(sender As Object, e As EventArgs)
         If photoList.Count > 0 Then
