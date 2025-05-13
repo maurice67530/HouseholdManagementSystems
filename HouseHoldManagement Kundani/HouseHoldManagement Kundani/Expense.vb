@@ -353,6 +353,8 @@ Public Class Expense
 
     End Sub
     Private Sub Expense_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        Timer1.Interval = 8000
+        Timer1.Enabled = True
 
         ' Initialize ToolTip properties (optional)
         toolTip.AutoPopDelay = 5000
@@ -413,6 +415,7 @@ Public Class Expense
         'Button1.Enabled = Label17.Text = "Connected"
         'Button1.Enabled = Label17.Text = "Connected"
 
+        'ProcessDuePayments()
 
         'PopulateMessagesFromDatabase()
         LoadExpenseDataFromDatabase()
@@ -635,10 +638,10 @@ Public Class Expense
         'ScheduleNextExpenseDate(ID)
     End Sub
     Private Sub CheckDueDates()
-        Dim query As String = "SELECT ID, BillName, StartDate FROM Expense WHERE StartDate <= @Today"
+        Dim query As String = "SELECT ID, BillName, StartDate FROM Expense WHERE StartDate <= ?"
         Using conn As New OleDbConnection(connectionString)
             Using command As New OleDbCommand(query, conn)
-                command.Parameters.AddWithValue("@Today", DateTime.Today)
+                command.Parameters.AddWithValue("?", DateTime.Today)
 
                 Try
                     conn.Open()
@@ -777,17 +780,26 @@ Public Class Expense
                 End While
                 reader.Close()
 
-                ' Process each due payment
-                For Each paymentId In duePayments
+            ' Process each due payment
+            For Each paymentId In duePayments
                 ' Simulate payment processing
                 Dim updateCmd As New OleDbCommand("UPDATE Expense SET Paid = Yes, StartDate = ? WHERE ID = ?", conn)
                 updateCmd.Parameters.AddWithValue("?", DateTime.Now)
                 updateCmd.Parameters.AddWithValue("?", paymentId)
                 updateCmd.ExecuteNonQuery()
-                Next
-            End Using
 
-        MessageBox.Show("Autopay process completed.")
+                MessageBox.Show("Autopay process completed.")
+            Next
+            MessageBox.Show("Autopay process completed.")
+        End Using
+
+
     End Sub
-    End Class
+
+    Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
+        Timer1.Enabled = False
+        ProcessDuePayments()
+
+    End Sub
+End Class
 

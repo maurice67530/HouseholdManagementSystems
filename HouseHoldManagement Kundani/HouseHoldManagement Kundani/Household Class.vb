@@ -69,9 +69,9 @@ Public Class Expensetracking
     Public Property Frequency As String
     Public Property ApprovalStatus As String
     Public Property Person As String
-    Public Property DateOfexpenses As DateTime
+    Public Property DateOfexpenses As String
     Public Property BillName As String
-    Public Property StartDate As DateTime
+    Public Property StartDate As String
     Public Property Recurring As String
     Public Property paid As String
 End Class
