@@ -589,7 +589,8 @@ Partial Class Expense
         Me.Button10.Name = "Button10"
         Me.Button10.Size = New System.Drawing.Size(75, 41)
         Me.Button10.TabIndex = 136
-        Me.Button10.Text = "Button10"
+        Me.Button10.Text = "                                                                                 " &
+    "              "
         Me.Button10.UseVisualStyleBackColor = True
         '
         'Timer1
@@ -617,6 +618,7 @@ Partial Class Expense
         Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.Label11)
         Me.Name = "Expense"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Expense"
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel1.ResumeLayout(False)
