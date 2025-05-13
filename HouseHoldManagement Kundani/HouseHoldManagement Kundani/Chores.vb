@@ -8,7 +8,7 @@ Public Class chores
     Public Property conn As New OleDbConnection(connectionString)
 
     Private Sub chores_Load(sender As System.Object, e As System.EventArgs) Handles MyBase.Load
-        Dim connection As New OleDbConnection(connectionString)
+        Dim conn As New OleDbConnection(connectionString)
 
         toolTip1.SetToolTip(Button1, "Save")
         toolTip1.SetToolTip(Button2, "Edit")
@@ -24,7 +24,7 @@ Public Class chores
 
             ' Create a new OleDbConnection object and open the connection  
 
-            connection.Open()
+            conn.Open()
 
             ' Display the connection status on a button with a green background  
             Label11.Text = "Connected"
@@ -53,7 +53,7 @@ Public Class chores
             PopulateComboboxFromDatabase(CmbASS)
             loadChoresFromDatabase()
             ' Close the database connection  
-            connection.Close()
+            conn.Close()
         End Try
 
         'chores
