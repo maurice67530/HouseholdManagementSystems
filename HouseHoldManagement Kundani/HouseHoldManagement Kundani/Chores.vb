@@ -703,15 +703,15 @@ Public Class chores
         Using conn As New OleDb.OleDbConnection(connString)
             Try
                 conn.Open()
-                Dim query As String = "SELECT TOP 1 FirstName, LastName FROM PersonalDetails " &
-                                  "WHERE FirstName + ' ' + LastName NOT IN (" &
+                Dim query As String = "SELECT TOP 1 AssignedTo, DateOfEvent FROM FamilySchedule " &
+                                  "WHERE AssignedTo + ' ' + DateOfEvent NOT IN (" &
                                   String.Join(",", assignedPeople.Select(Function(p) "'" & p & "'")) & ") " &
-                                  "ORDER BY FirstName, LastName"
+                                  "ORDER BY AssignedTo, DateOfEvent"
 
                 Using cmd As New OleDb.OleDbCommand(query, conn)
                     Dim reader As OleDb.OleDbDataReader = cmd.ExecuteReader()
                     If reader.Read() Then
-                        availablePerson = reader("FirstName").ToString() & " " & reader("LastName").ToString()
+                        availablePerson = reader("AssignedTo").ToString() & " " & reader("LastName").ToString()
                     End If
                 End Using
             Catch ex As Exception
@@ -758,4 +758,761 @@ Public Class chores
     Private Sub CmbASS_SelectedIndexChanged(sender As Object, e As EventArgs) Handles CmbASS.SelectedIndexChanged
 
     End Sub
+
+    Private Sub Button10_Click_1(sender As Object, e As EventArgs) Handles Button10.Click
+        'Start the task timer when the button Is clicked
+
+        Timer1.Start()
+
+        TextBox1.AppendText("Schedules started ." & vbCrLf)
+        'Define a list of chores
+
+        Label3.Text = ($"chores checked  {DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")}" & vbCrLf)
+
+        'Check If any chores are due (Pending) for the selected frequency (daily, weekly, monthly)
+
+        ' Dim selectedFrequency As String = ComboBox2.SelectedItem.ToString()
+
+        'LoadChoresByFrequency(selectedFrequency)
+
+        'Update chores based on frequency
+
+        ' Dim choresToUpdate As List(Of Integer) = GetPendingChoresToUpdate(selectedFrequency)
+
+        'For Each choreId As String In choresToUpdate
+
+        '  Next
+
+        Dim quiry = "Select AssignedTo & Title  FROM chores "
+
+        Using conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
+
+            Using cmd As New OleDbCommand(quiry, conn)
+
+                conn.Open()
+
+                '   MessageBox.Show("  : " & cmd.ExecuteScalar.ToString & MessageBoxIcon.Warning)
+
+            End Using
+            ' {"uzwothe", "rolivhuwa", "aluwani"}
+        End Using
+
+
+
+        Dim connString As String = HouseHoldManagment_Module.connectionString
+
+        Dim selectedChoreID As Integer
+
+        Dim selectedChore As String = ""
+
+        Dim currentPerson As String = ""
+
+        Dim assignedPerson As String = ""
+
+        Static lastAssignedPerson As String = ""
+
+        ' Check if a row is selected in DataGridView
+
+        If DGVChores.SelectedRows.Count > 0 Then
+
+            selectedChoreID = CInt(DGVChores.SelectedRows(0).Cells("ID").Value)
+
+            selectedChore = DGVChores.SelectedRows(0).Cells("Title").Value.ToString()
+
+            If DGVChores.SelectedRows(0).Cells("AssignedTo").Value IsNot Nothing Then
+
+                currentPerson = DGVChores.SelectedRows(0).Cells("AssignedTo").Value.ToString()
+
+            End If
+
+        Else
+
+            MsgBox("Please select a chore to assign.", MsgBoxStyle.Exclamation, "Chore Assignment")
+
+            Exit Sub
+
+        End If
+
+        ' Get all available people except the current person and the last assigned person
+
+        Dim availablePeople As New List(Of String)
+
+        For Each person As String In CmbASS.Items
+
+            If person <> currentPerson AndAlso person <> lastAssignedPerson Then
+
+                availablePeople.Add(person)
+
+            End If
+
+        Next
+
+        ' Validate if there are available people
+
+        If availablePeople.Count = 0 Then
+
+            MsgBox("No different person available for assignment.", MsgBoxStyle.Exclamation, "Chore Assignment")
+
+            Exit Sub
+
+        End If
+
+        ' Randomly select a different person from the available people
+
+        Dim rnd As New Random()
+
+        assignedPerson = availablePeople(rnd.Next(0, availablePeople.Count))
+
+        ' Get the frequency of the selected chore from the database (Daily, Weekly, Monthly)
+
+        Dim choreFrequency As String = ""
+
+        Dim nextDueDate As DateTime
+
+        Using conn As New OleDb.OleDbConnection(connString)
+
+            Try
+
+                conn.Open()
+
+                Dim query As String = "SELECT Frequency, DueDate FROM Chores WHERE ID = ?"
+
+                Using cmd As New OleDb.OleDbCommand(query, conn)
+
+                    cmd.Parameters.AddWithValue("?", selectedChoreID)
+
+                    Using reader As OleDb.OleDbDataReader = cmd.ExecuteReader()
+
+                        If reader.Read() Then
+
+                            choreFrequency = reader("Frequency").ToString()
+
+                            nextDueDate = Convert.ToDateTime(reader("DueDate"))
+
+                        End If
+
+                    End Using
+
+                End Using
+
+                ' Calculate the new due date based on the frequency
+
+                Select Case choreFrequency
+
+                    Case "Daily"
+
+                        nextDueDate = nextDueDate.AddDays(1)
+
+                    Case "Weekly"
+
+                        nextDueDate = nextDueDate.AddDays(7)
+
+                    Case "Monthly"
+
+                        nextDueDate = nextDueDate.AddMonths(1)
+
+                End Select
+
+                ' Assign the chore in the database and update the next due date
+
+                Dim updateQuery As String = "UPDATE Chores SET AssignedTo = ?, DueDate = ? WHERE ID = ?"
+
+                Using cmd As New OleDb.OleDbCommand(updateQuery, conn)
+
+                    cmd.Parameters.AddWithValue("?", assignedPerson)
+
+                    cmd.Parameters.AddWithValue("?", nextDueDate)
+
+                    cmd.Parameters.AddWithValue("?", selectedChoreID)
+
+                    cmd.ExecuteNonQuery()
+
+                End Using
+
+                ' Update DataGridView with new assignment and due date
+
+                For Each row As DataGridViewRow In DGVChores.Rows
+
+                    If row.Cells("ID").Value = selectedChoreID Then
+
+                        row.Cells("AssignedTo").Value = assignedPerson
+
+                        row.Cells("DueDate").Value = nextDueDate.ToShortDateString()
+
+                        Exit For
+
+                    End If
+
+                Next
+
+                ' Show confirmation
+
+                MsgBox("Chore Reassigned: " & selectedChore & " → " & assignedPerson & vbCrLf & "Next Due Date: " & nextDueDate.ToShortDateString(), MsgBoxStyle.Information, "Success")
+
+                ' Update lastAssignedPerson for the next assignment
+
+                lastAssignedPerson = assignedPerson
+
+                ' Refresh the available persons list
+
+
+
+            Catch ex As Exception
+
+                MsgBox("Error assigning chore: " & ex.Message, MsgBoxStyle.Critical, "Error")
+
+            End Try
+
+        End Using
+    End Sub
+
+
+
+
+    Private Sub Button13_Click(sender As Object, e As EventArgs) Handles Button13.Click
+        '    If Button13.Enabled = False Then
+        '        MessageBox.Show("Cannot save. Please resolve conflicts.", "Conflict", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+        '        Return
+        '    End If
+
+        '    ' Example: Check first row values (can loop if batch save)
+        '    Dim person = DGVChores.Rows(0).Cells("AssignedTo").Value.ToString()
+        '    Dim dueDate = CDate(DGVChores.Rows(0).Cells("DueDate").Value)
+
+        '    If IsPersonAlreadyAssigned(person, dueDate) Then
+        '        MessageBox.Show($"{person} is already assigned a chore on {dueDate:d}.", "Duplicate Assignment", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+        '        Return
+        '    End If
+
+        '    ' Proceed with save logic
+        '    MessageBox.Show("Chores saved successfully.")
+        'End Sub
+
+        'Dim choreID As Integer = GetSelectedChoreID()
+
+        'If choreID = 0 Then
+
+        '    MsgBox("Please select a chore first.", MsgBoxStyle.Exclamation, "Selection Required")
+
+        '    Return
+
+        'End If
+
+        'CompleteChores(choreID)
+
+        'LoadChoresDataToDataBase()
+
+        ' Method to complete the selected chore and auto-assign the next available person
+
+
+
+
+    End Sub
+
+    Private Sub Button14_Click(sender As Object, e As EventArgs) Handles Button14.Click
+
+    End Sub
+
+
+
+    ''mudzunga
+    'Private Function IsPersonAlreadyAssigned(person As String, dueDate As Date) As Boolean
+    '    Dim cmd As New OleDbCommand("SELECT COUNT(*) FROM Chores WHERE AssignedTo = @person AND DueDate = @dueDate", conn)
+    '    cmd.Parameters.AddWithValue("@person", person)
+    '    cmd.Parameters.AddWithValue("@dueDate", dueDate)
+    '    conn.Open()
+    '    Dim count As Integer = CInt(cmd.ExecuteScalar())
+    '    conn.Close()
+    '    Return count > 0
+    'End Function
+
+    'Public Sub CompleteChores(choreID As Integer)
+
+    '    Dim connString As String = connectionString
+
+    '    Using conn As New OleDb.OleDbConnection(connString)
+
+    '        Try
+
+    '            conn.Open()
+
+    '            ' Get chore details
+
+    '            Dim query As String = "SELECT Title, AssignedTo, Frequency, Recurring, DueDate, Status FROM Chores WHERE ID = @ID"
+
+    '            Using cmd As New OleDb.OleDbCommand(query, conn)
+
+    '                cmd.Parameters.AddWithValue("@ID", choreID)
+
+    '                Using reader As OleDb.OleDbDataReader = cmd.ExecuteReader()
+
+    '                    If reader.Read() Then
+
+    '                        Dim title As String = reader("Title").ToString()
+
+    '                        Dim assignedTo As String = reader("AssignedTo").ToString()
+
+    '                        Dim frequency As String = reader("Frequency").ToString()
+
+    '                        Dim recurring As String = reader("Recurring").ToString()
+
+    '                        Dim dueDate As Date = Convert.ToDateTime(reader("DueDate"))
+
+    '                        Dim status As String = reader("Status").ToString()
+
+    '                        ' Check if chore is completed, if so, do not reassign next person
+
+    '                        If status.ToLower() <> "completed" Then
+
+    '                            ' Mark as completed
+
+    '                            ' UpdateChoreStatus(choreID, "Completed")
+
+    '                            If recurring.ToLower() = "yes" Then
+
+    '                                ' Get the next available person
+
+    '                                Dim nextPerson As String = GetNextAvailablePersons()
+
+    '                                ' Calculate the next due date
+
+    '                                Dim nextDueDate As Date = CalculateNextDueDate(frequency, dueDate)
+
+    '                                ' Update only the selected chore with the next person and due date
+
+    '                                UpdateRecurringChore(choreID, nextPerson, nextDueDate)
+
+    '                                MsgBox($"Chore '{title}' Updated & Assigned to {nextPerson} with new due date {nextDueDate.ToShortDateString()}.", MsgBoxStyle.Information, "Chore Updated")
+
+    '                            Else
+
+    '                                MsgBox($"Chore '{title}' is not recurring.", MsgBoxStyle.Information, "Chore Completed")
+
+    '                            End If
+
+    '                        Else
+
+    '                            MsgBox($"Chore '{title}' is already marked as completed and will not be reassigned.", MsgBoxStyle.Information, "Chore Completed")
+
+    '                        End If
+
+    '                    End If
+
+    '                End Using
+
+    '            End Using
+
+    '        Catch ex As Exception
+
+    '            MsgBox("Error: " & ex.Message, MsgBoxStyle.Critical, "Error")
+
+    '        End Try
+
+    '    End Using
+
+    'End Sub
+
+    '' Get the next available person who is not already assigned in DataGridView or database
+
+    'Public Function GetNextAvailablePersons() As String
+
+    '    Dim connString As String = connectionString
+
+    '    Dim availablePerson As String = String.Empty
+
+    '    Dim assignedPeople As New List(Of String)
+
+    '    ' Get already assigned people from DataGridView
+
+    '    For Each row As DataGridViewRow In DGVChores.Rows
+
+    '        If row.Cells("AssignedTo").Value IsNot Nothing Then
+
+    '            assignedPeople.Add(row.Cells("AssignedTo").Value.ToString())
+
+    '        End If
+
+    '    Next
+
+    '    ' Get an available person from the database who is NOT in DataGridView or already assigned
+
+    '    Using conn As New OleDb.OleDbConnection(connString)
+
+    '        Try
+
+    '            conn.Open()
+
+    '            Dim query As String = "SELECT TOP 1 AssignedTo, DateOfEvent FROM FamilySchedule " &
+    '                             "WHERE AssignedTo + ' ' + DateOfEvent NOT IN (" & String.Join(",", assignedPeople.Select(Function(p) "'" & p & "'")) & ") " & "ORDER BY AssignedTo, DateOfEvent"
+
+    '            Using cmd As New OleDb.OleDbCommand(query, conn)
+
+    '                Dim reader As OleDb.OleDbDataReader = cmd.ExecuteReader()
+
+    '                If reader.Read() Then
+
+    '                    availablePerson = reader("AssignedTo").ToString() & " " & reader("DateOfEvent").ToString()
+
+    '                End If
+
+    '            End Using
+
+    '        Catch ex As Exception
+
+    '            MsgBox("Error retrieving next available person: " & ex.Message, MsgBoxStyle.Critical, "Error")
+
+    '        End Try
+
+    '    End Using
+
+    '    Return availablePerson
+
+    'End Function
+
+
+    'Private Sub cmbAssignedTo_SelectedIndexChanged(sender As Object, e As EventArgs) Handles CmbASS.SelectedIndexChanged
+    '    HighlightChoresForPerson(CmbASS.Text)
+    'End Sub
+
+    'Private Sub DGVChores_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles DGVChores.CellClick
+    '    If e.RowIndex >= 0 Then
+    '        Dim selectedPerson = DGVChores.Rows(e.RowIndex).Cells("Title").Value.ToString()
+    '        HighlightChoresForPerson(selectedPerson)
+    '    End If
+    'End Sub
+
+    'Private Sub HighlightChoresForPerson(person As String)
+    '    For Each row As DataGridViewRow In DGVChores.Rows
+    '        If row.IsNewRow Then Continue For
+    '        If row.Cells("Title").Value.ToString() = person Then
+    '            row.DefaultCellStyle.BackColor = Color.LightBlue
+    '        Else
+    '            row.DefaultCellStyle.BackColor = Color.White ' or original color
+    '        End If
+    '    Next
+    '    Button13.Enabled = True
+    'End Sub
+
+    'Private Sub btnClearHighlight_Click(sender As Object, e As EventArgs) Handles Button13.Click
+    '    For Each row As DataGridViewRow In DGVChores.Rows
+    '        If row.IsNewRow Then Continue For
+    '        row.DefaultCellStyle.BackColor = Color.White ' reset all highlights
+    '    Next
+    '    Button13.Enabled = False
+    'End Sub
+
+
+
+    ''zwuvhuya
+    'Private Sub btnSaveChore_Click(sender As Object, e As EventArgs) Handles Button14.Click
+    '    Dim choreDateTime As DateTime
+    '    Dim choreAssignedTo As String
+
+    '    ' Get chore details from the form controls
+    '    If Not DateTime.TryParse(DateTimePicker1.Value, choreDateTime) Then
+    '        MessageBox.Show("Invalid date and time selected.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+    '        Return
+    '    End If
+
+    '    choreAssignedTo = CmbASS.SelectedItem?.ToString()
+    '    If String.IsNullOrEmpty(choreAssignedTo) Then
+    '        MessageBox.Show("Please select a family member.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+    '        Return
+    '    End If
+
+    '    ' **--- 2. Check for Conflicts ---**
+    '    If HasConflictInDatabase(choreAssignedTo, choreDateTime) Then
+    '        MessageBox.Show($"Conflict: {choreAssignedTo} already has a scheduled task at {choreDateTime.ToString("yyyy-MM-dd HH:mm")}.", "Conflict Detected", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+    '    Else
+    '        ' **--- 3. Save the Chore (if no conflict) ---**
+    '        SaveChoreToDatabase(choreAssignedTo, choreDateTime)
+    '        MessageBox.Show("Chore saved successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
+    '        ' Optionally, refresh your chore list or family schedule display
+    '    End If
+    'End Sub
+
+    '' **--- 4. Function to Check for Conflicts in the Database ---**
+    'Private Function HasConflictInDatabase(familyMember As String, choreTime As DateTime) As Boolean
+    '    Using connection As New OleDbConnection(connectionString) ' Or SqlConnection
+    '        Using command As New OleDbCommand() ' Or SqlCommand
+    '            Try
+    '                connection.Open()
+    '                command.Connection = connection
+
+    '                ' **--- 5. Adjust your SQL query based on your FamilySchedule table structure ---**
+    '                command.CommandText = "SELECT COUNT(*) FROM FamilySchedule WHERE AssignedTo = @member AND DateOfEvent = @time"
+    '                command.Parameters.AddWithValue("@member", familyMember)
+    '                command.Parameters.AddWithValue("@time", choreTime)
+
+    '                Dim conflictCount As Integer = Convert.ToInt32(command.ExecuteScalar())
+    '                Return conflictCount > 0
+
+    '            Catch ex As OleDbException ' Or SqlException
+    '                MessageBox.Show($"Database error checking for conflict: {ex.Message}", "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+    '                Return True ' Assume conflict on error to prevent data corruption
+    '            Catch ex As Exception
+    '                MessageBox.Show($"An unexpected error occurred: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+    '                Return True
+    '            End Try
+    '        End Using
+    '    End Using
+    'End Function
+
+    '' **--- 6. Function to Save the Chore to the Database ---**
+    'Private Sub SaveChoreToDatabase(familyMember As String, choreTime As DateTime)
+    '    Using connection As New OleDbConnection(connectionString) ' Or SqlConnection
+    '        Using command As New OleDbCommand() ' Or SqlCommand
+    '            Try
+    '                connection.Open()
+    '                command.Connection = connection
+
+    '                ' **--- 7. Adjust your SQL INSERT statement based on your Chores table structure ---**
+    '                command.CommandText = "INSERT INTO Chores (AssignedTo, DueDate) VALUES (@member, @time)" ' Example
+    '                command.Parameters.AddWithValue("@member", familyMember)
+    '                command.Parameters.AddWithValue("@time", choreTime)
+
+    '                command.ExecuteNonQuery()
+
+    '            Catch ex As OleDbException ' Or SqlException
+    '                MessageBox.Show($"Error saving chore to database: {ex.Message}", "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+    '            Catch ex As Exception
+    '                MessageBox.Show($"An unexpected error occurred while saving: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+    '            End Try
+    '        End Using
+    '    End Using
+    'End Sub
+
+
+
+
+    '' List to hold the family schedule and meal plan events for conflict checking
+    'Private CalendarEvents As New List(Of CalendarEvent)
+
+    '    ' Structure to hold calendar event information (can be schedule or meal plan)
+    '    Private Structure CalendarEvent
+    '        Public StartTime As DateTime
+    '        Public EndTime As DateTime
+    '        Public Participants As String ' Could be a single person or multiple
+    '        Public EventType As String ' "Schedule" or "Meal" to differentiate
+    '    End Structure
+
+    '    Private Sub ChoresForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+    '        LoadCalendarEvents()
+    '    End Sub
+
+    '    Private Sub LoadCalendarEvents()
+    '        CalendarEvents.Clear() ' Clear existing events
+
+    '        ' Load Family Schedule Events
+    '        Try
+    '        Using connection As New OleDbConnection(connectionString)
+    '            connection.Open()
+    '            Dim scheduleQuery As String = "SELECT StartTime, EndTime, AssignedTo FROM FamilySchedule"
+    '            Using command As New OleDbCommand(scheduleQuery, connection)
+    '                Using reader As OleDbDataReader = command.ExecuteReader()
+    '                    While reader.Read()
+    '                        Dim calendarEvent As New CalendarEvent()
+    '                        calendarEvent.StartTime = Convert.ToDateTime(reader("StartTime"))
+    '                        calendarEvent.EndTime = Convert.ToDateTime(reader("EndTime"))
+    '                        calendarEvent.Participants = reader("AssignedTo").ToString()
+    '                        calendarEvent.EventType = "DateOfEvent"
+    '                        CalendarEvents.Add(calendarEvent)
+    '                    End While
+    '                End Using
+    '            End Using
+    '        End Using
+    '    Catch ex As Exception
+    '            MessageBox.Show("Error loading family schedule: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+    '        End Try
+
+    '    ' Load Meal Plan Events (assuming you have a MealPlans table)
+    '    '    Try
+    '    '    Using connection As New OleDbConnection(connectionString)
+    '    '        connection.Open()
+    '    '        Dim mealQuery As String = "SELECT MealTime AS StartTime, MealTime AS EndTime, Participants FROM MealPlans" ' Adjust columns as needed
+    '    '        Using command As New OleDbCommand(mealQuery, connection)
+    '    '            Using reader As OleDbDataReader = command.ExecuteReader()
+    '    '                While reader.Read()
+    '    '                    Dim calendarEvent As New CalendarEvent()
+    '    '                    calendarEvent.StartTime = Convert.ToDateTime(reader("StartTime"))
+    '    '                    ' Assuming meal time is a point in time, setting EndTime to the same
+    '    '                    calendarEvent.EndTime = calendarEvent.StartTime.AddMinutes(30) ' Adjust meal duration if needed
+    '    '                    calendarEvent.Participants = reader("AssignedTo").ToString()
+    '    '                    calendarEvent.EventType = "Meal"
+    '    '                    CalendarEvents.Add(calendarEvent)
+    '    '                End While
+    '    '            End Using
+    '    '        End Using
+    '    '    End Using
+    '    'Catch ex As Exception
+    '    '        MessageBox.Show("Error loading meal plans: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+    '    '    End Try
+    'End Sub
+
+    '    Private Function CheckForConflicts(choreStartTime As DateTime, choreEndTime As DateTime, assignedPerson As String) As List(Of String)
+    '        Dim conflicts As New List(Of String)
+
+    '        ' 1. Check for Conflicts Against Meal Plans or Events (Time Overlap)
+    '        For Each calendarEvent As CalendarEvent In CalendarEvents
+    '            If (choreStartTime < calendarEvent.EndTime AndAlso choreEndTime > calendarEvent.StartTime) Then
+    '                If calendarEvent.Participants.ToLower().Contains(assignedPerson.ToLower()) Then
+    '                    conflicts.Add($"Time overlap with {calendarEvent.EventType} on {calendarEvent.StartTime.ToString("g")}")
+    '                End If
+    '            End If
+    '        Next
+
+    '        ' 2. Check for Same-Person, Same-Date Conflict (Multiple Chores)
+    '        Dim choresOnSameDay As New List(Of Tuple(Of DateTime, DateTime))
+
+    '        Return conflicts
+    '    End Function
+
+    'Private Sub SaveChoreButton_Click(sender As Object, e As EventArgs) Handles Button14.Click
+
+    'Dim choreName As String = TxtTitle.Text
+    '    Dim assignedTo As String = CmbASS.Text
+    '    Dim startTime As DateTime = DateTimePicker1.Value
+    '    Dim endTime As DateTime = DateTimePicker1.Value
+    '    Dim notes As String = TxtDes.Text
+
+    '    ' Basic input validation
+    '    If String.IsNullOrWhiteSpace(choreName) OrElse String.IsNullOrWhiteSpace(assignedTo) Then
+    '        MessageBox.Show("Chore name and assigned person cannot be empty.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+    '        Return
+    '    End If
+
+    '    ' Check for conflicts
+    '    Dim foundConflicts As List(Of String) = CheckForConflicts(startTime, endTime, assignedTo)
+
+    '    If foundConflicts.Count > 0 Then
+    '        Dim conflictMessage As String = "Conflicts detected:\n" & String.Join(vbCrLf, foundConflicts)
+    '        Dim result As DialogResult = MessageBox.Show(conflictMessage & vbCrLf & "Do you want to save it anyway?", "Conflict Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning)
+    '        If result = DialogResult.No Then
+    '            Return ' Don't save if the user chooses not to
+    '        End If
+    '    End If
+
+    '    ' Save the chore to the database
+    '    Try
+    '        Using connection As New OleDbConnection(connectionString)
+    '            connection.Open()
+    '            Dim query As String = "INSERT INTO Chores (Title, AssignedTo, DueDate, Description) VALUES (@Title, @AssignedTo, @DueDate, @Description)"
+    '            Using command As New OleDbCommand(query, connection)
+    '                command.Parameters.AddWithValue("@ChoreName", choreName)
+    '                command.Parameters.AddWithValue("@AssignedTo", assignedTo)
+    '                command.Parameters.AddWithValue("@StartTime", startTime)
+    '                command.Parameters.AddWithValue("@EndTime", endTime)
+    '                command.Parameters.AddWithValue("@Notes", notes)
+    '                command.ExecuteNonQuery()
+    '                MessageBox.Show("Chore saved successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
+    '                ' Optionally clear the form after saving
+    '                ClearInputFields()
+    '            End Using
+    '        End Using
+    '    Catch ex As Exception
+    '        MessageBox.Show("Error saving chore: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+    '    End Try
+    'End Sub
+
+    'Private Sub ClearInputFields()
+    '    TxtTitle.Clear()
+    '    '  CmbASS.Clear()
+    '    DateTimePicker1.Value = DateTime.Now
+    '    DateTimePicker1.Value = DateTime.Now.AddHours(1)
+    '    TxtDes.Clear()
+    'End Sub
+
+    '    ' You would need a DataGridView on your form (e.g., ChoresDataGridView)
+    '    ' to display existing chores. The following would be relevant when loading/displaying chores.
+
+    '    ' Example of how you might highlight conflict rows in a DataGridView (this would be called after loading chores into the grid)
+    '    Private Sub HighlightConflictRows()
+    '    ' Assuming your DataGridView has columns named "AssignedTo", "StartTime", "EndTime"
+    '    For Each row As DataGridViewRow In DGVChores.Rows
+    '        If Not row.IsNewRow Then
+    '            Dim choreStartTime As DateTime = Convert.ToDateTime(row.Cells("DueDate").Value)
+    '            Dim choreEndTime As DateTime = Convert.ToDateTime(row.Cells("EndTime").Value)
+    '            Dim assignedPerson As String = row.Cells("AssignedTo").Value.ToString()
+
+    '            If CheckForConflicts(choreStartTime, choreEndTime, assignedPerson).Count > 0 Then
+    '                row.DefaultCellStyle.BackColor = Color.Red
+    '            Else
+    '                row.DefaultCellStyle.BackColor = SystemColors.Window ' Or your default color
+    '            End If
+    '        End If
+    '    Next
+    'End Sub
+
+    '    ' To disable the Save button if a conflict is detected on the current chore being entered:
+    '    Private Sub CheckAndToggleSaveButton()
+    '    Dim choreName As String = TxtTitle.Text
+    '    Dim assignedTo As String = CmbASS.Text
+    '    Dim startTime As DateTime = DateTimePicker1.Value
+    '    Dim endTime As DateTime = DateTimePicker1.Value
+
+    '    If Not String.IsNullOrWhiteSpace(choreName) AndAlso Not String.IsNullOrWhiteSpace(assignedTo) Then
+    '            If CheckForConflicts(startTime, endTime, assignedTo).Count > 0 Then
+    '            Button14.Enabled = False
+    '        Else
+    '            Button14.Enabled = True
+    '        End If
+    '        Else
+    '        Button14.Enabled = False ' Disable if essential fields are empty
+    '    End If
+    '    End Sub
+
+    '' You would call CheckAndToggleSaveButton in the TextChanged events of your input fields
+    '' and the ValueChanged events of your DateTimePickers.
+
+    'Private Sub ChoreNameTextBox_TextChanged(sender As Object, e As EventArgs) Handles TxtTitle.TextChanged
+    '    CheckAndToggleSaveButton()
+    'End Sub
+
+    'Private Sub AssignedToTextBox_TextChanged(sender As Object, e As EventArgs) Handles CmbASS.TextChanged
+    '    CheckAndToggleSaveButton()
+    'End Sub
+
+    'Private Sub StartDateTimePicker_ValueChanged(sender As Object, e As EventArgs) Handles DateTimePicker1.ValueChanged
+    '    CheckAndToggleSaveButton()
+    'End Sub
+
+    ' In-memory list to hold assigned chores
+    Private ChoreList As New List(Of chores_)
+
+    Private Sub btnAssign_Click(sender As Object, e As EventArgs) Handles Button14.Click
+        ' Get values from controls
+        Dim selectedPerson As String = CmbASS.SelectedItem?.ToString()
+        Dim choreName As String = TxtTitle.Text.Trim()
+        Dim selectedDate As Date = DateTimePicker1.Value.Date
+
+        ' Basic input validation
+        If String.IsNullOrEmpty(selectedPerson) OrElse String.IsNullOrEmpty(choreName) Then
+            MessageBox.Show("Please select a person and enter a chore name.", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            Exit Sub
+        End If
+
+        ' Check if this person already has a chore on this date
+        Dim alreadyAssigned = ChoreList.Any(Function(c) c.AssignedTo = selectedPerson AndAlso c.DueDate = selectedDate)
+
+        If alreadyAssigned Then
+            MessageBox.Show($"{selectedPerson} already has a chore assigned on {selectedDate.ToShortDateString()}.", "Assignment Blocked", MessageBoxButtons.OK, MessageBoxIcon.Information)
+            Exit Sub
+        End If
+
+        ' Add the new assignment
+        Dim newChore As New chores_ With {
+        .AssignedTo = selectedPerson,
+        .Title = choreName,
+        .DueDate = selectedDate
+    }
+        ChoreList.Add(newChore)
+
+        MessageBox.Show("Chore assigned successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
+
+        ' Optionally clear inputs
+        TxtTitle.Clear()
+        CmbASS.SelectedIndex = -1
+        DateTimePicker1.Value = Date.Today
+    End Sub
+
 End Class

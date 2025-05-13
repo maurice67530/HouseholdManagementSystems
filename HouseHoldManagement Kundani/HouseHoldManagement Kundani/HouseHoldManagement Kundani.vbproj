@@ -197,6 +197,9 @@
     <EmbeddedResource Include="Budget.resx">
       <DependentUpon>Budget.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Chores.resx">
+      <DependentUpon>Chores.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Dashboard.resx">
       <DependentUpon>Dashboard.vb</DependentUpon>
     </EmbeddedResource>

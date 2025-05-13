@@ -22,7 +22,7 @@ Partial Class chores
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(chores))
+        Me.components = New System.ComponentModel.Container()
         Me.Button12 = New System.Windows.Forms.Button()
         Me.Button11 = New System.Windows.Forms.Button()
         Me.Button9 = New System.Windows.Forms.Button()
@@ -60,6 +60,10 @@ Partial Class chores
         Me.Label3 = New System.Windows.Forms.Label()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
+        Me.Button10 = New System.Windows.Forms.Button()
+        Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
+        Me.Button13 = New System.Windows.Forms.Button()
+        Me.Button14 = New System.Windows.Forms.Button()
         CType(Me.DGVChores, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel2.SuspendLayout()
         Me.Panel1.SuspendLayout()
@@ -90,7 +94,6 @@ Partial Class chores
         'Button9
         '
         Me.Button9.BackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.Button9.Image = CType(resources.GetObject("Button9.Image"), System.Drawing.Image)
         Me.Button9.Location = New System.Drawing.Point(161, 459)
         Me.Button9.Name = "Button9"
         Me.Button9.Size = New System.Drawing.Size(116, 40)
@@ -118,7 +121,6 @@ Partial Class chores
         'Button5
         '
         Me.Button5.BackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.Button5.Image = CType(resources.GetObject("Button5.Image"), System.Drawing.Image)
         Me.Button5.Location = New System.Drawing.Point(283, 459)
         Me.Button5.Name = "Button5"
         Me.Button5.Size = New System.Drawing.Size(105, 40)
@@ -148,7 +150,6 @@ Partial Class chores
         'Button4
         '
         Me.Button4.BackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.Button4.Image = CType(resources.GetObject("Button4.Image"), System.Drawing.Image)
         Me.Button4.Location = New System.Drawing.Point(425, 459)
         Me.Button4.Name = "Button4"
         Me.Button4.Size = New System.Drawing.Size(98, 40)
@@ -185,7 +186,6 @@ Partial Class chores
         'Button3
         '
         Me.Button3.BackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.Button3.Image = CType(resources.GetObject("Button3.Image"), System.Drawing.Image)
         Me.Button3.Location = New System.Drawing.Point(4, 459)
         Me.Button3.Name = "Button3"
         Me.Button3.Size = New System.Drawing.Size(98, 40)
@@ -195,7 +195,6 @@ Partial Class chores
         'Button2
         '
         Me.Button2.BackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.Button2.Image = CType(resources.GetObject("Button2.Image"), System.Drawing.Image)
         Me.Button2.Location = New System.Drawing.Point(529, 459)
         Me.Button2.Name = "Button2"
         Me.Button2.Size = New System.Drawing.Size(102, 40)
@@ -205,7 +204,6 @@ Partial Class chores
         'Button1
         '
         Me.Button1.BackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.Button1.Image = CType(resources.GetObject("Button1.Image"), System.Drawing.Image)
         Me.Button1.Location = New System.Drawing.Point(637, 459)
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(90, 40)
@@ -382,6 +380,7 @@ Partial Class chores
         'CmbASS
         '
         Me.CmbASS.FormattingEnabled = True
+        Me.CmbASS.Items.AddRange(New Object() {" "})
         Me.CmbASS.Location = New System.Drawing.Point(6, 127)
         Me.CmbASS.Name = "CmbASS"
         Me.CmbASS.Size = New System.Drawing.Size(278, 21)
@@ -451,11 +450,41 @@ Partial Class chores
         Me.Label1.TabIndex = 28
         Me.Label1.Text = "CHORES"
         '
+        'Button10
+        '
+        Me.Button10.Location = New System.Drawing.Point(676, 290)
+        Me.Button10.Name = "Button10"
+        Me.Button10.Size = New System.Drawing.Size(75, 23)
+        Me.Button10.TabIndex = 46
+        Me.Button10.Text = "Button10"
+        Me.Button10.UseVisualStyleBackColor = True
+        '
+        'Button13
+        '
+        Me.Button13.Location = New System.Drawing.Point(595, 290)
+        Me.Button13.Name = "Button13"
+        Me.Button13.Size = New System.Drawing.Size(75, 23)
+        Me.Button13.TabIndex = 47
+        Me.Button13.Text = "Button13"
+        Me.Button13.UseVisualStyleBackColor = True
+        '
+        'Button14
+        '
+        Me.Button14.Location = New System.Drawing.Point(27, 291)
+        Me.Button14.Name = "Button14"
+        Me.Button14.Size = New System.Drawing.Size(75, 23)
+        Me.Button14.TabIndex = 48
+        Me.Button14.Text = "Button14"
+        Me.Button14.UseVisualStyleBackColor = True
+        '
         'chores
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(746, 509)
+        Me.Controls.Add(Me.Button14)
+        Me.Controls.Add(Me.Button13)
+        Me.Controls.Add(Me.Button10)
         Me.Controls.Add(Me.Button12)
         Me.Controls.Add(Me.Button11)
         Me.Controls.Add(Me.Button9)
@@ -523,4 +552,8 @@ Partial Class chores
     Friend WithEvents Label3 As Label
     Friend WithEvents Label5 As Label
     Friend WithEvents Label1 As Label
+    Friend WithEvents Button10 As Button
+    Friend WithEvents Timer1 As Timer
+    Friend WithEvents Button13 As Button
+    Friend WithEvents Button14 As Button
 End Class
