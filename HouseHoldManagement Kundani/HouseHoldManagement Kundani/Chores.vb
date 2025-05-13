@@ -764,9 +764,9 @@ Public Class chores
         End Using
     End Sub
 
-    Private Sub CmbASS_SelectedIndexChanged(sender As Object, e As EventArgs) Handles CmbASS.SelectedIndexChanged
-
-    End Sub
+    'Private Sub CmbASS_SelectedIndexChanged(sender As Object, e As EventArgs) Handles CmbASS.SelectedIndexChanged
+    '    LoadChore()
+    'End Sub
 
     Private Sub Button10_Click_1(sender As Object, e As EventArgs) Handles Button10.Click
         'Start the task timer when the button Is clicked
@@ -1063,132 +1063,68 @@ Public Class chores
 
 
 
-    Private FamilyScheduleEvents As New List(Of ScheduleEvent)
+    Private Sub cmbAssignedTo_SelectedIndexChanged(sender As Object, e As EventArgs) Handles CmbASS.SelectedIndexChanged
+        HighlightChoresForPerson(CmbASS.Text)
+    End Sub
+    Private Sub DGVChores_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles DGVChores.CellClick
+        If e.RowIndex >= 0 Then
+            Dim selectedPerson = DGVChores.Rows(e.RowIndex).Cells("AssignedTo").Value.ToString()
+            HighlightChoresForPerson(selectedPerson)
+        End If
+    End Sub
 
-        ' Structure to hold schedule event information
-        Private Structure ScheduleEvent
-            Public StartTime As DateTime
-            Public EndTime As DateTime
-            Public DateOfEvent As Date
-            Public AssignedTo As String
-        End Structure
+    Private Sub HighlightChoresForPerson(person As String)
+        For Each row As DataGridViewRow In DGVChores.Rows
+            If row.IsNewRow Then Continue For
+            If row.Cells("AssignedTo").Value.ToString() = person Then
+                row.DefaultCellStyle.BackColor = Color.Red
+            Else
+                row.DefaultCellStyle.BackColor = Color.White ' or original color
+            End If
+        Next
+        Button13.Enabled = True
+    End Sub
 
-        Private Sub ChoresForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-            LoadFamilySchedule()
-        End Sub
+    Private Sub btnClearHighlight_Click(sender As Object, e As EventArgs) Handles Button13.Click
 
-        Private Sub LoadFamilySchedule()
-            Try
-            Using connection As New OleDbConnection(connectionString)
-                connection.Open()
-                Dim query As String = "SELECT StartTime, EndTime, DateOfEvent, AssignedTo FROM FamilySchedule"
-                Using command As New OleDbCommand(query, connection)
-                    Using reader As OleDbDataReader = command.ExecuteReader()
-                        While reader.Read()
-                            Dim scheduleEvent As New ScheduleEvent With {
-                                    .StartTime = Convert.ToDateTime(reader("StartTime")),
-                                    .EndTime = Convert.ToDateTime(reader("EndTime")),
-                                    .DateOfEvent = Convert.ToDateTime(reader("DateOfEvent")),
-                                    .AssignedTo = reader("AssignedTo").ToString()
-                                }
-                            FamilyScheduleEvents.Add(scheduleEvent)
-                        End While
-                    End Using
-                End Using
-            End Using
-        Catch ex As Exception
-                MessageBox.Show("Error loading family schedule: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-            End Try
-        End Sub
+        ' Example: Check first row values (can loop if batch save)
+        Dim AssignedTo = DGVChores.Rows(0).Cells("AssignedTo").Value.ToString()
+        Dim dueDate = CDate(DGVChores.Rows(0).Cells("DueDate").Value)
+        For Each row As DataGridViewRow In DGVChores.Rows
+            If row.IsNewRow Then Continue For
+            row.DefaultCellStyle.BackColor = Color.White ' reset all highlights
+        Next
+        Button13.Enabled = False
 
-        Private Function CheckForConflict(choreStartTime As DateTime, choreEndTime As DateTime, assignedPerson As String) As Boolean
-            For Each scheduledEvent As ScheduleEvent In FamilyScheduleEvents
-                If scheduledEvent.DateOfEvent.Date = choreStartTime.Date Then
-                    If (choreStartTime < scheduledEvent.EndTime AndAlso choreEndTime > scheduledEvent.StartTime) Then
-                        If scheduledEvent.AssignedTo.ToLower() = assignedPerson.ToLower() Then
-                            Return True
-                        End If
-                    End If
-                End If
-            Next
-            Return False
-        End Function
+        If Button13.Enabled = False Then
 
-    Private Sub SaveChoreButton_Click(sender As Object, e As EventArgs) Handles Button13.Click
-        Dim choreName As String = TxtDes.Text
-        Dim assignedTo As String = CmbASS.Text
-        Dim startTime As DateTime = DateTimePicker1.Value
-        Dim endTime As DateTime = DateTimePicker1.Value
-        Dim notes As String = TxtDes.Text
 
-        If String.IsNullOrWhiteSpace(choreName) OrElse String.IsNullOrWhiteSpace(assignedTo) Then
-            MessageBox.Show("Chore name and assigned person cannot be empty.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+
+            MessageBox.Show($"{AssignedTo} is already assigned a chore on {dueDate:d}.", "Duplicate Assignment", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+            MessageBox.Show("Cannot save. Please resolve conflicts.", "Conflict", MessageBoxButtons.OK, MessageBoxIcon.Warning)
             Return
         End If
 
-        If CheckForConflict(startTime, endTime, assignedTo) Then
-            Dim result As DialogResult = MessageBox.Show(
-                                $"The chore '{choreName}' at {startTime.ToString("g")} conflicts with an existing event for '{assignedTo}'. Save anyway?",
-                                "Conflict Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning)
-            If result = DialogResult.No Then Return
-        End If
+        '' Example: Check first row values (can loop if batch save)
+        'Dim AssignedTo = DGVChores.Rows(0).Cells("AssignedTo").Value.ToString()
+        'Dim dueDate = CDate(DGVChores.Rows(0).Cells("DueDate").Value)
 
-        Try
-            Using connection As New OleDbConnection(connectionString)
-                connection.Open()
-                Dim query As String = "INSERT INTO Chores (Title, AssignedTo, StartTime, EndTime, Description) VALUES (@Title, @AssignedTo, @StartTime, @EndTime, @Description)"
-                Using command As New OleDbCommand(query, connection)
-                    command.Parameters.AddWithValue("@Title", choreName)
-                    command.Parameters.AddWithValue("@AssignedTo", assignedTo)
-                    command.Parameters.AddWithValue("@StartTime", startTime)
-                    command.Parameters.AddWithValue("@EndTime", endTime)
-                    command.Parameters.AddWithValue("@Description", notes)
-                    command.ExecuteNonQuery()
-                    MessageBox.Show("Chore saved successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
-                    'ClearInputFields()
-                End Using
-            End Using
-        Catch ex As Exception
-            MessageBox.Show("Error saving chore: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-        End Try
-        LoadChore()
+        'If IsPersonAlreadyAssigned(AssignedTo, dueDate) Then
+        '    MessageBox.Show($"{AssignedTo} is already assigned a chore on {dueDate:d}.", "Duplicate Assignment", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+        '    Return
+        'End If
+
     End Sub
 
-    Private Sub LoadChore()
-        Try
-            DGVChores.Rows.Clear()
-            Using connection As New OleDbConnection(connectionString)
-                connection.Open()
-                Dim query As String = "SELECT Title, AssignedTo, DueDate, Description FROM Chores"
-                Using command As New OleDbCommand(query, connection)
-                    Using reader As OleDbDataReader = command.ExecuteReader()
-                        While reader.Read()
-                            Dim rowIndex As Integer = DGVChores.Rows.Add()
-                            With DGVChores.Rows(rowIndex)
-                                .Cells("TitleColumn").Value = reader("Title").ToString()
-                                .Cells("AssignedToColumn").Value = reader("AssignedTo").ToString()
-                                .Cells("DueDateColumn").Value = reader("DueDate").ToString()
-                                '.Cells("EndTimeColumn").Value = reader("EndTime").ToString()
-                                .Cells("NotesColumn").Value = reader("Description").ToString()
+    Private Function IsPersonAlreadyAssigned(person As String, dueDate As Date) As Boolean
+        Dim cmd As New OleDbCommand("SELECT COUNT(*) FROM Chores WHERE AssignedTo = @person AND DueDate = @dueDate", conn)
+        cmd.Parameters.AddWithValue("@person", person)
+        cmd.Parameters.AddWithValue("@dueDate", dueDate)
+        conn.Open()
+        Dim count As Integer = CInt(cmd.ExecuteScalar())
+        conn.Close()
+        Return count > 0
+    End Function
 
-                                ' Highlight color based on assigned person
-                                Select Case reader("AssignedTo").ToString().ToLower()
-                                    Case "khodi Rasta"
-                                        .DefaultCellStyle.BackColor = Color.LightBlue
-                                    Case "Mulalo Ndou"
-                                        .DefaultCellStyle.BackColor = Color.LightGreen
-                                    Case "Rolivhuwa Singo"
-                                        .DefaultCellStyle.BackColor = Color.MistyRose
-                                    Case Else
-                                        .DefaultCellStyle.BackColor = Color.White
-                                End Select
-                            End With
-                        End While
-                    End Using
-                End Using
-            End Using
-        Catch ex As Exception
-            MessageBox.Show("Error loading chores: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-        End Try
-    End Sub
+
 End Class
