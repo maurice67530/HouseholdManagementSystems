@@ -4,7 +4,6 @@ Imports System.Net.Mail
 Imports System.Net
 Imports System.Runtime.InteropServices
 Imports System.Windows.Forms.DataVisualization.Charting
-
 Public Class Dashboard
 
     ' Daily tips list
@@ -18,8 +17,6 @@ Public Class Dashboard
     "Small tasks done daily keep chores away.",
     "Involve everyone – teamwork works best!"
 }
-
-
 
     Private Sub Dashboard_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         lblbadge.Region = New Region(New Drawing.Drawing2D.GraphicsPath())
@@ -42,7 +39,6 @@ Public Class Dashboard
         LoadRecentPhotos()
         DisplayPhoto()
         SetupTimer()
-
 
 
         ' Show current date, month, and time
@@ -96,8 +92,71 @@ Public Class Dashboard
 
         ShowInternetSpeed()
 
-    End Sub
 
+        If currentUser = "Admin" Then
+            ' Admin has full access
+
+            Button15.Enabled = True
+            Button11.Enabled = True
+            Button13.Enabled = True
+            Button14.Enabled = True
+            Button7.Enabled = True
+            Button8.Enabled = True
+            Button12.Enabled = True
+            Button17.Enabled = True
+            Button6.Enabled = True
+            Button16.Enabled = True
+            Button5.Enabled = True
+            btnInAppMessages.Enabled = True
+
+        ElseIf currentUser = "Member" Then
+            ' Members have limited access
+
+            Button11.Enabled = True
+            Button5.Enabled = True
+            Button7.Enabled = True
+            Button6.Enabled = True
+            Button8.Enabled = True
+
+            Button15.Enabled = False
+            Button13.Enabled = False
+            Button14.Enabled = False
+            Button12.Enabled = False
+            Button17.Enabled = False
+            Button16.Enabled = False
+            btnInAppMessages.Enabled = False
+
+        ElseIf currentUser = "Chef" Then
+
+            Button15.Enabled = True
+            Button13.Enabled = True
+            Button14.Enabled = True
+            btnInAppMessages.Enabled = True
+
+            Button7.Enabled = False
+            Button2.Enabled = False
+            Button8.Enabled = False
+            Button6.Enabled = False
+            Button1.Enabled = False
+            Button10.Enabled = False
+
+
+        ElseIf currentUser = "Finance" Then
+
+            Button12.Enabled = True
+            Button17.Enabled = True
+
+            Button3.Enabled = False
+            Button4.Enabled = False
+            Button7.Enabled = False
+            Button5.Enabled = False
+            Button2.Enabled = False
+            Button8.Enabled = False
+            Button6.Enabled = False
+            Button10.Enabled = False
+
+        End If
+    End Sub
 
     Private Sub LoadChoresStatus()
 
@@ -134,7 +193,7 @@ Public Class Dashboard
     End Sub
 
     Private Sub Button11_Click(sender As Object, e As EventArgs) Handles Button11.Click
-        Chores.ShowDialog()
+        chores.ShowDialog()
     End Sub
 
     Private Sub Button15_Click(sender As Object, e As EventArgs) Handles Button15.Click
@@ -314,8 +373,6 @@ Public Class Dashboard
         Return False
 
     End Function
-
-
     ' Function to check expired groceries from Inventory table
 
     Private Function CheckExpiredGroceries() As Boolean
@@ -428,9 +485,7 @@ Public Class Dashboard
 
         CheckExpense()
 
-
     End Sub
-
 
     '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
 
@@ -438,7 +493,6 @@ Public Class Dashboard
     Dim blinkState As Boolean = True
 
     Private Sub Timer2_Tick(sender As Object, e As EventArgs) Handles Timer2.Tick
-
 
         Dim totalExpenses = GetTotalExpenses()
         Dim totalIncome = GetTotalIncome()
@@ -451,7 +505,7 @@ Public Class Dashboard
         Label8.Text = "Remaining: R" & remaining.ToString("F2")
         Label14.Text = "Used: " & usedPercent.ToString("F0") & "%"
 
-        ' Budget alerts and panel blink
+        ' Budget alerts and panel behavior
         If totalExpenses >= 0.8 * budgetLimit AndAlso totalExpenses < budgetLimit Then
             Panel4.Visible = blinkState
             Panel4.BackColor = Color.Red
@@ -459,7 +513,6 @@ Public Class Dashboard
             Label13.Text = "You have exceeded 80%"
             Label13.ForeColor = Color.Red
             'FlashAppWindow()
-
         ElseIf totalExpenses >= budgetLimit Then
             Panel4.Visible = blinkState
             Panel4.BackColor = Color.Red
@@ -467,14 +520,16 @@ Public Class Dashboard
             Label13.Text = "Budget Exceeded!"
             Label13.ForeColor = Color.Red
             'FlashAppWindow()
-
         Else
+            ' Below 80% usage - budget is under control
             Panel4.Visible = False
             Label13.Text = "Budget is under control"
             Label13.ForeColor = Color.Green
         End If
 
+
         blinkState = Not blinkState
+
 
     End Sub
 
@@ -613,9 +668,6 @@ Public Class Dashboard
         conn.Close()
     End Sub
 
-
-
-
     Dim expiredGroceries As New Queue(Of String)
     Dim backupGroceries As New List(Of String)
     Dim groceryTimer As New Timer()
@@ -677,13 +729,6 @@ Public Class Dashboard
             Label16.ForeColor = Color.Red
         End If
     End Sub
-
-
-
-
-
-
-
     Public Sub PopulateListboxFromTasks(ByRef ListBox As ListBox)
         Dim conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
 
@@ -820,42 +865,7 @@ Public Class Dashboard
     Dim scheduleAlerts As New Queue(Of String)
     Dim alertTimer As New Timer()
 
-    'Private Sub LoadFamilyScheduleAlerts()
-    '    scheduleAlerts.Clear()
-    '    Label19.Text = ""
 
-    '    Dim con As New OleDbConnection("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Mudzunga\Source\Repos\maurice67530\HouseholdManagementSystems\HMS.accdb")
-    '    con.Open()
-    '    Dim query As String = "SELECT EventType, DateOfEvent, AssignedTo FROM FamilySchedule"
-    '    Dim cmd As New OleDbCommand(query, con)
-    '    cmd.Parameters.AddWithValue("?", Date.Today)
-    '    cmd.Parameters.AddWithValue("?", Date.Today.AddDays(5))
-
-    '    Dim reader As OleDbDataReader = cmd.ExecuteReader()
-    '    While reader.Read()
-    '        Dim eventText As String = $"Family Schedule: {reader("DateOfEvent"):dd MMM} - {reader("EventType")} ({reader("AssignedTo")})"
-    '        scheduleAlerts.Enqueue(eventText)
-    '    End While
-    '    reader.Close()
-    '    con.Close()
-
-    '    If scheduleAlerts.Count > 0 Then
-    '        alertTimer.Interval = 2000 ' 2 seconds
-    '        AddHandler alertTimer.Tick, AddressOf ShowNextAlert
-    '        alertTimer.Start()
-    '    Else
-    '        Label19.Text = "No upcoming family events."
-    '    End If
-    'End Sub
-
-    'Private Sub ShowNextAlert(sender As Object, e As EventArgs)
-    '    If scheduleAlerts.Count > 0 Then
-    '        Label19.Text = scheduleAlerts.Dequeue()
-    '    Else
-    '        alertTimer.Stop()
-    '        RemoveHandler alertTimer.Tick, AddressOf ShowNextAlert
-    '    End If
-    'End Sub
 
     'Dim scheduleAlerts As New Queue(Of String)
     Dim backupScheduleAlerts As New List(Of String)
@@ -904,10 +914,10 @@ Public Class Dashboard
         End If
     End Sub
 
-
     Private Sub Timer3_Tick(sender As Object, e As EventArgs) Handles Timer3.Tick
-
+        'Timer3.Stop()
         RunSearchAndBlink()
+
     End Sub
 
     Private Sub Button16_Click(sender As Object, e As EventArgs) Handles Button16.Click
@@ -916,7 +926,6 @@ Public Class Dashboard
         Notifications.ShowDialog()
 
     End Sub
-
 
     Private Sub UpdateNotificationCount()
 
@@ -1019,16 +1028,9 @@ Public Class Dashboard
     Dim delayCounter As Integer = 0
     Dim delayBeforeBlinking As Integer = 4 ' 4 ticks = ~1.2 sec (300ms x 4)
     Dim totalBlinkTicks As Integer = 10    ' ~3 sec of blinking
-
-
-
     Private Sub TextBox1_TextChanged(sender As Object, e As EventArgs) Handles TextBox1.TextChanged
         PrepareSearch()
     End Sub
-
-
-
-
 
     ' === Reset everything when user types ===
     Private Sub PrepareSearch()
@@ -1063,14 +1065,14 @@ Public Class Dashboard
                 formToOpen = New Inventory()
             ElseIf keyword.Contains("chore") Then
                 currentButtonToBlink = Button11
-                formToOpen = New Chores()
+                formToOpen = New chores()
             ElseIf keyword.Contains("photo") Then
                 currentButtonToBlink = Button8
                 formToOpen = New PhotoGallery()
-            ElseIf keyword.Contains("Task") Then
+            ElseIf keyword.Contains("task") Then
                 currentButtonToBlink = Button7
                 formToOpen = New Task_Management
-            ElseIf keyword.Contains("Personnel") Then
+            ElseIf keyword.Contains("personnel") Then
                 currentButtonToBlink = Button5
                 formToOpen = New Personnel()
             ElseIf keyword.Contains("notification") Then
@@ -1079,15 +1081,15 @@ Public Class Dashboard
             ElseIf keyword.Contains("grocery") Then
                 currentButtonToBlink = Button13
                 formToOpen = New Grocery_Items()
-            ElseIf keyword.Contains("notificationstatus") Then
+            ElseIf keyword.Contains("status") Then
                 currentButtonToBlink = btnInAppMessages
                 formToOpen = New In_App_Message()
-            ElseIf keyword.Contains("Family") Then
+            ElseIf keyword.Contains("family") Then
                 currentButtonToBlink = Button6
                 formToOpen = New Family_Schedule()
-                'ElseIf keyword.Contains("budget") Then
-                '    currentButtonToBlink = Button17
-                '    formToOpen = New Budget()
+            ElseIf keyword.Contains("budget") Then
+                currentButtonToBlink = Button17
+                formToOpen = New Budget()
             Else
                 Timer3.Stop()
                 Exit Sub
@@ -1116,6 +1118,7 @@ Public Class Dashboard
                 formToOpen.Show()
             End If
         End If
+
     End Sub
 
     Dim speedLevels As New List(Of String) From {
