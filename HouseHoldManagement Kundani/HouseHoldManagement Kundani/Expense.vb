@@ -418,6 +418,48 @@ Public Class Expense
         LoadExpenseDataFromDatabase()
         PopulateComboboxFromDatabase(ComboBox3)
     End Sub
+    Sub Main()
+
+        Using connection As New OleDbConnection(connectionString)
+            Try
+                connection.Open()
+
+                ' SQL query to select tasks where due date is today or earlier and status not yet updated
+                Dim query As String = "SELECT ID, StartDate FROM Expense WHERE StartDate = ? AND Paid = No"
+
+                Using command As New OleDbCommand(query, connection)
+                    command.Parameters.AddWithValue("?", DateTime.Today)
+                    'command.Parameters.AddWithValue("@OverdueStatus", "Overdue")
+
+                    Using reader As OleDbDataReader = command.ExecuteReader()
+                        Dim tasksToUpdate As New List(Of Integer)
+
+                        While reader.Read()
+                            Dim taskId As Integer = reader.GetInt32(0)
+                            tasksToUpdate.Add(taskId)
+                        End While
+
+                        reader.Close()
+
+                        ' Update each task's status to "Overdue"
+                        For Each taskId As Integer In tasksToUpdate
+                            Dim updateQuery As String = "UPDATE Expense SET Paid =  Yes WHERE ID = ?"
+                            Using updateCmd As New OleDbCommand(updateQuery, connection)
+                                updateCmd.Parameters.AddWithValue("Paid", "Yes")
+                                updateCmd.Parameters.AddWithValue("?", taskId)
+                                updateCmd.ExecuteNonQuery()
+                            End Using
+                            MessageBox.Show("Tasks updated successfully.")
+
+                        Next
+                    End Using
+                End Using
+
+            Catch ex As Exception
+                MessageBox.Show("Error: " & ex.Message)
+            End Try
+        End Using
+    End Sub
     Public Sub PopulateMessagesFromDatabase()
 
         Dim connect As New OleDbConnection(HouseHoldManagment_Module.connectionString)
@@ -628,7 +670,7 @@ Public Class Expense
     End Sub
 
     Private Sub Button10_Click(sender As Object, e As EventArgs) Handles Button10.Click
-        'CheckDueDates()
+        'Check                                                                                                                                                   DueDates()
         'P
         ProcessDuePayments()
         'Dim ID As Integer = "" ' replace with the actual ID you want to update

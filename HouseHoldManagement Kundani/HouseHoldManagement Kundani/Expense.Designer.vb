@@ -587,7 +587,8 @@ Partial Class Expense
         Me.Button10.Name = "Button10"
         Me.Button10.Size = New System.Drawing.Size(75, 41)
         Me.Button10.TabIndex = 136
-        Me.Button10.Text = "Button10"
+        Me.Button10.Text = "                                                                                 " &
+    "              "
         Me.Button10.UseVisualStyleBackColor = True
         '
         'Expense
