@@ -108,9 +108,9 @@ Public Class Household_Document
     End Sub
     Private Sub LoadDocuments()
         ListBox1.Items.Clear()
-        Using con As New OleDbConnection(connectionString)
-            Dim cmd As New OleDbCommand("SELECT Title FROM HouseholdDocument WHERE HouseholdID = 1", con)
-            con.Open()
+        Using conn As New OleDbConnection(connectionString)
+            Dim cmd As New OleDbCommand("SELECT Title FROM HouseholdDocument WHERE HouseholdID = ID", conn)
+            conn.Open()
             Using reader = cmd.ExecuteReader()
                 While reader.Read()
                     ListBox1.Items.Add(reader("Title").ToString())
@@ -134,6 +134,7 @@ Public Class Household_Document
     'End Sub
     Private Sub Household_Document_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         LoadhouseholddocumentDataFromDatabase()
+        LoadDocuments()
         'ViewDocument()
         ToolTip1.SetToolTip(Button2, "Upload")
         ToolTip1.SetToolTip(Button1, "Open")
@@ -163,11 +164,11 @@ Public Class Household_Document
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
 
         If ListBox1.SelectedItem Is Nothing Then Exit Sub
-        Dim title = ListBox1.SelectedItem.ToString()
-        Using con As New OleDbConnection(connectionString)
-            Dim cmd As New OleDbCommand("SELECT FilePath FROM HouseholdDocuments WHERE Title = @Title", con)
+        Dim Title = ListBox1.SelectedItem.ToString()
+        Using conn As New OleDbConnection(connectionString)
+            Dim cmd As New OleDbCommand("SELECT FilePath FROM HouseholdDocument WHERE Title = @Title", conn)
             cmd.Parameters.AddWithValue("@Title", title)
-            con.Open()
+            conn.Open()
             Dim path = cmd.ExecuteScalar().ToString()
             Process.Start(path)
         End Using
@@ -205,10 +206,10 @@ Public Class Household_Document
         If ListBox1.SelectedItem Is Nothing Then Exit Sub
         If MessageBox.Show("Are you sure?", "Delete", MessageBoxButtons.YesNo) = DialogResult.Yes Then
             Dim title = ListBox1.SelectedItem.ToString()
-            Using con As New OleDbConnection(connectionString)
-                Dim cmd As New OleDbCommand("DELETE FROM HouseholdDocument WHERE Title = @Title", con)
+            Using conn As New OleDbConnection(connectionString)
+                Dim cmd As New OleDbCommand("DELETE FROM HouseholdDocument WHERE Title = @Title", conn)
                 cmd.Parameters.AddWithValue("@Title", title)
-                con.Open()
+                conn.Open()
                 cmd.ExecuteNonQuery()
             End Using
             LoadDocuments()
@@ -282,7 +283,6 @@ Public Class Household_Document
             MessageBox.Show("Error saving document to database: " & ex.Message & vbNewLine & ex.StackTrace, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
     End Sub
-
     Private Sub Button5_Click(sender As Object, e As EventArgs) Handles Button5.Click
         If ListBox1.SelectedItem Is Nothing Then Exit Sub
         Dim tagInfo As String = "Document: " & ListBox1.SelectedItem.ToString() & vbCrLf & "Printed on: " & DateTime.Now.ToShortDateString()
@@ -295,6 +295,7 @@ Public Class Household_Document
                                  End Sub
         pd.Print()
     End Sub
+
     'PrintDialog1.Document = PrintDocument1
     'If PrintDialog1.ShowDialog() = DialogResult.OK Then
     '    LoadFilteredMealPlan() ' Load filtered data based on selected frequency
@@ -304,20 +305,20 @@ Public Class Household_Document
     '        MessageBox.Show("No meal plans found for the selected period.", "Print Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
     '    End If
     'End If
-
+    'End Sub
     Private Sub ApplySearchAndFilter()
         ListBox1.Items.Clear()
         Dim keyword = TextBox4.Text.Trim()
         Dim category = ComboBox2.Text
 
-        Using con As New OleDbConnection(connectionString)
-            Dim query = "SELECT Title FROM HouseholdDocument WHERE HouseholdID = 1"
+        Using conn As New OleDbConnection(connectionString)
+            Dim query = "SELECT Title FROM HouseholdDocument WHERE HouseholdID = ID"
             If keyword <> "" Then query &= " AND (Title LIKE @kw OR Notes LIKE @kw)"
             If category <> "" Then query &= " AND Category = @cat"
-            Dim cmd As New OleDbCommand(query, con)
+            Dim cmd As New OleDbCommand(query, conn)
             If keyword <> "" Then cmd.Parameters.AddWithValue("@kw", "%" & keyword & "%")
             If category <> "" Then cmd.Parameters.AddWithValue("@cat", category)
-            con.Open()
+            conn.Open()
             Using reader = cmd.ExecuteReader()
                 While reader.Read()
                     ListBox1.Items.Add(reader("Title").ToString())
