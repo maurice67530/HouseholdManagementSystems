@@ -413,11 +413,46 @@ Public Class Expense
         'Button1.Enabled = Label17.Text = "Connected"
         'Button1.Enabled = Label17.Text = "Connected"
 
-        ProcessDueBills()
-        'LoadData()
+
+        PopulateMessagesFromDatabase()
         LoadExpenseDataFromDatabase()
         PopulateComboboxFromDatabase(ComboBox3)
     End Sub
+    Public Sub PopulateMessagesFromDatabase()
+
+        Dim connect As New OleDbConnection(HouseHoldManagment_Module.connectionString)
+
+        Try
+            'Debug.WriteLine("listbox populated successfully")
+            ' 1. Open the database connection  
+            connect.Open()
+
+            ' 2. Retrieve the FirstName and LastName columns from the Expense table  
+            Dim query As String = "SELECT Amount, BillName, StartDate FROM Expense"
+            Dim cmd As New OleDbCommand(query, connect)
+            Dim reader As OleDbDataReader = cmd.ExecuteReader()
+
+            ' 3. Bind the retrieved data to the combobox  
+            While reader.Read()
+                MessageBox.Show($"{reader("Amount")} {reader("BillName")} {reader("StartDate")}")
+            End While
+
+            ' 4. Close the database connection  
+            reader.Close()
+        Catch ex As Exception
+            ' Handle any exceptions that may occur  
+            Debug.WriteLine("MessageBox population failed")
+            Debug.WriteLine($" An error has occured when PopulateMessageBoxFromDatabase: {ex.Message}")
+            Debug.WriteLine($"Stack Trace : {ex.StackTrace}")
+            MessageBox.Show($"Error: {ex.Message}")
+        Finally
+            ' Close the database connection  
+            If connect.State = ConnectionState.Open Then
+                connect.Close()
+            End If
+        End Try
+    End Sub
+
     Private Sub LoadData()
         Dim query As String = "SELECT * FROM Expense" ' Replace with your table name
         Dim dt As New DataTable()
@@ -594,7 +629,8 @@ Public Class Expense
 
     Private Sub Button10_Click(sender As Object, e As EventArgs) Handles Button10.Click
         'CheckDueDates()
-        ProcessDueBills()
+        'ProcessDueBills()
+        ScheduleNextExpenseDate("?")
     End Sub
     Private Sub CheckDueDates()
         Dim query As String = "SELECT ID, BillName, StartDate FROM Expense WHERE StartDate <= @Today"
@@ -679,6 +715,30 @@ Public Class Expense
             ' Handle exceptions
             MessageBox.Show("Error updating bill status: " & ex.Message)
         End Try
+    End Sub
+
+    Public Sub ScheduleNextExpenseDate(ID As Integer)
+
+        ' SQL to update the DueDate to the next day
+        Dim updateQuery As String = "UPDATE Expense SET StartDate = DATEADD(day, 20, DueDate) WHERE ID = ?"
+
+        Using connection As New OleDbConnection(connectionString)
+            Using command As New OleDbCommand(updateQuery, connection)
+                command.Parameters.AddWithValue("?", ID)
+
+                Try
+                    connection.Open()
+                    Dim rowsAffected As String = command.ExecuteNonQuery()
+                    If rowsAffected > 0 Then
+                        MessageBox.Show("Due date successfully updated to the next day.")
+                    Else
+                        MessageBox.Show("Expense not found or no update performed.")
+                    End If
+                Catch ex As Exception
+                    MessageBox.Show("Error updating due date: " & ex.Message)
+                End Try
+            End Using
+        End Using
     End Sub
 End Class
 
