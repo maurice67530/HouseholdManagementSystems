@@ -63,7 +63,6 @@ Partial Class chores
         Me.Button10 = New System.Windows.Forms.Button()
         Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
         Me.Button13 = New System.Windows.Forms.Button()
-        Me.Button14 = New System.Windows.Forms.Button()
         CType(Me.DGVChores, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel2.SuspendLayout()
         Me.Panel1.SuspendLayout()
@@ -468,21 +467,11 @@ Partial Class chores
         Me.Button13.Text = "Button13"
         Me.Button13.UseVisualStyleBackColor = True
         '
-        'Button14
-        '
-        Me.Button14.Location = New System.Drawing.Point(27, 291)
-        Me.Button14.Name = "Button14"
-        Me.Button14.Size = New System.Drawing.Size(75, 23)
-        Me.Button14.TabIndex = 48
-        Me.Button14.Text = "Button14"
-        Me.Button14.UseVisualStyleBackColor = True
-        '
         'chores
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(746, 509)
-        Me.Controls.Add(Me.Button14)
         Me.Controls.Add(Me.Button13)
         Me.Controls.Add(Me.Button10)
         Me.Controls.Add(Me.Button12)
@@ -555,5 +544,4 @@ Partial Class chores
     Friend WithEvents Button10 As Button
     Friend WithEvents Timer1 As Timer
     Friend WithEvents Button13 As Button
-    Friend WithEvents Button14 As Button
 End Class
