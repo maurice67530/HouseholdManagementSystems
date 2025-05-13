@@ -655,68 +655,6 @@ Public Class Expense
             End Using
         End Using
     End Sub
-    Public Sub ProcessDueBills()
-        Try
-            Using conn As New OleDbConnection(connectionString)
-                conn.Open()
-
-                ' Select bills where due date is today or past due and not yet paid
-                Dim query As String = "
-                    SELECT ID, Amount, StartDate
-                    FROM Expense
-                    WHERE Paid = No AND StartDate <= ?"
-
-                Using command As New OleDbCommand(query, conn)
-                    command.Parameters.AddWithValue("?", DateTime.Today)
-
-                    Using reader As OleDbDataReader = command.ExecuteReader()
-                        While reader.Read()
-                            Dim billID As Integer = reader("ID")
-                            Dim amount As Decimal = reader("Amount")
-                            Dim dueDate As Date = reader("StartDate")
-                            ' Process payment for this bill
-                            ProcessPayment(billID, amount)
-                            MsgBox("Due Date Alert""Recurring Bills paying process is complete ", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-
-                        End While
-                    End Using
-                End Using
-            End Using
-        Catch ex As Exception
-            ' Handle exceptions (e.g., log errors)
-            MessageBox.Show("Error processing bills: " & ex.Message)
-        End Try
-    End Sub
-
-    Private Sub ProcessPayment(billID As Integer, amount As Decimal)
-        ' Implement your payment logic here
-        ' For example, call a payment gateway API, update database, etc.
-
-        ' After successful payment, mark bill as paid
-        MarkBillAsPaid(billID)
-    End Sub
-
-    Private Sub MarkBillAsPaid(billID As Integer)
-        Try
-            Using conn As New OleDbConnection(connectionString)
-                conn.Open()
-
-                Dim updateQuery As String = "
-                    UPDATE  Expense
-                    SET Paid = Yes, DateOfexpenses = ?
-                    WHERE ID = ?"
-
-                Using cmd As New OleDbCommand(updateQuery, conn)
-                    cmd.Parameters.AddWithValue("?", DateTime.Now)
-                    cmd.Parameters.AddWithValue("?", billID)
-                    cmd.ExecuteNonQuery()
-                End Using
-            End Using
-        Catch ex As Exception
-            ' Handle exceptions
-            MessageBox.Show("Error updating bill status: " & ex.Message)
-        End Try
-    End Sub
 
     Public Sub ScheduleNextExpenseDate(ID As Integer)
         ' Use correct DATEADD syntax for your database (assuming Access)
@@ -740,6 +678,103 @@ Public Class Expense
                 End Try
             End Using
         End Using
+    End Sub
+
+    Private Sub ProcessRecurringExpenses()
+        Dim conn As New OleDbConnection(connectionString)
+        Dim cmd As New OleDbCommand()
+        cmd.Connection = conn
+        Dim paidExpensesMessage As String = "The following recurring expenses were automatically paid: " & Environment.NewLine
+
+        Try
+            conn.Open()
+
+            ' 1. Identify Recurring Expenses Due
+            Dim selectCmd As New OleDbCommand("SELECT BillName, Amount, Frequency, StartDate, Description FROM Expense WHERE Recurring = TRUE AND Paid = 'No'", conn) ' Assuming 'No' means not paid
+
+            Dim reader As OleDbDataReader = selectCmd.ExecuteReader()
+
+            While reader.Read()
+                Dim billName As String = reader("BillName").ToString()
+                Dim amount As Decimal = CDec(reader("Amount"))
+                Dim frequency As String = reader("Frequency").ToString()
+                Dim startDate As DateTime = CDate(reader("StartDate"))
+                Dim description As String = reader("Description").ToString()
+
+                ' 2. Calculate Next Payment Date and Check if Due
+                Dim nextPaymentDate As DateTime
+                Dim isDue As Boolean = False
+
+                Select Case frequency
+                    Case "Daily"
+                        nextPaymentDate = startDate.AddDays(1)
+                        If startDate <= DateTime.Today Then
+                            isDue = True
+                        End If
+                    Case "Weekly"
+                        nextPaymentDate = startDate.AddDays(7)
+                        If startDate <= DateTime.Today Then
+                            isDue = True
+                        End If
+                    Case "Monthly"
+                        nextPaymentDate = startDate.AddMonths(1)
+                        If startDate.Year < DateTime.Today.Year Or (startDate.Year = DateTime.Today.Year And startDate.Month <= DateTime.Today.Month) Then
+                            isDue = True
+                        End If
+                    Case "Annually"
+                        nextPaymentDate = startDate.AddYears(1)
+                        If startDate.Year <= DateTime.Today.Year Then
+                            isDue = True
+                        End If
+                        ' Add other frequencies here if needed
+                    Case Else
+                        ' Handle unknown frequencies or skip
+                        Continue While ' Skip to the next record
+                End Select
+
+                If isDue Then
+                    ' 3. Create a New Payment Entry
+                    Dim insertCmd As New OleDbCommand("INSERT INTO ExpenseLogs (BillName, Amount, Recurring, Frequency, StartDate, DateOfexpenses, Description, Paid) VALUES (?, ?, ?, ?, ?, ?, ?, ?)", conn)
+                    insertCmd.Parameters.AddWithValue("?", billName)
+                    insertCmd.Parameters.AddWithValue("?", amount)
+                    insertCmd.Parameters.AddWithValue("?", False) ' This is a paid instance, not the recurring definition
+                    insertCmd.Parameters.AddWithValue("?", frequency) ' Keep the frequency for reference
+                    insertCmd.Parameters.AddWithValue("?", startDate) ' Original start date
+                    insertCmd.Parameters.AddWithValue("?", DateTime.Today.Date) ' Date the payment is made
+                    insertCmd.Parameters.AddWithValue("?", "Auto-paid: " & description) ' Indicate it was auto-paid
+                    insertCmd.Parameters.AddWithValue("?", "Yes") ' Mark as paid
+                    insertCmd.ExecuteNonQuery()
+
+                    ' 4. Update the Original Recurring Record (Recommended)
+                    ' Update the StartDate to the next payment date for the recurring entry
+                    Dim updateCmd As New OleDbCommand("UPDATE ExpenseLogs SET StartDate = ? WHERE BillName = ? AND IsRecurring = TRUE AND Paid = 'No' AND StartDate = ?", conn)
+                    updateCmd.Parameters.AddWithValue("?", nextPaymentDate.Date)
+                    updateCmd.Parameters.AddWithValue("?", billName)
+                    updateCmd.Parameters.AddWithValue("?", startDate.Date) ' Use the original start date to identify the record
+                    updateCmd.ExecuteNonQuery()
+
+                    ' 5. Provide Feedback
+                    paidExpensesMessage &= $"- {billName} ({amount:C}) paid on {DateTime.Today.ToShortDateString()}. Next due date: {nextPaymentDate.ToShortDateString()}" & Environment.NewLine
+                End If
+            End While
+
+            reader.Close()
+
+            ' Show feedback message if any expenses were paid
+            If paidExpensesMessage.Length > "The following recurring expenses were automatically paid:" & Environment.NewLine.Length Then
+                MessageBox.Show(paidExpensesMessage)
+            Else
+                ' Optionally show a message if no recurring expenses were due
+                ' MessageBox.Show("No recurring expenses were due for payment today.")
+            End If
+
+        Catch ex As Exception
+            MessageBox.Show("Error processing recurring expenses: " & ex.Message)
+        Finally
+            If conn.State = ConnectionState.Open Then
+                conn.Close()
+            End If
+        End Try
     End Sub
 End Class
 
