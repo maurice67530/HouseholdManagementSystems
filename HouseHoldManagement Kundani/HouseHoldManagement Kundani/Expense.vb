@@ -630,7 +630,7 @@ Public Class Expense
     Private Sub Button10_Click(sender As Object, e As EventArgs) Handles Button10.Click
         'CheckDueDates()
         'P
-        ProcessRecurringExpenses()
+        ProcessDuePayments()
         'Dim ID As Integer = "" ' replace with the actual ID you want to update
         'ScheduleNextExpenseDate(ID)
     End Sub
@@ -757,5 +757,37 @@ Public Class Expense
             If conn.State = ConnectionState.Open Then conn.Close()
         End Try
     End Sub
-End Class
+
+
+    Public Sub ProcessDuePayments()
+            Dim today As Date = Date.Today
+            Using conn As New OleDbConnection(connectionString)
+                conn.Open()
+
+            ' Get all due payments
+            Dim cmd As New OleDbCommand("SELECT * FROM Expense WHERE StartDate = ? AND Paid = No", conn)
+            cmd.Parameters.AddWithValue("?", today)
+
+            Dim reader As OleDbDataReader = cmd.ExecuteReader()
+                Dim duePayments As New List(Of Integer)
+
+                While reader.Read()
+                Dim paymentId As Integer = Convert.ToInt32(reader("ID"))
+                duePayments.Add(paymentId)
+                End While
+                reader.Close()
+
+                ' Process each due payment
+                For Each paymentId In duePayments
+                ' Simulate payment processing
+                Dim updateCmd As New OleDbCommand("UPDATE Expense SET Paid = Yes, StartDate = ? WHERE ID = ?", conn)
+                updateCmd.Parameters.AddWithValue("?", DateTime.Now)
+                updateCmd.Parameters.AddWithValue("?", paymentId)
+                updateCmd.ExecuteNonQuery()
+                Next
+            End Using
+
+        MessageBox.Show("Autopay process completed.")
+    End Sub
+    End Class
 
