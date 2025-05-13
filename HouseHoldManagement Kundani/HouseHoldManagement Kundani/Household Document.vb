@@ -108,9 +108,9 @@ Public Class Household_Document
     End Sub
     Private Sub LoadDocuments()
         ListBox1.Items.Clear()
-        Using con As New OleDbConnection(connectionString)
-            Dim cmd As New OleDbCommand("SELECT Title FROM HouseholdDocument WHERE HouseholdID = 1", con)
-            con.Open()
+        Using conn As New OleDbConnection(connectionString)
+            Dim cmd As New OleDbCommand("SELECT Title FROM HouseholdDocument WHERE HouseholdID = ID", conn)
+            conn.Open()
             Using reader = cmd.ExecuteReader()
                 While reader.Read()
                     ListBox1.Items.Add(reader("Title").ToString())
@@ -134,6 +134,7 @@ Public Class Household_Document
     'End Sub
     Private Sub Household_Document_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         LoadhouseholddocumentDataFromDatabase()
+        LoadDocuments()
         'ViewDocument()
         ToolTip1.SetToolTip(Button2, "Upload")
         ToolTip1.SetToolTip(Button1, "Open")
@@ -162,39 +163,39 @@ Public Class Household_Document
     'End Sub
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
 
-        If ListBox1.SelectedItem Is Nothing Then Exit Sub
-        Dim title = ListBox1.SelectedItem.ToString()
-        Using con As New OleDbConnection(connectionString)
-            Dim cmd As New OleDbCommand("SELECT FilePath FROM HouseholdDocuments WHERE Title = @Title", con)
-            cmd.Parameters.AddWithValue("@Title", title)
-            con.Open()
-            Dim path = cmd.ExecuteScalar().ToString()
-            Process.Start(path)
-        End Using
-        'Try
-        '    If DataGridView1.CurrentRow IsNot Nothing Then
-        '        Dim filePath As String = DataGridView1.CurrentRow.Cells("FilePath").Value.ToString()
+        ''If ListBox1.SelectedItem Is Nothing Then Exit Sub
+        ''Dim Title = ListBox1.SelectedItem.ToString()
+        ''Using conn As New OleDbConnection(connectionString)
+        ''    Dim cmd As New OleDbCommand("SELECT FilePath FROM HouseholdDocument WHERE Title = @Title", conn)
+        ''    cmd.Parameters.AddWithValue("@Title", title)
+        ''    conn.Open()
+        ''    Dim path = cmd.ExecuteScalar().ToString()
+        ''    Process.Start(path)
+        'End Using
+        Try
+            If DataGridView1.CurrentRow IsNot Nothing Then
+                Dim filePath As String = DataGridView1.CurrentRow.Cells("FilePath").Value.ToString()
 
-        '        If System.IO.File.Exists(filePath) Then
-        '            Try
-        '                Process.Start(filePath)
-        '            Catch ex As Exception
-        '                MessageBox.Show("Error opening file: " & ex.Message)
-        '            End Try
-        '        Else
-        '            MessageBox.Show("File not found: " & filePath)
-        '        End If
-        '    Else
-        '        MessageBox.Show("Please select a document to open.")
-        '    End If
+                If System.IO.File.Exists(filePath) Then
+                    Try
+                        Process.Start(filePath)
+                    Catch ex As Exception
+                        MessageBox.Show("Error opening file: " & ex.Message)
+                    End Try
+                Else
+                    MessageBox.Show("File not found: " & filePath)
+                End If
+            Else
+                MessageBox.Show("Please select a document to open.")
+            End If
 
 
 
-        'Catch ex As Exception
-        '    'Debug.WriteLine("error selection data in the database")
-        '    Debug.WriteLine($"Stack Trace: {ex.StackTrace}")
-        '    MessageBox.Show("Error opening document to database: " & ex.Message & vbNewLine & ex.StackTrace, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-        'End Try
+        Catch ex As Exception
+            'Debug.WriteLine("error selection data in the database")
+            Debug.WriteLine($"Stack Trace: {ex.StackTrace}")
+            MessageBox.Show("Error opening document to database: " & ex.Message & vbNewLine & ex.StackTrace, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
 
 
 
@@ -202,56 +203,56 @@ Public Class Household_Document
 
     Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
 
-        If ListBox1.SelectedItem Is Nothing Then Exit Sub
-        If MessageBox.Show("Are you sure?", "Delete", MessageBoxButtons.YesNo) = DialogResult.Yes Then
-            Dim title = ListBox1.SelectedItem.ToString()
-            Using con As New OleDbConnection(connectionString)
-                Dim cmd As New OleDbCommand("DELETE FROM HouseholdDocument WHERE Title = @Title", con)
-                cmd.Parameters.AddWithValue("@Title", title)
-                con.Open()
-                cmd.ExecuteNonQuery()
-            End Using
-            LoadDocuments()
-        End If
-        '' Check if there are any selected rows in the DataGridView for PersonalDetails  
-        'If DataGridView1.SelectedRows.Count > 0 Then
-        '    ' Get the selected row  
-        '    Dim selectedRow As DataGridViewRow = DataGridView1.SelectedRows(0)
-
-        '    ' Assuming there is an "ID" column which is the primary key in the database  
-        '    Dim MealPlansId As Integer = Convert.ToInt32(selectedRow.Cells("ID").Value) ' Replace "ID" with your actual column name  
-
-        '    ' Confirm deletion  
-        '    Dim confirmationResult As DialogResult = MessageBox.Show("Are you sure you want to delete this document?", "Confirm Deletion", MessageBoxButtons.YesNo, MessageBoxIcon.Hand)
-        '    If confirmationResult = DialogResult.Yes Then
-        '        ' Proceed with deletion  
-        '        Try
-        '            Using conn As New OleDbConnection(connectionString)
-        '                conn.Open()
-
-        '                ' Create the delete command  
-        '                Dim cmd As New OleDbCommand("DELETE FROM [HouseholdDocument] WHERE [ID] = ?", conn)
-        '                cmd.Parameters.AddWithValue("@ID", MealPlansId) ' Primary key for matching record  
-
-        '                ' Execute the delete command  
-        '                Dim rowsAffected As Integer = cmd.ExecuteNonQuery()
-
-        '                If rowsAffected > 0 Then
-        '                    MessageBox.Show("document deleted successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
-        '                    ' Optionally refresh DataGridView or reload from database  
-
-        '                Else
-        '                    MessageBox.Show("No document deleted. Please check if the ID exists.", "Deletion Error", MessageBoxButtons.OK, MessageBoxIcon.Hand)
-        '                End If
-        '            End Using
-
-        '        Catch ex As Exception
-        '            MessageBox.Show($"An error occurred while deleting the mealplan: {ex.Message}", "Deletion Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-        '        End Try
-        '        LoadhouseholddocumentDataFromDatabase()
-        '    End If
-
+        'If ListBox1.SelectedItem Is Nothing Then Exit Sub
+        'If MessageBox.Show("Are you sure?", "Delete", MessageBoxButtons.YesNo) = DialogResult.Yes Then
+        '    Dim title = ListBox1.SelectedItem.ToString()
+        '    Using conn As New OleDbConnection(connectionString)
+        '        Dim cmd As New OleDbCommand("DELETE FROM HouseholdDocument WHERE Title = @Title", conn)
+        '        cmd.Parameters.AddWithValue("@Title", title)
+        '        conn.Open()
+        '        cmd.ExecuteNonQuery()
+        '    End Using
+        '    LoadDocuments()
         'End If
+        ' Check if there are any selected rows in the DataGridView for PersonalDetails  
+        If DataGridView1.SelectedRows.Count > 0 Then
+            ' Get the selected row  
+            Dim selectedRow As DataGridViewRow = DataGridView1.SelectedRows(0)
+
+            ' Assuming there is an "ID" column which is the primary key in the database  
+            Dim MealPlansId As Integer = Convert.ToInt32(selectedRow.Cells("ID").Value) ' Replace "ID" with your actual column name  
+
+            ' Confirm deletion  
+            Dim confirmationResult As DialogResult = MessageBox.Show("Are you sure you want to delete this document?", "Confirm Deletion", MessageBoxButtons.YesNo, MessageBoxIcon.Hand)
+            If confirmationResult = DialogResult.Yes Then
+                ' Proceed with deletion  
+                Try
+                    Using conn As New OleDbConnection(connectionString)
+                        conn.Open()
+
+                        ' Create the delete command  
+                        Dim cmd As New OleDbCommand("DELETE FROM [HouseholdDocument] WHERE [ID] = ?", conn)
+                        cmd.Parameters.AddWithValue("@ID", MealPlansId) ' Primary key for matching record  
+
+                        ' Execute the delete command  
+                        Dim rowsAffected As Integer = cmd.ExecuteNonQuery()
+
+                        If rowsAffected > 0 Then
+                            MessageBox.Show("document deleted successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                            ' Optionally refresh DataGridView or reload from database  
+
+                        Else
+                            MessageBox.Show("No document deleted. Please check if the ID exists.", "Deletion Error", MessageBoxButtons.OK, MessageBoxIcon.Hand)
+                        End If
+                    End Using
+
+                Catch ex As Exception
+                    MessageBox.Show($"An error occurred while deleting the mealplan: {ex.Message}", "Deletion Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                End Try
+                LoadhouseholddocumentDataFromDatabase()
+            End If
+
+        End If
     End Sub
 
 
@@ -282,7 +283,6 @@ Public Class Household_Document
             MessageBox.Show("Error saving document to database: " & ex.Message & vbNewLine & ex.StackTrace, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
     End Sub
-
     Private Sub Button5_Click(sender As Object, e As EventArgs) Handles Button5.Click
         If ListBox1.SelectedItem Is Nothing Then Exit Sub
         Dim tagInfo As String = "Document: " & ListBox1.SelectedItem.ToString() & vbCrLf & "Printed on: " & DateTime.Now.ToShortDateString()
@@ -295,6 +295,7 @@ Public Class Household_Document
                                  End Sub
         pd.Print()
     End Sub
+
     'PrintDialog1.Document = PrintDocument1
     'If PrintDialog1.ShowDialog() = DialogResult.OK Then
     '    LoadFilteredMealPlan() ' Load filtered data based on selected frequency
@@ -304,20 +305,20 @@ Public Class Household_Document
     '        MessageBox.Show("No meal plans found for the selected period.", "Print Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
     '    End If
     'End If
-
+    'End Sub
     Private Sub ApplySearchAndFilter()
         ListBox1.Items.Clear()
         Dim keyword = TextBox4.Text.Trim()
         Dim category = ComboBox2.Text
 
-        Using con As New OleDbConnection(connectionString)
-            Dim query = "SELECT Title FROM HouseholdDocument WHERE HouseholdID = 1"
+        Using conn As New OleDbConnection(connectionString)
+            Dim query = "SELECT Title FROM HouseholdDocument WHERE HouseholdID = ID"
             If keyword <> "" Then query &= " AND (Title LIKE @kw OR Notes LIKE @kw)"
             If category <> "" Then query &= " AND Category = @cat"
-            Dim cmd As New OleDbCommand(query, con)
+            Dim cmd As New OleDbCommand(query, conn)
             If keyword <> "" Then cmd.Parameters.AddWithValue("@kw", "%" & keyword & "%")
             If category <> "" Then cmd.Parameters.AddWithValue("@cat", category)
-            con.Open()
+            conn.Open()
             Using reader = cmd.ExecuteReader()
                 While reader.Read()
                     ListBox1.Items.Add(reader("Title").ToString())
