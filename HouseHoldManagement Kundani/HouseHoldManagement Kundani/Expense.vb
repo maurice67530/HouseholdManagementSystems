@@ -353,6 +353,8 @@ Public Class Expense
 
     End Sub
     Private Sub Expense_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        Timer1.Interval = 8000
+        Timer1.Enabled = True
 
         ' Initialize ToolTip properties (optional)
         toolTip.AutoPopDelay = 5000
@@ -413,10 +415,53 @@ Public Class Expense
         'Button1.Enabled = Label17.Text = "Connected"
         'Button1.Enabled = Label17.Text = "Connected"
 
+        'ProcessDuePayments()
 
-        PopulateMessagesFromDatabase()
+        'PopulateMessagesFromDatabase()
         LoadExpenseDataFromDatabase()
         PopulateComboboxFromDatabase(ComboBox3)
+    End Sub
+    Sub Main()
+
+        Using connection As New OleDbConnection(connectionString)
+            Try
+                connection.Open()
+
+                ' SQL query to select tasks where due date is today or earlier and status not yet updated
+                Dim query As String = "SELECT ID, StartDate FROM Expense WHERE StartDate = ? AND Paid = No"
+
+                Using command As New OleDbCommand(query, connection)
+                    command.Parameters.AddWithValue("?", DateTime.Today)
+                    'command.Parameters.AddWithValue("@OverdueStatus", "Overdue")
+
+                    Using reader As OleDbDataReader = command.ExecuteReader()
+                        Dim tasksToUpdate As New List(Of Integer)
+
+                        While reader.Read()
+                            Dim taskId As Integer = reader.GetInt32(0)
+                            tasksToUpdate.Add(taskId)
+                        End While
+
+                        reader.Close()
+
+                        ' Update each task's status to "Overdue"
+                        For Each taskId As Integer In tasksToUpdate
+                            Dim updateQuery As String = "UPDATE Expense SET Paid =  Yes WHERE ID = ?"
+                            Using updateCmd As New OleDbCommand(updateQuery, connection)
+                                updateCmd.Parameters.AddWithValue("Paid", "Yes")
+                                updateCmd.Parameters.AddWithValue("?", taskId)
+                                updateCmd.ExecuteNonQuery()
+
+                                MessageBox.Show("Tasks updated successfully.")
+                            End Using
+                        Next
+                    End Using
+                End Using
+
+            Catch ex As Exception
+                MessageBox.Show("Error: " & ex.Message)
+            End Try
+        End Using
     End Sub
     Public Sub PopulateMessagesFromDatabase()
 
@@ -628,17 +673,17 @@ Public Class Expense
     End Sub
 
     Private Sub Button10_Click(sender As Object, e As EventArgs) Handles Button10.Click
-        'CheckDueDates()
+        'Check                                                                                                                                                   DueDates()
         'P
-        ProcessRecurringExpenses()
+        ProcessDuePayments()
         'Dim ID As Integer = "" ' replace with the actual ID you want to update
         'ScheduleNextExpenseDate(ID)
     End Sub
     Private Sub CheckDueDates()
-        Dim query As String = "SELECT ID, BillName, StartDate FROM Expense WHERE StartDate <= @Today"
+        Dim query As String = "SELECT ID, BillName, StartDate FROM Expense WHERE StartDate <= ?"
         Using conn As New OleDbConnection(connectionString)
             Using command As New OleDbCommand(query, conn)
-                command.Parameters.AddWithValue("@Today", DateTime.Today)
+                command.Parameters.AddWithValue("?", DateTime.Today)
 
                 Try
                     conn.Open()
@@ -756,6 +801,47 @@ Public Class Expense
         Finally
             If conn.State = ConnectionState.Open Then conn.Close()
         End Try
+    End Sub
+
+
+    Public Sub ProcessDuePayments()
+            Dim today As Date = Date.Today
+            Using conn As New OleDbConnection(connectionString)
+                conn.Open()
+
+            ' Get all due payments
+            Dim cmd As New OleDbCommand("SELECT * FROM Expense WHERE StartDate = ? AND Paid = No", conn)
+            cmd.Parameters.AddWithValue("?", today)
+
+            Dim reader As OleDbDataReader = cmd.ExecuteReader()
+                Dim duePayments As New List(Of Integer)
+
+                While reader.Read()
+                Dim paymentId As Integer = Convert.ToInt32(reader("ID"))
+                duePayments.Add(paymentId)
+                End While
+                reader.Close()
+
+            ' Process each due payment
+            For Each paymentId In duePayments
+                ' Simulate payment processing
+                Dim updateCmd As New OleDbCommand("UPDATE Expense SET Paid = Yes, StartDate = ? WHERE ID = ?", conn)
+                updateCmd.Parameters.AddWithValue("?", DateTime.Now)
+                updateCmd.Parameters.AddWithValue("?", paymentId)
+                updateCmd.ExecuteNonQuery()
+
+                MessageBox.Show("Autopay process completed.")
+            Next
+            MessageBox.Show("Autopay process completed.")
+        End Using
+
+
+    End Sub
+
+    Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
+        Timer1.Enabled = False
+        ProcessDuePayments()
+        Main()
     End Sub
 End Class
 
