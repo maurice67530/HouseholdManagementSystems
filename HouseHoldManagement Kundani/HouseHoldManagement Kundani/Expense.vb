@@ -451,9 +451,9 @@ Public Class Expense
                                 updateCmd.Parameters.AddWithValue("Paid", "Yes")
                                 updateCmd.Parameters.AddWithValue("?", taskId)
                                 updateCmd.ExecuteNonQuery()
-                            End Using
-                            MessageBox.Show("Tasks updated successfully.")
 
+                                MessageBox.Show("Tasks updated successfully.")
+                            End Using
                         Next
                     End Using
                 End Using
@@ -841,7 +841,7 @@ Public Class Expense
     Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
         Timer1.Enabled = False
         ProcessDuePayments()
-
+        Main()
     End Sub
 End Class
 
