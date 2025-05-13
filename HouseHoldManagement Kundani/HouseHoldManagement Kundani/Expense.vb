@@ -630,7 +630,8 @@ Public Class Expense
     Private Sub Button10_Click(sender As Object, e As EventArgs) Handles Button10.Click
         'CheckDueDates()
         'ProcessDueBills()
-        ScheduleNextExpenseDate("?")
+        Dim ID As Integer = "" ' replace with the actual ID you want to update
+        ScheduleNextExpenseDate(ID)
     End Sub
     Private Sub CheckDueDates()
         Dim query As String = "SELECT ID, BillName, StartDate FROM Expense WHERE StartDate <= @Today"
@@ -718,17 +719,17 @@ Public Class Expense
     End Sub
 
     Public Sub ScheduleNextExpenseDate(ID As Integer)
-
-        ' SQL to update the DueDate to the next day
-        Dim updateQuery As String = "UPDATE Expense SET StartDate = DATEADD(day, 20, DueDate) WHERE ID = ?"
+        ' Use correct DATEADD syntax for your database (assuming Access)
+        Dim updateQuery As String = "UPDATE Expense SET StartDate = DATEADD('d', 5, DueDate) WHERE ID = ?"
 
         Using connection As New OleDbConnection(connectionString)
             Using command As New OleDbCommand(updateQuery, connection)
-                command.Parameters.AddWithValue("?", ID)
+                ' Add parameter in order, name can be empty string
+                command.Parameters.AddWithValue("", ID)
 
                 Try
                     connection.Open()
-                    Dim rowsAffected As String = command.ExecuteNonQuery()
+                    Dim rowsAffected As Integer = command.ExecuteNonQuery()
                     If rowsAffected > 0 Then
                         MessageBox.Show("Due date successfully updated to the next day.")
                     Else
