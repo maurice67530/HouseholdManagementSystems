@@ -33,7 +33,7 @@ Public Class Expense
                 Dim tableName As String = "Expense"
 
                 ' Create an OleDbCommand to insert the Expense data into the database 
-                Dim cmd As New OleDbCommand("INSERT INTO [Expense] ([Amount], [TotalIncome], [Description], [Tags], [Currency], [Category], [Paymentmethod], [Frequency], [ApprovalStatus], [DateOfexpenses], [Person], [BillName], [StartDate], [Recurring]) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", conn)
+                Dim cmd As New OleDbCommand("INSERT INTO [Expense] ([Amount], [TotalIncome], [Description], [Tags], [Currency], [Category], [Paymentmethod], [Frequency], [ApprovalStatus], [DateOfexpenses], [Person], [BillName], [StartDate], [Recurring], [Paid]) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", conn)
 
                 ' Set the parameter values from the UI controls 
                 'Class declaretions
@@ -48,11 +48,12 @@ Public Class Expense
                     .Paymentmethod = ComboBox1.SelectedItem.ToString,
                 .Frequency = ComboBox5.SelectedItem.ToString(),
                     .ApprovalStatus = ComboBox4.SelectedItem.ToString(),
-                    .Person = ComboBox3.SelectedItem.ToString(),
                     .DateOfexpenses = DateTimePicker1.Value,
+                     .Person = ComboBox3.SelectedItem.ToString(),
                     .BillName = TextBox8.Text,
                     .StartDate = DateTimePicker2.Value,
-                    .Recurring = CheckBox1.Checked}
+                    .Recurring = CheckBox1.Checked,
+                    .Paid = ComboBox6.SelectedItem.ToString}
 
                 'txtRecentUpdate.Text = $" Expense updated at {DateTime.Now:HH:MM}"
 
@@ -69,11 +70,12 @@ Public Class Expense
                 cmd.Parameters.AddWithValue("@PaymentMethod", expense.Paymentmethod)
                 cmd.Parameters.AddWithValue("@Frequency", expense.Frequency)
                 cmd.Parameters.AddWithValue("@ApprovalStatus", expense.ApprovalStatus)
-                cmd.Parameters.AddWithValue("@Person ", expense.Person)
                 cmd.Parameters.AddWithValue("@DateOfexpenses", expense.DateOfexpenses)
+                cmd.Parameters.AddWithValue("@Person ", expense.Person)
                 cmd.Parameters.AddWithValue("@BillName", expense.BillName)
                 cmd.Parameters.AddWithValue("@StartDate", expense.StartDate)
                 cmd.Parameters.AddWithValue("@Recurring", expense.Recurring)
+                cmd.Parameters.AddWithValue("@Paid", expense.Paid)
 
 
                 MsgBox("Expense Information Saved!" & vbCrLf &
@@ -91,6 +93,7 @@ Public Class Expense
                             "DateOfExpense: " & expense.DateOfexpenses.ToString & vbCrLf &
                             "BillName: " & expense.BillName & vbCrLf &
                              "Recurring: " & expense.Recurring & vbCrLf &
+                             "Paid: " & expense.Paid & vbCrLf &
                           "StartDate: " & expense.StartDate.ToString, vbInformation, "Expense Confirmation")
 
                 ' Execute the SQL command to insert the data 
@@ -119,7 +122,7 @@ Public Class Expense
             MessageBox.Show("An Unexpected error occured.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
         conn.Close()
-        LoadExpenseDataFromDatabase()
+        'LoadExpenseDataFromDatabase()
         Debug.WriteLine("Exiting btnSubmit")
     End Sub
 
@@ -169,6 +172,7 @@ Public Class Expense
                 Dim BillName As String = TextBox8.Text
                 Dim StartDate As String = DateTimePicker2.Value
                 Dim Recurring As String = CheckBox1.Checked
+                Dim Paid As String = ComboBox6.SelectedItem.ToString
 
 
                 ' Get the ID of the selected row (assuming your table has a primary key named "ID")  
@@ -176,7 +180,7 @@ Public Class Expense
                 Dim ID As Integer = Convert.ToInt32(selectedRow.Cells("ID").Value) ' Change "ID" to your primary key column name  
 
                 ' Create an OleDbCommand to update the Expense data in the database  
-                Dim cmd As New OleDbCommand("UPDATE [Expense] SET [Amount] = ?, [TotalIncome] = ?, [Description] = ?, [Tags] = ?, [Currency] =?, [Category] = ?, [Paymentmethod] = ?, [Frequency] = ?, [ApprovalStatus] = ?, [DateOfexpenses] = ?, [Person] = ?, [BillName] = ?, [StartDate] = ?, [Recurring] = ? WHERE [ID] = ?", conn)
+                Dim cmd As New OleDbCommand("UPDATE [Expense] SET [Amount] = ?, [TotalIncome] = ?, [Description] = ?, [Tags] = ?, [Currency] =?, [Category] = ?, [Paymentmethod] = ?, [Frequency] = ?, [ApprovalStatus] = ?, [DateOfexpenses] = ?, [Person] = ?, [BillName] = ?, [StartDate] = ?, [Recurring] = ?, [Paid] = ? WHERE [ID] = ?", conn)
 
                 ' Set the parameter values from the UI controls  
 
@@ -195,6 +199,7 @@ Public Class Expense
                 cmd.Parameters.AddWithValue("BillName", BillName)
                 cmd.Parameters.AddWithValue("StartDate", StartDate)
                 cmd.Parameters.AddWithValue("Recurring", Recurring)
+                cmd.Parameters.AddWithValue("Paid", Paid)
                 cmd.Parameters.AddWithValue("ID", ID)
 
 
@@ -309,29 +314,42 @@ Public Class Expense
         ComboBox3.SelectedItem = ""
         TextBox8.Text = ""
         CheckBox1.Checked = ""
+        ComboBox6.SelectedItem = ""
     End Sub
 
     Public Sub LoadExpenseDataFromDatabase()
 
-        Debug.WriteLine("LoadMealPlansDataFromDatabase")
-        Using conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
-            conn.Open()
 
-            ' Update the table name if necessary  
-            Dim tableName As String = "Expense"
+        Try
+            Debug.WriteLine("LoadExpenseDataFromDatabase")
+            Using connect As New OleDbConnection(HouseHoldManagment_Module.connectionString)
+                connect.Open()
 
-            ' Create an OleDbCommand to select the data from the database  
-            Dim cmd As New OleDbCommand($"SELECT * FROM {tableName}", conn)
+                ' Update the table name if necessary  
+                Dim tableName As String = "Expense"
 
-            ' Create a DataAdapter and fill a DataTable  
-            Dim da As New OleDbDataAdapter(cmd)
-            Dim dt As New DataTable()
-            da.Fill(dt)
+                ' Create an OleDbCommand to select the data from the database  
+                Dim cmd As New OleDbCommand($"SELECT * FROM {tableName}", connect)
 
-            ' Bind the DataTable to the DataGridView  
-            DataGridView1.DataSource = dt
-            'HighlightExpiredItemss()
-        End Using
+                ' Create a DataAdapter and fill a DataTable  
+                Dim da As New OleDbDataAdapter(cmd)
+                Dim dt As New DataTable()
+                da.Fill(dt)
+
+                ' Bind the DataTable to the DataGridView  
+                DataGridView1.DataSource = dt
+            End Using
+        Catch ex As OleDbException
+
+            Debug.WriteLine($"Stack Trace : {ex.StackTrace}")
+            Debug.WriteLine($"Error loading ExpenseDataFromDatabase : {ex.Message}")
+            MessageBox.Show($"Error loading Expense data from database: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        Catch ex As Exception
+            Debug.WriteLine($"Stack Trace : {ex.StackTrace}")
+            Debug.WriteLine($" General error in loading ExpenseDataFromDatabase: {ex.Message}")
+            MessageBox.Show($"Unexpected error: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
+
 
     End Sub
     Private Sub Expense_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -396,12 +414,66 @@ Public Class Expense
         'Button1.Enabled = Label17.Text = "Connected"
 
 
-        CheckDueDates()
-        ProcessDueBills()
+        PopulateMessagesFromDatabase()
         LoadExpenseDataFromDatabase()
         PopulateComboboxFromDatabase(ComboBox3)
     End Sub
+    Public Sub PopulateMessagesFromDatabase()
 
+        Dim connect As New OleDbConnection(HouseHoldManagment_Module.connectionString)
+
+        Try
+            'Debug.WriteLine("listbox populated successfully")
+            ' 1. Open the database connection  
+            connect.Open()
+
+            ' 2. Retrieve the FirstName and LastName columns from the Expense table  
+            Dim query As String = "SELECT Amount, BillName, StartDate FROM Expense"
+            Dim cmd As New OleDbCommand(query, connect)
+            Dim reader As OleDbDataReader = cmd.ExecuteReader()
+
+            ' 3. Bind the retrieved data to the combobox  
+            While reader.Read()
+                MessageBox.Show($"{reader("Amount")} {reader("BillName")} {reader("StartDate")}")
+            End While
+
+            ' 4. Close the database connection  
+            reader.Close()
+        Catch ex As Exception
+            ' Handle any exceptions that may occur  
+            Debug.WriteLine("MessageBox population failed")
+            Debug.WriteLine($" An error has occured when PopulateMessageBoxFromDatabase: {ex.Message}")
+            Debug.WriteLine($"Stack Trace : {ex.StackTrace}")
+            MessageBox.Show($"Error: {ex.Message}")
+        Finally
+            ' Close the database connection  
+            If connect.State = ConnectionState.Open Then
+                connect.Close()
+            End If
+        End Try
+    End Sub
+
+    Private Sub LoadData()
+        Dim query As String = "SELECT * FROM Expense" ' Replace with your table name
+        Dim dt As New DataTable()
+
+        Try
+            Using conn As New OleDbConnection(connectionString)
+                Using cmd As New OleDbCommand(query, conn)
+                    conn.Open()
+                    Using reader As OleDbDataReader = cmd.ExecuteReader()
+                        dt.Load(reader) ' Load data into DataTable
+                    End Using
+                End Using
+            End Using
+
+            ' Bind DataTable to DataGridView (assuming you have a DataGridView named dataGridView1)
+            DataGridView1.DataSource = dt
+
+        Catch ex As Exception
+            MessageBox.Show("Error loading data: " & ex.Message)
+        End Try
+    End Sub
     Public Sub PopulateComboboxFromDatabase(ByRef comboBox As ComboBox)
         Dim conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
         Try
@@ -503,6 +575,7 @@ Public Class Expense
                 TextBox8.Text = selectedRow.Cells("BillName").Value.ToString()
                 DateTimePicker2.Text = selectedRow.Cells("StartDate").Value.ToString()
                 CheckBox1.Text = selectedRow.Cells("Recurring").Value.ToString()
+                ComboBox6.SelectedItem = selectedRow.Cells("Paid").Value.ToString()
 
             End If
         Catch ex As Exception
@@ -555,8 +628,10 @@ Public Class Expense
     End Sub
 
     Private Sub Button10_Click(sender As Object, e As EventArgs) Handles Button10.Click
-        CheckDueDates()
-        ProcessDueBills()
+        'CheckDueDates()
+        'ProcessDueBills()
+        Dim ID As Integer = "" ' replace with the actual ID you want to update
+        ScheduleNextExpenseDate(ID)
     End Sub
     Private Sub CheckDueDates()
         Dim query As String = "SELECT ID, BillName, StartDate FROM Expense WHERE StartDate <= @Today"
@@ -580,66 +655,125 @@ Public Class Expense
             End Using
         End Using
     End Sub
-    Public Sub ProcessDueBills()
-        Try
-            Using conn As New OleDbConnection(connectionString)
-                conn.Open()
 
-                ' Select bills where due date is today or past due and not yet paid
-                Dim query As String = "
-                    SELECT ID, Amount, StartDate, Paid
-                    FROM Expense
-                    WHERE Paid = No AND StartDate <= @Today"
+    Public Sub ScheduleNextExpenseDate(ID As Integer)
+        ' Use correct DATEADD syntax for your database (assuming Access)
+        Dim updateQuery As String = "UPDATE Expense SET StartDate = DATEADD('d', 5, DueDate) WHERE ID = ?"
 
-                Using command As New OleDbCommand(query, conn)
-                    command.Parameters.AddWithValue("@Today", DateTime.Today)
+        Using connection As New OleDbConnection(connectionString)
+            Using command As New OleDbCommand(updateQuery, connection)
+                ' Add parameter in order, name can be empty string
+                command.Parameters.AddWithValue("", ID)
 
-                    Using reader As OleDbDataReader = command.ExecuteReader()
-                        While reader.Read()
-                            Dim billID As Integer = reader("ID")
-                            Dim amount As Decimal = reader("Amount")
-                            Dim dueDate As Date = reader("StartDate")
-                            ' Process payment for this bill
-                            ProcessPayment(billID, amount)
-                            MsgBox("Due Date Alert""Recurring Bills paying process is complete ", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-
-                        End While
-                    End Using
-                End Using
+                Try
+                    connection.Open()
+                    Dim rowsAffected As Integer = command.ExecuteNonQuery()
+                    If rowsAffected > 0 Then
+                        MessageBox.Show("Due date successfully updated to the next day.")
+                    Else
+                        MessageBox.Show("Expense not found or no update performed.")
+                    End If
+                Catch ex As Exception
+                    MessageBox.Show("Error updating due date: " & ex.Message)
+                End Try
             End Using
-        Catch ex As Exception
-            ' Handle exceptions (e.g., log errors)
-            MessageBox.Show("Error processing bills: " & ex.Message)
-        End Try
+        End Using
     End Sub
 
-    Private Sub ProcessPayment(billID As Integer, amount As Decimal)
-        ' Implement your payment logic here
-        ' For example, call a payment gateway API, update database, etc.
+    Private Sub ProcessRecurringExpenses()
+        Dim conn As New OleDbConnection(connectionString)
+        Dim cmd As New OleDbCommand()
+        cmd.Connection = conn
+        Dim paidExpensesMessage As String = "The following recurring expenses were automatically paid: " & Environment.NewLine
 
-        ' After successful payment, mark bill as paid
-        MarkBillAsPaid(billID)
-    End Sub
-
-    Private Sub MarkBillAsPaid(billID As Integer)
         Try
-            Using conn As New OleDbConnection(connectionString)
-                conn.Open()
+            conn.Open()
 
-                Dim updateQuery As String = "
-                    UPDATE  Expense
-                    SET Paid = Yes, DateOfexpenses = @DateOfexpenses
-                    WHERE ID = @ID"
+            ' 1. Identify Recurring Expenses Due
+            Dim selectCmd As New OleDbCommand("SELECT BillName, Amount, Frequency, StartDate, Description FROM Expense WHERE Recurring = TRUE AND Paid = 'No'", conn) ' Assuming 'No' means not paid
 
-                Using cmd As New OleDbCommand(updateQuery, conn)
-                    cmd.Parameters.AddWithValue("@DateOfexpenses", DateTime.Now)
-                    cmd.Parameters.AddWithValue("@ID", billID)
-                    cmd.ExecuteNonQuery()
-                End Using
-            End Using
+            Dim reader As OleDbDataReader = selectCmd.ExecuteReader()
+
+            While reader.Read()
+                Dim billName As String = reader("BillName").ToString()
+                Dim amount As Decimal = CDec(reader("Amount"))
+                Dim frequency As String = reader("Frequency").ToString()
+                Dim startDate As DateTime = CDate(reader("StartDate"))
+                Dim description As String = reader("Description").ToString()
+
+                ' 2. Calculate Next Payment Date and Check if Due
+                Dim nextPaymentDate As DateTime
+                Dim isDue As Boolean = False
+
+                Select Case frequency
+                    Case "Daily"
+                        nextPaymentDate = startDate.AddDays(1)
+                        If startDate <= DateTime.Today Then
+                            isDue = True
+                        End If
+                    Case "Weekly"
+                        nextPaymentDate = startDate.AddDays(7)
+                        If startDate <= DateTime.Today Then
+                            isDue = True
+                        End If
+                    Case "Monthly"
+                        nextPaymentDate = startDate.AddMonths(1)
+                        If startDate.Year < DateTime.Today.Year Or (startDate.Year = DateTime.Today.Year And startDate.Month <= DateTime.Today.Month) Then
+                            isDue = True
+                        End If
+                    Case "Annually"
+                        nextPaymentDate = startDate.AddYears(1)
+                        If startDate.Year <= DateTime.Today.Year Then
+                            isDue = True
+                        End If
+                        ' Add other frequencies here if needed
+                    Case Else
+                        ' Handle unknown frequencies or skip
+                        Continue While ' Skip to the next record
+                End Select
+
+                If isDue Then
+                    ' 3. Create a New Payment Entry
+                    Dim insertCmd As New OleDbCommand("INSERT INTO ExpenseLogs (BillName, Amount, Recurring, Frequency, StartDate, DateOfexpenses, Description, Paid) VALUES (?, ?, ?, ?, ?, ?, ?, ?)", conn)
+                    insertCmd.Parameters.AddWithValue("?", billName)
+                    insertCmd.Parameters.AddWithValue("?", amount)
+                    insertCmd.Parameters.AddWithValue("?", False) ' This is a paid instance, not the recurring definition
+                    insertCmd.Parameters.AddWithValue("?", frequency) ' Keep the frequency for reference
+                    insertCmd.Parameters.AddWithValue("?", startDate) ' Original start date
+                    insertCmd.Parameters.AddWithValue("?", DateTime.Today.Date) ' Date the payment is made
+                    insertCmd.Parameters.AddWithValue("?", "Auto-paid: " & description) ' Indicate it was auto-paid
+                    insertCmd.Parameters.AddWithValue("?", "Yes") ' Mark as paid
+                    insertCmd.ExecuteNonQuery()
+
+                    ' 4. Update the Original Recurring Record (Recommended)
+                    ' Update the StartDate to the next payment date for the recurring entry
+                    Dim updateCmd As New OleDbCommand("UPDATE ExpenseLogs SET StartDate = ? WHERE BillName = ? AND IsRecurring = TRUE AND Paid = 'No' AND StartDate = ?", conn)
+                    updateCmd.Parameters.AddWithValue("?", nextPaymentDate.Date)
+                    updateCmd.Parameters.AddWithValue("?", billName)
+                    updateCmd.Parameters.AddWithValue("?", startDate.Date) ' Use the original start date to identify the record
+                    updateCmd.ExecuteNonQuery()
+
+                    ' 5. Provide Feedback
+                    paidExpensesMessage &= $"- {billName} ({amount:C}) paid on {DateTime.Today.ToShortDateString()}. Next due date: {nextPaymentDate.ToShortDateString()}" & Environment.NewLine
+                End If
+            End While
+
+            reader.Close()
+
+            ' Show feedback message if any expenses were paid
+            If paidExpensesMessage.Length > "The following recurring expenses were automatically paid:" & Environment.NewLine.Length Then
+                MessageBox.Show(paidExpensesMessage)
+            Else
+                ' Optionally show a message if no recurring expenses were due
+                ' MessageBox.Show("No recurring expenses were due for payment today.")
+            End If
+
         Catch ex As Exception
-            ' Handle exceptions
-            MessageBox.Show("Error updating bill status: " & ex.Message)
+            MessageBox.Show("Error processing recurring expenses: " & ex.Message)
+        Finally
+            If conn.State = ConnectionState.Open Then
+                conn.Close()
+            End If
         End Try
     End Sub
 End Class

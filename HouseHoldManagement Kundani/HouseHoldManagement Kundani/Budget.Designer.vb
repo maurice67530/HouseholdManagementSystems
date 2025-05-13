@@ -108,9 +108,9 @@ Partial Class Budget
         Me.Label7.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         Me.Label7.Location = New System.Drawing.Point(16, 129)
         Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(41, 15)
+        Me.Label7.Size = New System.Drawing.Size(12, 15)
         Me.Label7.TabIndex = 48
-        Me.Label7.Text = "Label7"
+        Me.Label7.Text = " "
         '
         'Label6
         '
@@ -118,9 +118,9 @@ Partial Class Budget
         Me.Label6.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         Me.Label6.Location = New System.Drawing.Point(16, 153)
         Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(41, 15)
+        Me.Label6.Size = New System.Drawing.Size(12, 15)
         Me.Label6.TabIndex = 47
-        Me.Label6.Text = "Label6"
+        Me.Label6.Text = " "
         '
         'TextBox4
         '
