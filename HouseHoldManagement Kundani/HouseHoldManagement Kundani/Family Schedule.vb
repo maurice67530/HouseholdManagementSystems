@@ -1,7 +1,7 @@
 ﻿Imports System.Data.OleDb
 Public Class Family_Schedule
     Public Property conn As New OleDbConnection(connectionString)
-    Public Const connectionString As String = " Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Nedzamba\Source\Repos\maurice67530\HouseholdManagementSystems\HMS.accdb"
+    'Public Const connectionString As String = " Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Nedzamba\Source\Repos\maurice67530\HouseholdManagementSystems\HMS.accdb"
     Dim eventType As String = "Chores"
     Dim cmd As OleDbCommand
     Dim da As OleDbDataAdapter
@@ -105,9 +105,9 @@ Public Class Family_Schedule
         PopulateComboboxFromDatabase(ComboBox1)
         LoadScheduleFromDatabase()
 
-        'AutoCreateChoreEvents()
-        'AutoAddMealTimes()
-        'AutoCreateTaskReminders()
+        AutoCreateChoreEvents()
+        AutoAddMealTimes()
+        AutoCreateTaskReminders()
         'MarkPhotoDayEvents()
 
         ' IntegrateChores()

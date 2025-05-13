@@ -223,9 +223,6 @@ Partial Class Dashboard
         'Timer1
         '
         '
-        'ToolTip1
-        '
-        '
         'Panel2
         '
         Me.Panel2.BackColor = System.Drawing.SystemColors.GradientInactiveCaption
@@ -718,10 +715,10 @@ Partial Class Dashboard
         'Label24
         '
         Me.Label24.AutoSize = True
-        Me.Label24.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label24.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label24.Location = New System.Drawing.Point(14, 2)
         Me.Label24.Name = "Label24"
-        Me.Label24.Size = New System.Drawing.Size(358, 15)
+        Me.Label24.Size = New System.Drawing.Size(459, 16)
         Me.Label24.TabIndex = 119
         Me.Label24.Text = "Family Schedule Alerts, Expired grocery Alerts and Chores Status" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10)
         '
@@ -760,30 +757,30 @@ Partial Class Dashboard
         'Label25
         '
         Me.Label25.AutoSize = True
-        Me.Label25.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label25.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label25.Location = New System.Drawing.Point(501, 555)
         Me.Label25.Name = "Label25"
-        Me.Label25.Size = New System.Drawing.Size(39, 15)
+        Me.Label25.Size = New System.Drawing.Size(51, 16)
         Me.Label25.TabIndex = 117
         Me.Label25.Text = "Tasks"
         '
         'Label26
         '
         Me.Label26.AutoSize = True
-        Me.Label26.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label26.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label26.Location = New System.Drawing.Point(715, 555)
         Me.Label26.Name = "Label26"
-        Me.Label26.Size = New System.Drawing.Size(63, 15)
+        Me.Label26.Size = New System.Drawing.Size(77, 16)
         Me.Label26.TabIndex = 118
         Me.Label26.Text = "Meal Plan"
         '
         'Label27
         '
         Me.Label27.AutoSize = True
-        Me.Label27.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label27.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label27.Location = New System.Drawing.Point(970, 261)
         Me.Label27.Name = "Label27"
-        Me.Label27.Size = New System.Drawing.Size(87, 15)
+        Me.Label27.Size = New System.Drawing.Size(109, 16)
         Me.Label27.TabIndex = 119
         Me.Label27.Text = "Recent Photos"
         '

@@ -421,7 +421,7 @@ Public Class Expense
         LoadExpenseDataFromDatabase()
         PopulateComboboxFromDatabase(ComboBox3)
     End Sub
-    Sub Main()
+    Sub Mainn()
 
         Using connection As New OleDbConnection(connectionString)
             Try
@@ -842,6 +842,56 @@ Public Class Expense
         Timer1.Enabled = False
         ProcessDuePayments()
         Main()
+    End Sub
+
+    Sub Main()
+
+
+        Using conn As New OleDbConnection(connectionString)
+            Try
+                conn.Open()
+
+                ' SQL query to select tasks where due date is today or earlier and not yet paid
+                Dim query As String = "SELECT ID, StartDate FROM Expense WHERE StartDate = ? AND Paid = No"
+
+                Using command As New OleDbCommand(query, conn)
+                    command.Parameters.AddWithValue("?", DateTime.Today)
+
+                    Using reader As OleDbDataReader = command.ExecuteReader()
+                        ' Establish connection to the destination database
+
+                        While reader.Read()
+                                Dim expenseId As Integer = reader.GetInt32(0)
+                                Dim startDate As DateTime = reader.GetDateTime(1)
+                            Dim BillName As String = reader.GetInt32(0)
+                            Dim Recurring As String = reader.GetInt32(0)
+                            Dim Paid As String = reader.GetInt32(0)
+
+                            ' Prepare insert statement for the destination database
+                            Dim insertQuery As String = "INSERT INTO ExpenseLogs (ID, BillName, Paid, Recurring,  StartDate) VALUES (?, ?, ?, ?, ?)"
+                            Using insertCmd As New OleDbCommand(insertQuery, conn)
+                                insertCmd.Parameters.AddWithValue("?", expenseId)
+                                insertCmd.Parameters.AddWithValue("?", BillName)
+                                insertCmd.Parameters.AddWithValue("?", Paid)
+                                insertCmd.Parameters.AddWithValue("?", Recurring)
+                                insertCmd.Parameters.AddWithValue("?", startDate)
+
+                                insertCmd.ExecuteNonQuery()
+                            End Using
+                        End While
+                        End Using
+                    'End Using
+                End Using
+
+                ' Optional: After copying, you might want to update the source database
+                ' to mark these records as processed or paid, etc.
+
+                MessageBox.Show("Data copied successfully to the backup database.")
+
+            Catch ex As Exception
+                MessageBox.Show("Error: Data not copied successfully to the backup database. " & ex.Message)
+            End Try
+        End Using
     End Sub
 End Class
 

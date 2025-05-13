@@ -272,7 +272,7 @@ Partial Class Family_Schedule
         '
         Me.btnDelete.BackColor = System.Drawing.SystemColors.ActiveCaption
         Me.btnDelete.Image = CType(resources.GetObject("btnDelete.Image"), System.Drawing.Image)
-        Me.btnDelete.Location = New System.Drawing.Point(581, 498)
+        Me.btnDelete.Location = New System.Drawing.Point(550, 498)
         Me.btnDelete.Name = "btnDelete"
         Me.btnDelete.Size = New System.Drawing.Size(75, 44)
         Me.btnDelete.TabIndex = 21
