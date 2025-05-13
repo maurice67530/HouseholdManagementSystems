@@ -108,7 +108,7 @@ Public Class Household_Document
     End Sub
     Private Sub LoadDocuments()
         ListBox1.Items.Clear()
-        Using con As New OleDbConnection("connectionstring")
+        Using con As New OleDbConnection(connectionString)
             Dim cmd As New OleDbCommand("SELECT Title FROM HouseholdDocument WHERE HouseholdID = 1", con)
             con.Open()
             Using reader = cmd.ExecuteReader()
