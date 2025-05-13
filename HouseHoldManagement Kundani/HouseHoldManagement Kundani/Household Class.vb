@@ -131,3 +131,13 @@ Public Class BudgetClass
     Public Property Groceries As String
     Public Property StartDate As String
 End Class
+Public Class HouseholdDocument
+    Public Property HouseholdID As String
+    Public Property Title As String
+    Public Property Notes As String
+    Public Property Category As String
+    Public Property FilePath As String
+    Public Property UploadedBy As String
+    Public Property UploadDate As String
+
+End Class
