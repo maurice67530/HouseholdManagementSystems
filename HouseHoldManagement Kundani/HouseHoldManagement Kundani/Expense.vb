@@ -413,7 +413,7 @@ Public Class Expense
         'Button1.Enabled = Label17.Text = "Connected"
         'Button1.Enabled = Label17.Text = "Connected"
 
-
+        ProcessDueBills()
         'LoadData()
         LoadExpenseDataFromDatabase()
         PopulateComboboxFromDatabase(ComboBox3)
