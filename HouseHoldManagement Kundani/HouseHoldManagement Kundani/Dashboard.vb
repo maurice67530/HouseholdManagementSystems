@@ -1147,4 +1147,8 @@ Public Class Dashboard
     Private Sub NotifyIcon1_MouseDoubleClick(sender As Object, e As MouseEventArgs) Handles NotifyIcon1.MouseDoubleClick
 
     End Sub
+
+    Private Sub Chart2_Click(sender As Object, e As EventArgs) Handles Chart2.Click
+
+    End Sub
 End Class

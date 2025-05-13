@@ -308,6 +308,9 @@
   <ItemGroup>
     <None Include="Resources\icons8-register-blue-ui-96.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\WhatsApp Image 2025-05-07 at 09.58.32 %281%29.jpeg" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
