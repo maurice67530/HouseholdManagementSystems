@@ -33,6 +33,8 @@ Partial Class Household_Document
         Me.Label7 = New System.Windows.Forms.Label()
         Me.Label8 = New System.Windows.Forms.Label()
         Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.Label10 = New System.Windows.Forms.Label()
+        Me.ComboBox2 = New System.Windows.Forms.ComboBox()
         Me.Label9 = New System.Windows.Forms.Label()
         Me.TextBox4 = New System.Windows.Forms.TextBox()
         Me.TextBox3 = New System.Windows.Forms.TextBox()
@@ -52,8 +54,6 @@ Partial Class Household_Document
         Me.Button5 = New System.Windows.Forms.Button()
         Me.PrintDocument1 = New System.Drawing.Printing.PrintDocument()
         Me.PrintDialog1 = New System.Windows.Forms.PrintDialog()
-        Me.ComboBox2 = New System.Windows.Forms.ComboBox()
-        Me.Label10 = New System.Windows.Forms.Label()
         Me.Panel2.SuspendLayout()
         Me.Panel1.SuspendLayout()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -151,6 +151,24 @@ Partial Class Household_Document
         Me.Panel1.Name = "Panel1"
         Me.Panel1.Size = New System.Drawing.Size(264, 231)
         Me.Panel1.TabIndex = 31
+        '
+        'Label10
+        '
+        Me.Label10.AutoSize = True
+        Me.Label10.Location = New System.Drawing.Point(3, 173)
+        Me.Label10.Name = "Label10"
+        Me.Label10.Size = New System.Drawing.Size(29, 13)
+        Me.Label10.TabIndex = 37
+        Me.Label10.Text = "Filter"
+        '
+        'ComboBox2
+        '
+        Me.ComboBox2.FormattingEnabled = True
+        Me.ComboBox2.Items.AddRange(New Object() {"IDs", "Bills", "Medical", "School", "Finance", "Insurance", "Work", "Mics"})
+        Me.ComboBox2.Location = New System.Drawing.Point(65, 170)
+        Me.ComboBox2.Name = "ComboBox2"
+        Me.ComboBox2.Size = New System.Drawing.Size(155, 21)
+        Me.ComboBox2.TabIndex = 36
         '
         'Label9
         '
@@ -296,24 +314,6 @@ Partial Class Household_Document
         'PrintDialog1
         '
         Me.PrintDialog1.UseEXDialog = True
-        '
-        'ComboBox2
-        '
-        Me.ComboBox2.FormattingEnabled = True
-        Me.ComboBox2.Items.AddRange(New Object() {"IDs", "Bills", "Medical", "School", "Finance", "Insurance", "Work", "Mics"})
-        Me.ComboBox2.Location = New System.Drawing.Point(65, 170)
-        Me.ComboBox2.Name = "ComboBox2"
-        Me.ComboBox2.Size = New System.Drawing.Size(155, 21)
-        Me.ComboBox2.TabIndex = 36
-        '
-        'Label10
-        '
-        Me.Label10.AutoSize = True
-        Me.Label10.Location = New System.Drawing.Point(3, 173)
-        Me.Label10.Name = "Label10"
-        Me.Label10.Size = New System.Drawing.Size(29, 13)
-        Me.Label10.TabIndex = 37
-        Me.Label10.Text = "Filter"
         '
         'Household_Document
         '
