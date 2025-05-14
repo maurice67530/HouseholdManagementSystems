@@ -872,7 +872,7 @@ Public Class Expense
                         Dim Amount As Object = reader("Amount")
                         Dim StartDate As Object = reader("StartDate")
                         Dim Paid As Object = reader("Paid")
-                        dataList.Add($"BillName: {BillName}, Amount: {Amount}, StartDate: {StartDate}, Paid: {Paid}")
+                        dataList.Add($"The following items are Due and Paid successfully BillName: {BillName}, Amount: {Amount}, StartDate: {StartDate}, Paid: {Paid}")
                     End While
 
                     ' Display each record in a message box

@@ -335,7 +335,7 @@ Partial Class Expense
         '
         Me.CheckBox1.AutoSize = True
         Me.CheckBox1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.CheckBox1.Location = New System.Drawing.Point(12, 228)
+        Me.CheckBox1.Location = New System.Drawing.Point(12, 234)
         Me.CheckBox1.Name = "CheckBox1"
         Me.CheckBox1.Size = New System.Drawing.Size(101, 19)
         Me.CheckBox1.TabIndex = 88
@@ -407,7 +407,7 @@ Partial Class Expense
         '
         Me.Label16.AutoSize = True
         Me.Label16.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label16.Location = New System.Drawing.Point(12, 261)
+        Me.Label16.Location = New System.Drawing.Point(12, 267)
         Me.Label16.Name = "Label16"
         Me.Label16.Size = New System.Drawing.Size(170, 16)
         Me.Label16.TabIndex = 86
