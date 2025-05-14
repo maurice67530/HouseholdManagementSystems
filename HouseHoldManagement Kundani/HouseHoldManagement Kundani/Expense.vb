@@ -852,7 +852,7 @@ Public Class Expense
                 Next
 
                 MessageBox.Show("Payments with updated dates saved successfully at " & DateTime.Now.ToString())
-
+                UpdateDatesBasedOnFrequency()
             Catch ex As Exception
                 MessageBox.Show("Error fetching data: " & ex.Message)
             End Try
@@ -912,14 +912,16 @@ Public Class Expense
         End Using
     End Sub
 
-    Private Sub UpdateTaskDate(taskId As Integer, conn As OleDbConnection)
-        Dim updateQuery As String = "UPDATE Tasks SET LastUpdatedDate = @NewDate WHERE ID = @ID"
+    Private Sub UpdateTaskDate(Id As Integer, conn As OleDbConnection)
+        Dim updateQuery As String = "UPDATE Expense SET StartDate = ? WHERE ID = ?"
         Using updateCommand As New OleDbCommand(updateQuery, conn)
-            updateCommand.Parameters.AddWithValue("@NewDate", DateTime.Now)
-            updateCommand.Parameters.AddWithValue("@ID", taskId)
+            updateCommand.Parameters.AddWithValue("?", DateTime.Now)
+            updateCommand.Parameters.AddWithValue("?", Id)
 
             updateCommand.ExecuteNonQuery()
         End Using
+
+
     End Sub
 End Class
 
