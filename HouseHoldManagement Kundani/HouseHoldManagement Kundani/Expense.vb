@@ -353,7 +353,7 @@ Public Class Expense
 
     End Sub
     Private Sub Expense_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        Timer1.Interval = 5000
+        Timer1.Interval = 3000
         Timer1.Enabled = True
 
         ' Initialize ToolTip properties (optional)
@@ -374,7 +374,7 @@ Public Class Expense
             ' Dynamic label creation
             Dim lblDateTime As New Label()
             lblDateTime.Name = "lblDateTime"
-            lblDateTime.Text = "Today: " & DateTime.Now.ToString("dddd, dd MMMM yyyy HH:mm:ss")
+            lblDateTime.Text = "Today: " & DateTime.Now.ToString("dddd, dd MMMM yyyy HH:mm")
             lblDateTime.Location = New Point(10, 10) ' Adjust position as needed
             lblDateTime.AutoSize = True
             lblDateTime.Font = New Font("Arial", 10, FontStyle.Bold)
@@ -411,25 +411,16 @@ Public Class Expense
             conn.Close()
         End Try
 
-        '' Disable certain buttons if the connection is not established  
-        'Button1.Enabled = Label17.Text = "Connected"
-        'Button1.Enabled = Label17.Text = "Connected"
-
-        'ProcessDuePayments()
-
         'PopulateMessagesFromDatabase()
         LoadExpenseDataFromDatabase()
         PopulateComboboxFromDatabase(ComboBox3)
     End Sub
     Sub Mainn()
-
         Using connection As New OleDbConnection(connectionString)
             Try
                 connection.Open()
-
                 ' SQL query to select tasks where due date is today or earlier and status not yet updated
                 Dim query As String = "SELECT ID, StartDate FROM Expense WHERE StartDate = ? AND Paid = No"
-
                 Using command As New OleDbCommand(query, connection)
                     command.Parameters.AddWithValue("?", DateTime.Today)
                     'command.Parameters.AddWithValue("@OverdueStatus", "Overdue")
@@ -457,16 +448,13 @@ Public Class Expense
                         Next
                     End Using
                 End Using
-
             Catch ex As Exception
                 MessageBox.Show("Error: " & ex.Message)
             End Try
         End Using
     End Sub
     Public Sub PopulateMessagesFromDatabase()
-
         Dim connect As New OleDbConnection(HouseHoldManagment_Module.connectionString)
-
         Try
             'Debug.WriteLine("listbox populated successfully")
             ' 1. Open the database connection  
@@ -511,7 +499,6 @@ Public Class Expense
                     End Using
                 End Using
             End Using
-
             ' Bind DataTable to DataGridView (assuming you have a DataGridView named dataGridView1)
             DataGridView1.DataSource = dt
 
@@ -525,18 +512,15 @@ Public Class Expense
             Debug.WriteLine("populate combobox successful")
             'open the database connection
             conn.Open()
-
             'retrieve the firstname and surname columns from the personaldetails tabel
             Dim query As String = "SELECT FirstName, LastName FROM PersonalDetails"
             Dim cmd As New OleDbCommand(query, conn)
             Dim reader As OleDbDataReader = cmd.ExecuteReader()
-
             'bind the retrieved data to the combobox
             ComboBox3.Items.Clear()
             While reader.Read()
                 ComboBox3.Items.Add($"{reader("FirstName")} {reader("LastName")}")
             End While
-
             'close the database
             reader.Close()
 

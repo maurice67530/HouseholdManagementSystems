@@ -577,7 +577,7 @@ Partial Class Expense
         'Label17
         '
         Me.Label17.AutoSize = True
-        Me.Label17.Location = New System.Drawing.Point(557, 9)
+        Me.Label17.Location = New System.Drawing.Point(586, 9)
         Me.Label17.Name = "Label17"
         Me.Label17.Size = New System.Drawing.Size(60, 13)
         Me.Label17.TabIndex = 135
