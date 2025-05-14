@@ -16,6 +16,16 @@ Public Class chores
         toolTip1.SetToolTip(Button5, "Refresh")
         toolTip1.SetToolTip(Button9, "Mark All As complete")
         toolTip1.SetToolTip(Button3, "Dashboard")
+        toolTip1.SetToolTip(Button11, "Assign Chores")
+        toolTip1.SetToolTip(Button7, "Filter")
+
+        toolTip1.SetToolTip(Button6, "Sort")
+        toolTip1.SetToolTip(Button12, "Auto Assignment")
+        toolTip1.SetToolTip(Button10, "Check chores")
+        toolTip1.SetToolTip(Button13, "Conflicts")
+
+        toolTip1.SetToolTip(Button8, "Highlight")
+
 
         ' Check database connectivity 
 
@@ -776,7 +786,7 @@ Public Class chores
         TextBox1.AppendText("Schedules started ." & vbCrLf)
         'Define a list of chores
 
-        Label3.Text = ($"chores checked  {DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")}" & vbCrLf)
+        Label13.Text = ($"chores checked  {DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")}" & vbCrLf)
 
         'Check If any chores are due (Pending) for the selected frequency (daily, weekly, monthly)
 
@@ -974,95 +984,6 @@ Public Class chores
 
         End Using
     End Sub
-
-
-
-
-
-    'Private Sub cmbAssignedTo_SelectedIndexChanged(sender As Object, e As EventArgs) Handles CmbASS.SelectedIndexChanged
-    '    HighlightChoresForPerson(CmbASS.Text)
-    'End Sub
-
-    'Private Sub DGVChores_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles DGVChores.CellClick
-    '    If e.RowIndex >= 0 Then
-    '        Dim selectedPerson = DGVChores.Rows(e.RowIndex).Cells("AssignedTo").Value.ToString()
-    '        HighlightChoresForPerson(selectedPerson)
-    '    End If
-    'End Sub
-
-    'Private Sub HighlightChoresForPerson(person As String)
-    '    For Each row As DataGridViewRow In DGVChores.Rows
-    '        If row.IsNewRow Then Continue For
-    '        If row.Cells("AssignedTo").Value.ToString() = person Then
-    '            row.DefaultCellStyle.BackColor = Color.LightBlue
-    '        Else
-    '            row.DefaultCellStyle.BackColor = Color.White ' or original color
-    '        End If
-    '    Next
-    '    Button13.Visible = True
-    'End Sub
-
-    'Private Sub btnClearHighlight_Click(sender As Object, e As EventArgs) Handles Button13.Click
-    '    For Each row As DataGridViewRow In DGVChores.Rows
-    '        If row.IsNewRow Then Continue For
-    '        row.DefaultCellStyle.BackColor = Color.White ' reset all highlights
-    '    Next
-    '    Button13.Visible = False
-    'End Sub
-
-
-
-
-    'Private Sub cmbAssignedTo_SelectedIndexChanged(sender As Object, e As EventArgs) Handles CmbASS.SelectedIndexChanged
-    '    HighlightChoresForPerson(CmbASS.Text)
-    'End Sub
-
-    'Private Sub DGVChores_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles DGVChores.CellClick
-    '    If e.RowIndex >= 0 Then
-    '        Dim selectedPerson = DGVChores.Rows(e.RowIndex).Cells("AssignedTo").Value.ToString()
-    '        HighlightChoresForPerson(selectedPerson)
-    '    End If
-    'End Sub
-
-    'Private Sub HighlightChoresForPerson(person As String)
-    '    For Each row As DataGridViewRow In DGVChores.Rows
-    '        If row.IsNewRow Then Continue For
-    '        If row.Cells("AssignedTo").Value.ToString() = person Then
-    '            row.DefaultCellStyle.BackColor = Color.LightBlue
-    '        Else
-    '            row.DefaultCellStyle.BackColor = Color.White ' or original color
-    '        End If
-    '    Next
-    '    Button13.Enabled = True
-    'End Sub
-
-    'Private Sub btnClearHighlight_Click(sender As Object, e As EventArgs) Handles Button13.Click
-    '    For Each row As DataGridViewRow In DGVChores.Rows
-    '        If row.IsNewRow Then Continue For
-    '        row.DefaultCellStyle.BackColor = Color.White ' reset all highlights
-    '    Next
-    '    Button13.Enabled = False
-    'End Sub
-
-    'Private Function IsPersonAlreadyAssigned(person As String, dueDate As Date) As Boolean
-    '    Dim cmd As New OleDbCommand("SELECT COUNT(*) FROM Chores WHERE AssignedTo = @person AND DueDate = @dueDate", conn)
-    '    cmd.Parameters.AddWithValue("@person", person)
-    '    cmd.Parameters.AddWithValue("@dueDate", dueDate)
-    '    conn.Open()
-    '    Dim count As Integer = CInt(cmd.ExecuteScalar())
-    '    conn.Close()
-    '    Return count > 0
-    'End Function
-
-
-
-
-
-
-
-
-
-
     Private Sub cmbAssignedTo_SelectedIndexChanged(sender As Object, e As EventArgs) Handles CmbASS.SelectedIndexChanged
         HighlightChoresForPerson(CmbASS.Text)
     End Sub
@@ -1090,6 +1011,7 @@ Public Class chores
         ' Example: Check first row values (can loop if batch save)
         Dim AssignedTo = DGVChores.Rows(0).Cells("AssignedTo").Value.ToString()
         Dim dueDate = CDate(DGVChores.Rows(0).Cells("DueDate").Value)
+
         For Each row As DataGridViewRow In DGVChores.Rows
             If row.IsNewRow Then Continue For
             row.DefaultCellStyle.BackColor = Color.White ' reset all highlights
@@ -1098,32 +1020,28 @@ Public Class chores
 
         If Button13.Enabled = False Then
 
-
-
             MessageBox.Show($"{AssignedTo} is already assigned a chore on {dueDate:d}.", "Duplicate Assignment", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
             MessageBox.Show("Cannot save. Please resolve conflicts.", "Conflict", MessageBoxButtons.OK, MessageBoxIcon.Warning)
             Return
         End If
 
-        '' Example: Check first row values (can loop if batch save)
-        'Dim AssignedTo = DGVChores.Rows(0).Cells("AssignedTo").Value.ToString()
-        'Dim dueDate = CDate(DGVChores.Rows(0).Cells("DueDate").Value)
-
-        'If IsPersonAlreadyAssigned(AssignedTo, dueDate) Then
-        '    MessageBox.Show($"{AssignedTo} is already assigned a chore on {dueDate:d}.", "Duplicate Assignment", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
-        '    Return
-        'End If
 
     End Sub
 
     Private Function IsPersonAlreadyAssigned(person As String, dueDate As Date) As Boolean
+
         Dim cmd As New OleDbCommand("SELECT COUNT(*) FROM Chores WHERE AssignedTo = @person AND DueDate = @dueDate", conn)
         cmd.Parameters.AddWithValue("@person", person)
         cmd.Parameters.AddWithValue("@dueDate", dueDate)
+
         conn.Open()
+
         Dim count As Integer = CInt(cmd.ExecuteScalar())
+
         conn.Close()
+
         Return count > 0
+
     End Function
 
 
