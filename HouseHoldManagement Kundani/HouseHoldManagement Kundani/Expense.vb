@@ -670,6 +670,7 @@ Public Class Expense
 
     Private Sub Button10_Click(sender As Object, e As EventArgs) Handles Button10.Click
         DisplayDataInMessageBox()
+        UpdateDatesBasedOnFrequency()
     End Sub
 
     Private Sub ProcessRecurringExpenses()
@@ -858,7 +859,7 @@ Public Class Expense
         End Using
     End Sub
     Private Sub DisplayDataInMessageBox()
-        Dim query As String = "SELECT * FROM Expense" ' Replace with your table name
+        Dim query As String = "SELECT * FROM Expense WHERE Paid = 'No'" ' Replace with your table name
 
         Using conn As New OleDbConnection(connectionString)
             Dim command As New OleDbCommand(query, conn)
@@ -872,7 +873,7 @@ Public Class Expense
                         Dim Amount As Object = reader("Amount")
                         Dim StartDate As Object = reader("StartDate")
                         Dim Paid As Object = reader("Paid")
-                        dataList.Add($"The following items are Due and Paid successfully BillName: {BillName}, Amount: {Amount}, StartDate: {StartDate}, Paid: {Paid}")
+                        dataList.Add($"The following items are Due to be Paid : BillName: {BillName}, Amount: {Amount}, StartDate: {StartDate}, Paid: {Paid}")
                     End While
 
                     ' Display each record in a message box
@@ -883,6 +884,41 @@ Public Class Expense
             Catch ex As Exception
                 MessageBox.Show("Error: " & ex.Message)
             End Try
+        End Using
+    End Sub
+
+    Public Sub UpdateDatesBasedOnFrequency()
+        Using conn As New OleDbConnection(connectionString)
+            conn.Open()
+
+            ' Retrieve tasks with their last updated date and frequency
+            Dim selectCommand As String = "SELECT ID, StartDate, Frequency FROM Expense"
+            Dim command As New OleDbCommand(selectCommand, conn)
+
+            Using reader As OleDbDataReader = command.ExecuteReader()
+                While reader.Read()
+                    Dim taskId As Integer = reader.GetInt32(0)
+                    Dim lastUpdated As DateTime = reader.GetDateTime(1)
+                    Dim frequency As Integer = reader.GetInt32(2)
+
+                    Dim daysSinceLastUpdate As Integer = (DateTime.Now - lastUpdated).Days
+
+                    If daysSinceLastUpdate >= frequency Then
+                        ' Time to update the date
+                        UpdateTaskDate(taskId, conn)
+                    End If
+                End While
+            End Using
+        End Using
+    End Sub
+
+    Private Sub UpdateTaskDate(taskId As Integer, conn As OleDbConnection)
+        Dim updateQuery As String = "UPDATE Tasks SET LastUpdatedDate = @NewDate WHERE ID = @ID"
+        Using updateCommand As New OleDbCommand(updateQuery, conn)
+            updateCommand.Parameters.AddWithValue("@NewDate", DateTime.Now)
+            updateCommand.Parameters.AddWithValue("@ID", taskId)
+
+            updateCommand.ExecuteNonQuery()
         End Using
     End Sub
 End Class
