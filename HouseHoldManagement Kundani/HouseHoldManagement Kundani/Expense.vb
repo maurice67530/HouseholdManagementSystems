@@ -840,58 +840,104 @@ Public Class Expense
 
     Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
         Timer1.Enabled = False
-        ProcessDuePayments()
+        'ProcessDuePayments()
         Main()
+        SaveChangedDateToAnotherTable()
     End Sub
 
     Sub Main()
+        Using connection As New OleDbConnection(connectionString)
+            Try
+                connection.Open()
 
+                ' SQL query to select tasks where StartDate is today or earlier and not yet paid
+                Dim query As String = "SELECT ID, StartDate FROM Expense WHERE StartDate <= ? AND Paid = 'No'" 'Corrected condition
+
+                Using command As New OleDbCommand(query, connection)
+                    command.Parameters.AddWithValue("?", DateTime.Today)
+
+                    Using reader As OleDbDataReader = command.ExecuteReader()
+                        Dim tasksToUpdate As New List(Of Integer)
+
+                        While reader.Read()
+                            tasksToUpdate.Add(reader.GetInt32(reader.GetOrdinal("ID")))
+                        End While
+
+                        reader.Close() 'Close the reader after the loop
+
+                        If tasksToUpdate.Count > 0 Then
+                            ' SQL to update the StartDate in another table (e.g., UpdatedExpenses)
+                            Dim updateQuery As String = "UPDATE UpdatedExpenses SET StartDate = ?" &
+                                                    " WHERE ExpenseID IN (" & String.Join(",", tasksToUpdate.Select(Function(x) x).ToArray()) & ")"
+
+                            Using updateCommand As New OleDbCommand(updateQuery, connection)
+                                'Crucial: Add a parameter for the new StartDate
+                                updateCommand.Parameters.AddWithValue("?", DateTime.Today)
+                                updateCommand.ExecuteNonQuery()
+                            End Using
+                        End If
+                    End Using
+                End Using
+
+
+            Catch ex As Exception
+                Console.WriteLine("Error: " & ex.Message)
+                ' Important: Log the error for debugging
+                ' Add more robust error handling, such as logging to a file
+                ' or showing a user-friendly message.
+            Finally
+                If connection.State = ConnectionState.Open Then connection.Close()
+            End Try
+        End Using
+    End Sub
+    Private Sub SaveChangedDateToAnotherTable()
+        Dim selectQuery As String = "SELECT * FROM Expense" ' Your source table
+        Dim dt As New DataTable()
 
         Using conn As New OleDbConnection(connectionString)
             Try
                 conn.Open()
 
-                ' SQL query to select tasks where due date is today or earlier and not yet paid
-                Dim query As String = "SELECT ID, StartDate FROM Expense WHERE StartDate = ? AND Paid = No"
-
-                Using command As New OleDbCommand(query, conn)
-                    command.Parameters.AddWithValue("?", DateTime.Today)
-
-                    Using reader As OleDbDataReader = command.ExecuteReader()
-                        ' Establish connection to the destination database
-
-                        While reader.Read()
-                                Dim expenseId As Integer = reader.GetInt32(0)
-                                Dim startDate As DateTime = reader.GetDateTime(1)
-                            Dim BillName As String = reader.GetInt32(0)
-                            Dim Recurring As String = reader.GetInt32(0)
-                            Dim Paid As String = reader.GetInt32(0)
-
-                            ' Prepare insert statement for the destination database
-                            Dim insertQuery As String = "INSERT INTO ExpenseLogs (ID, BillName, Paid, Recurring,  StartDate) VALUES (?, ?, ?, ?, ?)"
-                            Using insertCmd As New OleDbCommand(insertQuery, conn)
-                                insertCmd.Parameters.AddWithValue("?", expenseId)
-                                insertCmd.Parameters.AddWithValue("?", BillName)
-                                insertCmd.Parameters.AddWithValue("?", Paid)
-                                insertCmd.Parameters.AddWithValue("?", Recurring)
-                                insertCmd.Parameters.AddWithValue("?", startDate)
-
-                                insertCmd.ExecuteNonQuery()
-                            End Using
-                        End While
-                        End Using
-                    'End Using
+                ' Fill DataTable with source data
+                Using cmd As New OleDbCommand(selectQuery, conn)
+                    Using adapter As New OleDbDataAdapter(cmd)
+                        adapter.Fill(dt)
+                    End Using
                 End Using
 
-                ' Optional: After copying, you might want to update the source database
-                ' to mark these records as processed or paid, etc.
+                ' Loop through each row to modify and insert into target table
+                For Each row As DataRow In dt.Rows
+                    ' Prepare the new change date for next payment
+                    Dim currentStartDate As DateTime = Convert.ToDateTime(row("StartDate"))
+                    Dim nextPaymentDate As DateTime = currentStartDate.AddMonths(1) ' or your logic for next payment
 
-                MessageBox.Show("Data copied successfully to the backup database.")
+                    ' Set the 'Paid' status to "no" and update the change date
+                    Dim paidStatus As String = "No"
+
+                    ' Insert into the target table, e.g., ExpenseLogs
+                    Dim insertQuery As String = "INSERT INTO ExpenseLogs (BillName, Amount, StartDate, Paid, Recurring) VALUES (?, ?, ?, ?, ?)"
+                    Using insertCmd As New OleDbCommand(insertQuery, conn)
+                        insertCmd.Parameters.AddWithValue("?", row("BillName"))
+                        insertCmd.Parameters.AddWithValue("?", row("Amount"))
+                        insertCmd.Parameters.AddWithValue("?", nextPaymentDate)
+                        insertCmd.Parameters.AddWithValue("?", paidStatus)
+                        insertCmd.Parameters.AddWithValue("?", row("Recurring")) ' assuming same recurring
+
+                        Try
+                            insertCmd.ExecuteNonQuery()
+                        Catch ex As Exception
+                            MessageBox.Show("Error inserting row: " & ex.Message)
+                        End Try
+                    End Using
+                Next
+
+                MessageBox.Show("Data with updated dates saved successfully at " & DateTime.Now.ToString())
 
             Catch ex As Exception
-                MessageBox.Show("Error: Data not copied successfully to the backup database. " & ex.Message)
+                MessageBox.Show("Error fetching data: " & ex.Message)
             End Try
         End Using
     End Sub
+
 End Class
 
