@@ -1,4 +1,5 @@
 ﻿Imports System.Data.OleDb
+Imports System.IO
 Public Class Inventory
     Public Sub LoadInventorydataFromDatabase()
         Try
