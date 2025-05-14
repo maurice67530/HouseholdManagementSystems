@@ -1,7 +1,7 @@
 ﻿Imports System.IO
 Imports System.Data.OleDb
 Public Class PhotoGallery
-
+    Private SelectedImagePath As String = ""
     Private Sub PhotoGallery_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
 
@@ -179,22 +179,15 @@ Public Class PhotoGallery
     End Sub
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         Try
-            ''validate due date is not in the past
-            'If TaskForm.DateTimePicker1.Value = DateTime.Now Then
-            '    MessageBox.Show("Due Date cannot be in the past", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
-            '    Return
+            Dim imageBytes As Byte() = File.ReadAllBytes(selectedImagePath)
+            'If selectedImagePath = "" OrElse PictureBox1.Image Is Nothing Then
+            '    MessageBox.Show("Please upload an image first.")
+            '    Exit Sub
             'End If
-
-            ''validate priority is selected
-            'If String.IsNullOrEmpty(TextBox1.Text) Then
-            '    MessageBox.Show("Please Enter a Title for the Photos", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
-            '    Return
-            'End If
-
             Using conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
 
                 conn.Open()
-                Dim cmd As New OleDbCommand($"INSERT INTO Photos ([Description], [FilePath], [DateAdded], [FamilyMember], [Photographer], [Album]) VALUES (?, ?, ?, ?, ?, ?)", conn)
+                Dim cmd As New OleDbCommand($"INSERT INTO Photos ([Description], [FilePath], [DateAdded], [FamilyMember], [Photographer], [Album], [ImageData]) VALUES (?, ?, ?, ?, ?, ?, ?)", conn)
 
                 cmd.Parameters.Clear()
                 'cmd.Parameters.AddWithValue("@PhotoID", PhotoID.textbox1.Text)
@@ -204,6 +197,7 @@ Public Class PhotoGallery
                 cmd.Parameters.AddWithValue("@FamilyMember", ComboBox1.SelectedItem)
                 cmd.Parameters.AddWithValue("@Photographer", TextBox3.Text)
                 cmd.Parameters.AddWithValue("@Album", ComboBox2.SelectedItem)
+                cmd.Parameters.Add("@ImageData", OleDbType.Binary).Value = imageBytes
 
                 cmd.ExecuteNonQuery()
                 conn.Close()
@@ -515,12 +509,16 @@ Public Class PhotoGallery
 
     End Sub
     Private Sub Button8_Click(sender As Object, e As EventArgs) Handles Button8.Click
-        Dim OpenFileDialog As New OpenFileDialog()
-        OpenFileDialog.Filter = "Bitmaps (*.jpg)|*.jpg"
-        If OpenFileDialog.ShowDialog() = DialogResult.OK Then
-            PictureBox1.ImageLocation = OpenFileDialog.FileName
-            TextBox5.Text = OpenFileDialog.FileName
+        Dim ofd As New OpenFileDialog()
+        ofd.Filter = "Image Files|*.jpg;*.jpeg;*.png;*.bmp"
+
+        If ofd.ShowDialog() = DialogResult.OK Then
+            SelectedImagePath = ofd.FileName
+            PictureBox1.Image = Image.FromFile(SelectedImagePath)
+            TextBox5.Text = ofd.FileName
         End If
+
+
     End Sub
     Private Sub Label9_Click(sender As Object, e As EventArgs) Handles Label9.Click
 
