@@ -353,7 +353,7 @@ Public Class Expense
 
     End Sub
     Private Sub Expense_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        Timer1.Interval = 8000
+        Timer1.Interval = 5000
         Timer1.Enabled = True
 
         ' Initialize ToolTip properties (optional)
@@ -891,7 +891,7 @@ Public Class Expense
         End Using
     End Sub
     Private Sub SaveChangedDateToAnotherTable()
-        Dim selectQuery As String = "SELECT * FROM Expense" ' Your source table
+        Dim selectQuery As String = "SELECT * FROM Expense"
         Dim dt As New DataTable()
 
         Using conn As New OleDbConnection(connectionString)
@@ -905,33 +905,54 @@ Public Class Expense
                     End Using
                 End Using
 
-                ' Loop through each row to modify and insert into target table
+                Dim today As DateTime = DateTime.Now.Date
+
+                ' Loop through each row to check if payment is due or overdue
                 For Each row As DataRow In dt.Rows
-                    ' Prepare the new change date for next payment
-                    Dim currentStartDate As DateTime = Convert.ToDateTime(row("StartDate"))
-                    Dim nextPaymentDate As DateTime = currentStartDate.AddMonths(1) ' or your logic for next payment
+                    Dim startDate As DateTime = Convert.ToDateTime(row("StartDate"))
+                    Dim paidStatus As String = row("Paid").ToString()
 
-                    ' Set the 'Paid' status to "no" and update the change date
-                    Dim paidStatus As String = "No"
+                    ' Determine the scheduled payment date (e.g., monthly)
+                    Dim scheduledDate As DateTime = startDate.AddMonths(1)
 
-                    ' Insert into the target table, e.g., ExpenseLogs
-                    Dim insertQuery As String = "INSERT INTO ExpenseLogs (BillName, Amount, StartDate, Paid, Recurring) VALUES (?, ?, ?, ?, ?)"
-                    Using insertCmd As New OleDbCommand(insertQuery, conn)
-                        insertCmd.Parameters.AddWithValue("?", row("BillName"))
-                        insertCmd.Parameters.AddWithValue("?", row("Amount"))
-                        insertCmd.Parameters.AddWithValue("?", nextPaymentDate)
-                        insertCmd.Parameters.AddWithValue("?", paidStatus)
-                        insertCmd.Parameters.AddWithValue("?", row("Recurring")) ' assuming same recurring
+                    ' Check if the scheduled date has passed and payment not yet marked as paid
+                    If today >= scheduledDate AndAlso paidStatus.ToLower() = "no" Then
+                        ' Update Paid to "Yes" and change date
+                        Dim updateQuery As String = "UPDATE Expense SET Paid = ?, ChangeDate = ? WHERE ID = ?"
+                        Using updateCmd As New OleDbCommand(updateQuery, conn)
+                            updateCmd.Parameters.AddWithValue("?", "Yes")
+                            updateCmd.Parameters.AddWithValue("?", DateTime.Now)
+                            updateCmd.Parameters.AddWithValue("?", row("ID")) ' Assuming there's a primary key column ID
 
-                        Try
-                            insertCmd.ExecuteNonQuery()
-                        Catch ex As Exception
-                            MessageBox.Show("Error inserting row: " & ex.Message)
-                        End Try
-                    End Using
+                            Try
+                                updateCmd.ExecuteNonQuery()
+                            Catch ex As Exception
+                                MessageBox.Show("Error updating row: " & ex.Message)
+                            End Try
+                        End Using
+
+                        ' Prepare for inserting the next payment
+                        Dim nextPaymentDate As DateTime = scheduledDate.AddMonths(1)
+
+                        ' Insert new expense record for the next payment
+                        Dim insertQuery As String = "INSERT INTO ExpenseLogs (BillName, Amount, StartDate, Paid, Recurring) VALUES (?, ?, ?, ?, ?)"
+                        Using insertCmd As New OleDbCommand(insertQuery, conn)
+                            insertCmd.Parameters.AddWithValue("?", row("BillName"))
+                            insertCmd.Parameters.AddWithValue("?", row("Amount"))
+                            insertCmd.Parameters.AddWithValue("?", nextPaymentDate)
+                            insertCmd.Parameters.AddWithValue("?", "Yes")
+                            insertCmd.Parameters.AddWithValue("?", row("Recurring"))
+
+                            Try
+                                insertCmd.ExecuteNonQuery()
+                            Catch ex As Exception
+                                MessageBox.Show("Error inserting next payment: " & ex.Message)
+                            End Try
+                        End Using
+                    End If
                 Next
 
-                MessageBox.Show("Data with updated dates saved successfully at " & DateTime.Now.ToString())
+                MessageBox.Show("Due payments processed successfully at " & DateTime.Now.ToString())
 
             Catch ex As Exception
                 MessageBox.Show("Error fetching data: " & ex.Message)
