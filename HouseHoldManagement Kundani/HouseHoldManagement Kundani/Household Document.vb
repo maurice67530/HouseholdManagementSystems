@@ -17,9 +17,9 @@ Public Class Household_Document
             File.Copy(sourcePath, destPath, True)
 
             Using conn As New OleDbConnection(connectionString)
-                Dim cmd As New OleDbCommand("INSERT INTO HouseholdDocument (Title, Notes, Category, FilePath, UploadedBy, UploadDate)
-            VALUES (@Title, @Notes, @Category, @FilePath, @UploadedBy, @UploadDate)", conn)
-                'cmd.Parameters.AddWithValue("@HouseholdID", ID)
+                Dim cmd As New OleDbCommand("INSERT INTO HouseholdDocument (HouseholdID, Title, Notes, Category, FilePath, UploadedBy, UploadDate)
+            VALUES (@HouseholdID, @Title, @Notes, @Category, @FilePath, @UploadedBy, @UploadDate)", conn)
+                cmd.Parameters.AddWithValue("@HouseholdID", 1)
                 cmd.Parameters.AddWithValue("@Title", TextBox1.Text)
                 cmd.Parameters.AddWithValue("@Notes", TextBox2.Text)
                 cmd.Parameters.AddWithValue("@Category", ComboBox1.Text)
@@ -66,21 +66,27 @@ Public Class Household_Document
             'MessageBox.Show("An error occurred while loading data into the grid.", "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
     End Sub
-
     Private Sub LoadDocuments()
-        If ComboBox1.SelectedIndex = -1 Then Exit Sub
-
-        Dim conn As New OleDbConnection(connectionString)
-        Dim cmd As New OleDbCommand("SELECT SelectHouseHold, FileName, FilePath, UploadedDate FROM HouseholdDocuments WHERE ID= @ID", conn)
-        cmd.Parameters.AddWithValue("@SelectHouseHold", ComboBox1.SelectedValue)
-
-        Dim adapter As New OleDbDataAdapter(cmd)
-        Dim dt As New DataTable()
-        adapter.Fill(dt)
-
-        DataGridView1.DataSource = dt
-        DataGridView1.Columns("FilePath").Visible = False ' Optional
+        Dim filter = ComboBox2.Text
+        Dim search = TextBox4.Text
+        Dim sql = "SELECT * FROM HouseholdDocument WHERE HouseholdID = ?"
+        If filter <> "All" Then sql &= " AND Category = ?"
+        If search <> "" Then sql &= " AND (Title LIKE ? OR Notes LIKE ?)"
+        Using conn As New OleDbConnection(connectionString),
+            cmd As New OleDbCommand(sql, conn)
+            cmd.Parameters.AddWithValue("?", 1)
+            If filter <> "All" Then cmd.Parameters.AddWithValue("?", filter)
+            If search <> "" Then
+                cmd.Parameters.AddWithValue("?", "%" & search & "%")
+                cmd.Parameters.AddWithValue("?", "%" & search & "%")
+            End If
+            Dim dt As New DataTable()
+            Dim adapter As New OleDbDataAdapter(cmd)
+            adapter.Fill(dt)
+            DataGridView1.DataSource = dt
+        End Using
     End Sub
+
     Private Sub Household_Document_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
         'LoadFilteredDocuments()
@@ -94,49 +100,8 @@ Public Class Household_Document
         ToolTip1.SetToolTip(Button3, "Delete")
     End Sub
 
-    'Private Sub LoadFilteredDocuments()
-    '    ListBox1.Items.Clear()
 
-    '    Dim conn As New OleDbConnection(connectionString)
-    '    Dim query As String = "SELECT Title FROM HouseholdDocument WHERE HouseholdID = @hid"
 
-    '    If ComboBox2.Text <> "All" Then
-    '        query &= " AND Category = @cat"
-    '    End If
-
-    '    Dim cmd As New OleDbCommand(query, conn)
-    '    'cmd.Parameters.AddWithValue("?", HouseholdID)
-    '    If ComboBox2.Text <> "All" Then
-    '        cmd.Parameters.AddWithValue("@cat", ComboBox2.Text)
-    '    End If
-
-    '    conn.Open()
-    '    Dim reader As OleDbDataReader = cmd.ExecuteReader()
-    '    While reader.Read()
-    '        ListBox1.Items.Add(reader("Title").ToString())
-    '    End While
-    '    conn.Close()
-    'End Sub
-    'Private Sub ViewDocument(SelectHouseHold As String)
-    '    Dim connStr As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\khodani\Documents\yourdb.accdb"
-    '    Dim filePath As String = ""
-
-    '    Using conn As New OleDbConnection(connStr)
-    '        conn.Open()
-    '        Dim cmd As New OleDbCommand("SELECT FilePath FROM HouseholdDocument WHERE ID = @ID", conn)
-    '        cmd.Parameters.AddWithValue("@ID", SelectHouseHold)
-    '        Dim reader As OleDbDataReader = cmd.ExecuteReader()
-    '        If reader.Read() Then
-    '            filePath = reader("FilePath").ToString()
-    '        End If
-    '    End Using
-
-    '    If System.IO.File.Exists(filePath) Then
-    '        Process.Start(filePath)
-    '    Else
-    '        MessageBox.Show("File not found: " & filePath)
-    '    End If
-    'End Sub
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
 
         Try
@@ -233,9 +198,23 @@ Public Class Household_Document
         End Try
     End Sub
     Private Sub Button5_Click(sender As Object, e As EventArgs) Handles Button5.Click
-        Dim pd As New PrintDialog()
-        ' Logic to generate and send document list to printer
-        ' Or export to PDF using iTextSharp or similar
+        PrintDialog1.Document = PrintDocument1
+
+        If PrintDialog1.ShowDialog() = DialogResult.OK Then
+
+            LoadFilteredDocuments() ' Load filtered data based on selected Category
+
+            If DataGridView1.Rows.Count > 0 Then
+
+                PrintDocument1.Print()
+
+            Else
+
+                MessageBox.Show("No document found for the selected period.", "Print Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+
+            End If
+
+        End If
 
     End Sub
 
@@ -249,9 +228,98 @@ Public Class Household_Document
     Private Sub ComboBox2_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ComboBox2.SelectedIndexChanged
         Dim dv As DataView = CType(DataGridView1.DataSource, DataTable).DefaultView
         dv.RowFilter = $"Category = '{ComboBox2.Text}'"
-        'ApplySearchAndFilter()
-        'LoadFilteredDocuments()
+        ''ApplySearchAndFilter()
+        ''LoadFilteredDocuments()
+
     End Sub
 
+
+    Private DataGridView As DataTable
+
+    Private currentRowIndex As Integer = 0
+
+    Private Sub PrintDocument1_PrintPage(sender As Object, e As Printing.PrintPageEventArgs) Handles PrintDocument1.PrintPage
+
+
+        Dim font As New Font("Arial", 12)
+
+        Dim brush As New SolidBrush(Color.Black)
+
+        Dim yPos As Integer = 100
+
+        Dim leftMargin As Integer = e.MarginBounds.Left
+
+        ' Print Title
+
+        e.Graphics.DrawString("document Report", New Font("Arial", 16, FontStyle.Bold), brush, leftMargin, yPos)
+
+        yPos += 40
+
+        ' Check if there is data to print
+
+        If DataGridView1.Rows.Count = 0 Then
+
+            e.Graphics.DrawString("No data available.", font, brush, leftMargin, yPos)
+
+            Exit Sub
+
+        End If
+
+        ' Print filtered meal plan data
+
+        For Each row As DataRow In DataGridView1.Rows
+
+            e.Graphics.DrawString("Title: " & row("Title").ToString(), font, brush, leftMargin, yPos)
+
+            yPos += 30
+
+            e.Graphics.DrawString("Notes: " & Convert.ToDateTime(row("Notes")).ToShortDateString(), font, brush, leftMargin, yPos)
+
+            yPos += 30
+            e.Graphics.DrawString("Category: " & row("Category").ToString(), font, brush, leftMargin, yPos)
+
+            yPos += 30
+            e.Graphics.DrawString("FilePath: " & Convert.ToDateTime(row("FilePath")).ToShortDateString(), font, brush, leftMargin, yPos)
+
+            yPos += 30
+
+            e.Graphics.DrawString("UploadedBy: " & row("UploadedBy").ToString(), font, brush, leftMargin, yPos)
+
+            yPos += 40
+
+            e.Graphics.DrawString("UploadDate: " & row("UploadDate").ToString(), font, brush, leftMargin, yPos)
+
+            yPos += 40
+
+        Next
+
+    End Sub
+
+
+    ' Load filtered document data based on category
+    Private Sub LoadFilteredDocuments()
+        Using dbConnection As New OleDbConnection(connectionString)
+            Dim selectedCategory As String = ComboBox3.SelectedItem?.ToString()
+            Dim query As String = "SELECT * FROM HouseholdDocument WHERE 1=1"
+
+            ' Add category filter if selected
+            If Not String.IsNullOrEmpty(selectedCategory) Then
+                query &= " AND Category = ?"
+            End If
+
+            Dim cmd As New OleDbCommand(query, dbConnection)
+
+            ' Bind parameters in the same order as in the query
+            If Not String.IsNullOrEmpty(selectedCategory) Then
+                cmd.Parameters.AddWithValue("?", selectedCategory)
+            End If
+
+            Dim adapter As New OleDbDataAdapter(cmd)
+            DataGridView = New DataTable()
+            adapter.Fill(DataGridView)
+
+            DataGridView1.DataSource = DataGridView ' Display filtered data in DataGridView
+        End Using
+    End Sub
 
 End Class
