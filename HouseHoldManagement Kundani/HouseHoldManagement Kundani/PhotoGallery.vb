@@ -177,6 +177,8 @@ Public Class PhotoGallery
         Debug.WriteLine("Exiting button delete")
 
     End Sub
+
+    Dim folderPath As String = Application.StartupPath & "\Photo Gallery\"
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         '   Try
         ''validate due date is not in the past
@@ -230,28 +232,72 @@ Public Class PhotoGallery
         '    '    'Tags as Photo Day in Calender
         '    'Ndamu.MarkPhotoDay(DateTimePicker1.Text, TextBox2.Text)
 
-        If String.IsNullOrEmpty(loadedImagePath) OrElse Not File.Exists(loadedImagePath) Then
-                MessageBox.Show("No image loaded or original file missing.")
-                Return
-            End If
+        'If String.IsNullOrEmpty(loadedImagePath) OrElse Not File.Exists(loadedImagePath) Then
+        '    MessageBox.Show("No image loaded or original file missing.")
+        '    Return
+        'End If
 
-        Dim destinationFolder As String = "C:\Users\Murangi\Source\Repos\maurice67530\HouseholdManagementSystems\Photo Gallery"
+        'Dim destinationFolder As String = "C:\Users\Murangi\Source\Repos\maurice67530\HouseholdManagementSystems\Photo Gallery"
 
-        Try
-            ' Create destination folder if not exists
-            If Not Directory.Exists(destinationFolder) Then
-                Directory.CreateDirectory(destinationFolder)
-            End If
+        'Try
+        '    ' Create destination folder if not exists
+        '    If Not Directory.Exists(destinationFolder) Then
+        '        Directory.CreateDirectory(destinationFolder)
+        '    End If
 
-            Dim fileName As String = Path.GetFileName(loadedImagePath)
-            Dim destPath As String = Path.Combine(destinationFolder, fileName)
+        '    Dim fileName As String = Path.GetFileName(loadedImagePath)
+        '    Dim destPath As String = Path.Combine(destinationFolder, fileName)
 
-            ' Copy the file (overwrite if exists)
-            File.Copy(loadedImagePath, destPath, overwrite:=True)
-            MessageBox.Show("Image saved/copied successfully.")
-        Catch ex As Exception
-            MessageBox.Show("Error saving image: " & ex.Message)
-        End Try
+        '    ' Copy the file (overwrite if exists)
+        '    File.Copy(loadedImagePath, destPath, overwrite:=True)
+        '    MessageBox.Show("Image saved/copied successfully.")
+        'Catch ex As Exception
+        '    MessageBox.Show("Error saving image: " & ex.Message)
+        'End Try
+
+
+
+
+        ' Select image
+        If OpenFileDialog1.ShowDialog = DialogResult.OK Then
+            Try
+                ' Get image name only (not full path)
+                Dim selectedPath As String = OpenFileDialog1.FileName
+                Dim imageName As String = Path.GetFileName(selectedPath)
+                Dim destinationPath As String = Path.Combine(folderPath, imageName)
+
+                ' Create folder if it doesn't exist
+                If Not Directory.Exists(folderPath) Then
+                    Directory.CreateDirectory(folderPath)
+                End If
+
+                ' Copy image to shared folder
+                File.Copy(selectedPath, destinationPath, True)
+
+                ' Display in PictureBox
+                PictureBox1.Image = Image.FromFile(destinationPath)
+                PictureBox1.ImageLocation = destinationPath
+
+                ' Save to database
+                conn.Open()
+                Dim cmd As New OleDbCommand("INSERT INTO Photos ([Description], [FilePath], [DateAdded], [FamilyMember], [Photographer], [Album]) VALUES (?, ?, ?, ?, ?, ?)", conn)
+                cmd.Parameters.AddWithValue("?", TextBox2.Text)
+                cmd.Parameters.AddWithValue("?", imageName) ' Only save the image name
+                cmd.Parameters.AddWithValue("?", DateTimePicker1.Value)
+                cmd.Parameters.AddWithValue("?", ComboBox1.Text)
+                cmd.Parameters.AddWithValue("?", TextBox3.Text)
+                cmd.Parameters.AddWithValue("?", ComboBox2.Text)
+                cmd.ExecuteNonQuery()
+                conn.Close()
+
+                MessageBox.Show("Photo saved to database and folder.")
+
+            Catch ex As Exception
+                conn.Close()
+                MessageBox.Show("Error: " & ex.Message)
+            End Try
+        End If
+
     End Sub
 
     Public Sub PopulateComboboxFromDatabase(ByRef comboBox As ComboBox)
@@ -542,22 +588,43 @@ Public Class PhotoGallery
     Private loadedImagePath As String = String.Empty ' To store selected image path
     Private Sub Button8_Click(sender As Object, e As EventArgs) Handles Button8.Click
 
-        Dim openFileDialog As New OpenFileDialog()
-        openFileDialog.Title = "Select an image"
-        openFileDialog.Filter = "Image Files|*.jpg;*.jpeg;*.png;*.bmp"
+        'Dim openFileDialog As New OpenFileDialog()
+        'openFileDialog.Title = "Select an image"
+        'openFileDialog.Filter = "Image Files|*.jpg;*.jpeg;*.png;*.bmp"
 
-        If openFileDialog.ShowDialog() = DialogResult.OK Then
-            loadedImagePath = openFileDialog.FileName
-            PictureBox1.Image = Image.FromFile(loadedImagePath)
-        End If
-
-
-        'Dim OpenFileDialog As New OpenFileDialog()
-        'OpenFileDialog.Filter = "Bitmaps (*.jpg)|*.jpg"
-        'If OpenFileDialog.ShowDialog() = DialogResult.OK Then
-        '    PictureBox1.ImageLocation = OpenFileDialog.FileName
-        '    TextBox5.Text = OpenFileDialog.FileName
+        'If openFileDialog.ShowDialog() = DialogResult.OK Then
+        '    loadedImagePath = openFileDialog.FileName
+        '    PictureBox1.Image = Image.FromFile(loadedImagePath)
         'End If
+
+
+        ' Load last photo from database
+        Try
+            conn.Open()
+            Dim cmd As New OleDbCommand("SELECT TOP 1 * FROM Photos ORDER BY ID DESC", conn)
+            Dim reader As OleDbDataReader = cmd.ExecuteReader()
+
+            If reader.Read() Then
+                Dim imageName As String = reader("FilePath").ToString()
+                Dim fullPath As String = Path.Combine(folderPath, imageName)
+
+                If File.Exists(fullPath) Then
+                    If PictureBox1.Image IsNot Nothing Then PictureBox1.Image.Dispose()
+                    PictureBox1.Image = Image.FromFile(fullPath)
+                Else
+                    MessageBox.Show("Image not found in folder.")
+                End If
+            Else
+                MessageBox.Show("No photo found.")
+            End If
+
+            reader.Close()
+            conn.Close()
+        Catch ex As Exception
+            conn.Close()
+            MessageBox.Show("Error loading image: " & ex.Message)
+        End Try
+
     End Sub
     Private Sub Label9_Click(sender As Object, e As EventArgs) Handles Label9.Click
 
