@@ -73,7 +73,7 @@ Public Class Expense
                 cmd.Parameters.AddWithValue("@BillName", expense.BillName)
                 cmd.Parameters.AddWithValue("@StartDate", expense.StartDate)
                 cmd.Parameters.AddWithValue("@Recurring", expense.Recurring)
-                cmd.Parameters.AddWithValue("@Paid", expense.Paid)
+                cmd.Parameters.AddWithValue("@Paid", expense.paid)
 
 
                 MsgBox("Expense Information Saved!" & vbCrLf &
