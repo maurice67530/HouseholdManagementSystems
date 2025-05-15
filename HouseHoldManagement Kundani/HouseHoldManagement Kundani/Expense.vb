@@ -176,7 +176,7 @@ Public Class Expense
                 Dim ID As Integer = Convert.ToInt32(selectedRow.Cells("ID").Value) ' Change "ID" to your primary key column name  
 
                 ' Create an OleDbCommand to update the Expense data in the database  
-                Dim cmd As New OleDbCommand("UPDATE [Expense] SET [Amount] = ?, [TotalIncome] = ?, [Description] = ?, [Tags] = ?, [Currency] =?, [Category] = ?, [Paymentmethod] = ?, [Frequency] = ?, [ApprovalStatus] = ?, [DateOfexpenses] = ?, [Person] = ?, [BillName] = ?, [StartDate] = ?, [Recurring] = ?, [Paid] = ? WHERE [ID] = ?", conn)
+                Dim cmd As New OleDbCommand("UPDATE [Expense] SET [Amount] = ?, [Description] = ?, [Tags] = ?, [Currency] =?, [Category] = ?, [Paymentmethod] = ?, [Frequency] = ?, [ApprovalStatus] = ?, [DateOfexpenses] = ?, [Person] = ?, [BillName] = ?, [StartDate] = ?, [Recurring] = ?, [Paid] = ? WHERE [ID] = ?", conn)
 
                 ' Set the parameter values from the UI controls  
 
@@ -524,26 +524,6 @@ Public Class Expense
         End Try
     End Sub
 
-    Private Sub LoadData()
-        Dim query As String = "SELECT * FROM Expense" ' Replace with your table name
-        Dim dt As New DataTable()
-
-        Try
-            Using conn As New OleDbConnection(connectionString)
-                Using cmd As New OleDbCommand(query, conn)
-                    conn.Open()
-                    Using reader As OleDbDataReader = cmd.ExecuteReader()
-                        dt.Load(reader) ' Load data into DataTable
-                    End Using
-                End Using
-            End Using
-            ' Bind DataTable to DataGridView (assuming you have a DataGridView named dataGridView1)
-            DataGridView1.DataSource = dt
-
-        Catch ex As Exception
-            MessageBox.Show("Error loading data: " & ex.Message)
-        End Try
-    End Sub
     Public Sub PopulateComboboxFromDatabase(ByRef comboBox As ComboBox)
         Dim conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
         Try
@@ -886,7 +866,7 @@ Public Class Expense
                         Dim BillName As Object = reader("BillName")
                         Dim Amount As Object = reader("Amount")
                         Dim StartDate As Object = reader("StartDate")
-                        dataList.Add($"The following items are Due to be Paid : BillName: {BillName}, Amount: {Amount}, StartDate: {StartDate}")
+                        dataList.Add($"This item is Due to be Paid : BillName: {BillName}, Amount: {Amount}, StartDate: {StartDate}")
                     End While
 
                     ' Display each record in a message box
@@ -900,7 +880,7 @@ Public Class Expense
                             Main()
                             SaveChangedDateToAnotherTable()
                             PopulatelistboxFromDatabase(ListBox1)
-                            UpdateDatesBasedOnFrequency()
+                            'UpdateDatesBasedOnFrequency()
                             MessageBox.Show("Payments with updated dates saved successfully at " & DateTime.Now.ToString())
                             'MessageBox.Show("Payments with updated dates saved successfully") 'Example
 
@@ -962,41 +942,87 @@ Public Class Expense
             updateCommand.ExecuteNonQuery()
         End Using
     End Sub
-    Sub Mainm()
+    'Sub Mainm()
 
+    '    ' The ID or unique identifier for the record you want to update
+    '    Dim recordId As Integer = 1
+
+    '    Using conn As New OleDbConnection(connectionString)
+    '        conn.Open()
+
+    '        ' Step 1: Retrieve the current date from the database
+    '        Dim selectCmd As New OleDbCommand("SELECT StartDate FROM Expense WHERE ID = ?", conn)
+    '        selectCmd.Parameters.AddWithValue("?", recordId)
+
+    '        Dim currentDate As Object = selectCmd.ExecuteScalar()
+
+    '        If currentDate IsNot Nothing AndAlso Not Convert.IsDBNull(currentDate) Then
+    '            Dim dateValue As DateTime = Convert.ToDateTime(currentDate)
+
+    '            ' Step 2: Add 30 days
+    '            Dim newDate As DateTime = dateValue.AddDays(30)
+
+    '            ' Step 3: Update the database with the new date
+    '            Dim updateCmd As New OleDbCommand("UPDATE Expense SET StartDate = ? WHERE ID = ?", conn)
+    '            updateCmd.Parameters.AddWithValue("?", newDate)
+    '            updateCmd.Parameters.AddWithValue("?", recordId)
+
+    '            Dim rowsAffected As Integer = updateCmd.ExecuteNonQuery()
+
+    '            If rowsAffected > 0 Then
+    '                MessageBox.Show("Date updated successfully.")
+    '            Else
+    '                MessageBox.Show("No record updated.")
+    '            End If
+    '        Else
+    '            MessageBox.Show("Record not found or date is null.")
+    '        End If
+    '    End Using
+    'End Sub
+    Sub Mainm()
         ' The ID or unique identifier for the record you want to update
         Dim recordId As Integer = 1
 
         Using conn As New OleDbConnection(connectionString)
             conn.Open()
 
-            ' Step 1: Retrieve the current date from the database
-            Dim selectCmd As New OleDbCommand("SELECT StartDate FROM Expense WHERE ID = ?", conn)
+            ' Step 1: Retrieve current date and frequency from the database
+            Dim selectCmd As New OleDbCommand("SELECT StartDate, Frequency FROM Expense WHERE ID = ?", conn)
             selectCmd.Parameters.AddWithValue("?", recordId)
 
-            Dim currentDate As Object = selectCmd.ExecuteScalar()
+            Using reader As OleDbDataReader = selectCmd.ExecuteReader()
+                If reader.Read() Then
+                    Dim currentDateObj As Object = reader("StartDate")
+                    Dim frequencyObj As Object = reader("Frequency")
 
-            If currentDate IsNot Nothing AndAlso Not Convert.IsDBNull(currentDate) Then
-                Dim dateValue As DateTime = Convert.ToDateTime(currentDate)
+                    If currentDateObj IsNot Nothing AndAlso Not Convert.IsDBNull(currentDateObj) AndAlso
+                   frequencyObj IsNot Nothing AndAlso Not Convert.IsDBNull(frequencyObj) Then
 
-                ' Step 2: Add 30 days
-                Dim newDate As DateTime = dateValue.AddDays(30)
+                        Dim dateValue As DateTime = Convert.ToDateTime(currentDateObj)
+                        Dim frequencyDays As Integer = Convert.ToInt32(frequencyObj)
 
-                ' Step 3: Update the database with the new date
-                Dim updateCmd As New OleDbCommand("UPDATE Expense SET StartDate = ? WHERE ID = ?", conn)
-                updateCmd.Parameters.AddWithValue("?", newDate)
-                updateCmd.Parameters.AddWithValue("?", recordId)
+                        ' Step 2: Add days based on frequency
+                        Dim newDate As DateTime = dateValue.AddDays(frequencyDays)
 
-                Dim rowsAffected As Integer = updateCmd.ExecuteNonQuery()
+                        ' Step 3: Update the database with the new date
+                        Dim updateCmd As New OleDbCommand("UPDATE Expense SET StartDate = ? WHERE ID = ?", conn)
+                        updateCmd.Parameters.AddWithValue("?", newDate)
+                        updateCmd.Parameters.AddWithValue("?", recordId)
 
-                If rowsAffected > 0 Then
-                    MessageBox.Show("Date updated successfully.")
+                        Dim rowsAffected As Integer = updateCmd.ExecuteNonQuery()
+
+                        If rowsAffected > 0 Then
+                            MessageBox.Show("Date updated successfully.")
+                        Else
+                            MessageBox.Show("No record updated.")
+                        End If
+                    Else
+                        MessageBox.Show("Record not found or date/frequency is null.")
+                    End If
                 Else
-                    MessageBox.Show("No record updated.")
+                    MessageBox.Show("Record not found.")
                 End If
-            Else
-                MessageBox.Show("Record not found or date is null.")
-            End If
+            End Using
         End Using
     End Sub
 
