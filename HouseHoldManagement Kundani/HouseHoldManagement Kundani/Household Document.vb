@@ -86,20 +86,7 @@ Public Class Household_Document
             DataGridView1.DataSource = dt
         End Using
     End Sub
-    'Private Sub LoadDocuments()
-    '    If ComboBox1.SelectedIndex = -1 Then Exit Sub
 
-    '    Dim conn As New OleDbConnection("HouseHoldManagment_Module.connectionstring")
-    '    Dim cmd As New OleDbCommand("SELECT SelectHouseHold, FileName, FilePath, UploadedDate FROM HouseholdDocuments WHERE ID= @ID", conn)
-    '    cmd.Parameters.AddWithValue("@SelectHouseHold", ComboBox1.SelectedValue)
-
-    '    Dim adapter As New OleDbDataAdapter(cmd)
-    '    Dim dt As New DataTable()
-    '    adapter.Fill(dt)
-
-    '    DataGridView1.DataSource = dt
-    '    DataGridView1.Columns("FilePath").Visible = False ' Optional
-    'End Sub
     Private Sub Household_Document_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
         'LoadFilteredDocuments()
@@ -114,49 +101,7 @@ Public Class Household_Document
     End Sub
 
 
-    'Private Sub LoadFilteredDocuments()
-    '    ListBox1.Items.Clear()
 
-    '    Dim conn As New OleDbConnection(connectionString)
-    '    Dim query As String = "SELECT Title FROM HouseholdDocument WHERE HouseholdID = @hid"
-
-    '    If ComboBox2.Text <> "All" Then
-    '        query &= " AND Category = @cat"
-    '    End If
-
-    '    Dim cmd As New OleDbCommand(query, conn)
-    '    'cmd.Parameters.AddWithValue("?", HouseholdID)
-    '    If ComboBox2.Text <> "All" Then
-    '        cmd.Parameters.AddWithValue("@cat", ComboBox2.Text)
-    '    End If
-
-    '    conn.Open()
-    '    Dim reader As OleDbDataReader = cmd.ExecuteReader()
-    '    While reader.Read()
-    '        ListBox1.Items.Add(reader("Title").ToString())
-    '    End While
-    '    conn.Close()
-    'End Sub
-    'Private Sub ViewDocument(SelectHouseHold As String)
-    '    Dim connStr As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\khodani\Documents\yourdb.accdb"
-    '    Dim filePath As String = ""
-
-    '    Using conn As New OleDbConnection(connStr)
-    '        conn.Open()
-    '        Dim cmd As New OleDbCommand("SELECT FilePath FROM HouseholdDocument WHERE ID = @ID", conn)
-    '        cmd.Parameters.AddWithValue("@ID", SelectHouseHold)
-    '        Dim reader As OleDbDataReader = cmd.ExecuteReader()
-    '        If reader.Read() Then
-    '            filePath = reader("FilePath").ToString()
-    '        End If
-    '    End Using
-
-    '    If System.IO.File.Exists(filePath) Then
-    '        Process.Start(filePath)
-    '    Else
-    '        MessageBox.Show("File not found: " & filePath)
-    '    End If
-    'End Sub
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
 
         Try
@@ -281,57 +226,14 @@ Public Class Household_Document
     End Sub
 
     Private Sub ComboBox2_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ComboBox2.SelectedIndexChanged
-        'Dim dv As DataView = CType(DataGridView1.DataSource, DataTable).DefaultView
-        'dv.RowFilter = $"Category = '{ComboBox2.Text}'"
+        Dim dv As DataView = CType(DataGridView1.DataSource, DataTable).DefaultView
+        dv.RowFilter = $"Category = '{ComboBox2.Text}'"
         ''ApplySearchAndFilter()
         ''LoadFilteredDocuments()
 
     End Sub
 
-    'Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
-    '    ' Get selected values from ComboBoxes
-    '    Dim selectedCategory As String = If(ComboBox1.SelectedItem IsNot Nothing, ComboBox2.SelectedItem.ToString(), "")
-    '    Dim selectedUploadedBy As String = If(ComboBox3.SelectedItem IsNot Nothing, ComboBox1.SelectedItem.ToString(), "")
 
-    '    ' Call the filtering method with selected values
-    '    Filterdocument(selectedCategory, selectedUploadedBy)
-    'End Sub
-    'Public Sub Filterdocument(Category As String, UploadedBy As String)
-    '    Dim taskTable As New DataTable()
-    '    Try
-    '        conn.Open()
-    '        Dim query As String = "SELECT * FROM HouseholdDocument WHERE 1=1"
-
-    '        ' Only add conditions if filters are selected  
-    '        If Not String.IsNullOrEmpty(Category) Then
-    '            query &= " AND Category = @Category"
-    '        End If
-
-    '        If Not String.IsNullOrEmpty(UploadedBy) Then
-    '            query &= " AND UploadedBy = @UploadedBy"
-    '        End If
-
-    '        Dim command As New OleDb.OleDbCommand(query, conn)
-
-    '        ' Only add parameters if filters are selected  
-    '        If Not String.IsNullOrEmpty(Category) Then
-    '            command.Parameters.AddWithValue("@UploadedBy", UploadedBy)
-    '        End If
-
-    '        If Not String.IsNullOrEmpty(UploadedBy) Then
-    '            command.Parameters.AddWithValue("@Category", Category)
-    '        End If
-
-    '        Dim adapter As New OleDb.OleDbDataAdapter(command)
-    '        adapter.Fill(taskTable)
-    '        DataGridView1.DataSource = taskTable
-    '    Catch ex As Exception
-    '        MsgBox("Error filtering document: " & ex.Message, MsgBoxStyle.Critical, "Database Error")
-    '    Finally
-    '        conn.Close()
-    '    End Try
-    '    'Daily_task.loadiTaskmanagementfromdatabase()
-    'End Sub
     Private DataGridView As DataTable
 
     Private currentRowIndex As Integer = 0
