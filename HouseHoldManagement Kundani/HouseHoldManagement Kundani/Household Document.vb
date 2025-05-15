@@ -70,7 +70,7 @@ Public Class Household_Document
     Private Sub LoadDocuments()
         If ComboBox1.SelectedIndex = -1 Then Exit Sub
 
-        Dim conn As New OleDbConnection("HouseHoldManagment_Module.connectionstring")
+        Dim conn As New OleDbConnection(connectionString)
         Dim cmd As New OleDbCommand("SELECT SelectHouseHold, FileName, FilePath, UploadedDate FROM HouseholdDocuments WHERE ID= @ID", conn)
         cmd.Parameters.AddWithValue("@SelectHouseHold", ComboBox1.SelectedValue)
 
