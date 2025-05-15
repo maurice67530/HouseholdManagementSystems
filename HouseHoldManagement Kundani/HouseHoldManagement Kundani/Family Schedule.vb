@@ -105,9 +105,9 @@ Public Class Family_Schedule
         PopulateComboboxFromDatabase(ComboBox1)
         LoadScheduleFromDatabase()
 
-        ' AutoCreateChoreEvents()
-        'AutoAddMealTimes()
-        'AutoCreateTaskReminders()
+        AutoCreateChoreEvents()
+        AutoAddMealTimes()
+        AutoCreateTaskReminders()
         'MarkPhotoDayEvents()
 
         ' IntegrateChores()
@@ -337,6 +337,31 @@ Public Class Family_Schedule
             End If
         End Try
     End Sub
+    'Private Sub AutoCreateChoreEvents()
+    '    Dim conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
+    '    Dim da As New OleDbDataAdapter("SELECT Title, DueDate, AssignedTo FROM Chores", conn)
+    '    Dim dt As New DataTable
+    '    da.Fill(dt)
+
+    '    Dim count As Integer = 0
+    '    For Each row As DataRow In dt.Rows
+    '        Dim cmd As New OleDbCommand("INSERT INTO FamilySchedule (Title, Notes, DateOfEvent, StartTime, EndTime, AssignedTo, EventType) VALUES (?, ?, ?, ?, ?, ?, ?)", conn)
+    '        cmd.Parameters.AddWithValue("?", row("Title").ToString())
+    '        cmd.Parameters.AddWithValue("?", "Auto-scheduled chore")
+    '        cmd.Parameters.AddWithValue("?", CDate(row("DueDate")))
+    '        cmd.Parameters.AddWithValue("?", #9:00:00 AM#)
+    '        cmd.Parameters.AddWithValue("?", #10:00:00 AM#)
+    '        cmd.Parameters.AddWithValue("?", row("AssignedTo").ToString())
+    '        cmd.Parameters.AddWithValue("?", "Chore")
+
+    '        conn.Open()
+    '        cmd.ExecuteNonQuery()
+    '        conn.Close()
+    '        count += 1
+    '    Next
+
+    '    MessageBox.Show(count.ToString() & " chore event(s) added to the schedule.", "Chore Integration Complete")
+    'End Sub
     Private Sub AutoCreateChoreEvents()
         Dim conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
         Dim da As New OleDbDataAdapter("SELECT Title, DueDate, AssignedTo FROM Chores", conn)
@@ -345,12 +370,16 @@ Public Class Family_Schedule
 
         Dim count As Integer = 0
         For Each row As DataRow In dt.Rows
+            Dim choreDate As Date = CDate(row("DueDate"))
+            Dim startTime As Date = choreDate.Date.AddHours(9)    ' 9:00 AM
+            Dim endTime As Date = choreDate.Date.AddHours(10)     ' 10:00 AM
+
             Dim cmd As New OleDbCommand("INSERT INTO FamilySchedule (Title, Notes, DateOfEvent, StartTime, EndTime, AssignedTo, EventType) VALUES (?, ?, ?, ?, ?, ?, ?)", conn)
             cmd.Parameters.AddWithValue("?", row("Title").ToString())
             cmd.Parameters.AddWithValue("?", "Auto-scheduled chore")
-            cmd.Parameters.AddWithValue("?", CDate(row("DueDate")))
-            cmd.Parameters.AddWithValue("?", #9:00:00 AM#)
-            cmd.Parameters.AddWithValue("?", #10:00:00 AM#)
+            cmd.Parameters.AddWithValue("?", choreDate.ToString("dddd, MMMM dd, yyyy"))
+            cmd.Parameters.AddWithValue("?", startTime.ToString("dddd, MMMM dd, yyyy hh:mm tt"))
+            cmd.Parameters.AddWithValue("?", endTime.ToString("dddd, MMMM dd, yyyy hh:mm tt"))
             cmd.Parameters.AddWithValue("?", row("AssignedTo").ToString())
             cmd.Parameters.AddWithValue("?", "Chore")
 
@@ -359,10 +388,9 @@ Public Class Family_Schedule
             conn.Close()
             count += 1
         Next
-
         MessageBox.Show(count.ToString() & " chore event(s) added to the schedule.", "Chore Integration Complete")
+        LoadScheduleFromDatabase()
     End Sub
-
 
     Private Sub AutoAddMealTimes()
         Dim conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
@@ -371,26 +399,32 @@ Public Class Family_Schedule
         da.Fill(dt)
 
         Dim count As Integer = 0
+
         For Each row As DataRow In dt.Rows
-            Dim cmd As New OleDbCommand("INSERT INTO FamilySchedule (Title, Notes, DateOfEvent, StartTime, EndTime, AssignedTo, EventType) VALUES (?, ?, ?, ?, ?, ?, ?)", conn)
+            Dim cmd As New OleDbCommand("INSERT INTO FamilySchedule (Title, Notes, DateOfEvent, StartTime, EndTime, AssignedTo, EventType) " &
+                                    "VALUES (?, ?, ?, ?, ?, ?, ?)", conn)
+
+            Dim mealDate As Date = CDate(row("StartDate"))
+            Dim startTime As Date = mealDate.Date.AddHours(13) ' 1:00 PM
+            Dim endTime As Date = mealDate.Date.AddHours(14)   ' 2:00 PM
+
             cmd.Parameters.AddWithValue("?", row("MealName").ToString())
             cmd.Parameters.AddWithValue("?", "Scheduled Meal")
-            cmd.Parameters.AddWithValue("?", CDate(row("StartDate")))
-            cmd.Parameters.AddWithValue("?", #1:00:00 PM#)
-            cmd.Parameters.AddWithValue("?", #2:00:00 PM#)
+            cmd.Parameters.AddWithValue("?", mealDate)
+            cmd.Parameters.AddWithValue("?", startTime.ToString("dddd, MMMM dd, yyyy hh:mm tt"))
+            cmd.Parameters.AddWithValue("?", endTime.ToString("dddd, MMMM dd, yyyy hh:mm tt"))
             cmd.Parameters.AddWithValue("?", row("Description").ToString())
             cmd.Parameters.AddWithValue("?", "Meal")
 
             conn.Open()
             cmd.ExecuteNonQuery()
             conn.Close()
+
             count += 1
         Next
 
-        MessageBox.Show(count.ToString() & " meal(s) added to the family calendar.", "Meal Plan Integration Complete")
+        MessageBox.Show(count.ToString() & " meal(s) added to the family calendar.")
     End Sub
-
-
     Private Sub AutoCreateTaskReminders()
         Dim conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
         Dim da As New OleDbDataAdapter("SELECT Title, DueDate, AssignedTo FROM Tasks", conn)
@@ -399,13 +433,19 @@ Public Class Family_Schedule
 
         Dim count As Integer = 0
         For Each row As DataRow In dt.Rows
-            Dim cmd As New OleDbCommand("INSERT INTO FamilySchedule (Title, Notes, DateOfEvent, StartTime, EndTime, AssignedTo, EventType) VALUES (?, ?, ?, ?, ?, ?, ?)", conn)
+            Dim reminderDate As Date = CDate(row("DueDate")).AddDays(-1)
+            Dim startTime As Date = reminderDate.Date.AddHours(8)    ' 8:00 AM
+            Dim endTime As Date = reminderDate.Date.AddHours(8.5)    ' 8:30 AM
+
+            Dim cmd As New OleDbCommand("INSERT INTO FamilySchedule (Title, Notes, DateOfEvent, StartTime, EndTime, AssignedTo, EventType) " &
+                                    "VALUES (?, ?, ?, ?, ?, ?, ?)", conn)
+
             cmd.Parameters.AddWithValue("?", row("Title").ToString())
             cmd.Parameters.AddWithValue("?", "Task due soon")
-            cmd.Parameters.AddWithValue("?", CDate(row("DueDate")).AddDays(-1)) ' Reminder 1 day before
-            cmd.Parameters.AddWithValue("?", #8:00:00 AM#)
-            cmd.Parameters.AddWithValue("?", #8:30:00 AM#)
-            cmd.Parameters.AddWithValue("?", row("AssignedTo").ToString())
+            cmd.Parameters.AddWithValue("?", reminderDate.ToString("dddd, MMMM dd, yyyy"))
+            cmd.Parameters.AddWithValue("?", startTime.ToString("dddd, MMMM dd, yyyy hh:mm tt"))
+            cmd.Parameters.AddWithValue("?", endTime.ToString("dddd, MMMM dd, yyyy hh:mm tt"))
+            cmd.Parameters.AddWithValue("?", row("AssignedTo"))
             cmd.Parameters.AddWithValue("?", "Task")
 
             conn.Open()
