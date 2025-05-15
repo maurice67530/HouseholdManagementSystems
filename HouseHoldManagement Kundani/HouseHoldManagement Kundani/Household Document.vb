@@ -117,26 +117,26 @@ Public Class Household_Document
     '    End While
     '    conn.Close()
     'End Sub
-    Private Sub ViewDocument(SelectHouseHold As String)
-        Dim connStr As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\khodani\Documents\yourdb.accdb"
-        Dim filePath As String = ""
+    'Private Sub ViewDocument(SelectHouseHold As String)
+    '    Dim connStr As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\khodani\Documents\yourdb.accdb"
+    '    Dim filePath As String = ""
 
-        Using conn As New OleDbConnection(connStr)
-            conn.Open()
-            Dim cmd As New OleDbCommand("SELECT FilePath FROM HouseholdDocument WHERE ID = @ID", conn)
-            cmd.Parameters.AddWithValue("@ID", SelectHouseHold)
-            Dim reader As OleDbDataReader = cmd.ExecuteReader()
-            If reader.Read() Then
-                filePath = reader("FilePath").ToString()
-            End If
-        End Using
+    '    Using conn As New OleDbConnection(connStr)
+    '        conn.Open()
+    '        Dim cmd As New OleDbCommand("SELECT FilePath FROM HouseholdDocument WHERE ID = @ID", conn)
+    '        cmd.Parameters.AddWithValue("@ID", SelectHouseHold)
+    '        Dim reader As OleDbDataReader = cmd.ExecuteReader()
+    '        If reader.Read() Then
+    '            filePath = reader("FilePath").ToString()
+    '        End If
+    '    End Using
 
-        If System.IO.File.Exists(filePath) Then
-            Process.Start(filePath)
-        Else
-            MessageBox.Show("File not found: " & filePath)
-        End If
-    End Sub
+    '    If System.IO.File.Exists(filePath) Then
+    '        Process.Start(filePath)
+    '    Else
+    '        MessageBox.Show("File not found: " & filePath)
+    '    End If
+    'End Sub
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
 
         Try
