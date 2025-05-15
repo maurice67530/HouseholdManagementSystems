@@ -253,9 +253,23 @@ Public Class Household_Document
         End Try
     End Sub
     Private Sub Button5_Click(sender As Object, e As EventArgs) Handles Button5.Click
-        Dim pd As New PrintDialog()
-        ' Logic to generate and send document list to printer
-        ' Or export to PDF using iTextSharp or similar
+        PrintDialog1.Document = PrintDocument1
+
+        If PrintDialog1.ShowDialog() = DialogResult.OK Then
+
+            LoadFilteredDocuments() ' Load filtered data based on selected Category
+
+            If DataGridView1.Rows.Count > 0 Then
+
+                PrintDocument1.Print()
+
+            Else
+
+                MessageBox.Show("No document found for the selected period.", "Print Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+
+            End If
+
+        End If
 
     End Sub
 
@@ -274,52 +288,136 @@ Public Class Household_Document
 
     End Sub
 
-    Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
-        ' Get selected values from ComboBoxes
-        Dim selectedCategory As String = If(ComboBox1.SelectedItem IsNot Nothing, ComboBox2.SelectedItem.ToString(), "")
-        Dim selectedUploadedBy As String = If(ComboBox3.SelectedItem IsNot Nothing, ComboBox1.SelectedItem.ToString(), "")
+    'Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
+    '    ' Get selected values from ComboBoxes
+    '    Dim selectedCategory As String = If(ComboBox1.SelectedItem IsNot Nothing, ComboBox2.SelectedItem.ToString(), "")
+    '    Dim selectedUploadedBy As String = If(ComboBox3.SelectedItem IsNot Nothing, ComboBox1.SelectedItem.ToString(), "")
 
-        ' Call the filtering method with selected values
-        Filterdocument(selectedCategory, selectedUploadedBy)
+    '    ' Call the filtering method with selected values
+    '    Filterdocument(selectedCategory, selectedUploadedBy)
+    'End Sub
+    'Public Sub Filterdocument(Category As String, UploadedBy As String)
+    '    Dim taskTable As New DataTable()
+    '    Try
+    '        conn.Open()
+    '        Dim query As String = "SELECT * FROM HouseholdDocument WHERE 1=1"
+
+    '        ' Only add conditions if filters are selected  
+    '        If Not String.IsNullOrEmpty(Category) Then
+    '            query &= " AND Category = @Category"
+    '        End If
+
+    '        If Not String.IsNullOrEmpty(UploadedBy) Then
+    '            query &= " AND UploadedBy = @UploadedBy"
+    '        End If
+
+    '        Dim command As New OleDb.OleDbCommand(query, conn)
+
+    '        ' Only add parameters if filters are selected  
+    '        If Not String.IsNullOrEmpty(Category) Then
+    '            command.Parameters.AddWithValue("@UploadedBy", UploadedBy)
+    '        End If
+
+    '        If Not String.IsNullOrEmpty(UploadedBy) Then
+    '            command.Parameters.AddWithValue("@Category", Category)
+    '        End If
+
+    '        Dim adapter As New OleDb.OleDbDataAdapter(command)
+    '        adapter.Fill(taskTable)
+    '        DataGridView1.DataSource = taskTable
+    '    Catch ex As Exception
+    '        MsgBox("Error filtering document: " & ex.Message, MsgBoxStyle.Critical, "Database Error")
+    '    Finally
+    '        conn.Close()
+    '    End Try
+    '    'Daily_task.loadiTaskmanagementfromdatabase()
+    'End Sub
+    Private DataGridView As DataTable
+
+    Private currentRowIndex As Integer = 0
+
+    Private Sub PrintDocument1_PrintPage(sender As Object, e As Printing.PrintPageEventArgs) Handles PrintDocument1.PrintPage
+
+
+        Dim font As New Font("Arial", 12)
+
+        Dim brush As New SolidBrush(Color.Black)
+
+        Dim yPos As Integer = 100
+
+        Dim leftMargin As Integer = e.MarginBounds.Left
+
+        ' Print Title
+
+        e.Graphics.DrawString("document Report", New Font("Arial", 16, FontStyle.Bold), brush, leftMargin, yPos)
+
+        yPos += 40
+
+        ' Check if there is data to print
+
+        If DataGridView1.Rows.Count = 0 Then
+
+            e.Graphics.DrawString("No data available.", font, brush, leftMargin, yPos)
+
+            Exit Sub
+
+        End If
+
+        ' Print filtered meal plan data
+
+        For Each row As DataRow In DataGridView1.Rows
+
+            e.Graphics.DrawString("Title: " & row("Title").ToString(), font, brush, leftMargin, yPos)
+
+            yPos += 30
+
+            e.Graphics.DrawString("Notes: " & Convert.ToDateTime(row("Notes")).ToShortDateString(), font, brush, leftMargin, yPos)
+
+            yPos += 30
+            e.Graphics.DrawString("Category: " & row("Category").ToString(), font, brush, leftMargin, yPos)
+
+            yPos += 30
+            e.Graphics.DrawString("FilePath: " & Convert.ToDateTime(row("FilePath")).ToShortDateString(), font, brush, leftMargin, yPos)
+
+            yPos += 30
+
+            e.Graphics.DrawString("UploadedBy: " & row("UploadedBy").ToString(), font, brush, leftMargin, yPos)
+
+            yPos += 40
+
+            e.Graphics.DrawString("UploadDate: " & row("UploadDate").ToString(), font, brush, leftMargin, yPos)
+
+            yPos += 40
+
+        Next
+
     End Sub
-    Public Sub Filterdocument(Category As String, UploadedBy As String)
-        Dim taskTable As New DataTable()
-        Try
-            conn.Open()
+
+
+    ' Load filtered document data based on category
+    Private Sub LoadFilteredDocuments()
+        Using dbConnection As New OleDbConnection(connectionString)
+            Dim selectedCategory As String = ComboBox3.SelectedItem?.ToString()
             Dim query As String = "SELECT * FROM HouseholdDocument WHERE 1=1"
 
-            ' Only add conditions if filters are selected  
-            If Not String.IsNullOrEmpty(Category) Then
-                query &= " AND Category = @Category"
+            ' Add category filter if selected
+            If Not String.IsNullOrEmpty(selectedCategory) Then
+                query &= " AND Category = ?"
             End If
 
-            If Not String.IsNullOrEmpty(UploadedBy) Then
-                query &= " AND UploadedBy = @UploadedBy"
+            Dim cmd As New OleDbCommand(query, dbConnection)
+
+            ' Bind parameters in the same order as in the query
+            If Not String.IsNullOrEmpty(selectedCategory) Then
+                cmd.Parameters.AddWithValue("?", selectedCategory)
             End If
 
-            Dim command As New OleDb.OleDbCommand(query, conn)
+            Dim adapter As New OleDbDataAdapter(cmd)
+            DataGridView = New DataTable()
+            adapter.Fill(DataGridView)
 
-            ' Only add parameters if filters are selected  
-            If Not String.IsNullOrEmpty(Category) Then
-                command.Parameters.AddWithValue("@UploadedBy", UploadedBy)
-            End If
-
-            If Not String.IsNullOrEmpty(UploadedBy) Then
-                command.Parameters.AddWithValue("@Category", Category)
-            End If
-
-            Dim adapter As New OleDb.OleDbDataAdapter(command)
-            adapter.Fill(taskTable)
-            DataGridView1.DataSource = taskTable
-        Catch ex As Exception
-            MsgBox("Error filtering document: " & ex.Message, MsgBoxStyle.Critical, "Database Error")
-        Finally
-            conn.Close()
-        End Try
-        'Daily_task.loadiTaskmanagementfromdatabase()
+            DataGridView1.DataSource = DataGridView ' Display filtered data in DataGridView
+        End Using
     End Sub
 
-    Private Sub ComboBox1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ComboBox1.SelectedIndexChanged
-
-    End Sub
 End Class
