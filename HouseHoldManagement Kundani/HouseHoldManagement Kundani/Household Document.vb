@@ -233,91 +233,22 @@ Public Class Household_Document
         End Try
     End Sub
     Private Sub Button5_Click(sender As Object, e As EventArgs) Handles Button5.Click
+        Dim pd As New PrintDialog()
+        ' Logic to generate and send document list to printer
+        ' Or export to PDF using iTextSharp or similar
 
-        If ComboBox1.SelectedItem Is Nothing Then
-            MessageBox.Show("Please select a document to print.")
-            Exit Sub
-        End If
-
-        Dim title As String = ComboBox1.SelectedItem.ToString()
-        Dim filePath As String = ""
-
-        ' Get the file path from database
-        Dim con As New OleDbConnection(connectionString)
-        Dim cmd As New OleDbCommand("SELECT FilePath FROM HouseholdDocument WHERE Title = @title", con)
-        cmd.Parameters.AddWithValue("@Title", title)
-        con.Open()
-        Dim result = cmd.ExecuteScalar()
-        con.Close()
-
-        If result IsNot Nothing Then
-            filePath = result.ToString()
-        Else
-            MessageBox.Show("File path not found.")
-            Exit Sub
-        End If
-
-        If IO.File.Exists(filePath) Then
-            Try
-                Dim psi As New ProcessStartInfo()
-                psi.FileName = filePath
-                psi.Verb = "print"
-                psi.CreateNoWindow = True
-                psi.WindowStyle = ProcessWindowStyle.Hidden
-                Process.Start(psi)
-            Catch ex As Exception
-                MessageBox.Show("Error printing: " & ex.Message)
-            End Try
-        Else
-            MessageBox.Show("File not found.")
-        End If
     End Sub
 
-    'Private Sub PrintDocument(info As String)
-    '    Dim pd As New Printing.PrintDocument()
-    '    AddHandler pd.PrintPage, Sub(s, e)
-    '                                 e.Graphics.DrawString(info, New Font("Arial", 12), Brushes.Black, 100, 100)
-    '                             End Sub
-    '    pd.Print()
-    'End Sub
-
-    'PrintDialog1.Document = PrintDocument1
-    'If PrintDialog1.ShowDialog() = DialogResult.OK Then
-    '    LoadFilteredMealPlan() ' Load filtered data based on selected frequency
-    '    If DataGridView1.Rows.Count > 0 Then
-    '        PrintDocument1.Print()
-    '    Else
-    '        MessageBox.Show("No meal plans found for the selected period.", "Print Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-    '    End If
-    'End If
-    'End Sub
-
-    'Private Sub ApplySearchAndFilter()
-    '    ListBox1.Items.Clear()
-    '    Dim keyword = TextBox4.Text.Trim()
-    '    Dim category = ComboBox2.Text
-
-    '    Using conn As New OleDbConnection(connectionString)
-    '        Dim query = "SELECT Title FROM HouseholdDocument WHERE HouseholdID = ID"
-    '        If keyword <> "" Then query &= " AND (Title LIKE @kw OR Notes LIKE @kw)"
-    '        If category <> "" Then query &= " AND Category = @cat"
-    '        Dim cmd As New OleDbCommand(query, conn)
-    '        If keyword <> "" Then cmd.Parameters.AddWithValue("@kw", "%" & keyword & "%")
-    '        If category <> "" Then cmd.Parameters.AddWithValue("@cat", category)
-    '        conn.Open()
-    '        Using reader = cmd.ExecuteReader()
-    '            While reader.Read()
-    '                ListBox1.Items.Add(reader("Title").ToString())
-    '            End While
-    '        End Using
-    '    End Using
-    'End Sub
 
     Private Sub TextBox4_TextChanged(sender As Object, e As EventArgs) Handles TextBox4.TextChanged
-        'ApplySearchAndFilter()
+        Dim dv As DataView = CType(DataGridView1.DataSource, DataTable).DefaultView
+        dv.RowFilter = $"Title LIKE '%{TextBox4.Text}%' OR Notes LIKE '%{TextBox4.Text}%'"
+
     End Sub
 
     Private Sub ComboBox2_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ComboBox2.SelectedIndexChanged
+        Dim dv As DataView = CType(DataGridView1.DataSource, DataTable).DefaultView
+        dv.RowFilter = $"Category = '{ComboBox2.Text}'"
         'ApplySearchAndFilter()
         'LoadFilteredDocuments()
     End Sub
