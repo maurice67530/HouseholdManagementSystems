@@ -40,6 +40,7 @@ Partial Class chores
         Me.Button2 = New System.Windows.Forms.Button()
         Me.Button1 = New System.Windows.Forms.Button()
         Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.TextBox4 = New System.Windows.Forms.TextBox()
         Me.Label10 = New System.Windows.Forms.Label()
         Me.cmbpriority = New System.Windows.Forms.ComboBox()
         Me.Cmbfre = New System.Windows.Forms.ComboBox()
@@ -51,6 +52,11 @@ Partial Class chores
         Me.Label4 = New System.Windows.Forms.Label()
         Me.TxtDes = New System.Windows.Forms.TextBox()
         Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.TextBox3 = New System.Windows.Forms.TextBox()
+        Me.TextBox2 = New System.Windows.Forms.TextBox()
+        Me.Label15 = New System.Windows.Forms.Label()
+        Me.Label14 = New System.Windows.Forms.Label()
+        Me.cmbChore = New System.Windows.Forms.ComboBox()
         Me.Label9 = New System.Windows.Forms.Label()
         Me.ComboBox1 = New System.Windows.Forms.ComboBox()
         Me.CmbASS = New System.Windows.Forms.ComboBox()
@@ -64,7 +70,10 @@ Partial Class chores
         Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
         Me.Button13 = New System.Windows.Forms.Button()
         Me.Label13 = New System.Windows.Forms.Label()
-        Me.cmbChore = New System.Windows.Forms.ComboBox()
+        Me.cboConflictSource = New System.Windows.Forms.ComboBox()
+        Me.Button14 = New System.Windows.Forms.Button()
+        Me.Button15 = New System.Windows.Forms.Button()
+        Me.lblWarning = New System.Windows.Forms.Label()
         CType(Me.DGVChores, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel2.SuspendLayout()
         Me.Panel1.SuspendLayout()
@@ -187,9 +196,9 @@ Partial Class chores
         '
         Me.DGVChores.BackgroundColor = System.Drawing.SystemColors.ActiveCaption
         Me.DGVChores.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DGVChores.Location = New System.Drawing.Point(10, 282)
+        Me.DGVChores.Location = New System.Drawing.Point(10, 333)
         Me.DGVChores.Name = "DGVChores"
-        Me.DGVChores.Size = New System.Drawing.Size(731, 157)
+        Me.DGVChores.Size = New System.Drawing.Size(731, 106)
         Me.DGVChores.TabIndex = 34
         '
         'Button3
@@ -226,6 +235,7 @@ Partial Class chores
         '
         Me.Panel2.BackColor = System.Drawing.SystemColors.ActiveCaption
         Me.Panel2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.Panel2.Controls.Add(Me.TextBox4)
         Me.Panel2.Controls.Add(Me.Label10)
         Me.Panel2.Controls.Add(Me.cmbpriority)
         Me.Panel2.Controls.Add(Me.Cmbfre)
@@ -242,6 +252,13 @@ Partial Class chores
         Me.Panel2.Name = "Panel2"
         Me.Panel2.Size = New System.Drawing.Size(413, 209)
         Me.Panel2.TabIndex = 29
+        '
+        'TextBox4
+        '
+        Me.TextBox4.Location = New System.Drawing.Point(281, 25)
+        Me.TextBox4.Name = "TextBox4"
+        Me.TextBox4.Size = New System.Drawing.Size(100, 22)
+        Me.TextBox4.TabIndex = 16
         '
         'Label10
         '
@@ -349,6 +366,10 @@ Partial Class chores
         '
         Me.Panel1.BackColor = System.Drawing.SystemColors.ActiveCaption
         Me.Panel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.Panel1.Controls.Add(Me.TextBox3)
+        Me.Panel1.Controls.Add(Me.TextBox2)
+        Me.Panel1.Controls.Add(Me.Label15)
+        Me.Panel1.Controls.Add(Me.Label14)
         Me.Panel1.Controls.Add(Me.cmbChore)
         Me.Panel1.Controls.Add(Me.Label9)
         Me.Panel1.Controls.Add(Me.ComboBox1)
@@ -360,8 +381,49 @@ Partial Class chores
         Me.Panel1.Controls.Add(Me.Label5)
         Me.Panel1.Location = New System.Drawing.Point(10, 54)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(314, 209)
+        Me.Panel1.Size = New System.Drawing.Size(314, 244)
         Me.Panel1.TabIndex = 30
+        '
+        'TextBox3
+        '
+        Me.TextBox3.Location = New System.Drawing.Point(207, 217)
+        Me.TextBox3.Name = "TextBox3"
+        Me.TextBox3.Size = New System.Drawing.Size(100, 20)
+        Me.TextBox3.TabIndex = 31
+        '
+        'TextBox2
+        '
+        Me.TextBox2.Location = New System.Drawing.Point(58, 204)
+        Me.TextBox2.Name = "TextBox2"
+        Me.TextBox2.Size = New System.Drawing.Size(100, 20)
+        Me.TextBox2.TabIndex = 30
+        '
+        'Label15
+        '
+        Me.Label15.AutoSize = True
+        Me.Label15.Location = New System.Drawing.Point(7, 211)
+        Me.Label15.Name = "Label15"
+        Me.Label15.Size = New System.Drawing.Size(45, 13)
+        Me.Label15.TabIndex = 29
+        Me.Label15.Text = "Label15"
+        '
+        'Label14
+        '
+        Me.Label14.AutoSize = True
+        Me.Label14.Location = New System.Drawing.Point(156, 229)
+        Me.Label14.Name = "Label14"
+        Me.Label14.Size = New System.Drawing.Size(45, 13)
+        Me.Label14.TabIndex = 28
+        Me.Label14.Text = "Label14"
+        '
+        'cmbChore
+        '
+        Me.cmbChore.FormattingEnabled = True
+        Me.cmbChore.Location = New System.Drawing.Point(234, 174)
+        Me.cmbChore.Name = "cmbChore"
+        Me.cmbChore.Size = New System.Drawing.Size(50, 21)
+        Me.cmbChore.TabIndex = 27
+        Me.cmbChore.Visible = False
         '
         'Label9
         '
@@ -465,6 +527,9 @@ Partial Class chores
         Me.Button10.TabIndex = 46
         Me.Button10.UseVisualStyleBackColor = False
         '
+        'Timer1
+        '
+        '
         'Button13
         '
         Me.Button13.BackColor = System.Drawing.SystemColors.ActiveCaption
@@ -484,20 +549,50 @@ Partial Class chores
         Me.Label13.Size = New System.Drawing.Size(0, 13)
         Me.Label13.TabIndex = 48
         '
-        'cmbChore
+        'cboConflictSource
         '
-        Me.cmbChore.FormattingEnabled = True
-        Me.cmbChore.Location = New System.Drawing.Point(234, 174)
-        Me.cmbChore.Name = "cmbChore"
-        Me.cmbChore.Size = New System.Drawing.Size(50, 21)
-        Me.cmbChore.TabIndex = 27
-        Me.cmbChore.Visible = False
+        Me.cboConflictSource.FormattingEnabled = True
+        Me.cboConflictSource.Location = New System.Drawing.Point(412, 304)
+        Me.cboConflictSource.Name = "cboConflictSource"
+        Me.cboConflictSource.Size = New System.Drawing.Size(121, 21)
+        Me.cboConflictSource.TabIndex = 49
+        '
+        'Button14
+        '
+        Me.Button14.Location = New System.Drawing.Point(569, 302)
+        Me.Button14.Name = "Button14"
+        Me.Button14.Size = New System.Drawing.Size(75, 23)
+        Me.Button14.TabIndex = 50
+        Me.Button14.Text = "Button14"
+        Me.Button14.UseVisualStyleBackColor = True
+        '
+        'Button15
+        '
+        Me.Button15.Location = New System.Drawing.Point(249, 304)
+        Me.Button15.Name = "Button15"
+        Me.Button15.Size = New System.Drawing.Size(75, 23)
+        Me.Button15.TabIndex = 51
+        Me.Button15.Text = "Button15"
+        Me.Button15.UseVisualStyleBackColor = True
+        '
+        'lblWarning
+        '
+        Me.lblWarning.AutoSize = True
+        Me.lblWarning.Location = New System.Drawing.Point(487, 267)
+        Me.lblWarning.Name = "lblWarning"
+        Me.lblWarning.Size = New System.Drawing.Size(45, 13)
+        Me.lblWarning.TabIndex = 52
+        Me.lblWarning.Text = "Label16"
         '
         'chores
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(746, 509)
+        Me.Controls.Add(Me.lblWarning)
+        Me.Controls.Add(Me.Button15)
+        Me.Controls.Add(Me.Button14)
+        Me.Controls.Add(Me.cboConflictSource)
         Me.Controls.Add(Me.Label13)
         Me.Controls.Add(Me.Button13)
         Me.Controls.Add(Me.Button10)
@@ -572,4 +667,13 @@ Partial Class chores
     Friend WithEvents Button13 As Button
     Friend WithEvents Label13 As Label
     Friend WithEvents cmbChore As ComboBox
+    Friend WithEvents cboConflictSource As ComboBox
+    Friend WithEvents Button14 As Button
+    Friend WithEvents Button15 As Button
+    Friend WithEvents TextBox3 As TextBox
+    Friend WithEvents TextBox2 As TextBox
+    Friend WithEvents Label15 As Label
+    Friend WithEvents Label14 As Label
+    Friend WithEvents TextBox4 As TextBox
+    Friend WithEvents lblWarning As Label
 End Class
