@@ -1,7 +1,7 @@
 ﻿Imports System.IO
 Imports System.Data.OleDb
 Public Class PhotoGallery
-
+    Private SelectedImagePath As String = ""
     Private Sub PhotoGallery_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
 
@@ -230,6 +230,7 @@ Public Class PhotoGallery
         'Tags as Photo Day in Calender
         'Ndamu.MarkPhotoDay(DateTimePicker1.Text, TextBox2.Text)
     End Sub
+
     Public Sub PopulateComboboxFromDatabase(ByRef comboBox As ComboBox)
         Dim conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
         Try
@@ -515,6 +516,7 @@ Public Class PhotoGallery
 
     End Sub
     Private Sub Button8_Click(sender As Object, e As EventArgs) Handles Button8.Click
+
         Dim OpenFileDialog As New OpenFileDialog()
         OpenFileDialog.Filter = "Bitmaps (*.jpg)|*.jpg"
         If OpenFileDialog.ShowDialog() = DialogResult.OK Then
