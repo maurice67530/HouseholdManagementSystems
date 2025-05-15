@@ -95,6 +95,7 @@ Partial Class Dashboard
         Me.Label25 = New System.Windows.Forms.Label()
         Me.Label26 = New System.Windows.Forms.Label()
         Me.Label27 = New System.Windows.Forms.Label()
+        Me.Label28 = New System.Windows.Forms.Label()
         Me.GroupBox1.SuspendLayout()
         Me.Panel2.SuspendLayout()
         Me.Panel1.SuspendLayout()
@@ -223,6 +224,9 @@ Partial Class Dashboard
         'Timer1
         '
         '
+        'ToolTip1
+        '
+        '
         'Panel2
         '
         Me.Panel2.BackColor = System.Drawing.SystemColors.GradientInactiveCaption
@@ -308,6 +312,7 @@ Partial Class Dashboard
         '
         Me.Panel1.BackColor = System.Drawing.SystemColors.GradientInactiveCaption
         Me.Panel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.Panel1.Controls.Add(Me.Label28)
         Me.Panel1.Controls.Add(Me.Label23)
         Me.Panel1.Controls.Add(Me.Label22)
         Me.Panel1.Controls.Add(Me.TextBox1)
@@ -322,7 +327,7 @@ Partial Class Dashboard
         Me.Panel1.Controls.Add(Me.TextBox2)
         Me.Panel1.Location = New System.Drawing.Point(12, 9)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(1186, 94)
+        Me.Panel1.Size = New System.Drawing.Size(1196, 94)
         Me.Panel1.TabIndex = 109
         '
         'Label23
@@ -784,6 +789,18 @@ Partial Class Dashboard
         Me.Label27.TabIndex = 119
         Me.Label27.Text = "Recent Photos"
         '
+        'Label28
+        '
+        Me.Label28.AutoSize = True
+        Me.Label28.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.Label28.ForeColor = System.Drawing.SystemColors.ButtonHighlight
+        Me.Label28.ImageAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.Label28.Location = New System.Drawing.Point(1172, -2)
+        Me.Label28.Name = "Label28"
+        Me.Label28.Size = New System.Drawing.Size(22, 13)
+        Me.Label28.TabIndex = 120
+        Me.Label28.Text = "out"
+        '
         'Dashboard
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -897,4 +914,5 @@ Partial Class Dashboard
     Friend WithEvents Label25 As Label
     Friend WithEvents Label26 As Label
     Friend WithEvents Label27 As Label
+    Friend WithEvents Label28 As Label
 End Class
