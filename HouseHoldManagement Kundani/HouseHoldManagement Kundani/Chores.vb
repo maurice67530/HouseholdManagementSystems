@@ -71,9 +71,9 @@ Public Class chores
         CheckRecurringChores()
         CheckPendingChores() ' Check pending chores when the form opens
 
-        TextBox4.Text = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")
-        Timer1.Interval = 1000
-        Timer1.Enabled = True
+        'Label16.Text = DateTime.Now.ToString(" HH:mm:ss")
+        'Timer1.Interval = 1000
+        'Timer1.Enabled = True
 
     End Sub
 
@@ -251,19 +251,7 @@ Public Class chores
     End Sub
 
     Private Sub DGVChores_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DGVChores.CellContentClick
-        For Each row As DataGridViewRow In DGVChores.Rows
-            Dim AssignedTo = row.Cells("AssignedTo").Value
-            Dim DueDate = CDate(row.Cells("DueDate").Value)
-
-            ' Re-run same-person, same-day logic
-            Dim matchCount = DGVChores.Rows.Cast(Of DataGridViewRow)().
-                Count(Function(r) r.Cells("AssignedTo").Value = AssignedTo AndAlso
-                                  CDate(r.Cells("DueDate").Value) = DueDate)
-
-            If matchCount > 3 Then
-                row.DefaultCellStyle.BackColor = Color.Red
-            End If
-        Next
+        CheckConflicts()
     End Sub
 
     Private Sub DGVChores_SelectionChanged(sender As Object, e As EventArgs) Handles DGVChores.SelectionChanged
@@ -293,6 +281,21 @@ Public Class chores
             Debug.WriteLine($"Stack Trace: {ex.StackTrace}")
 
         End Try
+
+        'For Each row As DataGridViewRow In DGVChores.Rows
+        '    Dim AssignedTo = row.Cells("AssignedTo").Value
+        '    Dim DueDate = CDate(row.Cells("DueDate").Value)
+
+        '    ' Re-run same-person, same-day logic
+        '    Dim matchCount = DGVChores.Rows.Cast(Of DataGridViewRow)().
+        '        Count(Function(r) r.Cells("AssignedTo").Value = AssignedTo AndAlso
+        '                          CDate(r.Cells("DueDate").Value) = DueDate)
+
+        '    If matchCount > 3 Then
+        '        row.DefaultCellStyle.BackColor = Color.Red
+        '    End If
+        'Next
+
 
     End Sub
     Public Sub PopulateComboboxFromDatabase(ByRef comboBox As ComboBox)
@@ -1002,63 +1005,62 @@ Public Class chores
     Private Sub Button13_Click(sender As Object, e As EventArgs) Handles Button13.Click
 
 
+        'Dim selectedDate As Date = DateTimePicker1.Value
+        'Dim AssignedTo As Integer = CmbASS.SelectedValue
 
+        'Dim query = "SELECT COUNT(*) FROM Chores WHERE AssignedTo = @AssignedTo AND DueDate = @Date"
+        'Using cmd As New OleDbCommand(query, conn)
+        '    conn.Open()
+        '    cmd.Parameters.AddWithValue("@AssignedTo", AssignedTo)
+        '    cmd.Parameters.AddWithValue("@DueDate", selectedDate)
+        '    Dim count As Integer = CInt(cmd.ExecuteScalar())
 
+        '    If count >= 3 Then
+        '        MessageBox.Show("This person already has 3 chores on this day.", "Conflict")
+        '        Button13.Enabled = False
+        '    Else
+        '        Button13.Enabled = True
+        '    End If
+        'End Using
 
-        Dim selectedDate As Date = DateTimePicker1.Value
-        Dim AssignedTo As Integer = CmbASS.SelectedValue
+        'Dim StartTime As DateTime = DateTime.Parse(DateTimePicker2.Text)
+        'Dim EndTime As DateTime = DateTime.Parse(DateTimePicker3.Text)
 
-        Dim query = "SELECT COUNT(*) FROM Chores WHERE AssignedTo = @AssignedTo AND DueDate = @Date"
-        Using cmd As New OleDbCommand(query, conn)
-            cmd.Parameters.AddWithValue("@AssignedTo", AssignedTo)
-            cmd.Parameters.AddWithValue("@DueDate", selectedDate)
-            Dim count As Integer = CInt(cmd.ExecuteScalar())
+        'Dim overlapQuery = "SELECT COUNT(*) FROM Chores WHERE AssignedTo = @AssignedTo AND DueDate = @Date AND ((@StartTime BETWEEN StartTime AND EndTime) OR (@EndTime BETWEEN StartTime AND EndTime))"
 
-            If count >= 3 Then
-                MessageBox.Show("This person already has 3 chores on this day.", "Conflict")
-                Button13.Enabled = False
-            Else
-                Button13.Enabled = True
-            End If
-        End Using
+        'Using cmd As New OleDbCommand(overlapQuery, conn)
+        '    cmd.Parameters.AddWithValue("@AssignedTo", AssignedTo)
+        '    cmd.Parameters.AddWithValue("@DueDate", selectedDate)
+        '    cmd.Parameters.AddWithValue("@StartTime", StartTime)
+        '    cmd.Parameters.AddWithValue("@EndTime", EndTime)
+        '    Dim conflictCount As Integer = CInt(cmd.ExecuteScalar())
 
-        Dim startTime As TimeSpan = TimeSpan.Parse(TextBox2.Text)
-        Dim endTime As TimeSpan = TimeSpan.Parse(TextBox3.Text)
+        '    If conflictCount > 0 Then
+        '        MessageBox.Show("Time overlap detected!", "Conflict")
+        '        Button13.Enabled = False
+        '    End If
+        'End Using
 
-        Dim overlapQuery = "SELECT COUNT(*) FROM Chores WHERE AssignedTo = @AssignedTo AND DueDate = @Date AND ((@StartTime BETWEEN StartTime AND EndTime) OR (@EndTime BETWEEN StartTime AND EndTime))"
+        'Dim eventQuery = "SELECT COUNT(*) FROM FamilySchedule WHERE DateOfEvent = @Date AND (@StartTime BETWEEN StartTime AND EndTime OR @EndTime BETWEEN StartTime AND EndTime)"
 
-        Using cmd As New OleDbCommand(overlapQuery, conn)
-            cmd.Parameters.AddWithValue("@AssignedTo", AssignedTo)
-            cmd.Parameters.AddWithValue("@DueDate", selectedDate)
-            cmd.Parameters.AddWithValue("@StartTime", startTime)
-            cmd.Parameters.AddWithValue("@EndTime", endTime)
-            Dim conflictCount As Integer = CInt(cmd.ExecuteScalar())
+        'Using cmd As New OleDbCommand(eventQuery, conn)
+        '    cmd.Parameters.AddWithValue("@DateOfEvent", selectedDate)
+        '    cmd.Parameters.AddWithValue("@StartTime", StartTime)
+        '    cmd.Parameters.AddWithValue("@EndTime", EndTime)
+        '    Dim eventConflict = CInt(cmd.ExecuteScalar())
 
-            If conflictCount > 0 Then
-                MessageBox.Show("Time overlap detected!", "Conflict")
-                Button13.Enabled = False
-            End If
-        End Using
+        '    If eventConflict > 0 Then
+        '        MessageBox.Show("Chore conflicts with a scheduled event.", "Calendar Conflict")
+        '        Button13.Enabled = False
+        '    End If
 
-        Dim eventQuery = "SELECT COUNT(*) FROM FamilySchedule WHERE DateOfEvent = @Date AND (@StartTime BETWEEN StartTime AND EndTime OR @EndTime BETWEEN StartTime AND EndTime)"
-
-        Using cmd As New OleDbCommand(eventQuery, conn)
-            cmd.Parameters.AddWithValue("@DateOfEvent", selectedDate)
-            cmd.Parameters.AddWithValue("@StartTime", startTime)
-            cmd.Parameters.AddWithValue("@EndTime", endTime)
-            Dim eventConflict = CInt(cmd.ExecuteScalar())
-
-            If eventConflict > 0 Then
-                MessageBox.Show("Chore conflicts with a scheduled event.", "Calendar Conflict")
-                Button13.Enabled = False
-            End If
-
-            If eventConflict Then
-                Button13.Enabled = False
-            Else
-                Button13.Enabled = True
-            End If
-        End Using
+        '    If eventConflict Then
+        '        Button13.Enabled = False
+        '    Else
+        '        Button13.Enabled = True
+        '    End If
+        'End Using
+        'conn.Close()
     End Sub
     Private Sub cmbAssignedTo_SelectedIndexChanged(sender As Object, e As EventArgs) Handles CmbASS.SelectedIndexChanged
         '    HighlightChoresForPerson(CmbASS.Text)
@@ -1071,7 +1073,11 @@ Public Class chores
     End Sub
 
     Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
-        TextBox4.Text = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")
+        ' Label16.Text = DateTime.Now.ToString(" HH:mm:ss")
+    End Sub
+
+    Private Sub Panel2_Paint(sender As Object, e As PaintEventArgs) Handles Panel2.Paint
+
     End Sub
 
     'Private Sub HighlightChoresForPerson(person As String)
@@ -1108,10 +1114,10 @@ Public Class chores
 
     'End Sub
 
-    'Private Function IsPersonAlreadyAssigned(person As String, dueDate As Date) As Boolean
+    'Private Function IsPersonAlreadyAssigned(AssignedTo As String, dueDate As Date) As Boolean
 
-    '    Dim cmd As New OleDbCommand("SELECT COUNT(*) FROM Chores WHERE AssignedTo = @person AND DueDate = @dueDate", conn)
-    '    cmd.Parameters.AddWithValue("@person", person)
+    '    Dim cmd As New OleDbCommand("SELECT COUNT(*) FROM Chores WHERE AssignedTo = @AssignedTo AND DueDate = @dueDate", conn)
+    '    cmd.Parameters.AddWithValue("@AssignedTo", AssignedTo)
     '    cmd.Parameters.AddWithValue("@dueDate", dueDate)
 
     '    conn.Open()
@@ -1140,10 +1146,14 @@ Public Class chores
 
 
 
+
+
     Dim dtChores As DataTable
 
         Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
             LoadChores()
+        'Button14.Enabled = False
+        lblWarning.Text = "Read-only mode: Save is disabled."
         End Sub
 
         Private Sub LoadChores()
@@ -1165,120 +1175,56 @@ Public Class chores
                 If row.IsNewRow Then Continue For
 
             Dim person As String = row.Cells("AssignedTo").Value.ToString()
-            Dim dates As Date = Convert.ToDateTime(row.Cells("DueDate").Value)
-            Dim cTime As String = row.Cells("ChoreTime").Value.ToString()
+            Dim cDates As Date = Convert.ToDateTime(row.Cells("DueDate").Value)
+            Dim cTime As String = row.Cells("Title").Value.ToString()
 
-            If HasConflict(person, dates, cTime) Then
+            If HasConflict(person, cDates, cTime) Then
                 row.DefaultCellStyle.BackColor = Color.Red
                 conflictFound = True
             Else
-                row.DefaultCellStyle.BackColor = color.White
+                row.DefaultCellStyle.BackColor = Color.White
                 End If
             Next
 
-        Button14.Enabled = Not conflictFound
-        lblWarning.Visible = conflictFound
-            lblWarning.Text = If(conflictFound, "⚠️ Conflict(s) detected. Check red rows.", "")
+            lblWarning.Visible = conflictFound
+            lblWarning.Text = If(conflictFound, "⚠️ Conflict(s) detected in red rows.", "No conflicts.")
         End Sub
 
-    Private Function HasConflict(person As String, dates As Date, cTime As String) As Boolean
-        ' Conflict 1: Meal Plan overlap
-        If ExistsInTable("MealPlans", "MealDate", "MealTime", person, dates, cTime) Then Return True
-
-        ' Conflict 2: Family Schedule overlap
-        If ExistsInTable("FamilySchedule", "EventDate", "EventTime", person, dates, cTime) Then Return True
-
-        ' Conflict 3: Too many chores in a day (e.g., max 2)
-        Dim count As Integer = GetChoreCount(person, dates)
-        If count > 2 Then Return True
-
+    Private Function HasConflict(person As String, cDates As Date, cTime As String) As Boolean
+        If CountMatching("MealName", "StartDate", "StartTime", person, cDates, cTime) > 0 Then Return True
+        If CountMatching("Title", "DateOfEvent", "StartTime", person, cDates, cTime) > 0 Then Return True
+        If GetChoreCount(person, cDates) > 2 Then Return True
         Return False
     End Function
 
-    Private Function ExistsInTable(table As String, dateField As String, timeField As String, person As String, dt As Date, tm As String) As Boolean
-            Dim result As Boolean = False
+    Private Function CountMatching(table As String, dateField As String, timeField As String, person As String, dt As Date, tm As String) As Integer
         Using conn As New OleDbConnection(connectionString)
-            Dim query As String = $"SELECT * FROM {table} WHERE AssignedTo = ? AND {dateField} = ? AND {timeField} = ?"
+            Dim query As String = $"SELECT COUNT(*) FROM Chores WHERE AssignedTo = ? AND DueDate = ? AND Title = ?"
             Using cmd As New OleDbCommand(query, conn)
                 cmd.Parameters.AddWithValue("?", person)
                 cmd.Parameters.AddWithValue("?", dt)
                 cmd.Parameters.AddWithValue("?", tm)
                 conn.Open()
-                Dim reader = cmd.ExecuteReader()
-                result = reader.HasRows
+                Return Convert.ToInt32(cmd.ExecuteScalar())
             End Using
         End Using
-        Return result
-        End Function
+    End Function
 
         Private Function GetChoreCount(person As String, dt As Date) As Integer
-            Dim count As Integer = 0
         Using conn As New OleDbConnection(connectionString)
             Dim query As String = "SELECT COUNT(*) FROM Chores WHERE AssignedTo = ? AND DueDate = ?"
             Using cmd As New OleDbCommand(query, conn)
                 cmd.Parameters.AddWithValue("?", person)
                 cmd.Parameters.AddWithValue("?", dt)
                 conn.Open()
-                count = Convert.ToInt32(cmd.ExecuteScalar())
+                Return Convert.ToInt32(cmd.ExecuteScalar())
             End Using
         End Using
-        Return count
-        End Function
+    End Function
 
-
-
-        Private Sub dgvChores_CellValueChanged(sender As Object, e As DataGridViewCellEventArgs) Handles dgvChores.CellValueChanged
-            CheckConflicts()
+        Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles button14.Click
+            MessageBox.Show("This database is read-only. Saving is disabled.", "Read-Only", MessageBoxButtons.OK, MessageBoxIcon.Warning)
         End Sub
-
-        Private Sub dgvChores_RowsAdded(sender As Object, e As DataGridViewRowsAddedEventArgs) Handles dgvChores.RowsAdded
-            CheckConflicts()
-        End Sub
-
-    Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles Button14.Click
-        Using conn As New OleDbConnection(connectionString)
-            conn.Open()
-
-            For Each row As DataGridViewRow In DGVChores.Rows
-                If row.IsNewRow Then Continue For
-
-                Dim id As Integer = If(IsDBNull(row.Cells("ID").Value), 0, Convert.ToInt32(row.Cells("ID").Value))
-                Dim person As String = row.Cells("AssignedTo").Value.ToString()
-                Dim desc As String = row.Cells("Title").Value.ToString()
-                Dim dt As Date = Convert.ToDateTime(row.Cells("DueDate").Value)
-                '  Dim tm As String = row.Cells("ChoreTime").Value.ToString()
-
-                Dim cmd As OleDbCommand
-
-                If id = 0 Then
-                    ' Insert
-                    Dim query As String = "INSERT INTO Chores (AssignedTo, Title, DueDate) VALUES (?, ?, ?)"
-                    cmd = New OleDbCommand(query, conn)
-                Else
-                    ' Update
-                    Dim query As String = "UPDATE Chores SET AssignedTo = ?, Title = ?, DueDate = ? WHERE ID = ?"
-                    cmd = New OleDbCommand(query, conn)
-                    cmd.Parameters.AddWithValue("?", person)
-                    cmd.Parameters.AddWithValue("?", desc)
-                    cmd.Parameters.AddWithValue("?", dt)
-                    'cmd.Parameters.AddWithValue("?", tm)
-                    cmd.Parameters.AddWithValue("?", id)
-                    cmd.ExecuteNonQuery()
-                    Continue For
-                End If
-
-                cmd.Parameters.AddWithValue("?", person)
-                cmd.Parameters.AddWithValue("?", desc)
-                cmd.Parameters.AddWithValue("?", dt)
-                ' cmd.Parameters.AddWithValue("?", tm)
-                cmd.ExecuteNonQuery()
-            Next
-        End Using
-
-        MessageBox.Show("✅ Chores saved successfully.")
-        LoadChores()
-    End Sub
-
-End Class
+    End Class
 
 
