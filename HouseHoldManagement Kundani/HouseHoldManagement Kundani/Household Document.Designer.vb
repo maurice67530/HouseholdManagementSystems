@@ -25,20 +25,20 @@ Partial Class Household_Document
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Household_Document))
         Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.Label10 = New System.Windows.Forms.Label()
         Me.DateTimePicker1 = New System.Windows.Forms.DateTimePicker()
-        Me.Label2 = New System.Windows.Forms.Label()
+        Me.Label9 = New System.Windows.Forms.Label()
+        Me.ComboBox2 = New System.Windows.Forms.ComboBox()
         Me.ComboBox3 = New System.Windows.Forms.ComboBox()
-        Me.ComboBox1 = New System.Windows.Forms.ComboBox()
+        Me.TextBox4 = New System.Windows.Forms.TextBox()
+        Me.Label3 = New System.Windows.Forms.Label()
+        Me.TextBox3 = New System.Windows.Forms.TextBox()
         Me.Label7 = New System.Windows.Forms.Label()
         Me.Label8 = New System.Windows.Forms.Label()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.ComboBox1 = New System.Windows.Forms.ComboBox()
         Me.Panel1 = New System.Windows.Forms.Panel()
-        Me.Label10 = New System.Windows.Forms.Label()
-        Me.ComboBox2 = New System.Windows.Forms.ComboBox()
-        Me.Label9 = New System.Windows.Forms.Label()
-        Me.TextBox4 = New System.Windows.Forms.TextBox()
-        Me.TextBox3 = New System.Windows.Forms.TextBox()
         Me.TextBox1 = New System.Windows.Forms.TextBox()
-        Me.Label3 = New System.Windows.Forms.Label()
         Me.TextBox2 = New System.Windows.Forms.TextBox()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.Label6 = New System.Windows.Forms.Label()
@@ -49,7 +49,6 @@ Partial Class Household_Document
         Me.Button1 = New System.Windows.Forms.Button()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
-        Me.Button4 = New System.Windows.Forms.Button()
         Me.Button5 = New System.Windows.Forms.Button()
         Me.PrintDocument1 = New System.Drawing.Printing.PrintDocument()
         Me.PrintDialog1 = New System.Windows.Forms.PrintDialog()
@@ -76,6 +75,15 @@ Partial Class Household_Document
         Me.Panel2.Size = New System.Drawing.Size(274, 231)
         Me.Panel2.TabIndex = 25
         '
+        'Label10
+        '
+        Me.Label10.AutoSize = True
+        Me.Label10.Location = New System.Drawing.Point(7, 204)
+        Me.Label10.Name = "Label10"
+        Me.Label10.Size = New System.Drawing.Size(29, 13)
+        Me.Label10.TabIndex = 37
+        Me.Label10.Text = "Filter"
+        '
         'DateTimePicker1
         '
         Me.DateTimePicker1.Location = New System.Drawing.Point(96, 105)
@@ -83,14 +91,23 @@ Partial Class Household_Document
         Me.DateTimePicker1.Size = New System.Drawing.Size(173, 20)
         Me.DateTimePicker1.TabIndex = 20
         '
-        'Label2
+        'Label9
         '
-        Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(7, 68)
-        Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(49, 13)
-        Me.Label2.TabIndex = 1
-        Me.Label2.Text = "Category"
+        Me.Label9.AutoSize = True
+        Me.Label9.Location = New System.Drawing.Point(7, 20)
+        Me.Label9.Name = "Label9"
+        Me.Label9.Size = New System.Drawing.Size(48, 13)
+        Me.Label9.TabIndex = 25
+        Me.Label9.Text = "File Path"
+        '
+        'ComboBox2
+        '
+        Me.ComboBox2.FormattingEnabled = True
+        Me.ComboBox2.Items.AddRange(New Object() {"IDs", "Bills", "Medical", "School", "Finance", "Insurance", "Work", "Mics"})
+        Me.ComboBox2.Location = New System.Drawing.Point(96, 201)
+        Me.ComboBox2.Name = "ComboBox2"
+        Me.ComboBox2.Size = New System.Drawing.Size(173, 21)
+        Me.ComboBox2.TabIndex = 36
         '
         'ComboBox3
         '
@@ -100,14 +117,28 @@ Partial Class Household_Document
         Me.ComboBox3.Size = New System.Drawing.Size(173, 21)
         Me.ComboBox3.TabIndex = 23
         '
-        'ComboBox1
+        'TextBox4
         '
-        Me.ComboBox1.FormattingEnabled = True
-        Me.ComboBox1.Items.AddRange(New Object() {"IDs", "Bills", "Medical", "School", "Finance", "Insurance", "Work", "Mics"})
-        Me.ComboBox1.Location = New System.Drawing.Point(65, 68)
-        Me.ComboBox1.Name = "ComboBox1"
-        Me.ComboBox1.Size = New System.Drawing.Size(173, 21)
-        Me.ComboBox1.TabIndex = 10
+        Me.TextBox4.Location = New System.Drawing.Point(96, 152)
+        Me.TextBox4.Name = "TextBox4"
+        Me.TextBox4.Size = New System.Drawing.Size(173, 20)
+        Me.TextBox4.TabIndex = 35
+        '
+        'Label3
+        '
+        Me.Label3.AutoSize = True
+        Me.Label3.Location = New System.Drawing.Point(5, 159)
+        Me.Label3.Name = "Label3"
+        Me.Label3.Size = New System.Drawing.Size(41, 13)
+        Me.Label3.TabIndex = 34
+        Me.Label3.Text = "Search"
+        '
+        'TextBox3
+        '
+        Me.TextBox3.Location = New System.Drawing.Point(96, 20)
+        Me.TextBox3.Name = "TextBox3"
+        Me.TextBox3.Size = New System.Drawing.Size(173, 20)
+        Me.TextBox3.TabIndex = 34
         '
         'Label7
         '
@@ -127,6 +158,24 @@ Partial Class Household_Document
         Me.Label8.TabIndex = 16
         Me.Label8.Text = "UploadedBy"
         '
+        'Label2
+        '
+        Me.Label2.AutoSize = True
+        Me.Label2.Location = New System.Drawing.Point(7, 68)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(49, 13)
+        Me.Label2.TabIndex = 1
+        Me.Label2.Text = "Category"
+        '
+        'ComboBox1
+        '
+        Me.ComboBox1.FormattingEnabled = True
+        Me.ComboBox1.Items.AddRange(New Object() {"IDs", "Bills", "Medical", "School", "Finance", "Insurance", "Work", "Mics"})
+        Me.ComboBox1.Location = New System.Drawing.Point(65, 68)
+        Me.ComboBox1.Name = "ComboBox1"
+        Me.ComboBox1.Size = New System.Drawing.Size(173, 21)
+        Me.ComboBox1.TabIndex = 10
+        '
         'Panel1
         '
         Me.Panel1.BackColor = System.Drawing.SystemColors.ActiveCaption
@@ -142,62 +191,12 @@ Partial Class Household_Document
         Me.Panel1.Size = New System.Drawing.Size(264, 231)
         Me.Panel1.TabIndex = 31
         '
-        'Label10
-        '
-        Me.Label10.AutoSize = True
-        Me.Label10.Location = New System.Drawing.Point(7, 204)
-        Me.Label10.Name = "Label10"
-        Me.Label10.Size = New System.Drawing.Size(29, 13)
-        Me.Label10.TabIndex = 37
-        Me.Label10.Text = "Filter"
-        '
-        'ComboBox2
-        '
-        Me.ComboBox2.FormattingEnabled = True
-        Me.ComboBox2.Items.AddRange(New Object() {"IDs", "Bills", "Medical", "School", "Finance", "Insurance", "Work", "Mics"})
-        Me.ComboBox2.Location = New System.Drawing.Point(96, 201)
-        Me.ComboBox2.Name = "ComboBox2"
-        Me.ComboBox2.Size = New System.Drawing.Size(155, 21)
-        Me.ComboBox2.TabIndex = 36
-        '
-        'Label9
-        '
-        Me.Label9.AutoSize = True
-        Me.Label9.Location = New System.Drawing.Point(7, 20)
-        Me.Label9.Name = "Label9"
-        Me.Label9.Size = New System.Drawing.Size(48, 13)
-        Me.Label9.TabIndex = 25
-        Me.Label9.Text = "File Path"
-        '
-        'TextBox4
-        '
-        Me.TextBox4.Location = New System.Drawing.Point(96, 152)
-        Me.TextBox4.Name = "TextBox4"
-        Me.TextBox4.Size = New System.Drawing.Size(173, 20)
-        Me.TextBox4.TabIndex = 35
-        '
-        'TextBox3
-        '
-        Me.TextBox3.Location = New System.Drawing.Point(96, 20)
-        Me.TextBox3.Name = "TextBox3"
-        Me.TextBox3.Size = New System.Drawing.Size(173, 20)
-        Me.TextBox3.TabIndex = 34
-        '
         'TextBox1
         '
         Me.TextBox1.Location = New System.Drawing.Point(65, 27)
         Me.TextBox1.Name = "TextBox1"
         Me.TextBox1.Size = New System.Drawing.Size(173, 20)
         Me.TextBox1.TabIndex = 18
-        '
-        'Label3
-        '
-        Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(5, 159)
-        Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(41, 13)
-        Me.Label3.TabIndex = 34
-        Me.Label3.Text = "Search"
         '
         'TextBox2
         '
@@ -245,7 +244,7 @@ Partial Class Household_Document
         '
         Me.Button3.BackColor = System.Drawing.SystemColors.ActiveCaption
         Me.Button3.Image = CType(resources.GetObject("Button3.Image"), System.Drawing.Image)
-        Me.Button3.Location = New System.Drawing.Point(360, 444)
+        Me.Button3.Location = New System.Drawing.Point(467, 446)
         Me.Button3.Name = "Button3"
         Me.Button3.Size = New System.Drawing.Size(75, 48)
         Me.Button3.TabIndex = 29
@@ -256,7 +255,7 @@ Partial Class Household_Document
         Me.Button2.BackColor = System.Drawing.SystemColors.ActiveCaption
         Me.Button2.BackgroundImage = CType(resources.GetObject("Button2.BackgroundImage"), System.Drawing.Image)
         Me.Button2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
-        Me.Button2.Location = New System.Drawing.Point(12, 444)
+        Me.Button2.Location = New System.Drawing.Point(15, 444)
         Me.Button2.Name = "Button2"
         Me.Button2.Size = New System.Drawing.Size(75, 48)
         Me.Button2.TabIndex = 28
@@ -267,7 +266,7 @@ Partial Class Household_Document
         Me.Button1.BackColor = System.Drawing.SystemColors.ActiveCaption
         Me.Button1.BackgroundImage = CType(resources.GetObject("Button1.BackgroundImage"), System.Drawing.Image)
         Me.Button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
-        Me.Button1.Location = New System.Drawing.Point(138, 444)
+        Me.Button1.Location = New System.Drawing.Point(172, 444)
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(75, 48)
         Me.Button1.TabIndex = 27
@@ -283,24 +282,18 @@ Partial Class Household_Document
         Me.Label1.TabIndex = 26
         Me.Label1.Text = "HouseHold Document"
         '
-        'Button4
-        '
-        Me.Button4.Location = New System.Drawing.Point(467, 444)
-        Me.Button4.Name = "Button4"
-        Me.Button4.Size = New System.Drawing.Size(75, 48)
-        Me.Button4.TabIndex = 32
-        Me.Button4.Text = "Button4"
-        Me.Button4.UseVisualStyleBackColor = True
-        '
         'Button5
         '
         Me.Button5.BackColor = System.Drawing.SystemColors.ActiveCaption
         Me.Button5.Image = CType(resources.GetObject("Button5.Image"), System.Drawing.Image)
-        Me.Button5.Location = New System.Drawing.Point(251, 444)
+        Me.Button5.Location = New System.Drawing.Point(318, 446)
         Me.Button5.Name = "Button5"
         Me.Button5.Size = New System.Drawing.Size(75, 48)
         Me.Button5.TabIndex = 33
         Me.Button5.UseVisualStyleBackColor = False
+        '
+        'PrintDocument1
+        '
         '
         'PrintDialog1
         '
@@ -310,9 +303,8 @@ Partial Class Household_Document
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(554, 506)
+        Me.ClientSize = New System.Drawing.Size(554, 499)
         Me.Controls.Add(Me.Button5)
-        Me.Controls.Add(Me.Button4)
         Me.Controls.Add(Me.Panel2)
         Me.Controls.Add(Me.Panel1)
         Me.Controls.Add(Me.DataGridView1)
@@ -352,7 +344,6 @@ Partial Class Household_Document
     Friend WithEvents Label1 As Label
     Friend WithEvents ToolTip1 As ToolTip
     Friend WithEvents TextBox3 As TextBox
-    Friend WithEvents Button4 As Button
     Friend WithEvents Button5 As Button
     Friend WithEvents TextBox4 As TextBox
     Friend WithEvents Label3 As Label
