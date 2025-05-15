@@ -39,7 +39,7 @@ Public Class Dashboard
         'LoadRecentPhotos()
         DisplayPhoto()
         'SetupTimer()
-        StartPhotoSlideshow
+        StartPhotoSlideshow()
 
         ' Show current date, month, and time
         Label17.Text = DateTime.Now.ToString("dddd, dd MMMM yyyy - hh:mm tt")
@@ -1196,5 +1196,10 @@ Public Class Dashboard
 
     Private Sub Chart2_Click(sender As Object, e As EventArgs) Handles Chart2.Click
 
+    End Sub
+
+    Private Sub Label28_Click(sender As Object, e As EventArgs) Handles Label28.Click
+        Login.Show()
+        Me.Hide()
     End Sub
 End Class

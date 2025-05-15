@@ -1,7 +1,7 @@
 ﻿Imports System.IO
 Imports System.Data.OleDb
 Public Class PhotoGallery
-
+    Private SelectedImagePath As String = ""
     Private Sub PhotoGallery_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
 
@@ -178,58 +178,82 @@ Public Class PhotoGallery
 
     End Sub
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+        '   Try
+        ''validate due date is not in the past
+        'If TaskForm.DateTimePicker1.Value = DateTime.Now Then
+        '    MessageBox.Show("Due Date cannot be in the past", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+        '    Return
+        'End If
+
+        ''validate priority is selected
+        'If String.IsNullOrEmpty(TextBox1.Text) Then
+        '    MessageBox.Show("Please Enter a Title for the Photos", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+        '    Return
+        'End If
+
+        'Using conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
+
+        '        conn.Open()
+        '        Dim cmd As New OleDbCommand($"INSERT INTO Photos ([Description], [FilePath], [DateAdded], [FamilyMember], [Photographer], [Album]) VALUES (?, ?, ?, ?, ?, ?)", conn)
+
+        '        cmd.Parameters.Clear()
+        '        'cmd.Parameters.AddWithValue("@PhotoID", PhotoID.textbox1.Text)
+        '        cmd.Parameters.AddWithValue("@Description", TextBox2.Text)
+        '        cmd.Parameters.AddWithValue("@FilePath", PictureBox1.ImageLocation)
+        '        cmd.Parameters.AddWithValue("@DateAdded", DateTimePicker1.Value)
+        '        cmd.Parameters.AddWithValue("@FamilyMember", ComboBox1.SelectedItem)
+        '        cmd.Parameters.AddWithValue("@Photographer", TextBox3.Text)
+        '        cmd.Parameters.AddWithValue("@Album", ComboBox2.SelectedItem)
+
+        '        cmd.ExecuteNonQuery()
+        '        conn.Close()
+        '        '            LoadPhotodataFromDatabase()
+        '        '            MsgBox("Photo Added!" & vbCrLf &
+        '        '                   "Description: " & TextBox2.Text & vbCrLf &
+        '        '                    "FilePath: " & PictureBox1.ImageLocation & vbCrLf &
+        '        '                    "DateAdded: " & DateTimePicker1.Value & vbCrLf &
+        '        '                    "FamilyMember: " & ComboBox1.SelectedItem & vbCrLf &
+        '        '                    "Album: " & ComboBox2.SelectedItem & vbCrLf &
+        '        '                    "Photographer: " & TextBox3.Text)
+
+        '    End Using
+        '    '    Catch ex As OleDbException
+        '    '        Debug.WriteLine($"Database error: {ex.Message}")
+        '    '        Debug.Write($"Stack Trace: {ex.StackTrace}")
+        '    '        MessageBox.Show("Error saving Photos to database: Please check the connectivity." & ex.Message & vbNewLine & ex.StackTrace, "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        '    '    Catch ex As Exception
+        '    '        Debug.WriteLine($"General error: {ex.Message}")
+
+        '    '        MessageBox.Show("Unexpected Error: " & ex.Message & vbNewLine & ex.StackTrace, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        '    '    Finally
+        '    '   End Try
+        '    '    'Tags as Photo Day in Calender
+        '    'Ndamu.MarkPhotoDay(DateTimePicker1.Text, TextBox2.Text)
+
+        If String.IsNullOrEmpty(loadedImagePath) OrElse Not File.Exists(loadedImagePath) Then
+                MessageBox.Show("No image loaded or original file missing.")
+                Return
+            End If
+
+        Dim destinationFolder As String = "C:\Users\Murangi\Source\Repos\maurice67530\HouseholdManagementSystems\Photo Gallery"
+
         Try
-            ''validate due date is not in the past
-            'If TaskForm.DateTimePicker1.Value = DateTime.Now Then
-            '    MessageBox.Show("Due Date cannot be in the past", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
-            '    Return
-            'End If
+            ' Create destination folder if not exists
+            If Not Directory.Exists(destinationFolder) Then
+                Directory.CreateDirectory(destinationFolder)
+            End If
 
-            ''validate priority is selected
-            'If String.IsNullOrEmpty(TextBox1.Text) Then
-            '    MessageBox.Show("Please Enter a Title for the Photos", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
-            '    Return
-            'End If
+            Dim fileName As String = Path.GetFileName(loadedImagePath)
+            Dim destPath As String = Path.Combine(destinationFolder, fileName)
 
-            Using conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
-
-                conn.Open()
-                Dim cmd As New OleDbCommand($"INSERT INTO Photos ([Description], [FilePath], [DateAdded], [FamilyMember], [Photographer], [Album]) VALUES (?, ?, ?, ?, ?, ?)", conn)
-
-                cmd.Parameters.Clear()
-                'cmd.Parameters.AddWithValue("@PhotoID", PhotoID.textbox1.Text)
-                cmd.Parameters.AddWithValue("@Description", TextBox2.Text)
-                cmd.Parameters.AddWithValue("@FilePath", PictureBox1.ImageLocation)
-                cmd.Parameters.AddWithValue("@DateAdded", DateTimePicker1.Value)
-                cmd.Parameters.AddWithValue("@FamilyMember", ComboBox1.SelectedItem)
-                cmd.Parameters.AddWithValue("@Photographer", TextBox3.Text)
-                cmd.Parameters.AddWithValue("@Album", ComboBox2.SelectedItem)
-
-                cmd.ExecuteNonQuery()
-                conn.Close()
-                LoadPhotodataFromDatabase()
-                MsgBox("Photo Added!" & vbCrLf &
-                       "Description: " & TextBox2.Text & vbCrLf &
-                        "FilePath: " & PictureBox1.ImageLocation & vbCrLf &
-                        "DateAdded: " & DateTimePicker1.Value & vbCrLf &
-                        "FamilyMember: " & ComboBox1.SelectedItem & vbCrLf &
-                        "Album: " & ComboBox2.SelectedItem & vbCrLf &
-                        "Photographer: " & TextBox3.Text)
-
-            End Using
-        Catch ex As OleDbException
-            Debug.WriteLine($"Database error: {ex.Message}")
-            Debug.Write($"Stack Trace: {ex.StackTrace}")
-            MessageBox.Show("Error saving Photos to database: Please check the connectivity." & ex.Message & vbNewLine & ex.StackTrace, "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            ' Copy the file (overwrite if exists)
+            File.Copy(loadedImagePath, destPath, overwrite:=True)
+            MessageBox.Show("Image saved/copied successfully.")
         Catch ex As Exception
-            Debug.WriteLine($"General error: {ex.Message}")
-
-            MessageBox.Show("Unexpected Error: " & ex.Message & vbNewLine & ex.StackTrace, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-        Finally
+            MessageBox.Show("Error saving image: " & ex.Message)
         End Try
-        'Tags as Photo Day in Calender
-        'Ndamu.MarkPhotoDay(DateTimePicker1.Text, TextBox2.Text)
     End Sub
+
     Public Sub PopulateComboboxFromDatabase(ByRef comboBox As ComboBox)
         Dim conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
         Try
@@ -514,13 +538,26 @@ Public Class PhotoGallery
         'LoadFilteredMealPlan()
 
     End Sub
+
+    Private loadedImagePath As String = String.Empty ' To store selected image path
     Private Sub Button8_Click(sender As Object, e As EventArgs) Handles Button8.Click
-        Dim OpenFileDialog As New OpenFileDialog()
-        OpenFileDialog.Filter = "Bitmaps (*.jpg)|*.jpg"
-        If OpenFileDialog.ShowDialog() = DialogResult.OK Then
-            PictureBox1.ImageLocation = OpenFileDialog.FileName
-            TextBox5.Text = OpenFileDialog.FileName
+
+        Dim openFileDialog As New OpenFileDialog()
+        openFileDialog.Title = "Select an image"
+        openFileDialog.Filter = "Image Files|*.jpg;*.jpeg;*.png;*.bmp"
+
+        If openFileDialog.ShowDialog() = DialogResult.OK Then
+            loadedImagePath = openFileDialog.FileName
+            PictureBox1.Image = Image.FromFile(loadedImagePath)
         End If
+
+
+        'Dim OpenFileDialog As New OpenFileDialog()
+        'OpenFileDialog.Filter = "Bitmaps (*.jpg)|*.jpg"
+        'If OpenFileDialog.ShowDialog() = DialogResult.OK Then
+        '    PictureBox1.ImageLocation = OpenFileDialog.FileName
+        '    TextBox5.Text = OpenFileDialog.FileName
+        'End If
     End Sub
     Private Sub Label9_Click(sender As Object, e As EventArgs) Handles Label9.Click
 

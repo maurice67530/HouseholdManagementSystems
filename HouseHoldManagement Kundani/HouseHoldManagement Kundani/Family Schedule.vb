@@ -105,9 +105,9 @@ Public Class Family_Schedule
         PopulateComboboxFromDatabase(ComboBox1)
         LoadScheduleFromDatabase()
 
-        AutoCreateChoreEvents()
-        AutoAddMealTimes()
-        AutoCreateTaskReminders()
+        ' AutoCreateChoreEvents()
+        'AutoAddMealTimes()
+        'AutoCreateTaskReminders()
         'MarkPhotoDayEvents()
 
         ' IntegrateChores()
@@ -339,7 +339,7 @@ Public Class Family_Schedule
     End Sub
     Private Sub AutoCreateChoreEvents()
         Dim conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
-        Dim da As New OleDbDataAdapter("SELECT Title, DueDate FROM Chores", conn)
+        Dim da As New OleDbDataAdapter("SELECT Title, DueDate, AssignedTo FROM Chores", conn)
         Dim dt As New DataTable
         da.Fill(dt)
 
@@ -351,7 +351,7 @@ Public Class Family_Schedule
             cmd.Parameters.AddWithValue("?", CDate(row("DueDate")))
             cmd.Parameters.AddWithValue("?", #9:00:00 AM#)
             cmd.Parameters.AddWithValue("?", #10:00:00 AM#)
-            cmd.Parameters.AddWithValue("?", "Family")
+            cmd.Parameters.AddWithValue("?", row("AssignedTo").ToString())
             cmd.Parameters.AddWithValue("?", "Chore")
 
             conn.Open()
@@ -366,7 +366,7 @@ Public Class Family_Schedule
 
     Private Sub AutoAddMealTimes()
         Dim conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
-        Dim da As New OleDbDataAdapter("SELECT MealName, StartDate FROM MealPlans", conn)
+        Dim da As New OleDbDataAdapter("SELECT MealName, StartDate, Description FROM MealPlans", conn)
         Dim dt As New DataTable
         da.Fill(dt)
 
@@ -378,7 +378,7 @@ Public Class Family_Schedule
             cmd.Parameters.AddWithValue("?", CDate(row("StartDate")))
             cmd.Parameters.AddWithValue("?", #1:00:00 PM#)
             cmd.Parameters.AddWithValue("?", #2:00:00 PM#)
-            cmd.Parameters.AddWithValue("?", "Family")
+            cmd.Parameters.AddWithValue("?", row("Description").ToString())
             cmd.Parameters.AddWithValue("?", "Meal")
 
             conn.Open()
@@ -393,7 +393,7 @@ Public Class Family_Schedule
 
     Private Sub AutoCreateTaskReminders()
         Dim conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
-        Dim da As New OleDbDataAdapter("SELECT Title, DueDate FROM Tasks", conn)
+        Dim da As New OleDbDataAdapter("SELECT Title, DueDate, AssignedTo FROM Tasks", conn)
         Dim dt As New DataTable
         da.Fill(dt)
 
@@ -405,7 +405,7 @@ Public Class Family_Schedule
             cmd.Parameters.AddWithValue("?", CDate(row("DueDate")).AddDays(-1)) ' Reminder 1 day before
             cmd.Parameters.AddWithValue("?", #8:00:00 AM#)
             cmd.Parameters.AddWithValue("?", #8:30:00 AM#)
-            cmd.Parameters.AddWithValue("?", "Family")
+            cmd.Parameters.AddWithValue("?", row("AssignedTo").ToString())
             cmd.Parameters.AddWithValue("?", "Task")
 
             conn.Open()
