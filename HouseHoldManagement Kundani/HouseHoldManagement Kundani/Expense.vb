@@ -195,7 +195,7 @@ Public Class Expense
                 cmd.Parameters.AddWithValue("StartDate", StartDate)
                 cmd.Parameters.AddWithValue("Recurring", Recurring)
                 cmd.Parameters.AddWithValue("Paid", Paid)
-                cmd.Parameters.AddWithValue("ID", ID)
+                'cmd.Parameters.AddWithValue("ID", ID)
 
 
                 cmd.ExecuteNonQuery()
@@ -813,10 +813,10 @@ Public Class Expense
                 ' Loop through each row to modify and insert into target table
                 For Each row As DataRow In dt.Rows
                     ' Read the 'Paid' status
-                    Dim paidStatus As String = Convert.ToString(row("Paid")).Trim().ToLower()
+                    Dim paidStatus As String = Convert.ToString(row("Recurring")).Trim().ToLower()
 
                     ' Proceed only if 'Paid' is "no"
-                    If paidStatus = "no" Then
+                    If paidStatus = "True" Then
                         ' Prepare the new change date for next payment
                         Dim currentStartDate As DateTime = Convert.ToDateTime(row("StartDate"))
                         Dim nextPaymentDate As DateTime = currentStartDate.AddMonths(1) ' or your logic for next payment
