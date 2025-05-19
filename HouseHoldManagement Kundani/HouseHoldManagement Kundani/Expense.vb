@@ -3,19 +3,14 @@ Imports System.Net.Mail
 Imports System.Net
 Imports System.Data.OleDb
 Public Class Expense
-
     Dim conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
-
     ' Create a ToolTip object
     Private toolTip As New ToolTip()
     Private toolTip1 As New ToolTip()
-
     Private mealPlanData As DataTable
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         Debug.WriteLine("Entering btnSubmit")
-
-
         Try
             'Dim txtRecentUpdate As New TextBox()
             'txtRecentUpdate.Text = $" Expense Saved at {DateTime.Now:HH:MM:ss}"
@@ -57,7 +52,6 @@ Public Class Expense
                 'txtRecentUpdate.Text = $" Expense updated at {DateTime.Now:HH:MM}"
 
                 cmd.Parameters.Clear()
-
 
                 'cmd.Parameters.AddWithValue("@ExpenseID", expense.ExpenseID)
                 cmd.Parameters.AddWithValue("@Amount", expense.Amount)
@@ -119,7 +113,7 @@ Public Class Expense
             MessageBox.Show("An Unexpected error occured.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
         conn.Close()
-        'LoadExpenseDataFromDatabase()
+        LoadExpenseDataFromDatabase()
         Debug.WriteLine("Exiting btnSubmit")
     End Sub
 
@@ -135,17 +129,6 @@ Public Class Expense
         End If
 
         Try
-
-            'txtRecentUpdate.Text = $" Expense updated at {DateTime.Now:HH:MM}"
-            'txtRecentUpdate.Location = New Point(65, Label20.Top + 45)
-            'txtRecentUpdate.AutoSize = False
-            'txtRecentUpdate.Font = New Font("Microsoft Sans Serif", 9, FontStyle.Regular)
-            'txtRecentUpdate.ForeColor = Color.Black
-            'Me.Controls.Add(txtRecentUpdate)
-
-            'TextBox8.Text = $" Expense updated at {DateTime.Now:HH:MM}"
-            'TextBox9.Text = $" Expense updated at {DateTime.Now:HH:MM}"
-
 
             Debug.WriteLine("User confirmed btnEdit")
             'Dim expenseId As Integer = Convert.ToInt32(selectedRow.Cells("ID").Value) ' Replace "ID" with your actual column name  
@@ -170,15 +153,12 @@ Public Class Expense
                 Dim Recurring As String = CheckBox1.Checked
                 Dim Paid As String = ComboBox6.SelectedItem.ToString
 
-
                 ' Get the ID of the selected row (assuming your table has a primary key named "ID")  
                 Dim selectedRow As DataGridViewRow = DataGridView1.SelectedRows(0)
                 Dim ID As Integer = Convert.ToInt32(selectedRow.Cells("ID").Value) ' Change "ID" to your primary key column name  
 
                 ' Create an OleDbCommand to update the Expense data in the database  
                 Dim cmd As New OleDbCommand("UPDATE [Expense] SET [Amount] = ?, [Description] = ?, [Tags] = ?, [Currency] =?, [Category] = ?, [Paymentmethod] = ?, [Frequency] = ?, [ApprovalStatus] = ?, [DateOfexpenses] = ?, [Person] = ?, [BillName] = ?, [StartDate] = ?, [Recurring] = ?, [Paid] = ? WHERE [ID] = ?", conn)
-
-                ' Set the parameter values from the UI controls  
 
                 'cmd.Parameters.AddWithValue("@ExpenseID", ExpenseID)
                 cmd.Parameters.AddWithValue("@Amount", Amount)
@@ -196,7 +176,6 @@ Public Class Expense
                 cmd.Parameters.AddWithValue("Recurring", Recurring)
                 cmd.Parameters.AddWithValue("Paid", Paid)
                 'cmd.Parameters.AddWithValue("ID", ID)
-
 
                 cmd.ExecuteNonQuery()
 
@@ -405,13 +384,10 @@ Public Class Expense
             ' Close the database connection  
             conn.Close()
         End Try
-
         'PopulateMessagesFromDatabase()
         LoadExpenseDataFromDatabase()
         PopulateComboboxFromDatabase(ComboBox3)
     End Sub
-
-
     Public Sub PopulatelistboxFromDatabase(ByRef listbox As ListBox)
 
         Dim connect As New OleDbConnection(HouseHoldManagment_Module.connectionString)
@@ -502,12 +478,10 @@ Public Class Expense
             Dim query As String = "SELECT Amount, BillName, StartDate FROM Expense"
             Dim cmd As New OleDbCommand(query, connect)
             Dim reader As OleDbDataReader = cmd.ExecuteReader()
-
             ' 3. Bind the retrieved data to the combobox  
             While reader.Read()
                 MessageBox.Show($"{reader("Amount")} {reader("BillName")} {reader("StartDate")}")
             End While
-
             ' 4. Close the database connection  
             reader.Close()
         Catch ex As Exception
@@ -523,7 +497,6 @@ Public Class Expense
             End If
         End Try
     End Sub
-
     Public Sub PopulateComboboxFromDatabase(ByRef comboBox As ComboBox)
         Dim conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
         Try
@@ -541,13 +514,11 @@ Public Class Expense
             End While
             'close the database
             reader.Close()
-
         Catch ex As Exception
             'handle any exeptions that may occur  
             Debug.WriteLine("failed to populate combobox")
             Debug.WriteLine($"Stack Trace: {ex.StackTrace}")
             MessageBox.Show($"Error: {ex.StackTrace}")
-
         Finally
             'close the database connection
             If conn.State = ConnectionState.Open Then
@@ -561,7 +532,6 @@ Public Class Expense
         ' Calculate total expenses  
         Dim totalExpenses As Decimal = Decimal.Parse(TextBox2.Text)
         Dim averageExpenses As Decimal = 0
-
         Try
             Debug.WriteLine("User confirmed btnCalculate")
             ' Calculate average expenses based on frequency  
@@ -599,10 +569,8 @@ Public Class Expense
         Debug.WriteLine("Exiting btnCalculate")
 
     End Sub
-
     Private Sub DataGridView1_SelectionChanged(sender As Object, e As EventArgs) Handles DataGridView1.SelectionChanged
         Try
-
             Debug.WriteLine("selecting data in the datagridview")
             If DataGridView1.SelectedRows.Count > 0 Then
                 Dim selectedRow As DataGridViewRow = DataGridView1.SelectedRows(0)
@@ -635,7 +603,6 @@ Public Class Expense
                 CType(ctrl, TextBox).Clear()
             End If
         Next
-
         ' Clear ComboBoxes  
         For Each ctrl As Control In FORM.Controls
             If TypeOf ctrl Is ComboBox Then
@@ -749,7 +716,6 @@ Public Class Expense
         'SaveChangedDateToAnotherTable()
         'PopulatelistboxFromDatabase(ListBox1)
     End Sub
-
     Sub Main()
         Using connection As New OleDbConnection(connectionString)
             Try
@@ -783,8 +749,6 @@ Public Class Expense
                         End If
                     End Using
                 End Using
-
-
             Catch ex As Exception
                 Console.WriteLine("Error: " & ex.Message)
                 ' Important: Log the error for debugging
@@ -809,7 +773,6 @@ Public Class Expense
                         adapter.Fill(dt)
                     End Using
                 End Using
-
                 ' Loop through each row to modify and insert into target table
                 For Each row As DataRow In dt.Rows
                     ' Read the 'Paid' status
@@ -840,13 +803,11 @@ Public Class Expense
                         ' Optionally, you can handle the case where Paid = "Yes"
                         ' For example, log or ignore
                         'MessageBox.Show("Payments that are not Recurring were not paid " & DateTime.Now.ToString())
-
                     End If
                 Next
-
                 'MessageBox.Show("Payments with updated dates saved successfully at " & DateTime.Now.ToString())
-                UpdateDatesBasedOnFrequency()
-                Mainm()
+                'UpdateDatesBasedOnFrequency()
+                'Mainm()
             Catch ex As Exception
                 MessageBox.Show("Error fetching data: " & ex.Message)
             End Try
@@ -877,7 +838,7 @@ Public Class Expense
                         result = MsgBox(Datas, MessageBoxButtons.YesNo)
 
                         If result = DialogResult.Yes Then ' Perform saving actions
-                            Main()
+                            Mainm()
                             SaveChangedDateToAnotherTable()
                             PopulatelistboxFromDatabase(ListBox1)
                             'UpdateDatesBasedOnFrequency()
@@ -885,7 +846,6 @@ Public Class Expense
                             'MessageBox.Show("Payments with updated dates saved successfully") 'Example
 
                         Else ' Perform actions for No 
-
                             MessageBox.Show("Payments were cancelled.")
                             'Example
                         End If
@@ -897,134 +857,111 @@ Public Class Expense
             End Try
         End Using
     End Sub
-    Private Sub Button11_Click(sender As Object, e As EventArgs) Handles Button11.Click
-        Dim result As DialogResult
-        ' Create a custom message box 
-        result = MessageBox.Show("Do you want to save changes?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
-        If result = DialogResult.Yes Then ' Perform saving actions
-
-            MessageBox.Show("Saving...") 'Example
-        Else ' Perform actions for No 
-            MessageBox.Show("Changes not saved.")
-            'Example
-        End If
-    End Sub
-    Public Sub UpdateDatesBasedOnFrequency()
+    Sub Mainm()
         Using conn As New OleDbConnection(connectionString)
             conn.Open()
 
-            ' Retrieve tasks with their last updated date and frequency
-            Dim selectCommand As String = "SELECT ID, StartDate, Frequency FROM Expense"
-            Dim command As New OleDbCommand(selectCommand, conn)
+            Dim selectAllCmd As New OleDbCommand("SELECT ID, StartDate, Frequency FROM Expense", conn)
 
-            Using reader As OleDbDataReader = command.ExecuteReader()
+            Using reader As OleDbDataReader = selectAllCmd.ExecuteReader()
                 While reader.Read()
-                    Dim taskId As Integer = reader.GetInt32(0)
-                    Dim lastUpdated As DateTime = reader.GetDateTime(1)
-                    Dim frequency As Integer = reader.GetInt32(2)
+                    Dim recordId As Integer = reader("ID")
+                    Dim currentDateObj As Object = reader("StartDate")
+                    Dim frequencyStrObj As Object = reader("Frequency")
 
-                    Dim daysSinceLastUpdate As Integer = (DateTime.Now - lastUpdated).Days
+                    If currentDateObj IsNot Nothing AndAlso Not Convert.IsDBNull(currentDateObj) AndAlso
+                   frequencyStrObj IsNot Nothing AndAlso Not Convert.IsDBNull(frequencyStrObj) Then
 
-                    If daysSinceLastUpdate >= frequency Then
-                        ' Time to update the date
-                        UpdateTaskDate(taskId, conn)
+                        Dim dateValue As DateTime
+                        Dim frequencyStr As String = frequencyStrObj.ToString()
+
+                        If DateTime.TryParse(currentDateObj.ToString(), dateValue) Then
+                            Dim daysToAdd As Integer = GetDaysFromFrequency(frequencyStr)
+
+                            If daysToAdd > 0 Then
+                                Dim newDate As DateTime = dateValue.AddDays(daysToAdd)
+
+                                ' Update the record
+                                Dim updateCmd As New OleDbCommand("UPDATE Expense SET StartDate = ? WHERE ID = ?", conn)
+                                updateCmd.Parameters.AddWithValue("?", newDate)
+                                updateCmd.Parameters.AddWithValue("?", recordId)
+                                updateCmd.ExecuteNonQuery()
+                            Else
+                                MessageBox.Show($"Unknown frequency '{frequencyStr}' for record ID {recordId}. Skipping.")
+                            End If
+                        Else
+                            MessageBox.Show($"Invalid StartDate for record ID {recordId}. Skipping.")
+                        End If
                     End If
                 End While
             End Using
         End Using
     End Sub
 
-    Private Sub UpdateTaskDate(Id As Integer, conn As OleDbConnection)
-        Dim updateQuery As String = "UPDATE Expense SET StartDate = ? WHERE ID = ?"
-        Using updateCommand As New OleDbCommand(updateQuery, conn)
-            updateCommand.Parameters.AddWithValue("?", DateTime.Now)
-            updateCommand.Parameters.AddWithValue("?", Id)
-            updateCommand.ExecuteNonQuery()
-        End Using
-    End Sub
-    'Sub Mainm()
+    ' Helper function to convert string frequency to days
+    Function GetDaysFromFrequency(freq As String) As Integer
+        Select Case freq.Trim().ToLower()
+            Case "daily"
+                Return 1
+            Case "weekly"
+                Return 7
+            Case "monthly"
+                Return 30
+            Case "yearly"
+                Return 365
+                ' Add more cases as needed
+            Case Else
+                Return 0 ' Unknown frequency
+        End Select
+    End Function
 
+
+    'Sub Mainm()
     '    ' The ID or unique identifier for the record you want to update
-    '    Dim recordId As Integer = 1
+    '    Dim recordId As Integer = "?"
 
     '    Using conn As New OleDbConnection(connectionString)
     '        conn.Open()
 
-    '        ' Step 1: Retrieve the current date from the database
-    '        Dim selectCmd As New OleDbCommand("SELECT StartDate FROM Expense WHERE ID = ?", conn)
+    '        ' Step 1: Retrieve current date and frequency from the database
+    '        Dim selectCmd As New OleDbCommand("SELECT StartDate, Frequency FROM Expense WHERE ID = ?", conn)
     '        selectCmd.Parameters.AddWithValue("?", recordId)
 
-    '        Dim currentDate As Object = selectCmd.ExecuteScalar()
+    '        Using reader As OleDbDataReader = selectCmd.ExecuteReader()
+    '            If reader.Read() Then
+    '                Dim currentDateObj As Object = reader("StartDate")
+    '                Dim frequencyObj As Object = reader("Frequency")
 
-    '        If currentDate IsNot Nothing AndAlso Not Convert.IsDBNull(currentDate) Then
-    '            Dim dateValue As DateTime = Convert.ToDateTime(currentDate)
+    '                If currentDateObj IsNot Nothing AndAlso Not Convert.IsDBNull(currentDateObj) AndAlso
+    '               frequencyObj IsNot Nothing AndAlso Not Convert.IsDBNull(frequencyObj) Then
 
-    '            ' Step 2: Add 30 days
-    '            Dim newDate As DateTime = dateValue.AddDays(30)
+    '                    Dim dateValue As DateTime = Convert.ToDateTime(currentDateObj)
+    '                    Dim frequencyDays As Integer = Convert.ToInt32(frequencyObj)
 
-    '            ' Step 3: Update the database with the new date
-    '            Dim updateCmd As New OleDbCommand("UPDATE Expense SET StartDate = ? WHERE ID = ?", conn)
-    '            updateCmd.Parameters.AddWithValue("?", newDate)
-    '            updateCmd.Parameters.AddWithValue("?", recordId)
+    '                    ' Step 2: Add days based on frequency
+    '                    Dim newDate As DateTime = dateValue.AddDays(frequencyDays)
 
-    '            Dim rowsAffected As Integer = updateCmd.ExecuteNonQuery()
+    '                    ' Step 3: Update the database with the new date
+    '                    Dim updateCmd As New OleDbCommand("UPDATE Expense SET StartDate = ? WHERE ID = ?", conn)
+    '                    updateCmd.Parameters.AddWithValue("?", newDate)
+    '                    updateCmd.Parameters.AddWithValue("?", recordId)
 
-    '            If rowsAffected > 0 Then
-    '                MessageBox.Show("Date updated successfully.")
+    '                    Dim rowsAffected As Integer = updateCmd.ExecuteNonQuery()
+
+    '                    If rowsAffected > 0 Then
+    '                        MessageBox.Show("Date updated successfully.")
+    '                    Else
+    '                        MessageBox.Show("No record updated.")
+    '                    End If
+    '                Else
+    '                    MessageBox.Show("Record not found or date/frequency is null.")
+    '                End If
     '            Else
-    '                MessageBox.Show("No record updated.")
+    '                MessageBox.Show("Record not found.")
     '            End If
-    '        Else
-    '            MessageBox.Show("Record not found or date is null.")
-    '        End If
+    '        End Using
     '    End Using
     'End Sub
-    Sub Mainm()
-        ' The ID or unique identifier for the record you want to update
-        Dim recordId As Integer = 1
-
-        Using conn As New OleDbConnection(connectionString)
-            conn.Open()
-
-            ' Step 1: Retrieve current date and frequency from the database
-            Dim selectCmd As New OleDbCommand("SELECT StartDate, Frequency FROM Expense WHERE ID = ?", conn)
-            selectCmd.Parameters.AddWithValue("?", recordId)
-
-            Using reader As OleDbDataReader = selectCmd.ExecuteReader()
-                If reader.Read() Then
-                    Dim currentDateObj As Object = reader("StartDate")
-                    Dim frequencyObj As Object = reader("Frequency")
-
-                    If currentDateObj IsNot Nothing AndAlso Not Convert.IsDBNull(currentDateObj) AndAlso
-                   frequencyObj IsNot Nothing AndAlso Not Convert.IsDBNull(frequencyObj) Then
-
-                        Dim dateValue As DateTime = Convert.ToDateTime(currentDateObj)
-                        Dim frequencyDays As Integer = Convert.ToInt32(frequencyObj)
-
-                        ' Step 2: Add days based on frequency
-                        Dim newDate As DateTime = dateValue.AddDays(frequencyDays)
-
-                        ' Step 3: Update the database with the new date
-                        Dim updateCmd As New OleDbCommand("UPDATE Expense SET StartDate = ? WHERE ID = ?", conn)
-                        updateCmd.Parameters.AddWithValue("?", newDate)
-                        updateCmd.Parameters.AddWithValue("?", recordId)
-
-                        Dim rowsAffected As Integer = updateCmd.ExecuteNonQuery()
-
-                        If rowsAffected > 0 Then
-                            MessageBox.Show("Date updated successfully.")
-                        Else
-                            MessageBox.Show("No record updated.")
-                        End If
-                    Else
-                        MessageBox.Show("Record not found or date/frequency is null.")
-                    End If
-                Else
-                    MessageBox.Show("Record not found.")
-                End If
-            End Using
-        End Using
-    End Sub
 
     Private Sub Button10_Click(sender As Object, e As EventArgs) Handles Button10.Click
         Try
@@ -1048,7 +985,7 @@ Public Class Expense
                     Dim Recurring As String = row.Cells("Recurring").Value.ToString().ToLower
                     Dim paid As String = row.Cells("Paid").Value.ToString.ToLower
 
-                    row.Visible = Amount.Contains(SearchTerm) OrElse BillName.Contains(SearchTerm)
+                    row.Visible = BillName.Contains(SearchTerm) OrElse Category.Contains(SearchTerm)
                 End If
             Next
         Catch ex As Exception
@@ -1056,7 +993,5 @@ Public Class Expense
             'MessageBox.Show("An error occured while Searching.", "Search Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
     End Sub
-
-
 End Class
 
