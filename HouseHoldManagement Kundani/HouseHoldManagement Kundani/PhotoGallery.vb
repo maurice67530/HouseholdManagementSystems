@@ -104,25 +104,25 @@ Public Class PhotoGallery
     End Sub
     Public Sub LoadPhotodataFromDatabase()
         Try
-            '  Dim dataTable As DataTable = HouseHold.GetData("SELECT * FROM Expense")
-            ' DataGridView1.DataSource = DataTable
-            Debug.WriteLine("Populate Datagridview: Datagridview populated successfully.")
+            Debug.WriteLine("Populate Datagridview: DataGridView populated successfully.")
             Using conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
                 conn.Open()
 
                 Dim tableName As String = "Photos"
+                Dim query As String = $"SELECT * FROM [{tableName}]"  ' [] are useful in case of spaces in table names
 
-                Dim cmd As New OleDbCommand($"SELECT*FROM {tableName}", conn)
-
-                Dim da As New OleDbDataAdapter(cmd)
-                Dim dt As New DataTable
-                da.Fill(dt)
-                DataGridView1.DataSource = dt
+                Using cmd As New OleDbCommand(query, conn)
+                    Using da As New OleDbDataAdapter(cmd)
+                        Dim dt As New DataTable
+                        da.Fill(dt)
+                        DataGridView1.DataSource = dt
+                    End Using
+                End Using
             End Using
         Catch ex As Exception
-            Debug.WriteLine("Failed to populate Gatagridview")
-            Debug.Write($"Stack Trace: {ex.StackTrace}")
-            MessageBox.Show($"Error Loading photos data from database: {ex.Message}", "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Debug.WriteLine("Failed to populate DataGridView")
+            Debug.WriteLine($"Stack Trace: {ex.StackTrace}")
+            MessageBox.Show($"Error loading photos data from database: {ex.Message}", "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
     End Sub
     Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
@@ -182,124 +182,39 @@ Public Class PhotoGallery
 
     'Dim folderPath As String = Application.StartupPath & "\Photo Gallery\"
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
-        '   Try
-        'validate due date is not in the past
-        'If TaskForm.DateTimePicker1.Value = DateTime.Now Then
-        '    MessageBox.Show("Due Date cannot be in the past", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
-        '    Return
-        'End If
-
-        ''validate priority is selected
-        'If String.IsNullOrEmpty(TextBox1.Text) Then
-        '    MessageBox.Show("Please Enter a Title for the Photos", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
-        '    Return
-        'End If
-
-        'Using conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
-
-        '        conn.Open()
-        '        Dim cmd As New OleDbCommand($"INSERT INTO Photos ([Description], [FilePath], [DateAdded], [FamilyMember], [Photographer], [Album]) VALUES (?, ?, ?, ?, ?, ?)", conn)
-
-        '        cmd.Parameters.Clear()
-        '        'cmd.Parameters.AddWithValue("@PhotoID", PhotoID.textbox1.Text)
-        '        cmd.Parameters.AddWithValue("@Description", TextBox2.Text)
-        '        cmd.Parameters.AddWithValue("@FilePath", PictureBox1.ImageLocation)
-        '        cmd.Parameters.AddWithValue("@DateAdded", DateTimePicker1.Value)
-        '        cmd.Parameters.AddWithValue("@FamilyMember", ComboBox1.SelectedItem)
-        '        cmd.Parameters.AddWithValue("@Photographer", TextBox3.Text)
-        '        cmd.Parameters.AddWithValue("@Album", ComboBox2.SelectedItem)
-
-        '        cmd.ExecuteNonQuery()
-        '        conn.Close()
-        '        '            LoadPhotodataFromDatabase()
-        '        '            MsgBox("Photo Added!" & vbCrLf &
-        '        '                   "Description: " & TextBox2.Text & vbCrLf &
-        '        '                    "FilePath: " & PictureBox1.ImageLocation & vbCrLf &
-        '        '                    "DateAdded: " & DateTimePicker1.Value & vbCrLf &
-        '        '                    "FamilyMember: " & ComboBox1.SelectedItem & vbCrLf &
-        '        '                    "Album: " & ComboBox2.SelectedItem & vbCrLf &
-        '        '                    "Photographer: " & TextBox3.Text)
-
-        '    End Using
-        '    '    Catch ex As OleDbException
-        '    '        Debug.WriteLine($"Database error: {ex.Message}")
-        '    '        Debug.Write($"Stack Trace: {ex.StackTrace}")
-        '    '        MessageBox.Show("Error saving Photos to database: Please check the connectivity." & ex.Message & vbNewLine & ex.StackTrace, "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-        '    '    Catch ex As Exception
-        '    '        Debug.WriteLine($"General error: {ex.Message}")
-
-        '    '        MessageBox.Show("Unexpected Error: " & ex.Message & vbNewLine & ex.StackTrace, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-        '    '    Finally
-        '    '   End Try
-        '    '    'Tags as Photo Day in Calender
-        '    'Ndamu.MarkPhotoDay(DateTimePicker1.Text, TextBox2.Text)
-
-        'If String.IsNullOrEmpty(loadedImagePath) OrElse Not File.Exists(loadedImagePath) Then
-        '    MessageBox.Show("No image loaded or original file missing.")
-        '    Return
-        'End If
-
-        'Dim destinationFolder As String = "C:\Users\Murangi\Source\Repos\maurice67530\HouseholdManagementSystems\Photo Gallery"
-
-        'Try
-        '    ' Create destination folder if not exists
-        '    If Not Directory.Exists(destinationFolder) Then
-        '        Directory.CreateDirectory(destinationFolder)
-        '    End If
-
-        '    Dim fileName As String = Path.GetFileName(loadedImagePath)
-        '    Dim destPath As String = Path.Combine(destinationFolder, fileName)
-
-        '    ' Copy the file (overwrite if exists)
-        '    File.Copy(loadedImagePath, destPath, overwrite:=True)
-        '    MessageBox.Show("Image saved/copied successfully.")
-        'Catch ex As Exception
-        '    MessageBox.Show("Error saving image: " & ex.Message)
-        'End Try
-
-
-
-
-        ' Select image
         If OpenFileDialog1.ShowDialog = DialogResult.OK Then
             Try
-                ' Get image name only (not full path)
                 Dim selectedPath As String = OpenFileDialog1.FileName
                 Dim imageName As String = Path.GetFileName(selectedPath)
-                Dim destinationPath As String = Path.Combine(folderPath, imageName)
+                Dim destinationPath As String = Path.Combine(Folderpath, imageName)
 
-                ' Create folder if it doesn't exist
-                If Not Directory.Exists(folderPath) Then
-                    Directory.CreateDirectory(folderPath)
+                If Not Directory.Exists(Folderpath) Then
+                    Directory.CreateDirectory(Folderpath)
                 End If
 
-                ' Copy image to shared folder
                 File.Copy(selectedPath, destinationPath, True)
 
-                ' Display in PictureBox
-                PictureBox1.Image = Image.FromFile(destinationPath)
-                PictureBox1.ImageLocation = destinationPath
+                ' Save only the full UNC path to database for portability
+                Dim dbFilePath As String = destinationPath
 
-                ' Save to database
-                conn.Open()
-                Dim cmd As New OleDbCommand("INSERT INTO Photos ([Description], [FilePath], [DateAdded], [FamilyMember], [Photographer], [Album]) VALUES (?, ?, ?, ?, ?, ?)", conn)
-                cmd.Parameters.AddWithValue("?", TextBox2.Text)
-                cmd.Parameters.AddWithValue("?", imageName) ' Only save the image name
-                cmd.Parameters.AddWithValue("?", DateTimePicker1.Value)
-                cmd.Parameters.AddWithValue("?", ComboBox1.Text)
-                cmd.Parameters.AddWithValue("?", TextBox3.Text)
-                cmd.Parameters.AddWithValue("?", ComboBox2.Text)
-                cmd.ExecuteNonQuery()
-                conn.Close()
+                Using conn As New OleDb.OleDbConnection(connectionString)
+                    conn.Open()
+                    Using cmd As New OleDb.OleDbCommand("INSERT INTO Photos ([Description], [FilePath], [DateAdded], [FamilyMember], [Photographer], [Album]) VALUES (?, ?, ?, ?, ?, ?)", conn)
+                        cmd.Parameters.AddWithValue("?", TextBox2.Text)
+                        cmd.Parameters.AddWithValue("?", dbFilePath)
+                        cmd.Parameters.AddWithValue("?", DateTimePicker1.Value)
+                        cmd.Parameters.AddWithValue("?", ComboBox1.Text)
+                        cmd.Parameters.AddWithValue("?", TextBox3.Text)
+                        cmd.Parameters.AddWithValue("?", ComboBox2.Text)
+                        cmd.ExecuteNonQuery()
+                    End Using
+                End Using
 
-                MessageBox.Show("Photo saved to database and folder.")
-
+                MessageBox.Show("Photo saved to database and network folder.")
             Catch ex As Exception
-                conn.Close()
                 MessageBox.Show("Error: " & ex.Message)
             End Try
         End If
-
     End Sub
 
     Public Sub PopulateComboboxFromDatabase(ByRef comboBox As ComboBox)
@@ -344,33 +259,28 @@ Public Class PhotoGallery
     End Sub
     Private Sub DataGridView1_SelectionChanged(sender As Object, e As EventArgs) Handles DataGridView1.SelectionChanged
         Try
-            Debug.WriteLine("Selecting data in the GDV: Data selected")
             If DataGridView1.SelectedRows.Count > 0 Then
                 Dim selectedRow As DataGridViewRow = DataGridView1.SelectedRows(0)
 
-                ' Load the data from the selected row into UI controls  
-                TextBox2.Text = selectedRow.Cells("Description").Value.ToString()
-                PictureBox1.ImageLocation = selectedRow.Cells("FilePath").Value.ToString()
-                DateTimePicker1.Text = selectedRow.Cells("DateAdded").Value.ToString()
-                ComboBox1.Text = selectedRow.Cells("FamilyMember").Value.ToString()
-                TextBox3.Text = selectedRow.Cells("Photographer").Value.ToString()
+                ' Populate controls
+                TextBox2.Text = selectedRow.Cells("Description").Value?.ToString()
+                DateTimePicker1.Text = selectedRow.Cells("DateAdded").Value?.ToString()
+                ComboBox1.Text = selectedRow.Cells("FamilyMember").Value?.ToString()
+                TextBox3.Text = selectedRow.Cells("Photographer").Value?.ToString()
+                ComboBox2.Text = selectedRow.Cells("Album").Value?.ToString()
 
-            End If
-
-            If DataGridView1.SelectedRows.Count > 0 Then
-                Dim FilePath As String = DataGridView1.SelectedRows(0).Cells("FilePath").Value.ToString()
-
-                If System.IO.File.Exists(FilePath) Then
-                    PictureBox1.Image = Image.FromFile(FilePath)
+                ' Try to load the image from the UNC path in FilePath
+                Dim filePath As String = selectedRow.Cells("FilePath").Value?.ToString()
+                If Not String.IsNullOrWhiteSpace(filePath) AndAlso File.Exists(filePath) Then
+                    PictureBox1.ImageLocation = filePath
+                    PictureBox1.Image = Image.FromFile(filePath)
                 Else
                     PictureBox1.Image = Nothing
-                    MessageBox.Show("IMAGE NOT FOUND")
+                    MessageBox.Show("Image not found at " & filePath)
                 End If
             End If
-
         Catch ex As Exception
-            Debug.WriteLine("Data not selected: Error")
-            Debug.Write($"Stack Trace: {ex.StackTrace}")
+            MessageBox.Show("Error selecting data: " & ex.Message)
         End Try
     End Sub
 
@@ -636,5 +546,31 @@ Public Class PhotoGallery
     End Sub
     Private Sub Button7_Click(sender As Object, e As EventArgs) Handles Button7.Click
         DataGridView1.Sort(DataGridView1.Columns("DateAdded"), System.ComponentModel.ListSortDirection.Ascending)
+    End Sub
+
+    Private Sub Button9_Click(sender As Object, e As EventArgs)
+        Try
+            Using conn As New OleDbConnection(connectionString)
+                conn.Open()
+                Dim selectCmd As New OleDbCommand("SELECT [ID], [FilePath] FROM [Photos]", conn)
+                Dim da As New OleDbDataAdapter(selectCmd)
+                Dim dt As New DataTable()
+                da.Fill(dt)
+
+                For Each row As DataRow In dt.Rows
+                    Dim fileName As String = row("FilePath").ToString()
+                    If Not fileName.StartsWith("\\MUDAUMURANGI") Then
+                        Dim newPath = System.IO.Path.Combine(Folderpath, fileName)
+                        Dim updateCmd As New OleDbCommand("UPDATE [Photos] SET [FilePath]=? WHERE [ID]=?", conn)
+                        updateCmd.Parameters.AddWithValue("?", newPath)
+                        updateCmd.Parameters.AddWithValue("?", row("ID"))
+                        updateCmd.ExecuteNonQuery()
+                    End If
+                Next
+            End Using
+            MessageBox.Show("FilePath values updated!", "Maintenance", MessageBoxButtons.OK, MessageBoxIcon.Information)
+        Catch ex As Exception
+            MessageBox.Show("Error updating paths: " & ex.Message)
+        End Try
     End Sub
 End Class
