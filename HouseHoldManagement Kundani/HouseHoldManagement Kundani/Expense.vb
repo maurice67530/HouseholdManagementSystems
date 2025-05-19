@@ -195,7 +195,7 @@ Public Class Expense
                 cmd.Parameters.AddWithValue("StartDate", StartDate)
                 cmd.Parameters.AddWithValue("Recurring", Recurring)
                 cmd.Parameters.AddWithValue("Paid", Paid)
-                'cmd.Parameters.AddWithValue("ID", ID)
+                cmd.Parameters.AddWithValue("ID", ID)
 
 
                 cmd.ExecuteNonQuery()
@@ -877,7 +877,7 @@ Public Class Expense
                         result = MsgBox(Datas, MessageBoxButtons.YesNo)
 
                         If result = DialogResult.Yes Then ' Perform saving actions
-                            Main()
+                            Mainm()
                             SaveChangedDateToAnotherTable()
                             PopulatelistboxFromDatabase(ListBox1)
                             'UpdateDatesBasedOnFrequency()
