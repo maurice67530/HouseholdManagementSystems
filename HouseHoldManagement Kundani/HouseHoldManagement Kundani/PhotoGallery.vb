@@ -1,7 +1,9 @@
 ﻿Imports System.IO
 Imports System.Data.OleDb
 Public Class PhotoGallery
-    Private SelectedImagePath As String = ""
+    Private SelectedImagePath As String = " "
+
+    Public Folderpath As String = "\\MUDAUMURANGI\Users\Murangi\Source\Repos\maurice67530\HouseholdManagementSystems\Photo Gallery"
     Private Sub PhotoGallery_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
 
@@ -178,10 +180,10 @@ Public Class PhotoGallery
 
     End Sub
 
-    Dim folderPath As String = Application.StartupPath & "\Photo Gallery\"
+    'Dim folderPath As String = Application.StartupPath & "\Photo Gallery\"
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         '   Try
-        ''validate due date is not in the past
+        'validate due date is not in the past
         'If TaskForm.DateTimePicker1.Value = DateTime.Now Then
         '    MessageBox.Show("Due Date cannot be in the past", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
         '    Return
