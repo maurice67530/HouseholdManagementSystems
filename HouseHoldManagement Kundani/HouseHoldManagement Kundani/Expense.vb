@@ -627,7 +627,7 @@ Public Class Expense
             If mealPlanData.Rows.Count > 0 Then
                 PrintDocument1.Print()
             Else
-                MessageBox.Show("No meal plans found for the selected period.", "Print Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                MessageBox.Show("No Expense found for the selected period.", "Print Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
             End If
         End If
     End Sub
@@ -833,13 +833,13 @@ Public Class Expense
                         ' Attempt to parse StartDate
                         If Date.TryParse(StartDateObj.ToString(), StartDate) Then
                             If StartDate = today Then
-                                dataList.Add($"This item is Due to be Paid : BillName: {BillName}, Amount: {Amount}, StartDate: {StartDate.ToShortDateString()}")
+                                dataList.Add($"This Payments is Due to be Paid : BillName: {BillName}, Amount: {Amount}, StartDate: {StartDate.ToShortDateString()}")
                             End If
                         End If
                     End While
 
                     If dataList.Count = 0 Then
-                        MessageBox.Show("No items are scheduled for today.")
+                        MessageBox.Show("No Payments are scheduled for today.")
                         Return
                     End If
 
