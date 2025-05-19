@@ -113,7 +113,7 @@ Public Class Expense
             MessageBox.Show("An Unexpected error occured.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
         conn.Close()
-        'LoadExpenseDataFromDatabase()
+        LoadExpenseDataFromDatabase()
         Debug.WriteLine("Exiting btnSubmit")
     End Sub
 
@@ -152,7 +152,6 @@ Public Class Expense
                 Dim StartDate As String = DateTimePicker2.Value
                 Dim Recurring As String = CheckBox1.Checked
                 Dim Paid As String = ComboBox6.SelectedItem.ToString
-
 
                 ' Get the ID of the selected row (assuming your table has a primary key named "ID")  
                 Dim selectedRow As DataGridViewRow = DataGridView1.SelectedRows(0)
@@ -986,7 +985,7 @@ Public Class Expense
                     Dim Recurring As String = row.Cells("Recurring").Value.ToString().ToLower
                     Dim paid As String = row.Cells("Paid").Value.ToString.ToLower
 
-                    row.Visible = Amount.Contains(SearchTerm) OrElse BillName.Contains(SearchTerm)
+                    row.Visible = BillName.Contains(SearchTerm) OrElse Category.Contains(SearchTerm)
                 End If
             Next
         Catch ex As Exception
