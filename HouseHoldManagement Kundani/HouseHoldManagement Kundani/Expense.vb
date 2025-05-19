@@ -175,7 +175,7 @@ Public Class Expense
                 cmd.Parameters.AddWithValue("StartDate", StartDate)
                 cmd.Parameters.AddWithValue("Recurring", Recurring)
                 cmd.Parameters.AddWithValue("Paid", Paid)
-                cmd.Parameters.AddWithValue("ID", ID)
+                'cmd.Parameters.AddWithValue("ID", ID)
 
                 cmd.ExecuteNonQuery()
 

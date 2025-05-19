@@ -105,9 +105,9 @@ Public Class Family_Schedule
         PopulateComboboxFromDatabase(ComboBox1)
         LoadScheduleFromDatabase()
 
-        AutoCreateChoreEvents()
-        AutoAddMealTimes()
-        AutoCreateTaskReminders()
+        'AutoCreateChoreEvents()
+        'AutoAddMealTimes()
+        'AutoCreateTaskReminders()
         'MarkPhotoDayEvents()
 
         ' IntegrateChores()
