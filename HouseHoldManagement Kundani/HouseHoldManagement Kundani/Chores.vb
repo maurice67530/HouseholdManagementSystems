@@ -1009,64 +1009,7 @@ Public Class chores
     End Sub
 
     Private Sub Button13_Click(sender As Object, e As EventArgs) Handles Button13.Click
-
-
-        'Dim selectedDate As Date = DateTimePicker1.Value
-        'Dim AssignedTo As Integer = CmbASS.SelectedValue
-
-        'Dim query = "SELECT COUNT(*) FROM Chores WHERE AssignedTo = @AssignedTo AND DueDate = @Date"
-        'Using cmd As New OleDbCommand(query, conn)
-        '    conn.Open()
-        '    cmd.Parameters.AddWithValue("@AssignedTo", AssignedTo)
-        '    cmd.Parameters.AddWithValue("@DueDate", selectedDate)
-        '    Dim count As Integer = CInt(cmd.ExecuteScalar())
-
-        '    If count >= 3 Then
-        '        MessageBox.Show("This person already has 3 chores on this day.", "Conflict")
-        '        Button13.Enabled = False
-        '    Else
-        '        Button13.Enabled = True
-        '    End If
-        'End Using
-
-        'Dim StartTime As DateTime = DateTime.Parse(DateTimePicker2.Text)
-        'Dim EndTime As DateTime = DateTime.Parse(DateTimePicker3.Text)
-
-        'Dim overlapQuery = "SELECT COUNT(*) FROM Chores WHERE AssignedTo = @AssignedTo AND DueDate = @Date AND ((@StartTime BETWEEN StartTime AND EndTime) OR (@EndTime BETWEEN StartTime AND EndTime))"
-
-        'Using cmd As New OleDbCommand(overlapQuery, conn)
-        '    cmd.Parameters.AddWithValue("@AssignedTo", AssignedTo)
-        '    cmd.Parameters.AddWithValue("@DueDate", selectedDate)
-        '    cmd.Parameters.AddWithValue("@StartTime", StartTime)
-        '    cmd.Parameters.AddWithValue("@EndTime", EndTime)
-        '    Dim conflictCount As Integer = CInt(cmd.ExecuteScalar())
-
-        '    If conflictCount > 0 Then
-        '        MessageBox.Show("Time overlap detected!", "Conflict")
-        '        Button13.Enabled = False
-        '    End If
-        'End Using
-
-        'Dim eventQuery = "SELECT COUNT(*) FROM FamilySchedule WHERE DateOfEvent = @Date AND (@StartTime BETWEEN StartTime AND EndTime OR @EndTime BETWEEN StartTime AND EndTime)"
-
-        'Using cmd As New OleDbCommand(eventQuery, conn)
-        '    cmd.Parameters.AddWithValue("@DateOfEvent", selectedDate)
-        '    cmd.Parameters.AddWithValue("@StartTime", StartTime)
-        '    cmd.Parameters.AddWithValue("@EndTime", EndTime)
-        '    Dim eventConflict = CInt(cmd.ExecuteScalar())
-
-        '    If eventConflict > 0 Then
-        '        MessageBox.Show("Chore conflicts with a scheduled event.", "Calendar Conflict")
-        '        Button13.Enabled = False
-        '    End If
-
-        '    If eventConflict Then
-        '        Button13.Enabled = False
-        '    Else
-        '        Button13.Enabled = True
-        '    End If
-        'End Using
-        'conn.Close()
+        CheckDailyChoreOverload()
     End Sub
     Private Sub cmbAssignedTo_SelectedIndexChanged(sender As Object, e As EventArgs) Handles CmbASS.SelectedIndexChanged
         Dim selectedPerson As String = CmbASS.SelectedItem.ToString()
@@ -1107,9 +1050,7 @@ Public Class chores
 
     ''maaano
 
-    Private Sub Button14_Click(sender As Object, e As EventArgs) Handles Button14.Click
-        ' ValidateChoresAndHighlight()
-    End Sub
+
 
     Private Sub CheckTimeOverlapForPerson(person As String)
         Dim conflictRows As New HashSet(Of Integer)
@@ -1154,8 +1095,58 @@ Public Class chores
         If conflictRows.Count > 0 Then
             Button1.Visible = False
             MessageBox.Show("This person has multiple chores at the same hour. Please fix the conflicts.", "Time Conflict", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+        Else
+            Button1.Visible = True
         End If
+
     End Sub
+
+
+
+
+
+
+
+
+
+
+
+    Private Sub CheckDailyChoreOverload()
+        Dim choreCounts As New Dictionary(Of String, Dictionary(Of Date, Integer))
+
+        For Each row As DataGridViewRow In DGVChores.Rows
+            If Not row.IsNewRow Then
+                Dim person = row.Cells("AssignedTo").Value?.ToString().Trim()
+                Dim freq = row.Cells("Frequency").Value?.ToString().Trim()
+                Dim dateStr = row.Cells("DueDate").Value?.ToString().Trim()
+
+                If Not String.IsNullOrEmpty(person) AndAlso freq = "Daily" AndAlso Not String.IsNullOrEmpty(dateStr) Then
+                    Dim choreDate As Date
+                    If Date.TryParse(dateStr, choreDate) Then
+                        If Not choreCounts.ContainsKey(person) Then
+                            choreCounts(person) = New Dictionary(Of Date, Integer)
+                        End If
+                        If Not choreCounts(person).ContainsKey(choreDate.Date) Then
+                            choreCounts(person)(choreDate.Date) = 0
+                        End If
+                        choreCounts(person)(choreDate.Date) += 1
+                    End If
+                End If
+            End If
+        Next
+
+        ' Check for overloads and show message
+        For Each person In choreCounts.Keys
+            For Each choreDate In choreCounts(person).Keys
+                If choreCounts(person)(choreDate) >= 3 Then
+                    MessageBox.Show($"{person} has {choreCounts(person)(choreDate)} chores on {choreDate:d}. Please review the schedule.",
+                                    "Daily Chore Overload", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                    Exit Sub ' Show message once for the first overload found
+                End If
+            Next
+        Next
+    End Sub
+
 End Class
 
 
