@@ -295,14 +295,14 @@ Public Class Expense
 
         Try
             Debug.WriteLine("LoadExpenseDataFromDatabase")
-            Using connect As New OleDbConnection(HouseHoldManagment_Module.connectionString)
-                connect.Open()
+            Using conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
+                conn.Open()
 
                 ' Update the table name if necessary  
                 Dim tableName As String = "Expense"
 
                 ' Create an OleDbCommand to select the data from the database  
-                Dim cmd As New OleDbCommand($"SELECT * FROM {tableName}", connect)
+                Dim cmd As New OleDbCommand($"SELECT * FROM {tableName}", conn)
 
                 ' Create a DataAdapter and fill a DataTable  
                 Dim da As New OleDbDataAdapter(cmd)
@@ -430,12 +430,12 @@ Public Class Expense
         End Try
     End Sub
     Sub Mainn()
-        Using connection As New OleDbConnection(connectionString)
+        Using conn As New OleDbConnection(connectionString)
             Try
-                connection.Open()
+                conn.Open()
                 ' SQL query to select tasks where due date is today or earlier and status not yet updated
                 Dim query As String = "SELECT ID, StartDate FROM Expense WHERE StartDate = ? AND Paid = No"
-                Using command As New OleDbCommand(query, connection)
+                Using command As New OleDbCommand(query, conn)
                     command.Parameters.AddWithValue("?", DateTime.Today)
                     'command.Parameters.AddWithValue("@OverdueStatus", "Overdue")
 
@@ -452,7 +452,7 @@ Public Class Expense
                         ' Update each task's status to "Overdue"
                         For Each taskId As Integer In tasksToUpdate
                             Dim updateQuery As String = "UPDATE Expense SET Paid =  Yes WHERE ID = ?"
-                            Using updateCmd As New OleDbCommand(updateQuery, connection)
+                            Using updateCmd As New OleDbCommand(updateQuery, conn)
                                 updateCmd.Parameters.AddWithValue("Paid", "Yes")
                                 updateCmd.Parameters.AddWithValue("?", taskId)
                                 updateCmd.ExecuteNonQuery()
@@ -627,7 +627,7 @@ Public Class Expense
             If mealPlanData.Rows.Count > 0 Then
                 PrintDocument1.Print()
             Else
-                MessageBox.Show("No meal plans found for the selected period.", "Print Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                MessageBox.Show("No Expense found for the selected period.", "Print Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
             End If
         End If
     End Sub
@@ -813,43 +813,50 @@ Public Class Expense
             End Try
         End Using
     End Sub
+
     Private Sub DisplayDataInMessageBox()
-        Dim query As String = "SELECT * FROM Expense " ' Replace with your table name
+        Dim query As String = "SELECT * FROM Expense" ' Fetch all records
 
         Using conn As New OleDbConnection(connectionString)
             Dim command As New OleDbCommand(query, conn)
             Try
                 conn.Open()
                 Using reader As OleDbDataReader = command.ExecuteReader()
+                    Dim today As Date = DateTime.Now.Date
                     Dim dataList As New List(Of String)
                     While reader.Read()
-                        ' Assuming your table has columns named "ID" and "Name"
                         Dim BillName As Object = reader("BillName")
                         Dim Amount As Object = reader("Amount")
-                        Dim StartDate As Object = reader("StartDate")
-                        dataList.Add($"This item is Due to be Paid : BillName: {BillName}, Amount: {Amount}, StartDate: {StartDate}")
+                        Dim StartDateObj As Object = reader("StartDate")
+                        Dim StartDate As Date
+
+                        ' Attempt to parse StartDate
+                        If Date.TryParse(StartDateObj.ToString(), StartDate) Then
+                            If StartDate = today Then
+                                dataList.Add($"This Payments is Due to be Paid : BillName: {BillName}, Amount: {Amount}, StartDate: {StartDate.ToShortDateString()}")
+                            End If
+                        End If
                     End While
+
+                    If dataList.Count = 0 Then
+                        MessageBox.Show("No Payments are scheduled for today.")
+                        Return
+                    End If
 
                     ' Display each record in a message box
                     For Each Datas In dataList
                         Dim result As DialogResult
+                        result = MessageBox.Show(Datas, "Confirmation", MessageBoxButtons.YesNo)
 
-                        ' Create a custom message box 
-                        result = MsgBox(Datas, MessageBoxButtons.YesNo)
-
-                        If result = DialogResult.Yes Then ' Perform saving actions
+                        If result = DialogResult.Yes Then
                             Mainm()
                             SaveChangedDateToAnotherTable()
                             PopulatelistboxFromDatabase(ListBox1)
-                            'UpdateDatesBasedOnFrequency()
+                            LoadExpenseDataFromDatabase()
                             MessageBox.Show("Payments with updated dates saved successfully at " & DateTime.Now.ToString())
-                            'MessageBox.Show("Payments with updated dates saved successfully") 'Example
-
-                        Else ' Perform actions for No 
+                        Else
                             MessageBox.Show("Payments were cancelled.")
-                            'Example
                         End If
-
                     Next
                 End Using
             Catch ex As Exception
@@ -857,6 +864,51 @@ Public Class Expense
             End Try
         End Using
     End Sub
+    'Private Sub DisplayDataInMessageBox()
+    '    Dim query As String = "SELECT * FROM Expense " ' Replace with your table name
+
+    '    Using conn As New OleDbConnection(connectionString)
+    '        Dim command As New OleDbCommand(query, conn)
+    '        Try
+    '            conn.Open()
+    '            Using reader As OleDbDataReader = command.ExecuteReader()
+    '                Dim dataList As New List(Of String)
+    '                While reader.Read()
+    '                    ' Assuming your table has columns named "ID" and "Name"
+    '                    Dim BillName As Object = reader("BillName")
+    '                    Dim Amount As Object = reader("Amount")
+    '                    Dim StartDate As Object = reader("StartDate")
+    '                    dataList.Add($"This item is Due to be Paid : BillName: {BillName}, Amount: {Amount}, StartDate: {StartDate}")
+    '                End While
+
+    '                ' Display each record in a message box
+    '                For Each Datas In dataList
+    '                    Dim result As DialogResult
+
+    '                    ' Create a custom message box 
+    '                    result = MsgBox(Datas, MessageBoxButtons.YesNo)
+
+    '                    If result = DialogResult.Yes Then ' Perform saving actions
+    '                        Mainm()
+    '                        SaveChangedDateToAnotherTable()
+    '                        PopulatelistboxFromDatabase(ListBox1)
+    '                        LoadExpenseDataFromDatabase()
+    '                        'UpdateDatesBasedOnFrequency()
+    '                        MessageBox.Show("Payments with updated dates saved successfully at " & DateTime.Now.ToString())
+    '                        'MessageBox.Show("Payments with updated dates saved successfully") 'Example
+
+    '                    Else ' Perform actions for No 
+    '                        MessageBox.Show("Payments were cancelled.")
+    '                        'Example
+    '                    End If
+
+    '                Next
+    '            End Using
+    '        Catch ex As Exception
+    '            MessageBox.Show("Error: " & ex.Message)
+    '        End Try
+    '    End Using
+    'End Sub
     Sub Mainm()
         Using conn As New OleDbConnection(connectionString)
             conn.Open()
@@ -915,7 +967,6 @@ Public Class Expense
         End Select
     End Function
 
-
     'Sub Mainm()
     '    ' The ID or unique identifier for the record you want to update
     '    Dim recordId As Integer = "?"
@@ -962,7 +1013,6 @@ Public Class Expense
     '        End Using
     '    End Using
     'End Sub
-
     Private Sub Button10_Click(sender As Object, e As EventArgs) Handles Button10.Click
         Try
             Dim SearchTerm As String = TextBox9.Text.ToLower
@@ -990,7 +1040,7 @@ Public Class Expense
             Next
         Catch ex As Exception
             Debug.WriteLine($" Error in Search Functionality: {ex.Message}")
-            'MessageBox.Show("An error occured while Searching.", "Search Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            MessageBox.Show("Try to Search Again.", "Search Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
     End Sub
 End Class
