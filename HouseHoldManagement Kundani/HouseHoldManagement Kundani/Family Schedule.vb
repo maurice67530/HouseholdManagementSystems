@@ -500,73 +500,117 @@ Public Class Family_Schedule
         End If
     End Sub
     Private Sub MonthCalendar1_DateChanged(sender As Object, e As DateRangeEventArgs) Handles MonthCalendar1.DateChanged
-        Dim selectedDate As Date = e.Start
-
-        Dim dt As DataTable = TryCast(Me.Tag, DataTable)
-        If dt Is Nothing Then
-            'MessageBox.Show("No events loaded.")
-            Return
-        End If
-
-        ' Filter events for the selected date
-        Dim eventsOnDate = dt.AsEnumerable().
-        Where(Function(r) CDate(r("DateOfEvent")).Date = selectedDate.Date).
-        Select(Function(r) r("EventType").ToString() & ": " & r("Title").ToString() & " (" & r("AssignedTo").ToString() & ")").
-        ToList()
-
-        'If eventsOnDate.Count = 0 Then
-        '    'MessageBox.Show("No events for " & selectedDate.ToShortDateString(), "No Events")
-        'Else
-        '    Dim message As String = "Events on " & selectedDate.ToShortDateString() & ":" & vbCrLf & String.Join(vbCrLf, eventsOnDate)
-        '    MessageBox.Show(message, "Family Calendar")
-        'End If
-        LoadScheduleFromDatabase()
-
         'Dim selectedDate As Date = e.Start
 
-        ' Dim dt As DataTable = TryCast(Me.Tag, DataTable)
-        ' Dim eventsOnDate As New List(Of String)
+        'Dim dt As DataTable = TryCast(Me.Tag, DataTable)
+        'If dt Is Nothing Then
+        '    'MessageBox.Show("No events loaded.")
+        '    Return
+        'End If
 
-        ' Existing schedule events
-        If dt IsNot Nothing Then
-            eventsOnDate.AddRange(
+        '' Filter events for the selected date
+        'Dim eventsOnDate = dt.AsEnumerable().
+        'Where(Function(r) CDate(r("DateOfEvent")).Date = selectedDate.Date).
+        'Select(Function(r) r("EventType").ToString() & ": " & r("Title").ToString() & " (" & r("AssignedTo").ToString() & ")").
+        'ToList()
+
+        ''If eventsOnDate.Count = 0 Then
+        ''    'MessageBox.Show("No events for " & selectedDate.ToShortDateString(), "No Events")
+        ''Else
+        ''    Dim message As String = "Events on " & selectedDate.ToShortDateString() & ":" & vbCrLf & String.Join(vbCrLf, eventsOnDate)
+        ''    MessageBox.Show(message, "Family Calendar")
+        ''End If
+        'LoadScheduleFromDatabase()
+
+        ''Dim selectedDate As Date = e.Start
+
+        '' Dim dt As DataTable = TryCast(Me.Tag, DataTable)
+        '' Dim eventsOnDate As New List(Of String)
+
+        '' Existing schedule events
+        'If dt IsNot Nothing Then
+        '    eventsOnDate.AddRange(
+        '    dt.AsEnumerable().
+        '    Where(Function(r) CDate(r("DateOfEvent")).Date = selectedDate.Date).
+        '    Select(Function(r) r("EventType").ToString() & ": " & r("Title").ToString() & " (" & r("AssignedTo").ToString() & ")")
+        ')
+        'End If
+
+        '' Add birthdays
+        'Try
+        '    conn.Open()
+        '    Dim query As String = "SELECT FirstName, DateOfBirth FROM PersonalDetails WHERE MONTH(DateOfBirth) = ? AND DAY(DateOfBirth) = ?"
+        '    Dim cmd As New OleDbCommand(query, conn)
+        '    cmd.Parameters.AddWithValue("?", selectedDate.Month)
+        '    cmd.Parameters.AddWithValue("?", selectedDate.Day)
+
+        '    Dim reader As OleDbDataReader = cmd.ExecuteReader()
+
+        '    While reader.Read()
+        '        Dim firstName As String = reader("FirstName").ToString()
+        '        Dim birthDate As Date = CDate(reader("DateOfBirth"))
+        '        eventsOnDate.Add("Birthday: " & firstName & " (" & birthDate.ToShortDateString() & ")")
+        '    End While
+
+        'Catch ex As Exception
+        '    MessageBox.Show("Error retrieving birthdays: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        'Finally
+        '    conn.Close()
+        'End Try
+
+        'If eventsOnDate.Count = 0 Then
+        '    'MessageBox.Show("No events or birthdays for " & selectedDate.ToShortDateString(), "No Events")
+        'Else
+        '    Dim message As String = "Events  " & selectedDate.ToShortDateString() & ":" & vbCrLf & String.Join(vbCrLf, eventsOnDate)
+        '    MessageBox.Show(message, "Family Calendar")
+        'End If
+
+        'LoadScheduleFromDatabase()
+
+
+        Dim selectedDate As Date = e.Start
+        Dim dt As DataTable = TryCast(Me.Tag, DataTable)
+
+        ' Refresh the schedule data first
+        LoadScheduleFromDatabase()
+        dt = TryCast(Me.Tag, DataTable)
+        If dt Is Nothing Then Return
+
+        Dim eventsOnDate As New List(Of String)
+
+        ' Existing FamilySchedule events
+        eventsOnDate.AddRange(
             dt.AsEnumerable().
-            Where(Function(r) CDate(r("DateOfEvent")).Date = selectedDate.Date).
+    Where(Function(r) CDate(r("DateOfEvent")).Date = selectedDate.Date).
             Select(Function(r) r("EventType").ToString() & ": " & r("Title").ToString() & " (" & r("AssignedTo").ToString() & ")")
         )
-        End If
 
         ' Add birthdays
         Try
-            conn.Open()
-            Dim query As String = "SELECT FirstName, DateOfBirth FROM PersonalDetails WHERE MONTH(DateOfBirth) = ? AND DAY(DateOfBirth) = ?"
-            Dim cmd As New OleDbCommand(query, conn)
-            cmd.Parameters.AddWithValue("?", selectedDate.Month)
-            cmd.Parameters.AddWithValue("?", selectedDate.Day)
+            Using conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
+                conn.Open()
+                Dim query As String = "SELECT FirstName, DateOfBirth FROM PersonalDetails WHERE MONTH(DateOfBirth) = ? AND DAY(DateOfBirth) = ?"
+                Dim cmd As New OleDbCommand(query, conn)
+                cmd.Parameters.AddWithValue("?", selectedDate.Month)
+                cmd.Parameters.AddWithValue("?", selectedDate.Day)
 
-            Dim reader As OleDbDataReader = cmd.ExecuteReader()
-
-            While reader.Read()
-                Dim firstName As String = reader("FirstName").ToString()
-                Dim birthDate As Date = CDate(reader("DateOfBirth"))
-                eventsOnDate.Add("Birthday: " & firstName & " (" & birthDate.ToShortDateString() & ")")
-            End While
-
+                Using reader As OleDbDataReader = cmd.ExecuteReader()
+                    While reader.Read()
+                        Dim firstName As String = reader("FirstName").ToString()
+                        Dim birthDate As Date = CDate(reader("DateOfBirth"))
+                        eventsOnDate.Add("Birthday: " & firstName & " (" & birthDate.ToShortDateString() & ")")
+                    End While
+                End Using
+            End Using
         Catch ex As Exception
             MessageBox.Show("Error retrieving birthdays: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-        Finally
-            conn.Close()
         End Try
 
-        If eventsOnDate.Count = 0 Then
-            'MessageBox.Show("No events or birthdays for " & selectedDate.ToShortDateString(), "No Events")
-        Else
-            Dim message As String = "Events  " & selectedDate.ToShortDateString() & ":" & vbCrLf & String.Join(vbCrLf, eventsOnDate)
+        ' Display result once
+        If eventsOnDate.Count > 0 Then
+            Dim message As String = "Events on " & selectedDate.ToShortDateString() & ":" & vbCrLf & String.Join(vbCrLf, eventsOnDate)
             MessageBox.Show(message, "Family Calendar")
         End If
-
-        LoadScheduleFromDatabase()
-
     End Sub
 
     Private Sub ListView1_ItemDrag(sender As Object, e As ItemDragEventArgs) Handles ListView1.ItemDrag

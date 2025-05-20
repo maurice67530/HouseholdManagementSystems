@@ -96,16 +96,18 @@ Partial Class Family_Schedule
         '
         'DateTimePicker3
         '
+        Me.DateTimePicker3.Format = System.Windows.Forms.DateTimePickerFormat.Time
         Me.DateTimePicker3.Location = New System.Drawing.Point(75, 90)
         Me.DateTimePicker3.Name = "DateTimePicker3"
-        Me.DateTimePicker3.Size = New System.Drawing.Size(200, 20)
+        Me.DateTimePicker3.Size = New System.Drawing.Size(136, 20)
         Me.DateTimePicker3.TabIndex = 10
         '
         'DateTimePicker2
         '
+        Me.DateTimePicker2.Format = System.Windows.Forms.DateTimePickerFormat.Time
         Me.DateTimePicker2.Location = New System.Drawing.Point(75, 55)
         Me.DateTimePicker2.Name = "DateTimePicker2"
-        Me.DateTimePicker2.Size = New System.Drawing.Size(200, 20)
+        Me.DateTimePicker2.Size = New System.Drawing.Size(136, 20)
         Me.DateTimePicker2.TabIndex = 9
         '
         'Label9
