@@ -17,6 +17,7 @@ Public Class Household_Document
             File.Copy(sourcePath, destPath, True)
 
             Using conn As New OleDbConnection(connectionString)
+                conn.Open()
                 Dim cmd As New OleDbCommand("INSERT INTO HouseholdDocument (HouseholdID, Title, Notes, Category, FilePath, UploadedBy, UploadDate)
             VALUES (@HouseholdID, @Title, @Notes, @Category, @FilePath, @UploadedBy, @UploadDate)", conn)
                 cmd.Parameters.AddWithValue("@HouseholdID", 1)
@@ -26,52 +27,70 @@ Public Class Household_Document
                 cmd.Parameters.AddWithValue("@FilePath", destPath)
                 cmd.Parameters.AddWithValue("@UploadedBy", Environment.UserName)
                 cmd.Parameters.AddWithValue("@UploadDate", DateTime.Now)
-                conn.Open()
                 cmd.ExecuteNonQuery()
             End Using
 
             MessageBox.Show("Document uploaded.")
             LoadDocuments()
         End If
+        conn.Close()
 
     End Sub
 
-    Public Sub LoadhouseholddocumentDataFromDatabase()
+    Public Sub LoadHouseholdDocumentDatafromDatabase()
+
         Try
-            Debug.WriteLine("DataGridview populated successfully ChoresForm_Load")
-            Using conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
+
+            Using conn As New OleDbConnection(connectionString)
+
                 conn.Open()
 
-                ' Update the table name if necessary  
-                Dim tableName As String = "HouseholdDocument"
+                'Update the table name if neccessary
 
+                Dim tablename As String = "HouseholdDocument"
 
-                ' Create an OleDbCommand to select the data from the database  
-                Dim cmd As New OleDbCommand($"SELECT * FROM {tableName}", conn)
+                'Create an OleDbCommand to select the data from the database
 
-                ' Create a DataAdapter and fill a DataTable  
+                Dim cmd As New OleDbCommand($"SELECT*FROM  {tablename}", conn)
+
+                'create a DataAdapter and fill a DataTable
+
                 Dim da As New OleDbDataAdapter(cmd)
+
                 Dim dt As New DataTable()
+
                 da.Fill(dt)
 
-                ' Bind the DataTable to the DataGridView  
+                'Bind the DataTable to the DataGridView
+
                 DataGridView1.DataSource = dt
+
             End Using
 
+        Catch ex As OleDbException
+
+            'MessageBox.Show("$Error loading PersonalDetails data from database: {ex.message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+
+            MessageBox.Show("$Error Loading HouseholdDocument to database: " & ex.Message & vbNewLine & ex.StackTrace, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+
         Catch ex As Exception
-            Debug.WriteLine($"DataGridView population failed")
-            Debug.WriteLine($"Unexpected error in DataGridView: {ex.Message}")
-            Debug.WriteLine($"Error in PopulateDataGridView: {ex.Message}")
-            Debug.WriteLine($"Stack Trace: {ex.StackTrace}")
-            'MessageBox.Show("An error occurred while loading data into the grid.", "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+
+            'MessageBox.Show("$unexpected Error:  {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+
+            MessageBox.Show("$unexpected Error:" & ex.Message & vbNewLine & ex.StackTrace, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+
         End Try
+
     End Sub
+
     Private Sub LoadDocuments()
         Dim filter = ComboBox2.Text
         Dim search = TextBox4.Text
         Dim sql = "SELECT * FROM HouseholdDocument WHERE HouseholdID = ?"
         If filter <> "All" Then sql &= " AND Category = ?"
         If search <> "" Then sql &= " AND (Title LIKE ? OR Notes LIKE ?)"
+        conn.Open()
+
         Using conn As New OleDbConnection(connectionString),
             cmd As New OleDbCommand(sql, conn)
             cmd.Parameters.AddWithValue("?", 1)
@@ -85,15 +104,17 @@ Public Class Household_Document
             adapter.Fill(dt)
             DataGridView1.DataSource = dt
         End Using
+        conn.Close()
     End Sub
 
     Private Sub Household_Document_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
         'LoadFilteredDocuments()
-
-
-        LoadhouseholddocumentDataFromDatabase()
         LoadDocuments()
+
+        'LoadhouseholddocumentDataFromDatabase()
+        LoadHouseholdDocumentDatafromDatabase()
+
         'ViewDocument()
         ToolTip1.SetToolTip(Button2, "Upload")
         ToolTip1.SetToolTip(Button1, "Open")
@@ -170,7 +191,8 @@ Public Class Household_Document
                 Catch ex As Exception
                     MessageBox.Show($"An error occurred while deleting document: {ex.Message}", "Deletion Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
                 End Try
-                LoadhouseholddocumentDataFromDatabase()
+                'LoadhouseholddocumentDataFromDatabase()
+                'LoadDocuments()
             End If
 
         End If
@@ -273,13 +295,13 @@ Public Class Household_Document
 
             yPos += 30
 
-            e.Graphics.DrawString("Notes: " & Convert.ToDateTime(row("Notes")).ToShortDateString(), font, brush, leftMargin, yPos)
+            e.Graphics.DrawString("Notes: " & row("Notes").ToShortDateString(), font, brush, leftMargin, yPos)
 
             yPos += 30
             e.Graphics.DrawString("Category: " & row("Category").ToString(), font, brush, leftMargin, yPos)
 
             yPos += 30
-            e.Graphics.DrawString("FilePath: " & Convert.ToDateTime(row("FilePath")).ToShortDateString(), font, brush, leftMargin, yPos)
+            e.Graphics.DrawString("FilePath: " & row("FilePath").ToString(), font, brush, leftMargin, yPos)
 
             yPos += 30
 
@@ -287,8 +309,7 @@ Public Class Household_Document
 
             yPos += 40
 
-            e.Graphics.DrawString("UploadDate: " & row("UploadDate").ToString(), font, brush, leftMargin, yPos)
-
+            e.Graphics.DrawString("UploadDate: " & Convert.ToDateTime(row("UploadDate")).ToShortDateString(), font, brush, leftMargin, yPos)
             yPos += 40
 
         Next
@@ -322,4 +343,7 @@ Public Class Household_Document
         End Using
     End Sub
 
+    Private Sub Panel1_Paint(sender As Object, e As PaintEventArgs) Handles Panel1.Paint
+
+    End Sub
 End Class
