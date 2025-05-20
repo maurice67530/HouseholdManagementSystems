@@ -32,7 +32,7 @@ Namespace My
         
         <Global.System.Diagnostics.DebuggerStepThroughAttribute()>  _
         Protected Overrides Sub OnCreateMainForm()
-            Me.MainForm = Global.HouseHoldManagement_Kundani.Household_Document
+            Me.MainForm = Global.HouseHoldManagement_Kundani.chores
         End Sub
     End Class
 End Namespace
