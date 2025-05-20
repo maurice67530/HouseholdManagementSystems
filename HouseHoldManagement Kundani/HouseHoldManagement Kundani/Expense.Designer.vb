@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class Expense
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,7 +20,7 @@ Partial Class Expense
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Expense))
@@ -34,7 +34,7 @@ Partial Class Expense
         Me.Label22 = New System.Windows.Forms.Label()
         Me.TextBox9 = New System.Windows.Forms.TextBox()
         Me.ComboBox6 = New System.Windows.Forms.ComboBox()
-        Me.Label16 = New System.Windows.Forms.Label()
+        Me.Label15 = New System.Windows.Forms.Label()
         Me.Label20 = New System.Windows.Forms.Label()
         Me.TextBox8 = New System.Windows.Forms.TextBox()
         Me.Label18 = New System.Windows.Forms.Label()
@@ -49,8 +49,8 @@ Partial Class Expense
         Me.Label7 = New System.Windows.Forms.Label()
         Me.Label8 = New System.Windows.Forms.Label()
         Me.Label4 = New System.Windows.Forms.Label()
+        Me.Label16 = New System.Windows.Forms.Label()
         Me.CheckBox1 = New System.Windows.Forms.CheckBox()
-        Me.Label15 = New System.Windows.Forms.Label()
         Me.ComboBox2 = New System.Windows.Forms.ComboBox()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.Panel2 = New System.Windows.Forms.Panel()
@@ -79,7 +79,6 @@ Partial Class Expense
         Me.Label17 = New System.Windows.Forms.Label()
         Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
         Me.Button10 = New System.Windows.Forms.Button()
-        Me.Button11 = New System.Windows.Forms.Button()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel1.SuspendLayout()
         Me.Panel2.SuspendLayout()
@@ -196,15 +195,15 @@ Partial Class Expense
         Me.ComboBox6.Size = New System.Drawing.Size(199, 24)
         Me.ComboBox6.TabIndex = 91
         '
-        'Label16
+        'Label15
         '
-        Me.Label16.AutoSize = True
-        Me.Label16.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label16.Location = New System.Drawing.Point(6, 289)
-        Me.Label16.Name = "Label16"
-        Me.Label16.Size = New System.Drawing.Size(154, 15)
-        Me.Label16.TabIndex = 86
-        Me.Label16.Text = "Average Expenses : R0"
+        Me.Label15.AutoSize = True
+        Me.Label15.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label15.Location = New System.Drawing.Point(13, 287)
+        Me.Label15.Name = "Label15"
+        Me.Label15.Size = New System.Drawing.Size(131, 15)
+        Me.Label15.TabIndex = 85
+        Me.Label15.Text = "Total Expenses: R0"
         '
         'Label20
         '
@@ -333,6 +332,16 @@ Partial Class Expense
         Me.Label4.TabIndex = 71
         Me.Label4.Text = "Tag"
         '
+        'Label16
+        '
+        Me.Label16.AutoSize = True
+        Me.Label16.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label16.Location = New System.Drawing.Point(6, 289)
+        Me.Label16.Name = "Label16"
+        Me.Label16.Size = New System.Drawing.Size(154, 15)
+        Me.Label16.TabIndex = 86
+        Me.Label16.Text = "Average Expenses : R0"
+        '
         'CheckBox1
         '
         Me.CheckBox1.AutoSize = True
@@ -343,16 +352,6 @@ Partial Class Expense
         Me.CheckBox1.TabIndex = 88
         Me.CheckBox1.Text = "Recurring ?"
         Me.CheckBox1.UseVisualStyleBackColor = True
-        '
-        'Label15
-        '
-        Me.Label15.AutoSize = True
-        Me.Label15.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label15.Location = New System.Drawing.Point(13, 287)
-        Me.Label15.Name = "Label15"
-        Me.Label15.Size = New System.Drawing.Size(131, 15)
-        Me.Label15.TabIndex = 85
-        Me.Label15.Text = "Total Expenses: R0"
         '
         'ComboBox2
         '
@@ -620,21 +619,11 @@ Partial Class Expense
         Me.Button10.TabIndex = 136
         Me.Button10.UseVisualStyleBackColor = False
         '
-        'Button11
-        '
-        Me.Button11.Location = New System.Drawing.Point(252, 547)
-        Me.Button11.Name = "Button11"
-        Me.Button11.Size = New System.Drawing.Size(75, 23)
-        Me.Button11.TabIndex = 137
-        Me.Button11.Text = "Button11"
-        Me.Button11.UseVisualStyleBackColor = True
-        '
         'Expense
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(669, 582)
-        Me.Controls.Add(Me.Button11)
         Me.Controls.Add(Me.Button10)
         Me.Controls.Add(Me.Label17)
         Me.Controls.Add(Me.Button9)
@@ -718,5 +707,4 @@ Partial Class Expense
     Friend WithEvents ComboBox7 As ComboBox
     Friend WithEvents Label22 As Label
     Friend WithEvents TextBox9 As TextBox
-    Friend WithEvents Button11 As Button
 End Class

@@ -31,7 +31,7 @@ Public Class Household_Document
             End Using
 
             MessageBox.Show("Document uploaded.")
-            LoadDocuments()
+            'LoadDocuments()
         End If
 
     End Sub
@@ -66,26 +66,26 @@ Public Class Household_Document
             'MessageBox.Show("An error occurred while loading data into the grid.", "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
     End Sub
-    Private Sub LoadDocuments()
-        Dim filter = ComboBox2.Text
-        Dim search = TextBox4.Text
-        Dim sql = "SELECT * FROM HouseholdDocument WHERE HouseholdID = ?"
-        If filter <> "All" Then sql &= " AND Category = ?"
-        If search <> "" Then sql &= " AND (Title LIKE ? OR Notes LIKE ?)"
-        Using conn As New OleDbConnection(connectionString),
-            cmd As New OleDbCommand(sql, conn)
-            cmd.Parameters.AddWithValue("?", 1)
-            If filter <> "All" Then cmd.Parameters.AddWithValue("?", filter)
-            If search <> "" Then
-                cmd.Parameters.AddWithValue("?", "%" & search & "%")
-                cmd.Parameters.AddWithValue("?", "%" & search & "%")
-            End If
-            Dim dt As New DataTable()
-            Dim adapter As New OleDbDataAdapter(cmd)
-            adapter.Fill(dt)
-            DataGridView1.DataSource = dt
-        End Using
-    End Sub
+    'Private Sub LoadDocuments()
+    '    Dim filter = ComboBox2.Text
+    '    Dim search = TextBox4.Text
+    '    Dim sql = "SELECT * FROM HouseholdDocument WHERE HouseholdID = ?"
+    '    If filter <> "All" Then sql &= " AND Category = ?"
+    '    If search <> "" Then sql &= " AND (Title LIKE ? OR Notes LIKE ?)"
+    '    Using conn As New OleDbConnection(connectionString),
+    '        cmd As New OleDbCommand(sql, conn)
+    '        cmd.Parameters.AddWithValue("?", 1)
+    '        If filter <> "All" Then cmd.Parameters.AddWithValue("?", filter)
+    '        If search <> "" Then
+    '            cmd.Parameters.AddWithValue("?", "%" & search & "%")
+    '            cmd.Parameters.AddWithValue("?", "%" & search & "%")
+    '        End If
+    '        Dim dt As New DataTable()
+    '        Dim adapter As New OleDbDataAdapter(cmd)
+    '        adapter.Fill(dt)
+    '        DataGridView1.DataSource = dt
+    '    End Using
+    'End Sub
 
     Private Sub Household_Document_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
@@ -93,7 +93,7 @@ Public Class Household_Document
 
 
         LoadhouseholddocumentDataFromDatabase()
-        LoadDocuments()
+        'LoadDocuments()
         'ViewDocument()
         ToolTip1.SetToolTip(Button2, "Upload")
         ToolTip1.SetToolTip(Button1, "Open")
