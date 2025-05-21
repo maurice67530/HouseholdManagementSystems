@@ -2,51 +2,57 @@
 Imports System.IO
 
 Public Class Household_Document
-    Private uploadPath As String = Path.Combine(Application.StartupPath, "Uploads")
+
+
+    Private SelectedImagePath As String = " "
+
+    Public Folderpath As String = "\\MUDAUMURANGI\Users\Murangi\Source\Repos\maurice67530\HouseholdManagementSystems\House Hold Documents"
+    'Private uploadPath As String = Path.Combine(Application.StartupPath, "Uploads")
     Public Property conn As New OleDbConnection(connectionString)
 
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
 
 
-        If TextBox1.Text = "" Then
-            MsgBox("Fill in the missing fields", MsgBoxStyle.Exclamation)
-            Exit Sub
-
-        End If
-        If TextBox2.Text = "" Then
+        If TextBox1.Text = "" OrElse TextBox2.Text = "" Then
             MsgBox("Fill in the missing fields", MsgBoxStyle.Exclamation)
             Exit Sub
         End If
-
 
         Dim ofd As New OpenFileDialog()
         ofd.Filter = "Documents|*.pdf;*.docx;*.xlsx;*.jpg;*.png|All files|*.*"
-        If ofd.ShowDialog() = DialogResult.OK Then
-            Dim sourcePath = ofd.FileName
-            Dim fileName = IO.Path.GetFileName(sourcePath)
-            Dim categoryFolder = Path.Combine("C:\DocumentLibrary", ComboBox1.Text)
-            Directory.CreateDirectory(categoryFolder)
-            Dim destPath = Path.Combine(categoryFolder, fileName)
-            File.Copy(sourcePath, destPath, True)
 
-            Using conn As New OleDbConnection(connectionString)
+        If ofd.ShowDialog() = DialogResult.OK Then
+            Dim sourcePath As String = ofd.FileName
+            Dim fileName As String = IO.Path.GetFileName(sourcePath)
+
+            ' Define your network folder and category subfolder
+            Dim networkFolder As String = "\\MUDAUMURANGI\Users\Murangi\Source\Repos\maurice67530\HouseholdManagementSystems\House Hold Documents" ' <-- Replace with your actual path
+            Dim categoryFolder As String = Path.Combine(networkFolder, ComboBox1.Text)
+
+            ' Ensure the category folder exists
+            Directory.CreateDirectory(categoryFolder)
+
+            ' Build destination path and copy file
+            Dim destinationPath As String = Path.Combine(categoryFolder, fileName)
+            File.Copy(sourcePath, destinationPath, True) ' Overwrite if exists
+
+            ' Save path and metadata to the database
+            Using conn As New OleDb.OleDbConnection(connectionString)
                 conn.Open()
-                Dim cmd As New OleDbCommand("INSERT INTO HouseholdDocument (HouseholdID, Title, Notes, Category, FilePath, UploadedBy, UploadDate)
-            VALUES (@HouseholdID, @Title, @Notes, @Category, @FilePath, @UploadedBy, @UploadDate)", conn)
-                cmd.Parameters.AddWithValue("@HouseholdID", 1)
-                cmd.Parameters.AddWithValue("@Title", TextBox1.Text)
-                cmd.Parameters.AddWithValue("@Notes", TextBox2.Text)
-                cmd.Parameters.AddWithValue("@Category", ComboBox1.Text)
-                cmd.Parameters.AddWithValue("@FilePath", destPath)
-                cmd.Parameters.AddWithValue("@UploadedBy", Environment.UserName)
-                cmd.Parameters.AddWithValue("@UploadDate", DateTime.Now)
+                Dim cmd As New OleDb.OleDbCommand("INSERT INTO HouseholdDocument (HouseholdID, Title, Notes, Category, FilePath, UploadedBy, UploadDate) VALUES (?, ?, ?, ?, ?, ?, ?)", conn)
+                cmd.Parameters.AddWithValue("?", 1)
+                cmd.Parameters.AddWithValue("?", TextBox1.Text)
+                cmd.Parameters.AddWithValue("?", TextBox2.Text)
+                cmd.Parameters.AddWithValue("?", ComboBox1.Text)
+                cmd.Parameters.AddWithValue("?", destinationPath) ' Save full UNC path
+                cmd.Parameters.AddWithValue("?", Environment.UserName)
+                cmd.Parameters.AddWithValue("?", DateTime.Now)
                 cmd.ExecuteNonQuery()
             End Using
 
-            MessageBox.Show("Document uploadeded successful.")
+            MessageBox.Show("Document uploaded and saved successfully.")
             LoadDocuments()
         End If
-        conn.Close()
     End Sub
 
     Public Sub PopulateComboboxFromDatabase(ByRef comboBox As ComboBox)
