@@ -52,6 +52,7 @@ Partial Class Dashboard
         Me.Panel4 = New System.Windows.Forms.Panel()
         Me.Label13 = New System.Windows.Forms.Label()
         Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.Label28 = New System.Windows.Forms.Label()
         Me.Label23 = New System.Windows.Forms.Label()
         Me.Label22 = New System.Windows.Forms.Label()
         Me.TextBox1 = New System.Windows.Forms.TextBox()
@@ -95,7 +96,6 @@ Partial Class Dashboard
         Me.Label25 = New System.Windows.Forms.Label()
         Me.Label26 = New System.Windows.Forms.Label()
         Me.Label27 = New System.Windows.Forms.Label()
-        Me.Label28 = New System.Windows.Forms.Label()
         Me.GroupBox1.SuspendLayout()
         Me.Panel2.SuspendLayout()
         Me.Panel1.SuspendLayout()
@@ -236,6 +236,7 @@ Partial Class Dashboard
         Me.Panel2.Controls.Add(Me.Label6)
         Me.Panel2.Controls.Add(Me.Label8)
         Me.Panel2.Controls.Add(Me.Label14)
+        Me.Panel2.Cursor = System.Windows.Forms.Cursors.No
         Me.Panel2.Location = New System.Drawing.Point(441, 115)
         Me.Panel2.Name = "Panel2"
         Me.Panel2.Size = New System.Drawing.Size(211, 140)
@@ -330,6 +331,18 @@ Partial Class Dashboard
         Me.Panel1.Size = New System.Drawing.Size(1196, 94)
         Me.Panel1.TabIndex = 109
         '
+        'Label28
+        '
+        Me.Label28.AutoSize = True
+        Me.Label28.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(192, Byte), Integer))
+        Me.Label28.ForeColor = System.Drawing.SystemColors.ButtonHighlight
+        Me.Label28.ImageAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.Label28.Location = New System.Drawing.Point(1172, -2)
+        Me.Label28.Name = "Label28"
+        Me.Label28.Size = New System.Drawing.Size(22, 13)
+        Me.Label28.TabIndex = 120
+        Me.Label28.Text = "out"
+        '
         'Label23
         '
         Me.Label23.AutoSize = True
@@ -422,6 +435,7 @@ Partial Class Dashboard
         Me.TextBox3.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TextBox3.Location = New System.Drawing.Point(1023, 8)
         Me.TextBox3.Name = "TextBox3"
+        Me.TextBox3.ReadOnly = True
         Me.TextBox3.Size = New System.Drawing.Size(132, 22)
         Me.TextBox3.TabIndex = 64
         '
@@ -440,11 +454,13 @@ Partial Class Dashboard
         Me.TextBox2.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TextBox2.Location = New System.Drawing.Point(1023, 36)
         Me.TextBox2.Name = "TextBox2"
+        Me.TextBox2.ReadOnly = True
         Me.TextBox2.Size = New System.Drawing.Size(132, 22)
         Me.TextBox2.TabIndex = 66
         '
         'FlowLayoutPanel2
         '
+        Me.FlowLayoutPanel2.Cursor = System.Windows.Forms.Cursors.No
         Me.FlowLayoutPanel2.Location = New System.Drawing.Point(833, 279)
         Me.FlowLayoutPanel2.Name = "FlowLayoutPanel2"
         Me.FlowLayoutPanel2.Size = New System.Drawing.Size(365, 260)
@@ -454,6 +470,7 @@ Partial Class Dashboard
         '
         Me.FlowLayoutPanel1.BackColor = System.Drawing.SystemColors.GradientInactiveCaption
         Me.FlowLayoutPanel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.FlowLayoutPanel1.Cursor = System.Windows.Forms.Cursors.No
         Me.FlowLayoutPanel1.Location = New System.Drawing.Point(649, 571)
         Me.FlowLayoutPanel1.Name = "FlowLayoutPanel1"
         Me.FlowLayoutPanel1.Size = New System.Drawing.Size(193, 264)
@@ -463,6 +480,7 @@ Partial Class Dashboard
         '
         ChartArea1.Name = "ChartArea1"
         Me.Chart2.ChartAreas.Add(ChartArea1)
+        Me.Chart2.Cursor = System.Windows.Forms.Cursors.No
         Legend1.Name = "Legend1"
         Me.Chart2.Legends.Add(Legend1)
         Me.Chart2.Location = New System.Drawing.Point(441, 277)
@@ -479,6 +497,7 @@ Partial Class Dashboard
         '
         ChartArea2.Name = "ChartArea1"
         Me.Chart1.ChartAreas.Add(ChartArea2)
+        Me.Chart1.Cursor = System.Windows.Forms.Cursors.No
         Legend2.Name = "Legend1"
         Me.Chart1.Legends.Add(Legend2)
         Me.Chart1.Location = New System.Drawing.Point(848, 545)
@@ -695,6 +714,7 @@ Partial Class Dashboard
         'Tasks
         '
         Me.Tasks.BackColor = System.Drawing.SystemColors.InactiveCaption
+        Me.Tasks.Cursor = System.Windows.Forms.Cursors.No
         Me.Tasks.FormattingEnabled = True
         Me.Tasks.Location = New System.Drawing.Point(441, 571)
         Me.Tasks.Name = "Tasks"
@@ -712,6 +732,7 @@ Partial Class Dashboard
         Me.Panel6.Controls.Add(Me.Label16)
         Me.Panel6.Controls.Add(Me.Label19)
         Me.Panel6.Controls.Add(Me.Label15)
+        Me.Panel6.Cursor = System.Windows.Forms.Cursors.No
         Me.Panel6.Location = New System.Drawing.Point(658, 117)
         Me.Panel6.Name = "Panel6"
         Me.Panel6.Size = New System.Drawing.Size(540, 140)
@@ -788,18 +809,6 @@ Partial Class Dashboard
         Me.Label27.Size = New System.Drawing.Size(109, 16)
         Me.Label27.TabIndex = 119
         Me.Label27.Text = "Recent Photos"
-        '
-        'Label28
-        '
-        Me.Label28.AutoSize = True
-        Me.Label28.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(192, Byte), Integer))
-        Me.Label28.ForeColor = System.Drawing.SystemColors.ButtonHighlight
-        Me.Label28.ImageAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.Label28.Location = New System.Drawing.Point(1172, -2)
-        Me.Label28.Name = "Label28"
-        Me.Label28.Size = New System.Drawing.Size(22, 13)
-        Me.Label28.TabIndex = 120
-        Me.Label28.Text = "out"
         '
         'Dashboard
         '
