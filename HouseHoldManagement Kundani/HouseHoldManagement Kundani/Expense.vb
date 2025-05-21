@@ -12,13 +12,7 @@ Public Class Expense
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         Debug.WriteLine("Entering btnSubmit")
         Try
-            'Dim txtRecentUpdate As New TextBox()
-            'txtRecentUpdate.Text = $" Expense Saved at {DateTime.Now:HH:MM:ss}"
-            'txtRecentUpdate.Location = New Point(65, Label20.Top + 25)
-            'txtRecentUpdate.AutoSize = False
-            'txtRecentUpdate.Font = New Font("Microsoft Sans Serif", 9, FontStyle.Regular)
-            'txtRecentUpdate.ForeColor = Color.Black
-            'Me.Controls.Add(txtRecentUpdate)
+
 
             Debug.WriteLine("User confirmed btnSubmit")
             Using conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
@@ -32,7 +26,7 @@ Public Class Expense
                 checkCmd.Parameters.AddWithValue("@Amount", TextBox2.Text)
                 checkCmd.Parameters.AddWithValue("@Description", TextBox6.Text)
                 checkCmd.Parameters.AddWithValue("@DateOfexpenses", DateTimePicker1.Value)
-                checkCmd.Parameters.AddWithValue("@Person", ComboBox3.SelectedItem.ToString)
+                'checkCmd.Parameters.AddWithValue("@Person", ComboBox3.SelectedItem.ToString)
                 checkCmd.Parameters.AddWithValue("@BillName", TextBox8.Text)
 
                 Dim count As Integer = Convert.ToInt32(checkCmd.ExecuteScalar())
