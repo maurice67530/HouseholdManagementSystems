@@ -93,6 +93,10 @@ Public Class Expense
                              "Paid: " & expense.paid & vbCrLf &
                           "StartDate: " & expense.StartDate.ToString, vbInformation, "Expense Confirmation")
 
+                Dim ID As Integer
+                Dim Amount As Integer
+                SubtractFromBudget(ID, Amount)
+
                 ' Execute the SQL command to insert the data 
                 ' Log the SQL statement and parameter values  
 
@@ -941,9 +945,9 @@ Public Class Expense
                             SaveChangedDateToAnotherTable()
                             PopulatelistboxFromDatabase(ListBox1)
                             LoadExpenseDataFromDatabase()
-                            Dim ID As Integer
-                            Dim Amount As Integer
-                            SubtractFromBudget(ID, Amount)
+                            'Dim ID As Integer
+                            'Dim Amount As Integer
+                            'SubtractFromBudget(ID, Amount)
                             MessageBox.Show("Payments with updated dates saved successfully at " & DateTime.Now.ToString())
                         Else
                             MessageBox.Show("Payments were cancelled.")
