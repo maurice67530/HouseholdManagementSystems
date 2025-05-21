@@ -106,8 +106,8 @@ Public Class Family_Schedule
         PopulateComboboxFromDatabase(ComboBox1)
         LoadScheduleFromDatabase()
 
-        AutoCreateChoreEvents()
-        'AutoAddMealTimes()
+        'AutoCreateChoreEvents()
+        ' AutoAddMealTimes()
         'AutoCreateTaskReminders()
         'MarkPhotoDayEvents()
 
@@ -298,7 +298,11 @@ Public Class Family_Schedule
                 DateTimePicker3.Text = selectedRow.Cells("EndTime").Value.ToString()
                 ComboBox1.Text = selectedRow.Cells("AssignedTo").Value.ToString()
                 ComboBox3.Text = selectedRow.Cells("EventType").Value.ToString()
+
+                ' Enable/disable the buttons based on the selected person  
+                btnSave.Enabled = False
             End If
+
         Catch ex As Exception
             Debug.WriteLine("error selection data in the database")
             Debug.WriteLine($"Stack Trace: {ex.StackTrace}")
@@ -564,10 +568,8 @@ Public Class Family_Schedule
         '    Dim message As String = "Events  " & selectedDate.ToShortDateString() & ":" & vbCrLf & String.Join(vbCrLf, eventsOnDate)
         '    MessageBox.Show(message, "Family Calendar")
         'End If
-
         'LoadScheduleFromDatabase()
-
-
+        'Private Sub MonthCalendar1_DateChanged(sender As Object, e As DateRangeEventArgs) Handles MonthCalendar1.DateChanged
         Dim selectedDate As Date = e.Start
         Dim dt As DataTable = TryCast(Me.Tag, DataTable)
 
@@ -580,10 +582,10 @@ Public Class Family_Schedule
 
         ' Existing FamilySchedule events
         eventsOnDate.AddRange(
-            dt.AsEnumerable().
-    Where(Function(r) CDate(r("DateOfEvent")).Date = selectedDate.Date).
-            Select(Function(r) r("EventType").ToString() & ": " & r("Title").ToString() & " (" & r("AssignedTo").ToString() & ")")
-        )
+        dt.AsEnumerable().
+        Where(Function(r) CDate(r("DateOfEvent")).Date = selectedDate.Date).
+        Select(Function(r) r("EventType").ToString() & ": " & r("Title").ToString() & " (" & r("AssignedTo").ToString() & ")")
+    )
 
         ' Add birthdays
         Try
@@ -612,6 +614,8 @@ Public Class Family_Schedule
             MessageBox.Show(message, "Family Calendar")
         End If
     End Sub
+
+
 
     Private Sub ListView1_ItemDrag(sender As Object, e As ItemDragEventArgs) Handles ListView1.ItemDrag
         DoDragDrop(e.Item, DragDropEffects.Move)
@@ -869,6 +873,19 @@ Public Class Family_Schedule
                 End Using
             End Using
         End Using
+    End Sub
+
+
+
+    Private Sub btnRefresh_Click(sender As Object, e As EventArgs) Handles btnRefresh.Click
+        LoadScheduleFromDatabase()
+        TextBox1.Text = ""
+        TextBox2.Text = ""
+        ComboBox1.Text = ""
+        ComboBox3.Text = ""
+        ListView1.Items.Clear()
+
+
     End Sub
 End Class
 
