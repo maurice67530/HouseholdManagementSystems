@@ -9,49 +9,150 @@ Public Class Expense
     Private toolTip1 As New ToolTip()
     Private mealPlanData As DataTable
 
+    'Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+    '    Debug.WriteLine("Entering btnSubmit")
+    '    Try
+    '        'Dim txtRecentUpdate As New TextBox()
+    '        'txtRecentUpdate.Text = $" Expense Saved at {DateTime.Now:HH:MM:ss}"
+    '        'txtRecentUpdate.Location = New Point(65, Label20.Top + 25)
+    '        'txtRecentUpdate.AutoSize = False
+    '        'txtRecentUpdate.Font = New Font("Microsoft Sans Serif", 9, FontStyle.Regular)
+    '        'txtRecentUpdate.ForeColor = Color.Black
+    '        'Me.Controls.Add(txtRecentUpdate)
+
+    '        Debug.WriteLine("User confirmed btnSubmit")
+    '        Using conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
+    '            conn.Open()
+
+    '            ' Update the table name if necessary  
+    '            Dim tableName As String = "Expense"
+
+    '            ' Create an OleDbCommand to insert the Expense data into the database 
+    '            Dim cmd As New OleDbCommand("INSERT INTO [Expense] ([Amount], [Description], [Tags], [Category], [Paymentmethod], [Frequency], [DateOfexpenses], [Person], [BillName], [StartDate], [Recurring], [Paid]) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", conn)
+
+    '            ' Set the parameter values from the UI controls 
+    '            'Class declaretions
+
+    '            Dim expense As New Expensetracking With {
+    '                .Amount = TextBox2.Text,
+    '                .Description = TextBox6.Text,
+    '                .Tags = TextBox4.Text,
+    '                .Category = ComboBox7.SelectedItem.ToString,
+    '                .Paymentmethod = ComboBox1.SelectedItem.ToString,
+    '            .Frequency = ComboBox5.SelectedItem.ToString(),
+    '                .DateOfexpenses = DateTimePicker1.Value,
+    '                 .Person = ComboBox3.SelectedItem.ToString(),
+    '                .BillName = TextBox8.Text,
+    '                .StartDate = DateTimePicker2.Value,
+    '                .Recurring = CheckBox1.Checked,
+    '                .paid = ComboBox6.SelectedItem.ToString}
+
+    '            'txtRecentUpdate.Text = $" Expense updated at {DateTime.Now:HH:MM}"
+
+    '            cmd.Parameters.Clear()
+
+    '            'cmd.Parameters.AddWithValue("@ExpenseID", expense.ExpenseID)
+    '            cmd.Parameters.AddWithValue("@Amount", expense.Amount)
+    '            cmd.Parameters.AddWithValue("@Description", expense.Description)
+    '            cmd.Parameters.AddWithValue("@Tags", expense.Tags)
+    '            cmd.Parameters.AddWithValue("@Category", expense.Category)
+    '            cmd.Parameters.AddWithValue("@PaymentMethod", expense.Paymentmethod)
+    '            cmd.Parameters.AddWithValue("@Frequency", expense.Frequency)
+    '            cmd.Parameters.AddWithValue("@DateOfexpenses", expense.DateOfexpenses)
+    '            cmd.Parameters.AddWithValue("@Person ", expense.Person)
+    '            cmd.Parameters.AddWithValue("@BillName", expense.BillName)
+    '            cmd.Parameters.AddWithValue("@StartDate", expense.StartDate)
+    '            cmd.Parameters.AddWithValue("@Recurring", expense.Recurring)
+    '            cmd.Parameters.AddWithValue("@Paid", expense.paid)
+
+
+    '            MsgBox("Expense Information Saved!" & vbCrLf &
+    '                    "ExpenseID: " & expense.ExpenseID & vbCrLf &
+    '                    "Amount: " & expense.Amount & vbCrLf &
+    '                    "Description: " & expense.Description & vbCrLf &
+    '                    "Tags: " & expense.Tags & vbCrLf &
+    '                    "Category: " & expense.Category & vbCrLf &
+    '                    "PaymentMethod: " & expense.Paymentmethod & vbCrLf &
+    '                     "Frequency: " & expense.Frequency & vbCrLf &
+    '                      "Receiver: " & expense.Person & vbCrLf &
+    '                        "DateOfExpense: " & expense.DateOfexpenses.ToString & vbCrLf &
+    '                        "BillName: " & expense.BillName & vbCrLf &
+    '                         "Recurring: " & expense.Recurring & vbCrLf &
+    '                         "Paid: " & expense.paid & vbCrLf &
+    '                      "StartDate: " & expense.StartDate.ToString, vbInformation, "Expense Confirmation")
+
+    '            ' Execute the SQL command to insert the data 
+    '            ' Log the SQL statement and parameter values  
+
+    '            'MessageBox.Show("Expense information saved to Database successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
+
+    '            ' Execute the SQL command to insert the data  
+    '            cmd.ExecuteNonQuery()
+    '            'Next
+
+    '        End Using
+    '    Catch ex As OleDbException
+    '        'MessageBox.Show($"Error saving Expense to database: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+
+    '        Debug.WriteLine($" Database error in Button_Click: {ex.Message}")
+    '        Debug.WriteLine($"Stack Trace : {ex.StackTrace}")
+    '        MessageBox.Show("Error saving Expense to database: " & ex.Message & vbNewLine & ex.StackTrace, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+
+    '        'MessageBox.Show("Error saving Expense to database.Please Check the connection.", "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+    '    Catch ex As Exception
+    '        'MessageBox.Show("Unexpected Error: " & ex.Message & vbNewLine & ex.StackTrace, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+    '        Debug.WriteLine($" General error in Button: {ex.Message}")
+    '        Debug.WriteLine($"Stack Trace : {ex.StackTrace}")
+    '        Debug.WriteLine(" Failed to save")
+    '        MessageBox.Show("An Unexpected error occured.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+    '    End Try
+    '    conn.Close()
+    '    LoadExpenseDataFromDatabase()
+    '    Debug.WriteLine("Exiting btnSubmit")
+    'End Sub
+
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         Debug.WriteLine("Entering btnSubmit")
         Try
-            'Dim txtRecentUpdate As New TextBox()
-            'txtRecentUpdate.Text = $" Expense Saved at {DateTime.Now:HH:MM:ss}"
-            'txtRecentUpdate.Location = New Point(65, Label20.Top + 25)
-            'txtRecentUpdate.AutoSize = False
-            'txtRecentUpdate.Font = New Font("Microsoft Sans Serif", 9, FontStyle.Regular)
-            'txtRecentUpdate.ForeColor = Color.Black
-            'Me.Controls.Add(txtRecentUpdate)
-
-            Debug.WriteLine("User confirmed btnSubmit")
             Using conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
                 conn.Open()
 
-                ' Update the table name if necessary  
-                Dim tableName As String = "Expense"
+                ' Define your unique criteria for an existing expense.
+                ' Adjust these fields based on what makes an expense unique.
+                Dim checkQuery As String = "SELECT COUNT(*) FROM [Expense] WHERE [Amount] = ? AND [Description] = ? AND [DateOfexpenses] = ? AND [Person] = ? AND [BillName] = ?"
+                Dim checkCmd As New OleDbCommand(checkQuery, conn)
+                checkCmd.Parameters.AddWithValue("@Amount", TextBox2.Text)
+                checkCmd.Parameters.AddWithValue("@Description", TextBox6.Text)
+                checkCmd.Parameters.AddWithValue("@DateOfexpenses", DateTimePicker1.Value)
+                checkCmd.Parameters.AddWithValue("@Person", ComboBox3.SelectedItem.ToString)
+                checkCmd.Parameters.AddWithValue("@BillName", TextBox8.Text)
 
-                ' Create an OleDbCommand to insert the Expense data into the database 
+                Dim count As Integer = Convert.ToInt32(checkCmd.ExecuteScalar())
+
+                If count > 0 Then
+                    MessageBox.Show("This expense has already been saved.", "Duplicate Entry", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                    Return ' Exit without saving
+                End If
+
+                ' Proceed with insert if no duplicate found
                 Dim cmd As New OleDbCommand("INSERT INTO [Expense] ([Amount], [Description], [Tags], [Category], [Paymentmethod], [Frequency], [DateOfexpenses], [Person], [BillName], [StartDate], [Recurring], [Paid]) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", conn)
 
-                ' Set the parameter values from the UI controls 
-                'Class declaretions
-
                 Dim expense As New Expensetracking With {
-                    .Amount = TextBox2.Text,
-                    .Description = TextBox6.Text,
-                    .Tags = TextBox4.Text,
-                    .Category = ComboBox7.SelectedItem.ToString,
-                    .Paymentmethod = ComboBox1.SelectedItem.ToString,
+                .Amount = TextBox2.Text,
+                .Description = TextBox6.Text,
+                .Tags = TextBox4.Text,
+                .Category = ComboBox7.SelectedItem.ToString,
+                .Paymentmethod = ComboBox1.SelectedItem.ToString,
                 .Frequency = ComboBox5.SelectedItem.ToString(),
-                    .DateOfexpenses = DateTimePicker1.Value,
-                     .Person = ComboBox3.SelectedItem.ToString(),
-                    .BillName = TextBox8.Text,
-                    .StartDate = DateTimePicker2.Value,
-                    .Recurring = CheckBox1.Checked,
-                    .paid = ComboBox6.SelectedItem.ToString}
-
-                'txtRecentUpdate.Text = $" Expense updated at {DateTime.Now:HH:MM}"
+                .DateOfexpenses = DateTimePicker1.Value,
+                .Person = ComboBox3.SelectedItem.ToString(),
+                .BillName = TextBox8.Text,
+                .StartDate = DateTimePicker2.Value,
+                .Recurring = CheckBox1.Checked,
+                .paid = ComboBox6.SelectedItem.ToString
+            }
 
                 cmd.Parameters.Clear()
-
-                'cmd.Parameters.AddWithValue("@ExpenseID", expense.ExpenseID)
                 cmd.Parameters.AddWithValue("@Amount", expense.Amount)
                 cmd.Parameters.AddWithValue("@Description", expense.Description)
                 cmd.Parameters.AddWithValue("@Tags", expense.Tags)
@@ -65,48 +166,19 @@ Public Class Expense
                 cmd.Parameters.AddWithValue("@Recurring", expense.Recurring)
                 cmd.Parameters.AddWithValue("@Paid", expense.paid)
 
-
-                MsgBox("Expense Information Saved!" & vbCrLf &
-                        "ExpenseID: " & expense.ExpenseID & vbCrLf &
-                        "Amount: " & expense.Amount & vbCrLf &
-                        "Description: " & expense.Description & vbCrLf &
-                        "Tags: " & expense.Tags & vbCrLf &
-                        "Category: " & expense.Category & vbCrLf &
-                        "PaymentMethod: " & expense.Paymentmethod & vbCrLf &
-                         "Frequency: " & expense.Frequency & vbCrLf &
-                          "Receiver: " & expense.Person & vbCrLf &
-                            "DateOfExpense: " & expense.DateOfexpenses.ToString & vbCrLf &
-                            "BillName: " & expense.BillName & vbCrLf &
-                             "Recurring: " & expense.Recurring & vbCrLf &
-                             "Paid: " & expense.paid & vbCrLf &
-                          "StartDate: " & expense.StartDate.ToString, vbInformation, "Expense Confirmation")
-
-                ' Execute the SQL command to insert the data 
-                ' Log the SQL statement and parameter values  
-
-                'MessageBox.Show("Expense information saved to Database successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
-
-                ' Execute the SQL command to insert the data  
+                MsgBox("Expense Information Saved!", vbInformation, "Expense Confirmation")
                 cmd.ExecuteNonQuery()
-                'Next
 
             End Using
         Catch ex As OleDbException
-            'MessageBox.Show($"Error saving Expense to database: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-
             Debug.WriteLine($" Database error in Button_Click: {ex.Message}")
             Debug.WriteLine($"Stack Trace : {ex.StackTrace}")
             MessageBox.Show("Error saving Expense to database: " & ex.Message & vbNewLine & ex.StackTrace, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-
-            'MessageBox.Show("Error saving Expense to database.Please Check the connection.", "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         Catch ex As Exception
-            'MessageBox.Show("Unexpected Error: " & ex.Message & vbNewLine & ex.StackTrace, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
             Debug.WriteLine($" General error in Button: {ex.Message}")
             Debug.WriteLine($"Stack Trace : {ex.StackTrace}")
-            Debug.WriteLine(" Failed to save")
-            MessageBox.Show("An Unexpected error occured.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            MessageBox.Show("An Unexpected error occurred.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
-        conn.Close()
         LoadExpenseDataFromDatabase()
         Debug.WriteLine("Exiting btnSubmit")
     End Sub
