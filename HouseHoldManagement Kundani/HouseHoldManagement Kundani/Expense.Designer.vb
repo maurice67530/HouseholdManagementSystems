@@ -82,6 +82,7 @@ Partial Class Expense
         'Button8
         '
         Me.Button8.BackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.Button8.Cursor = System.Windows.Forms.Cursors.Hand
         Me.Button8.Image = CType(resources.GetObject("Button8.Image"), System.Drawing.Image)
         Me.Button8.Location = New System.Drawing.Point(481, 470)
         Me.Button8.Name = "Button8"
@@ -101,6 +102,7 @@ Partial Class Expense
         'Button7
         '
         Me.Button7.BackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.Button7.Cursor = System.Windows.Forms.Cursors.Hand
         Me.Button7.Image = CType(resources.GetObject("Button7.Image"), System.Drawing.Image)
         Me.Button7.Location = New System.Drawing.Point(11, 469)
         Me.Button7.Name = "Button7"
@@ -111,6 +113,7 @@ Partial Class Expense
         'Button5
         '
         Me.Button5.BackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.Button5.Cursor = System.Windows.Forms.Cursors.Hand
         Me.Button5.Image = CType(resources.GetObject("Button5.Image"), System.Drawing.Image)
         Me.Button5.Location = New System.Drawing.Point(195, 469)
         Me.Button5.Name = "Button5"
@@ -226,6 +229,7 @@ Partial Class Expense
         '
         'TextBox1
         '
+        Me.TextBox1.Cursor = System.Windows.Forms.Cursors.No
         Me.TextBox1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TextBox1.Location = New System.Drawing.Point(113, 6)
         Me.TextBox1.Name = "TextBox1"
@@ -373,7 +377,9 @@ Partial Class Expense
         '
         'ListBox1
         '
+        Me.ListBox1.Cursor = System.Windows.Forms.Cursors.No
         Me.ListBox1.FormattingEnabled = True
+        Me.ListBox1.HorizontalScrollbar = True
         Me.ListBox1.ItemHeight = 16
         Me.ListBox1.Location = New System.Drawing.Point(122, 169)
         Me.ListBox1.Name = "ListBox1"
@@ -475,6 +481,7 @@ Partial Class Expense
         'Button4
         '
         Me.Button4.BackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.Button4.Cursor = System.Windows.Forms.Cursors.Hand
         Me.Button4.Image = CType(resources.GetObject("Button4.Image"), System.Drawing.Image)
         Me.Button4.Location = New System.Drawing.Point(289, 469)
         Me.Button4.Name = "Button4"
@@ -485,6 +492,7 @@ Partial Class Expense
         'Button3
         '
         Me.Button3.BackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.Button3.Cursor = System.Windows.Forms.Cursors.Hand
         Me.Button3.Image = CType(resources.GetObject("Button3.Image"), System.Drawing.Image)
         Me.Button3.Location = New System.Drawing.Point(387, 470)
         Me.Button3.Name = "Button3"
@@ -504,6 +512,7 @@ Partial Class Expense
         'Button1
         '
         Me.Button1.BackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.Button1.Cursor = System.Windows.Forms.Cursors.Hand
         Me.Button1.Image = CType(resources.GetObject("Button1.Image"), System.Drawing.Image)
         Me.Button1.Location = New System.Drawing.Point(576, 468)
         Me.Button1.Name = "Button1"
@@ -524,6 +533,7 @@ Partial Class Expense
         'Button9
         '
         Me.Button9.BackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.Button9.Cursor = System.Windows.Forms.Cursors.Hand
         Me.Button9.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Button9.Image = CType(resources.GetObject("Button9.Image"), System.Drawing.Image)
         Me.Button9.Location = New System.Drawing.Point(13, 526)
@@ -554,6 +564,7 @@ Partial Class Expense
         'Button10
         '
         Me.Button10.BackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.Button10.Cursor = System.Windows.Forms.Cursors.Hand
         Me.Button10.Image = CType(resources.GetObject("Button10.Image"), System.Drawing.Image)
         Me.Button10.Location = New System.Drawing.Point(103, 470)
         Me.Button10.Name = "Button10"
