@@ -425,7 +425,7 @@ Public Class chores
 
         TxtDes.Text = ""
         TxtTitle.Text = ""
-        TextBox1.Text = ""
+        'TextBox1.Text = ""
 
         CmbASS.Items.Clear() ' Clears all items
         CmbASS.Text = ""     ' Clears the selected text
@@ -759,7 +759,7 @@ Public Class chores
         'Start the task timer when the button Is clicked
 
         Timer1.Start()
-        TextBox1.AppendText("Schedules started ." & vbCrLf)
+        'TextBox1.AppendText("Schedules started ." & vbCrLf)
         'Define a list of chores
         Label13.Text = ($"chores checked  {DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")}" & vbCrLf)
 
