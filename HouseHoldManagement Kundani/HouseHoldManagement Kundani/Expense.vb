@@ -941,6 +941,9 @@ Public Class Expense
                             SaveChangedDateToAnotherTable()
                             PopulatelistboxFromDatabase(ListBox1)
                             LoadExpenseDataFromDatabase()
+                            Dim ID As Integer
+                            Dim Amount As Integer
+                            SubtractFromBudget(ID, Amount)
                             MessageBox.Show("Payments with updated dates saved successfully at " & DateTime.Now.ToString())
                         Else
                             MessageBox.Show("Payments were cancelled.")
@@ -1130,12 +1133,38 @@ Public Class Expense
         End Try
     End Sub
 
-    Private Sub Panel2_Paint(sender As Object, e As PaintEventArgs) Handles Panel2.Paint
+    Private Sub Button6_Click_1(sender As Object, e As EventArgs) Handles Button6.Click
+        ' Example: get ID and Amount from TextBoxes
+        Dim ID As Integer
+        Dim Amount As Integer
+
+        SubtractFromBudget(ID, Amount)
+
 
     End Sub
+    Public Sub SubtractFromBudget(ID As Integer, Amount As Integer)
+        ' SQL query to update the Amount by subtracting the specified value
+        Dim query As String = "UPDATE Budget SET Amount = Amount - ? WHERE ID = ?"
 
-    Private Sub DataGridView1_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridView1.CellContentClick
+        Using conn As New OleDbConnection(connectionString)
+            Using command As New OleDbCommand(query, conn)
+                ' Add parameters to prevent SQL injection
+                command.Parameters.AddWithValue("?", Amount)
+                command.Parameters.AddWithValue("?", ID)
 
+                Try
+                    conn.Open()
+                    Dim rowsAffected As Integer = command.ExecuteNonQuery()
+                    If rowsAffected > 0 Then
+                        MessageBox.Show("Budget updated successfully.")
+                    Else
+                        'MessageBox.Show("No record found with the specified ID.")
+                    End If
+                Catch ex As Exception
+                    MessageBox.Show("Error updating budget: " & ex.Message)
+                End Try
+            End Using
+        End Using
     End Sub
 End Class
 
