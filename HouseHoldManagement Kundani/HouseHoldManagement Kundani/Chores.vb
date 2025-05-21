@@ -8,27 +8,25 @@ Public Class chores
     Public Property conn As New OleDbConnection(connectionString)
 
     Private Sub chores_Load(sender As System.Object, e As System.EventArgs) Handles MyBase.Load
-        Dim conn As New OleDbConnection(connectionString)
+        cmbChore.Visible = False
 
+        Dim conn As New OleDbConnection(connectionString)
         toolTip1.SetToolTip(Button1, "Save")
         toolTip1.SetToolTip(Button2, "Edit")
         toolTip1.SetToolTip(Button4, "Delete")
         toolTip1.SetToolTip(Button5, "Refresh")
-        toolTip1.SetToolTip(Button9, "Mark All As complete")
+        toolTip1.SetToolTip(Button9, "Clear")
         toolTip1.SetToolTip(Button3, "Dashboard")
         toolTip1.SetToolTip(Button11, "Assign Chores")
         toolTip1.SetToolTip(Button7, "Filter")
-
         toolTip1.SetToolTip(Button6, "Sort")
         toolTip1.SetToolTip(Button12, "Auto Assignment")
         toolTip1.SetToolTip(Button10, "Check chores")
         toolTip1.SetToolTip(Button13, "Conflicts")
-
         toolTip1.SetToolTip(Button8, "Highlight")
 
 
         ' Check database connectivity 
-
         Try
             Debug.WriteLine("form load initialized successfully")
 
@@ -40,9 +38,6 @@ Public Class chores
             Label11.Text = "Connected"
             Label11.BackColor = Color.Green
             Label11.ForeColor = Color.White
-
-
-
         Catch ex As Exception
 
             ' Display an error message  
@@ -55,10 +50,7 @@ Public Class chores
             Label11.BackColor = Color.Red
             Label11.ForeColor = Color.White
 
-
-
         Finally
-
 
             PopulateComboboxFromDatabase(CmbASS)
             loadChoresFromDatabase()
@@ -71,7 +63,9 @@ Public Class chores
         CheckRecurringChores()
         CheckPendingChores() ' Check pending chores when the form opens
 
-
+        'Label16.Text = DateTime.Now.ToString(" HH:mm:ss")
+        'Timer1.Interval = 1000
+        'Timer1.Enabled = True
 
     End Sub
 
@@ -82,7 +76,6 @@ Public Class chores
     End Sub
 
     Private Sub Button3_Click(sender As System.Object, e As System.EventArgs) Handles Button3.Click
-
         Close()
     End Sub
 
@@ -101,14 +94,15 @@ Public Class chores
            .Frequency = Cmbfre.SelectedItem,
            .DueDate = DateTimePicker1.Value,
            .Recurring = ComboBox1.SelectedItem,
-           .Description = TxtDes.Text}
+           .Description = TxtDes.Text,
+            .StartTime = DateTimePicker2.Value,
+                .EndTime = DateTimePicker3.Value}
 
 
-            Dim conn As New OleDbConnection(connectionString)
-
+            'Dim conn As New OleDbConnection(connectionString)
             conn.Open()
             Dim tablename As String = "Chores"
-            Dim Cmd As New OleDbCommand($"INSERT INTO {tablename} ([Title], [AssignedTo], [Priority], [Status], [Frequency], [DueDate], [Recurring], [Description]) VALUES (?, ?, ?, ?, ?, ?, ?, ?)", conn)
+            Dim Cmd As New OleDbCommand($"INSERT INTO {tablename} ([Title], [AssignedTo], [Priority], [Status], [Frequency], [DueDate], [Recurring], [Description], [StartTime], [EndTime]) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", conn)
 
             Cmd.Parameters.Clear()
 
@@ -120,8 +114,10 @@ Public Class chores
             Cmd.Parameters.AddWithValue("@DueDate", chore.DueDate)
             Cmd.Parameters.AddWithValue("@Recurring", chore.Recurring)
             Cmd.Parameters.AddWithValue("@Description", chore.Description)
+            Cmd.Parameters.AddWithValue("@StartTime", chore.StartTime)
+            Cmd.Parameters.AddWithValue("@EndTime", chore.EndTime)
 
-            MsgBox("chores Information Addded!" & vbCrLf &
+            MsgBox("Chores Information Addded!" & vbCrLf &
               "Title: " & chore.Title & vbCrLf &
               "AssignedTo:" & chore.Description & vbCrLf &
               "Priority: " & chore.Priority & vbCrLf &
@@ -129,15 +125,17 @@ Public Class chores
               "Frequency: " & chore.AssignedTo & vbCrLf &
                 "Recurring: " & chore.Recurring & vbCrLf &
               "Description: " & chore.Description & vbCrLf &
-              "DueDate: " & chore.DueDate & vbCrLf & vbCrLf, vbInformation, "Chores confirmation")
+              "DueDate: " & chore.DueDate & vbCrLf & vbCrLf &
+              "StartTime: " & chore.StartTime & vbCrLf &
+              "EndTime: " & chore.EndTime & vbCrLf & vbCrLf, vbInformation, "Chores confirmation")
 
-            MessageBox.Show("Chores Information saved to Database successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
+            '   MessageBox.Show("Chores Information saved to Database successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
             Cmd.ExecuteNonQuery()
             conn.Close()
         Catch ex As OleDbException
-            Debug.WriteLine($"General error in button Save: {ex.Message}")
-            Debug.WriteLine($"Stack Trace: {ex.StackTrace}")
-            MessageBox.Show("Error saving control texts: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            '    Debug.WriteLine($"General error in button Save: {ex.Message}")
+            '    Debug.WriteLine($"Stack Trace: {ex.StackTrace}")
+            '    MessageBox.Show("Error saving control texts: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
             MessageBox.Show($"Error Saving To database: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
             MessageBox.Show("Error saving Chores to database: " & ex.Message & vbNewLine & ex.StackTrace, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
 
@@ -151,8 +149,6 @@ Public Class chores
 
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
         Try
-
-
             Debug.WriteLine("entering button update")
 
             If DGVChores.SelectedRows.Count = 0 Then
@@ -177,6 +173,8 @@ Public Class chores
             Dim DueDate As String = DateTimePicker1.Value
             Dim Recurring As String = ComboBox1.SelectedItem
             Dim Description As String = TxtDes.Text
+            Dim StartTime As String = DateTimePicker2.Value
+            Dim EndTime As String = DateTimePicker3.Value
 
             Using conn As New OleDbConnection(connectionString)
                 conn.Open()
@@ -186,7 +184,7 @@ Public Class chores
                 Dim ID As Integer = Convert.ToInt32(selectedRow.Cells("ID").Value) ' Change "ID" to your primary key column name  
 
                 'Create an OleDbCommand to update the personnel data in the database  
-                Dim cmd As New OleDbCommand("UPDATE Chores SET [Title] = ?, [AssignedTo] = ?, [Priority] = ?, [Status] = ?, [Frequency] = ?, [DueDate] = ?, [Recurring]= ?, [Description] = ? WHERE [ID] = ?", conn)
+                Dim cmd As New OleDbCommand("UPDATE Chores SET [Title] = ?, [AssignedTo] = ?, [Priority] = ?, [Status] = ?, [Frequency] = ?, [DueDate] = ?, [Recurring]= ?, [Description] = ?, [StartTime] = ?, [EndTime] = ? WHERE [ID] = ?", conn)
 
                 'Set the parameter values from the UI controls  
 
@@ -199,6 +197,8 @@ Public Class chores
                 cmd.Parameters.AddWithValue("@DueDate", Task_Management.DateTimePicker1.Value)
                 cmd.Parameters.AddWithValue("@Recurring", ComboBox1.SelectedItem)
                 cmd.Parameters.AddWithValue("@Description", TxtDes.Text)
+                cmd.Parameters.AddWithValue("@StartTime", DateTimePicker2.Value)
+                cmd.Parameters.AddWithValue("@EndTime", DateTimePicker3.Value)
                 cmd.Parameters.AddWithValue("@ID", ID)
                 MsgBox("Chores Updated Successfuly!", vbInformation, "Update Confirmation")
 
@@ -208,13 +208,13 @@ Public Class chores
         Catch ex As FormatException
             Debug.WriteLine($"Format Error in Button Update: {ex.Message}")
             Debug.WriteLine($"Stack Trace: {ex.StackTrace}")
-            MessageBox.Show($"Error updating Tasks in database: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-            MessageBox.Show("Error saving inventory to database: " & ex.Message & vbNewLine & ex.StackTrace, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            MessageBox.Show($"Error updating chores in database: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            MessageBox.Show("Error saving chores to database: " & ex.Message & vbNewLine & ex.StackTrace, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         Catch ex As Exception
             Debug.WriteLine($"unexpected error Button Update: {ex.Message}")
             Debug.WriteLine($"Stack Trace: {ex.StackTrace}")
             MessageBox.Show($"Unexpected error: {ex.Message}", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-            MessageBox.Show("Error saving inventory to database: " & ex.Message & vbNewLine & ex.StackTrace, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            MessageBox.Show("Error saving chores to database: " & ex.Message & vbNewLine & ex.StackTrace, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
 
         loadChoresFromDatabase()
@@ -230,9 +230,7 @@ Public Class chores
                 conn.Open()
 
                 Dim tableName As String = "Chores"
-
                 Dim cmd As New OleDbCommand($"SELECT*FROM {tableName}", conn)
-
                 Dim da As New OleDbDataAdapter(cmd)
                 Dim dt As New DataTable
                 da.Fill(dt)
@@ -244,23 +242,17 @@ Public Class chores
         Catch ex As Exception
             Debug.WriteLine($"Datagridview: Failed to Populate {ex.Message}")
             Debug.WriteLine($"Stack Trace: {ex.StackTrace}")
-            MessageBox.Show($"Error Loading Inventory data from database: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            MessageBox.Show($"Error Loading chores data from database: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
     End Sub
-
-    Private Sub DGVChores_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DGVChores.CellContentClick
-
-    End Sub
-
     Private Sub DGVChores_SelectionChanged(sender As Object, e As EventArgs) Handles DGVChores.SelectionChanged
-        Try
 
+        Try
             Button1.Enabled = False
 
             If DGVChores.SelectedRows.Count > 0 Then
                 Dim selectedRow As DataGridViewRow = DGVChores.SelectedRows(0)
                 Debug.WriteLine("row selected on dgv")
-
 
                 TxtTitle.Text = selectedRow.Cells("Title").Value.ToString()
                 CmbASS.SelectedItem = selectedRow.Cells("AssignedTo").Value.ToString()
@@ -270,7 +262,8 @@ Public Class chores
                 ComboBox1.SelectedItem = selectedRow.Cells("Recurring").Value.ToString()
                 TxtDes.Text = selectedRow.Cells("Description").Value.ToString()
                 DateTimePicker1.Value = selectedRow.Cells("DueDate").Value.ToString()
-
+                DateTimePicker2.Value = selectedRow.Cells("StartTime").Value.ToString()
+                DateTimePicker3.Value= selectedRow.Cells("EndTime").Value.ToString()
 
             End If
             Button1.Enabled = True
@@ -279,7 +272,6 @@ Public Class chores
             Debug.WriteLine($"Stack Trace: {ex.StackTrace}")
 
         End Try
-
     End Sub
     Public Sub PopulateComboboxFromDatabase(ByRef comboBox As ComboBox)
         Dim conn As New OleDbConnection(connectionString)
@@ -315,73 +307,58 @@ Public Class chores
             End If
         End Try
     End Sub
-
     Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
-        Debug.WriteLine("Entering Button delete")
-
-
+        Debug.WriteLine("Entering button delete")
+        ' Check if there are any selected rows in the DataGridView for expenses  
         If DGVChores.SelectedRows.Count > 0 Then
+
             ' Get the selected row  
             Dim selectedRow As DataGridViewRow = DGVChores.SelectedRows(0)
 
             ' Assuming there is an "ID" column which is the primary key in the database  
-            Dim ID As Integer = Convert.ToInt32(selectedRow.Cells("ID").Value) ' Replace "ID" with your actual column name  
+            Dim PhotoID As Integer = Convert.ToInt32(selectedRow.Cells("ID").Value) ' Replace "ID" with your actual column name  
+            'Dim DeletedBy As String
 
             ' Confirm deletion  
+            Dim confirmationResult As DialogResult = MessageBox.Show("Are you sure you want to delete this Chores?", "Confirm Deletion", MessageBoxButtons.YesNo, MessageBoxIcon.Warning)
+            If confirmationResult = DialogResult.Yes Then
+                Debug.WriteLine("User confirmation deletion.")
+                ' Proceed with deletion  
+                Try
+                    Debug.WriteLine("Format errors in button delete")
+                    Debug.WriteLine("Deleting data: Data delected")
+                    Debug.WriteLine("Stack Trace: {ex.StackTrace}")
+                    Using conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
+                        conn.Open()
 
-            ' Proceed with deletion  
-            Try
-                If DGVChores.SelectedRows.Count > 0 Then
-                    Debug.WriteLine("A row is selected for deletion")
-                    Dim confirmationResults As DialogResult = MessageBox.Show("Are you sure you want o delete this chore?", "Confirm Deletion", MessageBoxButtons.YesNo, MessageBoxIcon.Warning)
-                    If confirmationResults = DialogResult.Yes Then
-                        Debug.WriteLine("User confirmed deletion.")
+                        ' Create the delete command  
+                        Dim cmd As New OleDbCommand("DELETE FROM [Chores] WHERE [ID] = ?", conn)
+                        cmd.Parameters.AddWithValue("@ID", PhotoID) ' Primary key for matching record  
 
-                    Else
-                        Debug.WriteLine("User cancelled deletion.")
-                    End If
+                        ' Execute the delete command  
+                        Dim rowsAffected As Integer = cmd.ExecuteNonQuery()
 
-                Else
-                    Debug.WriteLine("No row selected, Exiting Button delete")
-
-                    MessageBox.Show("Please Select chore to delete", "Deletion Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-                End If
-
-
-
-                Using conn As New OleDbConnection(connectionString)
-                    conn.Open()
-
-
-                    ' Create the delete command  
-                    Dim cmd As New OleDbCommand("DELETE FROM [Chores] WHERE [ID] = ?", conn)
-                    cmd.Parameters.AddWithValue("@ID", ID) ' Primary key for matching record  
-
-                    ' Execute the delete command  
-                    Dim rowsAffected As Integer = cmd.ExecuteNonQuery()
-
-                    If rowsAffected > 0 Then
-                        MessageBox.Show("Task deleted successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
-                        ' Optionally refresh DataGridView or reload from database  
-                        loadChoresFromDatabase()
-                    Else
-                        MessageBox.Show("No chores deleted. Please check if the ID exists.", "Deletion Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-                    End If
-
-                End Using
-
-            Catch ex As Exception
-                MessageBox.Show($"An error occurred while deleting the expense: {ex.Message}", "Deletion Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-            End Try
+                        If rowsAffected > 0 Then
+                            MessageBox.Show("Chores deleted successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                            ' Optionally refresh DataGridView or reload from database  
+                            ' PopulateDataGridView()
+                        Else
+                            MessageBox.Show("No Chores was deleted. Please check if the ID exists.", "Deletion Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                        End If
+                    End Using
+                    loadChoresFromDatabase()
+                Catch ex As Exception
+                    Debug.WriteLine("Failed to delete data")
+                    Debug.Write($"Stack Trace: {ex.StackTrace}")
+                    MessageBox.Show($"An error occurred while deleting the Chores: {ex.Message}", "Deletion Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                End Try
+            End If
         Else
-
-            MessageBox.Show("Please select chores to delete.", "Deletion Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-
-            loadChoresFromDatabase()
+            Debug.WriteLine("User cancelled deletion")
+            MessageBox.Show("Please select Chores to delete.", "Deletion Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
         End If
-        Debug.WriteLine("Leaving button Delete")
+        Debug.WriteLine("Exiting button delete")
     End Sub
-
     Private Sub Button5_Click(sender As Object, e As EventArgs)
         'Dim itemCount As Integer = 0
 
@@ -400,23 +377,19 @@ Public Class chores
         ''display the total count in the label
         'lblitemCount.Text = "Total Items counted: " & itemCount
     End Sub
-
     Private Sub Button5_Click_1(sender As Object, e As EventArgs) Handles Button5.Click
+
         loadChoresFromDatabase()
     End Sub
-
     Private Sub Button6_Click(sender As Object, e As EventArgs) Handles Button6.Click
         DGVChores.Sort(DGVChores.Columns("DueDate"), System.ComponentModel.ListSortDirection.Ascending)
-
     End Sub
-
     Private Sub Button7_Click(sender As Object, e As EventArgs) Handles Button7.Click
         Dim selectedFrequency As String = If(Cmbfre.SelectedItem IsNot Nothing, Cmbfre.SelectedItem.ToString(), "")
         Dim selectedPriority As String = If(cmbpriority.SelectedItem IsNot Nothing, cmbpriority.SelectedItem.ToString(), "")
 
         HouseHoldManagment_Module.FilterChores(selectedFrequency, selectedPriority)
     End Sub
-
     Private Sub Button8_Click(sender As Object, e As EventArgs) Handles Button8.Click
         Try
             For Each row As DataGridViewRow In DGVChores.Rows
@@ -426,21 +399,15 @@ Public Class chores
 
                     If DueDate < DateTime.Now AndAlso Status <> "Completed" Then
                         row.DefaultCellStyle.BackColor = Color.Gray
-
                     Else
                         row.DefaultCellStyle.BackColor = Color.WhiteSmoke
-
-
                     End If
                 End If
             Next
             Dim InclompletedCount As Integer = 0
-
             For Each row As DataGridViewRow In DGVChores.Rows
                 If row.Cells("Status").Value IsNot Nothing AndAlso row.Cells("Status").Value.ToString() <> "Completed " Then
-
                     InclompletedCount += 1
-
                 End If
             Next
             Label12.Text = "Incompleted chores: " & InclompletedCount.ToString
@@ -448,14 +415,51 @@ Public Class chores
             MessageBox.Show("Error highligting overdue chores")
         End Try
     End Sub
-
     Private Sub Button9_Click(sender As Object, e As EventArgs) Handles Button9.Click
-        For Each row As DataGridViewRow In
-                DGVChores.SelectedRows
-            row.Cells("Status").Value = "Completed"
-        Next
-    End Sub
 
+        'For Each row As DataGridViewRow In
+        '        DGVChores.SelectedRows
+        '    row.Cells("Status").Value = "Completed"
+        'Next
+
+
+        TxtDes.Text = ""
+        TxtTitle.Text = ""
+        'TextBox1.Text = ""
+
+        CmbASS.Items.Clear() ' Clears all items
+        CmbASS.Text = ""     ' Clears the selected text
+
+        cmbChore.Items.Clear() ' Clears all items
+        cmbChore.Text = ""     ' Clears the selected text
+
+        Cmbfre.Items.Clear() ' Clears all items
+        Cmbfre.Text = ""     ' Clears the selected text
+
+        cmbpriority.Items.Clear() ' Clears all items
+        cmbpriority.Text = ""     ' Clears the selected text
+
+        CMBstatus.Items.Clear() ' Clears all items
+        CMBstatus.Text = ""     ' Clears the selected text
+
+        ComboBox1.Items.Clear() ' Clears all items
+        ComboBox1.Text = ""     ' Clears the selected text
+
+        Button1.Enabled = True
+        Button2.Enabled = True
+        Button3.Enabled = True
+        Button4.Enabled = True
+        Button5.Enabled = True
+        Button6.Enabled = True
+        Button7.Enabled = True
+        Button12.Enabled = True
+        Button13.Enabled = True
+        Button8.Enabled = True
+        Button9.Enabled = True
+        Button10.Enabled = True
+        Button11.Enabled = True
+
+    End Sub
     Private Sub Button10_Click(sender As Object, e As EventArgs)
         If ComboBox1.SelectedItem Then
             Select Case Cmbfre.Text
@@ -468,12 +472,10 @@ Public Class chores
             End Select
         End If
     End Sub
-
     Private Sub Button12_Click(sender As Object, e As EventArgs)
 
 
     End Sub
-
     'chores
     Public Sub LoadBudgetDataFromDatabase()
         Try
@@ -495,10 +497,9 @@ Public Class chores
         Catch ex As Exception
             Debug.WriteLine("Failed to populate Gatagridview")
             Debug.Write($"Stack Trace: {ex.StackTrace}")
-            MessageBox.Show($"Error Loading Budget data from database: {ex.Message}", "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            MessageBox.Show($"Error Loading chores data from database: {ex.Message}", "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
     End Sub
-
     Private Sub Button11_Click(sender As Object, e As EventArgs) Handles Button11.Click
         If CmbASS.SelectedIndex = -1 OrElse cmbChore.SelectedIndex = -1 OrElse Cmbfre.SelectedIndex = -1 Then
             MessageBox.Show("Please select a person, chore, and frequency.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
@@ -547,34 +548,24 @@ Public Class chores
             Return count > 0 ' If count > 0, person already has a chore
         End Using
     End Function
-
     Private Sub CheckRecurringChores()
-
 
         Using con As New OleDbConnection(connectionString)
             Dim query As String = "SELECT Title FROM Chores WHERE Frequency <> 'One-Time' AND Frequency IS NOT NULL"
 
             Using cmd As New OleDbCommand(query, con)
-
                 Try
-
                     con.Open()
                     Dim reader As OleDbDataReader = cmd.ExecuteReader()
-
                     Dim recurringChores As New List(Of String)
-
                     While reader.Read()
                         recurringChores.Add(reader("Title").ToString())
-
                     End While
-
                     reader.Close()
-
                     ' Display message if there are recurring chores
                     If recurringChores.Count > 0 Then
                         Dim message As String = "Recurring Chores Found:" & vbCrLf & String.Join(vbCrLf, recurringChores)
                         MessageBox.Show(message, "Recurring Chores", MessageBoxButtons.OK, MessageBoxIcon.Information)
-
                     End If
 
                 Catch ex As Exception
@@ -584,7 +575,6 @@ Public Class chores
         End Using
     End Sub
     Private Sub CheckPendingChores()
-
         Using con As New OleDbConnection(connectionString)
             Dim query As String = "SELECT Title, DueDate FROM Chores WHERE Status = 'In Progress' AND DueDate"
 
@@ -615,8 +605,6 @@ Public Class chores
             End Using
         End Using
     End Sub
-
-
     Private Sub Button12_Click_1(sender As Object, e As EventArgs) Handles Button12.Click
         Dim choreID As Integer = GetSelectedChoreID()
 
@@ -634,14 +622,12 @@ Public Class chores
         loadChoresFromDatabase()
         CheckPendingChores()
     End Sub
-
     Private Function GetSelectedChoreID() As Integer
         If DGVChores.SelectedRows.Count > 0 Then
             Return Convert.ToInt32(DGVChores.SelectedRows(0).Cells("ID").Value)
         End If
         Return 0 ' Return 0 if no row is selected
     End Function
-
     ' Method to complete the selected chore and auto-assign the next available person
     Private Sub CompleteChore(choreID As Integer)
         Dim connString As String = HouseHoldManagment_Module.connectionString
@@ -686,7 +672,6 @@ Public Class chores
             End Try
         End Using
     End Sub
-
     ' Update only the selected chore status to "Completed"
     Private Sub UpdateChoreStatus(choreID As Integer, status As String)
         Dim connString As String = HouseHoldManagment_Module.connectionString
@@ -704,7 +689,6 @@ Public Class chores
             End Try
         End Using
     End Sub
-
     ' Get the next available person who is not already assigned in DataGridView or database  
     Private Function GetNextAvailablePerson() As String
         Dim connString As String = HouseHoldManagment_Module.connectionString
@@ -740,7 +724,6 @@ Public Class chores
 
         Return availablePerson
     End Function
-
     ' Calculate the next due date based on frequency (Daily, Weekly, Monthly)
     Private Function CalculateNextDueDate(frequency As String, lastDueDate As Date) As Date
         Select Case frequency.ToLower()
@@ -754,7 +737,6 @@ Public Class chores
                 Return lastDueDate
         End Select
     End Function
-
     ' Update only the selected chore with the next person and new due date
     Private Sub UpdateRecurringChore(choreID As Integer, nextPerson As String, nextDueDate As Date)
         Dim connString As String = HouseHoldManagment_Module.connectionString
@@ -773,276 +755,233 @@ Public Class chores
             End Try
         End Using
     End Sub
-
-    'Private Sub CmbASS_SelectedIndexChanged(sender As Object, e As EventArgs) Handles CmbASS.SelectedIndexChanged
-    '    LoadChore()
-    'End Sub
-
     Private Sub Button10_Click_1(sender As Object, e As EventArgs) Handles Button10.Click
         'Start the task timer when the button Is clicked
 
         Timer1.Start()
-
-        TextBox1.AppendText("Schedules started ." & vbCrLf)
+        'TextBox1.AppendText("Schedules started ." & vbCrLf)
         'Define a list of chores
-
         Label13.Text = ($"chores checked  {DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")}" & vbCrLf)
 
         'Check If any chores are due (Pending) for the selected frequency (daily, weekly, monthly)
-
         ' Dim selectedFrequency As String = ComboBox2.SelectedItem.ToString()
-
         'LoadChoresByFrequency(selectedFrequency)
-
         'Update chores based on frequency
-
         ' Dim choresToUpdate As List(Of Integer) = GetPendingChoresToUpdate(selectedFrequency)
-
         'For Each choreId As String In choresToUpdate
-
         '  Next
 
         Dim quiry = "Select AssignedTo & Title  FROM chores "
 
         Using conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
-
             Using cmd As New OleDbCommand(quiry, conn)
-
                 conn.Open()
-
                 '   MessageBox.Show("  : " & cmd.ExecuteScalar.ToString & MessageBoxIcon.Warning)
-
             End Using
-            ' {"uzwothe", "rolivhuwa", "aluwani"}
         End Using
 
-
-
         Dim connString As String = HouseHoldManagment_Module.connectionString
-
         Dim selectedChoreID As Integer
-
         Dim selectedChore As String = ""
-
         Dim currentPerson As String = ""
-
         Dim assignedPerson As String = ""
 
         Static lastAssignedPerson As String = ""
 
-        ' Check if a row is selected in DataGridView
-
+        ' Check if a row is selected in DataGridView   
         If DGVChores.SelectedRows.Count > 0 Then
-
             selectedChoreID = CInt(DGVChores.SelectedRows(0).Cells("ID").Value)
-
             selectedChore = DGVChores.SelectedRows(0).Cells("Title").Value.ToString()
 
             If DGVChores.SelectedRows(0).Cells("AssignedTo").Value IsNot Nothing Then
-
                 currentPerson = DGVChores.SelectedRows(0).Cells("AssignedTo").Value.ToString()
-
             End If
-
         Else
-
             MsgBox("Please select a chore to assign.", MsgBoxStyle.Exclamation, "Chore Assignment")
-
             Exit Sub
-
         End If
 
         ' Get all available people except the current person and the last assigned person
-
         Dim availablePeople As New List(Of String)
 
         For Each person As String In CmbASS.Items
-
             If person <> currentPerson AndAlso person <> lastAssignedPerson Then
-
                 availablePeople.Add(person)
-
             End If
-
         Next
 
         ' Validate if there are available people
-
         If availablePeople.Count = 0 Then
-
             MsgBox("No different person available for assignment.", MsgBoxStyle.Exclamation, "Chore Assignment")
-
             Exit Sub
-
         End If
 
         ' Randomly select a different person from the available people
-
         Dim rnd As New Random()
-
         assignedPerson = availablePeople(rnd.Next(0, availablePeople.Count))
 
         ' Get the frequency of the selected chore from the database (Daily, Weekly, Monthly)
-
         Dim choreFrequency As String = ""
-
         Dim nextDueDate As DateTime
 
         Using conn As New OleDb.OleDbConnection(connString)
-
             Try
-
                 conn.Open()
-
                 Dim query As String = "SELECT Frequency, DueDate FROM Chores WHERE ID = ?"
-
                 Using cmd As New OleDb.OleDbCommand(query, conn)
-
                     cmd.Parameters.AddWithValue("?", selectedChoreID)
 
                     Using reader As OleDb.OleDbDataReader = cmd.ExecuteReader()
-
                         If reader.Read() Then
-
                             choreFrequency = reader("Frequency").ToString()
-
                             nextDueDate = Convert.ToDateTime(reader("DueDate"))
-
                         End If
-
                     End Using
-
                 End Using
 
-                ' Calculate the new due date based on the frequency
-
+                ' Calculate the new due date based on the frequency         
                 Select Case choreFrequency
-
                     Case "Daily"
-
                         nextDueDate = nextDueDate.AddDays(1)
-
                     Case "Weekly"
-
                         nextDueDate = nextDueDate.AddDays(7)
-
                     Case "Monthly"
-
                         nextDueDate = nextDueDate.AddMonths(1)
-
                 End Select
 
                 ' Assign the chore in the database and update the next due date
-
                 Dim updateQuery As String = "UPDATE Chores SET AssignedTo = ?, DueDate = ? WHERE ID = ?"
 
                 Using cmd As New OleDb.OleDbCommand(updateQuery, conn)
-
                     cmd.Parameters.AddWithValue("?", assignedPerson)
-
                     cmd.Parameters.AddWithValue("?", nextDueDate)
-
                     cmd.Parameters.AddWithValue("?", selectedChoreID)
-
                     cmd.ExecuteNonQuery()
-
                 End Using
 
                 ' Update DataGridView with new assignment and due date
-
                 For Each row As DataGridViewRow In DGVChores.Rows
-
                     If row.Cells("ID").Value = selectedChoreID Then
-
                         row.Cells("AssignedTo").Value = assignedPerson
-
                         row.Cells("DueDate").Value = nextDueDate.ToShortDateString()
 
                         Exit For
-
                     End If
-
                 Next
 
                 ' Show confirmation
-
                 MsgBox("Chore Reassigned: " & selectedChore & " → " & assignedPerson & vbCrLf & "Next Due Date: " & nextDueDate.ToShortDateString(), MsgBoxStyle.Information, "Success")
 
                 ' Update lastAssignedPerson for the next assignment
-
                 lastAssignedPerson = assignedPerson
 
                 ' Refresh the available persons list
-
-
-
             Catch ex As Exception
-
                 MsgBox("Error assigning chore: " & ex.Message, MsgBoxStyle.Critical, "Error")
-
             End Try
-
         End Using
     End Sub
-    Private Sub cmbAssignedTo_SelectedIndexChanged(sender As Object, e As EventArgs) Handles CmbASS.SelectedIndexChanged
-        HighlightChoresForPerson(CmbASS.Text)
+
+    Private Sub Button13_Click(sender As Object, e As EventArgs) Handles Button13.Click
+        CheckDailyChoreOverload()
     End Sub
-    Private Sub DGVChores_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles DGVChores.CellClick
-        If e.RowIndex >= 0 Then
-            Dim selectedPerson = DGVChores.Rows(e.RowIndex).Cells("AssignedTo").Value.ToString()
-            HighlightChoresForPerson(selectedPerson)
-        End If
+    Private Sub cmbAssignedTo_SelectedIndexChanged(sender As Object, e As EventArgs) Handles CmbASS.SelectedIndexChanged
+        Dim selectedPerson As String = CmbASS.SelectedItem.ToString()
+        CheckTimeOverlapForPerson(selectedPerson)
     End Sub
 
-    Private Sub HighlightChoresForPerson(person As String)
+    Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
+
+    End Sub
+
+    ''maaano
+    Private Sub CheckTimeOverlapForPerson(person As String)
+        Dim conflictRows As New HashSet(Of Integer)
+
+        ' Reset all row colors
         For Each row As DataGridViewRow In DGVChores.Rows
-            If row.IsNewRow Then Continue For
-            If row.Cells("AssignedTo").Value.ToString() = person Then
-                row.DefaultCellStyle.BackColor = Color.Red
-            Else
-                row.DefaultCellStyle.BackColor = Color.White ' or original color
+            row.DefaultCellStyle.BackColor = Color.White
+        Next
+
+        ' Collect rows for selected person
+        Dim personChores As New List(Of Tuple(Of Integer, DateTime)) ' (rowIndex, hour)
+
+        For i = 0 To DGVChores.Rows.Count - 2 ' skip new row
+            Dim row = DGVChores.Rows(i)
+            Dim rowPerson = row.Cells("AssignedTo").Value?.ToString().Trim()
+            Dim hourStr = row.Cells("StartTime").Value?.ToString().Trim()
+
+            If rowPerson = person AndAlso Not String.IsNullOrEmpty(hourStr) Then
+                Dim hourVal As DateTime
+                If DateTime.TryParse(hourStr, hourVal) Then
+                    personChores.Add(Tuple.Create(i, hourVal))
+                End If
             End If
         Next
-        Button13.Enabled = True
-    End Sub
 
-    Private Sub btnClearHighlight_Click(sender As Object, e As EventArgs) Handles Button13.Click
-
-        ' Example: Check first row values (can loop if batch save)
-        Dim AssignedTo = DGVChores.Rows(0).Cells("AssignedTo").Value.ToString()
-        Dim dueDate = CDate(DGVChores.Rows(0).Cells("DueDate").Value)
-
-        For Each row As DataGridViewRow In DGVChores.Rows
-            If row.IsNewRow Then Continue For
-            row.DefaultCellStyle.BackColor = Color.White ' reset all highlights
+        ' Check for hour overlap
+        For i = 0 To personChores.Count - 2
+            For j = i + 1 To personChores.Count - 1
+                If personChores(i).Item2.Hour = personChores(j).Item2.Hour Then
+                    conflictRows.Add(personChores(i).Item1)
+                    conflictRows.Add(personChores(j).Item1)
+                End If
+            Next
         Next
-        Button13.Enabled = False
 
-        If Button13.Enabled = False Then
+        ' Highlight conflicts
+        For Each idx In conflictRows
+            DGVChores.Rows(idx).DefaultCellStyle.BackColor = Color.Red
+        Next
 
-            MessageBox.Show($"{AssignedTo} is already assigned a chore on {dueDate:d}.", "Duplicate Assignment", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
-            MessageBox.Show("Cannot save. Please resolve conflicts.", "Conflict", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-            Return
+        ' Show message if conflict found
+        If conflictRows.Count > 0 Then
+            Button1.Visible = False
+            MessageBox.Show("This person has multiple chores at the same hour. Please fix the conflicts.", "Time Conflict", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+        Else
+            Button1.Visible = True
         End If
 
+    End Sub
+    Private Sub CheckDailyChoreOverload()
+        Dim choreCounts As New Dictionary(Of String, Dictionary(Of Date, Integer))
 
+        For Each row As DataGridViewRow In DGVChores.Rows
+            If Not row.IsNewRow Then
+                Dim person = row.Cells("AssignedTo").Value?.ToString().Trim()
+                Dim freq = row.Cells("Frequency").Value?.ToString().Trim()
+                Dim dateStr = row.Cells("DueDate").Value?.ToString().Trim()
+
+                If Not String.IsNullOrEmpty(person) AndAlso freq = "Daily" AndAlso Not String.IsNullOrEmpty(dateStr) Then
+                    Dim choreDate As Date
+                    If Date.TryParse(dateStr, choreDate) Then
+                        If Not choreCounts.ContainsKey(person) Then
+                            choreCounts(person) = New Dictionary(Of Date, Integer)
+                        End If
+                        If Not choreCounts(person).ContainsKey(choreDate.Date) Then
+                            choreCounts(person)(choreDate.Date) = 0
+                        End If
+                        choreCounts(person)(choreDate.Date) += 1
+                    End If
+                End If
+            End If
+        Next
+
+        ' Check for overloads and show message
+        For Each person In choreCounts.Keys
+            For Each choreDate In choreCounts(person).Keys
+                If choreCounts(person)(choreDate) >= 3 Then
+                    MessageBox.Show($"{person} has {choreCounts(person)(choreDate)} chores on {choreDate:d}. Please review the schedule.",
+                                    "Daily Chore Overload", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                    Exit Sub ' Show message once for the first overload found
+                End If
+            Next
+        Next
     End Sub
 
-    Private Function IsPersonAlreadyAssigned(person As String, dueDate As Date) As Boolean
 
-        Dim cmd As New OleDbCommand("SELECT COUNT(*) FROM Chores WHERE AssignedTo = @person AND DueDate = @dueDate", conn)
-        cmd.Parameters.AddWithValue("@person", person)
-        cmd.Parameters.AddWithValue("@dueDate", dueDate)
 
-        conn.Open()
-
-        Dim count As Integer = CInt(cmd.ExecuteScalar())
-
-        conn.Close()
-
-        Return count > 0
-
-    End Function
+    'vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
 
 
 End Class

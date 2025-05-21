@@ -40,23 +40,29 @@ Partial Class chores
         Me.Button2 = New System.Windows.Forms.Button()
         Me.Button1 = New System.Windows.Forms.Button()
         Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.Label17 = New System.Windows.Forms.Label()
+        Me.lblWarning = New System.Windows.Forms.Label()
+        Me.Label16 = New System.Windows.Forms.Label()
         Me.Label10 = New System.Windows.Forms.Label()
         Me.cmbpriority = New System.Windows.Forms.ComboBox()
         Me.Cmbfre = New System.Windows.Forms.ComboBox()
         Me.CMBstatus = New System.Windows.Forms.ComboBox()
-        Me.DateTimePicker1 = New System.Windows.Forms.DateTimePicker()
-        Me.Label6 = New System.Windows.Forms.Label()
+        Me.ComboBox1 = New System.Windows.Forms.ComboBox()
+        Me.Label9 = New System.Windows.Forms.Label()
         Me.Label7 = New System.Windows.Forms.Label()
         Me.Label8 = New System.Windows.Forms.Label()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.TxtDes = New System.Windows.Forms.TextBox()
+        Me.cmbChore = New System.Windows.Forms.ComboBox()
+        Me.DateTimePicker1 = New System.Windows.Forms.DateTimePicker()
+        Me.Label6 = New System.Windows.Forms.Label()
         Me.Panel1 = New System.Windows.Forms.Panel()
-        Me.Label9 = New System.Windows.Forms.Label()
-        Me.ComboBox1 = New System.Windows.Forms.ComboBox()
+        Me.DateTimePicker3 = New System.Windows.Forms.DateTimePicker()
+        Me.DateTimePicker2 = New System.Windows.Forms.DateTimePicker()
+        Me.Label15 = New System.Windows.Forms.Label()
+        Me.Label14 = New System.Windows.Forms.Label()
         Me.CmbASS = New System.Windows.Forms.ComboBox()
         Me.TxtTitle = New System.Windows.Forms.TextBox()
-        Me.TextBox1 = New System.Windows.Forms.TextBox()
-        Me.Label2 = New System.Windows.Forms.Label()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
@@ -64,7 +70,6 @@ Partial Class chores
         Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
         Me.Button13 = New System.Windows.Forms.Button()
         Me.Label13 = New System.Windows.Forms.Label()
-        Me.cmbChore = New System.Windows.Forms.ComboBox()
         CType(Me.DGVChores, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel2.SuspendLayout()
         Me.Panel1.SuspendLayout()
@@ -74,7 +79,7 @@ Partial Class chores
         '
         Me.Button12.BackColor = System.Drawing.SystemColors.ActiveCaption
         Me.Button12.Image = CType(resources.GetObject("Button12.Image"), System.Drawing.Image)
-        Me.Button12.Location = New System.Drawing.Point(583, 443)
+        Me.Button12.Location = New System.Drawing.Point(583, 485)
         Me.Button12.Name = "Button12"
         Me.Button12.Size = New System.Drawing.Size(44, 54)
         Me.Button12.TabIndex = 45
@@ -87,7 +92,7 @@ Partial Class chores
         Me.Button11.Cursor = System.Windows.Forms.Cursors.No
         Me.Button11.Enabled = False
         Me.Button11.Image = CType(resources.GetObject("Button11.Image"), System.Drawing.Image)
-        Me.Button11.Location = New System.Drawing.Point(355, 443)
+        Me.Button11.Location = New System.Drawing.Point(355, 485)
         Me.Button11.Name = "Button11"
         Me.Button11.Size = New System.Drawing.Size(44, 54)
         Me.Button11.TabIndex = 44
@@ -98,7 +103,7 @@ Partial Class chores
         '
         Me.Button9.BackColor = System.Drawing.SystemColors.ActiveCaption
         Me.Button9.Image = CType(resources.GetObject("Button9.Image"), System.Drawing.Image)
-        Me.Button9.Location = New System.Drawing.Point(70, 443)
+        Me.Button9.Location = New System.Drawing.Point(70, 485)
         Me.Button9.Name = "Button9"
         Me.Button9.Size = New System.Drawing.Size(44, 54)
         Me.Button9.TabIndex = 43
@@ -116,7 +121,7 @@ Partial Class chores
         '
         Me.Button8.BackColor = System.Drawing.SystemColors.ActiveCaption
         Me.Button8.Image = CType(resources.GetObject("Button8.Image"), System.Drawing.Image)
-        Me.Button8.Location = New System.Drawing.Point(469, 443)
+        Me.Button8.Location = New System.Drawing.Point(469, 485)
         Me.Button8.Name = "Button8"
         Me.Button8.Size = New System.Drawing.Size(44, 54)
         Me.Button8.TabIndex = 41
@@ -127,7 +132,7 @@ Partial Class chores
         '
         Me.Button5.BackColor = System.Drawing.SystemColors.ActiveCaption
         Me.Button5.Image = CType(resources.GetObject("Button5.Image"), System.Drawing.Image)
-        Me.Button5.Location = New System.Drawing.Point(127, 443)
+        Me.Button5.Location = New System.Drawing.Point(127, 485)
         Me.Button5.Name = "Button5"
         Me.Button5.Size = New System.Drawing.Size(44, 54)
         Me.Button5.TabIndex = 40
@@ -137,7 +142,7 @@ Partial Class chores
         '
         Me.Button7.BackColor = System.Drawing.SystemColors.ActiveCaption
         Me.Button7.Image = CType(resources.GetObject("Button7.Image"), System.Drawing.Image)
-        Me.Button7.Location = New System.Drawing.Point(412, 443)
+        Me.Button7.Location = New System.Drawing.Point(412, 485)
         Me.Button7.Name = "Button7"
         Me.Button7.Size = New System.Drawing.Size(44, 54)
         Me.Button7.TabIndex = 39
@@ -148,7 +153,7 @@ Partial Class chores
         '
         Me.Button6.BackColor = System.Drawing.SystemColors.ActiveCaption
         Me.Button6.Image = CType(resources.GetObject("Button6.Image"), System.Drawing.Image)
-        Me.Button6.Location = New System.Drawing.Point(526, 443)
+        Me.Button6.Location = New System.Drawing.Point(526, 485)
         Me.Button6.Name = "Button6"
         Me.Button6.Size = New System.Drawing.Size(44, 54)
         Me.Button6.TabIndex = 38
@@ -159,7 +164,7 @@ Partial Class chores
         '
         Me.Button4.BackColor = System.Drawing.SystemColors.ActiveCaption
         Me.Button4.Image = CType(resources.GetObject("Button4.Image"), System.Drawing.Image)
-        Me.Button4.Location = New System.Drawing.Point(184, 443)
+        Me.Button4.Location = New System.Drawing.Point(184, 485)
         Me.Button4.Name = "Button4"
         Me.Button4.Size = New System.Drawing.Size(44, 54)
         Me.Button4.TabIndex = 37
@@ -187,16 +192,16 @@ Partial Class chores
         '
         Me.DGVChores.BackgroundColor = System.Drawing.SystemColors.ActiveCaption
         Me.DGVChores.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DGVChores.Location = New System.Drawing.Point(10, 282)
+        Me.DGVChores.Location = New System.Drawing.Point(9, 345)
         Me.DGVChores.Name = "DGVChores"
-        Me.DGVChores.Size = New System.Drawing.Size(731, 157)
+        Me.DGVChores.Size = New System.Drawing.Size(731, 134)
         Me.DGVChores.TabIndex = 34
         '
         'Button3
         '
         Me.Button3.BackColor = System.Drawing.SystemColors.ActiveCaption
         Me.Button3.Image = CType(resources.GetObject("Button3.Image"), System.Drawing.Image)
-        Me.Button3.Location = New System.Drawing.Point(13, 443)
+        Me.Button3.Location = New System.Drawing.Point(13, 485)
         Me.Button3.Name = "Button3"
         Me.Button3.Size = New System.Drawing.Size(44, 54)
         Me.Button3.TabIndex = 33
@@ -206,7 +211,7 @@ Partial Class chores
         '
         Me.Button2.BackColor = System.Drawing.SystemColors.ActiveCaption
         Me.Button2.Image = CType(resources.GetObject("Button2.Image"), System.Drawing.Image)
-        Me.Button2.Location = New System.Drawing.Point(241, 443)
+        Me.Button2.Location = New System.Drawing.Point(241, 485)
         Me.Button2.Name = "Button2"
         Me.Button2.Size = New System.Drawing.Size(44, 54)
         Me.Button2.TabIndex = 32
@@ -216,7 +221,7 @@ Partial Class chores
         '
         Me.Button1.BackColor = System.Drawing.SystemColors.ActiveCaption
         Me.Button1.Image = CType(resources.GetObject("Button1.Image"), System.Drawing.Image)
-        Me.Button1.Location = New System.Drawing.Point(298, 443)
+        Me.Button1.Location = New System.Drawing.Point(298, 485)
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(44, 54)
         Me.Button1.TabIndex = 31
@@ -226,32 +231,61 @@ Partial Class chores
         '
         Me.Panel2.BackColor = System.Drawing.SystemColors.ActiveCaption
         Me.Panel2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.Panel2.Controls.Add(Me.Label17)
+        Me.Panel2.Controls.Add(Me.lblWarning)
+        Me.Panel2.Controls.Add(Me.Label16)
         Me.Panel2.Controls.Add(Me.Label10)
         Me.Panel2.Controls.Add(Me.cmbpriority)
-        Me.Panel2.Controls.Add(Me.Cmbfre)
         Me.Panel2.Controls.Add(Me.CMBstatus)
-        Me.Panel2.Controls.Add(Me.DateTimePicker1)
-        Me.Panel2.Controls.Add(Me.Label6)
-        Me.Panel2.Controls.Add(Me.Label7)
+        Me.Panel2.Controls.Add(Me.ComboBox1)
+        Me.Panel2.Controls.Add(Me.Label9)
         Me.Panel2.Controls.Add(Me.Label8)
         Me.Panel2.Controls.Add(Me.Label4)
         Me.Panel2.Controls.Add(Me.TxtDes)
         Me.Panel2.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Panel2.ForeColor = System.Drawing.SystemColors.HighlightText
-        Me.Panel2.Location = New System.Drawing.Point(327, 54)
+        Me.Panel2.Location = New System.Drawing.Point(335, 54)
         Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(413, 209)
+        Me.Panel2.Size = New System.Drawing.Size(405, 285)
         Me.Panel2.TabIndex = 29
+        '
+        'Label17
+        '
+        Me.Label17.AutoSize = True
+        Me.Label17.Location = New System.Drawing.Point(325, 242)
+        Me.Label17.Name = "Label17"
+        Me.Label17.Size = New System.Drawing.Size(0, 16)
+        Me.Label17.TabIndex = 30
+        '
+        'lblWarning
+        '
+        Me.lblWarning.AutoSize = True
+        Me.lblWarning.Location = New System.Drawing.Point(11, 242)
+        Me.lblWarning.Name = "lblWarning"
+        Me.lblWarning.Size = New System.Drawing.Size(11, 16)
+        Me.lblWarning.TabIndex = 29
+        Me.lblWarning.Text = " "
+        '
+        'Label16
+        '
+        Me.Label16.AutoSize = True
+        Me.Label16.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label16.Location = New System.Drawing.Point(11, 198)
+        Me.Label16.Name = "Label16"
+        Me.Label16.Size = New System.Drawing.Size(11, 13)
+        Me.Label16.TabIndex = 52
+        Me.Label16.Text = " "
         '
         'Label10
         '
         Me.Label10.AutoSize = True
         Me.Label10.BackColor = System.Drawing.Color.Transparent
-        Me.Label10.Font = New System.Drawing.Font("Arial", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label10.ForeColor = System.Drawing.SystemColors.HighlightText
-        Me.Label10.Location = New System.Drawing.Point(3, 158)
+        Me.Label10.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.Label10.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label10.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
+        Me.Label10.Location = New System.Drawing.Point(14, 61)
         Me.Label10.Name = "Label10"
-        Me.Label10.Size = New System.Drawing.Size(44, 15)
+        Me.Label10.Size = New System.Drawing.Size(40, 15)
         Me.Label10.TabIndex = 9
         Me.Label10.Text = "Priority"
         '
@@ -259,57 +293,60 @@ Partial Class chores
         '
         Me.cmbpriority.FormattingEnabled = True
         Me.cmbpriority.Items.AddRange(New Object() {"Low", "Medium", "High"})
-        Me.cmbpriority.Location = New System.Drawing.Point(6, 174)
+        Me.cmbpriority.Location = New System.Drawing.Point(94, 54)
         Me.cmbpriority.Name = "cmbpriority"
-        Me.cmbpriority.Size = New System.Drawing.Size(121, 24)
+        Me.cmbpriority.Size = New System.Drawing.Size(292, 24)
         Me.cmbpriority.TabIndex = 8
         '
         'Cmbfre
         '
         Me.Cmbfre.FormattingEnabled = True
         Me.Cmbfre.Items.AddRange(New Object() {"Daily", "Weekly", "Monthly", "Yearly"})
-        Me.Cmbfre.Location = New System.Drawing.Point(10, 69)
+        Me.Cmbfre.Location = New System.Drawing.Point(106, 238)
         Me.Cmbfre.Name = "Cmbfre"
-        Me.Cmbfre.Size = New System.Drawing.Size(121, 24)
+        Me.Cmbfre.Size = New System.Drawing.Size(203, 21)
         Me.Cmbfre.TabIndex = 15
         '
         'CMBstatus
         '
         Me.CMBstatus.FormattingEnabled = True
         Me.CMBstatus.Items.AddRange(New Object() {"Not Started", "In Progress", "Completed"})
-        Me.CMBstatus.Location = New System.Drawing.Point(9, 123)
+        Me.CMBstatus.Location = New System.Drawing.Point(94, 6)
         Me.CMBstatus.Name = "CMBstatus"
-        Me.CMBstatus.Size = New System.Drawing.Size(121, 24)
+        Me.CMBstatus.Size = New System.Drawing.Size(292, 24)
         Me.CMBstatus.TabIndex = 14
         '
-        'DateTimePicker1
+        'ComboBox1
         '
-        Me.DateTimePicker1.Location = New System.Drawing.Point(6, 24)
-        Me.DateTimePicker1.Name = "DateTimePicker1"
-        Me.DateTimePicker1.Size = New System.Drawing.Size(241, 22)
-        Me.DateTimePicker1.TabIndex = 11
+        Me.ComboBox1.FormattingEnabled = True
+        Me.ComboBox1.Items.AddRange(New Object() {"Yes", "No"})
+        Me.ComboBox1.Location = New System.Drawing.Point(94, 103)
+        Me.ComboBox1.Name = "ComboBox1"
+        Me.ComboBox1.Size = New System.Drawing.Size(292, 24)
+        Me.ComboBox1.TabIndex = 15
         '
-        'Label6
+        'Label9
         '
-        Me.Label6.AutoSize = True
-        Me.Label6.BackColor = System.Drawing.Color.Transparent
-        Me.Label6.Font = New System.Drawing.Font("Arial", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label6.ForeColor = System.Drawing.SystemColors.HighlightText
-        Me.Label6.Location = New System.Drawing.Point(9, 4)
-        Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(62, 16)
-        Me.Label6.TabIndex = 5
-        Me.Label6.Text = "Due Date"
+        Me.Label9.AutoSize = True
+        Me.Label9.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.Label9.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label9.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
+        Me.Label9.Location = New System.Drawing.Point(14, 110)
+        Me.Label9.Name = "Label9"
+        Me.Label9.Size = New System.Drawing.Size(55, 15)
+        Me.Label9.TabIndex = 16
+        Me.Label9.Text = "Recurring"
         '
         'Label7
         '
         Me.Label7.AutoSize = True
         Me.Label7.BackColor = System.Drawing.Color.Transparent
-        Me.Label7.Font = New System.Drawing.Font("Arial", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label7.ForeColor = System.Drawing.SystemColors.HighlightText
-        Me.Label7.Location = New System.Drawing.Point(7, 50)
+        Me.Label7.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.Label7.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label7.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
+        Me.Label7.Location = New System.Drawing.Point(19, 244)
         Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(69, 16)
+        Me.Label7.Size = New System.Drawing.Size(59, 15)
         Me.Label7.TabIndex = 6
         Me.Label7.Text = "Frequency"
         '
@@ -317,11 +354,12 @@ Partial Class chores
         '
         Me.Label8.AutoSize = True
         Me.Label8.BackColor = System.Drawing.Color.Transparent
-        Me.Label8.Font = New System.Drawing.Font("Arial", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label8.ForeColor = System.Drawing.SystemColors.HighlightText
-        Me.Label8.Location = New System.Drawing.Point(6, 104)
+        Me.Label8.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.Label8.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label8.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
+        Me.Label8.Location = New System.Drawing.Point(14, 15)
         Me.Label8.Name = "Label8"
-        Me.Label8.Size = New System.Drawing.Size(46, 16)
+        Me.Label8.Size = New System.Drawing.Size(39, 15)
         Me.Label8.TabIndex = 7
         Me.Label8.Text = "Status"
         '
@@ -329,104 +367,143 @@ Partial Class chores
         '
         Me.Label4.AutoSize = True
         Me.Label4.BackColor = System.Drawing.Color.Transparent
-        Me.Label4.Font = New System.Drawing.Font("Arial", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label4.ForeColor = System.Drawing.SystemColors.HighlightText
-        Me.Label4.Location = New System.Drawing.Point(242, 50)
+        Me.Label4.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.Label4.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label4.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
+        Me.Label4.Location = New System.Drawing.Point(14, 154)
         Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(73, 16)
+        Me.Label4.Size = New System.Drawing.Size(62, 15)
         Me.Label4.TabIndex = 3
         Me.Label4.Text = "Descriprion"
         '
         'TxtDes
         '
-        Me.TxtDes.Location = New System.Drawing.Point(149, 69)
+        Me.TxtDes.Location = New System.Drawing.Point(94, 154)
         Me.TxtDes.Multiline = True
         Me.TxtDes.Name = "TxtDes"
-        Me.TxtDes.Size = New System.Drawing.Size(251, 128)
+        Me.TxtDes.Size = New System.Drawing.Size(292, 121)
         Me.TxtDes.TabIndex = 15
+        '
+        'cmbChore
+        '
+        Me.cmbChore.ForeColor = System.Drawing.Color.White
+        Me.cmbChore.FormattingEnabled = True
+        Me.cmbChore.Location = New System.Drawing.Point(3, -22)
+        Me.cmbChore.Name = "cmbChore"
+        Me.cmbChore.Size = New System.Drawing.Size(10, 21)
+        Me.cmbChore.TabIndex = 27
+        Me.cmbChore.Visible = False
+        '
+        'DateTimePicker1
+        '
+        Me.DateTimePicker1.Location = New System.Drawing.Point(105, 192)
+        Me.DateTimePicker1.Name = "DateTimePicker1"
+        Me.DateTimePicker1.Size = New System.Drawing.Size(204, 20)
+        Me.DateTimePicker1.TabIndex = 11
+        '
+        'Label6
+        '
+        Me.Label6.AutoSize = True
+        Me.Label6.BackColor = System.Drawing.Color.Transparent
+        Me.Label6.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.Label6.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label6.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
+        Me.Label6.Location = New System.Drawing.Point(19, 195)
+        Me.Label6.Name = "Label6"
+        Me.Label6.Size = New System.Drawing.Size(55, 15)
+        Me.Label6.TabIndex = 5
+        Me.Label6.Text = "Due Date"
         '
         'Panel1
         '
         Me.Panel1.BackColor = System.Drawing.SystemColors.ActiveCaption
         Me.Panel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        Me.Panel1.Controls.Add(Me.cmbChore)
-        Me.Panel1.Controls.Add(Me.Label9)
-        Me.Panel1.Controls.Add(Me.ComboBox1)
+        Me.Panel1.Controls.Add(Me.DateTimePicker3)
+        Me.Panel1.Controls.Add(Me.DateTimePicker2)
+        Me.Panel1.Controls.Add(Me.Label15)
+        Me.Panel1.Controls.Add(Me.Label14)
         Me.Panel1.Controls.Add(Me.CmbASS)
+        Me.Panel1.Controls.Add(Me.Cmbfre)
         Me.Panel1.Controls.Add(Me.TxtTitle)
-        Me.Panel1.Controls.Add(Me.TextBox1)
-        Me.Panel1.Controls.Add(Me.Label2)
+        Me.Panel1.Controls.Add(Me.DateTimePicker1)
         Me.Panel1.Controls.Add(Me.Label3)
+        Me.Panel1.Controls.Add(Me.Label7)
+        Me.Panel1.Controls.Add(Me.Label6)
         Me.Panel1.Controls.Add(Me.Label5)
         Me.Panel1.Location = New System.Drawing.Point(10, 54)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(314, 209)
+        Me.Panel1.Size = New System.Drawing.Size(319, 285)
         Me.Panel1.TabIndex = 30
         '
-        'Label9
+        'DateTimePicker3
         '
-        Me.Label9.AutoSize = True
-        Me.Label9.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.Label9.Location = New System.Drawing.Point(9, 158)
-        Me.Label9.Name = "Label9"
-        Me.Label9.Size = New System.Drawing.Size(53, 13)
-        Me.Label9.TabIndex = 16
-        Me.Label9.Text = "Recurring"
+        Me.DateTimePicker3.Format = System.Windows.Forms.DateTimePickerFormat.Time
+        Me.DateTimePicker3.Location = New System.Drawing.Point(105, 152)
+        Me.DateTimePicker3.Name = "DateTimePicker3"
+        Me.DateTimePicker3.ShowUpDown = True
+        Me.DateTimePicker3.Size = New System.Drawing.Size(204, 20)
+        Me.DateTimePicker3.TabIndex = 31
         '
-        'ComboBox1
+        'DateTimePicker2
         '
-        Me.ComboBox1.FormattingEnabled = True
-        Me.ComboBox1.Items.AddRange(New Object() {"Yes", "No"})
-        Me.ComboBox1.Location = New System.Drawing.Point(6, 174)
-        Me.ComboBox1.Name = "ComboBox1"
-        Me.ComboBox1.Size = New System.Drawing.Size(184, 21)
-        Me.ComboBox1.TabIndex = 15
+        Me.DateTimePicker2.CustomFormat = "only hours and minutes"
+        Me.DateTimePicker2.Format = System.Windows.Forms.DateTimePickerFormat.Time
+        Me.DateTimePicker2.Location = New System.Drawing.Point(105, 104)
+        Me.DateTimePicker2.Name = "DateTimePicker2"
+        Me.DateTimePicker2.ShowUpDown = True
+        Me.DateTimePicker2.Size = New System.Drawing.Size(204, 20)
+        Me.DateTimePicker2.TabIndex = 30
+        '
+        'Label15
+        '
+        Me.Label15.AutoSize = True
+        Me.Label15.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.Label15.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label15.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
+        Me.Label15.Location = New System.Drawing.Point(19, 108)
+        Me.Label15.Name = "Label15"
+        Me.Label15.Size = New System.Drawing.Size(54, 15)
+        Me.Label15.TabIndex = 29
+        Me.Label15.Text = "StartTime"
+        '
+        'Label14
+        '
+        Me.Label14.AutoSize = True
+        Me.Label14.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.Label14.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label14.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
+        Me.Label14.Location = New System.Drawing.Point(19, 155)
+        Me.Label14.Name = "Label14"
+        Me.Label14.Size = New System.Drawing.Size(54, 15)
+        Me.Label14.TabIndex = 28
+        Me.Label14.Text = "End Time"
         '
         'CmbASS
         '
         Me.CmbASS.FormattingEnabled = True
         Me.CmbASS.Items.AddRange(New Object() {" "})
-        Me.CmbASS.Location = New System.Drawing.Point(6, 127)
+        Me.CmbASS.Location = New System.Drawing.Point(105, 55)
         Me.CmbASS.Name = "CmbASS"
-        Me.CmbASS.Size = New System.Drawing.Size(278, 21)
+        Me.CmbASS.Size = New System.Drawing.Size(204, 21)
         Me.CmbASS.TabIndex = 14
         '
         'TxtTitle
         '
-        Me.TxtTitle.Location = New System.Drawing.Point(6, 73)
+        Me.TxtTitle.Location = New System.Drawing.Point(105, 9)
         Me.TxtTitle.Name = "TxtTitle"
-        Me.TxtTitle.Size = New System.Drawing.Size(278, 20)
+        Me.TxtTitle.Size = New System.Drawing.Size(204, 20)
         Me.TxtTitle.TabIndex = 6
-        '
-        'TextBox1
-        '
-        Me.TextBox1.Location = New System.Drawing.Point(6, 31)
-        Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.ReadOnly = True
-        Me.TextBox1.Size = New System.Drawing.Size(278, 20)
-        Me.TextBox1.TabIndex = 5
-        '
-        'Label2
-        '
-        Me.Label2.AutoSize = True
-        Me.Label2.BackColor = System.Drawing.Color.Transparent
-        Me.Label2.Font = New System.Drawing.Font("Arial", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label2.ForeColor = System.Drawing.SystemColors.Window
-        Me.Label2.Location = New System.Drawing.Point(9, 8)
-        Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(54, 16)
-        Me.Label2.TabIndex = 1
-        Me.Label2.Text = "ChoreID"
         '
         'Label3
         '
         Me.Label3.AutoSize = True
         Me.Label3.BackColor = System.Drawing.Color.Transparent
-        Me.Label3.Font = New System.Drawing.Font("Arial", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label3.ForeColor = System.Drawing.SystemColors.Window
-        Me.Label3.Location = New System.Drawing.Point(9, 54)
+        Me.Label3.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.Label3.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label3.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
+        Me.Label3.Location = New System.Drawing.Point(19, 14)
         Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(32, 16)
+        Me.Label3.Size = New System.Drawing.Size(29, 15)
         Me.Label3.TabIndex = 2
         Me.Label3.Text = "Title"
         '
@@ -434,11 +511,12 @@ Partial Class chores
         '
         Me.Label5.AutoSize = True
         Me.Label5.BackColor = System.Drawing.Color.Transparent
-        Me.Label5.Font = New System.Drawing.Font("Arial", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label5.ForeColor = System.Drawing.SystemColors.Window
-        Me.Label5.Location = New System.Drawing.Point(9, 108)
+        Me.Label5.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.Label5.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label5.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
+        Me.Label5.Location = New System.Drawing.Point(19, 60)
         Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(79, 16)
+        Me.Label5.Size = New System.Drawing.Size(68, 15)
         Me.Label5.TabIndex = 4
         Me.Label5.Text = "Assigned To"
         '
@@ -449,7 +527,7 @@ Partial Class chores
         Me.Label1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         Me.Label1.Font = New System.Drawing.Font("Arial", 24.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label1.ForeColor = System.Drawing.SystemColors.Highlight
-        Me.Label1.Location = New System.Drawing.Point(280, 9)
+        Me.Label1.Location = New System.Drawing.Point(308, 9)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(152, 39)
         Me.Label1.TabIndex = 28
@@ -459,17 +537,20 @@ Partial Class chores
         '
         Me.Button10.BackColor = System.Drawing.SystemColors.ActiveCaption
         Me.Button10.Image = CType(resources.GetObject("Button10.Image"), System.Drawing.Image)
-        Me.Button10.Location = New System.Drawing.Point(697, 443)
+        Me.Button10.Location = New System.Drawing.Point(697, 485)
         Me.Button10.Name = "Button10"
         Me.Button10.Size = New System.Drawing.Size(44, 54)
         Me.Button10.TabIndex = 46
         Me.Button10.UseVisualStyleBackColor = False
         '
+        'Timer1
+        '
+        '
         'Button13
         '
         Me.Button13.BackColor = System.Drawing.SystemColors.ActiveCaption
         Me.Button13.Image = CType(resources.GetObject("Button13.Image"), System.Drawing.Image)
-        Me.Button13.Location = New System.Drawing.Point(640, 443)
+        Me.Button13.Location = New System.Drawing.Point(640, 485)
         Me.Button13.Name = "Button13"
         Me.Button13.Size = New System.Drawing.Size(44, 54)
         Me.Button13.TabIndex = 47
@@ -484,20 +565,11 @@ Partial Class chores
         Me.Label13.Size = New System.Drawing.Size(0, 13)
         Me.Label13.TabIndex = 48
         '
-        'cmbChore
-        '
-        Me.cmbChore.FormattingEnabled = True
-        Me.cmbChore.Location = New System.Drawing.Point(234, 174)
-        Me.cmbChore.Name = "cmbChore"
-        Me.cmbChore.Size = New System.Drawing.Size(50, 21)
-        Me.cmbChore.TabIndex = 27
-        Me.cmbChore.Visible = False
-        '
         'chores
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(746, 509)
+        Me.ClientSize = New System.Drawing.Size(746, 544)
         Me.Controls.Add(Me.Label13)
         Me.Controls.Add(Me.Button13)
         Me.Controls.Add(Me.Button10)
@@ -505,6 +577,7 @@ Partial Class chores
         Me.Controls.Add(Me.Button11)
         Me.Controls.Add(Me.Button9)
         Me.Controls.Add(Me.Label12)
+        Me.Controls.Add(Me.cmbChore)
         Me.Controls.Add(Me.Button8)
         Me.Controls.Add(Me.Button5)
         Me.Controls.Add(Me.Button7)
@@ -520,6 +593,7 @@ Partial Class chores
         Me.Controls.Add(Me.Panel1)
         Me.Controls.Add(Me.Label1)
         Me.Name = "chores"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Chores"
         CType(Me.DGVChores, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel2.ResumeLayout(False)
@@ -562,8 +636,6 @@ Partial Class chores
     Friend WithEvents ComboBox1 As ComboBox
     Friend WithEvents CmbASS As ComboBox
     Friend WithEvents TxtTitle As TextBox
-    Friend WithEvents TextBox1 As TextBox
-    Friend WithEvents Label2 As Label
     Friend WithEvents Label3 As Label
     Friend WithEvents Label5 As Label
     Friend WithEvents Label1 As Label
@@ -572,4 +644,11 @@ Partial Class chores
     Friend WithEvents Button13 As Button
     Friend WithEvents Label13 As Label
     Friend WithEvents cmbChore As ComboBox
+    Friend WithEvents Label15 As Label
+    Friend WithEvents Label14 As Label
+    Friend WithEvents Label16 As Label
+    Friend WithEvents lblWarning As Label
+    Friend WithEvents Label17 As Label
+    Friend WithEvents DateTimePicker3 As DateTimePicker
+    Friend WithEvents DateTimePicker2 As DateTimePicker
 End Class
