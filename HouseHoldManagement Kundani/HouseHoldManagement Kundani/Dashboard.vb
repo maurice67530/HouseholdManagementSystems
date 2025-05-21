@@ -4,7 +4,6 @@ Imports System.Net.Mail
 Imports System.Net
 Imports System.Runtime.InteropServices
 Imports System.Windows.Forms.DataVisualization.Charting
-
 Public Class Dashboard
 
     ' Daily tips list
@@ -18,16 +17,46 @@ Public Class Dashboard
     "Small tasks done daily keep chores away.",
     "Involve everyone – teamwork works best!"
 }
-
-
+    ' Set your design size (the size you built in designer)
+    Private originalWidth As Integer
+    Private originalHeight As Integer
 
     Private Sub Dashboard_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
+        CheckDatabaseConnection()
         lblbadge.Region = New Region(New Drawing2D.GraphicsPath())
         Dim gp As New Drawing.Drawing2D.GraphicsPath()
         gp.AddEllipse(0, 0, lblbadge.Width, lblbadge.Height)
         lblbadge.Region = New Region(gp)
         StyleBadge()
         In_App_Message.NotifyIcon1.ShowBalloonTip(5000) ' 5 seconds
+
+
+
+        ' Save the form's original design size
+        originalWidth = Me.Width
+        originalHeight = Me.Height
+
+        ' Get screen size excluding the taskbar
+        Dim workingWidth As Integer = Screen.PrimaryScreen.WorkingArea.Width
+        Dim workingHeight As Integer = Screen.PrimaryScreen.WorkingArea.Height
+
+        ' Calculate scale
+        Dim scaleX As Single = workingWidth / originalWidth
+        Dim scaleY As Single = workingHeight / originalHeight
+
+        ' Resize the form to fit working area
+        Me.FormBorderStyle = FormBorderStyle.None
+        Me.Bounds = Screen.PrimaryScreen.WorkingArea
+        Me.AutoScaleMode = AutoScaleMode.None
+        Application.DoEvents()
+
+        ' Resize controls
+        ResizeControls(Me, scaleX, scaleY)
+
+        ' Allow ESC to close while testing
+        Me.KeyPreview = True
+
 
         UpdateNotificationCount()
         LoadChoresStatus()
@@ -42,6 +71,16 @@ Public Class Dashboard
         LoadRecentPhotos()
         DisplayPhoto()
         SetupTimer()
+        'StartPhotoSlideshow()
+        LoadRecentPhotos()      ' Load from database
+        DisplayPhoto()          ' Display the first photo
+        SetupTimer()
+        LoadMemberChoreTaskSummary()
+        'LoadUnassignedPeople()
+        LoadAssignmentSummary()
+        LoadUpcomingDates()
+        LoadUpcomingBirthdays()
+
 
 
 
@@ -79,12 +118,14 @@ Public Class Dashboard
         ToolTip1.SetToolTip(Button6, "Family Event")
         ToolTip1.SetToolTip(btnInAppMessages, "Notifications Status")
         ToolTip1.SetToolTip(Button17, "Budget")
+
         Timer1.Interval = 100
         Timer1.Start()
         If photoList.Count > 0 Then
             DisplayPhoto() ' Show the first photo
             SetupTimer() ' Start timer for slideshow
         End If
+
 
         Timer2.Interval = 200
         Timer2.Start()
@@ -96,35 +137,166 @@ Public Class Dashboard
 
         ShowInternetSpeed()
 
+
+        If currentUser = "Admin" Then
+            ' Admin has full access
+
+            Button15.Enabled = True
+            Button11.Enabled = True
+            Button13.Enabled = True
+            Button14.Enabled = True
+            Button7.Enabled = True
+            Button8.Enabled = True
+            Button12.Enabled = True
+            Button17.Enabled = True
+            Button6.Enabled = True
+            Button16.Enabled = True
+            Button5.Enabled = True
+            btnInAppMessages.Enabled = True
+
+        ElseIf currentUser = "Member" Then
+            ' Members have limited access
+
+            Button11.Enabled = True
+            Button5.Enabled = True
+            Button7.Enabled = True
+            Button6.Enabled = True
+            Button8.Enabled = True
+
+            Button15.Enabled = False
+            Button13.Enabled = False
+            Button14.Enabled = False
+            Button12.Enabled = False
+            Button17.Enabled = False
+            Button16.Enabled = False
+            btnInAppMessages.Enabled = False
+
+        ElseIf currentUser = "Chef" Then
+
+            Button15.Enabled = True
+            Button13.Enabled = True
+            Button14.Enabled = True
+            btnInAppMessages.Enabled = True
+
+            Button7.Enabled = False
+            Button2.Enabled = False
+            Button8.Enabled = False
+            Button6.Enabled = False
+            Button1.Enabled = False
+            Button10.Enabled = False
+
+
+        ElseIf currentUser = "Finance" Then
+
+            Button12.Enabled = True
+            Button17.Enabled = True
+
+            Button3.Enabled = False
+            Button4.Enabled = False
+            Button7.Enabled = False
+            Button5.Enabled = False
+            Button2.Enabled = False
+            Button8.Enabled = False
+            Button6.Enabled = False
+            Button10.Enabled = False
+
+        End If
+
+
+
     End Sub
+
+    Private Sub ResizeControls(parent As Control, scaleX As Single, scaleY As Single)
+        For Each ctrl As Control In parent.Controls
+            ctrl.Left = CInt(ctrl.Left * scaleX)
+            ctrl.Top = CInt(ctrl.Top * scaleY)
+            ctrl.Width = CInt(ctrl.Width * scaleX)
+            ctrl.Height = CInt(ctrl.Height * scaleY)
+
+            Dim fontScale As Single = (scaleX + scaleY) / 2
+            ctrl.Font = New Font(ctrl.Font.FontFamily, ctrl.Font.Size * fontScale, ctrl.Font.Style)
+
+            If ctrl.HasChildren Then
+                ResizeControls(ctrl, scaleX, scaleY)
+            End If
+        Next
+    End Sub
+
+    ' ESC key to close (for testing)
+    Private Sub MainForm_KeyDown(sender As Object, e As KeyEventArgs) Handles Me.KeyDown
+        If e.KeyCode = Keys.Escape Then
+            Me.Close()
+        End If
+    End Sub
+
+
+
+
+
+
+
+
+
+
+    'Private Sub LoadChoresStatus()
+
+    '    Dim completed As Integer = 0, inProgress As Integer = 0, notStarted As Integer = 0
+    '    Dim query As String = "SELECT Status, COUNT(*) FROM Chores GROUP BY Status"
+
+    '    Using conn As New OleDbConnection(connectionString), cmd As New OleDbCommand(query, conn)
+    '        conn.Open()
+    '        Using reader = cmd.ExecuteReader()
+    '            While reader.Read()
+    '                Select Case reader("Status").ToString()
+    '                    Case "Completed"
+    '                        completed = Convert.ToInt32(reader(1))
+    '                    Case "In progress"
+    '                        inProgress = Convert.ToInt32(reader(1))
+    '                    Case "Not Started"
+    '                        notStarted = Convert.ToInt32(reader(1))
+    '                End Select
+
+    '            End While
+
+    '        End Using
+
+    '    End Using
+    '    conn.Close()
+    '    Label15.Text = $"   Chores: -Completed: {completed} -In Progress: {inProgress} -Not Started: {notStarted}"
+    'End Sub
+
 
 
     Private Sub LoadChoresStatus()
-
         Dim completed As Integer = 0, inProgress As Integer = 0, notStarted As Integer = 0
         Dim query As String = "SELECT Status, COUNT(*) FROM Chores GROUP BY Status"
 
-        Using conn As New OleDbConnection(connectionString), cmd As New OleDbCommand(query, conn)
+        Using conn As New OleDbConnection(connectionString),
+          cmd As New OleDbCommand(query, conn)
+
             conn.Open()
             Using reader = cmd.ExecuteReader()
                 While reader.Read()
-                    Select Case reader("Status").ToString()
-                        Case "Completed"
+                    Dim status As String = reader("Status").ToString().Trim().ToLower()
+                    Select Case status
+                        Case "completed"
                             completed = Convert.ToInt32(reader(1))
-                        Case "In progress"
+                        Case "in progress"
                             inProgress = Convert.ToInt32(reader(1))
-                        Case "Not Started"
+                        Case "not started"
                             notStarted = Convert.ToInt32(reader(1))
                     End Select
-
                 End While
-
             End Using
-
         End Using
-        conn.Close()
-        Label15.Text = $"   Chores: -Completed: {completed} -In Progress:{inProgress} -Not Started:{notStarted}"
+
+        Label15.Text = $"Chores: - Completed: {completed} - In Progress: {inProgress} - Not Started: {notStarted}"
     End Sub
+
+
+
+
+
     Private Sub Button7_Click_1(sender As Object, e As EventArgs) Handles Button7.Click
         Task_Management.ShowDialog()
     End Sub
@@ -134,7 +306,7 @@ Public Class Dashboard
     End Sub
 
     Private Sub Button11_Click(sender As Object, e As EventArgs) Handles Button11.Click
-        Chores.ShowDialog()
+        chores.ShowDialog()
     End Sub
 
     Private Sub Button15_Click(sender As Object, e As EventArgs) Handles Button15.Click
@@ -195,57 +367,108 @@ Public Class Dashboard
         Personnel.ShowDialog()
     End Sub
 
+    'Private Function CheckExpense() As Boolean
+
+    '    Dim BudgetLimit As Decimal = 700
+
+    '    Dim TotalExpense As Decimal = 0
+
+
+    '    Try
+
+    '        Dim Conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
+
+    '        Conn.Open()
+
+    '        Dim cmd As New OleDbCommand("SELECT Amount From Expense", Conn)
+
+    '        Dim Reader As OleDbDataReader = cmd.ExecuteReader
+
+    '        While Reader.Read()
+
+    '            TotalExpense += Convert.ToDecimal(Reader("Amount"))
+
+    '        End While
+
+    '        Reader.Close()
+
+    '        Conn.Close()
+
+    '        If TotalExpense >= (BudgetLimit * 0.8D) Then
+
+    '            MessageBox.Show("Alert! you have used more that 80% of your budget", "Budget Alert", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+
+    '        End If
+
+
+    '        Send the email with the expired items
+
+    '        Dim messageBody As String = $"Alert! Budget Alert:{vbCrLf}{vbCrLf}{BudgetLimit}"
+
+    '        SendEmail("nethonondamudzunga45@gmail.com", "Budget Alert", messageBody)
+
+    '        Notify that the email was sent
+
+    '        MessageBox.Show("Budget Alert Alert Sent Successfully!", "Budget Alert", MessageBoxButtons.OK, MessageBoxIcon.Information)
+
+    '    Catch ex As Exception
+
+    '    End Try
+
+    '    Return False
+
+    'End Function
+
+
+
     Private Function CheckExpense() As Boolean
-
-        Dim BudgetLimit As Decimal = 150169
-
+        Dim BudgetLimit As Decimal = 700
         Dim TotalExpense As Decimal = 0
 
-
         Try
-
             Dim Conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
-
             Conn.Open()
-
             Dim cmd As New OleDbCommand("SELECT Amount From Expense", Conn)
-
             Dim Reader As OleDbDataReader = cmd.ExecuteReader
 
             While Reader.Read()
-
                 TotalExpense += Convert.ToDecimal(Reader("Amount"))
-
             End While
 
             Reader.Close()
-
             Conn.Close()
 
             If TotalExpense >= (BudgetLimit * 0.8D) Then
+                ' More than or equal to 80% – Alert
+                MessageBox.Show("Alert! You have used more than 80% of your budget", "Budget Alert", MessageBoxButtons.OK, MessageBoxIcon.Warning)
 
-                MessageBox.Show("Alert! you have used more that 80% of your budget", "Budget Alert", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                Dim messageBody As String = $"Alert! Budget Alert:{vbCrLf}{vbCrLf}Total Expenses: {TotalExpense}{vbCrLf}Budget Limit: {BudgetLimit}"
+                SendEmail("nethonondamudzunga45@gmail.com", "Budget Alert", messageBody)
+                MessageBox.Show("Budget Alert Sent Successfully!", "Budget Alert", MessageBoxButtons.OK, MessageBoxIcon.Information)
+            Else
+                ' Less than 80% – Budget under control
+                MessageBox.Show("Your budget is under control.", "Budget Status", MessageBoxButtons.OK, MessageBoxIcon.Information)
 
+                Dim messageBody As String = $"Budget Status: Under Control{vbCrLf}{vbCrLf}Total Expenses: {TotalExpense}{vbCrLf}Budget Limit: {BudgetLimit}"
+                SendEmail("nethonondamudzunga45@gmail.com", "Budget Status", messageBody)
+                MessageBox.Show("Budget Status Email Sent Successfully!", "Budget Status", MessageBoxButtons.OK, MessageBoxIcon.Information)
             End If
 
-
-            ' Send the email with the expired items
-
-            Dim messageBody As String = $"Alert! Budget Alert:{vbCrLf}{vbCrLf}{BudgetLimit}"
-
-            SendEmail("nethonondamudzunga45@gmail.com", "Budget Alert", messageBody)
-
-            ' Notify that the email was sent
-
-            MessageBox.Show("Budget Alert Alert Sent Successfully!", "Budget Alert", MessageBoxButtons.OK, MessageBoxIcon.Information)
-
         Catch ex As Exception
-
+            MessageBox.Show("An error occurred while checking the budget.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
 
         Return False
-
     End Function
+
+
+
+
+
+
+
+
+
 
     ' Function to check expired groceries from Inventory table
 
@@ -314,8 +537,6 @@ Public Class Dashboard
         Return False
 
     End Function
-
-
     ' Function to check expired groceries from Inventory table
 
     Private Function CheckExpiredGroceries() As Boolean
@@ -428,17 +649,14 @@ Public Class Dashboard
 
         CheckExpense()
 
-
     End Sub
-
 
     '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
 
-    Dim budgetLimit As Double = 150300
+    Dim budgetLimit As Double = 700
     Dim blinkState As Boolean = True
 
     Private Sub Timer2_Tick(sender As Object, e As EventArgs) Handles Timer2.Tick
-
 
         Dim totalExpenses = GetTotalExpenses()
         Dim totalIncome = GetTotalIncome()
@@ -451,7 +669,7 @@ Public Class Dashboard
         Label8.Text = "Remaining: R" & remaining.ToString("F2")
         Label14.Text = "Used: " & usedPercent.ToString("F0") & "%"
 
-        ' Budget alerts and panel blink
+        ' Budget alerts and panel behavior
         If totalExpenses >= 0.8 * budgetLimit AndAlso totalExpenses < budgetLimit Then
             Panel4.Visible = blinkState
             Panel4.BackColor = Color.Red
@@ -459,7 +677,6 @@ Public Class Dashboard
             Label13.Text = "You have exceeded 80%"
             Label13.ForeColor = Color.Red
             'FlashAppWindow()
-
         ElseIf totalExpenses >= budgetLimit Then
             Panel4.Visible = blinkState
             Panel4.BackColor = Color.Red
@@ -467,14 +684,16 @@ Public Class Dashboard
             Label13.Text = "Budget Exceeded!"
             Label13.ForeColor = Color.Red
             'FlashAppWindow()
-
         Else
+            ' Below 80% usage - budget is under control
             Panel4.Visible = False
             Label13.Text = "Budget is under control"
             Label13.ForeColor = Color.Green
         End If
 
+
         blinkState = Not blinkState
+
 
     End Sub
 
@@ -483,7 +702,7 @@ Public Class Dashboard
 
             Using conn As OleDbConnection = Getconnection()
                 conn.Open()
-                Dim cmd As New OleDbCommand("SELECT SUM(Amount) FROM Expense", conn)
+                Dim cmd As New OleDbCommand("SELECT Amount FROM Expense", conn)
                 Dim result = cmd.ExecuteScalar()
                 Return If(IsDBNull(result), 0, Convert.ToDouble(result))
             End Using
@@ -499,7 +718,7 @@ Public Class Dashboard
         Try
             Using conn As OleDbConnection = Getconnection()
                 conn.Open()
-                Dim cmd As New OleDbCommand("SELECT SUM(Totalincome) FROM Expense", conn)
+                Dim cmd As New OleDbCommand("SELECT Amount FROM Expense", conn)
                 Dim result = cmd.ExecuteScalar()
                 Return If(IsDBNull(result), 0, Convert.ToDouble(result))
             End Using
@@ -613,9 +832,6 @@ Public Class Dashboard
         conn.Close()
     End Sub
 
-
-
-
     Dim expiredGroceries As New Queue(Of String)
     Dim backupGroceries As New List(Of String)
     Dim groceryTimer As New Timer()
@@ -677,13 +893,6 @@ Public Class Dashboard
             Label16.ForeColor = Color.Red
         End If
     End Sub
-
-
-
-
-
-
-
     Public Sub PopulateListboxFromTasks(ByRef ListBox As ListBox)
         Dim conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
 
@@ -772,90 +981,166 @@ Public Class Dashboard
         Chart1.Titles.Add("Chore Status Summary")
     End Sub
 
-    Private photoList As New List(Of String)() ' List to store photo paths
+    'Private photoList As New List(Of String)() ' List to store photo paths
+    'Private currentPhotoIndex As Integer = 0
+    'Private WithEvents photoTimer As New Timer()
+    'Private Sub LoadRecentPhotos()
+
+    '    photoList.Clear()
+    '    Dim query As String = "SELECT TOP 4 FilePath FROM Photos ORDER BY DateAdded"
+    '    Using conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
+    '        Using cmd As New OleDbCommand(query, conn)
+    '            conn.Open()
+    '            Using reader As OleDbDataReader = cmd.ExecuteReader()
+    '                While reader.Read()
+    '                    photoList.Add(reader("FilePath").ToString())
+
+    '                End While
+    '            End Using
+    '        End Using
+    '    End Using
+    '    conn.Close()
+    'End Sub
+    ''Private Sub LoadRecentPhotoPathsFromDatabase()
+    ''    photoList.Clear()
+
+    ''    'Dim connStr As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=yourdb.accdb;"
+    ''    Using conn As New OleDb.OleDbConnection(connectionString)
+    ''        conn.Open()
+
+    ''        ' ORDER BY DateAdded DESC or ID DESC to get recent photos
+    ''        Dim cmd As New OleDb.OleDbCommand("SELECT TOP 5 FilePath FROM Photos ORDER BY DateAdded", conn)
+    ''        ' If you're using ID instead of DateAdded:
+    ''        ' Dim cmd As New OleDb.OleDbCommand("SELECT PhotoPath FROM Gallery ORDER BY ID DESC", conn)
+
+    ''        Dim reader As OleDb.OleDbDataReader = cmd.ExecuteReader()
+
+    ''        While reader.Read()
+    ''            Dim path As String = reader("FilePath").ToString()
+    ''            If IO.File.Exists(path) Then
+    ''                photoList.Add(path)
+    ''            End If
+    ''        End While
+    ''    End Using
+
+    ''End Sub
+    ''Private Sub DisplayPhoto()
+    ''    If photoList.Count > 0 Then
+    ''        FlowLayoutPanel2.Controls.Clear() ' Clear previous image
+    ''        Dim pb As New PictureBox()
+    ''        pb.Image = Image.FromFile(photoList(currentPhotoIndex))
+    ''        pb.SizeMode = PictureBoxSizeMode.StretchImage ' Set stretch mode
+    ''        pb.Size = FlowLayoutPanel2.Size ' Match panel size
+    ''        FlowLayoutPanel2.Controls.Add(pb) ' Add to FlowLayoutPanel
+    ''    End If
+    ''End Sub
+
+    'Private Sub DisplayPhoto()
+    '    If photoList.Count > 0 Then
+    '        FlowLayoutPanel2.Controls.Clear()
+
+    '        Dim pb As New PictureBox()
+    '        pb.Image = Image.FromFile(photoList(currentPhotoIndex))
+    '        pb.SizeMode = PictureBoxSizeMode.StretchImage
+    '        pb.Size = FlowLayoutPanel2.Size
+
+    '        FlowLayoutPanel2.Controls.Add(pb)
+
+    '        ' Loop to the first image after the last
+    '        currentPhotoIndex = (currentPhotoIndex + 1) Mod photoList.Count
+    '    End If
+    'End Sub
+    ''Private Sub StartPhotoSlideshow()
+    ''    LoadRecentPhotoPathsFromDatabase()
+    ''    DisplayPhoto()
+
+    ''    photoTimer.Interval = 2000 ' 2 seconds
+    ''    photoTimer.Start()
+    ''End Sub
+    'Private Sub SetupTimer()
+    '    photoTimer.Interval = 1000 ' 2 seconds
+    '    AddHandler photoTimer.Tick, AddressOf PhotoTimer_Tick
+    '    photoTimer.Start()
+    'End Sub
+
+    'Private Sub PhotoTimer_Tick(sender As Object, e As EventArgs)
+    '    If photoList.Count > 0 Then
+    '        currentPhotoIndex = (currentPhotoIndex + 1) Mod photoList.Count ' Loop through photos
+    '        DisplayPhoto()
+    '    End If
+
+    'End Sub
+
+
+
+
+
+    ' Photo slideshow variables
+    Private photoList As New List(Of String)()
     Private currentPhotoIndex As Integer = 0
     Private WithEvents photoTimer As New Timer()
-    Private Sub LoadRecentPhotos()
 
+
+
+    Private Sub LoadRecentPhotos()
         photoList.Clear()
-        Dim query As String = "SELECT TOP 4 FilePath FROM Photos ORDER BY DateAdded"
+        Dim query As String = "SELECT TOP 4 FilePath FROM Photos "
+
         Using conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
             Using cmd As New OleDbCommand(query, conn)
                 conn.Open()
                 Using reader As OleDbDataReader = cmd.ExecuteReader()
                     While reader.Read()
-                        photoList.Add(reader("FilePath").ToString())
-
+                        Dim path As String = reader("FilePath").ToString()
+                        If IO.File.Exists(path) Then
+                            photoList.Add(path)
+                        End If
                     End While
                 End Using
             End Using
         End Using
-        conn.Close()
-
     End Sub
+
     Private Sub DisplayPhoto()
-        If photoList.Count > 0 Then
-            FlowLayoutPanel2.Controls.Clear() ' Clear previous image
-            Dim pb As New PictureBox()
-            pb.Image = Image.FromFile(photoList(currentPhotoIndex))
-            pb.SizeMode = PictureBoxSizeMode.StretchImage ' Set stretch mode
-            pb.Size = FlowLayoutPanel2.Size ' Match panel size
-            FlowLayoutPanel2.Controls.Add(pb) ' Add to FlowLayoutPanel
-        End If
+        If photoList.Count = 0 Then Exit Sub
+
+        ' Clear and display the current photo
+        FlowLayoutPanel2.Controls.Clear()
+        Dim pb As New PictureBox()
+        pb.Image = Image.FromFile(photoList(currentPhotoIndex))
+        pb.SizeMode = PictureBoxSizeMode.StretchImage
+        pb.Size = If(FlowLayoutPanel2.Size.Width > 0, FlowLayoutPanel2.Size, New Size(200, 150))
+        FlowLayoutPanel2.Controls.Add(pb)
     End Sub
 
     Private Sub SetupTimer()
-        photoTimer.Interval = 1000 ' 2 seconds
+        photoTimer.Interval = 2000 ' 2 seconds
         AddHandler photoTimer.Tick, AddressOf PhotoTimer_Tick
         photoTimer.Start()
     End Sub
 
     Private Sub PhotoTimer_Tick(sender As Object, e As EventArgs)
-        If photoList.Count > 0 Then
-            currentPhotoIndex = (currentPhotoIndex + 1) Mod photoList.Count ' Loop through photos
-            DisplayPhoto()
-        End If
+        If photoList.Count = 0 Then Exit Sub
 
+        ' Move to next photo
+        currentPhotoIndex = (currentPhotoIndex + 1) Mod photoList.Count
+        DisplayPhoto()
     End Sub
+
+
+
+
+
+
+
+
+
+
+
     Dim scheduleAlerts As New Queue(Of String)
     Dim alertTimer As New Timer()
 
-    'Private Sub LoadFamilyScheduleAlerts()
-    '    scheduleAlerts.Clear()
-    '    Label19.Text = ""
 
-    '    Dim con As New OleDbConnection("Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Mudzunga\Source\Repos\maurice67530\HouseholdManagementSystems\HMS.accdb")
-    '    con.Open()
-    '    Dim query As String = "SELECT EventType, DateOfEvent, AssignedTo FROM FamilySchedule"
-    '    Dim cmd As New OleDbCommand(query, con)
-    '    cmd.Parameters.AddWithValue("?", Date.Today)
-    '    cmd.Parameters.AddWithValue("?", Date.Today.AddDays(5))
-
-    '    Dim reader As OleDbDataReader = cmd.ExecuteReader()
-    '    While reader.Read()
-    '        Dim eventText As String = $"Family Schedule: {reader("DateOfEvent"):dd MMM} - {reader("EventType")} ({reader("AssignedTo")})"
-    '        scheduleAlerts.Enqueue(eventText)
-    '    End While
-    '    reader.Close()
-    '    con.Close()
-
-    '    If scheduleAlerts.Count > 0 Then
-    '        alertTimer.Interval = 2000 ' 2 seconds
-    '        AddHandler alertTimer.Tick, AddressOf ShowNextAlert
-    '        alertTimer.Start()
-    '    Else
-    '        Label19.Text = "No upcoming family events."
-    '    End If
-    'End Sub
-
-    'Private Sub ShowNextAlert(sender As Object, e As EventArgs)
-    '    If scheduleAlerts.Count > 0 Then
-    '        Label19.Text = scheduleAlerts.Dequeue()
-    '    Else
-    '        alertTimer.Stop()
-    '        RemoveHandler alertTimer.Tick, AddressOf ShowNextAlert
-    '    End If
-    'End Sub
 
     'Dim scheduleAlerts As New Queue(Of String)
     Dim backupScheduleAlerts As New List(Of String)
@@ -904,10 +1189,10 @@ Public Class Dashboard
         End If
     End Sub
 
-
     Private Sub Timer3_Tick(sender As Object, e As EventArgs) Handles Timer3.Tick
-
+        'Timer3.Stop()
         RunSearchAndBlink()
+
     End Sub
 
     Private Sub Button16_Click(sender As Object, e As EventArgs) Handles Button16.Click
@@ -916,7 +1201,6 @@ Public Class Dashboard
         Notifications.ShowDialog()
 
     End Sub
-
 
     Private Sub UpdateNotificationCount()
 
@@ -1019,16 +1303,9 @@ Public Class Dashboard
     Dim delayCounter As Integer = 0
     Dim delayBeforeBlinking As Integer = 4 ' 4 ticks = ~1.2 sec (300ms x 4)
     Dim totalBlinkTicks As Integer = 10    ' ~3 sec of blinking
-
-
-
     Private Sub TextBox1_TextChanged(sender As Object, e As EventArgs) Handles TextBox1.TextChanged
         PrepareSearch()
     End Sub
-
-
-
-
 
     ' === Reset everything when user types ===
     Private Sub PrepareSearch()
@@ -1063,14 +1340,14 @@ Public Class Dashboard
                 formToOpen = New Inventory()
             ElseIf keyword.Contains("chore") Then
                 currentButtonToBlink = Button11
-                formToOpen = New Chores()
+                formToOpen = New chores()
             ElseIf keyword.Contains("photo") Then
                 currentButtonToBlink = Button8
                 formToOpen = New PhotoGallery()
-            ElseIf keyword.Contains("Task") Then
+            ElseIf keyword.Contains("task") Then
                 currentButtonToBlink = Button7
                 formToOpen = New Task_Management
-            ElseIf keyword.Contains("Personnel") Then
+            ElseIf keyword.Contains("personnel") Then
                 currentButtonToBlink = Button5
                 formToOpen = New Personnel()
             ElseIf keyword.Contains("notification") Then
@@ -1079,15 +1356,15 @@ Public Class Dashboard
             ElseIf keyword.Contains("grocery") Then
                 currentButtonToBlink = Button13
                 formToOpen = New Grocery_Items()
-            ElseIf keyword.Contains("notificationstatus") Then
+            ElseIf keyword.Contains("status") Then
                 currentButtonToBlink = btnInAppMessages
                 formToOpen = New In_App_Message()
-            ElseIf keyword.Contains("Family") Then
+            ElseIf keyword.Contains("family") Then
                 currentButtonToBlink = Button6
                 formToOpen = New Family_Schedule()
-                'ElseIf keyword.Contains("budget") Then
-                '    currentButtonToBlink = Button17
-                '    formToOpen = New Budget()
+            ElseIf keyword.Contains("budget") Then
+                currentButtonToBlink = Button17
+                formToOpen = New Budget()
             Else
                 Timer3.Stop()
                 Exit Sub
@@ -1116,6 +1393,7 @@ Public Class Dashboard
                 formToOpen.Show()
             End If
         End If
+
     End Sub
 
     Dim speedLevels As New List(Of String) From {
@@ -1145,6 +1423,309 @@ Public Class Dashboard
     End Sub
 
     Private Sub NotifyIcon1_MouseDoubleClick(sender As Object, e As MouseEventArgs) Handles NotifyIcon1.MouseDoubleClick
+
+    End Sub
+
+    Private Sub Chart2_Click(sender As Object, e As EventArgs) Handles Chart2.Click
+
+    End Sub
+
+    Private Sub Label28_Click(sender As Object, e As EventArgs) Handles Label28.Click
+        Login.Show()
+        Me.Hide()
+    End Sub
+
+
+
+    Private Sub CheckDatabaseConnection()
+        'Dim connString As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=YourDatabasePath.accdb;"
+        Using conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
+            Try
+                conn.Open()
+                MessageBox.Show("DataBase Connected Successfully!", "Database Check", MessageBoxButtons.OK, MessageBoxIcon.Information)
+            Catch ex As Exception
+                MessageBox.Show("DataBase Connection Failed: " & ex.Message, "Database Check", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            End Try
+        End Using
+    End Sub
+
+
+
+
+    'Private Sub LoadMemberChoreTaskSummary()
+    '    FlowLayoutPanel3.Controls.Clear()
+
+    '    Dim query As String = "SELECT FirstName,
+    '           (SELECT COUNT(*) FROM Chores WHERE AssignedTo = FirstName) AS ChoreCount,
+    '           (SELECT COUNT(*) FROM Tasks WHERE AssignedTo = FirstName) AS TaskCount
+    '    FROM PersonalDetails"
+
+    '    Using conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
+    '        Using cmd As New OleDbCommand(query, conn)
+    '            conn.Open()
+    '            Using reader = cmd.ExecuteReader()
+    '                While reader.Read()
+    '                    Dim name As String = reader("FirstName").ToString()
+    '                    Dim chores As Integer = Convert.ToInt32(reader("ChoreCount"))
+    '                    Dim tasks As Integer = Convert.ToInt32(reader("TaskCount"))
+
+    '                    Dim lbl As New Label()
+    '                    lbl.Text = $"{name}: {chores} chore(s), {tasks} task(s)"
+    '                    lbl.AutoSize = True
+    '                    lbl.Font = New Font("Segoe UI", 10, FontStyle.Regular)
+    '                    lbl.Margin = New Padding(5)
+
+    '                    FlowLayoutPanel3.Controls.Add(lbl)
+    '                End While
+    '            End Using
+    '        End Using
+    '    End Using
+    'End Sub
+
+
+    'Private Sub LoadMemberChoreTaskSummary()
+    '    FlowLayoutPanel3.Controls.Clear()
+
+    '    Dim query As String = "
+    '    SELECT FirstName, LastName,
+    '        (SELECT COUNT(*) FROM Chores WHERE AssignedTo = (FirstName & ' ' & LastName)) AS ChoreCount,
+    '        (SELECT COUNT(*) FROM Tasks WHERE AssignedTo = (FirstName & ' ' & LastName)) AS TaskCount
+    '    FROM PersonalDetails"
+
+    '    Using conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
+    '        Using cmd As New OleDbCommand(query, conn)
+    '            conn.Open()
+    '            Using reader = cmd.ExecuteReader()
+    '                While reader.Read()
+    '                    Dim fname As String = reader("FirstName").ToString()
+    '                    Dim lname As String = reader("LastName").ToString()
+    '                    Dim fullName As String = fname & " " & lname
+    '                    Dim chores As Integer = Convert.ToInt32(reader("ChoreCount"))
+    '                    Dim tasks As Integer = Convert.ToInt32(reader("TaskCount"))
+
+    '                    Dim lbl As New Label()
+    '                    lbl.Text = $"{fullName}: {chores} chore(s), {tasks} task(s)"
+    '                    lbl.AutoSize = True
+    '                    lbl.Font = New Font("Segoe UI", 10, FontStyle.Regular)
+    '                    lbl.Margin = New Padding(5)
+    '                    FlowLayoutPanel3.Controls.Add(lbl)
+    '                End While
+    '            End Using
+    '        End Using
+    '    End Using
+    'End Sub
+
+
+    Private Sub LoadMemberChoreTaskSummary()
+        FlowLayoutPanel3.Controls.Clear()
+
+        Dim query As String = "
+        SELECT FirstName, LastName,
+            (SELECT COUNT(*) FROM Chores WHERE AssignedTo = (FirstName & ' ' & LastName)) AS ChoreCount,
+            (SELECT COUNT(*) FROM Tasks WHERE AssignedTo = (FirstName & ' ' & LastName)) AS TaskCount
+        FROM PersonalDetails"
+
+        Using conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
+            Using cmd As New OleDbCommand(query, conn)
+                conn.Open()
+                Using reader = cmd.ExecuteReader()
+                    While reader.Read()
+                        Dim fname As String = reader("FirstName").ToString()
+                        Dim lname As String = reader("LastName").ToString()
+                        Dim fullName As String = fname & " " & lname
+                        Dim chores As Integer = Convert.ToInt32(reader("ChoreCount"))
+                        Dim tasks As Integer = Convert.ToInt32(reader("TaskCount"))
+
+                        Dim lbl As New Label()
+                        lbl.Text = $"{fullName}
+-{chores} chore
+-{tasks} task"
+                        lbl.AutoSize = True
+                        lbl.Font = New Font("Segoe UI", 10, FontStyle.Regular)
+                        lbl.Margin = New Padding(5)
+                        FlowLayoutPanel3.Controls.Add(lbl)
+                    End While
+                End Using
+            End Using
+        End Using
+    End Sub
+
+    'Private Sub LoadUnassignedPeople()
+    '    'Dim connString As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=YourDatabasePath.accdb;"
+    '    Dim query As String = "
+    '    SELECT FirstName, LastName
+    '    FROM PersonalDetails
+    '    WHERE ID NOT IN (SELECT AssignedTo FROM Tasks)
+    '      AND ID NOT IN (SELECT AssignedTo FROM Chores)
+    '"
+
+    '    Using conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
+    '        Try
+    '            conn.Open()
+    '            Dim cmd As New OleDbCommand(query, conn)
+    '            Dim reader As OleDbDataReader = cmd.ExecuteReader()
+
+    '            Dim names As String = "Unassigned People:" & Environment.NewLine
+    '            Dim anyUnassigned As Boolean = False
+
+    '            While reader.Read()
+    '                names &= "- " & reader("FirstName").ToString() & " " & reader("LastName").ToString() & Environment.NewLine
+    '                anyUnassigned = True
+    '            End While
+
+    '            If anyUnassigned Then
+    '                Label29.Text = names
+    '            Else
+    '                Label29.Text = "All users are assigned to tasks or chores."
+    '            End If
+
+    '        Catch ex As Exception
+    '            Label29.Text = "Error loading unassigned people: " & ex.Message
+    '        End Try
+    '    End Using
+    'End Sub
+
+    'Private Sub LoadUnassignedPeople()
+    '    Dim connString As String = HouseHoldManagment_Module.connectionString
+    '    Dim query As String = "
+    '    SELECT FirstName, LastName 
+    '    FROM PersonalDetails 
+    '    WHERE (FirstName & ' ' & LastName) NOT IN 
+    '        (SELECT AssignedTo FROM Tasks) 
+    '    AND (FirstName & ' ' & LastName) NOT IN 
+    '        (SELECT AssignedTo FROM Chores)
+    '"
+
+    '    Using conn As New OleDbConnection(connString)
+    '        Try
+    '            conn.Open()
+    '            Dim cmd As New OleDbCommand(query, conn)
+    '            Dim reader As OleDbDataReader = cmd.ExecuteReader()
+
+    '            Dim names As String = "Unassigned People:" & Environment.NewLine
+    '            Dim anyUnassigned As Boolean = False
+
+    '            While reader.Read()
+    '                names &= "- " & reader("FirstName").ToString() & " " & reader("LastName").ToString() & Environment.NewLine
+    '                anyUnassigned = True
+    '            End While
+
+    '            If anyUnassigned Then
+    '                Label29.Text = names
+    '            Else
+    '                Label29.Text = "All users are assigned to tasks or chores."
+    '            End If
+
+    '        Catch ex As Exception
+    '            Label29.Text = "Error loading unassigned people: " & ex.Message
+    '        End Try
+    '    End Using
+    'End Sub
+
+
+    Private Sub LoadAssignmentSummary()
+        Dim connString As String = HouseHoldManagment_Module.connectionString
+
+        Dim totalQuery As String = "SELECT COUNT(*) FROM PersonalDetails"
+        Dim assignedQuery As String = "
+        SELECT COUNT(*) FROM (
+            SELECT DISTINCT FirstName & ' ' & LastName AS FullName FROM PersonalDetails
+            WHERE (FirstName & ' ' & LastName) IN (SELECT AssignedTo FROM Tasks)
+               OR (FirstName & ' ' & LastName) IN (SELECT AssignedTo FROM Chores)
+        ) AS AssignedPeople
+    "
+
+        Using conn As New OleDbConnection(connString)
+            conn.Open()
+
+            Dim cmdTotal As New OleDbCommand(totalQuery, conn)
+            Dim totalMembers As Integer = Convert.ToInt32(cmdTotal.ExecuteScalar())
+
+            Dim cmdAssigned As New OleDbCommand(assignedQuery, conn)
+            Dim assignedMembers As Integer = Convert.ToInt32(cmdAssigned.ExecuteScalar())
+
+            Dim unassignedMembers As Integer = totalMembers - assignedMembers
+
+            Label29.Text = $"Total Members: {totalMembers}"
+            Label30.Text = $"Assigned Members: {assignedMembers}"
+            Label31.Text = $"Unassigned Members: {unassignedMembers}"
+        End Using
+    End Sub
+
+
+
+    Private Sub LoadUpcomingDates()
+        Dim connString As String = HouseHoldManagment_Module.connectionString
+        Dim query As String = "
+        SELECT 'Task' AS Status, Title, DueDate
+        FROM Tasks 
+        WHERE DueDate >= Date() AND DueDate <= DateAdd('d', 3, Date())
+        UNION ALL
+        SELECT 'Chore' AS Status, Title, DueDate
+        FROM Chores 
+        WHERE DueDate >= Date() AND DueDate <= DateAdd('d', 3, Date())
+        ORDER BY DueDate ASC
+    "
+
+        Using conn As New OleDbConnection(connString)
+            conn.Open()
+            Dim cmd As New OleDbCommand(query, conn)
+            Using reader = cmd.ExecuteReader()
+                ListBox1.Items.Clear()
+                While reader.Read()
+                    Dim itemType As String = reader("Status").ToString()
+                    Dim title As String = reader("Title").ToString()
+                    Dim dueDate As Date = Convert.ToDateTime(reader("DueDate"))
+                    'Dim assignedTo As String = reader("AssignedTo").ToString()
+
+                    Dim displayText As String = $"{itemType}: {title} - Due {dueDate.ToShortDateString()})"
+                    ListBox1.Items.Add(displayText)
+                End While
+
+                If ListBox1.Items.Count = 0 Then
+                    ListBox1.Items.Add("No tasks or chores due in next 3 days.")
+                End If
+            End Using
+        End Using
+    End Sub
+    Private Sub LoadUpcomingBirthdays()
+        Dim connString As String = HouseHoldManagment_Module.connectionString
+        Dim query As String = " SELECT FirstName, LastName, DateOfBirth FROM PersonalDetails WHERE DateOfBirth IS NOT NULL "
+        Dim today As Date = Date.Today
+        Dim endDate As Date = today.AddDays(7)  ' Changed from 30 days to 5 months
+
+        Using conn As New OleDbConnection(connString)
+            conn.Open()
+            Dim cmd As New OleDbCommand(query, conn)
+            Using reader = cmd.ExecuteReader()
+                ListBox2.Items.Clear()
+                While reader.Read()
+                    Dim firstName As String = reader("FirstName").ToString()
+                    Dim lastName As String = reader("LastName").ToString()
+                    Dim birthDate As Date = Convert.ToDateTime(reader("DateOfBirth"))
+
+                    ' Adjust birthday year to this year for comparison
+                    Dim nextBirthday As Date = New Date(today.Year, birthDate.Month, birthDate.Day)
+
+                    ' If birthday already passed this year, consider next year
+                    If nextBirthday < today Then
+                        nextBirthday = nextBirthday.AddYears(1)
+                    End If
+
+                    If nextBirthday >= today AndAlso nextBirthday <= endDate Then
+                        Dim daysLeft As Integer = (nextBirthday - today).Days
+                        ListBox2.Items.Add($"{firstName} {lastName} - Birthday in {daysLeft} day(s) on {nextBirthday.ToString("MMMM dd")}")
+                    End If
+                End While
+
+                If ListBox2.Items.Count = 0 Then
+                    ListBox2.Items.Add("No upcoming birthdays in the next 7 Days.")
+                End If
+            End Using
+        End Using
+    End Sub
+
+    Private Sub Label23_Click(sender As Object, e As EventArgs) Handles Label23.Click
 
     End Sub
 End Class

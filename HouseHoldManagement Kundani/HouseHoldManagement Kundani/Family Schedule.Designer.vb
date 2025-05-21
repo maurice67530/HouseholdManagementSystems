@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class Family_Schedule
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,13 +20,11 @@ Partial Class Family_Schedule
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Family_Schedule))
         Me.DataGridView1 = New System.Windows.Forms.DataGridView()
-        Me.btnSave = New System.Windows.Forms.Button()
-        Me.btnUpdate = New System.Windows.Forms.Button()
-        Me.btnDelete = New System.Windows.Forms.Button()
         Me.Panel2 = New System.Windows.Forms.Panel()
         Me.MonthCalendar1 = New System.Windows.Forms.MonthCalendar()
         Me.DateTimePicker1 = New System.Windows.Forms.DateTimePicker()
@@ -37,7 +35,8 @@ Partial Class Family_Schedule
         Me.Label7 = New System.Windows.Forms.Label()
         Me.Label8 = New System.Windows.Forms.Label()
         Me.Panel1 = New System.Windows.Forms.Panel()
-        Me.ComboBox2 = New System.Windows.Forms.ComboBox()
+        Me.ComboBox3 = New System.Windows.Forms.ComboBox()
+        Me.ListView1 = New System.Windows.Forms.ListView()
         Me.ComboBox1 = New System.Windows.Forms.ComboBox()
         Me.TextBox2 = New System.Windows.Forms.TextBox()
         Me.TextBox1 = New System.Windows.Forms.TextBox()
@@ -47,49 +46,29 @@ Partial Class Family_Schedule
         Me.Label5 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
+        Me.btnSave = New System.Windows.Forms.Button()
+        Me.btnUpdate = New System.Windows.Forms.Button()
+        Me.btnDelete = New System.Windows.Forms.Button()
+        Me.Panel3 = New System.Windows.Forms.Panel()
+        Me.btnRefresh = New System.Windows.Forms.Button()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel2.SuspendLayout()
         Me.Panel1.SuspendLayout()
+        Me.Panel3.SuspendLayout()
         Me.SuspendLayout()
         '
         'DataGridView1
         '
         Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DataGridView1.Location = New System.Drawing.Point(12, 358)
+        Me.DataGridView1.Location = New System.Drawing.Point(12, 366)
         Me.DataGridView1.Name = "DataGridView1"
-        Me.DataGridView1.Size = New System.Drawing.Size(603, 119)
+        Me.DataGridView1.Size = New System.Drawing.Size(644, 119)
         Me.DataGridView1.TabIndex = 22
-        '
-        'btnSave
-        '
-        Me.btnSave.BackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.btnSave.Location = New System.Drawing.Point(1, 496)
-        Me.btnSave.Name = "btnSave"
-        Me.btnSave.Size = New System.Drawing.Size(75, 44)
-        Me.btnSave.TabIndex = 19
-        Me.btnSave.UseVisualStyleBackColor = False
-        '
-        'btnUpdate
-        '
-        Me.btnUpdate.BackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.btnUpdate.Location = New System.Drawing.Point(270, 496)
-        Me.btnUpdate.Name = "btnUpdate"
-        Me.btnUpdate.Size = New System.Drawing.Size(75, 44)
-        Me.btnUpdate.TabIndex = 20
-        Me.btnUpdate.UseVisualStyleBackColor = False
-        '
-        'btnDelete
-        '
-        Me.btnDelete.BackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.btnDelete.Location = New System.Drawing.Point(531, 496)
-        Me.btnDelete.Name = "btnDelete"
-        Me.btnDelete.Size = New System.Drawing.Size(75, 44)
-        Me.btnDelete.TabIndex = 21
-        Me.btnDelete.UseVisualStyleBackColor = False
         '
         'Panel2
         '
         Me.Panel2.BackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.Panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.Panel2.Controls.Add(Me.MonthCalendar1)
         Me.Panel2.Controls.Add(Me.DateTimePicker1)
         Me.Panel2.Controls.Add(Me.DateTimePicker3)
@@ -98,7 +77,7 @@ Partial Class Family_Schedule
         Me.Panel2.Controls.Add(Me.Label6)
         Me.Panel2.Controls.Add(Me.Label7)
         Me.Panel2.Controls.Add(Me.Label8)
-        Me.Panel2.Location = New System.Drawing.Point(296, 49)
+        Me.Panel2.Location = New System.Drawing.Point(337, 70)
         Me.Panel2.Name = "Panel2"
         Me.Panel2.Size = New System.Drawing.Size(319, 290)
         Me.Panel2.TabIndex = 16
@@ -113,21 +92,23 @@ Partial Class Family_Schedule
         '
         Me.DateTimePicker1.Location = New System.Drawing.Point(75, 19)
         Me.DateTimePicker1.Name = "DateTimePicker1"
-        Me.DateTimePicker1.Size = New System.Drawing.Size(200, 20)
+        Me.DateTimePicker1.Size = New System.Drawing.Size(227, 20)
         Me.DateTimePicker1.TabIndex = 9
         '
         'DateTimePicker3
         '
+        Me.DateTimePicker3.Format = System.Windows.Forms.DateTimePickerFormat.Time
         Me.DateTimePicker3.Location = New System.Drawing.Point(75, 90)
         Me.DateTimePicker3.Name = "DateTimePicker3"
-        Me.DateTimePicker3.Size = New System.Drawing.Size(200, 20)
+        Me.DateTimePicker3.Size = New System.Drawing.Size(227, 20)
         Me.DateTimePicker3.TabIndex = 10
         '
         'DateTimePicker2
         '
+        Me.DateTimePicker2.Format = System.Windows.Forms.DateTimePickerFormat.Time
         Me.DateTimePicker2.Location = New System.Drawing.Point(75, 55)
         Me.DateTimePicker2.Name = "DateTimePicker2"
-        Me.DateTimePicker2.Size = New System.Drawing.Size(200, 20)
+        Me.DateTimePicker2.Size = New System.Drawing.Size(227, 20)
         Me.DateTimePicker2.TabIndex = 9
         '
         'Label9
@@ -169,7 +150,9 @@ Partial Class Family_Schedule
         'Panel1
         '
         Me.Panel1.BackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.Panel1.Controls.Add(Me.ComboBox2)
+        Me.Panel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.Panel1.Controls.Add(Me.ComboBox3)
+        Me.Panel1.Controls.Add(Me.ListView1)
         Me.Panel1.Controls.Add(Me.ComboBox1)
         Me.Panel1.Controls.Add(Me.TextBox2)
         Me.Panel1.Controls.Add(Me.TextBox1)
@@ -177,47 +160,55 @@ Partial Class Family_Schedule
         Me.Panel1.Controls.Add(Me.Label3)
         Me.Panel1.Controls.Add(Me.Label4)
         Me.Panel1.Controls.Add(Me.Label5)
-        Me.Panel1.Location = New System.Drawing.Point(12, 49)
+        Me.Panel1.Location = New System.Drawing.Point(11, 70)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(277, 290)
+        Me.Panel1.Size = New System.Drawing.Size(319, 290)
         Me.Panel1.TabIndex = 18
         '
-        'ComboBox2
+        'ComboBox3
         '
-        Me.ComboBox2.FormattingEnabled = True
-        Me.ComboBox2.Items.AddRange(New Object() {"Chore", "Meal", "Task", "Personal"})
-        Me.ComboBox2.Location = New System.Drawing.Point(94, 151)
-        Me.ComboBox2.Name = "ComboBox2"
-        Me.ComboBox2.Size = New System.Drawing.Size(121, 21)
-        Me.ComboBox2.TabIndex = 8
+        Me.ComboBox3.FormattingEnabled = True
+        Me.ComboBox3.Items.AddRange(New Object() {"Chores", "Birthdays"})
+        Me.ComboBox3.Location = New System.Drawing.Point(92, 119)
+        Me.ComboBox3.Name = "ComboBox3"
+        Me.ComboBox3.Size = New System.Drawing.Size(149, 21)
+        Me.ComboBox3.TabIndex = 13
+        '
+        'ListView1
+        '
+        Me.ListView1.Location = New System.Drawing.Point(92, 154)
+        Me.ListView1.Name = "ListView1"
+        Me.ListView1.Size = New System.Drawing.Size(149, 126)
+        Me.ListView1.TabIndex = 12
+        Me.ListView1.UseCompatibleStateImageBehavior = False
         '
         'ComboBox1
         '
         Me.ComboBox1.FormattingEnabled = True
-        Me.ComboBox1.Location = New System.Drawing.Point(94, 104)
+        Me.ComboBox1.Location = New System.Drawing.Point(92, 84)
         Me.ComboBox1.Name = "ComboBox1"
-        Me.ComboBox1.Size = New System.Drawing.Size(121, 21)
+        Me.ComboBox1.Size = New System.Drawing.Size(149, 21)
         Me.ComboBox1.TabIndex = 7
         '
         'TextBox2
         '
-        Me.TextBox2.Location = New System.Drawing.Point(94, 58)
+        Me.TextBox2.Location = New System.Drawing.Point(92, 50)
         Me.TextBox2.Name = "TextBox2"
-        Me.TextBox2.Size = New System.Drawing.Size(121, 20)
+        Me.TextBox2.Size = New System.Drawing.Size(149, 20)
         Me.TextBox2.TabIndex = 6
         '
         'TextBox1
         '
-        Me.TextBox1.Location = New System.Drawing.Point(94, 12)
+        Me.TextBox1.Location = New System.Drawing.Point(92, 16)
         Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.Size = New System.Drawing.Size(121, 20)
+        Me.TextBox1.Size = New System.Drawing.Size(149, 20)
         Me.TextBox1.TabIndex = 5
         '
         'Label2
         '
         Me.Label2.AutoSize = True
         Me.Label2.Font = New System.Drawing.Font("Tahoma", 8.25!)
-        Me.Label2.Location = New System.Drawing.Point(3, 19)
+        Me.Label2.Location = New System.Drawing.Point(3, 16)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(27, 13)
         Me.Label2.TabIndex = 1
@@ -226,7 +217,7 @@ Partial Class Family_Schedule
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(3, 64)
+        Me.Label3.Location = New System.Drawing.Point(3, 50)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(35, 13)
         Me.Label3.TabIndex = 2
@@ -235,7 +226,7 @@ Partial Class Family_Schedule
         'Label4
         '
         Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(3, 109)
+        Me.Label4.Location = New System.Drawing.Point(3, 84)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(66, 13)
         Me.Label4.TabIndex = 3
@@ -244,7 +235,7 @@ Partial Class Family_Schedule
         'Label5
         '
         Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(3, 154)
+        Me.Label5.Location = New System.Drawing.Point(3, 118)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(62, 13)
         Me.Label5.TabIndex = 4
@@ -254,36 +245,85 @@ Partial Class Family_Schedule
         '
         Me.Label1.AutoSize = True
         Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 18.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.Location = New System.Drawing.Point(170, 9)
+        Me.Label1.Location = New System.Drawing.Point(212, 10)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(192, 29)
         Me.Label1.TabIndex = 17
         Me.Label1.Text = "Family Schedule"
         '
-        'Timer1
+        'btnSave
         '
+        Me.btnSave.BackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.btnSave.Image = CType(resources.GetObject("btnSave.Image"), System.Drawing.Image)
+        Me.btnSave.Location = New System.Drawing.Point(11, 498)
+        Me.btnSave.Name = "btnSave"
+        Me.btnSave.Size = New System.Drawing.Size(75, 44)
+        Me.btnSave.TabIndex = 19
+        Me.btnSave.UseVisualStyleBackColor = False
+        '
+        'btnUpdate
+        '
+        Me.btnUpdate.BackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.btnUpdate.Image = CType(resources.GetObject("btnUpdate.Image"), System.Drawing.Image)
+        Me.btnUpdate.Location = New System.Drawing.Point(391, 498)
+        Me.btnUpdate.Name = "btnUpdate"
+        Me.btnUpdate.Size = New System.Drawing.Size(75, 44)
+        Me.btnUpdate.TabIndex = 20
+        Me.btnUpdate.UseVisualStyleBackColor = False
+        '
+        'btnDelete
+        '
+        Me.btnDelete.BackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.btnDelete.Image = CType(resources.GetObject("btnDelete.Image"), System.Drawing.Image)
+        Me.btnDelete.Location = New System.Drawing.Point(581, 498)
+        Me.btnDelete.Name = "btnDelete"
+        Me.btnDelete.Size = New System.Drawing.Size(75, 44)
+        Me.btnDelete.TabIndex = 21
+        Me.btnDelete.UseVisualStyleBackColor = False
+        '
+        'Panel3
+        '
+        Me.Panel3.BackColor = System.Drawing.SystemColors.GradientActiveCaption
+        Me.Panel3.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.Panel3.Controls.Add(Me.Label1)
+        Me.Panel3.Location = New System.Drawing.Point(12, 12)
+        Me.Panel3.Name = "Panel3"
+        Me.Panel3.Size = New System.Drawing.Size(643, 50)
+        Me.Panel3.TabIndex = 23
+        '
+        'btnRefresh
+        '
+        Me.btnRefresh.Image = CType(resources.GetObject("btnRefresh.Image"), System.Drawing.Image)
+        Me.btnRefresh.Location = New System.Drawing.Point(201, 498)
+        Me.btnRefresh.Name = "btnRefresh"
+        Me.btnRefresh.Size = New System.Drawing.Size(75, 44)
+        Me.btnRefresh.TabIndex = 12
+        Me.btnRefresh.UseVisualStyleBackColor = True
         '
         'Family_Schedule
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(645, 541)
+        Me.ClientSize = New System.Drawing.Size(673, 545)
+        Me.Controls.Add(Me.btnRefresh)
+        Me.Controls.Add(Me.Panel3)
         Me.Controls.Add(Me.DataGridView1)
         Me.Controls.Add(Me.btnSave)
         Me.Controls.Add(Me.btnUpdate)
         Me.Controls.Add(Me.btnDelete)
         Me.Controls.Add(Me.Panel2)
         Me.Controls.Add(Me.Panel1)
-        Me.Controls.Add(Me.Label1)
         Me.Name = "Family_Schedule"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Family_Schedule"
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel2.ResumeLayout(False)
         Me.Panel2.PerformLayout()
         Me.Panel1.ResumeLayout(False)
         Me.Panel1.PerformLayout()
+        Me.Panel3.ResumeLayout(False)
+        Me.Panel3.PerformLayout()
         Me.ResumeLayout(False)
-        Me.PerformLayout()
 
     End Sub
 
@@ -301,7 +341,6 @@ Partial Class Family_Schedule
     Friend WithEvents Label7 As Label
     Friend WithEvents Label8 As Label
     Friend WithEvents Panel1 As Panel
-    Friend WithEvents ComboBox2 As ComboBox
     Friend WithEvents ComboBox1 As ComboBox
     Friend WithEvents TextBox2 As TextBox
     Friend WithEvents TextBox1 As TextBox
@@ -311,4 +350,9 @@ Partial Class Family_Schedule
     Friend WithEvents Label5 As Label
     Friend WithEvents Label1 As Label
     Friend WithEvents Timer1 As Timer
+    Friend WithEvents Panel4 As Panel
+    Friend WithEvents ListView1 As ListView
+    Friend WithEvents ComboBox3 As ComboBox
+    Friend WithEvents Panel3 As Panel
+    Friend WithEvents btnRefresh As Button
 End Class

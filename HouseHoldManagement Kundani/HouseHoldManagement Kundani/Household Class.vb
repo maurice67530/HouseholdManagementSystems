@@ -36,6 +36,9 @@ Public Class chores_
     Public Property DueDate As String
     Public Property Recurring As String
     Public Property Description As String
+    Public Property EndTime As String
+    Public Property StartTime As String
+
 End Class
 Public Class MealPlans
     'property of mealplan class
@@ -73,11 +76,11 @@ Public Class Expensetracking
     Public Property Frequency As String
     Public Property ApprovalStatus As String
     Public Property Person As String
-    Public Property DateOfexpenses As DateTime
+    Public Property DateOfexpenses As String
     Public Property BillName As String
-    Public Property StartDate As DateTime
+    Public Property StartDate As String
     Public Property Recurring As String
-
+    Public Property paid As String
 End Class
 Public Class DailyTask
     Public Property TaskID As String
@@ -134,4 +137,18 @@ Public Class BudgetClass
     Public Property EndDate As String
     Public Property Groceries As String
     Public Property StartDate As String
+    Public Property Remaining As String
+    Public Property BudgetAmount As String
+    Public Property Amount As String
+
+End Class
+Public Class HouseholdDocument
+    Public Property HouseholdID As String
+    Public Property Title As String
+    Public Property Notes As String
+    Public Property Category As String
+    Public Property FilePath As String
+    Public Property UploadedBy As String
+    Public Property UploadDate As String
+
 End Class

@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class PhotoGallery
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,7 +20,7 @@ Partial Class PhotoGallery
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(PhotoGallery))
@@ -30,6 +30,7 @@ Partial Class PhotoGallery
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.Label10 = New System.Windows.Forms.Label()
+        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.Panel2 = New System.Windows.Forms.Panel()
         Me.Label11 = New System.Windows.Forms.Label()
         Me.TextBox5 = New System.Windows.Forms.TextBox()
@@ -52,16 +53,16 @@ Partial Class PhotoGallery
         Me.Button7 = New System.Windows.Forms.Button()
         Me.Button8 = New System.Windows.Forms.Button()
         Me.Button6 = New System.Windows.Forms.Button()
-        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.Button5 = New System.Windows.Forms.Button()
         Me.Button4 = New System.Windows.Forms.Button()
         Me.Button3 = New System.Windows.Forms.Button()
         Me.Button2 = New System.Windows.Forms.Button()
         Me.Button1 = New System.Windows.Forms.Button()
+        Me.refresh = New System.Windows.Forms.Button()
         Me.Panel1.SuspendLayout()
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel2.SuspendLayout()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'Timer1
@@ -77,20 +78,32 @@ Partial Class PhotoGallery
         Me.Panel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         Me.Panel1.Controls.Add(Me.Label10)
         Me.Panel1.Controls.Add(Me.PictureBox1)
-        Me.Panel1.Location = New System.Drawing.Point(324, 63)
+        Me.Panel1.Location = New System.Drawing.Point(358, 63)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(304, 227)
+        Me.Panel1.Size = New System.Drawing.Size(336, 227)
         Me.Panel1.TabIndex = 141
         '
         'Label10
         '
         Me.Label10.AutoSize = True
         Me.Label10.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
-        Me.Label10.Location = New System.Drawing.Point(17, 204)
+        Me.Label10.Location = New System.Drawing.Point(11, 0)
         Me.Label10.Name = "Label10"
         Me.Label10.Size = New System.Drawing.Size(10, 13)
         Me.Label10.TabIndex = 106
         Me.Label10.Text = " "
+        '
+        'PictureBox1
+        '
+        Me.PictureBox1.BackColor = System.Drawing.SystemColors.Control
+        Me.PictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.PictureBox1.ImageLocation = ""
+        Me.PictureBox1.Location = New System.Drawing.Point(14, 12)
+        Me.PictureBox1.Name = "PictureBox1"
+        Me.PictureBox1.Size = New System.Drawing.Size(304, 205)
+        Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
+        Me.PictureBox1.TabIndex = 93
+        Me.PictureBox1.TabStop = False
         '
         'Panel2
         '
@@ -114,7 +127,7 @@ Partial Class PhotoGallery
         Me.Panel2.Controls.Add(Me.Label1)
         Me.Panel2.Location = New System.Drawing.Point(14, 63)
         Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(304, 227)
+        Me.Panel2.Size = New System.Drawing.Size(338, 227)
         Me.Panel2.TabIndex = 133
         '
         'Label11
@@ -131,7 +144,7 @@ Partial Class PhotoGallery
         '
         Me.TextBox5.Location = New System.Drawing.Point(104, 166)
         Me.TextBox5.Name = "TextBox5"
-        Me.TextBox5.Size = New System.Drawing.Size(176, 20)
+        Me.TextBox5.Size = New System.Drawing.Size(227, 20)
         Me.TextBox5.TabIndex = 130
         '
         'ComboBox2
@@ -140,7 +153,7 @@ Partial Class PhotoGallery
         Me.ComboBox2.Items.AddRange(New Object() {"Church", "Soccer", "Family", "Christmas"})
         Me.ComboBox2.Location = New System.Drawing.Point(104, 137)
         Me.ComboBox2.Name = "ComboBox2"
-        Me.ComboBox2.Size = New System.Drawing.Size(176, 21)
+        Me.ComboBox2.Size = New System.Drawing.Size(227, 21)
         Me.ComboBox2.TabIndex = 129
         '
         'Label8
@@ -167,7 +180,7 @@ Partial Class PhotoGallery
         '
         Me.TextBox4.Location = New System.Drawing.Point(104, 193)
         Me.TextBox4.Name = "TextBox4"
-        Me.TextBox4.Size = New System.Drawing.Size(176, 20)
+        Me.TextBox4.Size = New System.Drawing.Size(227, 20)
         Me.TextBox4.TabIndex = 124
         '
         'TextBox2
@@ -175,7 +188,7 @@ Partial Class PhotoGallery
         Me.TextBox2.Location = New System.Drawing.Point(104, 57)
         Me.TextBox2.Multiline = True
         Me.TextBox2.Name = "TextBox2"
-        Me.TextBox2.Size = New System.Drawing.Size(176, 21)
+        Me.TextBox2.Size = New System.Drawing.Size(227, 21)
         Me.TextBox2.TabIndex = 123
         '
         'Label3
@@ -192,7 +205,7 @@ Partial Class PhotoGallery
         '
         Me.TextBox3.Location = New System.Drawing.Point(104, 84)
         Me.TextBox3.Name = "TextBox3"
-        Me.TextBox3.Size = New System.Drawing.Size(176, 20)
+        Me.TextBox3.Size = New System.Drawing.Size(227, 20)
         Me.TextBox3.TabIndex = 121
         '
         'Label2
@@ -209,7 +222,7 @@ Partial Class PhotoGallery
         '
         Me.DateTimePicker1.Location = New System.Drawing.Point(104, 31)
         Me.DateTimePicker1.Name = "DateTimePicker1"
-        Me.DateTimePicker1.Size = New System.Drawing.Size(176, 20)
+        Me.DateTimePicker1.Size = New System.Drawing.Size(227, 20)
         Me.DateTimePicker1.TabIndex = 119
         '
         'ComboBox1
@@ -218,7 +231,7 @@ Partial Class PhotoGallery
         Me.ComboBox1.Items.AddRange(New Object() {""})
         Me.ComboBox1.Location = New System.Drawing.Point(104, 110)
         Me.ComboBox1.Name = "ComboBox1"
-        Me.ComboBox1.Size = New System.Drawing.Size(176, 21)
+        Me.ComboBox1.Size = New System.Drawing.Size(227, 21)
         Me.ComboBox1.TabIndex = 118
         '
         'TextBox1
@@ -227,7 +240,7 @@ Partial Class PhotoGallery
         Me.TextBox1.Location = New System.Drawing.Point(104, 5)
         Me.TextBox1.Name = "TextBox1"
         Me.TextBox1.ReadOnly = True
-        Me.TextBox1.Size = New System.Drawing.Size(176, 20)
+        Me.TextBox1.Size = New System.Drawing.Size(227, 20)
         Me.TextBox1.TabIndex = 117
         '
         'Label6
@@ -266,7 +279,7 @@ Partial Class PhotoGallery
         Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DataGridView1.Location = New System.Drawing.Point(14, 296)
         Me.DataGridView1.Name = "DataGridView1"
-        Me.DataGridView1.Size = New System.Drawing.Size(614, 101)
+        Me.DataGridView1.Size = New System.Drawing.Size(680, 101)
         Me.DataGridView1.TabIndex = 135
         '
         'Label9
@@ -276,7 +289,7 @@ Partial Class PhotoGallery
         Me.Label9.Font = New System.Drawing.Font("Microsoft Sans Serif", 20.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label9.Location = New System.Drawing.Point(14, 9)
         Me.Label9.Name = "Label9"
-        Me.Label9.Size = New System.Drawing.Size(614, 51)
+        Me.Label9.Size = New System.Drawing.Size(680, 51)
         Me.Label9.TabIndex = 134
         Me.Label9.Text = "Gallery"
         Me.Label9.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -307,24 +320,12 @@ Partial Class PhotoGallery
         '
         Me.Button6.BackColor = System.Drawing.Color.Silver
         Me.Button6.Image = CType(resources.GetObject("Button6.Image"), System.Drawing.Image)
-        Me.Button6.Location = New System.Drawing.Point(570, 403)
+        Me.Button6.Location = New System.Drawing.Point(571, 403)
         Me.Button6.Name = "Button6"
-        Me.Button6.Size = New System.Drawing.Size(63, 61)
+        Me.Button6.Size = New System.Drawing.Size(62, 61)
         Me.Button6.TabIndex = 143
         Me.Button6.Text = " "
         Me.Button6.UseVisualStyleBackColor = False
-        '
-        'PictureBox1
-        '
-        Me.PictureBox1.BackColor = System.Drawing.SystemColors.Control
-        Me.PictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        Me.PictureBox1.ImageLocation = ""
-        Me.PictureBox1.Location = New System.Drawing.Point(14, 12)
-        Me.PictureBox1.Name = "PictureBox1"
-        Me.PictureBox1.Size = New System.Drawing.Size(262, 186)
-        Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
-        Me.PictureBox1.TabIndex = 93
-        Me.PictureBox1.TabStop = False
         '
         'Button5
         '
@@ -381,12 +382,24 @@ Partial Class PhotoGallery
         Me.Button1.Text = " "
         Me.Button1.UseVisualStyleBackColor = False
         '
+        'refresh
+        '
+        Me.refresh.BackColor = System.Drawing.Color.Silver
+        Me.refresh.Image = CType(resources.GetObject("refresh.Image"), System.Drawing.Image)
+        Me.refresh.Location = New System.Drawing.Point(639, 403)
+        Me.refresh.Name = "refresh"
+        Me.refresh.Size = New System.Drawing.Size(63, 61)
+        Me.refresh.TabIndex = 145
+        Me.refresh.Text = " "
+        Me.refresh.UseVisualStyleBackColor = False
+        '
         'PhotoGallery
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.ClientSize = New System.Drawing.Size(647, 472)
+        Me.ClientSize = New System.Drawing.Size(702, 472)
+        Me.Controls.Add(Me.refresh)
         Me.Controls.Add(Me.Button7)
         Me.Controls.Add(Me.Button8)
         Me.Controls.Add(Me.Button6)
@@ -403,10 +416,10 @@ Partial Class PhotoGallery
         Me.Text = "PhotoGallery"
         Me.Panel1.ResumeLayout(False)
         Me.Panel1.PerformLayout()
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel2.ResumeLayout(False)
         Me.Panel2.PerformLayout()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -444,4 +457,5 @@ Partial Class PhotoGallery
     Friend WithEvents Label1 As Label
     Friend WithEvents DataGridView1 As DataGridView
     Friend WithEvents Label9 As Label
+    Friend WithEvents refresh As Button
 End Class
