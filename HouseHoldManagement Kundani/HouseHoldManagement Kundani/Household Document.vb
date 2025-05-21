@@ -2,9 +2,22 @@
 Imports System.IO
 
 Public Class Household_Document
+    Private uploadPath As String = Path.Combine(Application.StartupPath, "Uploads")
     Public Property conn As New OleDbConnection(connectionString)
 
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
+
+
+        If TextBox1.Text = "" Then
+            MsgBox("Fill in the missing fields", MsgBoxStyle.Exclamation)
+            Exit Sub
+
+        End If
+        If TextBox2.Text = "" Then
+            MsgBox("Fill in the missing fields", MsgBoxStyle.Exclamation)
+            Exit Sub
+        End If
+
 
         Dim ofd As New OpenFileDialog()
         ofd.Filter = "Documents|*.pdf;*.docx;*.xlsx;*.jpg;*.png|All files|*.*"
@@ -30,20 +43,48 @@ Public Class Household_Document
                 cmd.ExecuteNonQuery()
             End Using
 
-            MessageBox.Show("Document uploaded.")
+            MessageBox.Show("Document uploadeded successful.")
             LoadDocuments()
         End If
         conn.Close()
-
     End Sub
 
+    Public Sub PopulateComboboxFromDatabase(ByRef comboBox As ComboBox)
+        Dim conn As New OleDbConnection(connectionString)
+        Try
+            Debug.WriteLine("populate combobox successful")
+            'open the database connection
+            conn.Open()
+            'retrieve the firstname and surname columns from the personaldetails tabel
+            Dim query As String = "SELECT FirstName, LastName FROM PersonalDetails"
+            Dim cmd As New OleDbCommand(query, conn)
+            Dim reader As OleDbDataReader = cmd.ExecuteReader()
+            'bind the retrieved data to the combobox
+            ComboBox3.Items.Clear()
+            While reader.Read()
+                ComboBox3.Items.Add($"{reader("FirstName")} {reader("LastName")}")
+            End While
+            'close the database
+            reader.Close()
+        Catch ex As Exception
+            'handle any exeptions that may occur  
+            Debug.WriteLine("failed to populate combobox")
+            Debug.WriteLine($"Stack Trace: {ex.StackTrace}")
+            MessageBox.Show($"Error: {ex.StackTrace}")
+        Finally
+            'close the database connection
+            If conn.State = ConnectionState.Open Then
+                conn.Close()
+            End If
+        End Try
+    End Sub
     Public Sub LoadHouseholdDocumentDatafromDatabase()
 
         Try
 
             Using conn As New OleDbConnection(connectionString)
 
-                conn.Open()
+                'conn.Open()
 
                 'Update the table name if neccessary
 
@@ -109,12 +150,13 @@ Public Class Household_Document
 
     Private Sub Household_Document_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
+
         'LoadFilteredDocuments()
         LoadDocuments()
 
         'LoadhouseholddocumentDataFromDatabase()
         LoadHouseholdDocumentDatafromDatabase()
-
+        PopulateComboboxFromDatabase(ComboBox3)
         'ViewDocument()
         ToolTip1.SetToolTip(Button2, "Upload")
         ToolTip1.SetToolTip(Button1, "Open")
@@ -216,7 +258,7 @@ Public Class Household_Document
         Catch ex As Exception
             Debug.WriteLine("error selection data in the database")
             Debug.WriteLine($"Stack Trace: {ex.StackTrace}")
-            MessageBox.Show("Error saving document to database: " & ex.Message & vbNewLine & ex.StackTrace, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            'MessageBox.Show("Error saving document to database: " & ex.Message & vbNewLine & ex.StackTrace, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
     End Sub
     Private Sub Button5_Click(sender As Object, e As EventArgs) Handles Button5.Click
@@ -344,6 +386,10 @@ Public Class Household_Document
     End Sub
 
     Private Sub Panel1_Paint(sender As Object, e As PaintEventArgs) Handles Panel1.Paint
+
+    End Sub
+
+    Private Sub Label1_Click(sender As Object, e As EventArgs) Handles Label1.Click
 
     End Sub
 End Class
