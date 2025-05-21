@@ -149,8 +149,7 @@ Public Class Expense
                 .BillName = TextBox8.Text,
                 .StartDate = DateTimePicker2.Value,
                 .Recurring = CheckBox1.Checked,
-                .paid = ComboBox6.SelectedItem.ToString
-            }
+                .paid = ComboBox6.SelectedItem.ToString}
 
                 cmd.Parameters.Clear()
                 cmd.Parameters.AddWithValue("@Amount", expense.Amount)
@@ -222,7 +221,7 @@ Public Class Expense
                 Dim ID As Integer = Convert.ToInt32(selectedRow.Cells("ID").Value) ' Change "ID" to your primary key column name  
 
                 ' Create an OleDbCommand to update the Expense data in the database  
-                Dim cmd As New OleDbCommand("UPDATE [Expense] SET [Amount] = ?, [Description] = ?, [Tags] = ?, [Category] = ?, [Paymentmethod] = ?, [ApprovalStatus] = ?, [DateOfexpenses] = ?, [Person] = ?, [BillName] = ?, [StartDate] = ?, [Recurring] = ?, [Paid] = ? WHERE [ID] = ?", conn)
+                Dim cmd As New OleDbCommand("UPDATE [Expense] SET [Amount] = ?, [Description] = ?, [Tags] = ?, [Category] = ?, [Paymentmethod] = ?, [DateOfexpenses] = ?, [Person] = ?, [BillName] = ?, [StartDate] = ?, [Recurring] = ?, [Paid] = ? WHERE [ID] = ?", conn)
 
                 'cmd.Parameters.AddWithValue("@ExpenseID", ExpenseID)
                 cmd.Parameters.AddWithValue("@Amount", Amount)
@@ -334,7 +333,7 @@ Public Class Expense
 
     End Sub
 
-    Private Sub Button6_Click(sender As Object, e As EventArgs) Handles Button6.Click
+    Private Sub Button6_Click(sender As Object, e As EventArgs)
 
         TextBox1.Text = ""
         TextBox2.Text = ""
@@ -396,7 +395,7 @@ Public Class Expense
         toolTip.ShowAlways = True
 
         toolTip1.SetToolTip(Button5, "Sort")
-        toolTip1.SetToolTip(Button6, "Clear controls")
+        'toolTip1.SetToolTip(Button6, "Clear controls")
         toolTip1.SetToolTip(Button3, "Edit")
         toolTip1.SetToolTip(Button4, "Delete")
         toolTip1.SetToolTip(Button7, "Calculate Budget")
@@ -426,7 +425,7 @@ Public Class Expense
             conn.Open()
 
             ' Display the connection status on a button with a green background  
-            Label17.Text = "Connected"
+            Label17.Text = "Connected to Database"
             Label17.BackColor = Color.Green
             Label17.ForeColor = Color.White
         Catch ex As Exception
@@ -635,6 +634,8 @@ Public Class Expense
             If DataGridView1.SelectedRows.Count > 0 Then
                 Dim selectedRow As DataGridViewRow = DataGridView1.SelectedRows(0)
 
+                Button1.Enabled = False
+
                 ' Load the data from the selected row into UI controls  
                 TextBox2.Text = selectedRow.Cells("Amount").Value.ToString()
                 TextBox6.Text = selectedRow.Cells("Description").Value.ToString()
@@ -649,7 +650,7 @@ Public Class Expense
                 CheckBox1.Text = selectedRow.Cells("Recurring").Value.ToString()
                 ComboBox6.SelectedItem = selectedRow.Cells("Paid").Value.ToString()
 
-                Button1.Enabled = False
+
             End If
         Catch ex As Exception
             Debug.WriteLine("error selection data in the database")
@@ -678,6 +679,20 @@ Public Class Expense
         Next
     End Sub
     Private Sub Button8_Click(sender As Object, e As EventArgs) Handles Button8.Click
+        'TextBox1.Text = ""
+        'TextBox2.Text = ""
+        'TextBox6.Text = ""
+        'TextBox4.Text = ""
+        'ComboBox7.SelectedItem = ""
+        'ComboBox1.SelectedItem = ""
+        'ComboBox5.SelectedItem = ""
+        'TextBox7.Text = ""
+        'ComboBox3.SelectedItem = ""
+        'TextBox8.Text = ""
+        'CheckBox1.Checked = ""
+        'ComboBox6.SelectedItem = ""
+        HouseHoldManagment_Module.ClearControls(Me)
+
         LoadExpenseDataFromDatabase()
         Button1.Enabled = True
     End Sub
@@ -1094,7 +1109,7 @@ Public Class Expense
                     Dim Recurring As String = row.Cells("Recurring").Value.ToString().ToLower
                     Dim paid As String = row.Cells("Paid").Value.ToString.ToLower
 
-                    row.Visible = BillName.Contains(SearchTerm) OrElse Category.Contains(SearchTerm)
+                    row.Visible = BillName.Contains(SearchTerm) & Category.Contains(SearchTerm) & Amount.Contains(SearchTerm) & Description.Contains(SearchTerm)
                 End If
             Next
         Catch ex As Exception

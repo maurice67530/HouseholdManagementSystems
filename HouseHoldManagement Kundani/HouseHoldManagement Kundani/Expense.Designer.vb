@@ -27,16 +27,13 @@ Partial Class Expense
         Me.Button8 = New System.Windows.Forms.Button()
         Me.DataGridView1 = New System.Windows.Forms.DataGridView()
         Me.Button7 = New System.Windows.Forms.Button()
-        Me.Button6 = New System.Windows.Forms.Button()
         Me.Button5 = New System.Windows.Forms.Button()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.ComboBox7 = New System.Windows.Forms.ComboBox()
-        Me.Label22 = New System.Windows.Forms.Label()
-        Me.TextBox9 = New System.Windows.Forms.TextBox()
         Me.ComboBox6 = New System.Windows.Forms.ComboBox()
-        Me.Label15 = New System.Windows.Forms.Label()
         Me.Label20 = New System.Windows.Forms.Label()
         Me.TextBox8 = New System.Windows.Forms.TextBox()
+        Me.CheckBox1 = New System.Windows.Forms.CheckBox()
         Me.Label18 = New System.Windows.Forms.Label()
         Me.TextBox2 = New System.Windows.Forms.TextBox()
         Me.ComboBox1 = New System.Windows.Forms.ComboBox()
@@ -49,8 +46,10 @@ Partial Class Expense
         Me.Label7 = New System.Windows.Forms.Label()
         Me.Label8 = New System.Windows.Forms.Label()
         Me.Label4 = New System.Windows.Forms.Label()
+        Me.Label22 = New System.Windows.Forms.Label()
+        Me.TextBox9 = New System.Windows.Forms.TextBox()
+        Me.Label15 = New System.Windows.Forms.Label()
         Me.Label16 = New System.Windows.Forms.Label()
-        Me.CheckBox1 = New System.Windows.Forms.CheckBox()
         Me.Panel2 = New System.Windows.Forms.Panel()
         Me.Label21 = New System.Windows.Forms.Label()
         Me.ListBox1 = New System.Windows.Forms.ListBox()
@@ -84,7 +83,7 @@ Partial Class Expense
         '
         Me.Button8.BackColor = System.Drawing.SystemColors.ActiveCaption
         Me.Button8.Image = CType(resources.GetObject("Button8.Image"), System.Drawing.Image)
-        Me.Button8.Location = New System.Drawing.Point(488, 470)
+        Me.Button8.Location = New System.Drawing.Point(481, 470)
         Me.Button8.Name = "Button8"
         Me.Button8.Size = New System.Drawing.Size(75, 51)
         Me.Button8.TabIndex = 133
@@ -109,21 +108,11 @@ Partial Class Expense
         Me.Button7.TabIndex = 131
         Me.Button7.UseVisualStyleBackColor = False
         '
-        'Button6
-        '
-        Me.Button6.BackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.Button6.Image = CType(resources.GetObject("Button6.Image"), System.Drawing.Image)
-        Me.Button6.Location = New System.Drawing.Point(115, 470)
-        Me.Button6.Name = "Button6"
-        Me.Button6.Size = New System.Drawing.Size(75, 51)
-        Me.Button6.TabIndex = 130
-        Me.Button6.UseVisualStyleBackColor = False
-        '
         'Button5
         '
         Me.Button5.BackColor = System.Drawing.SystemColors.ActiveCaption
         Me.Button5.Image = CType(resources.GetObject("Button5.Image"), System.Drawing.Image)
-        Me.Button5.Location = New System.Drawing.Point(206, 470)
+        Me.Button5.Location = New System.Drawing.Point(195, 469)
         Me.Button5.Name = "Button5"
         Me.Button5.Size = New System.Drawing.Size(75, 51)
         Me.Button5.TabIndex = 129
@@ -164,22 +153,6 @@ Partial Class Expense
         Me.ComboBox7.Size = New System.Drawing.Size(198, 24)
         Me.ComboBox7.TabIndex = 94
         '
-        'Label22
-        '
-        Me.Label22.AutoSize = True
-        Me.Label22.Location = New System.Drawing.Point(8, 216)
-        Me.Label22.Name = "Label22"
-        Me.Label22.Size = New System.Drawing.Size(54, 16)
-        Me.Label22.TabIndex = 93
-        Me.Label22.Text = "Search "
-        '
-        'TextBox9
-        '
-        Me.TextBox9.Location = New System.Drawing.Point(122, 215)
-        Me.TextBox9.Name = "TextBox9"
-        Me.TextBox9.Size = New System.Drawing.Size(188, 22)
-        Me.TextBox9.TabIndex = 92
-        '
         'ComboBox6
         '
         Me.ComboBox6.FormattingEnabled = True
@@ -188,16 +161,6 @@ Partial Class Expense
         Me.ComboBox6.Name = "ComboBox6"
         Me.ComboBox6.Size = New System.Drawing.Size(199, 24)
         Me.ComboBox6.TabIndex = 91
-        '
-        'Label15
-        '
-        Me.Label15.AutoSize = True
-        Me.Label15.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label15.Location = New System.Drawing.Point(8, 252)
-        Me.Label15.Name = "Label15"
-        Me.Label15.Size = New System.Drawing.Size(131, 15)
-        Me.Label15.TabIndex = 85
-        Me.Label15.Text = "Total Expenses: R0"
         '
         'Label20
         '
@@ -215,10 +178,21 @@ Partial Class Expense
         Me.TextBox8.Size = New System.Drawing.Size(198, 22)
         Me.TextBox8.TabIndex = 89
         '
+        'CheckBox1
+        '
+        Me.CheckBox1.AutoSize = True
+        Me.CheckBox1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.CheckBox1.Location = New System.Drawing.Point(12, 272)
+        Me.CheckBox1.Name = "CheckBox1"
+        Me.CheckBox1.Size = New System.Drawing.Size(101, 19)
+        Me.CheckBox1.TabIndex = 88
+        Me.CheckBox1.Text = "Recurring ?"
+        Me.CheckBox1.UseVisualStyleBackColor = True
+        '
         'Label18
         '
         Me.Label18.AutoSize = True
-        Me.Label18.Location = New System.Drawing.Point(2, 35)
+        Me.Label18.Location = New System.Drawing.Point(2, 38)
         Me.Label18.Name = "Label18"
         Me.Label18.Size = New System.Drawing.Size(66, 16)
         Me.Label18.TabIndex = 87
@@ -291,7 +265,7 @@ Partial Class Expense
         '
         Me.Label10.AutoSize = True
         Me.Label10.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label10.Location = New System.Drawing.Point(3, 130)
+        Me.Label10.Location = New System.Drawing.Point(3, 137)
         Me.Label10.Name = "Label10"
         Me.Label10.Size = New System.Drawing.Size(63, 16)
         Me.Label10.TabIndex = 78
@@ -321,11 +295,37 @@ Partial Class Expense
         '
         Me.Label4.AutoSize = True
         Me.Label4.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label4.Location = New System.Drawing.Point(2, 98)
+        Me.Label4.Location = New System.Drawing.Point(4, 104)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(33, 16)
         Me.Label4.TabIndex = 71
         Me.Label4.Text = "Tag"
+        '
+        'Label22
+        '
+        Me.Label22.AutoSize = True
+        Me.Label22.Location = New System.Drawing.Point(8, 216)
+        Me.Label22.Name = "Label22"
+        Me.Label22.Size = New System.Drawing.Size(54, 16)
+        Me.Label22.TabIndex = 93
+        Me.Label22.Text = "Search "
+        '
+        'TextBox9
+        '
+        Me.TextBox9.Location = New System.Drawing.Point(122, 215)
+        Me.TextBox9.Name = "TextBox9"
+        Me.TextBox9.Size = New System.Drawing.Size(188, 22)
+        Me.TextBox9.TabIndex = 92
+        '
+        'Label15
+        '
+        Me.Label15.AutoSize = True
+        Me.Label15.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label15.Location = New System.Drawing.Point(8, 252)
+        Me.Label15.Name = "Label15"
+        Me.Label15.Size = New System.Drawing.Size(131, 15)
+        Me.Label15.TabIndex = 85
+        Me.Label15.Text = "Total Expenses: R0"
         '
         'Label16
         '
@@ -336,17 +336,6 @@ Partial Class Expense
         Me.Label16.Size = New System.Drawing.Size(154, 15)
         Me.Label16.TabIndex = 86
         Me.Label16.Text = "Average Expenses : R0"
-        '
-        'CheckBox1
-        '
-        Me.CheckBox1.AutoSize = True
-        Me.CheckBox1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.CheckBox1.Location = New System.Drawing.Point(10, 272)
-        Me.CheckBox1.Name = "CheckBox1"
-        Me.CheckBox1.Size = New System.Drawing.Size(101, 19)
-        Me.CheckBox1.TabIndex = 88
-        Me.CheckBox1.Text = "Recurring ?"
-        Me.CheckBox1.UseVisualStyleBackColor = True
         '
         'Panel2
         '
@@ -487,7 +476,7 @@ Partial Class Expense
         '
         Me.Button4.BackColor = System.Drawing.SystemColors.ActiveCaption
         Me.Button4.Image = CType(resources.GetObject("Button4.Image"), System.Drawing.Image)
-        Me.Button4.Location = New System.Drawing.Point(302, 469)
+        Me.Button4.Location = New System.Drawing.Point(289, 469)
         Me.Button4.Name = "Button4"
         Me.Button4.Size = New System.Drawing.Size(75, 51)
         Me.Button4.TabIndex = 127
@@ -497,7 +486,7 @@ Partial Class Expense
         '
         Me.Button3.BackColor = System.Drawing.SystemColors.ActiveCaption
         Me.Button3.Image = CType(resources.GetObject("Button3.Image"), System.Drawing.Image)
-        Me.Button3.Location = New System.Drawing.Point(396, 470)
+        Me.Button3.Location = New System.Drawing.Point(387, 470)
         Me.Button3.Name = "Button3"
         Me.Button3.Size = New System.Drawing.Size(75, 51)
         Me.Button3.TabIndex = 126
@@ -516,7 +505,7 @@ Partial Class Expense
         '
         Me.Button1.BackColor = System.Drawing.SystemColors.ActiveCaption
         Me.Button1.Image = CType(resources.GetObject("Button1.Image"), System.Drawing.Image)
-        Me.Button1.Location = New System.Drawing.Point(576, 470)
+        Me.Button1.Location = New System.Drawing.Point(576, 468)
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(75, 51)
         Me.Button1.TabIndex = 124
@@ -552,11 +541,11 @@ Partial Class Expense
         '
         Me.Label17.AutoSize = True
         Me.Label17.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        Me.Label17.Location = New System.Drawing.Point(563, 9)
+        Me.Label17.Location = New System.Drawing.Point(510, 10)
         Me.Label17.Name = "Label17"
-        Me.Label17.Size = New System.Drawing.Size(62, 15)
+        Me.Label17.Size = New System.Drawing.Size(141, 15)
         Me.Label17.TabIndex = 135
-        Me.Label17.Text = "No Internet"
+        Me.Label17.Text = "No Connection to Database"
         '
         'Timer1
         '
@@ -566,9 +555,9 @@ Partial Class Expense
         '
         Me.Button10.BackColor = System.Drawing.SystemColors.ActiveCaption
         Me.Button10.Image = CType(resources.GetObject("Button10.Image"), System.Drawing.Image)
-        Me.Button10.Location = New System.Drawing.Point(115, 526)
+        Me.Button10.Location = New System.Drawing.Point(103, 470)
         Me.Button10.Name = "Button10"
-        Me.Button10.Size = New System.Drawing.Size(75, 43)
+        Me.Button10.Size = New System.Drawing.Size(75, 51)
         Me.Button10.TabIndex = 136
         Me.Button10.UseVisualStyleBackColor = False
         '
@@ -576,14 +565,13 @@ Partial Class Expense
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(665, 583)
+        Me.ClientSize = New System.Drawing.Size(665, 576)
         Me.Controls.Add(Me.Button10)
         Me.Controls.Add(Me.Label17)
         Me.Controls.Add(Me.Button9)
         Me.Controls.Add(Me.Button8)
         Me.Controls.Add(Me.DataGridView1)
         Me.Controls.Add(Me.Button7)
-        Me.Controls.Add(Me.Button6)
         Me.Controls.Add(Me.Button5)
         Me.Controls.Add(Me.Panel1)
         Me.Controls.Add(Me.Panel2)
@@ -608,7 +596,6 @@ Partial Class Expense
     Friend WithEvents Button8 As Button
     Friend WithEvents DataGridView1 As DataGridView
     Friend WithEvents Button7 As Button
-    Friend WithEvents Button6 As Button
     Friend WithEvents Button5 As Button
     Friend WithEvents Panel1 As Panel
     Friend WithEvents TextBox2 As TextBox
