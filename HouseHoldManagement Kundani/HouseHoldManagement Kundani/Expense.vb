@@ -446,7 +446,7 @@ Public Class Expense
             Label17.ForeColor = Color.White
         Catch ex As Exception
             ' Display the connection status on a button with a red background  
-            Label17.Text = "Not Connected"
+            Label17.Text = "Not Connected to Database"
             Label17.BackColor = Color.Red
             Label17.ForeColor = Color.White
 
@@ -851,61 +851,118 @@ Public Class Expense
             End Try
         End Using
     End Sub
+    'Private Sub SaveChangedDateToAnotherTable()
+    '    Dim selectQuery As String = "SELECT * FROM Expense" ' Your source table
+    '    Dim dt As New DataTable()
+
+    '    Using conn As New OleDbConnection(connectionString)
+    '        Try
+    '            conn.Open()
+
+    '            ' Fill DataTable with source data
+    '            Using cmd As New OleDbCommand(selectQuery, conn)
+    '                Using adapter As New OleDbDataAdapter(cmd)
+    '                    adapter.Fill(dt)
+    '                End Using
+    '            End Using
+    '            ' Loop through each row to modify and insert into target table
+    '            For Each row As DataRow In dt.Rows
+    '                ' Read the 'Paid' status
+    '                Dim paidStatus As String = Convert.ToString(row("Recurring")).Trim().ToLower()
+
+    '                ' Proceed only if 'Paid' is "no"
+    '                If paidStatus = "True" Then
+    '                    ' Prepare the new change date for next payment
+    '                    Dim currentStartDate As DateTime = Convert.ToDateTime(row("StartDate"))
+    '                    Dim nextPaymentDate As DateTime = currentStartDate.AddMonths(1) ' or your logic for next payment
+
+    '                    ' Insert into the target table, e.g., ExpenseLogs
+    '                    Dim insertQuery As String = "INSERT INTO ExpenseLogs (BillName, Amount, StartDate, Paid, Recurring) VALUES (?, ?, ?, ?, ?)"
+    '                    Using insertCmd As New OleDbCommand(insertQuery, conn)
+    '                        insertCmd.Parameters.AddWithValue("?", row("BillName"))
+    '                        insertCmd.Parameters.AddWithValue("?", row("Amount"))
+    '                        insertCmd.Parameters.AddWithValue("?", nextPaymentDate)
+    '                        insertCmd.Parameters.AddWithValue("?", "Yes") ' or your logic for setting Paid
+    '                        insertCmd.Parameters.AddWithValue("?", row("Recurring")) ' assuming same recurring
+
+    '                        Try
+    '                            insertCmd.ExecuteNonQuery()
+    '                        Catch ex As Exception
+    '                            MessageBox.Show("Error inserting row: " & ex.Message)
+    '                        End Try
+    '                    End Using
+    '                Else
+    '                    ' Optionally, you can handle the case where Paid = "Yes"
+    '                    ' For example, log or ignore
+    '                    'MessageBox.Show("Payments that are not Recurring were not paid " & DateTime.Now.ToString())
+    '                End If
+    '            Next
+    '            'MessageBox.Show("Payments with updated dates saved successfully at " & DateTime.Now.ToString())
+    '            'UpdateDatesBasedOnFrequency()
+    '            'Mainm()
+    '        Catch ex As Exception
+    '            MessageBox.Show("Error fetching data: " & ex.Message)
+    '        End Try
+    '    End Using
+    'End Sub
+
     Private Sub SaveChangedDateToAnotherTable()
-        Dim selectQuery As String = "SELECT * FROM Expense" ' Your source table
+        Dim getBudgetQuery As String = "SELECT CurrentAmount FROM Budget"
+        Dim updateBudgetQuery As String = "UPDATE Budget SET CurrentAmount = ?"
         Dim dt As New DataTable()
+        ' Start a transaction to make sure all changes succeed or fail together
+        Dim transaction As OleDbTransaction = conn.BeginTransaction()
 
-        Using conn As New OleDbConnection(connectionString)
-            Try
-                conn.Open()
+        Try
+            ' Get current budget
+            Dim currentBudget As Decimal
+            Using budgetCmd As New OleDbCommand(getBudgetQuery, conn, transaction)
+                Dim result = budgetCmd.ExecuteScalar()
+                If result IsNot Nothing Then
+                    currentBudget = Convert.ToDecimal(result)
+                Else
+                    Throw New Exception("Budget not found.")
+                End If
+            End Using
 
-                ' Fill DataTable with source data
-                Using cmd As New OleDbCommand(selectQuery, conn)
-                    Using adapter As New OleDbDataAdapter(cmd)
-                        adapter.Fill(dt)
+            ' Loop through each row to modify and insert into target table
+            For Each row As DataRow In dt.Rows
+                Dim paidStatus As String = Convert.ToString(row("Recurring")).Trim().ToLower()
+                If paidStatus = "true" Then
+                    Dim amount As Decimal = Convert.ToDecimal(row("Amount"))
+
+                    ' Deduct from budget
+                    currentBudget -= amount
+                    Using updateCmd As New OleDbCommand(updateBudgetQuery, conn, transaction)
+                        updateCmd.Parameters.AddWithValue("?", currentBudget)
+                        updateCmd.ExecuteNonQuery()
                     End Using
-                End Using
-                ' Loop through each row to modify and insert into target table
-                For Each row As DataRow In dt.Rows
-                    ' Read the 'Paid' status
-                    Dim paidStatus As String = Convert.ToString(row("Recurring")).Trim().ToLower()
 
-                    ' Proceed only if 'Paid' is "no"
-                    If paidStatus = "True" Then
-                        ' Prepare the new change date for next payment
-                        Dim currentStartDate As DateTime = Convert.ToDateTime(row("StartDate"))
-                        Dim nextPaymentDate As DateTime = currentStartDate.AddMonths(1) ' or your logic for next payment
+                    ' Insert into ExpenseLogs
+                    Dim currentStartDate As DateTime = Convert.ToDateTime(row("StartDate"))
+                    Dim nextPaymentDate As DateTime = currentStartDate.AddMonths(1)
 
-                        ' Insert into the target table, e.g., ExpenseLogs
-                        Dim insertQuery As String = "INSERT INTO ExpenseLogs (BillName, Amount, StartDate, Paid, Recurring) VALUES (?, ?, ?, ?, ?)"
-                        Using insertCmd As New OleDbCommand(insertQuery, conn)
-                            insertCmd.Parameters.AddWithValue("?", row("BillName"))
-                            insertCmd.Parameters.AddWithValue("?", row("Amount"))
-                            insertCmd.Parameters.AddWithValue("?", nextPaymentDate)
-                            insertCmd.Parameters.AddWithValue("?", "Yes") ' or your logic for setting Paid
-                            insertCmd.Parameters.AddWithValue("?", row("Recurring")) ' assuming same recurring
+                    Dim insertQuery As String = "INSERT INTO ExpenseLogs (BillName, Amount, StartDate, Paid, Recurring) VALUES (?, ?, ?, ?, ?)"
+                    Using insertCmd As New OleDbCommand(insertQuery, conn, transaction)
+                        insertCmd.Parameters.AddWithValue("?", row("BillName"))
+                        insertCmd.Parameters.AddWithValue("?", amount)
+                        insertCmd.Parameters.AddWithValue("?", nextPaymentDate)
+                        insertCmd.Parameters.AddWithValue("?", "Yes")
+                        insertCmd.Parameters.AddWithValue("?", row("Recurring"))
 
-                            Try
-                                insertCmd.ExecuteNonQuery()
-                            Catch ex As Exception
-                                MessageBox.Show("Error inserting row: " & ex.Message)
-                            End Try
-                        End Using
-                    Else
-                        ' Optionally, you can handle the case where Paid = "Yes"
-                        ' For example, log or ignore
-                        'MessageBox.Show("Payments that are not Recurring were not paid " & DateTime.Now.ToString())
-                    End If
-                Next
-                'MessageBox.Show("Payments with updated dates saved successfully at " & DateTime.Now.ToString())
-                'UpdateDatesBasedOnFrequency()
-                'Mainm()
-            Catch ex As Exception
-                MessageBox.Show("Error fetching data: " & ex.Message)
-            End Try
-        End Using
+                        insertCmd.ExecuteNonQuery()
+                    End Using
+                End If
+            Next
+
+            ' Commit all changes
+            transaction.Commit()
+            MessageBox.Show("Payments saved and budget updated successfully.")
+        Catch ex As Exception
+            transaction.Rollback()
+            MessageBox.Show("Transaction failed: " & ex.Message)
+        End Try
     End Sub
-
     Private Sub DisplayDataInMessageBox()
         Dim query As String = "SELECT * FROM Expense" ' Fetch all records
 
