@@ -1190,6 +1190,8 @@ Public Class Dashboard
     End Sub
 
     Private Sub Timer3_Tick(sender As Object, e As EventArgs) Handles Timer3.Tick
+
+        CheckDatabaseConnection()
         'Timer3.Stop()
         RunSearchAndBlink()
 
@@ -1437,18 +1439,30 @@ Public Class Dashboard
 
 
 
+    'Private Sub CheckDatabaseConnection()
+    '    'Dim connString As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=YourDatabasePath.accdb;"
+    '    Using conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
+    '        Try
+    '            conn.Open()
+    '            MessageBox.Show("DataBase Connected Successfully!", "Database Check", MessageBoxButtons.OK, MessageBoxIcon.Information)
+    '        Catch ex As Exception
+    '            MessageBox.Show("DataBase Connection Failed: " & ex.Message, "Database Check", MessageBoxButtons.OK, MessageBoxIcon.Error)
+    '        End Try
+    '    End Using
+    'End Sub
     Private Sub CheckDatabaseConnection()
         'Dim connString As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=YourDatabasePath.accdb;"
-        Using conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
+        Using conn As New OleDb.OleDbConnection(HouseHoldManagment_Module.connectionString)
             Try
                 conn.Open()
-                MessageBox.Show("DataBase Connected Successfully!", "Database Check", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                Label36.Text = "Database Status: Connected"
+                Label36.ForeColor = Color.Green
             Catch ex As Exception
-                MessageBox.Show("DataBase Connection Failed: " & ex.Message, "Database Check", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                Label36.Text = "Database Status: Disconnected"
+                Label36.ForeColor = Color.Red
             End Try
         End Using
     End Sub
-
 
 
 
