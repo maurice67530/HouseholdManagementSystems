@@ -32,6 +32,9 @@ Public Class chores_
     Public Property DueDate As String
     Public Property Recurring As String
     Public Property Description As String
+    Public Property EndTime As String
+    Public Property StartTime As String
+
 End Class
 Public Class MealPlans
     'properties of the mealplan class
