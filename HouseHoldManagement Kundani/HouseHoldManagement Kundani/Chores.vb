@@ -11,26 +11,22 @@ Public Class chores
         cmbChore.Visible = False
 
         Dim conn As New OleDbConnection(connectionString)
-
         toolTip1.SetToolTip(Button1, "Save")
         toolTip1.SetToolTip(Button2, "Edit")
         toolTip1.SetToolTip(Button4, "Delete")
         toolTip1.SetToolTip(Button5, "Refresh")
-        toolTip1.SetToolTip(Button9, "Mark All As complete")
+        toolTip1.SetToolTip(Button9, "Clear")
         toolTip1.SetToolTip(Button3, "Dashboard")
         toolTip1.SetToolTip(Button11, "Assign Chores")
         toolTip1.SetToolTip(Button7, "Filter")
-
         toolTip1.SetToolTip(Button6, "Sort")
         toolTip1.SetToolTip(Button12, "Auto Assignment")
         toolTip1.SetToolTip(Button10, "Check chores")
         toolTip1.SetToolTip(Button13, "Conflicts")
-
         toolTip1.SetToolTip(Button8, "Highlight")
 
 
         ' Check database connectivity 
-
         Try
             Debug.WriteLine("form load initialized successfully")
 
@@ -42,9 +38,6 @@ Public Class chores
             Label11.Text = "Connected"
             Label11.BackColor = Color.Green
             Label11.ForeColor = Color.White
-
-
-
         Catch ex As Exception
 
             ' Display an error message  
@@ -57,10 +50,7 @@ Public Class chores
             Label11.BackColor = Color.Red
             Label11.ForeColor = Color.White
 
-
-
         Finally
-
 
             PopulateComboboxFromDatabase(CmbASS)
             loadChoresFromDatabase()
@@ -86,13 +76,10 @@ Public Class chores
     End Sub
 
     Private Sub Button3_Click(sender As System.Object, e As System.EventArgs) Handles Button3.Click
-
         Close()
     End Sub
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
-
-
 
         If TxtTitle.Text = "" Then
             MsgBox("Please enter tittle on provided space")
@@ -112,8 +99,7 @@ Public Class chores
                 .EndTime = DateTimePicker3.Value}
 
 
-            '            Dim conn As New OleDbConnection(connectionString)
-
+            'Dim conn As New OleDbConnection(connectionString)
             conn.Open()
             Dim tablename As String = "Chores"
             Dim Cmd As New OleDbCommand($"INSERT INTO {tablename} ([Title], [AssignedTo], [Priority], [Status], [Frequency], [DueDate], [Recurring], [Description], [StartTime], [EndTime]) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", conn)
@@ -163,8 +149,6 @@ Public Class chores
 
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
         Try
-
-
             Debug.WriteLine("entering button update")
 
             If DGVChores.SelectedRows.Count = 0 Then
@@ -262,6 +246,7 @@ Public Class chores
         End Try
     End Sub
     Private Sub DGVChores_SelectionChanged(sender As Object, e As EventArgs) Handles DGVChores.SelectionChanged
+
         Try
             Button1.Enabled = False
 
@@ -393,6 +378,7 @@ Public Class chores
         'lblitemCount.Text = "Total Items counted: " & itemCount
     End Sub
     Private Sub Button5_Click_1(sender As Object, e As EventArgs) Handles Button5.Click
+
         loadChoresFromDatabase()
     End Sub
     Private Sub Button6_Click(sender As Object, e As EventArgs) Handles Button6.Click
@@ -430,10 +416,49 @@ Public Class chores
         End Try
     End Sub
     Private Sub Button9_Click(sender As Object, e As EventArgs) Handles Button9.Click
-        For Each row As DataGridViewRow In
-                DGVChores.SelectedRows
-            row.Cells("Status").Value = "Completed"
-        Next
+
+        'For Each row As DataGridViewRow In
+        '        DGVChores.SelectedRows
+        '    row.Cells("Status").Value = "Completed"
+        'Next
+
+
+        TxtDes.Text = ""
+        TxtTitle.Text = ""
+        TextBox1.Text = ""
+
+        CmbASS.Items.Clear() ' Clears all items
+        CmbASS.Text = ""     ' Clears the selected text
+
+        cmbChore.Items.Clear() ' Clears all items
+        cmbChore.Text = ""     ' Clears the selected text
+
+        Cmbfre.Items.Clear() ' Clears all items
+        Cmbfre.Text = ""     ' Clears the selected text
+
+        cmbpriority.Items.Clear() ' Clears all items
+        cmbpriority.Text = ""     ' Clears the selected text
+
+        CMBstatus.Items.Clear() ' Clears all items
+        CMBstatus.Text = ""     ' Clears the selected text
+
+        ComboBox1.Items.Clear() ' Clears all items
+        ComboBox1.Text = ""     ' Clears the selected text
+
+        Button1.Enabled = True
+        Button2.Enabled = True
+        Button3.Enabled = True
+        Button4.Enabled = True
+        Button5.Enabled = True
+        Button6.Enabled = True
+        Button7.Enabled = True
+        Button12.Enabled = True
+        Button13.Enabled = True
+        Button8.Enabled = True
+        Button9.Enabled = True
+        Button10.Enabled = True
+        Button11.Enabled = True
+
     End Sub
     Private Sub Button10_Click(sender As Object, e As EventArgs)
         If ComboBox1.SelectedItem Then
@@ -906,7 +931,7 @@ Public Class chores
 
         ' Highlight conflicts
         For Each idx In conflictRows
-            DGVChores.Rows(idx).DefaultCellStyle.BackColor = Color.LightCoral
+            DGVChores.Rows(idx).DefaultCellStyle.BackColor = Color.Red
         Next
 
         ' Show message if conflict found
@@ -954,7 +979,9 @@ Public Class chores
         Next
     End Sub
 
-    Private Sub Panel1_Paint(sender As Object, e As PaintEventArgs) Handles Panel1.Paint
 
-    End Sub
+
+    'vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
+
+
 End Class
