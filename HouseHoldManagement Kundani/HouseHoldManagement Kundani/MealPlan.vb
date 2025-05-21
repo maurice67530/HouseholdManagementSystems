@@ -260,7 +260,7 @@ Public Class MealPlan
 
         Dim TotalCalories As String = If(ComboBox1.SelectedItem IsNot Nothing, ComboBox1.SelectedItem.ToString(), "")
         Dim StartDate As DateTime = If(DateTimePicker2.Text IsNot Nothing, DateTimePicker2.Value.ToString(), "")
-        HouseHoldManagment_Module.FilterMealPlan(TotalCalories, StartDate)
+        'HouseHoldManagment_Module.FilterMealPlan(TotalCalories, StartDate)
     End Sub
 
     Private Sub Button5_Click(sender As Object, e As EventArgs) Handles Button5.Click
