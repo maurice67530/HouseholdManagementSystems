@@ -941,7 +941,9 @@ Public Class Expense
                             SaveChangedDateToAnotherTable()
                             PopulatelistboxFromDatabase(ListBox1)
                             LoadExpenseDataFromDatabase()
-                            'SubtractFromBudget()
+                            Dim ID As Integer
+                            Dim Amount As Integer
+                            SubtractFromBudget(ID, Amount)
                             MessageBox.Show("Payments with updated dates saved successfully at " & DateTime.Now.ToString())
                         Else
                             MessageBox.Show("Payments were cancelled.")
