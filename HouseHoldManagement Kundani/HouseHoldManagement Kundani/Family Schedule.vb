@@ -870,6 +870,68 @@ Public Class Family_Schedule
             End Using
         End Using
     End Sub
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    Public Sub AddMealToSchedule(mealDate As DateTime, mealTitle As String, mealDetails As String)
+
+        Using conn As New OleDbConnection(connectionString)
+            Dim query As String = "INSERT INTO FamilySchedule (DateOfEvent, Title, EventType) VALUES (?, ?, ?)"
+            Using cmd As New OleDbCommand(query, conn)
+                cmd.Parameters.AddWithValue("?", mealDate)
+                cmd.Parameters.AddWithValue("?", mealTitle)
+                ' cmd.Parameters.AddWithValue("?", mealDetails)
+                cmd.Parameters.AddWithValue("?", "Meal") ' Category for filtering in calendar
+
+                conn.Open()
+                cmd.ExecuteNonQuery()
+            End Using
+        End Using
+    End Sub
+
+
+
+    Public Sub LoadFamilySchedule()
+
+        Dim dt As New DataTable()
+
+        Using conn As New OleDbConnection(connectionString)
+            Dim query As String = "SELECT DateOfEvent, Title, EventType FROM FamilySchedule WHERE EventType = 'Meal' ORDER BY DateOfEvent"
+            Using cmd As New OleDbCommand(query, conn)
+                conn.Open()
+                Using reader As OleDbDataReader = cmd.ExecuteReader()
+                    dt.Load(reader)
+                End Using
+            End Using
+        End Using
+
+        ' Example: Bind to DataGridView or process for calendar
+        DataGridView1.DataSource = dt
+    End Sub
+
+    'Private Sub FamilySchedule_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+    '    LoadFamilySchedule()
+    'End Sub
+
+    Private Sub Button1_Click_1(sender As Object, e As EventArgs) Handles Button1.Click
+        LoadFamilySchedule()
+    End Sub
 End Class
 
 
