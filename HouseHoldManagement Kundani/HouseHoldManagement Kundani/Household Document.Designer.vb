@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class Household_Document
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,7 +20,7 @@ Partial Class Household_Document
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Household_Document))
@@ -86,15 +86,15 @@ Partial Class Household_Document
         '
         'DateTimePicker1
         '
-        Me.DateTimePicker1.Location = New System.Drawing.Point(96, 105)
+        Me.DateTimePicker1.Location = New System.Drawing.Point(84, 106)
         Me.DateTimePicker1.Name = "DateTimePicker1"
-        Me.DateTimePicker1.Size = New System.Drawing.Size(173, 20)
+        Me.DateTimePicker1.Size = New System.Drawing.Size(187, 20)
         Me.DateTimePicker1.TabIndex = 20
         '
         'Label9
         '
         Me.Label9.AutoSize = True
-        Me.Label9.Location = New System.Drawing.Point(7, 20)
+        Me.Label9.Location = New System.Drawing.Point(7, 23)
         Me.Label9.Name = "Label9"
         Me.Label9.Size = New System.Drawing.Size(48, 13)
         Me.Label9.TabIndex = 25
@@ -104,30 +104,30 @@ Partial Class Household_Document
         '
         Me.ComboBox2.FormattingEnabled = True
         Me.ComboBox2.Items.AddRange(New Object() {"IDs", "Bills", "Medical", "School", "Finance", "Insurance", "Work", "Mics"})
-        Me.ComboBox2.Location = New System.Drawing.Point(96, 201)
+        Me.ComboBox2.Location = New System.Drawing.Point(84, 196)
         Me.ComboBox2.Name = "ComboBox2"
-        Me.ComboBox2.Size = New System.Drawing.Size(173, 21)
+        Me.ComboBox2.Size = New System.Drawing.Size(187, 21)
         Me.ComboBox2.TabIndex = 36
         '
         'ComboBox3
         '
         Me.ComboBox3.FormattingEnabled = True
-        Me.ComboBox3.Location = New System.Drawing.Point(98, 60)
+        Me.ComboBox3.Location = New System.Drawing.Point(84, 60)
         Me.ComboBox3.Name = "ComboBox3"
-        Me.ComboBox3.Size = New System.Drawing.Size(173, 21)
+        Me.ComboBox3.Size = New System.Drawing.Size(187, 21)
         Me.ComboBox3.TabIndex = 23
         '
         'TextBox4
         '
-        Me.TextBox4.Location = New System.Drawing.Point(96, 152)
+        Me.TextBox4.Location = New System.Drawing.Point(84, 153)
         Me.TextBox4.Name = "TextBox4"
-        Me.TextBox4.Size = New System.Drawing.Size(173, 20)
+        Me.TextBox4.Size = New System.Drawing.Size(187, 20)
         Me.TextBox4.TabIndex = 35
         '
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(5, 159)
+        Me.Label3.Location = New System.Drawing.Point(7, 153)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(41, 13)
         Me.Label3.TabIndex = 34
@@ -135,9 +135,9 @@ Partial Class Household_Document
         '
         'TextBox3
         '
-        Me.TextBox3.Location = New System.Drawing.Point(96, 20)
+        Me.TextBox3.Location = New System.Drawing.Point(84, 20)
         Me.TextBox3.Name = "TextBox3"
-        Me.TextBox3.Size = New System.Drawing.Size(173, 20)
+        Me.TextBox3.Size = New System.Drawing.Size(187, 20)
         Me.TextBox3.TabIndex = 34
         '
         'Label7
@@ -152,7 +152,7 @@ Partial Class Household_Document
         'Label8
         '
         Me.Label8.AutoSize = True
-        Me.Label8.Location = New System.Drawing.Point(4, 59)
+        Me.Label8.Location = New System.Drawing.Point(3, 68)
         Me.Label8.Name = "Label8"
         Me.Label8.Size = New System.Drawing.Size(65, 13)
         Me.Label8.TabIndex = 16
@@ -161,7 +161,7 @@ Partial Class Household_Document
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(7, 68)
+        Me.Label2.Location = New System.Drawing.Point(3, 63)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(49, 13)
         Me.Label2.TabIndex = 1
@@ -171,9 +171,9 @@ Partial Class Household_Document
         '
         Me.ComboBox1.FormattingEnabled = True
         Me.ComboBox1.Items.AddRange(New Object() {"IDs", "Bills", "Medical", "School", "Finance", "Insurance", "Work", "Mics"})
-        Me.ComboBox1.Location = New System.Drawing.Point(65, 68)
+        Me.ComboBox1.Location = New System.Drawing.Point(56, 60)
         Me.ComboBox1.Name = "ComboBox1"
-        Me.ComboBox1.Size = New System.Drawing.Size(173, 21)
+        Me.ComboBox1.Size = New System.Drawing.Size(205, 21)
         Me.ComboBox1.TabIndex = 10
         '
         'Panel1
@@ -193,14 +193,14 @@ Partial Class Household_Document
         '
         'TextBox1
         '
-        Me.TextBox1.Location = New System.Drawing.Point(65, 27)
+        Me.TextBox1.Location = New System.Drawing.Point(56, 20)
         Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.Size = New System.Drawing.Size(173, 20)
+        Me.TextBox1.Size = New System.Drawing.Size(205, 20)
         Me.TextBox1.TabIndex = 18
         '
         'TextBox2
         '
-        Me.TextBox2.Location = New System.Drawing.Point(65, 109)
+        Me.TextBox2.Location = New System.Drawing.Point(56, 106)
         Me.TextBox2.Multiline = True
         Me.TextBox2.Name = "TextBox2"
         Me.TextBox2.Size = New System.Drawing.Size(173, 108)
@@ -217,7 +217,7 @@ Partial Class Household_Document
         'Label6
         '
         Me.Label6.AutoSize = True
-        Me.Label6.Location = New System.Drawing.Point(11, 109)
+        Me.Label6.Location = New System.Drawing.Point(3, 106)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(35, 13)
         Me.Label6.TabIndex = 14
@@ -226,7 +226,7 @@ Partial Class Household_Document
         'Label5
         '
         Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(11, 27)
+        Me.Label5.Location = New System.Drawing.Point(7, 27)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(27, 13)
         Me.Label5.TabIndex = 13
@@ -313,6 +313,7 @@ Partial Class Household_Document
         Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.Label1)
         Me.Name = "Household_Document"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Household_Document"
         Me.Panel2.ResumeLayout(False)
         Me.Panel2.PerformLayout()
