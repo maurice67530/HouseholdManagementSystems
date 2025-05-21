@@ -12,23 +12,35 @@ Public Class Expense
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         Debug.WriteLine("Entering btnSubmit")
         Try
-            'Dim txtRecentUpdate As New TextBox()
-            'txtRecentUpdate.Text = $" Expense Saved at {DateTime.Now:HH:MM:ss}"
-            'txtRecentUpdate.Location = New Point(65, Label20.Top + 25)
-            'txtRecentUpdate.AutoSize = False
-            'txtRecentUpdate.Font = New Font("Microsoft Sans Serif", 9, FontStyle.Regular)
-            'txtRecentUpdate.ForeColor = Color.Black
-            'Me.Controls.Add(txtRecentUpdate)
+
 
             Debug.WriteLine("User confirmed btnSubmit")
             Using conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
                 conn.Open()
 
+
+                'Define your unique criteria for an existing expense.
+                'Adjust these fields based on what makes an expense unique.
+                Dim checkQuery As String = "SELECT COUNT(*) FROM [Expense] WHERE [Amount] = ? AND [Description] = ? AND [DateOfexpenses] = ? AND [BillName] = ?"
+                Dim checkCmd As New OleDbCommand(checkQuery, conn)
+                checkCmd.Parameters.AddWithValue("@Amount", TextBox2.Text)
+                checkCmd.Parameters.AddWithValue("@Description", TextBox6.Text)
+                checkCmd.Parameters.AddWithValue("@DateOfexpenses", DateTimePicker1.Value)
+                'checkCmd.Parameters.AddWithValue("@Person", ComboBox3.SelectedItem.ToString)
+                checkCmd.Parameters.AddWithValue("@BillName", TextBox8.Text)
+
+                Dim count As Integer = Convert.ToInt32(checkCmd.ExecuteScalar())
+
+                If count > 0 Then
+                    MessageBox.Show("This expense has already been saved.", "Duplicate Entry", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                    Return ' Exit without saving
+                End If
+
                 ' Update the table name if necessary  
                 Dim tableName As String = "Expense"
 
                 ' Create an OleDbCommand to insert the Expense data into the database 
-                Dim cmd As New OleDbCommand("INSERT INTO [Expense] ([Amount], [Description], [Tags], [Currency], [Category], [Paymentmethod], [Frequency], [ApprovalStatus], [DateOfexpenses], [Person], [BillName], [StartDate], [Recurring], [Paid]) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", conn)
+                Dim cmd As New OleDbCommand("INSERT INTO [Expense] ([Amount], [Description], [Tags], [Category], [Paymentmethod], [Frequency], [DateOfexpenses], [Person], [BillName], [StartDate], [Recurring], [Paid]) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", conn)
 
                 ' Set the parameter values from the UI controls 
                 'Class declaretions
@@ -37,11 +49,9 @@ Public Class Expense
                     .Amount = TextBox2.Text,
                     .Description = TextBox6.Text,
                     .Tags = TextBox4.Text,
-                    .Currency = ComboBox2.SelectedItem.ToString,
                     .Category = ComboBox7.SelectedItem.ToString,
                     .Paymentmethod = ComboBox1.SelectedItem.ToString,
                 .Frequency = ComboBox5.SelectedItem.ToString(),
-                    .ApprovalStatus = ComboBox4.SelectedItem.ToString(),
                     .DateOfexpenses = DateTimePicker1.Value,
                      .Person = ComboBox3.SelectedItem.ToString(),
                     .BillName = TextBox8.Text,
@@ -57,11 +67,9 @@ Public Class Expense
                 cmd.Parameters.AddWithValue("@Amount", expense.Amount)
                 cmd.Parameters.AddWithValue("@Description", expense.Description)
                 cmd.Parameters.AddWithValue("@Tags", expense.Tags)
-                cmd.Parameters.AddWithValue("@Currency", expense.Currency)
                 cmd.Parameters.AddWithValue("@Category", expense.Category)
                 cmd.Parameters.AddWithValue("@PaymentMethod", expense.Paymentmethod)
                 cmd.Parameters.AddWithValue("@Frequency", expense.Frequency)
-                cmd.Parameters.AddWithValue("@ApprovalStatus", expense.ApprovalStatus)
                 cmd.Parameters.AddWithValue("@DateOfexpenses", expense.DateOfexpenses)
                 cmd.Parameters.AddWithValue("@Person ", expense.Person)
                 cmd.Parameters.AddWithValue("@BillName", expense.BillName)
@@ -75,11 +83,9 @@ Public Class Expense
                         "Amount: " & expense.Amount & vbCrLf &
                         "Description: " & expense.Description & vbCrLf &
                         "Tags: " & expense.Tags & vbCrLf &
-                        "Currency: " & expense.Currency & vbCrLf &
                         "Category: " & expense.Category & vbCrLf &
                         "PaymentMethod: " & expense.Paymentmethod & vbCrLf &
                          "Frequency: " & expense.Frequency & vbCrLf &
-                         "ApprovalStatus: " & expense.ApprovalStatus & vbCrLf &
                           "Receiver: " & expense.Person & vbCrLf &
                             "DateOfExpense: " & expense.DateOfexpenses.ToString & vbCrLf &
                             "BillName: " & expense.BillName & vbCrLf &
@@ -117,6 +123,77 @@ Public Class Expense
         Debug.WriteLine("Exiting btnSubmit")
     End Sub
 
+    'Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+    '    Debug.WriteLine("Entering btnSubmit")
+    '    Try
+    '        Using conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
+    '            conn.Open()
+
+    '            ' Define your unique criteria for an existing expense.
+    '            ' Adjust these fields based on what makes an expense unique.
+    '            Dim checkQuery As String = "SELECT COUNT(*) FROM [Expense] WHERE [Amount] = ? AND [Description] = ? AND [DateOfexpenses] = ? AND [BillName] = ?"
+    '            Dim checkCmd As New OleDbCommand(checkQuery, conn)
+    '            checkCmd.Parameters.AddWithValue("@Amount", TextBox2.Text)
+    '            checkCmd.Parameters.AddWithValue("@Description", TextBox6.Text)
+    '            checkCmd.Parameters.AddWithValue("@DateOfexpenses", DateTimePicker1.Value)
+    '            'checkCmd.Parameters.AddWithValue("@Person", ComboBox3.SelectedItem.ToString)
+    '            checkCmd.Parameters.AddWithValue("@BillName", TextBox8.Text)
+
+    '            Dim count As Integer = Convert.ToInt32(checkCmd.ExecuteScalar())
+
+    '            If count > 0 Then
+    '                MessageBox.Show("This expense has already been saved.", "Duplicate Entry", MessageBoxButtons.OK, MessageBoxIcon.Information)
+    '                Return ' Exit without saving
+    '            End If
+
+    '            ' Proceed with insert if no duplicate found
+    '            Dim cmd As New OleDbCommand("INSERT INTO [Expense] ([Amount], [Description], [Tags], [Category], [Paymentmethod], [Frequency], [DateOfexpenses], [Person], [BillName], [StartDate], [Recurring], [Paid]) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", conn)
+
+    '            Dim expense As New Expensetracking With {
+    '            .Amount = TextBox2.Text,
+    '            .Description = TextBox6.Text,
+    '            .Tags = TextBox4.Text,
+    '            .Category = ComboBox7.SelectedItem.ToString,
+    '            .Paymentmethod = ComboBox1.SelectedItem.ToString,
+    '            .Frequency = ComboBox5.SelectedItem.ToString(),
+    '            .DateOfexpenses = DateTimePicker1.Value,
+    '            .Person = ComboBox3.SelectedItem.ToString(),
+    '            .BillName = TextBox8.Text,
+    '            .StartDate = DateTimePicker2.Value,
+    '            .Recurring = CheckBox1.Checked,
+    '            .paid = ComboBox6.SelectedItem.ToString}
+
+    '            cmd.Parameters.Clear()
+    '            cmd.Parameters.AddWithValue("@Amount", expense.Amount)
+    '            cmd.Parameters.AddWithValue("@Description", expense.Description)
+    '            cmd.Parameters.AddWithValue("@Tags", expense.Tags)
+    '            cmd.Parameters.AddWithValue("@Category", expense.Category)
+    '            cmd.Parameters.AddWithValue("@PaymentMethod", expense.Paymentmethod)
+    '            cmd.Parameters.AddWithValue("@Frequency", expense.Frequency)
+    '            cmd.Parameters.AddWithValue("@DateOfexpenses", expense.DateOfexpenses)
+    '            cmd.Parameters.AddWithValue("@Person ", expense.Person)
+    '            cmd.Parameters.AddWithValue("@BillName", expense.BillName)
+    '            cmd.Parameters.AddWithValue("@StartDate", expense.StartDate)
+    '            cmd.Parameters.AddWithValue("@Recurring", expense.Recurring)
+    '            cmd.Parameters.AddWithValue("@Paid", expense.paid)
+
+    '            MsgBox("Expense Information Saved!", vbInformation, "Expense Confirmation")
+    '            cmd.ExecuteNonQuery()
+
+    '        End Using
+    '    Catch ex As OleDbException
+    '        Debug.WriteLine($" Database error in Button_Click: {ex.Message}")
+    '        Debug.WriteLine($"Stack Trace : {ex.StackTrace}")
+    '        MessageBox.Show("Error saving Expense to database: " & ex.Message & vbNewLine & ex.StackTrace, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+    '    Catch ex As Exception
+    '        Debug.WriteLine($" General error in Button: {ex.Message}")
+    '        Debug.WriteLine($"Stack Trace : {ex.StackTrace}")
+    '        MessageBox.Show("An Unexpected error occurred.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+    '    End Try
+    '    LoadExpenseDataFromDatabase()
+    '    Debug.WriteLine("Exiting btnSubmit")
+    'End Sub
+
     Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
         Debug.WriteLine("Entering btnEdit")
 
@@ -141,11 +218,9 @@ Public Class Expense
                 Dim Amount As String = TextBox2.Text
                 Dim Description As String = TextBox6.Text
                 Dim Tags As String = TextBox4.Text
-                Dim Currency As String = ComboBox2.SelectedItem.ToString
                 Dim Category As String = ComboBox7.SelectedItem.ToString
                 Dim Paymentmethod As String = ComboBox1.SelectedItem.ToString
                 Dim Frequency As String = ComboBox5.SelectedItem.ToString()
-                Dim ApprovalStatus As String = ComboBox4.SelectedItem.ToString()
                 Dim Person As String = ComboBox3.SelectedItem.ToString()
                 Dim DateOfexpenses As String = DateTimePicker1.Value
                 Dim BillName As String = TextBox8.Text
@@ -158,24 +233,22 @@ Public Class Expense
                 Dim ID As Integer = Convert.ToInt32(selectedRow.Cells("ID").Value) ' Change "ID" to your primary key column name  
 
                 ' Create an OleDbCommand to update the Expense data in the database  
-                Dim cmd As New OleDbCommand("UPDATE [Expense] SET [Amount] = ?, [Description] = ?, [Tags] = ?, [Currency] =?, [Category] = ?, [Paymentmethod] = ?, [Frequency] = ?, [ApprovalStatus] = ?, [DateOfexpenses] = ?, [Person] = ?, [BillName] = ?, [StartDate] = ?, [Recurring] = ?, [Paid] = ? WHERE [ID] = ?", conn)
+                Dim cmd As New OleDbCommand("UPDATE [Expense] SET [Amount] = ?, [Description] = ?, [Tags] = ?, [Category] = ?, [Paymentmethod] = ?, [DateOfexpenses] = ?, [Person] = ?, [BillName] = ?, [StartDate] = ?, [Recurring] = ?, [Paid] = ? WHERE [ID] = ?", conn)
 
                 'cmd.Parameters.AddWithValue("@ExpenseID", ExpenseID)
                 cmd.Parameters.AddWithValue("@Amount", Amount)
                 cmd.Parameters.AddWithValue("@Description", Description)
                 cmd.Parameters.AddWithValue("@Tags", Tags)
-                cmd.Parameters.AddWithValue("@Currency", Currency)
                 cmd.Parameters.AddWithValue("@Category", Category)
                 cmd.Parameters.AddWithValue("@PaymentMethod", Paymentmethod)
                 cmd.Parameters.AddWithValue("Frequency", Frequency)
-                cmd.Parameters.AddWithValue("ApprovalStatus", ApprovalStatus)
                 cmd.Parameters.AddWithValue("Person ", Person)
                 cmd.Parameters.AddWithValue("DateOfexpense", DateOfexpenses)
                 cmd.Parameters.AddWithValue("BillName", BillName)
                 cmd.Parameters.AddWithValue("StartDate", StartDate)
                 cmd.Parameters.AddWithValue("Recurring", Recurring)
                 cmd.Parameters.AddWithValue("Paid", Paid)
-                'cmd.Parameters.AddWithValue("ID", ID)
+                cmd.Parameters.AddWithValue("ID", ID)
 
                 cmd.ExecuteNonQuery()
 
@@ -272,17 +345,15 @@ Public Class Expense
 
     End Sub
 
-    Private Sub Button6_Click(sender As Object, e As EventArgs) Handles Button6.Click
+    Private Sub Button6_Click(sender As Object, e As EventArgs)
 
         TextBox1.Text = ""
         TextBox2.Text = ""
         TextBox6.Text = ""
         TextBox4.Text = ""
-        ComboBox2.SelectedItem = ""
         ComboBox7.SelectedItem = ""
         ComboBox1.SelectedItem = ""
         ComboBox5.SelectedItem = ""
-        ComboBox4.SelectedItem = ""
         TextBox7.Text = ""
         ComboBox3.SelectedItem = ""
         TextBox8.Text = ""
@@ -336,7 +407,7 @@ Public Class Expense
         toolTip.ShowAlways = True
 
         toolTip1.SetToolTip(Button5, "Sort")
-        toolTip1.SetToolTip(Button6, "Clear controls")
+        'toolTip1.SetToolTip(Button6, "Clear controls")
         toolTip1.SetToolTip(Button3, "Edit")
         toolTip1.SetToolTip(Button4, "Delete")
         toolTip1.SetToolTip(Button7, "Calculate Budget")
@@ -366,7 +437,7 @@ Public Class Expense
             conn.Open()
 
             ' Display the connection status on a button with a green background  
-            Label17.Text = "Connected"
+            Label17.Text = "Connected to Database"
             Label17.BackColor = Color.Green
             Label17.ForeColor = Color.White
         Catch ex As Exception
@@ -575,21 +646,23 @@ Public Class Expense
             If DataGridView1.SelectedRows.Count > 0 Then
                 Dim selectedRow As DataGridViewRow = DataGridView1.SelectedRows(0)
 
+                Button1.Enabled = False
+
                 ' Load the data from the selected row into UI controls  
                 TextBox2.Text = selectedRow.Cells("Amount").Value.ToString()
                 TextBox6.Text = selectedRow.Cells("Description").Value.ToString()
                 TextBox4.Text = selectedRow.Cells("Tags").Value.ToString()
-                ComboBox2.SelectedItem = selectedRow.Cells("currency").Value.ToString()
                 ComboBox7.SelectedItem = selectedRow.Cells("Category").Value.ToString()
                 ComboBox1.SelectedItem = selectedRow.Cells("Paymentmethod").Value.ToString()
                 ComboBox5.SelectedItem = selectedRow.Cells("Frequency").Value.ToString()
-                ComboBox4.SelectedItem = selectedRow.Cells("Approvalstatus").Value.ToString()
                 DateTimePicker1.Text = selectedRow.Cells("Dateofexpenses").Value.ToString()
                 ComboBox3.SelectedItem = selectedRow.Cells("Person").Value.ToString()
                 TextBox8.Text = selectedRow.Cells("BillName").Value.ToString()
                 DateTimePicker2.Text = selectedRow.Cells("StartDate").Value.ToString()
                 CheckBox1.Text = selectedRow.Cells("Recurring").Value.ToString()
                 ComboBox6.SelectedItem = selectedRow.Cells("Paid").Value.ToString()
+
+
             End If
         Catch ex As Exception
             Debug.WriteLine("error selection data in the database")
@@ -618,7 +691,22 @@ Public Class Expense
         Next
     End Sub
     Private Sub Button8_Click(sender As Object, e As EventArgs) Handles Button8.Click
+        TextBox1.Text = ""
+        TextBox2.Text = ""
+        TextBox6.Text = ""
+        TextBox4.Text = ""
+        ComboBox7.SelectedItem = ""
+        ComboBox1.SelectedItem = ""
+        ComboBox5.SelectedItem = ""
+        TextBox7.Text = ""
+        ComboBox3.SelectedItem = ""
+        TextBox8.Text = ""
+        'CheckBox1.Checked = ""
+        ComboBox6.SelectedItem = ""
+        HouseHoldManagment_Module.ClearControls(Me)
+
         LoadExpenseDataFromDatabase()
+        Button1.Enabled = True
     End Sub
     Private Sub Button9_Click(sender As Object, e As EventArgs) Handles Button9.Click
         PrintDialog1.Document = PrintDocument1
@@ -853,6 +941,9 @@ Public Class Expense
                             SaveChangedDateToAnotherTable()
                             PopulatelistboxFromDatabase(ListBox1)
                             LoadExpenseDataFromDatabase()
+                            Dim ID As Integer
+                            Dim Amount As Integer
+                            SubtractFromBudget(ID, Amount)
                             MessageBox.Show("Payments with updated dates saved successfully at " & DateTime.Now.ToString())
                         Else
                             MessageBox.Show("Payments were cancelled.")
@@ -1023,11 +1114,9 @@ Public Class Expense
                     Dim TotalIncome As String = row.Cells("TotalIncome").Value.ToString().ToLower
                     Dim Description As String = row.Cells("Description").Value.ToString().ToLower
                     Dim Tags As String = row.Cells("Tags").Value.ToString().ToLower
-                    Dim Currency As String = row.Cells("Currency").Value.ToString().ToLower
                     Dim Category As String = row.Cells("Category").Value.ToString().ToLower
                     Dim Paymentmethod As String = row.Cells("Paymentmethod").Value.ToString().ToLower
                     Dim Frequency As String = row.Cells("Frequency").Value.ToString().ToLower
-                    Dim ApprovalStatus As String = row.Cells("ApprovalStatus").Value.ToString().ToLower
                     Dim Person As String = row.Cells("Person").Value.ToString().ToLower
                     Dim DateOfexpenses As String = row.Cells("DateOfexpenses").Value.ToString.ToLower
                     Dim BillName As String = row.Cells("BillName").Value.ToString().ToLower
@@ -1035,13 +1124,47 @@ Public Class Expense
                     Dim Recurring As String = row.Cells("Recurring").Value.ToString().ToLower
                     Dim paid As String = row.Cells("Paid").Value.ToString.ToLower
 
-                    row.Visible = BillName.Contains(SearchTerm) OrElse Category.Contains(SearchTerm)
+                    row.Visible = BillName.Contains(SearchTerm) & Category.Contains(SearchTerm) & Amount.Contains(SearchTerm) & Description.Contains(SearchTerm)
                 End If
             Next
         Catch ex As Exception
             Debug.WriteLine($" Error in Search Functionality: {ex.Message}")
             MessageBox.Show("Try to Search Again.", "Search Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
+    End Sub
+
+    Private Sub Button6_Click_1(sender As Object, e As EventArgs) Handles Button6.Click
+        ' Example: get ID and Amount from TextBoxes
+        Dim ID As Integer
+        Dim Amount As Integer
+
+        SubtractFromBudget(ID, Amount)
+
+
+    End Sub
+    Public Sub SubtractFromBudget(ID As Integer, Amount As Integer)
+        ' SQL query to update the Amount by subtracting the specified value
+        Dim query As String = "UPDATE Budget SET Amount = Amount - ? WHERE ID = ?"
+
+        Using conn As New OleDbConnection(connectionString)
+            Using command As New OleDbCommand(query, conn)
+                ' Add parameters to prevent SQL injection
+                command.Parameters.AddWithValue("?", Amount)
+                command.Parameters.AddWithValue("?", ID)
+
+                Try
+                    conn.Open()
+                    Dim rowsAffected As Integer = command.ExecuteNonQuery()
+                    If rowsAffected > 0 Then
+                        MessageBox.Show("Budget updated successfully.")
+                    Else
+                        'MessageBox.Show("No record found with the specified ID.")
+                    End If
+                Catch ex As Exception
+                    MessageBox.Show("Error updating budget: " & ex.Message)
+                End Try
+            End Using
+        End Using
     End Sub
 End Class
 

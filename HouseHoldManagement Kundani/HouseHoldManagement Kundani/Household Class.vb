@@ -23,6 +23,10 @@ Public Class Logging
 
 End Class
 
+Public Class FamilyMembers
+    Public Property NameOfPerson As String
+    Public Property DoesNotEat As String
+End Class
 Public Class chores_
     Public Property Title As String
     Public Property AssignedTo As String
@@ -37,16 +41,16 @@ Public Class chores_
 
 End Class
 Public Class MealPlans
-    'properties of the mealplan class
+    'property of mealplan class
+    Public Property MealID As String
+    Public Property MealPlan As String
+    Public Property NameOfMeal As String
     Public Property StartDate As DateTime
     Public Property EndDate As DateTime
-    Public Property Meals As String
-    Public Property MealName As String
-    Public Property Items As String
-    Public Property TotalCalories As Integer
+    Public Property TotalCalories As String
     Public Property Description As String
+    Public Property Ingredients As String
     Public Property FilePath As String
-    Public Property Calories As String
     Public Property Frequency As String
 End Class
 Public Class Inventory1

@@ -188,17 +188,34 @@ Public Class PhotoGallery
                 Dim imageName As String = Path.GetFileName(selectedPath)
                 Dim destinationPath As String = Path.Combine(Folderpath, imageName)
 
-                If Not Directory.Exists(Folderpath) Then
-                    Directory.CreateDirectory(Folderpath)
-                End If
-
-                File.Copy(selectedPath, destinationPath, True)
-
                 ' Save only the full UNC path to database for portability
                 Dim dbFilePath As String = destinationPath
 
                 Using conn As New OleDb.OleDbConnection(connectionString)
                     conn.Open()
+
+                    ' Check if the image is already saved
+                    Using checkCmd As New OleDb.OleDbCommand("SELECT COUNT(*) FROM Photos WHERE FilePath = ?", conn)
+                        checkCmd.Parameters.AddWithValue("?", dbFilePath)
+                        Dim count As Integer = Convert.ToInt32(checkCmd.ExecuteScalar())
+
+                        If count > 0 Then
+                            MsgBox("This image has already been uploaded.", vbInformation, vbOKCancel)
+                            Exit Sub
+                        End If
+                    End Using
+
+                    ' Only copy if not already existing in destination folder
+                    If Not Directory.Exists(Folderpath) Then
+                        Directory.CreateDirectory(Folderpath)
+                    End If
+
+                    ' Optional: Check file existence in destination folder too
+                    If Not File.Exists(destinationPath) Then
+                        File.Copy(selectedPath, destinationPath, True)
+                    End If
+
+                    ' Save new record
                     Using cmd As New OleDb.OleDbCommand("INSERT INTO Photos ([Description], [FilePath], [DateAdded], [FamilyMember], [Photographer], [Album]) VALUES (?, ?, ?, ?, ?, ?)", conn)
                         cmd.Parameters.AddWithValue("?", TextBox2.Text)
                         cmd.Parameters.AddWithValue("?", dbFilePath)
@@ -216,6 +233,7 @@ Public Class PhotoGallery
             End Try
         End If
     End Sub
+
 
     Public Sub PopulateComboboxFromDatabase(ByRef comboBox As ComboBox)
         Dim conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
@@ -572,5 +590,23 @@ Public Class PhotoGallery
         Catch ex As Exception
             MessageBox.Show("Error updating paths: " & ex.Message)
         End Try
+    End Sub
+
+    Private Sub refresh_Click(sender As Object, e As EventArgs) Handles refresh.Click
+        LoadPhotodataFromDatabase()
+
+        TextBox2.Text = " "
+
+        'DateTimePicker1.Text = " "
+
+        ComboBox1.Text = " "
+
+        TextBox3.Text = " "
+
+        ComboBox2.Text = " "
+
+        Label10.Text = " "
+
+
     End Sub
 End Class

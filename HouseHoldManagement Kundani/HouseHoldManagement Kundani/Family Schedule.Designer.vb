@@ -50,6 +50,7 @@ Partial Class Family_Schedule
         Me.btnUpdate = New System.Windows.Forms.Button()
         Me.btnDelete = New System.Windows.Forms.Button()
         Me.Panel3 = New System.Windows.Forms.Panel()
+        Me.btnRefresh = New System.Windows.Forms.Button()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel2.SuspendLayout()
         Me.Panel1.SuspendLayout()
@@ -91,21 +92,23 @@ Partial Class Family_Schedule
         '
         Me.DateTimePicker1.Location = New System.Drawing.Point(75, 19)
         Me.DateTimePicker1.Name = "DateTimePicker1"
-        Me.DateTimePicker1.Size = New System.Drawing.Size(200, 20)
+        Me.DateTimePicker1.Size = New System.Drawing.Size(227, 20)
         Me.DateTimePicker1.TabIndex = 9
         '
         'DateTimePicker3
         '
+        Me.DateTimePicker3.Format = System.Windows.Forms.DateTimePickerFormat.Time
         Me.DateTimePicker3.Location = New System.Drawing.Point(75, 90)
         Me.DateTimePicker3.Name = "DateTimePicker3"
-        Me.DateTimePicker3.Size = New System.Drawing.Size(200, 20)
+        Me.DateTimePicker3.Size = New System.Drawing.Size(227, 20)
         Me.DateTimePicker3.TabIndex = 10
         '
         'DateTimePicker2
         '
+        Me.DateTimePicker2.Format = System.Windows.Forms.DateTimePickerFormat.Time
         Me.DateTimePicker2.Location = New System.Drawing.Point(75, 55)
         Me.DateTimePicker2.Name = "DateTimePicker2"
-        Me.DateTimePicker2.Size = New System.Drawing.Size(200, 20)
+        Me.DateTimePicker2.Size = New System.Drawing.Size(227, 20)
         Me.DateTimePicker2.TabIndex = 9
         '
         'Label9
@@ -175,7 +178,7 @@ Partial Class Family_Schedule
         '
         Me.ListView1.Location = New System.Drawing.Point(92, 154)
         Me.ListView1.Name = "ListView1"
-        Me.ListView1.Size = New System.Drawing.Size(206, 126)
+        Me.ListView1.Size = New System.Drawing.Size(149, 126)
         Me.ListView1.TabIndex = 12
         Me.ListView1.UseCompatibleStateImageBehavior = False
         '
@@ -262,7 +265,7 @@ Partial Class Family_Schedule
         '
         Me.btnUpdate.BackColor = System.Drawing.SystemColors.ActiveCaption
         Me.btnUpdate.Image = CType(resources.GetObject("btnUpdate.Image"), System.Drawing.Image)
-        Me.btnUpdate.Location = New System.Drawing.Point(297, 498)
+        Me.btnUpdate.Location = New System.Drawing.Point(391, 498)
         Me.btnUpdate.Name = "btnUpdate"
         Me.btnUpdate.Size = New System.Drawing.Size(75, 44)
         Me.btnUpdate.TabIndex = 20
@@ -272,7 +275,7 @@ Partial Class Family_Schedule
         '
         Me.btnDelete.BackColor = System.Drawing.SystemColors.ActiveCaption
         Me.btnDelete.Image = CType(resources.GetObject("btnDelete.Image"), System.Drawing.Image)
-        Me.btnDelete.Location = New System.Drawing.Point(550, 498)
+        Me.btnDelete.Location = New System.Drawing.Point(581, 498)
         Me.btnDelete.Name = "btnDelete"
         Me.btnDelete.Size = New System.Drawing.Size(75, 44)
         Me.btnDelete.TabIndex = 21
@@ -288,11 +291,21 @@ Partial Class Family_Schedule
         Me.Panel3.Size = New System.Drawing.Size(643, 50)
         Me.Panel3.TabIndex = 23
         '
+        'btnRefresh
+        '
+        Me.btnRefresh.Image = CType(resources.GetObject("btnRefresh.Image"), System.Drawing.Image)
+        Me.btnRefresh.Location = New System.Drawing.Point(201, 498)
+        Me.btnRefresh.Name = "btnRefresh"
+        Me.btnRefresh.Size = New System.Drawing.Size(75, 44)
+        Me.btnRefresh.TabIndex = 12
+        Me.btnRefresh.UseVisualStyleBackColor = True
+        '
         'Family_Schedule
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(673, 545)
+        Me.Controls.Add(Me.btnRefresh)
         Me.Controls.Add(Me.Panel3)
         Me.Controls.Add(Me.DataGridView1)
         Me.Controls.Add(Me.btnSave)
@@ -341,4 +354,5 @@ Partial Class Family_Schedule
     Friend WithEvents ListView1 As ListView
     Friend WithEvents ComboBox3 As ComboBox
     Friend WithEvents Panel3 As Panel
+    Friend WithEvents btnRefresh As Button
 End Class
