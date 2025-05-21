@@ -904,9 +904,6 @@ Public Class Family_Schedule
             End Using
         End Using
     End Sub
-
-
-
     Public Sub LoadFamilySchedule()
 
         Dim dt As New DataTable()
@@ -931,7 +928,50 @@ Public Class Family_Schedule
 
     Private Sub Button1_Click_1(sender As Object, e As EventArgs) Handles Button1.Click
         LoadFamilySchedule()
+        'LoadMealsToCalendar()
+    End Sub
+
+    Dim mealDict As New Dictionary(Of Date, List(Of String))
+
+    Private Sub LoadMealsToCalendar()
+        mealDict.Clear()
+
+
+        Using conn As New OleDbConnection(connectionString)
+            Dim query As String = "SELECT DateOfEvent, Title FROM FamilySchedule WHERE EventType = 'Meal'"
+            Using cmd As New OleDbCommand(query, conn)
+                conn.Open()
+                Using reader As OleDbDataReader = cmd.ExecuteReader()
+                    While reader.Read()
+                        Dim mealDate As Date = CDate(reader("DateOfEvent"))
+                        Dim mealTitle As String = reader("Title").ToString()
+
+                        If Not mealDict.ContainsKey(mealDate.Date) Then
+                            mealDict(mealDate.Date) = New List(Of String)
+                        End If
+                        mealDict(mealDate.Date).Add(mealTitle)
+                    End While
+                End Using
+            End Using
+        End Using
+
+        MonthCalendar1.BoldedDates = mealDict.Keys.ToArray()
+    End Sub
+
+    Private Sub MonthCalendarMeals_DateChanged(sender As Object, e As DateRangeEventArgs) Handles MonthCalendar1.DateChanged
+        Dim selectedDate As Date = MonthCalendar1.SelectionStart.Date
+        ListBox1.Items.Clear()
+
+        If mealDict.ContainsKey(selectedDate) Then
+            For Each meal In mealDict(selectedDate)
+                ListBox1.Items.Add(meal)
+            Next
+        Else
+            ListBox1.Items.Add("No meals scheduled.")
+        End If
+    End Sub
+
+    Private Sub FamilySchedule_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        LoadMealsToCalendar()
     End Sub
 End Class
-
-

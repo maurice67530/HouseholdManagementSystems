@@ -51,6 +51,7 @@ Partial Class Family_Schedule
         Me.btnDelete = New System.Windows.Forms.Button()
         Me.Panel3 = New System.Windows.Forms.Panel()
         Me.Button1 = New System.Windows.Forms.Button()
+        Me.ListBox1 = New System.Windows.Forms.ListBox()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel2.SuspendLayout()
         Me.Panel1.SuspendLayout()
@@ -151,6 +152,7 @@ Partial Class Family_Schedule
         '
         Me.Panel1.BackColor = System.Drawing.SystemColors.ActiveCaption
         Me.Panel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.Panel1.Controls.Add(Me.ListBox1)
         Me.Panel1.Controls.Add(Me.ComboBox3)
         Me.Panel1.Controls.Add(Me.ListView1)
         Me.Panel1.Controls.Add(Me.ComboBox1)
@@ -176,9 +178,9 @@ Partial Class Family_Schedule
         '
         'ListView1
         '
-        Me.ListView1.Location = New System.Drawing.Point(92, 154)
+        Me.ListView1.Location = New System.Drawing.Point(-1, 157)
         Me.ListView1.Name = "ListView1"
-        Me.ListView1.Size = New System.Drawing.Size(206, 126)
+        Me.ListView1.Size = New System.Drawing.Size(122, 126)
         Me.ListView1.TabIndex = 12
         Me.ListView1.UseCompatibleStateImageBehavior = False
         '
@@ -300,6 +302,14 @@ Partial Class Family_Schedule
         Me.Button1.Text = "Button1"
         Me.Button1.UseVisualStyleBackColor = True
         '
+        'ListBox1
+        '
+        Me.ListBox1.FormattingEnabled = True
+        Me.ListBox1.Location = New System.Drawing.Point(159, 157)
+        Me.ListBox1.Name = "ListBox1"
+        Me.ListBox1.Size = New System.Drawing.Size(153, 121)
+        Me.ListBox1.TabIndex = 14
+        '
         'Family_Schedule
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -355,4 +365,5 @@ Partial Class Family_Schedule
     Friend WithEvents ComboBox3 As ComboBox
     Friend WithEvents Panel3 As Panel
     Friend WithEvents Button1 As Button
+    Friend WithEvents ListBox1 As ListBox
 End Class

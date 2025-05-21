@@ -5,10 +5,12 @@ Imports System.Data.OleDb
 Public Class MealPlan
 
 
-    ' Dim conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
     Public Property conn As New OleDbConnection(connectionString)
-    ' Connection string using relative path to the database
-
+    'Public Const connectionString As String = " Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Nedzamba\Source\Repos\maurice67530\HouseholdManagementSystems\HMS.accdb"
+    Dim eventType As String = "MealPlans"
+    Dim cmd As OleDbCommand
+    Dim da As OleDbDataAdapter
+    Dim dt As DataTable
 
     Private Sub btnEdit_Click(sender As Object, e As EventArgs) Handles btnEdit.Click
         Try
@@ -119,38 +121,36 @@ Public Class MealPlan
             DataGridView1.DataSource = mealPlanData ' Display filtered data in DataGridView
         End Using
     End Sub
+
     Public Sub LoadMealPlanfromDatabase1()
         Try
-            Debug.WriteLine("Form loading the data")
-            Debug.WriteLine("Form loading  data failed")
 
-            Using conn As New OleDbConnection(connectionString)
+            Debug.WriteLine("DataGridview populated successfully MealPlanForm_Load")
+            Using conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
                 conn.Open()
 
-                'Update the table name if neccessary
-                Dim DataTable As String = "MealPlans"
+                ' Update the table name if necessary  
+                Dim tableName As String = "MealPlans"
 
-                'Create an OleDbCommand to select the data from the database
-                Dim cmd As New OleDbCommand($"SELECT*FROM {DataTable}", conn)
 
-                'create a DataAdapter and fill a DataTable
+                ' Create an OleDbCommand to select the data from the database  
+                Dim cmd As New OleDbCommand($"SELECT * FROM {tableName}", conn)
+
+                ' Create a DataAdapter and fill a DataTable  
                 Dim da As New OleDbDataAdapter(cmd)
                 Dim dt As New DataTable()
                 da.Fill(dt)
 
-                'Bind the DataTable to the DataGridView
+                ' Bind the DataTable to the DataGridView  
                 DataGridView1.DataSource = dt
             End Using
 
-        Catch ex As FormatException
-            Debug.WriteLine("initializing the data.")
-            MessageBox.Show("Please load the information.", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-            MessageBox.Show("&Error Loading task to database: " & ex.Message & vbNewLine & ex.StackTrace, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         Catch ex As Exception
-            Debug.WriteLine($"Form loaded unsuccessfully {ex.Message}")
-            MessageBox.Show("An unexpected error occured during loading the data.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-            MessageBox.Show("&unexpected Error:" & ex.Message & vbNewLine & ex.StackTrace, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-
+            Debug.WriteLine($"DataGridView population failed")
+            Debug.WriteLine($"Unexpected error in DataGridView: {ex.Message}")
+            Debug.WriteLine($"Error in PopulateDataGridView: {ex.Message}")
+            Debug.WriteLine($"Stack Trace: {ex.StackTrace}")
+            'MessageBox.Show("An error occurred while loading data into the grid.", "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
     End Sub
     Public Property meals As New List(Of MealPlans)
@@ -403,7 +403,42 @@ Public Class MealPlan
         Debug.WriteLine("Existing btnSave_Click")
 
 
+
+
+
+
+
+
+        '' MealPlan Form - Add this code to btnAddMeal_Click
+
+        'Dim mealDate As Date = DateTimePicker1.Value.Date
+        'Dim mealTitle As String = TextBox4.Text.Trim()
+
+        'If mealTitle = "" Then
+        '    MessageBox.Show("Please enter a meal name.", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+        '    Exit Sub
+        'End If
+
+
+
+
+        'Using conn As New OleDbConnection(connectionString)
+        '    Dim query As String = "INSERT INTO FamilySchedule (DateOfEvent, Title, EventType) VALUES (?, ?, ?)"
+        '    Using cmd As New OleDbCommand(query, conn)
+        '        cmd.Parameters.AddWithValue("?", mealDate)
+        '        cmd.Parameters.AddWithValue("?", mealTitle)
+        '        cmd.Parameters.AddWithValue("?", "MealName")
+        '        conn.Open()
+        '        cmd.ExecuteNonQuery()
+        '    End Using
+        'End Using
+
+        'MessageBox.Show("Meal added to schedule successfully!", "Saved", MessageBoxButtons.OK, MessageBoxIcon.Information)
+
+        '' Optional: clear fields
+        'TextBox4.Clear()
     End Sub
+
 
     Private Sub btnHighlight_Click(sender As Object, e As EventArgs) Handles btnHighlight.Click
         Try
