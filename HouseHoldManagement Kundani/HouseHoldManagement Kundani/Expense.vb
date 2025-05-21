@@ -697,18 +697,18 @@ Public Class Expense
         Next
     End Sub
     Private Sub Button8_Click(sender As Object, e As EventArgs) Handles Button8.Click
-        'TextBox1.Text = ""
-        'TextBox2.Text = ""
-        'TextBox6.Text = ""
-        'TextBox4.Text = ""
-        'ComboBox7.SelectedItem = ""
-        'ComboBox1.SelectedItem = ""
-        'ComboBox5.SelectedItem = ""
-        'TextBox7.Text = ""
-        'ComboBox3.SelectedItem = ""
-        'TextBox8.Text = ""
+        TextBox1.Text = ""
+        TextBox2.Text = ""
+        TextBox6.Text = ""
+        TextBox4.Text = ""
+        ComboBox7.SelectedItem = ""
+        ComboBox1.SelectedItem = ""
+        ComboBox5.SelectedItem = ""
+        TextBox7.Text = ""
+        ComboBox3.SelectedItem = ""
+        TextBox8.Text = ""
         'CheckBox1.Checked = ""
-        'ComboBox6.SelectedItem = ""
+        ComboBox6.SelectedItem = ""
         HouseHoldManagment_Module.ClearControls(Me)
 
         LoadExpenseDataFromDatabase()
