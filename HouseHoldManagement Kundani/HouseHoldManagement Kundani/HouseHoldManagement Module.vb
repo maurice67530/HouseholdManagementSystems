@@ -6,7 +6,25 @@ Module HouseHoldManagment_Module
     Public currentUser As String ' Global variable for logged-in user
     Public Property conn As New OleDbConnection(connectionString)
     Public Const connectionString As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=\\MUDAUMURANGI\Users\Murangi\Source\Repos\maurice67530\HouseholdManagementSystems\HMS.accdb"
-
+    Public Sub InsertEvent(conn As OleDbConnection, title As String, notes As String, dateOfEvent As Date, startTime As Date, endTime As Date, assignedTo As String, eventType As String)
+        Using insertCmd As New OleDbCommand("INSERT INTO FamilySchedule (Title, Notes, DateOfEvent, StartTime, EndTime, AssignedTo, EventType) VALUES (?, ?, ?, ?, ?, ?, ?)", conn)
+            insertCmd.Parameters.AddWithValue("?", title)
+            insertCmd.Parameters.AddWithValue("?", notes)
+            insertCmd.Parameters.AddWithValue("?", dateOfEvent)
+            insertCmd.Parameters.AddWithValue("?", startTime)
+            insertCmd.Parameters.AddWithValue("?", endTime)
+            insertCmd.Parameters.AddWithValue("?", assignedTo)
+            insertCmd.Parameters.AddWithValue("?", eventType)
+            insertCmd.ExecuteNonQuery()
+        End Using
+    End Sub
+    Public Function EventExists(conn As OleDbConnection, title As String, dateOfEvent As Date) As Boolean
+        Using checkCmd As New OleDbCommand("SELECT COUNT(*) FROM FamilySchedule WHERE Title = ? AND DateOfEvent = ?", conn)
+            checkCmd.Parameters.AddWithValue("?", title)
+            checkCmd.Parameters.AddWithValue("?", dateOfEvent)
+            Return Convert.ToInt32(checkCmd.ExecuteScalar()) > 0
+        End Using
+    End Function
     Public Function Getconnection() As OleDbConnection
         Return New OleDbConnection(connectionString)
     End Function
