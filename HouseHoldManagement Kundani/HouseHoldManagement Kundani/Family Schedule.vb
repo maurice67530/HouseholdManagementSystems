@@ -106,8 +106,8 @@ Public Class Family_Schedule
         PopulateComboboxFromDatabase(ComboBox1)
         LoadScheduleFromDatabase()
 
-        'AutoCreateChoreEvents()
-        ' AutoAddMealTimes()
+        AutoCreateChoreEvents()
+        'AutoAddMealTimes()
         'AutoCreateTaskReminders()
         'MarkPhotoDayEvents()
 
@@ -298,11 +298,7 @@ Public Class Family_Schedule
                 DateTimePicker3.Text = selectedRow.Cells("EndTime").Value.ToString()
                 ComboBox1.Text = selectedRow.Cells("AssignedTo").Value.ToString()
                 ComboBox3.Text = selectedRow.Cells("EventType").Value.ToString()
-
-                ' Enable/disable the buttons based on the selected person  
-                btnSave.Enabled = False
             End If
-
         Catch ex As Exception
             Debug.WriteLine("error selection data in the database")
             Debug.WriteLine($"Stack Trace: {ex.StackTrace}")
@@ -568,8 +564,10 @@ Public Class Family_Schedule
         '    Dim message As String = "Events  " & selectedDate.ToShortDateString() & ":" & vbCrLf & String.Join(vbCrLf, eventsOnDate)
         '    MessageBox.Show(message, "Family Calendar")
         'End If
+
         'LoadScheduleFromDatabase()
-        'Private Sub MonthCalendar1_DateChanged(sender As Object, e As DateRangeEventArgs) Handles MonthCalendar1.DateChanged
+
+
         Dim selectedDate As Date = e.Start
         Dim dt As DataTable = TryCast(Me.Tag, DataTable)
 
@@ -582,10 +580,10 @@ Public Class Family_Schedule
 
         ' Existing FamilySchedule events
         eventsOnDate.AddRange(
-        dt.AsEnumerable().
-        Where(Function(r) CDate(r("DateOfEvent")).Date = selectedDate.Date).
-        Select(Function(r) r("EventType").ToString() & ": " & r("Title").ToString() & " (" & r("AssignedTo").ToString() & ")")
-    )
+            dt.AsEnumerable().
+    Where(Function(r) CDate(r("DateOfEvent")).Date = selectedDate.Date).
+            Select(Function(r) r("EventType").ToString() & ": " & r("Title").ToString() & " (" & r("AssignedTo").ToString() & ")")
+        )
 
         ' Add birthdays
         Try
@@ -614,8 +612,6 @@ Public Class Family_Schedule
             MessageBox.Show(message, "Family Calendar")
         End If
     End Sub
-
-
 
     Private Sub ListView1_ItemDrag(sender As Object, e As ItemDragEventArgs) Handles ListView1.ItemDrag
         DoDragDrop(e.Item, DragDropEffects.Move)
@@ -877,16 +873,104 @@ Public Class Family_Schedule
 
 
 
-    Private Sub btnRefresh_Click(sender As Object, e As EventArgs) Handles btnRefresh.Click
-        LoadScheduleFromDatabase()
-        TextBox1.Text = ""
-        TextBox2.Text = ""
-        ComboBox1.Text = ""
-        ComboBox3.Text = ""
-        ListView1.Items.Clear()
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+    'vHO ZWIVHUYA, MULANGA AND XILUVA
+    Public Sub AddMealToSchedule(mealDate As DateTime, mealTitle As String, mealDetails As String)
+
+        Using conn As New OleDbConnection(connectionString)
+            Dim query As String = "INSERT INTO FamilySchedule (DateOfEvent, Title, EventType) VALUES (?, ?, ?)"
+            Using cmd As New OleDbCommand(query, conn)
+                cmd.Parameters.AddWithValue("?", mealDate)
+                cmd.Parameters.AddWithValue("?", mealTitle)
+                ' cmd.Parameters.AddWithValue("?", mealDetails)
+                cmd.Parameters.AddWithValue("?", "Meal") ' Category for filtering in calendar
+
+                conn.Open()
+                cmd.ExecuteNonQuery()
+            End Using
+        End Using
     End Sub
+    Public Sub LoadFamilySchedule()
+
+        Dim dt As New DataTable()
+
+        Using conn As New OleDbConnection(connectionString)
+            Dim query As String = "SELECT DateOfEvent, Title, EventType FROM FamilySchedule WHERE EventType = 'Meal' ORDER BY DateOfEvent"
+            Using cmd As New OleDbCommand(query, conn)
+                conn.Open()
+                Using reader As OleDbDataReader = cmd.ExecuteReader()
+                    dt.Load(reader)
+                End Using
+            End Using
+        End Using
+
+        ' Example: Bind to DataGridView or process for calendar
+        DataGridView1.DataSource = dt
+    End Sub
+
+    Private Sub Button1_Click_1(sender As Object, e As EventArgs) Handles Button1.Click
+        LoadFamilySchedule()
+        'LoadMealsToCalendar()
+    End Sub
+
+    Dim mealDict As New Dictionary(Of Date, List(Of String))
+
+
+    Private Sub LoadMealSchedule()
+        mealDict.Clear()
+
+        Using conn As New OleDbConnection(connectionString)
+            Dim query As String = "SELECT DateOfEvent, Title FROM FamilySchedule WHERE EventType = 'Meal'"
+            Using cmd As New OleDbCommand(query, conn)
+                conn.Open()
+                Using reader As OleDbDataReader = cmd.ExecuteReader()
+                    While reader.Read()
+                        Dim mealDate As Date = CDate(reader("DateOfEvent")).Date
+                        Dim mealTitle As String = reader("Title").ToString()
+
+                        If Not mealDict.ContainsKey(mealDate) Then
+                            mealDict(mealDate) = New List(Of String)
+                        End If
+                        mealDict(mealDate).Add(mealTitle)
+                    End While
+                End Using
+            End Using
+        End Using
+
+        ' Bold meal dates in calendar
+        MonthCalendar1.BoldedDates = mealDict.Keys.ToArray()
+    End Sub
+
+    Private Sub MonthCalendarMeals_DateChanged(sender As Object, e As DateRangeEventArgs) Handles MonthCalendar1.DateChanged
+        Dim selectedDate As Date = MonthCalendar1.SelectionStart.Date
+
+        If mealDict.ContainsKey(selectedDate) Then
+            Dim meals As List(Of String) = mealDict(selectedDate)
+            Dim mealList As String = String.Join(Environment.NewLine, meals)
+            MessageBox.Show("Meals for " & selectedDate.ToShortDateString() & ":" & Environment.NewLine & mealList,
+                        "Meal Schedule", MessageBoxButtons.OK, MessageBoxIcon.Information)
+        Else
+            MessageBox.Show("No meals scheduled for " & selectedDate.ToShortDateString() & ".",
+                        "Meal Schedule", MessageBoxButtons.OK, MessageBoxIcon.Information)
+        End If
+    End Sub
+
+    Private Sub FamilySchedule_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        LoadMealSchedule()
+    End Sub
+
 End Class
-
-

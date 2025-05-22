@@ -248,43 +248,45 @@ Public Class Household_Document
     Private Sub DataGridView1_SelectionChanged(sender As Object, e As EventArgs) Handles DataGridView1.SelectionChanged
         Try
 
-            'Debug.WriteLine("selecting data in the datagridview")
-            'If DataGridView1.SelectedRows.Count > 0 Then
-            '    Dim selectedRow As DataGridViewRow = DataGridView1.SelectedRows(0)
-
-            '    ' Load the data from the selected row into UI controls  
-            '    ComboBox1.Text = selectedRow.Cells("Category").Value.ToString()
-            '    TextBox1.Text = selectedRow.Cells("Title").Value.ToString()
-            '    TextBox2.Text = selectedRow.Cells("Notes").Value.ToString()
-            '    TextBox3.Text = selectedRow.Cells("FilePath").Value.ToString()
-            '    DateTimePicker1.Text = selectedRow.Cells("UploadDate").Value.ToString()
-            '    ComboBox3.Text = selectedRow.Cells("UploadedBy").Value.ToString()
-
-            'End If
             If DataGridView1.SelectedRows.Count > 0 Then
                 Dim selectedRow As DataGridViewRow = DataGridView1.SelectedRows(0)
                 Dim filePath As String = selectedRow.Cells("FilePath").Value.ToString() ' Adjust to your actual column name
 
                 If File.Exists(filePath) Then
-                        Dim extension As String = Path.GetExtension(filePath).ToLower()
+                    Dim extension As String = Path.GetExtension(filePath).ToLower()
 
-                        If extension = ".jpg" OrElse extension = ".png" OrElse extension = ".bmp" OrElse extension = ".gif" Then
-                            ' Show image in PictureBox
-                            PictureBoxPreview.Image = Image.FromFile(filePath)
-                            PictureBoxPreview.SizeMode = PictureBoxSizeMode.Zoom
+                    If extension = ".jpg" OrElse extension = ".png" OrElse extension = ".bmp" OrElse extension = ".gif" Then
+                        ' Show image in PictureBox
+                        PictureBoxPreview.Image = Image.FromFile(filePath)
+                        PictureBoxPreview.SizeMode = PictureBoxSizeMode.Zoom
 
-                        ElseIf extension = ".pdf" Then
-                            ' For PDF, you may need to use a PDF viewer control or load the PDF in a WebBrowser
-                            WebBrowser1.Navigate(filePath) ' Add a WebBrowser control named WebBrowser1
-                            PictureBoxPreview.Image = Nothing
-                        Else
-                            MessageBox.Show("Unsupported file type.")
-                            PictureBoxPreview.Image = Nothing
-                        End If
+                    ElseIf extension = ".pdf" Then
+                        ' For PDF, you may need to use a PDF viewer control or load the PDF in a WebBrowser
+                        WebBrowser1.Navigate(filePath) ' Add a WebBrowser control named WebBrowser1
+                        PictureBoxPreview.Image = Nothing
                     Else
-                        MessageBox.Show("File not found.")
+                        MessageBox.Show("Unsupported file type.")
+                        PictureBoxPreview.Image = Nothing
                     End If
+                Else
+                    MessageBox.Show("File not found.")
                 End If
+            End If
+
+            Debug.WriteLine("selecting data in the datagridview")
+            If DataGridView1.SelectedRows.Count > 0 Then
+                Dim selectedRow As DataGridViewRow = DataGridView1.SelectedRows(0)
+
+                ' Load the data from the selected row into UI controls  
+                ComboBox1.Text = selectedRow.Cells("Category").Value.ToString()
+                TextBox1.Text = selectedRow.Cells("Title").Value.ToString()
+                TextBox2.Text = selectedRow.Cells("Notes").Value.ToString()
+                TextBox3.Text = selectedRow.Cells("FilePath").Value.ToString()
+                DateTimePicker1.Text = selectedRow.Cells("UploadDate").Value.ToString()
+                ComboBox3.Text = selectedRow.Cells("UploadedBy").Value.ToString()
+
+            End If
+
 
         Catch ex As Exception
             Debug.WriteLine("error selection data in the database")
