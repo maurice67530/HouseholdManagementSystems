@@ -2,48 +2,95 @@
 Imports System.IO
 
 Public Class Household_Document
+
+
+    Private SelectedImagePath As String = " "
+
+    Public Folderpath As String = "\\MUDAUMURANGI\Users\Murangi\Source\Repos\maurice67530\HouseholdManagementSystems\House Hold Documents"
+    'Private uploadPath As String = Path.Combine(Application.StartupPath, "Uploads")
     Public Property conn As New OleDbConnection(connectionString)
 
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
 
+
+        If TextBox1.Text = "" OrElse TextBox2.Text = "" Then
+            MsgBox("Fill in the missing fields", MsgBoxStyle.Exclamation)
+            Exit Sub
+        End If
+
         Dim ofd As New OpenFileDialog()
         ofd.Filter = "Documents|*.pdf;*.docx;*.xlsx;*.jpg;*.png|All files|*.*"
-        If ofd.ShowDialog() = DialogResult.OK Then
-            Dim sourcePath = ofd.FileName
-            Dim fileName = IO.Path.GetFileName(sourcePath)
-            Dim categoryFolder = Path.Combine("C:\DocumentLibrary", ComboBox1.Text)
-            Directory.CreateDirectory(categoryFolder)
-            Dim destPath = Path.Combine(categoryFolder, fileName)
-            File.Copy(sourcePath, destPath, True)
 
-            Using conn As New OleDbConnection(connectionString)
+        If ofd.ShowDialog() = DialogResult.OK Then
+            Dim sourcePath As String = ofd.FileName
+            Dim fileName As String = IO.Path.GetFileName(sourcePath)
+
+            ' Define your network folder and category subfolder
+            Dim networkFolder As String = "\\MUDAUMURANGI\Users\Murangi\Source\Repos\maurice67530\HouseholdManagementSystems\House Hold Documents" ' <-- Replace with your actual path
+            Dim categoryFolder As String = Path.Combine(networkFolder, ComboBox1.Text)
+
+            ' Ensure the category folder exists
+            Directory.CreateDirectory(categoryFolder)
+
+            ' Build destination path and copy file
+            Dim destinationPath As String = Path.Combine(categoryFolder, fileName)
+            File.Copy(sourcePath, destinationPath, True) ' Overwrite if exists
+
+            ' Save path and metadata to the database
+            Using conn As New OleDb.OleDbConnection(connectionString)
                 conn.Open()
-                Dim cmd As New OleDbCommand("INSERT INTO HouseholdDocument (HouseholdID, Title, Notes, Category, FilePath, UploadedBy, UploadDate)
-            VALUES (@HouseholdID, @Title, @Notes, @Category, @FilePath, @UploadedBy, @UploadDate)", conn)
-                cmd.Parameters.AddWithValue("@HouseholdID", 1)
-                cmd.Parameters.AddWithValue("@Title", TextBox1.Text)
-                cmd.Parameters.AddWithValue("@Notes", TextBox2.Text)
-                cmd.Parameters.AddWithValue("@Category", ComboBox1.Text)
-                cmd.Parameters.AddWithValue("@FilePath", destPath)
-                cmd.Parameters.AddWithValue("@UploadedBy", Environment.UserName)
-                cmd.Parameters.AddWithValue("@UploadDate", DateTime.Now)
+                Dim cmd As New OleDb.OleDbCommand("INSERT INTO HouseholdDocument (HouseholdID, Title, Notes, Category, FilePath, UploadedBy, UploadDate) VALUES (?, ?, ?, ?, ?, ?, ?)", conn)
+                cmd.Parameters.AddWithValue("?", 1)
+                cmd.Parameters.AddWithValue("?", TextBox1.Text)
+                cmd.Parameters.AddWithValue("?", TextBox2.Text)
+                cmd.Parameters.AddWithValue("?", ComboBox1.Text)
+                cmd.Parameters.AddWithValue("?", destinationPath) ' Save full UNC path
+                cmd.Parameters.AddWithValue("?", Environment.UserName)
+                cmd.Parameters.AddWithValue("?", DateTime.Now)
                 cmd.ExecuteNonQuery()
             End Using
 
-            MessageBox.Show("Document uploaded.")
+            MessageBox.Show("Document uploaded and saved successfully.")
             LoadDocuments()
         End If
-        conn.Close()
-
     End Sub
 
+    Public Sub PopulateComboboxFromDatabase(ByRef comboBox As ComboBox)
+        Dim conn As New OleDbConnection(connectionString)
+        Try
+            Debug.WriteLine("populate combobox successful")
+            'open the database connection
+            conn.Open()
+            'retrieve the firstname and surname columns from the personaldetails tabel
+            Dim query As String = "SELECT FirstName, LastName FROM PersonalDetails"
+            Dim cmd As New OleDbCommand(query, conn)
+            Dim reader As OleDbDataReader = cmd.ExecuteReader()
+            'bind the retrieved data to the combobox
+            ComboBox3.Items.Clear()
+            While reader.Read()
+                ComboBox3.Items.Add($"{reader("FirstName")} {reader("LastName")}")
+            End While
+            'close the database
+            reader.Close()
+        Catch ex As Exception
+            'handle any exeptions that may occur  
+            Debug.WriteLine("failed to populate combobox")
+            Debug.WriteLine($"Stack Trace: {ex.StackTrace}")
+            MessageBox.Show($"Error: {ex.StackTrace}")
+        Finally
+            'close the database connection
+            If conn.State = ConnectionState.Open Then
+                conn.Close()
+            End If
+        End Try
+    End Sub
     Public Sub LoadHouseholdDocumentDatafromDatabase()
 
         Try
 
             Using conn As New OleDbConnection(connectionString)
 
-                conn.Open()
+                'conn.Open()
 
                 'Update the table name if neccessary
 
@@ -83,6 +130,74 @@ Public Class Household_Document
 
     End Sub
 
+    'Private Sub LoadHouseholdDocument()
+    '    Try
+    '        Using conn As New OleDbConnection(connectionString)
+    '            Dim tablename As String = "HouseholdDocument"
+    '            Dim cmd As New OleDbCommand($"SELECT * FROM {tablename}", conn)
+    '            Dim da As New OleDbDataAdapter(cmd)
+    '            Dim dt As New DataTable()
+    '            da.Fill(dt)
+    '            DataGridView1.DataSource = dt
+
+    '            ' Apply color formatting based on Category column
+    '            For Each row As DataGridViewRow In DataGridView1.Rows
+    '                If Not row.IsNewRow Then
+    '                    Dim category As String = row.Cells("Category").Value.ToString().ToLower()
+    '                    Select Case category
+    '                        Case "bills"
+    '                            row.DefaultCellStyle.BackColor = Color.LightBlue
+    '                        Case "medical"
+    '                            row.DefaultCellStyle.BackColor = Color.LightPink
+    '                        Case "school"
+    '                            row.DefaultCellStyle.BackColor = Color.LightGreen
+    '                        Case "finance"
+    '                            row.DefaultCellStyle.BackColor = Color.Khaki
+    '                        Case "insurance"
+    '                            row.DefaultCellStyle.BackColor = Color.Orange
+    '                        Case "work"
+    '                            row.DefaultCellStyle.BackColor = Color.LightGray
+    '                        Case "mics", "misc", "miscellaneous"
+    '                            row.DefaultCellStyle.BackColor = Color.Plum
+    '                        Case Else
+    '                            row.DefaultCellStyle.BackColor = Color.White
+    '                    End Select
+    '                End If
+    '            Next
+
+    '        End Using
+
+    '    Catch ex As OleDbException
+    '        MessageBox.Show("Error Loading HouseholdDocument to database: " & ex.Message & vbNewLine & ex.StackTrace, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+    '    Catch ex As Exception
+    '        MessageBox.Show("Unexpected Error: " & ex.Message & vbNewLine & ex.StackTrace, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+    '    End Try
+    'End Sub
+    Private Sub HighlightRowsByCategory()
+        For Each row As DataGridViewRow In DataGridView1.Rows
+            If Not row.IsNewRow Then
+                Dim category As String = row.Cells("Category").Value.ToString().ToLower()
+                Select Case category
+                    Case "bills"
+                        row.DefaultCellStyle.BackColor = Color.LightBlue
+                    Case "medical"
+                        row.DefaultCellStyle.BackColor = Color.LightPink
+                    Case "school"
+                        row.DefaultCellStyle.BackColor = Color.LightGreen
+                    Case "finance"
+                        row.DefaultCellStyle.BackColor = Color.Khaki
+                    Case "insurance"
+                        row.DefaultCellStyle.BackColor = Color.Orange
+                    Case "work"
+                        row.DefaultCellStyle.BackColor = Color.LightGray
+                    Case "mics", "misc", "miscellaneous"
+                        row.DefaultCellStyle.BackColor = Color.Plum
+                    Case Else
+                        row.DefaultCellStyle.BackColor = Color.White
+                End Select
+            End If
+        Next
+    End Sub
     Private Sub LoadDocuments()
         Dim filter = ComboBox2.Text
         Dim search = TextBox4.Text
@@ -109,12 +224,13 @@ Public Class Household_Document
 
     Private Sub Household_Document_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
+        'LoadHouseholdDocument()
         'LoadFilteredDocuments()
         LoadDocuments()
 
         'LoadhouseholddocumentDataFromDatabase()
         LoadHouseholdDocumentDatafromDatabase()
-
+        PopulateComboboxFromDatabase(ComboBox3)
         'ViewDocument()
         ToolTip1.SetToolTip(Button2, "Upload")
         ToolTip1.SetToolTip(Button1, "Open")
@@ -200,6 +316,31 @@ Public Class Household_Document
     Private Sub DataGridView1_SelectionChanged(sender As Object, e As EventArgs) Handles DataGridView1.SelectionChanged
         Try
 
+            If DataGridView1.SelectedRows.Count > 0 Then
+                Dim selectedRow As DataGridViewRow = DataGridView1.SelectedRows(0)
+                Dim filePath As String = selectedRow.Cells("FilePath").Value.ToString() ' Adjust to your actual column name
+
+                If File.Exists(filePath) Then
+                    Dim extension As String = Path.GetExtension(filePath).ToLower()
+
+                    If extension = ".jpg" OrElse extension = ".png" OrElse extension = ".bmp" OrElse extension = ".gif" Then
+                        ' Show image in PictureBox
+                        PictureBoxPreview.Image = Image.FromFile(filePath)
+                        PictureBoxPreview.SizeMode = PictureBoxSizeMode.Zoom
+
+                    ElseIf extension = ".pdf" Then
+                        ' For PDF, you may need to use a PDF viewer control or load the PDF in a WebBrowser
+                        WebBrowser1.Navigate(filePath) ' Add a WebBrowser control named WebBrowser1
+                        PictureBoxPreview.Image = Nothing
+                    Else
+                        MessageBox.Show("Unsupported file type.")
+                        PictureBoxPreview.Image = Nothing
+                    End If
+                Else
+                    MessageBox.Show("File not found.")
+                End If
+            End If
+
             Debug.WriteLine("selecting data in the datagridview")
             If DataGridView1.SelectedRows.Count > 0 Then
                 Dim selectedRow As DataGridViewRow = DataGridView1.SelectedRows(0)
@@ -213,10 +354,12 @@ Public Class Household_Document
                 ComboBox3.Text = selectedRow.Cells("UploadedBy").Value.ToString()
 
             End If
+
+
         Catch ex As Exception
             Debug.WriteLine("error selection data in the database")
             Debug.WriteLine($"Stack Trace: {ex.StackTrace}")
-            MessageBox.Show("Error saving document to database: " & ex.Message & vbNewLine & ex.StackTrace, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            'MessageBox.Show("Error saving document to database: " & ex.Message & vbNewLine & ex.StackTrace, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
     End Sub
     Private Sub Button5_Click(sender As Object, e As EventArgs) Handles Button5.Click
@@ -345,5 +488,17 @@ Public Class Household_Document
 
     Private Sub Panel1_Paint(sender As Object, e As PaintEventArgs) Handles Panel1.Paint
 
+    End Sub
+
+    Private Sub Label1_Click(sender As Object, e As EventArgs) Handles Label1.Click
+
+    End Sub
+
+    Private Sub DataGridView1_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridView1.CellContentClick
+
+    End Sub
+
+    Private Sub DataGridView1_DataBindingComplete(sender As Object, e As DataGridViewBindingCompleteEventArgs) Handles DataGridView1.DataBindingComplete
+        HighlightRowsByCategory()
     End Sub
 End Class
