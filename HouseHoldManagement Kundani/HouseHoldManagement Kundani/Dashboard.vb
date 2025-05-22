@@ -20,10 +20,12 @@ Public Class Dashboard
     ' Set your design size (the size you built in designer)
     Private originalWidth As Integer
     Private originalHeight As Integer
-
+    Public Shared LoggedInUser As String
     Private Sub Dashboard_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
         CheckDatabaseConnection()
+
+
         lblbadge.Region = New Region(New Drawing2D.GraphicsPath())
         Dim gp As New Drawing.Drawing2D.GraphicsPath()
         gp.AddEllipse(0, 0, lblbadge.Width, lblbadge.Height)
@@ -91,6 +93,7 @@ Public Class Dashboard
         Label17.Font = New Font("Arial", 10, FontStyle.Bold)
         Label17.ForeColor = Color.Blue
 
+
         Dim hour As Integer = DateTime.Now.Hour
         If hour < 12 Then
             Label18.Text = "Good morning , Have a great day! 😊"
@@ -99,6 +102,31 @@ Public Class Dashboard
         Else
             Label18.Text = "Good evening ,  Have a great day! 😊"
         End If
+
+        ''Dim user As String = LoggedInUser
+        ''Dim hour As Integer = DateTime.Now.Hour
+        ''Dim greeting As String = ""
+
+        ''If hour >= 5 AndAlso hour < 12 Then
+        ''    greeting = "Good Morning"
+        ''ElseIf hour >= 12 AndAlso hour < 17 Then
+        ''    greeting = "Good Afternoon"
+        ''ElseIf hour >= 17 AndAlso hour < 21 Then
+        ''    greeting = "Good Evening"
+        ''Else
+        ''    greeting = "Good Night"
+        ''End If
+
+        'Label18.Text = $"{greeting}, {user}!"
+        'Label18.ForeColor = Color.DarkBlue
+        'Label18.Font = New Font("Segoe UI", 14, FontStyle.Bold)
+
+        'CheckExpense()
+
+
+
+
+
 
         'Show Random tip
         Dim rnd As New Random()
@@ -321,39 +349,6 @@ Public Class Dashboard
         PhotoGallery.ShowDialog()
     End Sub
 
-    'Private Sub Button9_Click_1(sender As Object, e As EventArgs) Handles btnInAppMessages.Click
-    '    Using con As OleDbConnection = Getconnection()
-
-
-    '        Dim FullNames = TextBox2.Text.Trim()
-
-
-    '        Dim cmd As New OleDbCommand("SELECT FullNames FROM Users WHERE Username = ? AND [Password] = ?", con)
-    '        cmd.Parameters.AddWithValue("?", FullNames)
-
-
-    '        con.Open()
-    '        Dim reader As OleDbDataReader = cmd.ExecuteReader()
-
-    '        If reader.Read() Then
-    '            Dim family As String = reader("FullNames").ToString()
-
-
-    '            MessageBox.Show("Login successful. Family: " & family, "Welcome!", MessageBoxButtons.OK, MessageBoxIcon.Information)
-
-
-    '            In_App_Message.TextBox2.Text = FullNames
-
-
-    '            In_App_Message.ShowDialog()
-    '            Me.Hide()
-    '        Else
-    '            MessageBox.Show("cannot show Notification.")
-    '        End If
-
-    '        con.Close()
-    '    End Using
-    'End Sub
 
     Private Sub Button12_Click(sender As Object, e As EventArgs) Handles Button12.Click
         Expense.ShowDialog()
@@ -460,11 +455,6 @@ Public Class Dashboard
 
         Return False
     End Function
-
-
-
-
-
 
 
 
@@ -981,99 +971,6 @@ Public Class Dashboard
         Chart1.Titles.Add("Chore Status Summary")
     End Sub
 
-    'Private photoList As New List(Of String)() ' List to store photo paths
-    'Private currentPhotoIndex As Integer = 0
-    'Private WithEvents photoTimer As New Timer()
-    'Private Sub LoadRecentPhotos()
-
-    '    photoList.Clear()
-    '    Dim query As String = "SELECT TOP 4 FilePath FROM Photos ORDER BY DateAdded"
-    '    Using conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
-    '        Using cmd As New OleDbCommand(query, conn)
-    '            conn.Open()
-    '            Using reader As OleDbDataReader = cmd.ExecuteReader()
-    '                While reader.Read()
-    '                    photoList.Add(reader("FilePath").ToString())
-
-    '                End While
-    '            End Using
-    '        End Using
-    '    End Using
-    '    conn.Close()
-    'End Sub
-    ''Private Sub LoadRecentPhotoPathsFromDatabase()
-    ''    photoList.Clear()
-
-    ''    'Dim connStr As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=yourdb.accdb;"
-    ''    Using conn As New OleDb.OleDbConnection(connectionString)
-    ''        conn.Open()
-
-    ''        ' ORDER BY DateAdded DESC or ID DESC to get recent photos
-    ''        Dim cmd As New OleDb.OleDbCommand("SELECT TOP 5 FilePath FROM Photos ORDER BY DateAdded", conn)
-    ''        ' If you're using ID instead of DateAdded:
-    ''        ' Dim cmd As New OleDb.OleDbCommand("SELECT PhotoPath FROM Gallery ORDER BY ID DESC", conn)
-
-    ''        Dim reader As OleDb.OleDbDataReader = cmd.ExecuteReader()
-
-    ''        While reader.Read()
-    ''            Dim path As String = reader("FilePath").ToString()
-    ''            If IO.File.Exists(path) Then
-    ''                photoList.Add(path)
-    ''            End If
-    ''        End While
-    ''    End Using
-
-    ''End Sub
-    ''Private Sub DisplayPhoto()
-    ''    If photoList.Count > 0 Then
-    ''        FlowLayoutPanel2.Controls.Clear() ' Clear previous image
-    ''        Dim pb As New PictureBox()
-    ''        pb.Image = Image.FromFile(photoList(currentPhotoIndex))
-    ''        pb.SizeMode = PictureBoxSizeMode.StretchImage ' Set stretch mode
-    ''        pb.Size = FlowLayoutPanel2.Size ' Match panel size
-    ''        FlowLayoutPanel2.Controls.Add(pb) ' Add to FlowLayoutPanel
-    ''    End If
-    ''End Sub
-
-    'Private Sub DisplayPhoto()
-    '    If photoList.Count > 0 Then
-    '        FlowLayoutPanel2.Controls.Clear()
-
-    '        Dim pb As New PictureBox()
-    '        pb.Image = Image.FromFile(photoList(currentPhotoIndex))
-    '        pb.SizeMode = PictureBoxSizeMode.StretchImage
-    '        pb.Size = FlowLayoutPanel2.Size
-
-    '        FlowLayoutPanel2.Controls.Add(pb)
-
-    '        ' Loop to the first image after the last
-    '        currentPhotoIndex = (currentPhotoIndex + 1) Mod photoList.Count
-    '    End If
-    'End Sub
-    ''Private Sub StartPhotoSlideshow()
-    ''    LoadRecentPhotoPathsFromDatabase()
-    ''    DisplayPhoto()
-
-    ''    photoTimer.Interval = 2000 ' 2 seconds
-    ''    photoTimer.Start()
-    ''End Sub
-    'Private Sub SetupTimer()
-    '    photoTimer.Interval = 1000 ' 2 seconds
-    '    AddHandler photoTimer.Tick, AddressOf PhotoTimer_Tick
-    '    photoTimer.Start()
-    'End Sub
-
-    'Private Sub PhotoTimer_Tick(sender As Object, e As EventArgs)
-    '    If photoList.Count > 0 Then
-    '        currentPhotoIndex = (currentPhotoIndex + 1) Mod photoList.Count ' Loop through photos
-    '        DisplayPhoto()
-    '    End If
-
-    'End Sub
-
-
-
-
 
     ' Photo slideshow variables
     Private photoList As New List(Of String)()
@@ -1191,7 +1088,10 @@ Public Class Dashboard
 
     Private Sub Timer3_Tick(sender As Object, e As EventArgs) Handles Timer3.Tick
 
-        CheckDatabaseConnection()
+
+
+
+
         'Timer3.Stop()
         RunSearchAndBlink()
 
@@ -1439,95 +1339,7 @@ Public Class Dashboard
 
 
 
-    'Private Sub CheckDatabaseConnection()
-    '    'Dim connString As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=YourDatabasePath.accdb;"
-    '    Using conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
-    '        Try
-    '            conn.Open()
-    '            MessageBox.Show("DataBase Connected Successfully!", "Database Check", MessageBoxButtons.OK, MessageBoxIcon.Information)
-    '        Catch ex As Exception
-    '            MessageBox.Show("DataBase Connection Failed: " & ex.Message, "Database Check", MessageBoxButtons.OK, MessageBoxIcon.Error)
-    '        End Try
-    '    End Using
-    'End Sub
-    Private Sub CheckDatabaseConnection()
-        'Dim connString As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=YourDatabasePath.accdb;"
-        Using conn As New OleDb.OleDbConnection(HouseHoldManagment_Module.connectionString)
-            Try
-                conn.Open()
-                Label36.Text = "Database Status: Connected"
-                Label36.ForeColor = Color.Green
-            Catch ex As Exception
-                Label36.Text = "Database Status: Disconnected"
-                Label36.ForeColor = Color.Red
-            End Try
-        End Using
-    End Sub
 
-
-
-    'Private Sub LoadMemberChoreTaskSummary()
-    '    FlowLayoutPanel3.Controls.Clear()
-
-    '    Dim query As String = "SELECT FirstName,
-    '           (SELECT COUNT(*) FROM Chores WHERE AssignedTo = FirstName) AS ChoreCount,
-    '           (SELECT COUNT(*) FROM Tasks WHERE AssignedTo = FirstName) AS TaskCount
-    '    FROM PersonalDetails"
-
-    '    Using conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
-    '        Using cmd As New OleDbCommand(query, conn)
-    '            conn.Open()
-    '            Using reader = cmd.ExecuteReader()
-    '                While reader.Read()
-    '                    Dim name As String = reader("FirstName").ToString()
-    '                    Dim chores As Integer = Convert.ToInt32(reader("ChoreCount"))
-    '                    Dim tasks As Integer = Convert.ToInt32(reader("TaskCount"))
-
-    '                    Dim lbl As New Label()
-    '                    lbl.Text = $"{name}: {chores} chore(s), {tasks} task(s)"
-    '                    lbl.AutoSize = True
-    '                    lbl.Font = New Font("Segoe UI", 10, FontStyle.Regular)
-    '                    lbl.Margin = New Padding(5)
-
-    '                    FlowLayoutPanel3.Controls.Add(lbl)
-    '                End While
-    '            End Using
-    '        End Using
-    '    End Using
-    'End Sub
-
-
-    'Private Sub LoadMemberChoreTaskSummary()
-    '    FlowLayoutPanel3.Controls.Clear()
-
-    '    Dim query As String = "
-    '    SELECT FirstName, LastName,
-    '        (SELECT COUNT(*) FROM Chores WHERE AssignedTo = (FirstName & ' ' & LastName)) AS ChoreCount,
-    '        (SELECT COUNT(*) FROM Tasks WHERE AssignedTo = (FirstName & ' ' & LastName)) AS TaskCount
-    '    FROM PersonalDetails"
-
-    '    Using conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
-    '        Using cmd As New OleDbCommand(query, conn)
-    '            conn.Open()
-    '            Using reader = cmd.ExecuteReader()
-    '                While reader.Read()
-    '                    Dim fname As String = reader("FirstName").ToString()
-    '                    Dim lname As String = reader("LastName").ToString()
-    '                    Dim fullName As String = fname & " " & lname
-    '                    Dim chores As Integer = Convert.ToInt32(reader("ChoreCount"))
-    '                    Dim tasks As Integer = Convert.ToInt32(reader("TaskCount"))
-
-    '                    Dim lbl As New Label()
-    '                    lbl.Text = $"{fullName}: {chores} chore(s), {tasks} task(s)"
-    '                    lbl.AutoSize = True
-    '                    lbl.Font = New Font("Segoe UI", 10, FontStyle.Regular)
-    '                    lbl.Margin = New Padding(5)
-    '                    FlowLayoutPanel3.Controls.Add(lbl)
-    '                End While
-    '            End Using
-    '        End Using
-    '    End Using
-    'End Sub
 
 
     Private Sub LoadMemberChoreTaskSummary()
@@ -1564,77 +1376,7 @@ Public Class Dashboard
         End Using
     End Sub
 
-    'Private Sub LoadUnassignedPeople()
-    '    'Dim connString As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=YourDatabasePath.accdb;"
-    '    Dim query As String = "
-    '    SELECT FirstName, LastName
-    '    FROM PersonalDetails
-    '    WHERE ID NOT IN (SELECT AssignedTo FROM Tasks)
-    '      AND ID NOT IN (SELECT AssignedTo FROM Chores)
-    '"
 
-    '    Using conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
-    '        Try
-    '            conn.Open()
-    '            Dim cmd As New OleDbCommand(query, conn)
-    '            Dim reader As OleDbDataReader = cmd.ExecuteReader()
-
-    '            Dim names As String = "Unassigned People:" & Environment.NewLine
-    '            Dim anyUnassigned As Boolean = False
-
-    '            While reader.Read()
-    '                names &= "- " & reader("FirstName").ToString() & " " & reader("LastName").ToString() & Environment.NewLine
-    '                anyUnassigned = True
-    '            End While
-
-    '            If anyUnassigned Then
-    '                Label29.Text = names
-    '            Else
-    '                Label29.Text = "All users are assigned to tasks or chores."
-    '            End If
-
-    '        Catch ex As Exception
-    '            Label29.Text = "Error loading unassigned people: " & ex.Message
-    '        End Try
-    '    End Using
-    'End Sub
-
-    'Private Sub LoadUnassignedPeople()
-    '    Dim connString As String = HouseHoldManagment_Module.connectionString
-    '    Dim query As String = "
-    '    SELECT FirstName, LastName 
-    '    FROM PersonalDetails 
-    '    WHERE (FirstName & ' ' & LastName) NOT IN 
-    '        (SELECT AssignedTo FROM Tasks) 
-    '    AND (FirstName & ' ' & LastName) NOT IN 
-    '        (SELECT AssignedTo FROM Chores)
-    '"
-
-    '    Using conn As New OleDbConnection(connString)
-    '        Try
-    '            conn.Open()
-    '            Dim cmd As New OleDbCommand(query, conn)
-    '            Dim reader As OleDbDataReader = cmd.ExecuteReader()
-
-    '            Dim names As String = "Unassigned People:" & Environment.NewLine
-    '            Dim anyUnassigned As Boolean = False
-
-    '            While reader.Read()
-    '                names &= "- " & reader("FirstName").ToString() & " " & reader("LastName").ToString() & Environment.NewLine
-    '                anyUnassigned = True
-    '            End While
-
-    '            If anyUnassigned Then
-    '                Label29.Text = names
-    '            Else
-    '                Label29.Text = "All users are assigned to tasks or chores."
-    '            End If
-
-    '        Catch ex As Exception
-    '            Label29.Text = "Error loading unassigned people: " & ex.Message
-    '        End Try
-    '    End Using
-    'End Sub
 
 
     Private Sub LoadAssignmentSummary()
@@ -1739,7 +1481,52 @@ Public Class Dashboard
         End Using
     End Sub
 
+    Private Sub CheckDatabaseConnection()
+        'Dim connString As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=your_database_path.accdb;"
+        Using conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
+            Try
+                conn.Open()
+                Label36.Text = "Database connected successfully."
+                Label36.ForeColor = Color.Green
+            Catch ex As Exception
+                Label36.Text = "Database Connection failed: " & ex.Message
+                Label36.ForeColor = Color.Red
+            Finally
+                conn.Close()
+            End Try
+        End Using
+    End Sub
+
+    Private Sub LoadRecentGroceries()
+        Try
+            conn.Open()
+            Dim query As String = "SELECT ItemName, Quantity, PurchaseDate FROM GroceryItems WHERE PurchaseDate >= Date() - 7 ORDER BY PurchaseDate DESC"
+            Dim cmd As New OleDbCommand(query, conn)
+            Dim reader As OleDbDataReader = cmd.ExecuteReader()
+
+            ListBox3.Items.Clear()
+
+            If reader.HasRows Then
+                While reader.Read()
+                    Dim itemInfo As String = $"{reader("ItemName")} - Qty: {reader("Quantity")} - {CDate(reader("PurchaseDate")).ToShortDateString()}"
+                    ListBox3.Items.Add(itemInfo)
+                End While
+            Else
+                ListBox3.Items.Add("No groceries added in the last 7 days.")
+            End If
+
+        Catch ex As Exception
+            MessageBox.Show("Error loading recent groceries: " & ex.Message)
+        Finally
+            conn.Close()
+        End Try
+    End Sub
+
     Private Sub Label23_Click(sender As Object, e As EventArgs) Handles Label23.Click
+
+    End Sub
+
+    Private Sub Panel1_Paint(sender As Object, e As PaintEventArgs) Handles Panel1.Paint
 
     End Sub
 End Class
