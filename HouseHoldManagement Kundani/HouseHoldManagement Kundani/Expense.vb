@@ -12,12 +12,9 @@ Public Class Expense
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         Debug.WriteLine("Entering btnSubmit")
         Try
-
-
             Debug.WriteLine("User confirmed btnSubmit")
             Using conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
                 conn.Open()
-
 
                 'Define your unique criteria for an existing expense.
                 'Adjust these fields based on what makes an expense unique.
@@ -60,7 +57,6 @@ Public Class Expense
                     .paid = ComboBox6.SelectedItem.ToString}
 
                 'txtRecentUpdate.Text = $" Expense updated at {DateTime.Now:HH:MM}"
-
                 cmd.Parameters.Clear()
 
                 'cmd.Parameters.AddWithValue("@ExpenseID", expense.ExpenseID)
@@ -76,7 +72,6 @@ Public Class Expense
                 cmd.Parameters.AddWithValue("@StartDate", expense.StartDate)
                 cmd.Parameters.AddWithValue("@Recurring", expense.Recurring)
                 cmd.Parameters.AddWithValue("@Paid", expense.paid)
-
 
                 MsgBox("Expense Information Saved!" & vbCrLf &
                         "ExpenseID: " & expense.ExpenseID & vbCrLf &
@@ -94,9 +89,9 @@ Public Class Expense
                           "StartDate: " & expense.StartDate.ToString, vbInformation, "Expense Confirmation")
 
                 'Dim ID As Integer
-                'Dim Amount As Integer
+                Dim Amount As Integer = TextBox2.Text
                 'SubtractFromBudget(ID, Amount)
-
+                SubtractBudget(Amount)
                 ' Execute the SQL command to insert the data 
                 ' Log the SQL statement and parameter values  
 
@@ -1224,6 +1219,42 @@ Public Class Expense
                 Catch ex As Exception
                     MessageBox.Show("Error updating budget: " & ex.Message)
                 End Try
+            End Using
+        End Using
+    End Sub
+
+    Public Sub SubtractBudget(Amount As Decimal)
+        Dim querySelect As String = "SELECT BudgetAmount FROM Budget WHERE ID = ?"
+        Dim queryUpdate As String = "UPDATE Budget SET BudgetAmount = ? WHERE ID = ?"
+
+        Dim id As Integer = "?" ' Change as needed to identify your record
+
+        Using conn As New OleDbConnection(connectionString)
+            conn.Open()
+
+            ' Retrieve current budget
+            Dim currentBudget As Decimal
+            Using selectCmd As New OleDbCommand(querySelect, conn)
+                selectCmd.Parameters.AddWithValue("?", id)
+                Dim result As Object = selectCmd.ExecuteScalar()
+                If result IsNot Nothing Then
+                    currentBudget = Convert.ToDecimal(result)
+                Else
+                    Throw New Exception("Record not found.")
+                End If
+            End Using
+
+            ' Calculate new budget
+            Dim newBudget As Decimal = currentBudget - Amount
+            If newBudget < 0 Then
+                Throw New Exception("Budget cannot be NOTHING or R0.")
+            End If
+
+            ' Update the budget in the database
+            Using updateCmd As New OleDbCommand(queryUpdate, conn)
+                updateCmd.Parameters.AddWithValue("?", newBudget)
+                updateCmd.Parameters.AddWithValue("?", id)
+                updateCmd.ExecuteNonQuery()
             End Using
         End Using
     End Sub
