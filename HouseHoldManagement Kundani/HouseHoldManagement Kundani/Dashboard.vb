@@ -82,7 +82,7 @@ Public Class Dashboard
         LoadAssignmentSummary()
         LoadUpcomingDates()
         LoadUpcomingBirthdays()
-
+        LoadRecentGroceries()
 
 
 
@@ -258,43 +258,6 @@ Public Class Dashboard
     End Sub
 
 
-
-
-
-
-
-
-
-
-    'Private Sub LoadChoresStatus()
-
-    '    Dim completed As Integer = 0, inProgress As Integer = 0, notStarted As Integer = 0
-    '    Dim query As String = "SELECT Status, COUNT(*) FROM Chores GROUP BY Status"
-
-    '    Using conn As New OleDbConnection(connectionString), cmd As New OleDbCommand(query, conn)
-    '        conn.Open()
-    '        Using reader = cmd.ExecuteReader()
-    '            While reader.Read()
-    '                Select Case reader("Status").ToString()
-    '                    Case "Completed"
-    '                        completed = Convert.ToInt32(reader(1))
-    '                    Case "In progress"
-    '                        inProgress = Convert.ToInt32(reader(1))
-    '                    Case "Not Started"
-    '                        notStarted = Convert.ToInt32(reader(1))
-    '                End Select
-
-    '            End While
-
-    '        End Using
-
-    '    End Using
-    '    conn.Close()
-    '    Label15.Text = $"   Chores: -Completed: {completed} -In Progress: {inProgress} -Not Started: {notStarted}"
-    'End Sub
-
-
-
     Private Sub LoadChoresStatus()
         Dim completed As Integer = 0, inProgress As Integer = 0, notStarted As Integer = 0
         Dim query As String = "SELECT Status, COUNT(*) FROM Chores GROUP BY Status"
@@ -320,9 +283,6 @@ Public Class Dashboard
 
         Label15.Text = $"Chores: - Completed: {completed} - In Progress: {inProgress} - Not Started: {notStarted}"
     End Sub
-
-
-
 
 
     Private Sub Button7_Click_1(sender As Object, e As EventArgs) Handles Button7.Click
@@ -361,59 +321,6 @@ Public Class Dashboard
     Private Sub Button5_Click_1(sender As Object, e As EventArgs) Handles Button5.Click
         Personnel.ShowDialog()
     End Sub
-
-    'Private Function CheckExpense() As Boolean
-
-    '    Dim BudgetLimit As Decimal = 700
-
-    '    Dim TotalExpense As Decimal = 0
-
-
-    '    Try
-
-    '        Dim Conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
-
-    '        Conn.Open()
-
-    '        Dim cmd As New OleDbCommand("SELECT Amount From Expense", Conn)
-
-    '        Dim Reader As OleDbDataReader = cmd.ExecuteReader
-
-    '        While Reader.Read()
-
-    '            TotalExpense += Convert.ToDecimal(Reader("Amount"))
-
-    '        End While
-
-    '        Reader.Close()
-
-    '        Conn.Close()
-
-    '        If TotalExpense >= (BudgetLimit * 0.8D) Then
-
-    '            MessageBox.Show("Alert! you have used more that 80% of your budget", "Budget Alert", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-
-    '        End If
-
-
-    '        Send the email with the expired items
-
-    '        Dim messageBody As String = $"Alert! Budget Alert:{vbCrLf}{vbCrLf}{BudgetLimit}"
-
-    '        SendEmail("nethonondamudzunga45@gmail.com", "Budget Alert", messageBody)
-
-    '        Notify that the email was sent
-
-    '        MessageBox.Show("Budget Alert Alert Sent Successfully!", "Budget Alert", MessageBoxButtons.OK, MessageBoxIcon.Information)
-
-    '    Catch ex As Exception
-
-    '    End Try
-
-    '    Return False
-
-    'End Function
-
 
 
     Private Function CheckExpense() As Boolean
@@ -455,10 +362,6 @@ Public Class Dashboard
 
         Return False
     End Function
-
-
-
-
 
     ' Function to check expired groceries from Inventory table
 
@@ -1025,19 +928,8 @@ Public Class Dashboard
     End Sub
 
 
-
-
-
-
-
-
-
-
-
     Dim scheduleAlerts As New Queue(Of String)
     Dim alertTimer As New Timer()
-
-
 
     'Dim scheduleAlerts As New Queue(Of String)
     Dim backupScheduleAlerts As New List(Of String)
@@ -1088,17 +980,12 @@ Public Class Dashboard
 
     Private Sub Timer3_Tick(sender As Object, e As EventArgs) Handles Timer3.Tick
 
-
-
-
-
         'Timer3.Stop()
         RunSearchAndBlink()
 
     End Sub
 
     Private Sub Button16_Click(sender As Object, e As EventArgs) Handles Button16.Click
-
 
         Notifications.ShowDialog()
 
@@ -1338,10 +1225,6 @@ Public Class Dashboard
     End Sub
 
 
-
-
-
-
     Private Sub LoadMemberChoreTaskSummary()
         FlowLayoutPanel3.Controls.Clear()
 
@@ -1376,9 +1259,6 @@ Public Class Dashboard
         End Using
     End Sub
 
-
-
-
     Private Sub LoadAssignmentSummary()
         Dim connString As String = HouseHoldManagment_Module.connectionString
 
@@ -1407,8 +1287,6 @@ Public Class Dashboard
             Label31.Text = $"Unassigned Members: {unassignedMembers}"
         End Using
     End Sub
-
-
 
     Private Sub LoadUpcomingDates()
         Dim connString As String = HouseHoldManagment_Module.connectionString
