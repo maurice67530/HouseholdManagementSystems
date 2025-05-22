@@ -167,6 +167,9 @@ Public Class Household_Document
         ToolTip1.SetToolTip(Button2, "Upload")
         ToolTip1.SetToolTip(Button1, "Open")
         ToolTip1.SetToolTip(Button3, "Delete")
+        ToolTip1.SetToolTip(Button5, "Print")
+        ToolTip1.SetToolTip(Button4, "Refresh")
+
     End Sub
 
 
@@ -397,5 +400,10 @@ Public Class Household_Document
 
     Private Sub Label1_Click(sender As Object, e As EventArgs) Handles Label1.Click
 
+    End Sub
+
+    Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
+        LoadHouseholdDocumentDatafromDatabase()
+        ClearControls(Me)
     End Sub
 End Class
