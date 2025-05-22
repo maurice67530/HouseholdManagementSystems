@@ -1002,12 +1002,15 @@ Public Class Expense
     End Sub
     Private Sub DisplayDataInMessageBox()
         Dim expenseQuery As String = "SELECT * FROM Expense" ' Fetch all expense records
-        Dim budgetQuery As String = "SELECT BudgetAmount FROM Budget WHERE ID=?" ' Adjust as needed
+        'Dim budgetQuery As String = "SELECT BudgetAmount FROM Budget WHERE ID=?" ' Adjust as needed
 
         Using conn As New OleDbConnection(connectionString)
             Dim expenseCommand As New OleDbCommand(expenseQuery, conn)
+            'Dim budgetCommand As New OleDbCommand(budgetQuery, conn)
+            Dim budgetID As Integer = 1 ' Replace with actual Budget record ID
+            Dim budgetQuery As String = "SELECT BudgetAmount FROM Budget WHERE ID=?"
             Dim budgetCommand As New OleDbCommand(budgetQuery, conn)
-
+            budgetCommand.Parameters.AddWithValue("?", budgetID)
             Try
                 conn.Open()
 
@@ -1070,9 +1073,10 @@ Public Class Expense
                                 currentBudget += expense.Amount ' revert deduction
                             Else
                                 ' Update the budget in database
-                                Dim updateBudgetQuery As String = "UPDATE Budget SET Amount = ? WHERE ID=1"
+                                Dim updateBudgetQuery As String = "UPDATE Budget SET BudgetAmount = ? WHERE ID=?"
                                 Using updateCmd As New OleDbCommand(updateBudgetQuery, conn)
-                                    updateCmd.Parameters.AddWithValue("@p1", currentBudget)
+                                    updateCmd.Parameters.AddWithValue("?", currentBudget)
+                                    updateCmd.Parameters.AddWithValue("?", budgetID)
                                     updateCmd.ExecuteNonQuery()
                                 End Using
 
