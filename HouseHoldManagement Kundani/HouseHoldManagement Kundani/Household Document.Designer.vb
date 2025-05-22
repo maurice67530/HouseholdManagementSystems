@@ -55,6 +55,7 @@ Partial Class Household_Document
         Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
         Me.PictureBoxPreview = New System.Windows.Forms.PictureBox()
         Me.WebBrowser1 = New System.Windows.Forms.WebBrowser()
+        Me.Button4 = New System.Windows.Forms.Button()
         Me.Panel2.SuspendLayout()
         Me.Panel1.SuspendLayout()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -72,7 +73,7 @@ Partial Class Household_Document
         Me.Panel2.Controls.Add(Me.Label2)
         Me.Panel2.Controls.Add(Me.Label5)
         Me.Panel2.Controls.Add(Me.Label7)
-        Me.Panel2.Location = New System.Drawing.Point(12, 76)
+        Me.Panel2.Location = New System.Drawing.Point(2, 54)
         Me.Panel2.Name = "Panel2"
         Me.Panel2.Size = New System.Drawing.Size(297, 218)
         Me.Panel2.TabIndex = 25
@@ -223,7 +224,7 @@ Partial Class Household_Document
         Me.Panel1.Controls.Add(Me.ComboBox2)
         Me.Panel1.Controls.Add(Me.TextBox3)
         Me.Panel1.Controls.Add(Me.Label4)
-        Me.Panel1.Location = New System.Drawing.Point(534, 76)
+        Me.Panel1.Location = New System.Drawing.Point(524, 57)
         Me.Panel1.Name = "Panel1"
         Me.Panel1.Size = New System.Drawing.Size(304, 218)
         Me.Panel1.TabIndex = 31
@@ -239,16 +240,16 @@ Partial Class Household_Document
         'DataGridView1
         '
         Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DataGridView1.Location = New System.Drawing.Point(12, 300)
+        Me.DataGridView1.Location = New System.Drawing.Point(8, 290)
         Me.DataGridView1.Name = "DataGridView1"
-        Me.DataGridView1.Size = New System.Drawing.Size(826, 142)
+        Me.DataGridView1.Size = New System.Drawing.Size(820, 142)
         Me.DataGridView1.TabIndex = 30
         '
         'Button3
         '
         Me.Button3.BackColor = System.Drawing.SystemColors.ActiveCaption
         Me.Button3.Image = CType(resources.GetObject("Button3.Image"), System.Drawing.Image)
-        Me.Button3.Location = New System.Drawing.Point(763, 448)
+        Me.Button3.Location = New System.Drawing.Point(753, 437)
         Me.Button3.Name = "Button3"
         Me.Button3.Size = New System.Drawing.Size(75, 48)
         Me.Button3.TabIndex = 29
@@ -259,7 +260,7 @@ Partial Class Household_Document
         Me.Button2.BackColor = System.Drawing.SystemColors.ActiveCaption
         Me.Button2.BackgroundImage = CType(resources.GetObject("Button2.BackgroundImage"), System.Drawing.Image)
         Me.Button2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
-        Me.Button2.Location = New System.Drawing.Point(22, 448)
+        Me.Button2.Location = New System.Drawing.Point(27, 438)
         Me.Button2.Name = "Button2"
         Me.Button2.Size = New System.Drawing.Size(75, 48)
         Me.Button2.TabIndex = 28
@@ -270,7 +271,7 @@ Partial Class Household_Document
         Me.Button1.BackColor = System.Drawing.SystemColors.ActiveCaption
         Me.Button1.BackgroundImage = CType(resources.GetObject("Button1.BackgroundImage"), System.Drawing.Image)
         Me.Button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
-        Me.Button1.Location = New System.Drawing.Point(195, 448)
+        Me.Button1.Location = New System.Drawing.Point(216, 437)
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(75, 48)
         Me.Button1.TabIndex = 27
@@ -290,7 +291,7 @@ Partial Class Household_Document
         '
         Me.Button5.BackColor = System.Drawing.SystemColors.ActiveCaption
         Me.Button5.Image = CType(resources.GetObject("Button5.Image"), System.Drawing.Image)
-        Me.Button5.Location = New System.Drawing.Point(616, 448)
+        Me.Button5.Location = New System.Drawing.Point(391, 438)
         Me.Button5.Name = "Button5"
         Me.Button5.Size = New System.Drawing.Size(75, 48)
         Me.Button5.TabIndex = 33
@@ -309,7 +310,7 @@ Partial Class Household_Document
         '
         'PictureBoxPreview
         '
-        Me.PictureBoxPreview.Location = New System.Drawing.Point(315, 203)
+        Me.PictureBoxPreview.Location = New System.Drawing.Point(305, 184)
         Me.PictureBoxPreview.Name = "PictureBoxPreview"
         Me.PictureBoxPreview.Size = New System.Drawing.Size(213, 91)
         Me.PictureBoxPreview.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
@@ -318,17 +319,28 @@ Partial Class Household_Document
         '
         'WebBrowser1
         '
-        Me.WebBrowser1.Location = New System.Drawing.Point(315, 76)
+        Me.WebBrowser1.Location = New System.Drawing.Point(305, 54)
         Me.WebBrowser1.MinimumSize = New System.Drawing.Size(20, 20)
         Me.WebBrowser1.Name = "WebBrowser1"
         Me.WebBrowser1.Size = New System.Drawing.Size(213, 121)
         Me.WebBrowser1.TabIndex = 39
         '
+        'Button4
+        '
+        Me.Button4.BackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.Button4.Image = CType(resources.GetObject("Button4.Image"), System.Drawing.Image)
+        Me.Button4.Location = New System.Drawing.Point(569, 437)
+        Me.Button4.Name = "Button4"
+        Me.Button4.Size = New System.Drawing.Size(75, 48)
+        Me.Button4.TabIndex = 40
+        Me.Button4.UseVisualStyleBackColor = False
+        '
         'Household_Document
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(850, 497)
+        Me.ClientSize = New System.Drawing.Size(830, 485)
+        Me.Controls.Add(Me.Button4)
         Me.Controls.Add(Me.WebBrowser1)
         Me.Controls.Add(Me.PictureBoxPreview)
         Me.Controls.Add(Me.Button5)
@@ -384,4 +396,5 @@ Partial Class Household_Document
     Friend WithEvents OpenFileDialog1 As OpenFileDialog
     Friend WithEvents PictureBoxPreview As PictureBox
     Friend WithEvents WebBrowser1 As WebBrowser
+    Friend WithEvents Button4 As Button
 End Class
