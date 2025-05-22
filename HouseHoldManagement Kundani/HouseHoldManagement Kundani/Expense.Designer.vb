@@ -30,10 +30,11 @@ Partial Class Expense
         Me.Button5 = New System.Windows.Forms.Button()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.ComboBox7 = New System.Windows.Forms.ComboBox()
+        Me.Label22 = New System.Windows.Forms.Label()
         Me.ComboBox6 = New System.Windows.Forms.ComboBox()
         Me.Label20 = New System.Windows.Forms.Label()
+        Me.TextBox9 = New System.Windows.Forms.TextBox()
         Me.TextBox8 = New System.Windows.Forms.TextBox()
-        Me.CheckBox1 = New System.Windows.Forms.CheckBox()
         Me.Label18 = New System.Windows.Forms.Label()
         Me.TextBox2 = New System.Windows.Forms.TextBox()
         Me.ComboBox1 = New System.Windows.Forms.ComboBox()
@@ -46,11 +47,12 @@ Partial Class Expense
         Me.Label7 = New System.Windows.Forms.Label()
         Me.Label8 = New System.Windows.Forms.Label()
         Me.Label4 = New System.Windows.Forms.Label()
-        Me.Label22 = New System.Windows.Forms.Label()
-        Me.TextBox9 = New System.Windows.Forms.TextBox()
+        Me.CheckBox1 = New System.Windows.Forms.CheckBox()
         Me.Label15 = New System.Windows.Forms.Label()
         Me.Label16 = New System.Windows.Forms.Label()
         Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.ComboBox2 = New System.Windows.Forms.ComboBox()
         Me.Label21 = New System.Windows.Forms.Label()
         Me.ListBox1 = New System.Windows.Forms.ListBox()
         Me.DateTimePicker2 = New System.Windows.Forms.DateTimePicker()
@@ -156,6 +158,15 @@ Partial Class Expense
         Me.ComboBox7.Size = New System.Drawing.Size(198, 24)
         Me.ComboBox7.TabIndex = 94
         '
+        'Label22
+        '
+        Me.Label22.AutoSize = True
+        Me.Label22.Location = New System.Drawing.Point(7, 266)
+        Me.Label22.Name = "Label22"
+        Me.Label22.Size = New System.Drawing.Size(54, 16)
+        Me.Label22.TabIndex = 93
+        Me.Label22.Text = "Search "
+        '
         'ComboBox6
         '
         Me.ComboBox6.FormattingEnabled = True
@@ -174,23 +185,19 @@ Partial Class Expense
         Me.Label20.TabIndex = 90
         Me.Label20.Text = "Paid"
         '
+        'TextBox9
+        '
+        Me.TextBox9.Location = New System.Drawing.Point(112, 265)
+        Me.TextBox9.Name = "TextBox9"
+        Me.TextBox9.Size = New System.Drawing.Size(197, 22)
+        Me.TextBox9.TabIndex = 92
+        '
         'TextBox8
         '
         Me.TextBox8.Location = New System.Drawing.Point(113, 34)
         Me.TextBox8.Name = "TextBox8"
         Me.TextBox8.Size = New System.Drawing.Size(198, 22)
         Me.TextBox8.TabIndex = 89
-        '
-        'CheckBox1
-        '
-        Me.CheckBox1.AutoSize = True
-        Me.CheckBox1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.CheckBox1.Location = New System.Drawing.Point(17, 199)
-        Me.CheckBox1.Name = "CheckBox1"
-        Me.CheckBox1.Size = New System.Drawing.Size(101, 19)
-        Me.CheckBox1.TabIndex = 88
-        Me.CheckBox1.Text = "Recurring ?"
-        Me.CheckBox1.UseVisualStyleBackColor = True
         '
         'Label18
         '
@@ -305,27 +312,22 @@ Partial Class Expense
         Me.Label4.TabIndex = 71
         Me.Label4.Text = "Tag"
         '
-        'Label22
+        'CheckBox1
         '
-        Me.Label22.AutoSize = True
-        Me.Label22.Location = New System.Drawing.Point(7, 266)
-        Me.Label22.Name = "Label22"
-        Me.Label22.Size = New System.Drawing.Size(54, 16)
-        Me.Label22.TabIndex = 93
-        Me.Label22.Text = "Search "
-        '
-        'TextBox9
-        '
-        Me.TextBox9.Location = New System.Drawing.Point(112, 265)
-        Me.TextBox9.Name = "TextBox9"
-        Me.TextBox9.Size = New System.Drawing.Size(197, 22)
-        Me.TextBox9.TabIndex = 92
+        Me.CheckBox1.AutoSize = True
+        Me.CheckBox1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.CheckBox1.Location = New System.Drawing.Point(11, 226)
+        Me.CheckBox1.Name = "CheckBox1"
+        Me.CheckBox1.Size = New System.Drawing.Size(101, 19)
+        Me.CheckBox1.TabIndex = 88
+        Me.CheckBox1.Text = "Recurring ?"
+        Me.CheckBox1.UseVisualStyleBackColor = True
         '
         'Label15
         '
         Me.Label15.AutoSize = True
         Me.Label15.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label15.Location = New System.Drawing.Point(14, 237)
+        Me.Label15.Location = New System.Drawing.Point(8, 252)
         Me.Label15.Name = "Label15"
         Me.Label15.Size = New System.Drawing.Size(131, 15)
         Me.Label15.TabIndex = 85
@@ -335,7 +337,7 @@ Partial Class Expense
         '
         Me.Label16.AutoSize = True
         Me.Label16.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label16.Location = New System.Drawing.Point(16, 267)
+        Me.Label16.Location = New System.Drawing.Point(8, 276)
         Me.Label16.Name = "Label16"
         Me.Label16.Size = New System.Drawing.Size(154, 15)
         Me.Label16.TabIndex = 86
@@ -344,6 +346,8 @@ Partial Class Expense
         'Panel2
         '
         Me.Panel2.BackColor = System.Drawing.SystemColors.GradientActiveCaption
+        Me.Panel2.Controls.Add(Me.Label1)
+        Me.Panel2.Controls.Add(Me.ComboBox2)
         Me.Panel2.Controls.Add(Me.Label21)
         Me.Panel2.Controls.Add(Me.ListBox1)
         Me.Panel2.Controls.Add(Me.CheckBox1)
@@ -362,6 +366,23 @@ Partial Class Expense
         Me.Panel2.Name = "Panel2"
         Me.Panel2.Size = New System.Drawing.Size(317, 302)
         Me.Panel2.TabIndex = 122
+        '
+        'Label1
+        '
+        Me.Label1.AutoSize = True
+        Me.Label1.Location = New System.Drawing.Point(8, 187)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(83, 16)
+        Me.Label1.TabIndex = 93
+        Me.Label1.Text = "Data Tables"
+        '
+        'ComboBox2
+        '
+        Me.ComboBox2.FormattingEnabled = True
+        Me.ComboBox2.Location = New System.Drawing.Point(122, 184)
+        Me.ComboBox2.Name = "ComboBox2"
+        Me.ComboBox2.Size = New System.Drawing.Size(188, 24)
+        Me.ComboBox2.TabIndex = 92
         '
         'Label21
         '
@@ -492,9 +513,9 @@ Partial Class Expense
         Me.Button1.BackColor = System.Drawing.SystemColors.ActiveCaption
         Me.Button1.Cursor = System.Windows.Forms.Cursors.Hand
         Me.Button1.Image = CType(resources.GetObject("Button1.Image"), System.Drawing.Image)
-        Me.Button1.Location = New System.Drawing.Point(576, 468)
+        Me.Button1.Location = New System.Drawing.Point(576, 470)
         Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(75, 51)
+        Me.Button1.Size = New System.Drawing.Size(75, 49)
         Me.Button1.TabIndex = 124
         Me.Button1.UseVisualStyleBackColor = False
         '
@@ -641,4 +662,6 @@ Partial Class Expense
     Friend WithEvents Label22 As Label
     Friend WithEvents TextBox9 As TextBox
     Friend WithEvents Button6 As Button
+    Friend WithEvents Label1 As Label
+    Friend WithEvents ComboBox2 As ComboBox
 End Class
