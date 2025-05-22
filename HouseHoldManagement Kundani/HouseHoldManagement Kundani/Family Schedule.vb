@@ -888,7 +888,7 @@ Public Class Family_Schedule
 
 
 
-
+    'vHO ZWIVHUYA, MULANGA AND XILUVA
     Public Sub AddMealToSchedule(mealDate As DateTime, mealTitle As String, mealDetails As String)
 
         Using conn As New OleDbConnection(connectionString)
@@ -922,10 +922,6 @@ Public Class Family_Schedule
         DataGridView1.DataSource = dt
     End Sub
 
-    'Private Sub FamilySchedule_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-    '    LoadFamilySchedule()
-    'End Sub
-
     Private Sub Button1_Click_1(sender As Object, e As EventArgs) Handles Button1.Click
         LoadFamilySchedule()
         'LoadMealsToCalendar()
@@ -933,9 +929,9 @@ Public Class Family_Schedule
 
     Dim mealDict As New Dictionary(Of Date, List(Of String))
 
-    Private Sub LoadMealsToCalendar()
-        mealDict.Clear()
 
+    Private Sub LoadMealSchedule()
+        mealDict.Clear()
 
         Using conn As New OleDbConnection(connectionString)
             Dim query As String = "SELECT DateOfEvent, Title FROM FamilySchedule WHERE EventType = 'Meal'"
@@ -943,35 +939,38 @@ Public Class Family_Schedule
                 conn.Open()
                 Using reader As OleDbDataReader = cmd.ExecuteReader()
                     While reader.Read()
-                        Dim mealDate As Date = CDate(reader("DateOfEvent"))
+                        Dim mealDate As Date = CDate(reader("DateOfEvent")).Date
                         Dim mealTitle As String = reader("Title").ToString()
 
-                        If Not mealDict.ContainsKey(mealDate.Date) Then
-                            mealDict(mealDate.Date) = New List(Of String)
+                        If Not mealDict.ContainsKey(mealDate) Then
+                            mealDict(mealDate) = New List(Of String)
                         End If
-                        mealDict(mealDate.Date).Add(mealTitle)
+                        mealDict(mealDate).Add(mealTitle)
                     End While
                 End Using
             End Using
         End Using
 
+        ' Bold meal dates in calendar
         MonthCalendar1.BoldedDates = mealDict.Keys.ToArray()
     End Sub
 
     Private Sub MonthCalendarMeals_DateChanged(sender As Object, e As DateRangeEventArgs) Handles MonthCalendar1.DateChanged
         Dim selectedDate As Date = MonthCalendar1.SelectionStart.Date
-        ListBox1.Items.Clear()
 
         If mealDict.ContainsKey(selectedDate) Then
-            For Each meal In mealDict(selectedDate)
-                ListBox1.Items.Add(meal)
-            Next
+            Dim meals As List(Of String) = mealDict(selectedDate)
+            Dim mealList As String = String.Join(Environment.NewLine, meals)
+            MessageBox.Show("Meals for " & selectedDate.ToShortDateString() & ":" & Environment.NewLine & mealList,
+                        "Meal Schedule", MessageBoxButtons.OK, MessageBoxIcon.Information)
         Else
-            ListBox1.Items.Add("No meals scheduled.")
+            MessageBox.Show("No meals scheduled for " & selectedDate.ToShortDateString() & ".",
+                        "Meal Schedule", MessageBoxButtons.OK, MessageBoxIcon.Information)
         End If
     End Sub
 
     Private Sub FamilySchedule_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        LoadMealsToCalendar()
+        LoadMealSchedule()
     End Sub
+
 End Class

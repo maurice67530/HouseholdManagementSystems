@@ -64,9 +64,9 @@ Public Class MealPlan
         tooltip.SetToolTip(btnRefresh, "Refresh")
         tooltip.SetToolTip(btnSort, "Sort")
         tooltip.SetToolTip(btnHighlight, "Highlight")
-        tooltip.SetToolTip(btnPrint, "Print")
         tooltip.SetToolTip(btnSuggest, "Suggest")
         tooltip.SetToolTip(btnFilter, "Filter")
+        tooltip.SetToolTip(Button2, "View Family Schedule")
 
         tooltip.SetToolTip(ComboBox3, "Select the meal")
         LoadMealPlanfromDatabase1()
@@ -361,52 +361,72 @@ Public Class MealPlan
 
     Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
 
-
-        ''''''''SAVE''''''''''''''''''
-
-
         Try
-            Debug.WriteLine("Entering btnEdit_Click")
+
             Using conn As New OleDbConnection(connectionString)
                 conn.Open()
 
-                Dim tablename As String = "MealPlans"
-                Using cmd As New OleDbCommand("INSERT INTO MealPlans ([StartDate], [EndDate], [Meals], [MealName], [Items], [TotalCalories], [Description], [FilePath], [Calories], [Frequency]) VALUES (@StartDate, @EndDate, @Meals, @MealName, @Items, @TotalCalories, @Description, @FilePath, @Calories, @Frequency)", conn)
+                ' Update the table name if necessary  
 
-                    cmd.Parameters.AddWithValue("@StartDate", DateTimePicker1.Text)
-                    cmd.Parameters.AddWithValue("@EndDate", DateTimePicker2.Text)
-                    cmd.Parameters.AddWithValue("@Meals", lstMealSuggestions.SelectedItem.ToString)
-                    cmd.Parameters.AddWithValue("@MealName", TextBox4.Text)
-                    cmd.Parameters.AddWithValue("@Items", ComboBox3.SelectedItem.ToString)
-                    cmd.Parameters.AddWithValue("@TotalCalories", NumericUpDown1.Value)
-                    cmd.Parameters.AddWithValue("@Description", TextBox2.Text)
-                    cmd.Parameters.AddWithValue("@FilePath", TextBox3.Text)
-                    cmd.Parameters.AddWithValue("@Calories", ComboBox1.SelectedItem.ToString)
-                    cmd.Parameters.AddWithValue("@Frequency", ComboBox2.SelectedItem.ToString)
-                    cmd.ExecuteNonQuery()
-                End Using
-                MessageBox.Show("MealPlan Updated successfully")
+
+                ' Create an OleDbCommand to insert the Expense data into the database  
+                Dim cmd As New OleDbCommand("INSERT INTO MealPlans ([StartDate], [EndDate], [Meals], [MealName], [Items], [TotalCalories], [Description], [FilePath], [Calories], [Frequency]) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", conn)
+
+
+                Dim meals As New MealPlans
+
+                'Assign Values 
+                meals.StartDate = DateTimePicker1.Text
+                meals.EndDate = DateTimePicker2.Text
+                meals.Meals = lstMealSuggestions.SelectedItem.ToString()
+                meals.MealName = TextBox4.Text
+                meals.Items = ComboBox3.SelectedItem.ToString
+                meals.TotalCalories = NumericUpDown1.Value
+                meals.Description = TextBox2.Text
+                meals.FilePath = TextBox3.Text
+                meals.Calories = ComboBox1.SelectedItem.ToString
+                meals.Frequency = ComboBox2.SelectedItem.ToString
+
+
+                ' Set the parameter values from the UI controls  
+                'For Each exp As Expenses In expenses
+                cmd.Parameters.Clear()
+
+
+                cmd.Parameters.AddWithValue("@StartDate", DateTimePicker1.Text)
+                cmd.Parameters.AddWithValue("@EndDate", DateTimePicker2.Text)
+                cmd.Parameters.AddWithValue("@Meals", lstMealSuggestions.SelectedItem.ToString)
+                cmd.Parameters.AddWithValue("@MealName", TextBox4.Text)
+                cmd.Parameters.AddWithValue("@Items", ComboBox3.SelectedItem.ToString)
+                cmd.Parameters.AddWithValue("@TotalCalories", NumericUpDown1.Value)
+                cmd.Parameters.AddWithValue("@Description", TextBox2.Text)
+                cmd.Parameters.AddWithValue("@FilePath", TextBox3.Text)
+                cmd.Parameters.AddWithValue("@Calories", ComboBox1.SelectedItem.ToString)
+                cmd.Parameters.AddWithValue("@Frequency", ComboBox2.SelectedItem.ToString)
+
+                cmd.ExecuteNonQuery()
+
+                'Display a confirmation messageBox  
+                MsgBox("Schedule Information Added!" & vbCrLf &
+                "StartDate: " & meals.StartDate.ToString & vbCrLf &
+                "EndDate: " & meals.EndDate.ToString & vbCrLf &
+                "Meals: " & meals.Meals & vbCrLf &
+                "Items: " & meals.Items & vbCrLf &
+                 "MealName: " & meals.MealName & vbCrLf &
+                "TotalCalories: " & meals.TotalCalories & vbCrLf &
+                "Description: " & meals.Description & vbCrLf &
+                 "FilePath: " & meals.FilePath & vbCrLf &
+                 "Calories: " & meals.Calories & vbCrLf &
+                "Frequency: " & meals.Frequency.ToString(), vbInformation, "Schedule confirmation")
 
             End Using
 
-            Debug.WriteLine("The data has been edited successfully")
-        Catch ex As OleDbException
-            Debug.WriteLine($"Database saving in btnEdit_Click: {ex.Message}")
-            Debug.WriteLine($"Stack Trace: {ex.StackTrace}")
-            ' MessageBox.Show("error saving expense to database. please check the connection.", "Database error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         Catch ex As Exception
-            MessageBox.Show($"Unexpected error: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-            Debug.WriteLine($"General error in btnEdit_Click: {ex.Message}")
-            Debug.WriteLine($"Stack Trace: {ex.StackTrace}")
+            Debug.WriteLine($"Database error in btnAdd_Click: {ex.Message}")
+            MessageBox.Show("Error saving Schedule to database: " & ex.Message & vbNewLine & ex.StackTrace, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Debug.WriteLine("Exiting btnAdd")
+
         End Try
-
-        Debug.WriteLine("Existing btnSave_Click")
-
-
-
-
-
-
 
 
         '' MealPlan Form - Add this code to btnAddMeal_Click
@@ -522,4 +542,11 @@ Public Class MealPlan
         End Try
         Debug.WriteLine("Done with populating combobox from database")
     End Sub
+
+    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
+        If MessageBox.Show("Meal saved! Would you like to view the calendar?", "Open Family Schedule", MessageBoxButtons.YesNo) = DialogResult.Yes Then
+            Family_Schedule.ShowDialog()
+        End If
+    End Sub
+
 End Class
