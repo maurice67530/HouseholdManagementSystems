@@ -22,12 +22,11 @@ Public Class Dashboard
     Private originalHeight As Integer
     Public Shared LoggedInUser As String
     Private Sub Dashboard_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-
         ' Show total users who have logged in
         Label39.Text = "Users: " & GetTotalUsersLoggedIn().ToString()
-
-
         CheckDatabaseConnection()
+
+
         lblbadge.Region = New Region(New Drawing2D.GraphicsPath())
         Dim gp As New Drawing.Drawing2D.GraphicsPath()
         gp.AddEllipse(0, 0, lblbadge.Width, lblbadge.Height)
@@ -36,6 +35,30 @@ Public Class Dashboard
         In_App_Message.NotifyIcon1.ShowBalloonTip(5000) ' 5 seconds
 
 
+        ' Save the form's original design size
+        originalWidth = Me.Width
+        originalHeight = Me.Height
+
+        '' Get screen size excluding the taskbar
+        'Dim workingWidth As Integer = Screen.PrimaryScreen.WorkingArea.Width
+        'Dim workingHeight As Integer = Screen.PrimaryScreen.WorkingArea.Height
+
+        '' Calculate scale
+        'Dim scaleX As Single = workingWidth / originalWidth
+        'Dim scaleY As Single = workingHeight / originalHeight
+
+        '' Resize the form to fit working area
+        'Me.FormBorderStyle = FormBorderStyle.None
+        'Me.Bounds = Screen.PrimaryScreen.WorkingArea
+        'Me.AutoScaleMode = AutoScaleMode.None
+        'Application.DoEvents()
+
+        '' Resize controls
+        'ResizeControls(Me, scaleX, scaleY)
+
+        '' Allow ESC to close while testing
+        'Me.KeyPreview = True
+        ''''''''
 
         ' Save the form's original design size
         originalWidth = Me.Width
@@ -61,7 +84,6 @@ Public Class Dashboard
         ' Allow ESC to close while testing
         Me.KeyPreview = True
 
-
         UpdateNotificationCount()
         LoadChoresStatus()
 
@@ -85,7 +107,6 @@ Public Class Dashboard
         LoadUpcomingDates()
         LoadUpcomingBirthdays()
         LoadRecentGroceries()
-
 
 
         ' Show current date, month, and time
@@ -124,8 +145,6 @@ Public Class Dashboard
         'Label18.Font = New Font("Segoe UI", 14, FontStyle.Bold)
 
         'CheckExpense()
-
-
 
 
 
@@ -233,28 +252,24 @@ Public Class Dashboard
         End If
 
 
-
     End Sub
 
-    Private Function GetTotalUsersLoggedIn() As Integer
-        Dim total As Integer = 0
-        Dim query As String = "SELECT COUNT(*) FROM (SELECT UserName FROM Users GROUP BY UserName)"
-
-        Using conn As New OleDbConnection(connectionString)
-            Using cmd As New OleDbCommand(query, conn)
-                conn.Open()
-                total = CInt(cmd.ExecuteScalar())
-            End Using
-        End Using
-
-        Return total
-    End Function
-
-
-
-
-
     Private Sub ResizeControls(parent As Control, scaleX As Single, scaleY As Single)
+        'For Each ctrl As Control In parent.Controls
+        '    ctrl.Left = CInt(ctrl.Left * scaleX)
+        '    ctrl.Top = CInt(ctrl.Top * scaleY)
+        '    ctrl.Width = CInt(ctrl.Width * scaleX)
+        '    ctrl.Height = CInt(ctrl.Height * scaleY)
+
+        '    Dim fontScale As Single = (scaleX + scaleY) / 2
+        '    ctrl.Font = New Font(ctrl.Font.FontFamily, ctrl.Font.Size * fontScale, ctrl.Font.Style)
+
+        '    If ctrl.HasChildren Then
+        '        ResizeControls(ctrl, scaleX, scaleY)
+        '    End If
+        'Next
+
+
         For Each ctrl As Control In parent.Controls
             ctrl.Left = CInt(ctrl.Left * scaleX)
             ctrl.Top = CInt(ctrl.Top * scaleY)
@@ -268,6 +283,7 @@ Public Class Dashboard
                 ResizeControls(ctrl, scaleX, scaleY)
             End If
         Next
+
     End Sub
 
     ' ESC key to close (for testing)
@@ -276,6 +292,28 @@ Public Class Dashboard
             Me.Close()
         End If
     End Sub
+
+    Private Function GetTotalUsersLoggedIn() As Integer
+
+        Dim total As Integer = 0
+
+        Dim query As String = "SELECT COUNT(*) FROM (SELECT UserName FROM Users GROUP BY UserName)"
+
+        Using conn As New OleDbConnection(connectionString)
+
+            Using cmd As New OleDbCommand(query, conn)
+
+                conn.Open()
+
+                total = CInt(cmd.ExecuteScalar())
+
+            End Using
+
+        End Using
+
+        Return total
+
+    End Function
 
 
     Private Sub LoadChoresStatus()
