@@ -130,6 +130,74 @@ Public Class Household_Document
 
     End Sub
 
+    'Private Sub LoadHouseholdDocument()
+    '    Try
+    '        Using conn As New OleDbConnection(connectionString)
+    '            Dim tablename As String = "HouseholdDocument"
+    '            Dim cmd As New OleDbCommand($"SELECT * FROM {tablename}", conn)
+    '            Dim da As New OleDbDataAdapter(cmd)
+    '            Dim dt As New DataTable()
+    '            da.Fill(dt)
+    '            DataGridView1.DataSource = dt
+
+    '            ' Apply color formatting based on Category column
+    '            For Each row As DataGridViewRow In DataGridView1.Rows
+    '                If Not row.IsNewRow Then
+    '                    Dim category As String = row.Cells("Category").Value.ToString().ToLower()
+    '                    Select Case category
+    '                        Case "bills"
+    '                            row.DefaultCellStyle.BackColor = Color.LightBlue
+    '                        Case "medical"
+    '                            row.DefaultCellStyle.BackColor = Color.LightPink
+    '                        Case "school"
+    '                            row.DefaultCellStyle.BackColor = Color.LightGreen
+    '                        Case "finance"
+    '                            row.DefaultCellStyle.BackColor = Color.Khaki
+    '                        Case "insurance"
+    '                            row.DefaultCellStyle.BackColor = Color.Orange
+    '                        Case "work"
+    '                            row.DefaultCellStyle.BackColor = Color.LightGray
+    '                        Case "mics", "misc", "miscellaneous"
+    '                            row.DefaultCellStyle.BackColor = Color.Plum
+    '                        Case Else
+    '                            row.DefaultCellStyle.BackColor = Color.White
+    '                    End Select
+    '                End If
+    '            Next
+
+    '        End Using
+
+    '    Catch ex As OleDbException
+    '        MessageBox.Show("Error Loading HouseholdDocument to database: " & ex.Message & vbNewLine & ex.StackTrace, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+    '    Catch ex As Exception
+    '        MessageBox.Show("Unexpected Error: " & ex.Message & vbNewLine & ex.StackTrace, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+    '    End Try
+    'End Sub
+    Private Sub HighlightRowsByCategory()
+        For Each row As DataGridViewRow In DataGridView1.Rows
+            If Not row.IsNewRow Then
+                Dim category As String = row.Cells("Category").Value.ToString().ToLower()
+                Select Case category
+                    Case "bills"
+                        row.DefaultCellStyle.BackColor = Color.LightBlue
+                    Case "medical"
+                        row.DefaultCellStyle.BackColor = Color.LightPink
+                    Case "school"
+                        row.DefaultCellStyle.BackColor = Color.LightGreen
+                    Case "finance"
+                        row.DefaultCellStyle.BackColor = Color.Khaki
+                    Case "insurance"
+                        row.DefaultCellStyle.BackColor = Color.Orange
+                    Case "work"
+                        row.DefaultCellStyle.BackColor = Color.LightGray
+                    Case "mics", "misc", "miscellaneous"
+                        row.DefaultCellStyle.BackColor = Color.Plum
+                    Case Else
+                        row.DefaultCellStyle.BackColor = Color.White
+                End Select
+            End If
+        Next
+    End Sub
     Private Sub LoadDocuments()
         Dim filter = ComboBox2.Text
         Dim search = TextBox4.Text
@@ -156,7 +224,7 @@ Public Class Household_Document
 
     Private Sub Household_Document_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
-
+        'LoadHouseholdDocument()
         'LoadFilteredDocuments()
         LoadDocuments()
 
@@ -428,5 +496,9 @@ Public Class Household_Document
 
     Private Sub DataGridView1_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridView1.CellContentClick
 
+    End Sub
+
+    Private Sub DataGridView1_DataBindingComplete(sender As Object, e As DataGridViewBindingCompleteEventArgs) Handles DataGridView1.DataBindingComplete
+        HighlightRowsByCategory()
     End Sub
 End Class
