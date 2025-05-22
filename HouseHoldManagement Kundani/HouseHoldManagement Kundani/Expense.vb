@@ -12,12 +12,9 @@ Public Class Expense
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         Debug.WriteLine("Entering btnSubmit")
         Try
-
-
             Debug.WriteLine("User confirmed btnSubmit")
             Using conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
                 conn.Open()
-
 
                 'Define your unique criteria for an existing expense.
                 'Adjust these fields based on what makes an expense unique.
@@ -60,7 +57,6 @@ Public Class Expense
                     .paid = ComboBox6.SelectedItem.ToString}
 
                 'txtRecentUpdate.Text = $" Expense updated at {DateTime.Now:HH:MM}"
-
                 cmd.Parameters.Clear()
 
                 'cmd.Parameters.AddWithValue("@ExpenseID", expense.ExpenseID)
@@ -77,7 +73,6 @@ Public Class Expense
                 cmd.Parameters.AddWithValue("@Recurring", expense.Recurring)
                 cmd.Parameters.AddWithValue("@Paid", expense.paid)
 
-
                 MsgBox("Expense Information Saved!" & vbCrLf &
                         "ExpenseID: " & expense.ExpenseID & vbCrLf &
                         "Amount: " & expense.Amount & vbCrLf &
@@ -93,6 +88,10 @@ Public Class Expense
                              "Paid: " & expense.paid & vbCrLf &
                           "StartDate: " & expense.StartDate.ToString, vbInformation, "Expense Confirmation")
 
+                'Dim ID As Integer
+                Dim Amount As Integer = TextBox2.Text
+                'SubtractFromBudget(ID, Amount)
+                SubtractBudget(Amount)
                 ' Execute the SQL command to insert the data 
                 ' Log the SQL statement and parameter values  
 
@@ -294,7 +293,7 @@ Public Class Expense
             If confirmationResult = DialogResult.Yes Then
                 ' Proceed with deletion  
                 Try
-                    TextBox7.Text = $" Expense updated at {DateTime.Now:HH:MM}"
+                    'TextBox7.Text = $" Expense updated at {DateTime.Now:HH:MM}"
 
                     Using conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
                         conn.Open()
@@ -312,7 +311,7 @@ Public Class Expense
 
                             'LoadExpenseDataFromDatabase()
 
-                            TextBox7.Text = $" Expense Delete at {DateTime.Now:HH:MM}"
+                            'TextBox7.Text = $" Expense Delete at {DateTime.Now:HH:MM}"
 
                         Else
                             Debug.WriteLine(" User canceled deletion")
@@ -354,7 +353,7 @@ Public Class Expense
         ComboBox7.SelectedItem = ""
         ComboBox1.SelectedItem = ""
         ComboBox5.SelectedItem = ""
-        TextBox7.Text = ""
+        'TextBox7.Text = ""
         ComboBox3.SelectedItem = ""
         TextBox8.Text = ""
         CheckBox1.Checked = ""
@@ -442,7 +441,7 @@ Public Class Expense
             Label17.ForeColor = Color.White
         Catch ex As Exception
             ' Display the connection status on a button with a red background  
-            Label17.Text = "Not Connected"
+            Label17.Text = "Not Connected to Database"
             Label17.BackColor = Color.Red
             Label17.ForeColor = Color.White
 
@@ -693,16 +692,16 @@ Public Class Expense
     Private Sub Button8_Click(sender As Object, e As EventArgs) Handles Button8.Click
         TextBox1.Text = ""
         TextBox2.Text = ""
-        TextBox6.Text = ""
         TextBox4.Text = ""
-        ComboBox7.SelectedItem = ""
-        ComboBox1.SelectedItem = ""
-        ComboBox5.SelectedItem = ""
-        TextBox7.Text = ""
-        ComboBox3.SelectedItem = ""
+        TextBox6.Text = ""
         TextBox8.Text = ""
-        'CheckBox1.Checked = ""
+        TextBox9.Text = ""
+        ComboBox1.SelectedItem = ""
+        ComboBox3.SelectedItem = ""
+        ComboBox5.SelectedItem = ""
         ComboBox6.SelectedItem = ""
+        ComboBox7.SelectedItem = ""
+
         HouseHoldManagment_Module.ClearControls(Me)
 
         LoadExpenseDataFromDatabase()
@@ -847,61 +846,118 @@ Public Class Expense
             End Try
         End Using
     End Sub
+    'Private Sub SaveChangedDateToAnotherTable()
+    '    Dim selectQuery As String = "SELECT * FROM Expense" ' Your source table
+    '    Dim dt As New DataTable()
+
+    '    Using conn As New OleDbConnection(connectionString)
+    '        Try
+    '            conn.Open()
+
+    '            ' Fill DataTable with source data
+    '            Using cmd As New OleDbCommand(selectQuery, conn)
+    '                Using adapter As New OleDbDataAdapter(cmd)
+    '                    adapter.Fill(dt)
+    '                End Using
+    '            End Using
+    '            ' Loop through each row to modify and insert into target table
+    '            For Each row As DataRow In dt.Rows
+    '                ' Read the 'Paid' status
+    '                Dim paidStatus As String = Convert.ToString(row("Recurring")).Trim().ToLower()
+
+    '                ' Proceed only if 'Paid' is "no"
+    '                If paidStatus = "True" Then
+    '                    ' Prepare the new change date for next payment
+    '                    Dim currentStartDate As DateTime = Convert.ToDateTime(row("StartDate"))
+    '                    Dim nextPaymentDate As DateTime = currentStartDate.AddMonths(1) ' or your logic for next payment
+
+    '                    ' Insert into the target table, e.g., ExpenseLogs
+    '                    Dim insertQuery As String = "INSERT INTO ExpenseLogs (BillName, Amount, StartDate, Paid, Recurring) VALUES (?, ?, ?, ?, ?)"
+    '                    Using insertCmd As New OleDbCommand(insertQuery, conn)
+    '                        insertCmd.Parameters.AddWithValue("?", row("BillName"))
+    '                        insertCmd.Parameters.AddWithValue("?", row("Amount"))
+    '                        insertCmd.Parameters.AddWithValue("?", nextPaymentDate)
+    '                        insertCmd.Parameters.AddWithValue("?", "Yes") ' or your logic for setting Paid
+    '                        insertCmd.Parameters.AddWithValue("?", row("Recurring")) ' assuming same recurring
+
+    '                        Try
+    '                            insertCmd.ExecuteNonQuery()
+    '                        Catch ex As Exception
+    '                            MessageBox.Show("Error inserting row: " & ex.Message)
+    '                        End Try
+    '                    End Using
+    '                Else
+    '                    ' Optionally, you can handle the case where Paid = "Yes"
+    '                    ' For example, log or ignore
+    '                    'MessageBox.Show("Payments that are not Recurring were not paid " & DateTime.Now.ToString())
+    '                End If
+    '            Next
+    '            'MessageBox.Show("Payments with updated dates saved successfully at " & DateTime.Now.ToString())
+    '            'UpdateDatesBasedOnFrequency()
+    '            'Mainm()
+    '        Catch ex As Exception
+    '            MessageBox.Show("Error fetching data: " & ex.Message)
+    '        End Try
+    '    End Using
+    'End Sub
+
     Private Sub SaveChangedDateToAnotherTable()
-        Dim selectQuery As String = "SELECT * FROM Expense" ' Your source table
+        Dim getBudgetQuery As String = "SELECT CurrentAmount FROM Budget"
+        Dim updateBudgetQuery As String = "UPDATE Budget SET CurrentAmount = ?"
         Dim dt As New DataTable()
+        ' Start a transaction to make sure all changes succeed or fail together
+        Dim transaction As OleDbTransaction = conn.BeginTransaction()
 
-        Using conn As New OleDbConnection(connectionString)
-            Try
-                conn.Open()
+        Try
+            ' Get current budget
+            Dim currentBudget As Decimal
+            Using budgetCmd As New OleDbCommand(getBudgetQuery, conn, transaction)
+                Dim result = budgetCmd.ExecuteScalar()
+                If result IsNot Nothing Then
+                    currentBudget = Convert.ToDecimal(result)
+                Else
+                    Throw New Exception("Budget not found.")
+                End If
+            End Using
 
-                ' Fill DataTable with source data
-                Using cmd As New OleDbCommand(selectQuery, conn)
-                    Using adapter As New OleDbDataAdapter(cmd)
-                        adapter.Fill(dt)
+            ' Loop through each row to modify and insert into target table
+            For Each row As DataRow In dt.Rows
+                Dim paidStatus As String = Convert.ToString(row("Recurring")).Trim().ToLower()
+                If paidStatus = "true" Then
+                    Dim amount As Decimal = Convert.ToDecimal(row("Amount"))
+
+                    ' Deduct from budget
+                    currentBudget -= amount
+                    Using updateCmd As New OleDbCommand(updateBudgetQuery, conn, transaction)
+                        updateCmd.Parameters.AddWithValue("?", currentBudget)
+                        updateCmd.ExecuteNonQuery()
                     End Using
-                End Using
-                ' Loop through each row to modify and insert into target table
-                For Each row As DataRow In dt.Rows
-                    ' Read the 'Paid' status
-                    Dim paidStatus As String = Convert.ToString(row("Recurring")).Trim().ToLower()
 
-                    ' Proceed only if 'Paid' is "no"
-                    If paidStatus = "True" Then
-                        ' Prepare the new change date for next payment
-                        Dim currentStartDate As DateTime = Convert.ToDateTime(row("StartDate"))
-                        Dim nextPaymentDate As DateTime = currentStartDate.AddMonths(1) ' or your logic for next payment
+                    ' Insert into ExpenseLogs
+                    Dim currentStartDate As DateTime = Convert.ToDateTime(row("StartDate"))
+                    Dim nextPaymentDate As DateTime = currentStartDate.AddMonths(1)
 
-                        ' Insert into the target table, e.g., ExpenseLogs
-                        Dim insertQuery As String = "INSERT INTO ExpenseLogs (BillName, Amount, StartDate, Paid, Recurring) VALUES (?, ?, ?, ?, ?)"
-                        Using insertCmd As New OleDbCommand(insertQuery, conn)
-                            insertCmd.Parameters.AddWithValue("?", row("BillName"))
-                            insertCmd.Parameters.AddWithValue("?", row("Amount"))
-                            insertCmd.Parameters.AddWithValue("?", nextPaymentDate)
-                            insertCmd.Parameters.AddWithValue("?", "Yes") ' or your logic for setting Paid
-                            insertCmd.Parameters.AddWithValue("?", row("Recurring")) ' assuming same recurring
+                    Dim insertQuery As String = "INSERT INTO ExpenseLogs (BillName, Amount, StartDate, Paid, Recurring) VALUES (?, ?, ?, ?, ?)"
+                    Using insertCmd As New OleDbCommand(insertQuery, conn, transaction)
+                        insertCmd.Parameters.AddWithValue("?", row("BillName"))
+                        insertCmd.Parameters.AddWithValue("?", amount)
+                        insertCmd.Parameters.AddWithValue("?", nextPaymentDate)
+                        insertCmd.Parameters.AddWithValue("?", "Yes")
+                        insertCmd.Parameters.AddWithValue("?", row("Recurring"))
 
-                            Try
-                                insertCmd.ExecuteNonQuery()
-                            Catch ex As Exception
-                                MessageBox.Show("Error inserting row: " & ex.Message)
-                            End Try
-                        End Using
-                    Else
-                        ' Optionally, you can handle the case where Paid = "Yes"
-                        ' For example, log or ignore
-                        'MessageBox.Show("Payments that are not Recurring were not paid " & DateTime.Now.ToString())
-                    End If
-                Next
-                'MessageBox.Show("Payments with updated dates saved successfully at " & DateTime.Now.ToString())
-                'UpdateDatesBasedOnFrequency()
-                'Mainm()
-            Catch ex As Exception
-                MessageBox.Show("Error fetching data: " & ex.Message)
-            End Try
-        End Using
+                        insertCmd.ExecuteNonQuery()
+                    End Using
+                End If
+            Next
+
+            ' Commit all changes
+            transaction.Commit()
+            MessageBox.Show("Payments saved and budget updated successfully.")
+        Catch ex As Exception
+            transaction.Rollback()
+            MessageBox.Show("Transaction failed: " & ex.Message)
+        End Try
     End Sub
-
     Private Sub DisplayDataInMessageBox()
         Dim query As String = "SELECT * FROM Expense" ' Fetch all records
 
@@ -941,6 +997,9 @@ Public Class Expense
                             SaveChangedDateToAnotherTable()
                             PopulatelistboxFromDatabase(ListBox1)
                             LoadExpenseDataFromDatabase()
+                            'Dim ID As Integer
+                            'Dim Amount As Integer
+                            'SubtractFromBudget(ID, Amount)
                             MessageBox.Show("Payments with updated dates saved successfully at " & DateTime.Now.ToString())
                         Else
                             MessageBox.Show("Payments were cancelled.")
@@ -1130,12 +1189,74 @@ Public Class Expense
         End Try
     End Sub
 
-    Private Sub Panel2_Paint(sender As Object, e As PaintEventArgs) Handles Panel2.Paint
+    Private Sub Button6_Click_1(sender As Object, e As EventArgs) Handles Button6.Click
+        ' Example: get ID and Amount from TextBoxes
+        Dim ID As Integer
+        Dim Amount As Integer
+
+        SubtractFromBudget(ID, Amount)
+
 
     End Sub
+    Public Sub SubtractFromBudget(ID As Integer, Amount As Integer)
+        ' SQL query to update the Amount by subtracting the specified value
+        Dim query As String = "UPDATE Budget SET Amount = Amount - ? WHERE ID = ?"
 
-    Private Sub DataGridView1_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridView1.CellContentClick
+        Using conn As New OleDbConnection(connectionString)
+            Using command As New OleDbCommand(query, conn)
+                ' Add parameters to prevent SQL injection
+                command.Parameters.AddWithValue("?", Amount)
+                command.Parameters.AddWithValue("?", ID)
 
+                Try
+                    conn.Open()
+                    Dim rowsAffected As Integer = command.ExecuteNonQuery()
+                    If rowsAffected > 0 Then
+                        MessageBox.Show("Budget updated successfully.")
+                    Else
+                        'MessageBox.Show("No record found with the specified ID.")
+                    End If
+                Catch ex As Exception
+                    MessageBox.Show("Error updating budget: " & ex.Message)
+                End Try
+            End Using
+        End Using
+    End Sub
+
+    Public Sub SubtractBudget(Amount As Decimal)
+        Dim querySelect As String = "SELECT BudgetAmount FROM Budget WHERE ID = ?"
+        Dim queryUpdate As String = "UPDATE Budget SET BudgetAmount = ? WHERE ID = ?"
+
+        Dim id As Integer = "?" ' Change as needed to identify your record
+
+        Using conn As New OleDbConnection(connectionString)
+            conn.Open()
+
+            ' Retrieve current budget
+            Dim currentBudget As Decimal
+            Using selectCmd As New OleDbCommand(querySelect, conn)
+                selectCmd.Parameters.AddWithValue("?", id)
+                Dim result As Object = selectCmd.ExecuteScalar()
+                If result IsNot Nothing Then
+                    currentBudget = Convert.ToDecimal(result)
+                Else
+                    Throw New Exception("Record not found.")
+                End If
+            End Using
+
+            ' Calculate new budget
+            Dim newBudget As Decimal = currentBudget - Amount
+            If newBudget < 0 Then
+                Throw New Exception("Budget cannot be NOTHING or R0.")
+            End If
+
+            ' Update the budget in the database
+            Using updateCmd As New OleDbCommand(queryUpdate, conn)
+                updateCmd.Parameters.AddWithValue("?", newBudget)
+                updateCmd.Parameters.AddWithValue("?", id)
+                updateCmd.ExecuteNonQuery()
+            End Using
+        End Using
     End Sub
 End Class
 
