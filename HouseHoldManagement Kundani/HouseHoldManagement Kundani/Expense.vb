@@ -88,10 +88,10 @@ Public Class Expense
                              "Paid: " & expense.paid & vbCrLf &
                           "StartDate: " & expense.StartDate.ToString, vbInformation, "Expense Confirmation")
 
-                'Dim ID As Integer
+                Dim ID As Integer
                 Dim Amount As Integer = TextBox2.Text
-                'SubtractFromBudget(ID, Amount)
-                SubtractBudget(Amount)
+                SubtractFromBudget(ID, Amount)
+                'SubtractBudget(Amount)
                 ' Execute the SQL command to insert the data 
                 ' Log the SQL statement and parameter values  
 
@@ -395,6 +395,42 @@ Public Class Expense
 
 
     End Sub
+    ' DataAdapter and DataTable to hold data
+    Private dataAdapter As OleDbDataAdapter
+    Private dataTable As DataTable
+
+    'Private Sub MainForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+    '    ' Populate ComboBox with table options
+    '    ComboBox2.Items.Add("Expense")
+    '    ComboBox2.Items.Add("ExpenseLogs")
+    '    ComboBox2.SelectedIndex = 0 ' Default selection
+    'End Sub
+
+    Private Sub ComboBox2_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ComboBox2.SelectedIndexChanged
+        LoadSelectedTable()
+    End Sub
+
+    Private Sub LoadSelectedTable()
+        Dim selectedTable As String = ComboBox2.SelectedItem.ToString()
+
+        ' Define your SQL query based on selection
+        Dim query As String = $"SELECT * FROM {selectedTable}"
+
+        Try
+            Using connection As New OleDbConnection(connectionString)
+                dataAdapter = New OleDbDataAdapter(query, connection)
+                dataTable = New DataTable()
+
+                ' Fill the DataTable with data from the selected table
+                dataAdapter.Fill(dataTable)
+
+                ' Bind the DataTable to the DataGridView
+                DataGridView1.DataSource = dataTable
+            End Using
+        Catch ex As Exception
+            MessageBox.Show("Error loading data: " & ex.Message)
+        End Try
+    End Sub
     Private Sub Expense_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Timer1.Interval = 3000
         Timer1.Enabled = True
@@ -454,6 +490,12 @@ Public Class Expense
             ' Close the database connection  
             conn.Close()
         End Try
+
+        ' Populate ComboBox with table options
+        ComboBox2.Items.Add("Expense")
+        ComboBox2.Items.Add("ExpenseLogs")
+        ComboBox2.SelectedIndex = 0 ' Default selection
+
         'PopulateMessagesFromDatabase()
         LoadExpenseDataFromDatabase()
         PopulateComboboxFromDatabase(ComboBox3)
@@ -1199,14 +1241,14 @@ Public Class Expense
 
     End Sub
     Public Sub SubtractFromBudget(ID As Integer, Amount As Integer)
-        ' SQL query to update the Amount by subtracting the specified value
-        Dim query As String = "UPDATE Budget SET Amount = Amount - ? WHERE ID = ?"
+        ' SQL query to subtract Amount from the existing BudgetAmount
+        Dim query As String = "UPDATE Budget SET BudgetAmount = BudgetAmount - @Amount WHERE ID = @ID"
 
         Using conn As New OleDbConnection(connectionString)
             Using command As New OleDbCommand(query, conn)
-                ' Add parameters to prevent SQL injection
-                command.Parameters.AddWithValue("?", Amount)
-                command.Parameters.AddWithValue("?", ID)
+                ' Add parameters with explicit names
+                command.Parameters.AddWithValue("@Amount", Amount)
+                command.Parameters.AddWithValue("@ID", ID)
 
                 Try
                     conn.Open()
@@ -1222,7 +1264,6 @@ Public Class Expense
             End Using
         End Using
     End Sub
-
     Public Sub SubtractBudget(Amount As Decimal)
         Dim querySelect As String = "SELECT BudgetAmount FROM Budget WHERE ID = ?"
         Dim queryUpdate As String = "UPDATE Budget SET BudgetAmount = ? WHERE ID = ?"
@@ -1258,5 +1299,6 @@ Public Class Expense
             End Using
         End Using
     End Sub
+
 End Class
 
