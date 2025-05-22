@@ -167,9 +167,6 @@ Public Class Household_Document
         ToolTip1.SetToolTip(Button2, "Upload")
         ToolTip1.SetToolTip(Button1, "Open")
         ToolTip1.SetToolTip(Button3, "Delete")
-        ToolTip1.SetToolTip(Button5, "Print")
-        ToolTip1.SetToolTip(Button4, "Refresh")
-
     End Sub
 
 
@@ -251,19 +248,44 @@ Public Class Household_Document
     Private Sub DataGridView1_SelectionChanged(sender As Object, e As EventArgs) Handles DataGridView1.SelectionChanged
         Try
 
-            Debug.WriteLine("selecting data in the datagridview")
+            'Debug.WriteLine("selecting data in the datagridview")
+            'If DataGridView1.SelectedRows.Count > 0 Then
+            '    Dim selectedRow As DataGridViewRow = DataGridView1.SelectedRows(0)
+
+            '    ' Load the data from the selected row into UI controls  
+            '    ComboBox1.Text = selectedRow.Cells("Category").Value.ToString()
+            '    TextBox1.Text = selectedRow.Cells("Title").Value.ToString()
+            '    TextBox2.Text = selectedRow.Cells("Notes").Value.ToString()
+            '    TextBox3.Text = selectedRow.Cells("FilePath").Value.ToString()
+            '    DateTimePicker1.Text = selectedRow.Cells("UploadDate").Value.ToString()
+            '    ComboBox3.Text = selectedRow.Cells("UploadedBy").Value.ToString()
+
+            'End If
             If DataGridView1.SelectedRows.Count > 0 Then
                 Dim selectedRow As DataGridViewRow = DataGridView1.SelectedRows(0)
+                Dim filePath As String = selectedRow.Cells("FilePath").Value.ToString() ' Adjust to your actual column name
 
-                ' Load the data from the selected row into UI controls  
-                ComboBox1.Text = selectedRow.Cells("Category").Value.ToString()
-                TextBox1.Text = selectedRow.Cells("Title").Value.ToString()
-                TextBox2.Text = selectedRow.Cells("Notes").Value.ToString()
-                TextBox3.Text = selectedRow.Cells("FilePath").Value.ToString()
-                DateTimePicker1.Text = selectedRow.Cells("UploadDate").Value.ToString()
-                ComboBox3.Text = selectedRow.Cells("UploadedBy").Value.ToString()
+                If File.Exists(filePath) Then
+                        Dim extension As String = Path.GetExtension(filePath).ToLower()
 
-            End If
+                        If extension = ".jpg" OrElse extension = ".png" OrElse extension = ".bmp" OrElse extension = ".gif" Then
+                            ' Show image in PictureBox
+                            PictureBoxPreview.Image = Image.FromFile(filePath)
+                            PictureBoxPreview.SizeMode = PictureBoxSizeMode.Zoom
+
+                        ElseIf extension = ".pdf" Then
+                            ' For PDF, you may need to use a PDF viewer control or load the PDF in a WebBrowser
+                            WebBrowser1.Navigate(filePath) ' Add a WebBrowser control named WebBrowser1
+                            PictureBoxPreview.Image = Nothing
+                        Else
+                            MessageBox.Show("Unsupported file type.")
+                            PictureBoxPreview.Image = Nothing
+                        End If
+                    Else
+                        MessageBox.Show("File not found.")
+                    End If
+                End If
+
         Catch ex As Exception
             Debug.WriteLine("error selection data in the database")
             Debug.WriteLine($"Stack Trace: {ex.StackTrace}")
@@ -402,8 +424,7 @@ Public Class Household_Document
 
     End Sub
 
-    Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
-        LoadHouseholdDocumentDatafromDatabase()
-        ClearControls(Me)
+    Private Sub DataGridView1_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridView1.CellContentClick
+
     End Sub
 End Class
