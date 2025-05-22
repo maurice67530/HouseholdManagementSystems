@@ -22,12 +22,11 @@ Public Class Dashboard
     Private originalHeight As Integer
     Public Shared LoggedInUser As String
     Private Sub Dashboard_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-
         ' Show total users who have logged in
         Label39.Text = "Users: " & GetTotalUsersLoggedIn().ToString()
-
-
         CheckDatabaseConnection()
+
+
         lblbadge.Region = New Region(New Drawing2D.GraphicsPath())
         Dim gp As New Drawing.Drawing2D.GraphicsPath()
         gp.AddEllipse(0, 0, lblbadge.Width, lblbadge.Height)
@@ -36,6 +35,30 @@ Public Class Dashboard
         In_App_Message.NotifyIcon1.ShowBalloonTip(5000) ' 5 seconds
 
 
+        ' Save the form's original design size
+        originalWidth = Me.Width
+        originalHeight = Me.Height
+
+        '' Get screen size excluding the taskbar
+        'Dim workingWidth As Integer = Screen.PrimaryScreen.WorkingArea.Width
+        'Dim workingHeight As Integer = Screen.PrimaryScreen.WorkingArea.Height
+
+        '' Calculate scale
+        'Dim scaleX As Single = workingWidth / originalWidth
+        'Dim scaleY As Single = workingHeight / originalHeight
+
+        '' Resize the form to fit working area
+        'Me.FormBorderStyle = FormBorderStyle.None
+        'Me.Bounds = Screen.PrimaryScreen.WorkingArea
+        'Me.AutoScaleMode = AutoScaleMode.None
+        'Application.DoEvents()
+
+        '' Resize controls
+        'ResizeControls(Me, scaleX, scaleY)
+
+        '' Allow ESC to close while testing
+        'Me.KeyPreview = True
+        ''''''''
 
         ' Save the form's original design size
         originalWidth = Me.Width
@@ -61,7 +84,6 @@ Public Class Dashboard
         ' Allow ESC to close while testing
         Me.KeyPreview = True
 
-
         UpdateNotificationCount()
         LoadChoresStatus()
 
@@ -84,8 +106,7 @@ Public Class Dashboard
         LoadAssignmentSummary()
         LoadUpcomingDates()
         LoadUpcomingBirthdays()
-
-
+        LoadRecentGroceries()
 
 
         ' Show current date, month, and time
@@ -124,8 +145,6 @@ Public Class Dashboard
         'Label18.Font = New Font("Segoe UI", 14, FontStyle.Bold)
 
         'CheckExpense()
-
-
 
 
 
@@ -233,28 +252,24 @@ Public Class Dashboard
         End If
 
 
-
     End Sub
 
-    Private Function GetTotalUsersLoggedIn() As Integer
-        Dim total As Integer = 0
-        Dim query As String = "SELECT COUNT(*) FROM (SELECT UserName FROM Users GROUP BY UserName)"
-
-        Using conn As New OleDbConnection(connectionString)
-            Using cmd As New OleDbCommand(query, conn)
-                conn.Open()
-                total = CInt(cmd.ExecuteScalar())
-            End Using
-        End Using
-
-        Return total
-    End Function
-
-
-
-
-
     Private Sub ResizeControls(parent As Control, scaleX As Single, scaleY As Single)
+        'For Each ctrl As Control In parent.Controls
+        '    ctrl.Left = CInt(ctrl.Left * scaleX)
+        '    ctrl.Top = CInt(ctrl.Top * scaleY)
+        '    ctrl.Width = CInt(ctrl.Width * scaleX)
+        '    ctrl.Height = CInt(ctrl.Height * scaleY)
+
+        '    Dim fontScale As Single = (scaleX + scaleY) / 2
+        '    ctrl.Font = New Font(ctrl.Font.FontFamily, ctrl.Font.Size * fontScale, ctrl.Font.Style)
+
+        '    If ctrl.HasChildren Then
+        '        ResizeControls(ctrl, scaleX, scaleY)
+        '    End If
+        'Next
+
+
         For Each ctrl As Control In parent.Controls
             ctrl.Left = CInt(ctrl.Left * scaleX)
             ctrl.Top = CInt(ctrl.Top * scaleY)
@@ -268,6 +283,7 @@ Public Class Dashboard
                 ResizeControls(ctrl, scaleX, scaleY)
             End If
         Next
+
     End Sub
 
     ' ESC key to close (for testing)
@@ -277,42 +293,27 @@ Public Class Dashboard
         End If
     End Sub
 
+    Private Function GetTotalUsersLoggedIn() As Integer
 
+        Dim total As Integer = 0
 
+        Dim query As String = "SELECT COUNT(*) FROM (SELECT UserName FROM Users GROUP BY UserName)"
 
+        Using conn As New OleDbConnection(connectionString)
 
+            Using cmd As New OleDbCommand(query, conn)
 
+                conn.Open()
 
+                total = CInt(cmd.ExecuteScalar())
 
+            End Using
 
+        End Using
 
-    'Private Sub LoadChoresStatus()
+        Return total
 
-    '    Dim completed As Integer = 0, inProgress As Integer = 0, notStarted As Integer = 0
-    '    Dim query As String = "SELECT Status, COUNT(*) FROM Chores GROUP BY Status"
-
-    '    Using conn As New OleDbConnection(connectionString), cmd As New OleDbCommand(query, conn)
-    '        conn.Open()
-    '        Using reader = cmd.ExecuteReader()
-    '            While reader.Read()
-    '                Select Case reader("Status").ToString()
-    '                    Case "Completed"
-    '                        completed = Convert.ToInt32(reader(1))
-    '                    Case "In progress"
-    '                        inProgress = Convert.ToInt32(reader(1))
-    '                    Case "Not Started"
-    '                        notStarted = Convert.ToInt32(reader(1))
-    '                End Select
-
-    '            End While
-
-    '        End Using
-
-    '    End Using
-    '    conn.Close()
-    '    Label15.Text = $"   Chores: -Completed: {completed} -In Progress: {inProgress} -Not Started: {notStarted}"
-    'End Sub
-
+    End Function
 
 
     Private Sub LoadChoresStatus()
@@ -340,9 +341,6 @@ Public Class Dashboard
 
         Label15.Text = $"Chores: - Completed: {completed} - In Progress: {inProgress} - Not Started: {notStarted}"
     End Sub
-
-
-
 
 
     Private Sub Button7_Click_1(sender As Object, e As EventArgs) Handles Button7.Click
@@ -381,59 +379,6 @@ Public Class Dashboard
     Private Sub Button5_Click_1(sender As Object, e As EventArgs) Handles Button5.Click
         Personnel.ShowDialog()
     End Sub
-
-    'Private Function CheckExpense() As Boolean
-
-    '    Dim BudgetLimit As Decimal = 700
-
-    '    Dim TotalExpense As Decimal = 0
-
-
-    '    Try
-
-    '        Dim Conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
-
-    '        Conn.Open()
-
-    '        Dim cmd As New OleDbCommand("SELECT Amount From Expense", Conn)
-
-    '        Dim Reader As OleDbDataReader = cmd.ExecuteReader
-
-    '        While Reader.Read()
-
-    '            TotalExpense += Convert.ToDecimal(Reader("Amount"))
-
-    '        End While
-
-    '        Reader.Close()
-
-    '        Conn.Close()
-
-    '        If TotalExpense >= (BudgetLimit * 0.8D) Then
-
-    '            MessageBox.Show("Alert! you have used more that 80% of your budget", "Budget Alert", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-
-    '        End If
-
-
-    '        Send the email with the expired items
-
-    '        Dim messageBody As String = $"Alert! Budget Alert:{vbCrLf}{vbCrLf}{BudgetLimit}"
-
-    '        SendEmail("nethonondamudzunga45@gmail.com", "Budget Alert", messageBody)
-
-    '        Notify that the email was sent
-
-    '        MessageBox.Show("Budget Alert Alert Sent Successfully!", "Budget Alert", MessageBoxButtons.OK, MessageBoxIcon.Information)
-
-    '    Catch ex As Exception
-
-    '    End Try
-
-    '    Return False
-
-    'End Function
-
 
 
     Private Function CheckExpense() As Boolean
@@ -475,10 +420,6 @@ Public Class Dashboard
 
         Return False
     End Function
-
-
-
-
 
     ' Function to check expired groceries from Inventory table
 
@@ -1045,19 +986,8 @@ Public Class Dashboard
     End Sub
 
 
-
-
-
-
-
-
-
-
-
     Dim scheduleAlerts As New Queue(Of String)
     Dim alertTimer As New Timer()
-
-
 
     'Dim scheduleAlerts As New Queue(Of String)
     Dim backupScheduleAlerts As New List(Of String)
@@ -1108,17 +1038,12 @@ Public Class Dashboard
 
     Private Sub Timer3_Tick(sender As Object, e As EventArgs) Handles Timer3.Tick
 
-
-
-
-
         'Timer3.Stop()
         RunSearchAndBlink()
 
     End Sub
 
     Private Sub Button16_Click(sender As Object, e As EventArgs) Handles Button16.Click
-
 
         Notifications.ShowDialog()
 
@@ -1358,10 +1283,6 @@ Public Class Dashboard
     End Sub
 
 
-
-
-
-
     Private Sub LoadMemberChoreTaskSummary()
         FlowLayoutPanel3.Controls.Clear()
 
@@ -1396,9 +1317,6 @@ Public Class Dashboard
         End Using
     End Sub
 
-
-
-
     Private Sub LoadAssignmentSummary()
         Dim connString As String = HouseHoldManagment_Module.connectionString
 
@@ -1427,8 +1345,6 @@ Public Class Dashboard
             Label31.Text = $"Unassigned Members: {unassignedMembers}"
         End Using
     End Sub
-
-
 
     Private Sub LoadUpcomingDates()
         Dim connString As String = HouseHoldManagment_Module.connectionString
