@@ -24,7 +24,7 @@ Public Class Dashboard
     Private Sub Dashboard_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
         ' Show total users who have logged in
-        Label39.Text = "Total Users Logged In: " & GetTotalUsersLoggedIn().ToString()
+        Label39.Text = "Users: " & GetTotalUsersLoggedIn().ToString()
 
 
         CheckDatabaseConnection()
