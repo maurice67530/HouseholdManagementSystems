@@ -23,12 +23,12 @@ Partial Class Dashboard
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim ChartArea9 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
-        Dim Legend9 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
-        Dim Series9 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
-        Dim ChartArea10 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
-        Dim Legend10 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
-        Dim Series10 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
+        Dim ChartArea3 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
+        Dim Legend3 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
+        Dim Series3 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
+        Dim ChartArea4 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
+        Dim Legend4 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
+        Dim Series4 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Dashboard))
         Me.Label7 = New System.Windows.Forms.Label()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
@@ -52,6 +52,7 @@ Partial Class Dashboard
         Me.Panel4 = New System.Windows.Forms.Panel()
         Me.Label13 = New System.Windows.Forms.Label()
         Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.Label36 = New System.Windows.Forms.Label()
         Me.Label28 = New System.Windows.Forms.Label()
         Me.Label23 = New System.Windows.Forms.Label()
         Me.Label22 = New System.Windows.Forms.Label()
@@ -107,7 +108,7 @@ Partial Class Dashboard
         Me.Label33 = New System.Windows.Forms.Label()
         Me.Label34 = New System.Windows.Forms.Label()
         Me.Label35 = New System.Windows.Forms.Label()
-        Me.Label36 = New System.Windows.Forms.Label()
+        Me.Label37 = New System.Windows.Forms.Label()
         Me.GroupBox1.SuspendLayout()
         Me.Panel2.SuspendLayout()
         Me.Panel1.SuspendLayout()
@@ -325,6 +326,7 @@ Partial Class Dashboard
         '
         Me.Panel1.BackColor = System.Drawing.SystemColors.GradientInactiveCaption
         Me.Panel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.Panel1.Controls.Add(Me.Label37)
         Me.Panel1.Controls.Add(Me.Label36)
         Me.Panel1.Controls.Add(Me.Label28)
         Me.Panel1.Controls.Add(Me.Label23)
@@ -343,6 +345,15 @@ Partial Class Dashboard
         Me.Panel1.Name = "Panel1"
         Me.Panel1.Size = New System.Drawing.Size(1419, 94)
         Me.Panel1.TabIndex = 109
+        '
+        'Label36
+        '
+        Me.Label36.AutoSize = True
+        Me.Label36.Location = New System.Drawing.Point(956, 17)
+        Me.Label36.Name = "Label36"
+        Me.Label36.Size = New System.Drawing.Size(45, 13)
+        Me.Label36.TabIndex = 127
+        Me.Label36.Text = "Label36"
         '
         'Label28
         '
@@ -487,33 +498,33 @@ Partial Class Dashboard
         '
         'Chart2
         '
-        ChartArea9.Name = "ChartArea1"
-        Me.Chart2.ChartAreas.Add(ChartArea9)
-        Legend9.Name = "Legend1"
-        Me.Chart2.Legends.Add(Legend9)
+        ChartArea3.Name = "ChartArea1"
+        Me.Chart2.ChartAreas.Add(ChartArea3)
+        Legend3.Name = "Legend1"
+        Me.Chart2.Legends.Add(Legend3)
         Me.Chart2.Location = New System.Drawing.Point(441, 277)
         Me.Chart2.Name = "Chart2"
-        Series9.ChartArea = "ChartArea1"
-        Series9.Legend = "Legend1"
-        Series9.Name = "Expense"
-        Me.Chart2.Series.Add(Series9)
+        Series3.ChartArea = "ChartArea1"
+        Series3.Legend = "Legend1"
+        Series3.Name = "Expense"
+        Me.Chart2.Series.Add(Series3)
         Me.Chart2.Size = New System.Drawing.Size(387, 262)
         Me.Chart2.TabIndex = 103
         Me.Chart2.Text = "Chart2"
         '
         'Chart1
         '
-        ChartArea10.Name = "ChartArea1"
-        Me.Chart1.ChartAreas.Add(ChartArea10)
-        Legend10.Name = "Legend1"
-        Me.Chart1.Legends.Add(Legend10)
+        ChartArea4.Name = "ChartArea1"
+        Me.Chart1.ChartAreas.Add(ChartArea4)
+        Legend4.Name = "Legend1"
+        Me.Chart1.Legends.Add(Legend4)
         Me.Chart1.Location = New System.Drawing.Point(848, 571)
         Me.Chart1.Name = "Chart1"
-        Series10.ChartArea = "ChartArea1"
-        Series10.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Pie
-        Series10.Legend = "Legend1"
-        Series10.Name = "Expense"
-        Me.Chart1.Series.Add(Series10)
+        Series4.ChartArea = "ChartArea1"
+        Series4.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Pie
+        Series4.Legend = "Legend1"
+        Series4.Name = "Expense"
+        Me.Chart1.Series.Add(Series4)
         Me.Chart1.Size = New System.Drawing.Size(350, 264)
         Me.Chart1.TabIndex = 102
         Me.Chart1.Text = "Chart1"
@@ -922,20 +933,21 @@ Partial Class Dashboard
         Me.Label35.TabIndex = 126
         Me.Label35.Text = "Counts of Chores and Tasks"
         '
-        'Label36
+        'Label37
         '
-        Me.Label36.AutoSize = True
-        Me.Label36.Location = New System.Drawing.Point(956, 17)
-        Me.Label36.Name = "Label36"
-        Me.Label36.Size = New System.Drawing.Size(45, 13)
-        Me.Label36.TabIndex = 127
-        Me.Label36.Text = "Label36"
+        Me.Label37.AutoSize = True
+        Me.Label37.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label37.Location = New System.Drawing.Point(295, 42)
+        Me.Label37.Name = "Label37"
+        Me.Label37.Size = New System.Drawing.Size(63, 16)
+        Me.Label37.TabIndex = 127
+        Me.Label37.Text = "Label37"
         '
         'Dashboard
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1434, 854)
+        Me.ClientSize = New System.Drawing.Size(1284, 854)
         Me.Controls.Add(Me.Label35)
         Me.Controls.Add(Me.Label34)
         Me.Controls.Add(Me.Label33)
@@ -1067,4 +1079,5 @@ Partial Class Dashboard
     Friend WithEvents Label34 As Label
     Friend WithEvents Label35 As Label
     Friend WithEvents Label36 As Label
+    Friend WithEvents Label37 As Label
 End Class
