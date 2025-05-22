@@ -26,15 +26,15 @@ Partial Class Household_Document
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Household_Document))
         Me.Panel2 = New System.Windows.Forms.Panel()
         Me.ComboBox3 = New System.Windows.Forms.ComboBox()
-        Me.TextBox2 = New System.Windows.Forms.TextBox()
         Me.TextBox1 = New System.Windows.Forms.TextBox()
         Me.Label8 = New System.Windows.Forms.Label()
-        Me.Label6 = New System.Windows.Forms.Label()
         Me.DateTimePicker1 = New System.Windows.Forms.DateTimePicker()
         Me.ComboBox1 = New System.Windows.Forms.ComboBox()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.Label7 = New System.Windows.Forms.Label()
+        Me.TextBox2 = New System.Windows.Forms.TextBox()
+        Me.Label6 = New System.Windows.Forms.Label()
         Me.Label9 = New System.Windows.Forms.Label()
         Me.TextBox4 = New System.Windows.Forms.TextBox()
         Me.Label3 = New System.Windows.Forms.Label()
@@ -53,6 +53,7 @@ Partial Class Household_Document
         Me.PrintDocument1 = New System.Drawing.Printing.PrintDocument()
         Me.PrintDialog1 = New System.Windows.Forms.PrintDialog()
         Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
+        Me.Button4 = New System.Windows.Forms.Button()
         Me.Panel2.SuspendLayout()
         Me.Panel1.SuspendLayout()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -82,14 +83,6 @@ Partial Class Household_Document
         Me.ComboBox3.Size = New System.Drawing.Size(205, 21)
         Me.ComboBox3.TabIndex = 23
         '
-        'TextBox2
-        '
-        Me.TextBox2.Location = New System.Drawing.Point(71, 17)
-        Me.TextBox2.Multiline = True
-        Me.TextBox2.Name = "TextBox2"
-        Me.TextBox2.Size = New System.Drawing.Size(213, 61)
-        Me.TextBox2.TabIndex = 19
-        '
         'TextBox1
         '
         Me.TextBox1.Location = New System.Drawing.Point(84, 14)
@@ -105,15 +98,6 @@ Partial Class Household_Document
         Me.Label8.Size = New System.Drawing.Size(65, 13)
         Me.Label8.TabIndex = 16
         Me.Label8.Text = "UploadedBy"
-        '
-        'Label6
-        '
-        Me.Label6.AutoSize = True
-        Me.Label6.Location = New System.Drawing.Point(10, 21)
-        Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(35, 13)
-        Me.Label6.TabIndex = 14
-        Me.Label6.Text = "Notes"
         '
         'DateTimePicker1
         '
@@ -157,6 +141,23 @@ Partial Class Household_Document
         Me.Label7.Size = New System.Drawing.Size(79, 13)
         Me.Label7.TabIndex = 15
         Me.Label7.Text = "Uploaded Date"
+        '
+        'TextBox2
+        '
+        Me.TextBox2.Location = New System.Drawing.Point(71, 17)
+        Me.TextBox2.Multiline = True
+        Me.TextBox2.Name = "TextBox2"
+        Me.TextBox2.Size = New System.Drawing.Size(213, 61)
+        Me.TextBox2.TabIndex = 19
+        '
+        'Label6
+        '
+        Me.Label6.AutoSize = True
+        Me.Label6.Location = New System.Drawing.Point(10, 21)
+        Me.Label6.Name = "Label6"
+        Me.Label6.Size = New System.Drawing.Size(35, 13)
+        Me.Label6.TabIndex = 14
+        Me.Label6.Text = "Notes"
         '
         'Label9
         '
@@ -245,7 +246,7 @@ Partial Class Household_Document
         '
         Me.Button3.BackColor = System.Drawing.SystemColors.ActiveCaption
         Me.Button3.Image = CType(resources.GetObject("Button3.Image"), System.Drawing.Image)
-        Me.Button3.Location = New System.Drawing.Point(524, 448)
+        Me.Button3.Location = New System.Drawing.Point(553, 448)
         Me.Button3.Name = "Button3"
         Me.Button3.Size = New System.Drawing.Size(75, 48)
         Me.Button3.TabIndex = 29
@@ -256,7 +257,7 @@ Partial Class Household_Document
         Me.Button2.BackColor = System.Drawing.SystemColors.ActiveCaption
         Me.Button2.BackgroundImage = CType(resources.GetObject("Button2.BackgroundImage"), System.Drawing.Image)
         Me.Button2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
-        Me.Button2.Location = New System.Drawing.Point(18, 448)
+        Me.Button2.Location = New System.Drawing.Point(12, 448)
         Me.Button2.Name = "Button2"
         Me.Button2.Size = New System.Drawing.Size(75, 48)
         Me.Button2.TabIndex = 28
@@ -267,7 +268,7 @@ Partial Class Household_Document
         Me.Button1.BackColor = System.Drawing.SystemColors.ActiveCaption
         Me.Button1.BackgroundImage = CType(resources.GetObject("Button1.BackgroundImage"), System.Drawing.Image)
         Me.Button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
-        Me.Button1.Location = New System.Drawing.Point(175, 448)
+        Me.Button1.Location = New System.Drawing.Point(151, 448)
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(75, 48)
         Me.Button1.TabIndex = 27
@@ -287,7 +288,7 @@ Partial Class Household_Document
         '
         Me.Button5.BackColor = System.Drawing.SystemColors.ActiveCaption
         Me.Button5.Image = CType(resources.GetObject("Button5.Image"), System.Drawing.Image)
-        Me.Button5.Location = New System.Drawing.Point(345, 448)
+        Me.Button5.Location = New System.Drawing.Point(288, 448)
         Me.Button5.Name = "Button5"
         Me.Button5.Size = New System.Drawing.Size(75, 48)
         Me.Button5.TabIndex = 33
@@ -304,11 +305,22 @@ Partial Class Household_Document
         '
         Me.OpenFileDialog1.FileName = "OpenFileDialog1"
         '
+        'Button4
+        '
+        Me.Button4.BackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.Button4.Image = CType(resources.GetObject("Button4.Image"), System.Drawing.Image)
+        Me.Button4.Location = New System.Drawing.Point(424, 448)
+        Me.Button4.Name = "Button4"
+        Me.Button4.Size = New System.Drawing.Size(75, 48)
+        Me.Button4.TabIndex = 34
+        Me.Button4.UseVisualStyleBackColor = False
+        '
         'Household_Document
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(631, 497)
+        Me.Controls.Add(Me.Button4)
         Me.Controls.Add(Me.Button5)
         Me.Controls.Add(Me.Panel2)
         Me.Controls.Add(Me.Panel1)
@@ -359,4 +371,5 @@ Partial Class Household_Document
     Friend WithEvents ComboBox2 As ComboBox
     Friend WithEvents Label10 As Label
     Friend WithEvents OpenFileDialog1 As OpenFileDialog
+    Friend WithEvents Button4 As Button
 End Class
