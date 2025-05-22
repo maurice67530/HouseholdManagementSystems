@@ -293,7 +293,7 @@ Public Class Expense
             If confirmationResult = DialogResult.Yes Then
                 ' Proceed with deletion  
                 Try
-                    TextBox7.Text = $" Expense updated at {DateTime.Now:HH:MM}"
+                    'TextBox7.Text = $" Expense updated at {DateTime.Now:HH:MM}"
 
                     Using conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
                         conn.Open()
@@ -311,7 +311,7 @@ Public Class Expense
 
                             'LoadExpenseDataFromDatabase()
 
-                            TextBox7.Text = $" Expense Delete at {DateTime.Now:HH:MM}"
+                            'TextBox7.Text = $" Expense Delete at {DateTime.Now:HH:MM}"
 
                         Else
                             Debug.WriteLine(" User canceled deletion")
@@ -353,7 +353,7 @@ Public Class Expense
         ComboBox7.SelectedItem = ""
         ComboBox1.SelectedItem = ""
         ComboBox5.SelectedItem = ""
-        TextBox7.Text = ""
+        'TextBox7.Text = ""
         ComboBox3.SelectedItem = ""
         TextBox8.Text = ""
         CheckBox1.Checked = ""
@@ -692,16 +692,16 @@ Public Class Expense
     Private Sub Button8_Click(sender As Object, e As EventArgs) Handles Button8.Click
         TextBox1.Text = ""
         TextBox2.Text = ""
-        TextBox6.Text = ""
         TextBox4.Text = ""
-        ComboBox7.SelectedItem = ""
-        ComboBox1.SelectedItem = ""
-        ComboBox5.SelectedItem = ""
-        TextBox7.Text = ""
-        ComboBox3.SelectedItem = ""
+        TextBox6.Text = ""
         TextBox8.Text = ""
-        'CheckBox1.Checked = ""
+        TextBox9.Text = ""
+        ComboBox1.SelectedItem = ""
+        ComboBox3.SelectedItem = ""
+        ComboBox5.SelectedItem = ""
         ComboBox6.SelectedItem = ""
+        ComboBox7.SelectedItem = ""
+
         HouseHoldManagment_Module.ClearControls(Me)
 
         LoadExpenseDataFromDatabase()
