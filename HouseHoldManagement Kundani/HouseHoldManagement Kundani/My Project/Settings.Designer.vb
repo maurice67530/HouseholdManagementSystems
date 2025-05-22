@@ -64,6 +64,66 @@ Namespace My
                 Return CType(Me("HMSConnectionString"),String)
             End Get
         End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
+        Public Property Smtpserver() As String
+            Get
+                Return CType(Me("Smtpserver"),String)
+            End Get
+            Set
+                Me("Smtpserver") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("0")>  _
+        Public Property SmtpPort() As Integer
+            Get
+                Return CType(Me("SmtpPort"),Integer)
+            End Get
+            Set
+                Me("SmtpPort") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
+        Public Property EmailFrom() As String
+            Get
+                Return CType(Me("EmailFrom"),String)
+            End Get
+            Set
+                Me("EmailFrom") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
+        Public Property Password() As String
+            Get
+                Return CType(Me("Password"),String)
+            End Get
+            Set
+                Me("Password") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
+        Public Property RecipientEmail() As String
+            Get
+                Return CType(Me("RecipientEmail"),String)
+            End Get
+            Set
+                Me("RecipientEmail") = value
+            End Set
+        End Property
     End Class
 End Namespace
 
