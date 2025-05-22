@@ -1001,25 +1001,52 @@ Public Class Expense
         End Try
     End Sub
     Private Sub DisplayDataInMessageBox()
-        Dim query As String = "SELECT * FROM Expense" ' Fetch all records
+        Dim expenseQuery As String = "SELECT * FROM Expense" ' Fetch all expense records
+        'Dim budgetQuery As String = "SELECT BudgetAmount FROM Budget WHERE ID=?" ' Adjust as needed
 
         Using conn As New OleDbConnection(connectionString)
-            Dim command As New OleDbCommand(query, conn)
+            Dim expenseCommand As New OleDbCommand(expenseQuery, conn)
+            'Dim budgetCommand As New OleDbCommand(budgetQuery, conn)
+            Dim budgetID As Integer = 1 ' Replace with actual Budget record ID
+            Dim budgetQuery As String = "SELECT BudgetAmount FROM Budget WHERE ID=?"
+            Dim budgetCommand As New OleDbCommand(budgetQuery, conn)
+            budgetCommand.Parameters.AddWithValue("?", budgetID)
             Try
                 conn.Open()
-                Using reader As OleDbDataReader = command.ExecuteReader()
+
+                ' Get current budget
+                Dim currentBudget As Decimal = 0
+                Using budgetReader As OleDbDataReader = budgetCommand.ExecuteReader()
+                    If budgetReader.Read() Then
+                        currentBudget = Convert.ToDecimal(budgetReader("BudgetAmount"))
+                    End If
+                End Using
+
+                ' Fetch expenses
+                Using expenseReader As OleDbDataReader = expenseCommand.ExecuteReader()
                     Dim today As Date = DateTime.Now.Date
                     Dim dataList As New List(Of String)
-                    While reader.Read()
-                        Dim BillName As Object = reader("BillName")
-                        Dim Amount As Object = reader("Amount")
-                        Dim StartDateObj As Object = reader("StartDate")
-                        Dim StartDate As Date
 
-                        ' Attempt to parse StartDate
+                    ' Store expenses for today to process after user confirmation
+                    Dim todaysExpenses As New List(Of Expensetracking)
+
+                    While expenseReader.Read()
+                        Dim BillName As Object = expenseReader("BillName")
+                        Dim AmountObj As Object = expenseReader("Amount")
+                        Dim StartDateObj As Object = expenseReader("StartDate")
+                        Dim StartDate As Date
+                        Dim Amount As Decimal
+
+                        If Not Decimal.TryParse(AmountObj.ToString(), Amount) Then
+                            Continue While ' Skip invalid
+                        End If
+
                         If Date.TryParse(StartDateObj.ToString(), StartDate) Then
                             If StartDate = today Then
-                                dataList.Add($"This Payments is Due to be Paid : BillName: {BillName}, Amount: {Amount}, StartDate: {StartDate.ToShortDateString()}")
+                                dataList.Add($"This Payment is Due to be Paid : BillName: {BillName}, Amount: {Amount}, StartDate: {StartDate.ToShortDateString()}")
+                                ' Store for processing after confirmation
+                                Dim Bill As String = BillName.ToString()
+                                todaysExpenses.Add(New Expensetracking With {.BillName = Bill, .Amount = Amount})
                             End If
                         End If
                     End While
@@ -1029,30 +1056,103 @@ Public Class Expense
                         Return
                     End If
 
-                    ' Display each record in a message box
-                    For Each Datas In dataList
-                        Dim result As DialogResult
-                        result = MessageBox.Show(Datas, "Confirmation", MessageBoxButtons.YesNo)
+                    ' For each expense due today, ask user to confirm
+                    For i As Integer = 0 To todaysExpenses.Count - 1
+                        Dim expense = todaysExpenses(i)
+                        Dim message As String = $"This Payment is Due to be Paid: BillName: {expense.BillName}, Amount: {expense.Amount}, Date: {DateTime.Now.ToShortDateString()}"
+                        Dim result As DialogResult = MessageBox.Show(message, "Confirmation", MessageBoxButtons.YesNo)
 
                         If result = DialogResult.Yes Then
-                            Mainm()
-                            SaveChangedDateToAnotherTable()
-                            PopulatelistboxFromDatabase(ListBox1)
-                            LoadExpenseDataFromDatabase()
-                            'Dim ID As Integer
-                            'Dim Amount As Integer
-                            'SubtractFromBudget(ID, Amount)
-                            MessageBox.Show("Payments with updated dates saved successfully at " & DateTime.Now.ToString())
+                            ' Deduct expense amount from budget
+                            currentBudget -= expense.Amount
+
+                            ' Ensure budget doesn't go negative
+                            If currentBudget < 0 Then
+                                MessageBox.Show("Insufficient budget to cover this expense.")
+                                ' Optionally, handle this case (e.g., skip deduction)
+                                currentBudget += expense.Amount ' revert deduction
+                            Else
+                                ' Update the budget in database
+                                Dim updateBudgetQuery As String = "UPDATE Budget SET BudgetAmount = ? WHERE ID=?"
+                                Using updateCmd As New OleDbCommand(updateBudgetQuery, conn)
+                                    updateCmd.Parameters.AddWithValue("?", currentBudget)
+                                    updateCmd.Parameters.AddWithValue("?", budgetID)
+                                    updateCmd.ExecuteNonQuery()
+                                End Using
+
+                                ' Proceed with other operations
+                                Mainm()
+                                SaveChangedDateToAnotherTable()
+                                PopulatelistboxFromDatabase(ListBox1)
+                                LoadExpenseDataFromDatabase()
+
+                                MessageBox.Show("Payment processed and budget updated successfully at " & DateTime.Now.ToString())
+                            End If
                         Else
-                            MessageBox.Show("Payments were cancelled.")
+                            MessageBox.Show("Payment was cancelled.")
+                            ' Do not deduct or update budget
                         End If
                     Next
                 End Using
+
             Catch ex As Exception
                 MessageBox.Show("Error: " & ex.Message)
             End Try
         End Using
     End Sub
+    'Private Sub DisplayDataInMessageBox()
+    '    Dim query As String = "SELECT * FROM Expense" ' Fetch all records
+
+    '    Using conn As New OleDbConnection(connectionString)
+    '        Dim command As New OleDbCommand(query, conn)
+    '        Try
+    '            conn.Open()
+    '            Using reader As OleDbDataReader = command.ExecuteReader()
+    '                Dim today As Date = DateTime.Now.Date
+    '                Dim dataList As New List(Of String)
+    '                While reader.Read()
+    '                    Dim BillName As Object = reader("BillName")
+    '                    Dim Amount As Object = reader("Amount")
+    '                    Dim StartDateObj As Object = reader("StartDate")
+    '                    Dim StartDate As Date
+
+    '                    ' Attempt to parse StartDate
+    '                    If Date.TryParse(StartDateObj.ToString(), StartDate) Then
+    '                        If StartDate = today Then
+    '                            dataList.Add($"This Payments is Due to be Paid : BillName: {BillName}, Amount: {Amount}, StartDate: {StartDate.ToShortDateString()}")
+    '                        End If
+    '                    End If
+    '                End While
+
+    '                If dataList.Count = 0 Then
+    '                    MessageBox.Show("No Payments are scheduled for today.")
+    '                    Return
+    '                End If
+
+    '                ' Display each record in a message box
+    '                For Each Datas In dataList
+    '                    Dim result As DialogResult
+    '                    result = MessageBox.Show(Datas, "Confirmation", MessageBoxButtons.YesNo)
+
+    '                    If result = DialogResult.Yes Then
+    '                        Mainm()
+    '                        SaveChangedDateToAnotherTable()
+    '                        PopulatelistboxFromDatabase(ListBox1)
+    '                        LoadExpenseDataFromDatabase()
+    '                        'Dim ID As Integer
+    '                        'Dim Amount As Integer
+    '                        'SubtractFromBudget(ID, Amount)
+    '                        MessageBox.Show("Payments with updated dates saved successfully at " & DateTime.Now.ToString())
+    '                    Else
+    '                        MessageBox.Show("Payments were cancelled.")
+    '                    End If
+    '                Next
+    '            End Using
+    '        Catch ex As Exception
+    '            MessageBox.Show("Error: " & ex.Message)
+    '        End Try
+    '    End Using
+    'End Sub
     'Private Sub DisplayDataInMessageBox()
     '    Dim query As String = "SELECT * FROM Expense " ' Replace with your table name
 
@@ -1264,6 +1364,7 @@ Public Class Expense
             End Using
         End Using
     End Sub
+
     Public Sub SubtractBudget(Amount As Decimal)
         Dim querySelect As String = "SELECT BudgetAmount FROM Budget WHERE ID = ?"
         Dim queryUpdate As String = "UPDATE Budget SET BudgetAmount = ? WHERE ID = ?"

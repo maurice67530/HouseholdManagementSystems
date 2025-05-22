@@ -23,9 +23,11 @@ Public Class Dashboard
     Public Shared LoggedInUser As String
     Private Sub Dashboard_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
+        ' Show total users who have logged in
+        Label39.Text = "Total Users Logged In: " & GetTotalUsersLoggedIn().ToString()
+
+
         CheckDatabaseConnection()
-
-
         lblbadge.Region = New Region(New Drawing2D.GraphicsPath())
         Dim gp As New Drawing.Drawing2D.GraphicsPath()
         gp.AddEllipse(0, 0, lblbadge.Width, lblbadge.Height)
@@ -233,6 +235,24 @@ Public Class Dashboard
 
 
     End Sub
+
+    Private Function GetTotalUsersLoggedIn() As Integer
+        Dim total As Integer = 0
+        Dim query As String = "SELECT COUNT(*) FROM (SELECT UserName FROM Users GROUP BY UserName)"
+
+        Using conn As New OleDbConnection(connectionString)
+            Using cmd As New OleDbCommand(query, conn)
+                conn.Open()
+                total = CInt(cmd.ExecuteScalar())
+            End Using
+        End Using
+
+        Return total
+    End Function
+
+
+
+
 
     Private Sub ResizeControls(parent As Control, scaleX As Single, scaleY As Single)
         For Each ctrl As Control In parent.Controls
