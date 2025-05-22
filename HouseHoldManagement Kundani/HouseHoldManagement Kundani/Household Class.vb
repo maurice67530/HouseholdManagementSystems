@@ -42,14 +42,14 @@ Public Class chores_
 End Class
 Public Class MealPlans
     'property of mealplan class
-    Public Property MealID As String
-    Public Property MealPlan As String
-    Public Property NameOfMeal As String
+    Public Property Meals As String
+    Public Property Items As String
+    Public Property MealName As String
     Public Property StartDate As DateTime
     Public Property EndDate As DateTime
     Public Property TotalCalories As String
     Public Property Description As String
-    Public Property Ingredients As String
+    Public Property Calories As String
     Public Property FilePath As String
     Public Property Frequency As String
 End Class
