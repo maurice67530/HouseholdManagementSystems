@@ -404,14 +404,14 @@ Public Class Dashboard
                 MessageBox.Show("Alert! You have used more than 80% of your budget", "Budget Alert", MessageBoxButtons.OK, MessageBoxIcon.Warning)
 
                 Dim messageBody As String = $"Alert! Budget Alert:{vbCrLf}{vbCrLf}Total Expenses: {TotalExpense}{vbCrLf}Budget Limit: {BudgetLimit}"
-                SendEmail("nethonondamudzunga45@gmail.com", "Budget Alert", messageBody)
+                SendEmail(My.Settings.RecipientEmail, "Budget Alert", messageBody)
                 MessageBox.Show("Budget Alert Sent Successfully!", "Budget Alert", MessageBoxButtons.OK, MessageBoxIcon.Information)
             Else
                 ' Less than 80% – Budget under control
                 MessageBox.Show("Your budget is under control.", "Budget Status", MessageBoxButtons.OK, MessageBoxIcon.Information)
 
                 Dim messageBody As String = $"Budget Status: Under Control{vbCrLf}{vbCrLf}Total Expenses: {TotalExpense}{vbCrLf}Budget Limit: {BudgetLimit}"
-                SendEmail("nethonondamudzunga45@gmail.com", "Budget Status", messageBody)
+                SendEmail(My.Settings.RecipientEmail, "Budget Status", messageBody)
                 MessageBox.Show("Budget Status Email Sent Successfully!", "Budget Status", MessageBoxButtons.OK, MessageBoxIcon.Information)
             End If
 
@@ -477,7 +477,7 @@ Public Class Dashboard
 
             Dim messageBody As String = $"Alert! overdueChore:{vbCrLf}{vbCrLf}{overdueChore}"
 
-            SendEmail("nethonondamudzunga45@gmail.com", "overdueChore Alert", messageBody)
+            SendEmail(My.Settings.RecipientEmail, "overdueChore Alert", messageBody)
 
             ' Notify that the email was sent
 
@@ -545,7 +545,7 @@ Public Class Dashboard
 
             Dim messageBody As String = $"Alert! The following grocery items have expired:{vbCrLf}{vbCrLf}{expiredGroceries}"
 
-            SendEmail("nethonondamudzunga45@gmail.com", "Grocery Expiry Alert", messageBody)
+            SendEmail(My.Settings.RecipientEmail, "Grocery Expiry Alert", messageBody)
 
             ' Notify that the email was sent
 
@@ -566,12 +566,12 @@ Public Class Dashboard
 
             ' Configure SMTP client
 
-            Dim smtpClient As New SmtpClient(My.Settings.Smtpserver) With {.Port = 587, .EnableSsl = True, .Credentials = New NetworkCredential("nethonondamudzunga45@gmail.com", "slwo xavj lool amzu")}
+            Dim smtpClient As New SmtpClient(My.Settings.Smtpserver) With {.Port = 587, .EnableSsl = True, .Credentials = New NetworkCredential(My.Settings.EmailFrom, My.Settings.Password)}
 
 
             ' Create the email message
 
-            Dim mailMessage As New MailMessage() With {.From = New MailAddress("nethonondamudzunga45@gmail.com"), .Subject = subject, .Body = messageBody}
+            Dim mailMessage As New MailMessage() With {.From = New MailAddress(My.Settings.EmailFrom), .Subject = subject, .Body = messageBody}
 
 
 

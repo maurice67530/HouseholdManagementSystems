@@ -50,7 +50,8 @@ Partial Class Family_Schedule
         Me.btnUpdate = New System.Windows.Forms.Button()
         Me.btnDelete = New System.Windows.Forms.Button()
         Me.Panel3 = New System.Windows.Forms.Panel()
-        Me.Button1 = New System.Windows.Forms.Button()
+        Me.btnFilte = New System.Windows.Forms.Button()
+        Me.btnRefresh = New System.Windows.Forms.Button()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel2.SuspendLayout()
         Me.Panel1.SuspendLayout()
@@ -265,7 +266,7 @@ Partial Class Family_Schedule
         '
         Me.btnUpdate.BackColor = System.Drawing.SystemColors.ActiveCaption
         Me.btnUpdate.Image = CType(resources.GetObject("btnUpdate.Image"), System.Drawing.Image)
-        Me.btnUpdate.Location = New System.Drawing.Point(297, 498)
+        Me.btnUpdate.Location = New System.Drawing.Point(295, 498)
         Me.btnUpdate.Name = "btnUpdate"
         Me.btnUpdate.Size = New System.Drawing.Size(75, 44)
         Me.btnUpdate.TabIndex = 20
@@ -275,7 +276,7 @@ Partial Class Family_Schedule
         '
         Me.btnDelete.BackColor = System.Drawing.SystemColors.ActiveCaption
         Me.btnDelete.Image = CType(resources.GetObject("btnDelete.Image"), System.Drawing.Image)
-        Me.btnDelete.Location = New System.Drawing.Point(550, 498)
+        Me.btnDelete.Location = New System.Drawing.Point(579, 498)
         Me.btnDelete.Name = "btnDelete"
         Me.btnDelete.Size = New System.Drawing.Size(75, 44)
         Me.btnDelete.TabIndex = 21
@@ -291,21 +292,33 @@ Partial Class Family_Schedule
         Me.Panel3.Size = New System.Drawing.Size(643, 50)
         Me.Panel3.TabIndex = 23
         '
-        'Button1
+        'btnFilte
         '
-        Me.Button1.Location = New System.Drawing.Point(426, 498)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(75, 23)
-        Me.Button1.TabIndex = 24
-        Me.Button1.Text = "Button1"
-        Me.Button1.UseVisualStyleBackColor = True
+        Me.btnFilte.BackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.btnFilte.Image = CType(resources.GetObject("btnFilte.Image"), System.Drawing.Image)
+        Me.btnFilte.Location = New System.Drawing.Point(437, 498)
+        Me.btnFilte.Name = "btnFilte"
+        Me.btnFilte.Size = New System.Drawing.Size(75, 44)
+        Me.btnFilte.TabIndex = 24
+        Me.btnFilte.UseVisualStyleBackColor = False
+        '
+        'btnRefresh
+        '
+        Me.btnRefresh.BackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.btnRefresh.Image = CType(resources.GetObject("btnRefresh.Image"), System.Drawing.Image)
+        Me.btnRefresh.Location = New System.Drawing.Point(153, 498)
+        Me.btnRefresh.Name = "btnRefresh"
+        Me.btnRefresh.Size = New System.Drawing.Size(75, 44)
+        Me.btnRefresh.TabIndex = 25
+        Me.btnRefresh.UseVisualStyleBackColor = False
         '
         'Family_Schedule
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(673, 545)
-        Me.Controls.Add(Me.Button1)
+        Me.Controls.Add(Me.btnRefresh)
+        Me.Controls.Add(Me.btnFilte)
         Me.Controls.Add(Me.Panel3)
         Me.Controls.Add(Me.DataGridView1)
         Me.Controls.Add(Me.btnSave)
@@ -354,5 +367,6 @@ Partial Class Family_Schedule
     Friend WithEvents ListView1 As ListView
     Friend WithEvents ComboBox3 As ComboBox
     Friend WithEvents Panel3 As Panel
-    Friend WithEvents Button1 As Button
+    Friend WithEvents btnFilte As Button
+    Friend WithEvents btnRefresh As Button
 End Class

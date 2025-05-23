@@ -672,7 +672,7 @@ Public Class Family_Schedule
     ' Declare this at the top of your form
     Private currentEventIndex As Integer = 0
     Private eventTypes As String() = {"Chore", "Meal", "Task"}
-    Private Sub btnFilte_Click(sender As Object, e As EventArgs) Handles btnFilte.Click
+    Private Sub btnFilte_Click_1(sender As Object, e As EventArgs) Handles btnFilte.Click
         Try
             ' Get current event type to show
             Dim eventTypeToShow As String = eventTypes(currentEventIndex)
