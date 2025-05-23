@@ -92,11 +92,6 @@ Public Class Expense
                 Dim Amount As Integer = TextBox2.Text
                 SubtractFromBudget(ID, Amount)
                 'SubtractBudget(Amount)
-                ' Execute the SQL command to insert the data 
-                ' Log the SQL statement and parameter values  
-
-                'MessageBox.Show("Expense information saved to Database successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
-
                 ' Execute the SQL command to insert the data  
                 cmd.ExecuteNonQuery()
                 'Next
@@ -343,7 +338,6 @@ Public Class Expense
         DataGridView1.Sort(DataGridView1.Columns("Currency"), System.ComponentModel.ListSortDirection.Ascending)
 
     End Sub
-
     Private Sub Button6_Click(sender As Object, e As EventArgs)
 
         TextBox1.Text = ""
@@ -361,8 +355,6 @@ Public Class Expense
     End Sub
 
     Public Sub LoadExpenseDataFromDatabase()
-
-
         Try
             Debug.WriteLine("LoadExpenseDataFromDatabase")
             Using conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
@@ -392,19 +384,10 @@ Public Class Expense
             Debug.WriteLine($" General error in loading ExpenseDataFromDatabase: {ex.Message}")
             MessageBox.Show($"Unexpected error: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
-
-
     End Sub
     ' DataAdapter and DataTable to hold data
     Private dataAdapter As OleDbDataAdapter
     Private dataTable As DataTable
-
-    'Private Sub MainForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-    '    ' Populate ComboBox with table options
-    '    ComboBox2.Items.Add("Expense")
-    '    ComboBox2.Items.Add("ExpenseLogs")
-    '    ComboBox2.SelectedIndex = 0 ' Default selection
-    'End Sub
 
     Private Sub ComboBox2_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ComboBox2.SelectedIndexChanged
         LoadSelectedTable()
@@ -499,6 +482,8 @@ Public Class Expense
         'PopulateMessagesFromDatabase()
         LoadExpenseDataFromDatabase()
         PopulateComboboxFromDatabase(ComboBox3)
+        PopulatelistboxFromDatabase(ListBox1)
+
     End Sub
     Public Sub PopulatelistboxFromDatabase(ByRef listbox As ListBox)
 
@@ -1083,7 +1068,7 @@ Public Class Expense
                                 ' Proceed with other operations
                                 Mainm()
                                 SaveChangedDateToAnotherTable()
-                                PopulatelistboxFromDatabase(ListBox1)
+                                'PopulatelistboxFromDatabase(ListBox1)
                                 LoadExpenseDataFromDatabase()
 
                                 MessageBox.Show("Payment processed and budget updated successfully at " & DateTime.Now.ToString())
@@ -1331,15 +1316,6 @@ Public Class Expense
         End Try
     End Sub
 
-    Private Sub Button6_Click_1(sender As Object, e As EventArgs) Handles Button6.Click
-        ' Example: get ID and Amount from TextBoxes
-        Dim ID As Integer
-        Dim Amount As Integer
-
-        SubtractFromBudget(ID, Amount)
-
-
-    End Sub
     Public Sub SubtractFromBudget(ID As Integer, Amount As Integer)
         ' SQL query to subtract Amount from the existing BudgetAmount
         Dim query As String = "UPDATE Budget SET BudgetAmount = BudgetAmount - @Amount WHERE ID = @ID"
@@ -1400,6 +1376,72 @@ Public Class Expense
             End Using
         End Using
     End Sub
+
+    Private Sub Button6_Click_1(sender As Object, e As EventArgs) Handles Button6.Click
+        PayBill()
+    End Sub
+    Public Sub PayBill()
+        Dim budgetId As Integer
+        Dim expenseAmount As Decimal
+        Dim expenseDescription As String
+
+        Dim conn As New OleDbConnection(connectionString)
+
+        Try
+            conn.Open()
+
+            ' Start a transaction to ensure data integrity
+            Dim transaction As OleDbTransaction = conn.BeginTransaction()
+
+            ' 1. Retrieve current budget amount
+            Dim getBudgetCmd As New OleDbCommand("SELECT BudgetAmount FROM Budget WHERE ID = ?", conn, transaction)
+            getBudgetCmd.Parameters.AddWithValue("?", budgetId)
+
+            Dim currentBudget As Object = getBudgetCmd.ExecuteScalar()
+            If currentBudget Is Nothing Then
+                Throw New Exception("Budget ID not found.")
+            End If
+
+            Dim currentBudgetAmount As Decimal = Convert.ToDecimal(currentBudget)
+
+            ' 2. Check if enough budget exists
+            If currentBudgetAmount < expenseAmount Then
+                Throw New Exception("Insufficient budget.")
+            End If
+
+            ' 3. Calculate new budget amount
+            Dim newBudgetAmount As Decimal = currentBudgetAmount - expenseAmount
+
+            ' 4. Update BudgetTable
+            Dim updateBudgetCmd As New OleDbCommand("UPDATE Budget SET BudgetAmount = ? WHERE ID = ?", conn, transaction)
+            updateBudgetCmd.Parameters.AddWithValue("@BudgetAmount", newBudgetAmount)
+            updateBudgetCmd.Parameters.AddWithValue("@ID", budgetId)
+            updateBudgetCmd.ExecuteNonQuery()
+
+            ' 5. Insert into ExpenseTable
+            Dim insertExpenseCmd As New OleDbCommand("INSERT INTO ExpenseLogs (Amount, Expenses, StartDate) VALUES (?, ?, ?)", conn, transaction)
+            insertExpenseCmd.Parameters.AddWithValue("@Amount", expenseAmount)
+            insertExpenseCmd.Parameters.AddWithValue("@Description", expenseDescription)
+            insertExpenseCmd.Parameters.AddWithValue("@Date", DateTime.Now)
+            insertExpenseCmd.ExecuteNonQuery()
+
+            ' 6. Commit transaction
+            transaction.Commit()
+
+            MessageBox.Show("Bill paid successfully and budget updated.")
+        Catch ex As Exception
+            ' Rollback in case of error
+            If conn.State = ConnectionState.Open Then
+                conn.Close()
+            End If
+            MessageBox.Show("Error: " & ex.Message)
+        Finally
+            If conn.State = ConnectionState.Open Then
+                conn.Close()
+            End If
+        End Try
+    End Sub
+
 
 End Class
 

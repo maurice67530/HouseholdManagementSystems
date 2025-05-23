@@ -349,9 +349,9 @@ Partial Class Expense
         Me.Panel2.Controls.Add(Me.Label1)
         Me.Panel2.Controls.Add(Me.ComboBox2)
         Me.Panel2.Controls.Add(Me.Label21)
-        Me.Panel2.Controls.Add(Me.ListBox1)
         Me.Panel2.Controls.Add(Me.CheckBox1)
         Me.Panel2.Controls.Add(Me.DateTimePicker2)
+        Me.Panel2.Controls.Add(Me.ListBox1)
         Me.Panel2.Controls.Add(Me.Label19)
         Me.Panel2.Controls.Add(Me.Label15)
         Me.Panel2.Controls.Add(Me.Label16)
@@ -370,7 +370,7 @@ Partial Class Expense
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(8, 187)
+        Me.Label1.Location = New System.Drawing.Point(4, 142)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(83, 16)
         Me.Label1.TabIndex = 93
@@ -379,7 +379,7 @@ Partial Class Expense
         'ComboBox2
         '
         Me.ComboBox2.FormattingEnabled = True
-        Me.ComboBox2.Location = New System.Drawing.Point(122, 184)
+        Me.ComboBox2.Location = New System.Drawing.Point(122, 138)
         Me.ComboBox2.Name = "ComboBox2"
         Me.ComboBox2.Size = New System.Drawing.Size(188, 24)
         Me.ComboBox2.TabIndex = 92
@@ -387,21 +387,20 @@ Partial Class Expense
         'Label21
         '
         Me.Label21.AutoSize = True
-        Me.Label21.Location = New System.Drawing.Point(8, 148)
+        Me.Label21.Location = New System.Drawing.Point(7, 176)
         Me.Label21.Name = "Label21"
-        Me.Label21.Size = New System.Drawing.Size(76, 16)
+        Me.Label21.Size = New System.Drawing.Size(99, 16)
         Me.Label21.TabIndex = 91
-        Me.Label21.Text = "Bills Payed"
+        Me.Label21.Text = "Expenses Paid"
         '
         'ListBox1
         '
         Me.ListBox1.Cursor = System.Windows.Forms.Cursors.No
         Me.ListBox1.FormattingEnabled = True
-        Me.ListBox1.HorizontalScrollbar = True
         Me.ListBox1.ItemHeight = 16
-        Me.ListBox1.Location = New System.Drawing.Point(122, 142)
+        Me.ListBox1.Location = New System.Drawing.Point(121, 170)
         Me.ListBox1.Name = "ListBox1"
-        Me.ListBox1.Size = New System.Drawing.Size(188, 36)
+        Me.ListBox1.Size = New System.Drawing.Size(188, 52)
         Me.ListBox1.TabIndex = 90
         '
         'DateTimePicker2
@@ -661,7 +660,7 @@ Partial Class Expense
     Friend WithEvents ComboBox7 As ComboBox
     Friend WithEvents Label22 As Label
     Friend WithEvents TextBox9 As TextBox
-    Friend WithEvents Button6 As Button
     Friend WithEvents Label1 As Label
     Friend WithEvents ComboBox2 As ComboBox
+    Friend WithEvents Button6 As Button
 End Class
