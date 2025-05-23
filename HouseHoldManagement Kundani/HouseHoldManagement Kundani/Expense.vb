@@ -910,69 +910,75 @@ Public Class Expense
     'End Sub
 
     Private Sub SaveChangedDateToAnotherTable()
-        Dim getBudgetQuery As String = "SELECT CurrentAmount FROM Budget"
-        Dim updateBudgetQuery As String = "UPDATE Budget SET CurrentAmount = ?"
-        Dim dt As New DataTable()
-        ' Start a transaction to make sure all changes succeed or fail together
-        Dim transaction As OleDbTransaction = conn.BeginTransaction()
+        Dim getBudgetQuery As String = "SELECT BudgetAmount FROM Budget"
+        Dim updateBudgetQuery As String = "UPDATE Budget SET BudgetAmount = ?"
+        Dim dt As New DataTable() ' Make sure dt is populated somewhere before this method is called
 
-        Try
-            ' Get current budget
-            Dim currentBudget As Decimal
-            Using budgetCmd As New OleDbCommand(getBudgetQuery, conn, transaction)
-                Dim result = budgetCmd.ExecuteScalar()
-                If result IsNot Nothing Then
-                    currentBudget = Convert.ToDecimal(result)
-                Else
-                    Throw New Exception("Budget not found.")
-                End If
-            End Using
+        Dim connectionString As String = HouseHoldManagment_Module.connectionString
 
-            ' Loop through each row to modify and insert into target table
-            For Each row As DataRow In dt.Rows
-                Dim paidStatus As String = Convert.ToString(row("Recurring")).Trim().ToLower()
-                If paidStatus = "true" Then
-                    Dim amount As Decimal = Convert.ToDecimal(row("Amount"))
+        Using conn As New OleDbConnection(connectionString)
+            Try
+                conn.Open()
+                Dim transaction As OleDbTransaction = conn.BeginTransaction()
 
-                    ' Deduct from budget
-                    currentBudget -= amount
-                    Using updateCmd As New OleDbCommand(updateBudgetQuery, conn, transaction)
-                        updateCmd.Parameters.AddWithValue("?", currentBudget)
-                        updateCmd.ExecuteNonQuery()
-                    End Using
+                ' Get current budget
+                Dim currentBudget As Decimal
+                Using budgetCmd As New OleDbCommand(getBudgetQuery, conn, transaction)
+                    Dim result = budgetCmd.ExecuteScalar()
+                    If result IsNot Nothing Then
+                        currentBudget = Convert.ToDecimal(result)
+                    Else
+                        Throw New Exception("Budget not found.")
+                    End If
+                End Using
 
-                    ' Insert into ExpenseLogs
-                    Dim currentStartDate As DateTime = Convert.ToDateTime(row("StartDate"))
-                    Dim nextPaymentDate As DateTime = currentStartDate.AddMonths(1)
+                ' Loop through each row in dt
+                For Each row As DataRow In dt.Rows
+                    Dim paidStatus As String = Convert.ToString(row("Recurring")).Trim().ToLower()
+                    If paidStatus = "true" Then
+                        Dim amount As Decimal = Convert.ToDecimal(row("Amount"))
 
-                    Dim insertQuery As String = "INSERT INTO ExpenseLogs (BillName, Amount, StartDate, Paid, Recurring) VALUES (?, ?, ?, ?, ?)"
-                    Using insertCmd As New OleDbCommand(insertQuery, conn, transaction)
-                        insertCmd.Parameters.AddWithValue("?", row("BillName"))
-                        insertCmd.Parameters.AddWithValue("?", amount)
-                        insertCmd.Parameters.AddWithValue("?", nextPaymentDate)
-                        insertCmd.Parameters.AddWithValue("?", "Yes")
-                        insertCmd.Parameters.AddWithValue("?", row("Recurring"))
+                        ' Deduct from budget
+                        currentBudget -= amount
+                        Using updateCmd As New OleDbCommand(updateBudgetQuery, conn, transaction)
+                            updateCmd.Parameters.AddWithValue("?", currentBudget)
+                            updateCmd.ExecuteNonQuery()
+                        End Using
 
-                        insertCmd.ExecuteNonQuery()
-                    End Using
-                End If
-            Next
+                        ' Insert into ExpenseLogs
+                        Dim currentStartDate As DateTime = Convert.ToDateTime(row("StartDate"))
+                        Dim nextPaymentDate As DateTime = currentStartDate.AddMonths(1)
 
-            ' Commit all changes
-            transaction.Commit()
-            MessageBox.Show("Payments saved and budget updated successfully.")
-        Catch ex As Exception
-            transaction.Rollback()
-            MessageBox.Show("Transaction failed: " & ex.Message)
-        End Try
+                        Dim insertQuery As String = "INSERT INTO ExpenseLogs (BillName, Amount, StartDate, Paid, Recurring) VALUES (?, ?, ?, ?, ?)"
+                        Using insertCmd As New OleDbCommand(insertQuery, conn, transaction)
+                            insertCmd.Parameters.AddWithValue("?", row("BillName"))
+                            insertCmd.Parameters.AddWithValue("?", amount)
+                            insertCmd.Parameters.AddWithValue("?", nextPaymentDate)
+                            insertCmd.Parameters.AddWithValue("?", "Yes")
+                            insertCmd.Parameters.AddWithValue("?", row("Recurring"))
+
+                            insertCmd.ExecuteNonQuery()
+                        End Using
+                    End If
+                Next
+
+                ' Commit all changes
+                transaction.Commit()
+                MessageBox.Show("Payments saved and budget updated successfully.")
+            Catch ex As Exception
+                ' If an error occurs, rollback the transaction
+                MessageBox.Show("Transaction failed: " & ex.Message)
+            End Try
+        End Using
     End Sub
     Private Sub DisplayDataInMessageBox()
-        Dim expenseQuery As String = "SELECT * FROM Expense" ' Fetch all expense records
-        'Dim budgetQuery As String = "SELECT BudgetAmount FROM Budget WHERE ID=?" ' Adjust as needed
-
         Using conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
             conn.Open()
-            Dim expenseCommand As New OleDbCommand(expenseQuery, conn)
+            Dim expenseQuery As String = "SELECT * FROM Expense" ' Fetch all expense records
+        'Dim budgetQuery As String = "SELECT BudgetAmount FROM Budget WHERE ID=?" ' Adjust as needed
+
+
+        Dim expenseCommand As New OleDbCommand(expenseQuery, conn)
             'Dim budgetCommand As New OleDbCommand(budgetQuery, conn)
             Dim budgetID As Integer = 1 ' Replace with actual Budget record ID
             Dim budgetQuery As String = "SELECT BudgetAmount FROM Budget WHERE ID=?"
