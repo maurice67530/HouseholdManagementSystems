@@ -460,39 +460,9 @@ Public Class Expense
             MessageBox.Show($"Unexpected error: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
     End Sub
-    ' DataAdapter and DataTable to hold data
-    Private dataAdapter As OleDbDataAdapter
-    Private dataTable As DataTable
 
-    Private Sub ComboBox2_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ComboBox2.SelectedIndexChanged
-        LoadSelectedTable()
-    End Sub
-
-    Private Sub LoadSelectedTable()
-        Dim selectedTable As String = ComboBox2.SelectedItem.ToString()
-
-        ' Define your SQL query based on selection
-        Dim query As String = $"SELECT * FROM {selectedTable}"
-
-        Try
-            Using connection As New OleDbConnection(connectionString)
-                dataAdapter = New OleDbDataAdapter(query, connection)
-                dataTable = New DataTable()
-
-                ' Fill the DataTable with data from the selected table
-                dataAdapter.Fill(dataTable)
-
-                ' Bind the DataTable to the DataGridView
-                DataGridView1.DataSource = dataTable
-            End Using
-        Catch ex As Exception
-            MessageBox.Show("Error loading data: " & ex.Message)
-        End Try
-    End Sub
     Private Sub Expense_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         CheckDatabaseConnection(statusLabel)
-
-
 
         Timer1.Interval = 3000
         Timer1.Enabled = True
@@ -533,58 +503,13 @@ Public Class Expense
             conn.Close()
         End Try
 
-        ' Populate ComboBox with table options
-        ComboBox2.Items.Add("Expense")
-        ComboBox2.Items.Add("ExpenseLogs")
-        ComboBox2.SelectedIndex = 0 ' Default selection
-
         'PopulateMessagesFromDatabase()
         LoadExpenseDataFromDatabase()
         PopulateComboboxFromDatabase(ComboBox3)
-        PopulatelistboxFromDatabase(ListBox1)
+        'PopulatelistboxFromDatabase(ListBox1)
 
     End Sub
-    Public Sub PopulatelistboxFromDatabase(ByRef listbox As ListBox)
 
-        Dim connect As New OleDbConnection(HouseHoldManagment_Module.connectionString)
-
-        Try
-            Debug.WriteLine("listbox populated successfully")
-            ' 1. Open the database connection  
-            connect.Open()
-
-            ' 2. Retrieve the FirstName and LastName columns from the Personnel table  
-            Dim query As String = "SELECT BillName, Amount, StartDate FROM ExpenseLogs"
-            Dim cmd As New OleDbCommand(query, connect)
-            Dim reader As OleDbDataReader = cmd.ExecuteReader()
-
-            ' 3. Bind the retrieved data to the combobox  
-            ListBox1.Items.Clear()
-            While reader.Read()
-                ListBox1.Items.Add($"{reader("BillName")} {reader("Amount")} {reader("StartDate")}")
-            End While
-
-            'increment = increment + 10
-            'If increment > ProgressBar1.Maximum Then
-            '    increment = ProgressBar1.Maximum
-            'End If
-            'ProgressBar1.Value = increment
-
-            ' 4. Close the database connection  
-            reader.Close()
-        Catch ex As Exception
-            ' Handle any exceptions that may occur  
-            Debug.WriteLine("ComboBox population failed")
-            Debug.WriteLine($" An error has occured when PopulateComboboxFromDatabase: {ex.Message}")
-            Debug.WriteLine($"Stack Trace : {ex.StackTrace}")
-            MessageBox.Show($"Error: {ex.Message}")
-        Finally
-            ' Close the database connection  
-            If connect.State = ConnectionState.Open Then
-                connect.Close()
-            End If
-        End Try
-    End Sub
     Sub Mainn()
         Using conn As New OleDbConnection(connectionString)
             Try
@@ -1055,7 +980,7 @@ Public Class Expense
 
                                 ' Proceed with other operations
                                 Mainm()
-                                SaveChangedDateToAnotherTable()
+                                'SaveChangedDateToAnotherTable()
                                 'PopulatelistboxFromDatabase(ListBox1)
                                 LoadExpenseDataFromDatabase()
 

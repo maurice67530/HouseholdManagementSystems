@@ -51,11 +51,7 @@ Partial Class Expense
         Me.Label15 = New System.Windows.Forms.Label()
         Me.Label16 = New System.Windows.Forms.Label()
         Me.Panel2 = New System.Windows.Forms.Panel()
-        Me.Label1 = New System.Windows.Forms.Label()
-        Me.ComboBox2 = New System.Windows.Forms.ComboBox()
-        Me.Label21 = New System.Windows.Forms.Label()
         Me.DateTimePicker2 = New System.Windows.Forms.DateTimePicker()
-        Me.ListBox1 = New System.Windows.Forms.ListBox()
         Me.Label19 = New System.Windows.Forms.Label()
         Me.ComboBox5 = New System.Windows.Forms.ComboBox()
         Me.Label3 = New System.Windows.Forms.Label()
@@ -84,7 +80,7 @@ Partial Class Expense
         Me.Button8.BackColor = System.Drawing.SystemColors.ActiveCaption
         Me.Button8.Cursor = System.Windows.Forms.Cursors.Hand
         Me.Button8.Image = CType(resources.GetObject("Button8.Image"), System.Drawing.Image)
-        Me.Button8.Location = New System.Drawing.Point(481, 470)
+        Me.Button8.Location = New System.Drawing.Point(483, 440)
         Me.Button8.Name = "Button8"
         Me.Button8.Size = New System.Drawing.Size(75, 51)
         Me.Button8.TabIndex = 133
@@ -94,7 +90,7 @@ Partial Class Expense
         '
         Me.DataGridView1.BackgroundColor = System.Drawing.SystemColors.ActiveCaption
         Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DataGridView1.Location = New System.Drawing.Point(10, 361)
+        Me.DataGridView1.Location = New System.Drawing.Point(12, 331)
         Me.DataGridView1.Name = "DataGridView1"
         Me.DataGridView1.Size = New System.Drawing.Size(643, 101)
         Me.DataGridView1.TabIndex = 132
@@ -104,7 +100,7 @@ Partial Class Expense
         Me.Button7.BackColor = System.Drawing.SystemColors.ActiveCaption
         Me.Button7.Cursor = System.Windows.Forms.Cursors.Hand
         Me.Button7.Image = CType(resources.GetObject("Button7.Image"), System.Drawing.Image)
-        Me.Button7.Location = New System.Drawing.Point(11, 469)
+        Me.Button7.Location = New System.Drawing.Point(13, 439)
         Me.Button7.Name = "Button7"
         Me.Button7.Size = New System.Drawing.Size(75, 51)
         Me.Button7.TabIndex = 131
@@ -115,7 +111,7 @@ Partial Class Expense
         Me.Button5.BackColor = System.Drawing.SystemColors.ActiveCaption
         Me.Button5.Cursor = System.Windows.Forms.Cursors.Hand
         Me.Button5.Image = CType(resources.GetObject("Button5.Image"), System.Drawing.Image)
-        Me.Button5.Location = New System.Drawing.Point(195, 469)
+        Me.Button5.Location = New System.Drawing.Point(197, 439)
         Me.Button5.Name = "Button5"
         Me.Button5.Size = New System.Drawing.Size(75, 51)
         Me.Button5.TabIndex = 129
@@ -125,10 +121,8 @@ Partial Class Expense
         '
         Me.Panel1.BackColor = System.Drawing.SystemColors.GradientActiveCaption
         Me.Panel1.Controls.Add(Me.ComboBox7)
-        Me.Panel1.Controls.Add(Me.Label22)
         Me.Panel1.Controls.Add(Me.ComboBox6)
         Me.Panel1.Controls.Add(Me.Label20)
-        Me.Panel1.Controls.Add(Me.TextBox9)
         Me.Panel1.Controls.Add(Me.TextBox8)
         Me.Panel1.Controls.Add(Me.Label18)
         Me.Panel1.Controls.Add(Me.TextBox2)
@@ -145,7 +139,7 @@ Partial Class Expense
         Me.Panel1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Panel1.Location = New System.Drawing.Point(10, 49)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(317, 302)
+        Me.Panel1.Size = New System.Drawing.Size(317, 272)
         Me.Panel1.TabIndex = 128
         '
         'ComboBox7
@@ -160,7 +154,7 @@ Partial Class Expense
         'Label22
         '
         Me.Label22.AutoSize = True
-        Me.Label22.Location = New System.Drawing.Point(7, 266)
+        Me.Label22.Location = New System.Drawing.Point(8, 138)
         Me.Label22.Name = "Label22"
         Me.Label22.Size = New System.Drawing.Size(54, 16)
         Me.Label22.TabIndex = 93
@@ -186,9 +180,9 @@ Partial Class Expense
         '
         'TextBox9
         '
-        Me.TextBox9.Location = New System.Drawing.Point(112, 265)
+        Me.TextBox9.Location = New System.Drawing.Point(122, 137)
         Me.TextBox9.Name = "TextBox9"
-        Me.TextBox9.Size = New System.Drawing.Size(197, 22)
+        Me.TextBox9.Size = New System.Drawing.Size(188, 22)
         Me.TextBox9.TabIndex = 92
         '
         'TextBox8
@@ -315,7 +309,7 @@ Partial Class Expense
         '
         Me.CheckBox1.AutoSize = True
         Me.CheckBox1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.CheckBox1.Location = New System.Drawing.Point(11, 226)
+        Me.CheckBox1.Location = New System.Drawing.Point(11, 179)
         Me.CheckBox1.Name = "CheckBox1"
         Me.CheckBox1.Size = New System.Drawing.Size(101, 19)
         Me.CheckBox1.TabIndex = 88
@@ -326,7 +320,7 @@ Partial Class Expense
         '
         Me.Label15.AutoSize = True
         Me.Label15.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label15.Location = New System.Drawing.Point(8, 252)
+        Me.Label15.Location = New System.Drawing.Point(8, 205)
         Me.Label15.Name = "Label15"
         Me.Label15.Size = New System.Drawing.Size(131, 15)
         Me.Label15.TabIndex = 85
@@ -336,7 +330,7 @@ Partial Class Expense
         '
         Me.Label16.AutoSize = True
         Me.Label16.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label16.Location = New System.Drawing.Point(8, 276)
+        Me.Label16.Location = New System.Drawing.Point(8, 229)
         Me.Label16.Name = "Label16"
         Me.Label16.Size = New System.Drawing.Size(154, 15)
         Me.Label16.TabIndex = 86
@@ -345,14 +339,12 @@ Partial Class Expense
         'Panel2
         '
         Me.Panel2.BackColor = System.Drawing.SystemColors.GradientActiveCaption
-        Me.Panel2.Controls.Add(Me.Label1)
-        Me.Panel2.Controls.Add(Me.ComboBox2)
-        Me.Panel2.Controls.Add(Me.Label21)
         Me.Panel2.Controls.Add(Me.CheckBox1)
+        Me.Panel2.Controls.Add(Me.Label22)
         Me.Panel2.Controls.Add(Me.DateTimePicker2)
-        Me.Panel2.Controls.Add(Me.ListBox1)
         Me.Panel2.Controls.Add(Me.Label19)
         Me.Panel2.Controls.Add(Me.Label15)
+        Me.Panel2.Controls.Add(Me.TextBox9)
         Me.Panel2.Controls.Add(Me.Label16)
         Me.Panel2.Controls.Add(Me.ComboBox5)
         Me.Panel2.Controls.Add(Me.Label3)
@@ -363,34 +355,8 @@ Partial Class Expense
         Me.Panel2.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Panel2.Location = New System.Drawing.Point(336, 49)
         Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(317, 302)
+        Me.Panel2.Size = New System.Drawing.Size(317, 272)
         Me.Panel2.TabIndex = 122
-        '
-        'Label1
-        '
-        Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(4, 142)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(83, 16)
-        Me.Label1.TabIndex = 93
-        Me.Label1.Text = "Data Tables"
-        '
-        'ComboBox2
-        '
-        Me.ComboBox2.FormattingEnabled = True
-        Me.ComboBox2.Location = New System.Drawing.Point(122, 138)
-        Me.ComboBox2.Name = "ComboBox2"
-        Me.ComboBox2.Size = New System.Drawing.Size(188, 24)
-        Me.ComboBox2.TabIndex = 92
-        '
-        'Label21
-        '
-        Me.Label21.AutoSize = True
-        Me.Label21.Location = New System.Drawing.Point(7, 176)
-        Me.Label21.Name = "Label21"
-        Me.Label21.Size = New System.Drawing.Size(99, 16)
-        Me.Label21.TabIndex = 91
-        Me.Label21.Text = "Expenses Paid"
         '
         'DateTimePicker2
         '
@@ -398,16 +364,6 @@ Partial Class Expense
         Me.DateTimePicker2.Name = "DateTimePicker2"
         Me.DateTimePicker2.Size = New System.Drawing.Size(188, 22)
         Me.DateTimePicker2.TabIndex = 89
-        '
-        'ListBox1
-        '
-        Me.ListBox1.Cursor = System.Windows.Forms.Cursors.No
-        Me.ListBox1.FormattingEnabled = True
-        Me.ListBox1.ItemHeight = 16
-        Me.ListBox1.Location = New System.Drawing.Point(121, 170)
-        Me.ListBox1.Name = "ListBox1"
-        Me.ListBox1.Size = New System.Drawing.Size(188, 52)
-        Me.ListBox1.TabIndex = 90
         '
         'Label19
         '
@@ -480,7 +436,7 @@ Partial Class Expense
         Me.Button4.BackColor = System.Drawing.SystemColors.ActiveCaption
         Me.Button4.Cursor = System.Windows.Forms.Cursors.Hand
         Me.Button4.Image = CType(resources.GetObject("Button4.Image"), System.Drawing.Image)
-        Me.Button4.Location = New System.Drawing.Point(289, 469)
+        Me.Button4.Location = New System.Drawing.Point(291, 439)
         Me.Button4.Name = "Button4"
         Me.Button4.Size = New System.Drawing.Size(75, 51)
         Me.Button4.TabIndex = 127
@@ -491,7 +447,7 @@ Partial Class Expense
         Me.Button3.BackColor = System.Drawing.SystemColors.ActiveCaption
         Me.Button3.Cursor = System.Windows.Forms.Cursors.Hand
         Me.Button3.Image = CType(resources.GetObject("Button3.Image"), System.Drawing.Image)
-        Me.Button3.Location = New System.Drawing.Point(387, 470)
+        Me.Button3.Location = New System.Drawing.Point(389, 440)
         Me.Button3.Name = "Button3"
         Me.Button3.Size = New System.Drawing.Size(75, 51)
         Me.Button3.TabIndex = 126
@@ -511,7 +467,7 @@ Partial Class Expense
         Me.Button1.BackColor = System.Drawing.SystemColors.ActiveCaption
         Me.Button1.Cursor = System.Windows.Forms.Cursors.Hand
         Me.Button1.Image = CType(resources.GetObject("Button1.Image"), System.Drawing.Image)
-        Me.Button1.Location = New System.Drawing.Point(576, 470)
+        Me.Button1.Location = New System.Drawing.Point(578, 440)
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(75, 49)
         Me.Button1.TabIndex = 124
@@ -533,7 +489,7 @@ Partial Class Expense
         Me.Button9.Cursor = System.Windows.Forms.Cursors.Hand
         Me.Button9.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Button9.Image = CType(resources.GetObject("Button9.Image"), System.Drawing.Image)
-        Me.Button9.Location = New System.Drawing.Point(13, 526)
+        Me.Button9.Location = New System.Drawing.Point(15, 496)
         Me.Button9.Name = "Button9"
         Me.Button9.Size = New System.Drawing.Size(72, 43)
         Me.Button9.TabIndex = 134
@@ -562,7 +518,7 @@ Partial Class Expense
         Me.Button10.BackColor = System.Drawing.SystemColors.ActiveCaption
         Me.Button10.Cursor = System.Windows.Forms.Cursors.Hand
         Me.Button10.Image = CType(resources.GetObject("Button10.Image"), System.Drawing.Image)
-        Me.Button10.Location = New System.Drawing.Point(103, 470)
+        Me.Button10.Location = New System.Drawing.Point(105, 440)
         Me.Button10.Name = "Button10"
         Me.Button10.Size = New System.Drawing.Size(75, 51)
         Me.Button10.TabIndex = 136
@@ -572,7 +528,7 @@ Partial Class Expense
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(665, 576)
+        Me.ClientSize = New System.Drawing.Size(665, 546)
         Me.Controls.Add(Me.Button10)
         Me.Controls.Add(Me.statusLabel)
         Me.Controls.Add(Me.Button9)
@@ -642,12 +598,8 @@ Partial Class Expense
     Friend WithEvents ComboBox6 As ComboBox
     Friend WithEvents Label20 As Label
     Friend WithEvents Timer1 As Timer
-    Friend WithEvents Label21 As Label
-    Friend WithEvents ListBox1 As ListBox
     Friend WithEvents Button10 As Button
     Friend WithEvents ComboBox7 As ComboBox
     Friend WithEvents Label22 As Label
     Friend WithEvents TextBox9 As TextBox
-    Friend WithEvents Label1 As Label
-    Friend WithEvents ComboBox2 As ComboBox
 End Class
