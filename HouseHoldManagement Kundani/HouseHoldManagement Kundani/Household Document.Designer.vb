@@ -56,6 +56,7 @@ Partial Class Household_Document
         Me.PictureBoxPreview = New System.Windows.Forms.PictureBox()
         Me.WebBrowser1 = New System.Windows.Forms.WebBrowser()
         Me.Button4 = New System.Windows.Forms.Button()
+        Me.StatusLabel = New System.Windows.Forms.Label()
         Me.Panel2.SuspendLayout()
         Me.Panel1.SuspendLayout()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -335,11 +336,20 @@ Partial Class Household_Document
         Me.Button4.TabIndex = 40
         Me.Button4.UseVisualStyleBackColor = False
         '
+        'StatusLabel
+        '
+        Me.StatusLabel.AutoSize = True
+        Me.StatusLabel.Location = New System.Drawing.Point(0, 0)
+        Me.StatusLabel.Name = "StatusLabel"
+        Me.StatusLabel.Size = New System.Drawing.Size(0, 13)
+        Me.StatusLabel.TabIndex = 41
+        '
         'Household_Document
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(830, 485)
+        Me.Controls.Add(Me.StatusLabel)
         Me.Controls.Add(Me.Button4)
         Me.Controls.Add(Me.WebBrowser1)
         Me.Controls.Add(Me.PictureBoxPreview)
@@ -397,4 +407,5 @@ Partial Class Household_Document
     Friend WithEvents PictureBoxPreview As PictureBox
     Friend WithEvents WebBrowser1 As WebBrowser
     Friend WithEvents Button4 As Button
+    Friend WithEvents StatusLabel As Label
 End Class
