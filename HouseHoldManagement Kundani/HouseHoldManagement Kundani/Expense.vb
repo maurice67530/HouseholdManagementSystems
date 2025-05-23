@@ -465,6 +465,10 @@ Public Class Expense
         End Try
     End Sub
     Private Sub Expense_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        CheckDatabaseConnection(statusLabel)
+
+
+
         Timer1.Interval = 3000
         Timer1.Enabled = True
 
@@ -498,26 +502,6 @@ Public Class Expense
             Me.Controls.Add(lblDateTime)
             Debug.WriteLine("Expense Load: Datetime label added.")
 
-
-            Debug.WriteLine("Form loaded successfully")
-            ' Create a new OleDbConnection object and open the connection  
-
-            conn.Open()
-
-            ' Display the connection status on a button with a green background  
-            Label17.Text = "Connected to Database"
-            Label17.BackColor = Color.Green
-            Label17.ForeColor = Color.White
-        Catch ex As Exception
-            ' Display the connection status on a button with a red background  
-            Label17.Text = "Not Connected to Database"
-            Label17.BackColor = Color.Red
-            Label17.ForeColor = Color.White
-
-            ' Display an error message  
-            Debug.WriteLine(" Failed loading the Expense data  from DataBase")
-            Debug.WriteLine($"Stack Trace : {ex.StackTrace}")
-            MessageBox.Show("Error connecting to the database" & ex.Message, "Database Connection Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
 
         Finally
             ' Close the database connection  
