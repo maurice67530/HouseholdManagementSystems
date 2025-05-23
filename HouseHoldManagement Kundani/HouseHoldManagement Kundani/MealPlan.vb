@@ -543,14 +543,14 @@ Public Class MealPlan
     End Sub
 
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
-        If MessageBox.Show("Would you like to view the calendar?", "Open Family Schedule", MessageBoxButtons.YesNo) = DialogResult.Yes Then
-            Family_Schedule.ShowDialog()
-            'Family_Schedule.LoadFamilySchedule()
-            ''Family_Schedule.HighlightMealEvents()
-            'Family_Schedule.LoadFamilySchedules()
+        'If MessageBox.Show("Would you like to view the calendar?", "Open Family Schedule", MessageBoxButtons.YesNo) = DialogResult.Yes Then
+        '    Family_Schedule.ShowDialog()
+        '    Family_Schedule.LoadFamilySchedule()
+        '    'Family_Schedule.HighlightMealEvents()
+        '    Family_Schedule.LoadFamilySchedules()
 
-            'Family_Schedule.Button1.Visible = True
-        End If
+        '    Family_Schedule.btnFilte.Visible = True
+        'End If
 
     End Sub
 

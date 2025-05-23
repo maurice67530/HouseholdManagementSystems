@@ -311,9 +311,10 @@ Partial Class Household_Document
         '
         'PictureBoxPreview
         '
-        Me.PictureBoxPreview.Location = New System.Drawing.Point(305, 184)
+        Me.PictureBoxPreview.Image = CType(resources.GetObject("PictureBoxPreview.Image"), System.Drawing.Image)
+        Me.PictureBoxPreview.Location = New System.Drawing.Point(305, 181)
         Me.PictureBoxPreview.Name = "PictureBoxPreview"
-        Me.PictureBoxPreview.Size = New System.Drawing.Size(213, 91)
+        Me.PictureBoxPreview.Size = New System.Drawing.Size(213, 103)
         Me.PictureBoxPreview.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
         Me.PictureBoxPreview.TabIndex = 38
         Me.PictureBoxPreview.TabStop = False
