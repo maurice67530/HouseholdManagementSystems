@@ -45,14 +45,14 @@ Partial Class chores
         Me.Label16 = New System.Windows.Forms.Label()
         Me.Label10 = New System.Windows.Forms.Label()
         Me.cmbpriority = New System.Windows.Forms.ComboBox()
-        Me.Cmbfre = New System.Windows.Forms.ComboBox()
         Me.CMBstatus = New System.Windows.Forms.ComboBox()
         Me.ComboBox1 = New System.Windows.Forms.ComboBox()
         Me.Label9 = New System.Windows.Forms.Label()
-        Me.Label7 = New System.Windows.Forms.Label()
         Me.Label8 = New System.Windows.Forms.Label()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.TxtDes = New System.Windows.Forms.TextBox()
+        Me.Cmbfre = New System.Windows.Forms.ComboBox()
+        Me.Label7 = New System.Windows.Forms.Label()
         Me.cmbChore = New System.Windows.Forms.ComboBox()
         Me.DateTimePicker1 = New System.Windows.Forms.DateTimePicker()
         Me.Label6 = New System.Windows.Forms.Label()
@@ -70,6 +70,7 @@ Partial Class chores
         Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
         Me.Button13 = New System.Windows.Forms.Button()
         Me.Label13 = New System.Windows.Forms.Label()
+        Me.statusLabel = New System.Windows.Forms.Label()
         CType(Me.DGVChores, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel2.SuspendLayout()
         Me.Panel1.SuspendLayout()
@@ -298,15 +299,6 @@ Partial Class chores
         Me.cmbpriority.Size = New System.Drawing.Size(292, 24)
         Me.cmbpriority.TabIndex = 8
         '
-        'Cmbfre
-        '
-        Me.Cmbfre.FormattingEnabled = True
-        Me.Cmbfre.Items.AddRange(New Object() {"Daily", "Weekly", "Monthly", "Yearly"})
-        Me.Cmbfre.Location = New System.Drawing.Point(106, 238)
-        Me.Cmbfre.Name = "Cmbfre"
-        Me.Cmbfre.Size = New System.Drawing.Size(203, 21)
-        Me.Cmbfre.TabIndex = 15
-        '
         'CMBstatus
         '
         Me.CMBstatus.FormattingEnabled = True
@@ -336,19 +328,6 @@ Partial Class chores
         Me.Label9.Size = New System.Drawing.Size(55, 15)
         Me.Label9.TabIndex = 16
         Me.Label9.Text = "Recurring"
-        '
-        'Label7
-        '
-        Me.Label7.AutoSize = True
-        Me.Label7.BackColor = System.Drawing.Color.Transparent
-        Me.Label7.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        Me.Label7.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label7.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.Label7.Location = New System.Drawing.Point(19, 244)
-        Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(59, 15)
-        Me.Label7.TabIndex = 6
-        Me.Label7.Text = "Frequency"
         '
         'Label8
         '
@@ -383,6 +362,28 @@ Partial Class chores
         Me.TxtDes.Name = "TxtDes"
         Me.TxtDes.Size = New System.Drawing.Size(292, 121)
         Me.TxtDes.TabIndex = 15
+        '
+        'Cmbfre
+        '
+        Me.Cmbfre.FormattingEnabled = True
+        Me.Cmbfre.Items.AddRange(New Object() {"Daily", "Weekly", "Monthly", "Yearly"})
+        Me.Cmbfre.Location = New System.Drawing.Point(106, 238)
+        Me.Cmbfre.Name = "Cmbfre"
+        Me.Cmbfre.Size = New System.Drawing.Size(203, 21)
+        Me.Cmbfre.TabIndex = 15
+        '
+        'Label7
+        '
+        Me.Label7.AutoSize = True
+        Me.Label7.BackColor = System.Drawing.Color.Transparent
+        Me.Label7.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.Label7.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label7.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
+        Me.Label7.Location = New System.Drawing.Point(19, 244)
+        Me.Label7.Name = "Label7"
+        Me.Label7.Size = New System.Drawing.Size(59, 15)
+        Me.Label7.TabIndex = 6
+        Me.Label7.Text = "Frequency"
         '
         'cmbChore
         '
@@ -565,11 +566,21 @@ Partial Class chores
         Me.Label13.Size = New System.Drawing.Size(0, 13)
         Me.Label13.TabIndex = 48
         '
+        'statusLabel
+        '
+        Me.statusLabel.AutoSize = True
+        Me.statusLabel.Location = New System.Drawing.Point(7, 9)
+        Me.statusLabel.Name = "statusLabel"
+        Me.statusLabel.Size = New System.Drawing.Size(39, 13)
+        Me.statusLabel.TabIndex = 49
+        Me.statusLabel.Text = "Label2"
+        '
         'chores
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(746, 544)
+        Me.Controls.Add(Me.statusLabel)
         Me.Controls.Add(Me.Label13)
         Me.Controls.Add(Me.Button13)
         Me.Controls.Add(Me.Button10)
@@ -651,4 +662,5 @@ Partial Class chores
     Friend WithEvents Label17 As Label
     Friend WithEvents DateTimePicker3 As DateTimePicker
     Friend WithEvents DateTimePicker2 As DateTimePicker
+    Friend WithEvents statusLabel As Label
 End Class

@@ -54,8 +54,8 @@ Partial Class Expense
         Me.Label1 = New System.Windows.Forms.Label()
         Me.ComboBox2 = New System.Windows.Forms.ComboBox()
         Me.Label21 = New System.Windows.Forms.Label()
-        Me.ListBox1 = New System.Windows.Forms.ListBox()
         Me.DateTimePicker2 = New System.Windows.Forms.DateTimePicker()
+        Me.ListBox1 = New System.Windows.Forms.ListBox()
         Me.Label19 = New System.Windows.Forms.Label()
         Me.ComboBox5 = New System.Windows.Forms.ComboBox()
         Me.Label3 = New System.Windows.Forms.Label()
@@ -71,10 +71,9 @@ Partial Class Expense
         Me.Button9 = New System.Windows.Forms.Button()
         Me.PrintDialog1 = New System.Windows.Forms.PrintDialog()
         Me.PrintDocument1 = New System.Drawing.Printing.PrintDocument()
-        Me.Label17 = New System.Windows.Forms.Label()
+        Me.statusLabel = New System.Windows.Forms.Label()
         Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
         Me.Button10 = New System.Windows.Forms.Button()
-        Me.Button6 = New System.Windows.Forms.Button()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel1.SuspendLayout()
         Me.Panel2.SuspendLayout()
@@ -349,9 +348,9 @@ Partial Class Expense
         Me.Panel2.Controls.Add(Me.Label1)
         Me.Panel2.Controls.Add(Me.ComboBox2)
         Me.Panel2.Controls.Add(Me.Label21)
-        Me.Panel2.Controls.Add(Me.ListBox1)
         Me.Panel2.Controls.Add(Me.CheckBox1)
         Me.Panel2.Controls.Add(Me.DateTimePicker2)
+        Me.Panel2.Controls.Add(Me.ListBox1)
         Me.Panel2.Controls.Add(Me.Label19)
         Me.Panel2.Controls.Add(Me.Label15)
         Me.Panel2.Controls.Add(Me.Label16)
@@ -370,7 +369,7 @@ Partial Class Expense
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(8, 187)
+        Me.Label1.Location = New System.Drawing.Point(4, 142)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(83, 16)
         Me.Label1.TabIndex = 93
@@ -379,7 +378,7 @@ Partial Class Expense
         'ComboBox2
         '
         Me.ComboBox2.FormattingEnabled = True
-        Me.ComboBox2.Location = New System.Drawing.Point(122, 184)
+        Me.ComboBox2.Location = New System.Drawing.Point(122, 138)
         Me.ComboBox2.Name = "ComboBox2"
         Me.ComboBox2.Size = New System.Drawing.Size(188, 24)
         Me.ComboBox2.TabIndex = 92
@@ -387,22 +386,11 @@ Partial Class Expense
         'Label21
         '
         Me.Label21.AutoSize = True
-        Me.Label21.Location = New System.Drawing.Point(8, 148)
+        Me.Label21.Location = New System.Drawing.Point(7, 176)
         Me.Label21.Name = "Label21"
-        Me.Label21.Size = New System.Drawing.Size(76, 16)
+        Me.Label21.Size = New System.Drawing.Size(99, 16)
         Me.Label21.TabIndex = 91
-        Me.Label21.Text = "Bills Payed"
-        '
-        'ListBox1
-        '
-        Me.ListBox1.Cursor = System.Windows.Forms.Cursors.No
-        Me.ListBox1.FormattingEnabled = True
-        Me.ListBox1.HorizontalScrollbar = True
-        Me.ListBox1.ItemHeight = 16
-        Me.ListBox1.Location = New System.Drawing.Point(122, 142)
-        Me.ListBox1.Name = "ListBox1"
-        Me.ListBox1.Size = New System.Drawing.Size(188, 36)
-        Me.ListBox1.TabIndex = 90
+        Me.Label21.Text = "Expenses Paid"
         '
         'DateTimePicker2
         '
@@ -410,6 +398,16 @@ Partial Class Expense
         Me.DateTimePicker2.Name = "DateTimePicker2"
         Me.DateTimePicker2.Size = New System.Drawing.Size(188, 22)
         Me.DateTimePicker2.TabIndex = 89
+        '
+        'ListBox1
+        '
+        Me.ListBox1.Cursor = System.Windows.Forms.Cursors.No
+        Me.ListBox1.FormattingEnabled = True
+        Me.ListBox1.ItemHeight = 16
+        Me.ListBox1.Location = New System.Drawing.Point(121, 170)
+        Me.ListBox1.Name = "ListBox1"
+        Me.ListBox1.Size = New System.Drawing.Size(188, 52)
+        Me.ListBox1.TabIndex = 90
         '
         'Label19
         '
@@ -546,15 +544,14 @@ Partial Class Expense
         '
         Me.PrintDialog1.UseEXDialog = True
         '
-        'Label17
+        'statusLabel
         '
-        Me.Label17.AutoSize = True
-        Me.Label17.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        Me.Label17.Location = New System.Drawing.Point(510, 10)
-        Me.Label17.Name = "Label17"
-        Me.Label17.Size = New System.Drawing.Size(141, 15)
-        Me.Label17.TabIndex = 135
-        Me.Label17.Text = "No Connection to Database"
+        Me.statusLabel.AutoSize = True
+        Me.statusLabel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.statusLabel.Location = New System.Drawing.Point(510, 10)
+        Me.statusLabel.Name = "statusLabel"
+        Me.statusLabel.Size = New System.Drawing.Size(2, 15)
+        Me.statusLabel.TabIndex = 135
         '
         'Timer1
         '
@@ -571,23 +568,13 @@ Partial Class Expense
         Me.Button10.TabIndex = 136
         Me.Button10.UseVisualStyleBackColor = False
         '
-        'Button6
-        '
-        Me.Button6.Location = New System.Drawing.Point(103, 527)
-        Me.Button6.Name = "Button6"
-        Me.Button6.Size = New System.Drawing.Size(75, 23)
-        Me.Button6.TabIndex = 137
-        Me.Button6.Text = "Button6"
-        Me.Button6.UseVisualStyleBackColor = True
-        '
         'Expense
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(665, 576)
-        Me.Controls.Add(Me.Button6)
         Me.Controls.Add(Me.Button10)
-        Me.Controls.Add(Me.Label17)
+        Me.Controls.Add(Me.statusLabel)
         Me.Controls.Add(Me.Button9)
         Me.Controls.Add(Me.Button8)
         Me.Controls.Add(Me.DataGridView1)
@@ -646,7 +633,7 @@ Partial Class Expense
     Friend WithEvents Button9 As Button
     Friend WithEvents PrintDialog1 As PrintDialog
     Friend WithEvents PrintDocument1 As Printing.PrintDocument
-    Friend WithEvents Label17 As Label
+    Friend WithEvents statusLabel As Label
     Friend WithEvents TextBox8 As TextBox
     Friend WithEvents CheckBox1 As CheckBox
     Friend WithEvents Label18 As Label
@@ -661,7 +648,6 @@ Partial Class Expense
     Friend WithEvents ComboBox7 As ComboBox
     Friend WithEvents Label22 As Label
     Friend WithEvents TextBox9 As TextBox
-    Friend WithEvents Button6 As Button
     Friend WithEvents Label1 As Label
     Friend WithEvents ComboBox2 As ComboBox
 End Class

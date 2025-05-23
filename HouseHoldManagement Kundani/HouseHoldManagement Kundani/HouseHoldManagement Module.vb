@@ -3,6 +3,7 @@ Imports System.IO
 Imports System.Data.OleDb
 Module HouseHoldManagment_Module
 
+
     Public currentUser As String ' Global variable for logged-in user
     Public Property conn As New OleDbConnection(connectionString)
     Public Const connectionString As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=\\MUDAUMURANGI\Users\Murangi\Source\Repos\maurice67530\HouseholdManagementSystems\HMS.accdb"
@@ -233,5 +234,23 @@ Module HouseHoldManagment_Module
             conn.Close()
         End Try
     End Sub
+    Public Sub CheckDatabaseConnection(statusLabel As Label)
+        ' Access .accdb file on a network path
+        Dim connectionString As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=\\MUDAUMURANGI\Users\Murangi\Source\Repos\maurice67530\HouseholdManagementSystems\HMS.accdb;Persist Security Info=False;"
 
+        Using conn As New OleDbConnection(connectionString)
+            Try
+                conn.Open()
+                statusLabel.Text = "Database Connected"
+                statusLabel.ForeColor = Color.Green
+                statusLabel.BackColor = Color.BurlyWood
+            Catch ex As Exception
+                statusLabel.Text = "Database NOT Connected: " & ex.Message
+                statusLabel.ForeColor = Color.Red
+                statusLabel.BackColor = Color.BurlyWood
+            End Try
+        End Using
+    End Sub
 End Module
+
+
