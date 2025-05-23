@@ -367,8 +367,6 @@ Public Class Dashboard
     Private Sub Button8_Click_1(sender As Object, e As EventArgs) Handles Button8.Click
         PhotoGallery.ShowDialog()
     End Sub
-
-
     Private Sub Button12_Click(sender As Object, e As EventArgs) Handles Button12.Click
         Expense.ShowDialog()
     End Sub
@@ -380,7 +378,6 @@ Public Class Dashboard
     Private Sub Button5_Click_1(sender As Object, e As EventArgs) Handles Button5.Click
         Personnel.ShowDialog()
     End Sub
-
 
     Private Function CheckExpense() As Boolean
         Dim BudgetLimit As Decimal = 700
@@ -559,7 +556,6 @@ Public Class Dashboard
     End Function
 
     ' Function to send email
-
     Private Sub SendEmail(recipient As String, subject As String, messageBody As String)
 
         Try
@@ -642,11 +638,7 @@ Public Class Dashboard
             Label13.Text = "Budget is under control"
             Label13.ForeColor = Color.Green
         End If
-
-
         blinkState = Not blinkState
-
-
     End Sub
 
     Private Function GetTotalExpenses() As Double
@@ -938,8 +930,6 @@ Public Class Dashboard
     Private photoList As New List(Of String)()
     Private currentPhotoIndex As Integer = 0
     Private WithEvents photoTimer As New Timer()
-
-
 
     Private Sub LoadRecentPhotos()
         photoList.Clear()

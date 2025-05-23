@@ -26,17 +26,18 @@ Partial Class Settings
         Me.TabControl2 = New System.Windows.Forms.TabControl()
         Me.TabPage3 = New System.Windows.Forms.TabPage()
         Me.TabPage4 = New System.Windows.Forms.TabPage()
+        Me.TextBox6 = New System.Windows.Forms.TextBox()
         Me.TextBox7 = New System.Windows.Forms.TextBox()
         Me.Label7 = New System.Windows.Forms.Label()
         Me.Label8 = New System.Windows.Forms.Label()
         Me.Label9 = New System.Windows.Forms.Label()
         Me.Label10 = New System.Windows.Forms.Label()
         Me.Label11 = New System.Windows.Forms.Label()
-        Me.Button1 = New System.Windows.Forms.Button()
-        Me.TextBox6 = New System.Windows.Forms.TextBox()
         Me.TextBox8 = New System.Windows.Forms.TextBox()
         Me.TextBox9 = New System.Windows.Forms.TextBox()
         Me.TextBox10 = New System.Windows.Forms.TextBox()
+        Me.Button1 = New System.Windows.Forms.Button()
+        Me.Button2 = New System.Windows.Forms.Button()
         Me.TabControl2.SuspendLayout()
         Me.TabPage4.SuspendLayout()
         Me.SuspendLayout()
@@ -91,6 +92,15 @@ Partial Class Settings
         Me.TabPage4.Text = "Email Settings"
         Me.TabPage4.UseVisualStyleBackColor = True
         '
+        'TextBox6
+        '
+        Me.TextBox6.DataBindings.Add(New System.Windows.Forms.Binding("Text", Global.HouseHoldManagement_Kundani.My.MySettings.Default, "Smtpserver", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+        Me.TextBox6.Location = New System.Drawing.Point(97, 18)
+        Me.TextBox6.Name = "TextBox6"
+        Me.TextBox6.Size = New System.Drawing.Size(100, 20)
+        Me.TextBox6.TabIndex = 10
+        Me.TextBox6.Text = Global.HouseHoldManagement_Kundani.My.MySettings.Default.Smtpserver
+        '
         'TextBox7
         '
         Me.TextBox7.Location = New System.Drawing.Point(97, 59)
@@ -143,24 +153,6 @@ Partial Class Settings
         Me.Label11.TabIndex = 16
         Me.Label11.Text = "Smtp Port"
         '
-        'Button1
-        '
-        Me.Button1.Location = New System.Drawing.Point(82, 328)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(75, 23)
-        Me.Button1.TabIndex = 11
-        Me.Button1.Text = "Save"
-        Me.Button1.UseVisualStyleBackColor = True
-        '
-        'TextBox6
-        '
-        Me.TextBox6.DataBindings.Add(New System.Windows.Forms.Binding("Text", Global.HouseHoldManagement_Kundani.My.MySettings.Default, "Smtpserver", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
-        Me.TextBox6.Location = New System.Drawing.Point(97, 18)
-        Me.TextBox6.Name = "TextBox6"
-        Me.TextBox6.Size = New System.Drawing.Size(100, 20)
-        Me.TextBox6.TabIndex = 10
-        Me.TextBox6.Text = Global.HouseHoldManagement_Kundani.My.MySettings.Default.Smtpserver
-        '
         'TextBox8
         '
         Me.TextBox8.DataBindings.Add(New System.Windows.Forms.Binding("Text", Global.HouseHoldManagement_Kundani.My.MySettings.Default, "EmailFrom", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
@@ -188,11 +180,30 @@ Partial Class Settings
         Me.TextBox10.TabIndex = 14
         Me.TextBox10.Text = Global.HouseHoldManagement_Kundani.My.MySettings.Default.RecipientEmail
         '
+        'Button1
+        '
+        Me.Button1.Location = New System.Drawing.Point(82, 328)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(75, 23)
+        Me.Button1.TabIndex = 11
+        Me.Button1.Text = "Save"
+        Me.Button1.UseVisualStyleBackColor = True
+        '
+        'Button2
+        '
+        Me.Button2.Location = New System.Drawing.Point(177, 328)
+        Me.Button2.Name = "Button2"
+        Me.Button2.Size = New System.Drawing.Size(75, 23)
+        Me.Button2.TabIndex = 12
+        Me.Button2.Text = "Cancel"
+        Me.Button2.UseVisualStyleBackColor = True
+        '
         'Settings
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(398, 360)
+        Me.Controls.Add(Me.Button2)
         Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.Label6)
         Me.Controls.Add(Me.TabControl2)
@@ -221,4 +232,5 @@ Partial Class Settings
     Friend WithEvents Label10 As Label
     Friend WithEvents Label11 As Label
     Friend WithEvents Button1 As Button
+    Friend WithEvents Button2 As Button
 End Class

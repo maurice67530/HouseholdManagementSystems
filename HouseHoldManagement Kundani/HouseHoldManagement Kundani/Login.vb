@@ -98,9 +98,6 @@ Public Class Login
         conn.Close()
     End Sub
 
-
-
-
     Private Sub Login_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Dim tooltip As New ToolTip()
         tooltip.SetToolTip(Button1, "Login")
