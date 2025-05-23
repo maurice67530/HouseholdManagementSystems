@@ -110,7 +110,6 @@ Public Class Family_Schedule
         PopulateComboboxFromDatabase(ComboBox1)
         LoadScheduleFromDatabase()
 
-
         DataGridView1.Columns("DateOfEvent").DefaultCellStyle.Format = "dd, MMMM yyyy"
         DataGridView1.Columns("StartTime").DefaultCellStyle.Format = "dd, MMMM yyyy hh:mm tt"
         DataGridView1.Columns("EndTime").DefaultCellStyle.Format = "dd, MMMM yyyy hh:mm tt"
