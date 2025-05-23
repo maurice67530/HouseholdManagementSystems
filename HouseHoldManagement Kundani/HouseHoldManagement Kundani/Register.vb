@@ -14,7 +14,7 @@ Public Class Register
         Dim Role = ComboBox1.SelectedItem.ToString().Trim()
         Dim DateCreated = DateTimePicker1.Text.Trim()
         Dim Age = TextBox7.Text.Trim()
-        Dim Picture = PictureBox1.ImageLocation.Trim()
+        ''Dim Picture = PictureBox1.ImageLocation.Trim()
         Dim Preference = ComboBox2.Text.Trim()
 
         ' Check if the Family already exists
@@ -28,16 +28,15 @@ Public Class Register
         '    MessageBox.Show("This family already exists. Please use a different family name.", "Duplicate Family", MessageBoxButtons.OK, MessageBoxIcon.Warning)
         'Else
         ' Proceed with saving only if family doesn't exist
-        Dim cmd As New OleDbCommand("INSERT INTO Users ([FullNames], [UserName], [Email], [Password], [Role], [DateCreated], [Family], [Age], [Picture], [Preference]) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", conn)
+        Dim cmd As New OleDbCommand("INSERT INTO Users ([FullNames], [UserName], [Email], [Password], [Role], [DateCreated]) VALUES (?, ?, ?, ?, ?, ?)", conn)
         cmd.Parameters.AddWithValue("?", FullNames)
-            cmd.Parameters.AddWithValue("?", username)
+        cmd.Parameters.AddWithValue("?", username)
             cmd.Parameters.AddWithValue("?", Email)
             cmd.Parameters.AddWithValue("?", password)
             cmd.Parameters.AddWithValue("?", Role)
-            cmd.Parameters.AddWithValue("?", DateCreated)
-            cmd.Parameters.AddWithValue("?", family)
-            cmd.Parameters.AddWithValue("?", Age)
-        cmd.Parameters.AddWithValue("?", Picture)
+        cmd.Parameters.AddWithValue("?", DateCreated)
+
+
         cmd.Parameters.AddWithValue("?", Preference)
 
         conn.Open()
