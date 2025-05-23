@@ -119,8 +119,25 @@ Public Class Family_Schedule
         LoadFamilyCalendar()
         LoadScheduleFromDatabase()
     End Sub
-  
-    Private Sub LoadFamilyCalendar()
+    Public Sub FilterByEventType(eventType As String)
+        Try
+            Dim dt As DataTable = TryCast(Me.Tag, DataTable)
+
+            ' Clear existing rows
+            DataGridView1.Rows.Clear()
+
+            ' Manually add matching rows
+            For Each row As DataRow In dt.Select($"EventType = '{eventType}'")
+                DataGridView1.Rows.Add(row.ItemArray)
+            Next
+
+            MessageBox.Show($"Filtered rows added: {DataGridView1.RowCount}", "Filter Result", MessageBoxButtons.OK, MessageBoxIcon.Information)
+        Catch ex As Exception
+            MessageBox.Show($"Error filtering: {ex.Message}", "Filter Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
+    End Sub
+
+    Public Sub LoadFamilyCalendar()
         Dim conStr As String = (HouseHoldManagment_Module.connectionString)
         Dim con As New OleDbConnection(conStr)
         Dim dt As New DataTable()

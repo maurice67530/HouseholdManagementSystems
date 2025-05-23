@@ -33,6 +33,8 @@ Public Class Expense
                     Return ' Exit without saving
                 End If
 
+
+
                 ' Update the table name if necessary  
                 Dim tableName As String = "Expense"
 
@@ -88,15 +90,17 @@ Public Class Expense
                              "Paid: " & expense.paid & vbCrLf &
                           "StartDate: " & expense.StartDate.ToString, vbInformation, "Expense Confirmation")
 
-                Dim ID As Integer
-                Dim Amount As Integer = TextBox2.Text
-                SubtractFromBudget(ID, Amount)
+                Dim expenseAmount As Decimal
+                If Decimal.TryParse(TextBox2.Text, expenseAmount) Then
+                    ' Assuming TextBox2 contains the expense amount
+                    ' Use the BillName or other identifier to locate the budget record
+                    Dim budgetIdentifier As String = TextBox8.Text ' or other relevant identifier
+                    UpdateBudget(budgetIdentifier, expenseAmount)
+                Else
+                    MessageBox.Show("Invalid expense amount.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                End If
+
                 'SubtractBudget(Amount)
-                ' Execute the SQL command to insert the data 
-                ' Log the SQL statement and parameter values  
-
-                'MessageBox.Show("Expense information saved to Database successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
-
                 ' Execute the SQL command to insert the data  
                 cmd.ExecuteNonQuery()
                 'Next
@@ -120,6 +124,47 @@ Public Class Expense
         conn.Close()
         LoadExpenseDataFromDatabase()
         Debug.WriteLine("Exiting btnSubmit")
+    End Sub
+
+    Private Sub UpdateBudget(budgetIdentifier As String, expenseAmount As Decimal)
+        Using conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
+            conn.Open()
+            Try
+                ' Retrieve current budget amount
+                Dim selectQuery As String = "SELECT [BudgetAmount] FROM [Budget] WHERE [ID] = ?"
+                Dim selectCmd As New OleDbCommand(selectQuery, conn)
+                selectCmd.Parameters.AddWithValue("@ID", budgetIdentifier)
+
+                Dim currentBudget As Object = selectCmd.ExecuteScalar()
+
+                If currentBudget Is Nothing Then
+                    MessageBox.Show("Budget record not found.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                    Return
+                End If
+
+                Dim currentAmount As Decimal = Convert.ToDecimal(currentBudget)
+
+                ' Subtract expense amount
+                Dim newBudgetAmount As Decimal = currentAmount - expenseAmount
+
+                If newBudgetAmount < 0 Then
+                    MessageBox.Show("Expense exceeds current budget!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                    ' Decide whether to proceed or not
+                    ' For now, proceed with negative budget or handle as needed
+                End If
+
+                ' Update the budget with the new amount
+                Dim updateQuery As String = "UPDATE [Budget] SET [BudgetAmount] = ? WHERE [ID] = ?"
+                Dim updateCmd As New OleDbCommand(updateQuery, conn)
+                updateCmd.Parameters.AddWithValue("@Amount", newBudgetAmount)
+                updateCmd.Parameters.AddWithValue("@ID", budgetIdentifier)
+
+                updateCmd.ExecuteNonQuery()
+
+            Catch ex As Exception
+                MessageBox.Show("Error updating budget: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            End Try
+        End Using
     End Sub
 
     'Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
@@ -343,7 +388,6 @@ Public Class Expense
         DataGridView1.Sort(DataGridView1.Columns("Currency"), System.ComponentModel.ListSortDirection.Ascending)
 
     End Sub
-
     Private Sub Button6_Click(sender As Object, e As EventArgs)
 
         TextBox1.Text = ""
@@ -361,8 +405,6 @@ Public Class Expense
     End Sub
 
     Public Sub LoadExpenseDataFromDatabase()
-
-
         Try
             Debug.WriteLine("LoadExpenseDataFromDatabase")
             Using conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
@@ -392,19 +434,10 @@ Public Class Expense
             Debug.WriteLine($" General error in loading ExpenseDataFromDatabase: {ex.Message}")
             MessageBox.Show($"Unexpected error: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
-
-
     End Sub
     ' DataAdapter and DataTable to hold data
     Private dataAdapter As OleDbDataAdapter
     Private dataTable As DataTable
-
-    'Private Sub MainForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-    '    ' Populate ComboBox with table options
-    '    ComboBox2.Items.Add("Expense")
-    '    ComboBox2.Items.Add("ExpenseLogs")
-    '    ComboBox2.SelectedIndex = 0 ' Default selection
-    'End Sub
 
     Private Sub ComboBox2_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ComboBox2.SelectedIndexChanged
         LoadSelectedTable()
@@ -432,6 +465,10 @@ Public Class Expense
         End Try
     End Sub
     Private Sub Expense_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        CheckDatabaseConnection(statusLabel)
+
+
+
         Timer1.Interval = 3000
         Timer1.Enabled = True
 
@@ -466,26 +503,6 @@ Public Class Expense
             Debug.WriteLine("Expense Load: Datetime label added.")
 
 
-            Debug.WriteLine("Form loaded successfully")
-            ' Create a new OleDbConnection object and open the connection  
-
-            conn.Open()
-
-            ' Display the connection status on a button with a green background  
-            Label17.Text = "Connected to Database"
-            Label17.BackColor = Color.Green
-            Label17.ForeColor = Color.White
-        Catch ex As Exception
-            ' Display the connection status on a button with a red background  
-            Label17.Text = "Not Connected to Database"
-            Label17.BackColor = Color.Red
-            Label17.ForeColor = Color.White
-
-            ' Display an error message  
-            Debug.WriteLine(" Failed loading the Expense data  from DataBase")
-            Debug.WriteLine($"Stack Trace : {ex.StackTrace}")
-            MessageBox.Show("Error connecting to the database" & ex.Message, "Database Connection Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-
         Finally
             ' Close the database connection  
             conn.Close()
@@ -499,6 +516,8 @@ Public Class Expense
         'PopulateMessagesFromDatabase()
         LoadExpenseDataFromDatabase()
         PopulateComboboxFromDatabase(ComboBox3)
+        PopulatelistboxFromDatabase(ListBox1)
+
     End Sub
     Public Sub PopulatelistboxFromDatabase(ByRef listbox As ListBox)
 
@@ -760,84 +779,6 @@ Public Class Expense
             End If
         End If
     End Sub
-
-    Private Sub ProcessRecurringExpenses()
-        Dim conn As New OleDbConnection(connectionString)
-        Try
-            conn.Open()
-
-            ' 1. Get all due recurring expenses
-            Dim selectCmd As New OleDbCommand(
-            "SELECT BillName, Amount, Frequency, StartDate, Description FROM Expense WHERE Recurring = TRUE AND Paid = 'No'", conn)
-
-            Using reader As OleDbDataReader = selectCmd.ExecuteReader()
-                While reader.Read()
-                    Dim billName As String = reader("BillName").ToString()
-                    Dim amount As Decimal = CDec(reader("Amount"))
-                    Dim frequency As String = reader("Frequency").ToString()
-                    Dim startDate As DateTime = CDate(reader("StartDate"))
-                    Dim description As String = reader("Description").ToString()
-
-                    ' Determine if expense is due based on frequency and start date
-                    Dim nextPaymentDate As DateTime = startDate
-                    Dim isDue As Boolean = False
-
-                    Select Case frequency
-                        Case "Daily"
-                            isDue = (startDate <= DateTime.Today)
-                            nextPaymentDate = startDate.AddDays(1)
-                        Case "Weekly"
-                            isDue = (startDate <= DateTime.Today)
-                            nextPaymentDate = startDate.AddDays(7)
-                        Case "Monthly"
-                            isDue = (startDate <= DateTime.Today)
-                            nextPaymentDate = startDate.AddMonths(1)
-                        Case "Annually"
-                            isDue = (startDate <= DateTime.Today)
-                            nextPaymentDate = startDate.AddYears(1)
-                        Case Else
-                            ' Unknown frequency, skip
-                            Continue While
-                    End Select
-
-                    If isDue Then
-                        ' 2. Insert a record into ExpenseLogs for the payment
-                        Dim insertCmd As New OleDbCommand(
-                        "INSERT INTO ExpenseLogs (BillName, Amount, Recurring, Frequency, StartDate, DateOfExpenses, Description, Paid) VALUES (?, ?, ?, ?, ?, ?, ?, ?)", conn)
-
-                        insertCmd.Parameters.AddWithValue("?", billName)
-                        insertCmd.Parameters.AddWithValue("?", amount)
-                        insertCmd.Parameters.AddWithValue("?", False) ' Paid - false since it's just paid now
-                        insertCmd.Parameters.AddWithValue("?", frequency)
-                        insertCmd.Parameters.AddWithValue("?", startDate)
-                        insertCmd.Parameters.AddWithValue("?", DateTime.Today)
-                        insertCmd.Parameters.AddWithValue("?", "Auto-paid: " & description)
-                        insertCmd.Parameters.AddWithValue("?", "Yes") ' Mark as paid
-
-                        insertCmd.ExecuteNonQuery()
-
-                        ' 3. Update the original expense's StartDate to the next payment date
-                        Dim updateCmd As New OleDbCommand(
-                        "UPDATE Expense SET StartDate = ? WHERE BillName = ? AND Recurring = TRUE AND Paid = 'No'", conn)
-                        updateCmd.Parameters.AddWithValue("?", nextPaymentDate)
-                        updateCmd.Parameters.AddWithValue("?", billName)
-
-                        updateCmd.ExecuteNonQuery()
-
-                        ' Optional: Add feedback or logging here
-                    End If
-                End While
-            End Using
-
-            MessageBox.Show("Recurring expenses processed successfully.")
-
-        Catch ex As Exception
-            MessageBox.Show("Error: " & ex.Message)
-        Finally
-            If conn.State = ConnectionState.Open Then conn.Close()
-        End Try
-    End Sub
-
     Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
         Timer1.Enabled = False
         DisplayDataInMessageBox()
@@ -1004,7 +945,8 @@ Public Class Expense
         Dim expenseQuery As String = "SELECT * FROM Expense" ' Fetch all expense records
         'Dim budgetQuery As String = "SELECT BudgetAmount FROM Budget WHERE ID=?" ' Adjust as needed
 
-        Using conn As New OleDbConnection(connectionString)
+        Using conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
+            conn.Open()
             Dim expenseCommand As New OleDbCommand(expenseQuery, conn)
             'Dim budgetCommand As New OleDbCommand(budgetQuery, conn)
             Dim budgetID As Integer = 1 ' Replace with actual Budget record ID
@@ -1012,7 +954,7 @@ Public Class Expense
             Dim budgetCommand As New OleDbCommand(budgetQuery, conn)
             budgetCommand.Parameters.AddWithValue("?", budgetID)
             Try
-                conn.Open()
+
 
                 ' Get current budget
                 Dim currentBudget As Decimal = 0
@@ -1083,7 +1025,7 @@ Public Class Expense
                                 ' Proceed with other operations
                                 Mainm()
                                 SaveChangedDateToAnotherTable()
-                                PopulatelistboxFromDatabase(ListBox1)
+                                'PopulatelistboxFromDatabase(ListBox1)
                                 LoadExpenseDataFromDatabase()
 
                                 MessageBox.Show("Payment processed and budget updated successfully at " & DateTime.Now.ToString())
@@ -1094,7 +1036,9 @@ Public Class Expense
                         End If
                     Next
                 End Using
-
+                If conn.State = ConnectionState.Open Then
+                    conn.Close()
+                End If
             Catch ex As Exception
                 MessageBox.Show("Error: " & ex.Message)
             End Try
@@ -1331,15 +1275,6 @@ Public Class Expense
         End Try
     End Sub
 
-    Private Sub Button6_Click_1(sender As Object, e As EventArgs) Handles Button6.Click
-        ' Example: get ID and Amount from TextBoxes
-        Dim ID As Integer
-        Dim Amount As Integer
-
-        SubtractFromBudget(ID, Amount)
-
-
-    End Sub
     Public Sub SubtractFromBudget(ID As Integer, Amount As Integer)
         ' SQL query to subtract Amount from the existing BudgetAmount
         Dim query As String = "UPDATE Budget SET BudgetAmount = BudgetAmount - @Amount WHERE ID = @ID"
@@ -1400,6 +1335,69 @@ Public Class Expense
             End Using
         End Using
     End Sub
+
+    Public Sub PayBill()
+        Dim budgetId As Integer
+        Dim expenseAmount As Decimal
+        Dim expenseDescription As String
+
+        Dim conn As New OleDbConnection(connectionString)
+
+        Try
+            conn.Open()
+
+            ' Start a transaction to ensure data integrity
+            Dim transaction As OleDbTransaction = conn.BeginTransaction()
+
+            ' 1. Retrieve current budget amount
+            Dim getBudgetCmd As New OleDbCommand("SELECT BudgetAmount FROM Budget WHERE ID = ?", conn, transaction)
+            getBudgetCmd.Parameters.AddWithValue("?", budgetId)
+
+            Dim currentBudget As Object = getBudgetCmd.ExecuteScalar()
+            If currentBudget Is Nothing Then
+                Throw New Exception("Budget ID not found.")
+            End If
+
+            Dim currentBudgetAmount As Decimal = Convert.ToDecimal(currentBudget)
+
+            ' 2. Check if enough budget exists
+            If currentBudgetAmount < expenseAmount Then
+                Throw New Exception("Insufficient budget.")
+            End If
+
+            ' 3. Calculate new budget amount
+            Dim newBudgetAmount As Decimal = currentBudgetAmount - expenseAmount
+
+            ' 4. Update BudgetTable
+            Dim updateBudgetCmd As New OleDbCommand("UPDATE Budget SET BudgetAmount = ? WHERE ID = ?", conn, transaction)
+            updateBudgetCmd.Parameters.AddWithValue("@BudgetAmount", newBudgetAmount)
+            updateBudgetCmd.Parameters.AddWithValue("@ID", budgetId)
+            updateBudgetCmd.ExecuteNonQuery()
+
+            ' 5. Insert into ExpenseTable
+            Dim insertExpenseCmd As New OleDbCommand("INSERT INTO ExpenseLogs (Amount, Expenses, StartDate) VALUES (?, ?, ?)", conn, transaction)
+            insertExpenseCmd.Parameters.AddWithValue("@Amount", expenseAmount)
+            insertExpenseCmd.Parameters.AddWithValue("@Description", expenseDescription)
+            insertExpenseCmd.Parameters.AddWithValue("@Date", DateTime.Now)
+            insertExpenseCmd.ExecuteNonQuery()
+
+            ' 6. Commit transaction
+            transaction.Commit()
+
+            MessageBox.Show("Bill paid successfully and budget updated.")
+        Catch ex As Exception
+            ' Rollback in case of error
+            If conn.State = ConnectionState.Open Then
+                conn.Close()
+            End If
+            MessageBox.Show("Error: " & ex.Message)
+        Finally
+            If conn.State = ConnectionState.Open Then
+                conn.Close()
+            End If
+        End Try
+    End Sub
+
 
 End Class
 

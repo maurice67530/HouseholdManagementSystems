@@ -24,10 +24,11 @@ Public Class Dashboard
 
     Public Property CurrentUserName As String
     Private Sub Dashboard_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
+
+        CheckDatabaseConnection(statusLabel)
         ' Show total users who have logged in
         Label39.Text = "Users: " & GetTotalUsersLoggedIn().ToString()
-        CheckDatabaseConnection()
-
 
         lblbadge.Region = New Region(New Drawing2D.GraphicsPath())
         Dim gp As New Drawing.Drawing2D.GraphicsPath()
@@ -556,7 +557,7 @@ Public Class Dashboard
 
             ' Configure SMTP client
 
-            Dim smtpClient As New SmtpClient("smtp.gmail.com") With {.Port = 587, .EnableSsl = True, .Credentials = New NetworkCredential("nethonondamudzunga45@gmail.com", "slwo xavj lool amzu")}
+            Dim smtpClient As New SmtpClient(My.Settings.Smtpserver) With {.Port = 587, .EnableSsl = True, .Credentials = New NetworkCredential("nethonondamudzunga45@gmail.com", "slwo xavj lool amzu")}
 
 
             ' Create the email message
@@ -1419,21 +1420,7 @@ Public Class Dashboard
         End Using
     End Sub
 
-    Private Sub CheckDatabaseConnection()
-        'Dim connString As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=your_database_path.accdb;"
-        Using conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
-            Try
-                conn.Open()
-                Label36.Text = "Database connected successfully."
-                Label36.ForeColor = Color.Green
-            Catch ex As Exception
-                Label36.Text = "Database Connection failed: " & ex.Message
-                Label36.ForeColor = Color.Red
-            Finally
-                conn.Close()
-            End Try
-        End Using
-    End Sub
+
 
     Private Sub LoadRecentGroceries()
         Try

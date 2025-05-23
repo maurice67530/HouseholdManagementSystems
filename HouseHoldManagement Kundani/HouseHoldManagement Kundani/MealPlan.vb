@@ -53,6 +53,8 @@ Public Class MealPlan
     End Sub
 
     Private Sub MealPlan_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        CheckDatabaseConnection(StatusLabel)
+
         ComboBox1.Items.AddRange(New String() {"<500", "500-1000", ">1000"})
         ComboBox2.Items.AddRange(New String() {"Daily", "Weekly", "Monthly"})
 
@@ -544,8 +546,15 @@ Public Class MealPlan
     End Sub
 
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
+        'If MessageBox.Show("Meal saved! Would you like to view the calendar?", "Open Family Schedule", MessageBoxButtons.YesNo) = DialogResult.Yes Then
+        '    Family_Schedule.ShowDialog()
+        'End If
+
         If MessageBox.Show("Meal saved! Would you like to view the calendar?", "Open Family Schedule", MessageBoxButtons.YesNo) = DialogResult.Yes Then
-            Family_Schedule.ShowDialog()
+            Dim familyScheduleForm As New Family_Schedule()
+            familyScheduleForm.LoadFamilyCalendar()             ' Load data first, set Me.Tag
+            familyScheduleForm.FilterByEventType("Meal")        ' Then apply the filter
+            familyScheduleForm.ShowDialog()
         End If
     End Sub
 
