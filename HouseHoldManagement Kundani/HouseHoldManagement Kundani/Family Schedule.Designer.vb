@@ -293,7 +293,7 @@ Partial Class Family_Schedule
         '
         'Button1
         '
-        Me.Button1.Location = New System.Drawing.Point(413, 510)
+        Me.Button1.Location = New System.Drawing.Point(426, 498)
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(75, 23)
         Me.Button1.TabIndex = 24

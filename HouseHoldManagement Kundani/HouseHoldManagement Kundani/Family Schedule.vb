@@ -98,6 +98,7 @@ Public Class Family_Schedule
     End Sub
     Private Sub Family_Schedule_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
+
         Dim tooltip As New ToolTip
         tooltip.SetToolTip(btnSave, "Submit")
         tooltip.SetToolTip(btnUpdate, "Update")
@@ -286,6 +287,7 @@ Public Class Family_Schedule
     Private Sub DataGridView1_SelectionChanged(sender As Object, e As EventArgs) Handles DataGridView1.SelectionChanged
         Try
 
+
             Debug.WriteLine("selecting data in the datagridview")
             If DataGridView1.SelectedRows.Count > 0 Then
                 Dim selectedRow As DataGridViewRow = DataGridView1.SelectedRows(0)
@@ -304,6 +306,8 @@ Public Class Family_Schedule
             Debug.WriteLine($"Stack Trace: {ex.StackTrace}")
             MessageBox.Show("Error saving inventory to database: " & ex.Message & vbNewLine & ex.StackTrace, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
+
+
 
     End Sub
 
@@ -887,8 +891,7 @@ Public Class Family_Schedule
 
 
 
-
-    'vHO ZWIVHUYA, MULANGA AND XILUVA
+    'xilu
     Public Sub AddMealToSchedule(mealDate As DateTime, mealTitle As String, mealDetails As String)
 
         Using conn As New OleDbConnection(connectionString)
@@ -918,13 +921,11 @@ Public Class Family_Schedule
             End Using
         End Using
 
+        ' Show the count of scheduled meals
+        MessageBox.Show("You have " & dt.Rows.Count & " meals scheduled.", "Meal Schedule Count", MessageBoxButtons.OK, MessageBoxIcon.Information)
+
         ' Example: Bind to DataGridView or process for calendar
         DataGridView1.DataSource = dt
-    End Sub
-
-    Private Sub Button1_Click_1(sender As Object, e As EventArgs) Handles Button1.Click
-        LoadFamilySchedule()
-        'LoadMealsToCalendar()
     End Sub
 
     Dim mealDict As New Dictionary(Of Date, List(Of String))
@@ -967,10 +968,70 @@ Public Class Family_Schedule
             MessageBox.Show("No meals scheduled for " & selectedDate.ToShortDateString() & ".",
                         "Meal Schedule", MessageBoxButtons.OK, MessageBoxIcon.Information)
         End If
+        HighlightMealEvents()
+        LoadFamilySchedules()
+
+        'Dim selectedDate As Date = MonthCalendar1.SelectionStart.Date
+        HighlightMealRowsByDate(selectedDate)
+    End Sub
+    Private Sub HighlightMealEvents()
+        ' Loop through each row in the DataGridView
+        For Each row As DataGridViewRow In DataGridView1.Rows
+            If Not row.IsNewRow Then
+                Dim eventType As String = row.Cells("EventType").Value.ToString()
+                If eventType = "Meal" Then
+                    row.DefaultCellStyle.BackColor = Color.DarkRed
+                    row.DefaultCellStyle.ForeColor = Color.White
+                Else
+                    ' Optional: Reset other rows
+                    row.DefaultCellStyle.BackColor = Color.White
+                    row.DefaultCellStyle.ForeColor = Color.Black
+                End If
+            End If
+        Next
     End Sub
 
-    Private Sub FamilySchedule_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+    Public Sub LoadFamilySchedules()
+        Dim dt As New DataTable()
+
+        Using conn As New OleDbConnection(connectionString)
+            Dim query As String = "SELECT DateOfEvent, Title, EventType FROM FamilySchedule WHERE EventType = 'Meal' ORDER BY DateOfEvent"
+            Using cmd As New OleDbCommand(query, conn)
+                conn.Open()
+                Using reader As OleDbDataReader = cmd.ExecuteReader()
+                    dt.Load(reader)
+                End Using
+            End Using
+        End Using
+
+        DataGridView1.DataSource = dt
+
+        ' Optional: highlight Meal events
+        HighlightMealEvents()
+    End Sub
+
+    Private Sub HighlightMealRowsByDate(selectedDate As Date)
+        For Each row As DataGridViewRow In DataGridView1.Rows
+            If Not row.IsNewRow Then
+                Dim rowDate As Date = CDate(row.Cells("DateOfEvent").Value).Date
+                Dim eventType As String = row.Cells("EventType").Value.ToString()
+
+                ' Reset all rows first
+                row.DefaultCellStyle.BackColor = Color.White
+                row.DefaultCellStyle.ForeColor = Color.Black
+
+                ' Highlight only matching Meal event rows for selected date
+                If rowDate = selectedDate AndAlso eventType = "Meal" Then
+                    row.DefaultCellStyle.BackColor = Color.Red
+                    row.DefaultCellStyle.ForeColor = Color.White
+                End If
+            End If
+        Next
+    End Sub
+
+    Private Sub Button1_Click_1(sender As Object, e As EventArgs) Handles Button1.Click
         LoadMealSchedule()
+        LoadFamilySchedule()
     End Sub
 
 End Class
