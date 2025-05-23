@@ -92,10 +92,7 @@ Public Class Expense
 
                 Dim expenseAmount As Decimal
                 If Decimal.TryParse(TextBox2.Text, expenseAmount) Then
-                    ' Assuming TextBox2 contains the expense amount
-                    ' Use the BillName or other identifier to locate the budget record
-                    Dim budgetIdentifier As String = TextBox8.Text ' or other relevant identifier
-                    UpdateBudget(budgetIdentifier, expenseAmount)
+                    SubtractExpenseFromBudget(expenseAmount)
                 Else
                     MessageBox.Show("Invalid expense amount.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
                 End If
@@ -126,41 +123,40 @@ Public Class Expense
         Debug.WriteLine("Exiting btnSubmit")
     End Sub
 
-    Private Sub UpdateBudget(budgetIdentifier As String, expenseAmount As Decimal)
+    Private Sub SubtractExpenseFromBudget(expenseAmount As Decimal)
         Using conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
             conn.Open()
             Try
-                ' Retrieve current budget amount
-                Dim selectQuery As String = "SELECT [BudgetAmount] FROM [Budget] WHERE [ID] = ?"
+                ' 1. Retrieve the current budget amount (assuming only one record or the first record)
+                Dim selectQuery As String = "SELECT TOP 1 [ID], [BudgetAmount] FROM [Budget]"
                 Dim selectCmd As New OleDbCommand(selectQuery, conn)
-                selectCmd.Parameters.AddWithValue("@ID", budgetIdentifier)
+                Dim reader As OleDbDataReader = selectCmd.ExecuteReader()
 
-                Dim currentBudget As Object = selectCmd.ExecuteScalar()
+                If reader.Read() Then
+                    Dim budgetID As Integer = reader.GetInt32(0) ' Assuming ID is int
+                    Dim currentAmount As Decimal = reader.GetDecimal(1)
 
-                If currentBudget Is Nothing Then
-                    MessageBox.Show("Budget record not found.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-                    Return
+                    ' 2. Calculate the new budget amount
+                    Dim newBudgetAmount As Decimal = currentAmount - expenseAmount
+
+                    ' Optional: prevent negative budget
+                    If newBudgetAmount < 0 Then
+                        MessageBox.Show("Expense exceeds current budget!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                        ' You can choose to stop or proceed
+                    End If
+
+                    ' 3. Update the budget record
+                    Dim updateQuery As String = "UPDATE [Budget] SET [BudgetAmount] = ? WHERE [ID] = ?"
+                    Dim updateCmd As New OleDbCommand(updateQuery, conn)
+                    updateCmd.Parameters.AddWithValue("@Amount", newBudgetAmount)
+                    updateCmd.Parameters.AddWithValue("@ID", budgetID)
+
+                    updateCmd.ExecuteNonQuery()
+                Else
+                    MessageBox.Show("No budget record found.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
                 End If
 
-                Dim currentAmount As Decimal = Convert.ToDecimal(currentBudget)
-
-                ' Subtract expense amount
-                Dim newBudgetAmount As Decimal = currentAmount - expenseAmount
-
-                If newBudgetAmount < 0 Then
-                    MessageBox.Show("Expense exceeds current budget!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-                    ' Decide whether to proceed or not
-                    ' For now, proceed with negative budget or handle as needed
-                End If
-
-                ' Update the budget with the new amount
-                Dim updateQuery As String = "UPDATE [Budget] SET [BudgetAmount] = ? WHERE [ID] = ?"
-                Dim updateCmd As New OleDbCommand(updateQuery, conn)
-                updateCmd.Parameters.AddWithValue("@Amount", newBudgetAmount)
-                updateCmd.Parameters.AddWithValue("@ID", budgetIdentifier)
-
-                updateCmd.ExecuteNonQuery()
-
+                reader.Close()
             Catch ex As Exception
                 MessageBox.Show("Error updating budget: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
             End Try
