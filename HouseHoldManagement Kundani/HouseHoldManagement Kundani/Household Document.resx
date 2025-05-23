@@ -191,6 +191,27 @@
   <metadata name="OpenFileDialog1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
+  <data name="PictureBoxPreview.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAAJcEhZcwAACxMAAAsTAQCanBgAAAOOSURBVHhe7Zw7r0xRGIaPWwiiIi4NEg1BRecaIYSIS6JX
+        0El0SrfKpTgqEQWJX0BDCL+Bxi0aGkJI3EJI8L5xJhnLt2evb81eM3vNeZ/kSWTO7DXJ95jZc86+jAkh
+        hBBCCCGEEEIIIYQQQkywBF6ET+E3+FuacjZPIGfFmTXCAfgZWi8oq+XM9sG+2AZ/QusFZL0/4BaYxAz4
+        AloLy3ifQ87SzW5oLSj97oRuzkJrMen3DHRzGVqLSb+cpZsr0FpM+uUs3ShAcypAop/gbXgN3oRvoPW8
+        OhXAKQd/DM6E3UyFB+FLaG1XpQI4fAtXw14sgA+htb2lAjjcDmNYBr9Aa41QBYj0LvRwDlrrhCpApEeg
+        h3XQWidUASLdBD3MhdY6oVkDnDAeK9XN0MM8aK0TmjUAOQWtn5XmUehhPbTWCc0egIxChHvQwwVorRM6
+        kABkFCLsgDEsh1+htUbowAKQ0iO8g2tgLxbCR9Da3nKgAUjpEXg89zicBbuZBg/BV9DarsqBByCj8HHE
+        33TvwOvwFuSfKazn1TmUAGSUvqL249ACEEUYcgDS5McRz9Tg6R7Wz9rq0AOQJt4J/OYxH/KMje8Tj5Vg
+        KwKQfiJ0ht+hpAitCUBSIoTD71BKhFYFIJ4IVcPvUEKE1gUgsTvmw7AOnkDc5h1zKwOQmHcCBxtzlnGb
+        3wmtDUBiI+yHdTQVgR97G+Hrrsf6sdUBSJsidO9zVsImIrQ+AImJwMGugnWkRrB2+E1EKCIAidkxX4Ux
+        eHfMHD7P97FYC/lnamu7GIsJQOoiPICxxEbg//Cq4XfoJ0JRAUivCJegh9gIMV93UyMUF4CchOFrvYcp
+        Vx/GRPgAecCljpQIRQYge+B9yMtjb8ClMJWYCCtgDN4IxQZoml4ReDXobBiLJ4ICdFEVYRx6YYRwHUsF
+        CNgAeXr5L/gR8iTb8FqAWKyZhCpABXPglL//TMaaSagCZMSaSagCZMSaSagCZMSaSagCZMSaSagCZMSa
+        SagCZMSaSagCZMSaSagCZMSaSagCZMSaSagCZMSaSWjWAHzeZNaaSSif5yZ2cVmvAgzZpAC6ZVlzJt2y
+        TDfta87T0M0uaC0m/cZee/wPvNkobzpqLSjjfQanwyS2Qt26OF0ee/beAOQ/eGo476FmvYCslsea98JG
+        WAzPw8dQt6+vlrPhjHiQfxEUQgghhBBCCCGEEEIIIcSkZ2zsD2lgudfY0nIoAAAAAElFTkSuQmCC
+</value>
+  </data>
   <data name="Button4.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         R0lGODlhKAAoAPcAAAD/AE56tU97tVB8tlF9t1J9t1J+t1N+uFN/uFN/uVR/uFR/uVSAuVV/uFWAuVWA

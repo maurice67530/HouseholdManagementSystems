@@ -110,7 +110,6 @@ Public Class Family_Schedule
         PopulateComboboxFromDatabase(ComboBox1)
         LoadScheduleFromDatabase()
 
-
         DataGridView1.Columns("DateOfEvent").DefaultCellStyle.Format = "dd, MMMM yyyy"
         DataGridView1.Columns("StartTime").DefaultCellStyle.Format = "dd, MMMM yyyy hh:mm tt"
         DataGridView1.Columns("EndTime").DefaultCellStyle.Format = "dd, MMMM yyyy hh:mm tt"
@@ -119,25 +118,8 @@ Public Class Family_Schedule
         LoadFamilyCalendar()
         LoadScheduleFromDatabase()
     End Sub
-    Public Sub FilterByEventType(eventType As String)
-        Try
-            Dim dt As DataTable = TryCast(Me.Tag, DataTable)
-
-            ' Clear existing rows
-            DataGridView1.Rows.Clear()
-
-            ' Manually add matching rows
-            For Each row As DataRow In dt.Select($"EventType = '{eventType}'")
-                DataGridView1.Rows.Add(row.ItemArray)
-            Next
-
-            MessageBox.Show($"Filtered rows added: {DataGridView1.RowCount}", "Filter Result", MessageBoxButtons.OK, MessageBoxIcon.Information)
-        Catch ex As Exception
-            MessageBox.Show($"Error filtering: {ex.Message}", "Filter Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-        End Try
-    End Sub
-
-    Public Sub LoadFamilyCalendar()
+  
+    Private Sub LoadFamilyCalendar()
         Dim conStr As String = (HouseHoldManagment_Module.connectionString)
         Dim con As New OleDbConnection(conStr)
         Dim dt As New DataTable()
@@ -690,7 +672,7 @@ Public Class Family_Schedule
     ' Declare this at the top of your form
     Private currentEventIndex As Integer = 0
     Private eventTypes As String() = {"Chore", "Meal", "Task"}
-    Private Sub btnFilte_Click(sender As Object, e As EventArgs) Handles btnFilte.Click
+    Private Sub btnFilte_Click_1(sender As Object, e As EventArgs) Handles btnFilte.Click
         Try
             ' Get current event type to show
             Dim eventTypeToShow As String = eventTypes(currentEventIndex)

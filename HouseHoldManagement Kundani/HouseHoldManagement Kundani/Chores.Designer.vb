@@ -397,6 +397,7 @@ Partial Class chores
         '
         'DateTimePicker1
         '
+        Me.DateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
         Me.DateTimePicker1.Location = New System.Drawing.Point(105, 192)
         Me.DateTimePicker1.Name = "DateTimePicker1"
         Me.DateTimePicker1.Size = New System.Drawing.Size(204, 20)
@@ -543,9 +544,6 @@ Partial Class chores
         Me.Button10.Size = New System.Drawing.Size(44, 54)
         Me.Button10.TabIndex = 46
         Me.Button10.UseVisualStyleBackColor = False
-        '
-        'Timer1
-        '
         '
         'Button13
         '
