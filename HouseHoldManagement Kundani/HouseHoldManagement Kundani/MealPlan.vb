@@ -53,8 +53,6 @@ Public Class MealPlan
     End Sub
 
     Private Sub MealPlan_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        CheckDatabaseConnection(StatusLabel)
-
         ComboBox1.Items.AddRange(New String() {"<500", "500-1000", ">1000"})
         ComboBox2.Items.AddRange(New String() {"Daily", "Weekly", "Monthly"})
 
@@ -86,8 +84,8 @@ Public Class MealPlan
                 End While
             End Using
         End Using
-        'hhhhhh
-        PopulateComboboxFromDatabase(ComboBox4)
+        ''hhhhhh
+        'PopulateComboboxFromDatabase(ComboBox4)
     End Sub
 
     Private mealPlanData As DataTable
@@ -497,7 +495,6 @@ Public Class MealPlan
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
 
-
         Dim openFileDialog As New OpenFileDialog()
         openFileDialog.Filter = "Image Files|*.jpg;*.*.bmp"
 
@@ -517,19 +514,19 @@ Public Class MealPlan
             'open the database connection
             conn.Open()
 
-            'retrieve the firstname and surname columns from the personaldetails tabel
-            Dim query As String = "SELECT Preference FROM Users"
-            Dim cmd As New OleDbCommand(query, conn)
-            Dim reader As OleDbDataReader = cmd.ExecuteReader()
+            ''retrieve the firstname and surname columns from the personaldetails tabel
+            'Dim query As String = "SELECT Preference FROM Users"
+            'Dim cmd As New OleDbCommand(query, conn)
+            'Dim reader As OleDbDataReader = cmd.ExecuteReader()
 
-            'bind the retrieved data to the combobox
-            ComboBox4.Items.Clear()
-            While reader.Read()
-                ComboBox4.Items.Add($"{reader("Preference")}")
-            End While
+            ''bind the retrieved data to the combobox
+            'ComboBox4.Items.Clear()
+            'While reader.Read()
+            '    ComboBox4.Items.Add($"{reader("Preference")}")
+            'End While
 
-            'close the database
-            reader.Close()
+            ''close the database
+            'reader.Close()
 
         Catch ex As Exception
             Debug.WriteLine("Failed to initialize combobox")
@@ -546,16 +543,15 @@ Public Class MealPlan
     End Sub
 
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
-        'If MessageBox.Show("Meal saved! Would you like to view the calendar?", "Open Family Schedule", MessageBoxButtons.YesNo) = DialogResult.Yes Then
-        '    Family_Schedule.ShowDialog()
-        'End If
+        If MessageBox.Show("Would you like to view the calendar?", "Open Family Schedule", MessageBoxButtons.YesNo) = DialogResult.Yes Then
+            Family_Schedule.ShowDialog()
+            Family_Schedule.LoadFamilySchedule()
+            'Family_Schedule.HighlightMealEvents()
+            Family_Schedule.LoadFamilySchedules()
 
-        If MessageBox.Show("Meal saved! Would you like to view the calendar?", "Open Family Schedule", MessageBoxButtons.YesNo) = DialogResult.Yes Then
-            Dim familyScheduleForm As New Family_Schedule()
-            familyScheduleForm.LoadFamilyCalendar()             ' Load data first, set Me.Tag
-            familyScheduleForm.FilterByEventType("Meal")        ' Then apply the filter
-            familyScheduleForm.ShowDialog()
+            Family_Schedule.Button1.Visible = True
         End If
+
     End Sub
 
 End Class

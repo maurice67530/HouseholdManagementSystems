@@ -19,6 +19,7 @@ Public Class Family_Schedule
     .EventType = ComboBox3.SelectedItem.ToString
     }
 
+
             Using conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
                 conn.Open()
 
@@ -66,7 +67,7 @@ Public Class Family_Schedule
     End Sub
     Public Sub LoadScheduleFromDatabase()
         Try
-            HighlightScheduleEventsByType()
+
             Debug.WriteLine("DataGridview populated successfully ChoresForm_Load")
             Using conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
                 conn.Open()
@@ -85,8 +86,6 @@ Public Class Family_Schedule
 
                 ' Bind the DataTable to the DataGridView  
                 DataGridView1.DataSource = dt
-
-                HighlightScheduleEventsByType()
             End Using
 
         Catch ex As Exception
@@ -99,45 +98,24 @@ Public Class Family_Schedule
     End Sub
     Private Sub Family_Schedule_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
+
         Dim tooltip As New ToolTip
         tooltip.SetToolTip(btnSave, "Submit")
         tooltip.SetToolTip(btnUpdate, "Update")
         tooltip.SetToolTip(btnDelete, "Delete")
-        tooltip.SetToolTip(btnRefresh, "Refresh")
-        tooltip.SetToolTip(btnFilte, "Filter")
-
 
         PopulateComboboxFromDatabase(ComboBox1)
         LoadScheduleFromDatabase()
 
+        AutoCreateChoreEvents()
+        'AutoAddMealTimes()
+        'AutoCreateTaskReminders()
+        'MarkPhotoDayEvents()
 
-        DataGridView1.Columns("DateOfEvent").DefaultCellStyle.Format = "dd, MMMM yyyy"
-        DataGridView1.Columns("StartTime").DefaultCellStyle.Format = "dd, MMMM yyyy hh:mm tt"
-        DataGridView1.Columns("EndTime").DefaultCellStyle.Format = "dd, MMMM yyyy hh:mm tt"
-        AutoIntegrateAllEvents()
-
+        ' IntegrateChores()
         LoadFamilyCalendar()
-        LoadScheduleFromDatabase()
     End Sub
-    Public Sub FilterByEventType(eventType As String)
-        Try
-            Dim dt As DataTable = TryCast(Me.Tag, DataTable)
-
-            ' Clear existing rows
-            DataGridView1.Rows.Clear()
-
-            ' Manually add matching rows
-            For Each row As DataRow In dt.Select($"EventType = '{eventType}'")
-                DataGridView1.Rows.Add(row.ItemArray)
-            Next
-
-            MessageBox.Show($"Filtered rows added: {DataGridView1.RowCount}", "Filter Result", MessageBoxButtons.OK, MessageBoxIcon.Information)
-        Catch ex As Exception
-            MessageBox.Show($"Error filtering: {ex.Message}", "Filter Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-        End Try
-    End Sub
-
-    Public Sub LoadFamilyCalendar()
+    Private Sub LoadFamilyCalendar()
         Dim conStr As String = (HouseHoldManagment_Module.connectionString)
         Dim con As New OleDbConnection(conStr)
         Dim dt As New DataTable()
@@ -250,6 +228,7 @@ Public Class Family_Schedule
             Return
         End If
 
+
         Try
             Dim Title As String = TextBox1.Text
             Dim Notes As String = TextBox2.Text
@@ -302,8 +281,12 @@ Public Class Family_Schedule
         End If
         LoadScheduleFromDatabase()
     End Sub
+
+
+
     Private Sub DataGridView1_SelectionChanged(sender As Object, e As EventArgs) Handles DataGridView1.SelectionChanged
         Try
+
 
             Debug.WriteLine("selecting data in the datagridview")
             If DataGridView1.SelectedRows.Count > 0 Then
@@ -317,17 +300,17 @@ Public Class Family_Schedule
                 DateTimePicker3.Text = selectedRow.Cells("EndTime").Value.ToString()
                 ComboBox1.Text = selectedRow.Cells("AssignedTo").Value.ToString()
                 ComboBox3.Text = selectedRow.Cells("EventType").Value.ToString()
-
-                ' Enable/disable the buttons based on the selected person  
-                btnSave.Enabled = False
             End If
-
         Catch ex As Exception
             Debug.WriteLine("error selection data in the database")
             Debug.WriteLine($"Stack Trace: {ex.StackTrace}")
             MessageBox.Show("Error saving inventory to database: " & ex.Message & vbNewLine & ex.StackTrace, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
+
+
+
     End Sub
+
     Public Sub PopulateComboboxFromDatabase(ByRef comboBox As ComboBox)
         Dim conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
         Try
@@ -359,11 +342,238 @@ Public Class Family_Schedule
             End If
         End Try
     End Sub
+
+    'Private Sub AutoCreateChoreEvents()
+    '    Dim conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
+    '    Dim da As New OleDbDataAdapter("SELECT Title, DueDate, AssignedTo FROM Chores", conn)
+    '    Dim dt As New DataTable
+    '    da.Fill(dt)
+
+    '    Dim count As Integer = 0
+    '    For Each row As DataRow In dt.Rows
+    '        Dim choreDate As Date = CDate(row("DueDate"))
+    '        Dim startTime As Date = choreDate.Date.AddHours(9)    ' 9:00 AM
+    '        Dim endTime As Date = choreDate.Date.AddHours(10)     ' 10:00 AM
+
+    '        Dim cmd As New OleDbCommand("INSERT INTO FamilySchedule (Title, Notes, DateOfEvent, StartTime, EndTime, AssignedTo, EventType) VALUES (?, ?, ?, ?, ?, ?, ?)", conn)
+    '        cmd.Parameters.AddWithValue("?", row("Title").ToString())
+    '        cmd.Parameters.AddWithValue("?", "Auto-scheduled chore")
+    '        cmd.Parameters.AddWithValue("?", choreDate.ToString("dddd, MMMM dd, yyyy"))
+    '        cmd.Parameters.AddWithValue("?", startTime.ToString("dddd, MMMM dd, yyyy hh:mm tt"))
+    '        cmd.Parameters.AddWithValue("?", endTime.ToString("dddd, MMMM dd, yyyy hh:mm tt"))
+    '        cmd.Parameters.AddWithValue("?", row("AssignedTo").ToString())
+    '        cmd.Parameters.AddWithValue("?", "Chore")
+
+    '        conn.Open()
+    '        cmd.ExecuteNonQuery()
+    '        conn.Close()
+    '        count += 1
+    '    Next
+    '    MessageBox.Show(count.ToString() & " chore event(s) added to the schedule.", "Chore Integration Complete")
+    '    LoadScheduleFromDatabase()
+    'End Sub
+    Private Sub AutoCreateChoreEvents()
+        Dim conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
+        Dim da As New OleDbDataAdapter("SELECT Title, DueDate, AssignedTo FROM Chores WHERE Status <> 'Completed'", conn)
+        Dim dt As New DataTable
+        da.Fill(dt)
+
+        Dim count As Integer = 0
+
+        For Each row As DataRow In dt.Rows
+            Dim choreTitle As String = row("Title").ToString()
+            Dim assignedTo As String = row("AssignedTo").ToString()
+            Dim choreDate As Date = CDate(row("DueDate"))
+
+            ' Check for duplicates
+            Dim checkCmd As New OleDbCommand("SELECT COUNT(*) FROM FamilySchedule WHERE Title = ? AND DateOfEvent = ?", conn)
+            checkCmd.Parameters.AddWithValue("?", choreTitle)
+            checkCmd.Parameters.AddWithValue("?", choreDate)
+
+            conn.Open()
+            Dim exists As Integer = Convert.ToInt32(checkCmd.ExecuteScalar())
+            conn.Close()
+
+            If exists = 0 Then
+                Dim startTime As Date = choreDate.Date.AddHours(9)    ' 9:00 AM
+                Dim endTime As Date = choreDate.Date.AddHours(10)     ' 10:00 AM
+
+                Dim insertCmd As New OleDbCommand("INSERT INTO FamilySchedule (Title, Notes, DateOfEvent, StartTime, EndTime, AssignedTo, EventType) VALUES (?, ?, ?, ?, ?, ?, ?)", conn)
+                insertCmd.Parameters.AddWithValue("?", choreTitle)
+                insertCmd.Parameters.AddWithValue("?", "Auto-scheduled chore")
+                insertCmd.Parameters.AddWithValue("?", choreDate)         ' Store real date
+                insertCmd.Parameters.AddWithValue("?", startTime)
+                insertCmd.Parameters.AddWithValue("?", endTime)
+                insertCmd.Parameters.AddWithValue("?", assignedTo)
+                insertCmd.Parameters.AddWithValue("?", "Chore")
+
+                conn.Open()
+                insertCmd.ExecuteNonQuery()
+                conn.Close()
+
+                count += 1
+            End If
+        Next
+
+        MessageBox.Show(count.ToString() & " new chore event(s) added to the schedule.", "Chore Integration Complete")
+        LoadScheduleFromDatabase()
+    End Sub
+    Private Sub AutoAddMealTimes()
+        Dim conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
+        Dim da As New OleDbDataAdapter("SELECT MealName, StartDate, Description FROM MealPlans", conn)
+        Dim dt As New DataTable
+        da.Fill(dt)
+
+        Dim count As Integer = 0
+
+        For Each row As DataRow In dt.Rows
+            Dim cmd As New OleDbCommand("INSERT INTO FamilySchedule (Title, Notes, DateOfEvent, StartTime, EndTime, AssignedTo, EventType) " &
+                                    "VALUES (?, ?, ?, ?, ?, ?, ?)", conn)
+
+            Dim mealDate As Date = CDate(row("StartDate"))
+            Dim startTime As Date = mealDate.Date.AddHours(13) ' 1:00 PM
+            Dim endTime As Date = mealDate.Date.AddHours(14)   ' 2:00 PM
+
+            cmd.Parameters.AddWithValue("?", row("MealName").ToString())
+            cmd.Parameters.AddWithValue("?", "Scheduled Meal")
+            cmd.Parameters.AddWithValue("?", mealDate)
+            cmd.Parameters.AddWithValue("?", startTime.ToString("dddd, MMMM dd, yyyy hh:mm tt"))
+            cmd.Parameters.AddWithValue("?", endTime.ToString("dddd, MMMM dd, yyyy hh:mm tt"))
+            cmd.Parameters.AddWithValue("?", row("Description").ToString())
+            cmd.Parameters.AddWithValue("?", "Meal")
+
+            conn.Open()
+            cmd.ExecuteNonQuery()
+            conn.Close()
+
+            count += 1
+        Next
+
+        MessageBox.Show(count.ToString() & " meal(s) added to the family calendar.")
+    End Sub
+    Private Sub AutoCreateTaskReminders()
+        Dim conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
+        Dim da As New OleDbDataAdapter("SELECT Title, DueDate, AssignedTo FROM Tasks", conn)
+        Dim dt As New DataTable
+        da.Fill(dt)
+
+        Dim count As Integer = 0
+        For Each row As DataRow In dt.Rows
+            Dim reminderDate As Date = CDate(row("DueDate")).AddDays(-1)
+            Dim startTime As Date = reminderDate.Date.AddHours(8)    ' 8:00 AM
+            Dim endTime As Date = reminderDate.Date.AddHours(8.5)    ' 8:30 AM
+
+            Dim cmd As New OleDbCommand("INSERT INTO FamilySchedule (Title, Notes, DateOfEvent, StartTime, EndTime, AssignedTo, EventType) " &
+                                    "VALUES (?, ?, ?, ?, ?, ?, ?)", conn)
+
+            cmd.Parameters.AddWithValue("?", row("Title").ToString())
+            cmd.Parameters.AddWithValue("?", "Task due soon")
+            cmd.Parameters.AddWithValue("?", reminderDate.ToString("dddd, MMMM dd, yyyy"))
+            cmd.Parameters.AddWithValue("?", startTime.ToString("dddd, MMMM dd, yyyy hh:mm tt"))
+            cmd.Parameters.AddWithValue("?", endTime.ToString("dddd, MMMM dd, yyyy hh:mm tt"))
+            cmd.Parameters.AddWithValue("?", row("AssignedTo"))
+            cmd.Parameters.AddWithValue("?", "Task")
+
+            conn.Open()
+            cmd.ExecuteNonQuery()
+            conn.Close()
+            count += 1
+        Next
+        MessageBox.Show(count.ToString() & " task reminder(s) scheduled.", "Task Reminder Integration")
+    End Sub
+
+
+    Private Sub MarkPhotoDayEvents()
+        Dim count As Integer = 0
+
+        For Each row As DataGridViewRow In DataGridView1.Rows
+            If Not row.IsNewRow AndAlso
+           row.Cells("Notes").Value IsNot Nothing AndAlso
+           Not IsDBNull(row.Cells("Notes").Value) AndAlso
+           row.Cells("Notes").Value.ToString().ToLower().Contains("photo day") Then
+
+                row.DefaultCellStyle.BackColor = Color.LightGoldenrodYellow
+                count += 1
+            End If
+        Next
+
+        If count > 0 Then
+            MessageBox.Show(count.ToString() & " Photo Day event(s) highlighted!", "Photo Album Integration")
+        Else
+            MessageBox.Show("No Photo Day events found.", "Photo Album Integration")
+        End If
+    End Sub
     Private Sub MonthCalendar1_DateChanged(sender As Object, e As DateRangeEventArgs) Handles MonthCalendar1.DateChanged
+        'Dim selectedDate As Date = e.Start
+
+        'Dim dt As DataTable = TryCast(Me.Tag, DataTable)
+        'If dt Is Nothing Then
+        '    'MessageBox.Show("No events loaded.")
+        '    Return
+        'End If
+
+        '' Filter events for the selected date
+        'Dim eventsOnDate = dt.AsEnumerable().
+        'Where(Function(r) CDate(r("DateOfEvent")).Date = selectedDate.Date).
+        'Select(Function(r) r("EventType").ToString() & ": " & r("Title").ToString() & " (" & r("AssignedTo").ToString() & ")").
+        'ToList()
+
+        ''If eventsOnDate.Count = 0 Then
+        ''    'MessageBox.Show("No events for " & selectedDate.ToShortDateString(), "No Events")
+        ''Else
+        ''    Dim message As String = "Events on " & selectedDate.ToShortDateString() & ":" & vbCrLf & String.Join(vbCrLf, eventsOnDate)
+        ''    MessageBox.Show(message, "Family Calendar")
+        ''End If
+        'LoadScheduleFromDatabase()
+
+        ''Dim selectedDate As Date = e.Start
+
+        '' Dim dt As DataTable = TryCast(Me.Tag, DataTable)
+        '' Dim eventsOnDate As New List(Of String)
+
+        '' Existing schedule events
+        'If dt IsNot Nothing Then
+        '    eventsOnDate.AddRange(
+        '    dt.AsEnumerable().
+        '    Where(Function(r) CDate(r("DateOfEvent")).Date = selectedDate.Date).
+        '    Select(Function(r) r("EventType").ToString() & ": " & r("Title").ToString() & " (" & r("AssignedTo").ToString() & ")")
+        ')
+        'End If
+
+        '' Add birthdays
+        'Try
+        '    conn.Open()
+        '    Dim query As String = "SELECT FirstName, DateOfBirth FROM PersonalDetails WHERE MONTH(DateOfBirth) = ? AND DAY(DateOfBirth) = ?"
+        '    Dim cmd As New OleDbCommand(query, conn)
+        '    cmd.Parameters.AddWithValue("?", selectedDate.Month)
+        '    cmd.Parameters.AddWithValue("?", selectedDate.Day)
+
+        '    Dim reader As OleDbDataReader = cmd.ExecuteReader()
+
+        '    While reader.Read()
+        '        Dim firstName As String = reader("FirstName").ToString()
+        '        Dim birthDate As Date = CDate(reader("DateOfBirth"))
+        '        eventsOnDate.Add("Birthday: " & firstName & " (" & birthDate.ToShortDateString() & ")")
+        '    End While
+
+        'Catch ex As Exception
+        '    MessageBox.Show("Error retrieving birthdays: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        'Finally
+        '    conn.Close()
+        'End Try
+
+        'If eventsOnDate.Count = 0 Then
+        '    'MessageBox.Show("No events or birthdays for " & selectedDate.ToShortDateString(), "No Events")
+        'Else
+        '    Dim message As String = "Events  " & selectedDate.ToShortDateString() & ":" & vbCrLf & String.Join(vbCrLf, eventsOnDate)
+        '    MessageBox.Show(message, "Family Calendar")
+        'End If
+
+        'LoadScheduleFromDatabase()
+
 
         Dim selectedDate As Date = e.Start
         Dim dt As DataTable = TryCast(Me.Tag, DataTable)
-
 
         ' Refresh the schedule data first
         LoadScheduleFromDatabase()
@@ -374,10 +584,10 @@ Public Class Family_Schedule
 
         ' Existing FamilySchedule events
         eventsOnDate.AddRange(
-        dt.AsEnumerable().
-        Where(Function(r) CDate(r("DateOfEvent")).Date = selectedDate.Date).
-        Select(Function(r) r("EventType").ToString() & ": " & r("Title").ToString() & " (" & r("AssignedTo").ToString() & ")")
-    )
+            dt.AsEnumerable().
+    Where(Function(r) CDate(r("DateOfEvent")).Date = selectedDate.Date).
+            Select(Function(r) r("EventType").ToString() & ": " & r("Title").ToString() & " (" & r("AssignedTo").ToString() & ")")
+        )
 
         ' Add birthdays
         Try
@@ -406,14 +616,17 @@ Public Class Family_Schedule
             MessageBox.Show(message, "Family Calendar")
         End If
     End Sub
+
     Private Sub ListView1_ItemDrag(sender As Object, e As ItemDragEventArgs) Handles ListView1.ItemDrag
         DoDragDrop(e.Item, DragDropEffects.Move)
     End Sub
+
     Private Sub MonthCalendar1_DragEnter(sender As Object, e As DragEventArgs) Handles MonthCalendar1.DragEnter
         If e.Data.GetDataPresent(GetType(ListViewItem)) Then
             e.Effect = DragDropEffects.Move
         End If
     End Sub
+
     Private Sub MonthCalendar1_DragDrop(sender As Object, e As DragEventArgs) Handles MonthCalendar1.DragDrop
         Dim item As ListViewItem = CType(e.Data.GetData(GetType(ListViewItem)), ListViewItem)
         Dim newDate = MonthCalendar1.SelectionStart
@@ -421,10 +634,13 @@ Public Class Family_Schedule
         ' Example: You can now update the due date of a chore or appointment in DB
         MessageBox.Show("Item dropped on " & newDate.ToShortDateString() & ". Update DB logic here.")
     End Sub
+
     Private Sub LoadAllEvents()
         ListView1.Items.Clear()
         Dim dt As New DataTable()
         Dim messageLines As New List(Of String)()
+
+
 
         Using conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
             conn.Open()
@@ -499,8 +715,46 @@ Public Class Family_Schedule
             End If
         End If
     End Sub
+
+    Private Sub HighlightEventsOnCalendar()
+        Dim eventDates As New List(Of Date)()
+
+        Using conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
+            conn.Open()
+            Dim query As String = ""
+            Dim cmd As OleDbCommand
+
+            If eventType = "Chores" Then
+                query = "SELECT DueDate, Status FROM Chores WHERE Status <> 'Completed'"
+                cmd = New OleDbCommand(query, conn)
+            ElseIf eventType = "Birthdays" Then
+                query = "SELECT DateOfBirth FROM PersonalDetails"
+                cmd = New OleDbCommand(query, conn)
+            End If
+
+            Dim reader = cmd.ExecuteReader()
+            While reader.Read()
+                Dim rawDate As Date = Convert.ToDateTime(reader(0))
+
+                If eventType = "Birthdays" Then
+                    ' Bold birthday for current year
+                    Dim birthdayThisYear As Date = New Date(Date.Today.Year, rawDate.Month, rawDate.Day)
+                    eventDates.Add(birthdayThisYear)
+                ElseIf eventType = "Chores" Then
+                    ' Only overdue chores
+                    If rawDate.Date < Date.Today Then
+                        eventDates.Add(rawDate.Date)
+                    End If
+                End If
+            End While
+        End Using
+
+        MonthCalendar1.BoldedDates = eventDates.Distinct().ToArray()
+    End Sub
+
     Private Sub ComboBox3_SelectedIndexChanged_1(sender As Object, e As EventArgs) Handles ComboBox3.SelectedIndexChanged
         eventType = ComboBox3.SelectedItem.ToString()
+        HighlightEventsOnCalendar()
         LoadAllEvents()  ' <-- instead of LoadEventsByDate
 
         If ComboBox3.SelectedItem.ToString() = "Birthdays" Then
@@ -513,6 +767,7 @@ Public Class Family_Schedule
             LoadChores()
         End If
     End Sub
+
     Private Sub SetupListView()
         ListView1.Clear()
         ListView1.View = View.Details
@@ -586,153 +841,197 @@ Public Class Family_Schedule
             ListView1.Items.Add(item)
         Next
     End Sub
-    Private Sub btnRefresh_Click(sender As Object, e As EventArgs) Handles btnRefresh.Click
-        LoadScheduleFromDatabase()
-        TextBox1.Text = ""
-        TextBox2.Text = ""
-        ComboBox1.Text = ""
-        ComboBox3.Text = ""
-        ListView1.Items.Clear()
+    Private Sub IntegrateChores()
+        Using conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
+            conn.Open()
+            Dim query As String = "SELECT AssignedTo, DueDate FROM Chores WHERE Status <> 'Completed'"
+            Using cmd As New OleDbCommand(query, conn)
+                Using reader As OleDbDataReader = cmd.ExecuteReader()
+                    While reader.Read()
+                        Dim title As String = "Chore: " & reader("AssignedTo").ToString()
+                        Dim dateOfEvent As Date = Convert.ToDateTime(reader("DueDate"))
+                        Dim existsQuery As String = "SELECT COUNT(*) FROM FamilySchedule WHERE Title=? AND DateOfEvent=?"
+                        Using checkCmd As New OleDbCommand(existsQuery, conn)
+                            checkCmd.Parameters.AddWithValue("?", title)
+                            checkCmd.Parameters.AddWithValue("?", dateOfEvent)
+                            Dim exists As Integer = Convert.ToInt32(checkCmd.ExecuteScalar())
+                            If exists = 0 Then
+                                Dim insertQuery As String = "INSERT INTO FamilySchedule (Title, Notes, DateOfEvent, StartTime, EndTime, AssignedTo, EventType) VALUES (?, ?, ?, ?, ?, ?, ?)"
+                                Using insertCmd As New OleDbCommand(insertQuery, conn)
+                                    insertCmd.Parameters.AddWithValue("?", title)
+                                    insertCmd.Parameters.AddWithValue("?", "Auto-created from Chores")
+                                    insertCmd.Parameters.AddWithValue("?", dateOfEvent)
+                                    insertCmd.Parameters.AddWithValue("?", #8:00 AM#)
+                                    insertCmd.Parameters.AddWithValue("?", #9:00 AM#)
+                                    insertCmd.Parameters.AddWithValue("?", reader("AssignedTo").ToString())
+                                    insertCmd.Parameters.AddWithValue("?", "Chore")
+                                    insertCmd.ExecuteNonQuery()
+                                End Using
+                            End If
+                        End Using
+                    End While
+                End Using
+            End Using
+        End Using
     End Sub
-    Private Sub AutoIntegrateAllEvents()
-        Dim conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
-        conn.Open()
 
-        Dim countChores As Integer = 0
-        Dim countMeals As Integer = 0
-        Dim countTasks As Integer = 0
 
-        ' --- CHORES ---
-        Dim choreCmd As New OleDbCommand("SELECT Title, DueDate, AssignedTo FROM Chores", conn)
-        Dim choreReader As OleDbDataReader = choreCmd.ExecuteReader()
-        While choreReader.Read()
-            Dim title As String = choreReader("Title").ToString()
-            Dim dueDate As Date = CDate(choreReader("DueDate"))
-            Dim startTime As Date = dueDate.Date.AddHours(9)
-            Dim endTime As Date = dueDate.Date.AddHours(10)
-            Dim assignedTo As String = choreReader("AssignedTo").ToString()
 
-            If Not EventExists(conn, title, dueDate) Then
-                InsertEvent(conn, title, "Auto-scheduled chore", dueDate, startTime, endTime, assignedTo, "Chore")
-                countChores += 1
-            End If
-        End While
-        choreReader.Close()
 
-        ' --- MEAL PLANS ---
-        Dim mealCmd As New OleDbCommand("SELECT MealName, StartDate, Description FROM MealPlans", conn)
-        Dim mealReader As OleDbDataReader = mealCmd.ExecuteReader()
-        While mealReader.Read()
-            Dim title As String = mealReader("MealName").ToString()
-            Dim startDate As Date = CDate(mealReader("StartDate"))
-            Dim startTime As Date = startDate.Date.AddHours(13)
-            Dim endTime As Date = startDate.Date.AddHours(14)
-            Dim description As String = mealReader("Description").ToString()
 
-            If Not EventExists(conn, title, startDate) Then
-                InsertEvent(conn, title, "Scheduled Meal", startDate, startTime, endTime, description, "Meal")
-                countMeals += 1
-            End If
-        End While
-        mealReader.Close()
 
-        ' --- TASK REMINDERS ---
-        Dim taskCmd As New OleDbCommand("SELECT Title, DueDate, AssignedTo FROM Tasks", conn)
-        Dim taskReader As OleDbDataReader = taskCmd.ExecuteReader()
-        While taskReader.Read()
-            Dim title As String = taskReader("Title").ToString()
-            Dim reminderDate As Date = CDate(taskReader("DueDate")).AddDays(-1)
-            Dim startTime As Date = reminderDate.Date.AddHours(8)
-            Dim endTime As Date = reminderDate.Date.AddHours(8.5)
-            Dim assignedTo As String = taskReader("AssignedTo").ToString()
 
-            If Not EventExists(conn, title, reminderDate) Then
-                InsertEvent(conn, title, "Task due soon", reminderDate, startTime, endTime, assignedTo, "Task")
-                countTasks += 1
-            End If
-        End While
-        taskReader.Close()
 
-        conn.Close()
-        MessageBox.Show(
-    countChores & " chore(s)" & vbCrLf &
-    countMeals & " meal(s)" & vbCrLf &
-    countTasks & " task(s) added.",
-    "All Events Integrated",
-    MessageBoxButtons.OK,
-    MessageBoxIcon.Information)
 
-        LoadScheduleFromDatabase()
+
+
+
+
+
+
+
+
+    'xilu
+    Public Sub AddMealToSchedule(mealDate As DateTime, mealTitle As String, mealDetails As String)
+
+        Using conn As New OleDbConnection(connectionString)
+            Dim query As String = "INSERT INTO FamilySchedule (DateOfEvent, Title, EventType) VALUES (?, ?, ?)"
+            Using cmd As New OleDbCommand(query, conn)
+                cmd.Parameters.AddWithValue("?", mealDate)
+                cmd.Parameters.AddWithValue("?", mealTitle)
+                ' cmd.Parameters.AddWithValue("?", mealDetails)
+                cmd.Parameters.AddWithValue("?", "Meal") ' Category for filtering in calendar
+
+                conn.Open()
+                cmd.ExecuteNonQuery()
+            End Using
+        End Using
     End Sub
-    Private Sub HighlightScheduleEventsByType()
+    Public Sub LoadFamilySchedule()
+
+        Dim dt As New DataTable()
+
+        Using conn As New OleDbConnection(connectionString)
+            Dim query As String = "SELECT DateOfEvent, Title, EventType FROM FamilySchedule WHERE EventType = 'Meal' ORDER BY DateOfEvent"
+            Using cmd As New OleDbCommand(query, conn)
+                conn.Open()
+                Using reader As OleDbDataReader = cmd.ExecuteReader()
+                    dt.Load(reader)
+                End Using
+            End Using
+        End Using
+
+        ' Show the count of scheduled meals
+        MessageBox.Show("You have " & dt.Rows.Count & " meals scheduled.", "Meal Schedule Count", MessageBoxButtons.OK, MessageBoxIcon.Information)
+
+        ' Example: Bind to DataGridView or process for calendar
+        DataGridView1.DataSource = dt
+    End Sub
+
+    Dim mealDict As New Dictionary(Of Date, List(Of String))
+
+
+    Private Sub LoadMealSchedule()
+        mealDict.Clear()
+
+        Using conn As New OleDbConnection(connectionString)
+            Dim query As String = "SELECT DateOfEvent, Title FROM FamilySchedule WHERE EventType = 'Meal'"
+            Using cmd As New OleDbCommand(query, conn)
+                conn.Open()
+                Using reader As OleDbDataReader = cmd.ExecuteReader()
+                    While reader.Read()
+                        Dim mealDate As Date = CDate(reader("DateOfEvent")).Date
+                        Dim mealTitle As String = reader("Title").ToString()
+
+                        If Not mealDict.ContainsKey(mealDate) Then
+                            mealDict(mealDate) = New List(Of String)
+                        End If
+                        mealDict(mealDate).Add(mealTitle)
+                    End While
+                End Using
+            End Using
+        End Using
+
+        ' Bold meal dates in calendar
+        MonthCalendar1.BoldedDates = mealDict.Keys.ToArray()
+    End Sub
+
+    Private Sub MonthCalendarMeals_DateChanged(sender As Object, e As DateRangeEventArgs) Handles MonthCalendar1.DateChanged
+        Dim selectedDate As Date = MonthCalendar1.SelectionStart.Date
+
+        If mealDict.ContainsKey(selectedDate) Then
+            Dim meals As List(Of String) = mealDict(selectedDate)
+            Dim mealList As String = String.Join(Environment.NewLine, meals)
+            MessageBox.Show("Meals for " & selectedDate.ToShortDateString() & ":" & Environment.NewLine & mealList,
+                        "Meal Schedule", MessageBoxButtons.OK, MessageBoxIcon.Information)
+        Else
+            MessageBox.Show("No meals scheduled for " & selectedDate.ToShortDateString() & ".",
+                        "Meal Schedule", MessageBoxButtons.OK, MessageBoxIcon.Information)
+        End If
+        HighlightMealEvents()
+        LoadFamilySchedules()
+
+        'Dim selectedDate As Date = MonthCalendar1.SelectionStart.Date
+        HighlightMealRowsByDate(selectedDate)
+    End Sub
+    Private Sub HighlightMealEvents()
+        ' Loop through each row in the DataGridView
         For Each row As DataGridViewRow In DataGridView1.Rows
-            If Not row.IsNewRow AndAlso row.Cells("EventType").Value IsNot Nothing Then
-                Dim eventType As String = row.Cells("EventType").Value.ToString().Trim()
-
-                Select Case eventType
-                    Case "Chore"
-                        row.DefaultCellStyle.BackColor = Color.LightPink
-                    Case "Meal"
-                        row.DefaultCellStyle.BackColor = Color.LightGreen
-                    Case "Task"
-                        row.DefaultCellStyle.BackColor = Color.LightBlue
-                    Case "Birthday"
-                        row.DefaultCellStyle.BackColor = Color.LightPink
-                    Case Else
-                        row.DefaultCellStyle.BackColor = Color.White
-                End Select
-                row.DefaultCellStyle.SelectionBackColor = row.DefaultCellStyle.BackColor
-                row.DefaultCellStyle.SelectionForeColor = Color.Black
+            If Not row.IsNewRow Then
+                Dim eventType As String = row.Cells("EventType").Value.ToString()
+                If eventType = "Meal" Then
+                    row.DefaultCellStyle.BackColor = Color.DarkRed
+                    row.DefaultCellStyle.ForeColor = Color.White
+                Else
+                    ' Optional: Reset other rows
+                    row.DefaultCellStyle.BackColor = Color.White
+                    row.DefaultCellStyle.ForeColor = Color.Black
+                End If
             End If
         Next
     End Sub
 
-    ' Declare this at the top of your form
-    Private currentEventIndex As Integer = 0
-    Private eventTypes As String() = {"Chore", "Meal", "Task"}
-    Private Sub btnFilte_Click(sender As Object, e As EventArgs) Handles btnFilte.Click
-        Try
-            ' Get current event type to show
-            Dim eventTypeToShow As String = eventTypes(currentEventIndex)
+    Public Sub LoadFamilySchedules()
+        Dim dt As New DataTable()
 
-            ' Build query
-            Dim query As String = "SELECT Title, Notes, DateOfEvent, StartTime, EndTime, AssignedTo, EventType " &
-                              "FROM FamilySchedule WHERE EventType = @EventType"
-
-            Using conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
+        Using conn As New OleDbConnection(connectionString)
+            Dim query As String = "SELECT DateOfEvent, Title, EventType FROM FamilySchedule WHERE EventType = 'Meal' ORDER BY DateOfEvent"
+            Using cmd As New OleDbCommand(query, conn)
                 conn.Open()
-                Using cmd As New OleDbCommand(query, conn)
-                    cmd.Parameters.AddWithValue("@EventType", eventTypeToShow)
-                    Dim adapter As New OleDbDataAdapter(cmd)
-                    Dim dt As New DataTable()
-                    adapter.Fill(dt)
-                    DataGridView1.DataSource = dt
-
-                    ' Show info about what was viewed
-                    MessageBox.Show("Now viewing: " & eventTypeToShow & " Events" & vbCrLf &
-                                "Total Events Found: " & dt.Rows.Count, "Event Filter", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                Using reader As OleDbDataReader = cmd.ExecuteReader()
+                    dt.Load(reader)
                 End Using
             End Using
+        End Using
 
-            ' Highlight event rows
-            HighlightScheduleEventsByType()
+        DataGridView1.DataSource = dt
 
-            ' Check if this was the LAST event in the cycle
-            If currentEventIndex = eventTypes.Length - 1 Then
-                MessageBox.Show("You have reached the end of the event list." & vbCrLf &
-                            "All events (Chores, Meals, Tasks) have been displayed.",
-                            "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-                btnFilte.Enabled = False
-            Else
-                ' Prepare for next event type
-                currentEventIndex += 1
-                'btnFilte.Text = "View: " & eventTypes(currentEventIndex) & " Events"
-            End If
-
-        Catch ex As Exception
-            MessageBox.Show("Error displaying events: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-        End Try
+        ' Optional: highlight Meal events
+        HighlightMealEvents()
     End Sub
+
+    Private Sub HighlightMealRowsByDate(selectedDate As Date)
+        For Each row As DataGridViewRow In DataGridView1.Rows
+            If Not row.IsNewRow Then
+                Dim rowDate As Date = CDate(row.Cells("DateOfEvent").Value).Date
+                Dim eventType As String = row.Cells("EventType").Value.ToString()
+
+                ' Reset all rows first
+                row.DefaultCellStyle.BackColor = Color.White
+                row.DefaultCellStyle.ForeColor = Color.Black
+
+                ' Highlight only matching Meal event rows for selected date
+                If rowDate = selectedDate AndAlso eventType = "Meal" Then
+                    row.DefaultCellStyle.BackColor = Color.Red
+                    row.DefaultCellStyle.ForeColor = Color.White
+                End If
+            End If
+        Next
+    End Sub
+
+    Private Sub Button1_Click_1(sender As Object, e As EventArgs) Handles Button1.Click
+        LoadMealSchedule()
+        LoadFamilySchedule()
+    End Sub
+
 End Class
-
-
