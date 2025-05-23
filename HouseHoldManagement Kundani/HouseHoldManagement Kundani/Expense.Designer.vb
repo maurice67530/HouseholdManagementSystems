@@ -74,7 +74,6 @@ Partial Class Expense
         Me.Label17 = New System.Windows.Forms.Label()
         Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
         Me.Button10 = New System.Windows.Forms.Button()
-        Me.Button6 = New System.Windows.Forms.Button()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel1.SuspendLayout()
         Me.Panel2.SuspendLayout()
@@ -570,21 +569,11 @@ Partial Class Expense
         Me.Button10.TabIndex = 136
         Me.Button10.UseVisualStyleBackColor = False
         '
-        'Button6
-        '
-        Me.Button6.Location = New System.Drawing.Point(103, 527)
-        Me.Button6.Name = "Button6"
-        Me.Button6.Size = New System.Drawing.Size(75, 23)
-        Me.Button6.TabIndex = 137
-        Me.Button6.Text = "Button6"
-        Me.Button6.UseVisualStyleBackColor = True
-        '
         'Expense
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(665, 576)
-        Me.Controls.Add(Me.Button6)
         Me.Controls.Add(Me.Button10)
         Me.Controls.Add(Me.Label17)
         Me.Controls.Add(Me.Button9)
@@ -662,5 +651,4 @@ Partial Class Expense
     Friend WithEvents TextBox9 As TextBox
     Friend WithEvents Label1 As Label
     Friend WithEvents ComboBox2 As ComboBox
-    Friend WithEvents Button6 As Button
 End Class
