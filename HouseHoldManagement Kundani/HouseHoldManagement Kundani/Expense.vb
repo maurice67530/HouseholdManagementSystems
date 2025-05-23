@@ -127,28 +127,57 @@ Public Class Expense
         Using conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
             conn.Open()
             Try
-                ' 1. Retrieve the current budget amount (assuming only one record or the first record)
+                ' 1. Retrieve the first budget record
                 Dim selectQuery As String = "SELECT TOP 1 [ID], [BudgetAmount] FROM [Budget]"
                 Dim selectCmd As New OleDbCommand(selectQuery, conn)
                 Dim reader As OleDbDataReader = selectCmd.ExecuteReader()
 
                 If reader.Read() Then
-                    Dim budgetID As Integer = reader.GetInt32(0) ' Assuming ID is int
-                    Dim currentAmount As Decimal = reader.GetDecimal(1)
+                    ' Use GetValue() and convert explicitly
+                    Dim rawID As Object = reader.GetValue(0)
+                    Dim rawAmount As Object = reader.GetValue(1)
 
-                    ' 2. Calculate the new budget amount
+                    ' Convert ID: assuming it might be string or int
+                    Dim budgetID As Integer
+                    If TypeOf rawID Is Integer Then
+                        budgetID = CInt(rawID)
+                    ElseIf TypeOf rawID Is String Then
+                        If Integer.TryParse(CStr(rawID), budgetID) Then
+                            ' successfully parsed
+                        Else
+                            Throw New Exception("Unable to parse Budget ID.")
+                        End If
+                    Else
+                        Throw New Exception("Unsupported ID type.")
+                    End If
+
+                    ' Convert Amount: assuming it might be double, decimal, or string
+                    Dim currentAmount As Decimal
+                    If TypeOf rawAmount Is Decimal Then
+                        currentAmount = CDec(rawAmount)
+                    ElseIf TypeOf rawAmount Is Double Then
+                        currentAmount = Convert.ToDecimal(rawAmount)
+                    ElseIf TypeOf rawAmount Is String Then
+                        If Not Decimal.TryParse(CStr(rawAmount), currentAmount) Then
+                            Throw New Exception("Unable to parse BudgetAmount.")
+                        End If
+                    Else
+                        ' fallback: try parsing
+                        currentAmount = Decimal.Parse(rawAmount.ToString())
+                    End If
+
+                    ' 2. Calculate new budget
                     Dim newBudgetAmount As Decimal = currentAmount - expenseAmount
 
                     ' Optional: prevent negative budget
                     If newBudgetAmount < 0 Then
                         MessageBox.Show("Expense exceeds current budget!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-                        ' You can choose to stop or proceed
                     End If
 
                     ' 3. Update the budget record
                     Dim updateQuery As String = "UPDATE [Budget] SET [BudgetAmount] = ? WHERE [ID] = ?"
                     Dim updateCmd As New OleDbCommand(updateQuery, conn)
-                    updateCmd.Parameters.AddWithValue("@Amount", newBudgetAmount)
+                    updateCmd.Parameters.AddWithValue("@BudgetAmount", newBudgetAmount)
                     updateCmd.Parameters.AddWithValue("@ID", budgetID)
 
                     updateCmd.ExecuteNonQuery()
