@@ -461,7 +461,7 @@ Partial Class Dashboard
         '
         Me.Label18.AutoSize = True
         Me.Label18.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label18.Location = New System.Drawing.Point(15, 39)
+        Me.Label18.Location = New System.Drawing.Point(3, 39)
         Me.Label18.Name = "Label18"
         Me.Label18.Size = New System.Drawing.Size(24, 16)
         Me.Label18.TabIndex = 115

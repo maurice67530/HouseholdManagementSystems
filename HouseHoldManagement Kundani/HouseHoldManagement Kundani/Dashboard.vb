@@ -21,6 +21,8 @@ Public Class Dashboard
     Private originalWidth As Integer
     Private originalHeight As Integer
     Public Shared LoggedInUser As String
+
+    Public Property CurrentUserName As String
     Private Sub Dashboard_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         ' Show total users who have logged in
         Label39.Text = "Users: " & GetTotalUsersLoggedIn().ToString()
@@ -39,26 +41,6 @@ Public Class Dashboard
         originalWidth = Me.Width
         originalHeight = Me.Height
 
-        '' Get screen size excluding the taskbar
-        'Dim workingWidth As Integer = Screen.PrimaryScreen.WorkingArea.Width
-        'Dim workingHeight As Integer = Screen.PrimaryScreen.WorkingArea.Height
-
-        '' Calculate scale
-        'Dim scaleX As Single = workingWidth / originalWidth
-        'Dim scaleY As Single = workingHeight / originalHeight
-
-        '' Resize the form to fit working area
-        'Me.FormBorderStyle = FormBorderStyle.None
-        'Me.Bounds = Screen.PrimaryScreen.WorkingArea
-        'Me.AutoScaleMode = AutoScaleMode.None
-        'Application.DoEvents()
-
-        '' Resize controls
-        'ResizeControls(Me, scaleX, scaleY)
-
-        '' Allow ESC to close while testing
-        'Me.KeyPreview = True
-        ''''''''
 
         ' Save the form's original design size
         originalWidth = Me.Width
@@ -117,34 +99,33 @@ Public Class Dashboard
         Label17.ForeColor = Color.Blue
 
 
+        'Dim hour As Integer = DateTime.Now.Hour
+        'If hour < 12 Then
+        '    Label18.Text = "Good morning , Have a great day! 😊"
+        'ElseIf hour < 18 Then
+        '    Label18.Text = "Good afternoon , Have a great day! 😊"
+        'Else
+        '    Label18.Text = "Good evening ,  Have a great day! 😊"
+        'End If
+
+
+
         Dim hour As Integer = DateTime.Now.Hour
+        Dim greeting As String
+
         If hour < 12 Then
-            Label18.Text = "Good morning , Have a great day! 😊"
+            greeting = "Good morning"
         ElseIf hour < 18 Then
-            Label18.Text = "Good afternoon , Have a great day! 😊"
+            greeting = "Good afternoon"
         Else
-            Label18.Text = "Good evening ,  Have a great day! 😊"
+            greeting = "Good evening"
         End If
 
-        ''Dim user As String = LoggedInUser
-        ''Dim hour As Integer = DateTime.Now.Hour
-        ''Dim greeting As String = ""
-
-        ''If hour >= 5 AndAlso hour < 12 Then
-        ''    greeting = "Good Morning"
-        ''ElseIf hour >= 12 AndAlso hour < 17 Then
-        ''    greeting = "Good Afternoon"
-        ''ElseIf hour >= 17 AndAlso hour < 21 Then
-        ''    greeting = "Good Evening"
-        ''Else
-        ''    greeting = "Good Night"
-        ''End If
-
-        'Label18.Text = $"{greeting}, {user}!"
-        'Label18.ForeColor = Color.DarkBlue
-        'Label18.Font = New Font("Segoe UI", 14, FontStyle.Bold)
-
-        'CheckExpense()
+        If Not String.IsNullOrEmpty(CurrentUserName) Then
+            Label18.Text = $"{greeting}, {CurrentUserName}! Have a great day! 😊"
+        Else
+            Label18.Text = $"{greeting},Unknown User. Have a great day! 😊"
+        End If
 
 
 
@@ -255,20 +236,6 @@ Public Class Dashboard
     End Sub
 
     Private Sub ResizeControls(parent As Control, scaleX As Single, scaleY As Single)
-        'For Each ctrl As Control In parent.Controls
-        '    ctrl.Left = CInt(ctrl.Left * scaleX)
-        '    ctrl.Top = CInt(ctrl.Top * scaleY)
-        '    ctrl.Width = CInt(ctrl.Width * scaleX)
-        '    ctrl.Height = CInt(ctrl.Height * scaleY)
-
-        '    Dim fontScale As Single = (scaleX + scaleY) / 2
-        '    ctrl.Font = New Font(ctrl.Font.FontFamily, ctrl.Font.Size * fontScale, ctrl.Font.Style)
-
-        '    If ctrl.HasChildren Then
-        '        ResizeControls(ctrl, scaleX, scaleY)
-        '    End If
-        'Next
-
 
         For Each ctrl As Control In parent.Controls
             ctrl.Left = CInt(ctrl.Left * scaleX)
@@ -419,7 +386,16 @@ Public Class Dashboard
         End Try
 
         Return False
+
+
+
+        '''''
+        'emails from settings
+
+
+
     End Function
+
 
     ' Function to check expired groceries from Inventory table
 
@@ -487,7 +463,16 @@ Public Class Dashboard
 
         Return False
 
+
+
+        '''''''
+
+        'Emails from settings
+
+
+
     End Function
+
     ' Function to check expired groceries from Inventory table
 
     Private Function CheckExpiredGroceries() As Boolean
@@ -555,7 +540,13 @@ Public Class Dashboard
 
         Return False
 
+
+        '''''
+
+        'Send Emails From settings
+
     End Function
+
 
     ' Function to send email
 
@@ -587,6 +578,7 @@ Public Class Dashboard
             MessageBox.Show("Error sending email: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
 
         End Try
+
 
     End Sub
 
@@ -1278,8 +1270,18 @@ Public Class Dashboard
     End Sub
 
     Private Sub Label28_Click(sender As Object, e As EventArgs) Handles Label28.Click
-        Login.Show()
-        Me.Hide()
+        'Login.Show()
+        'Me.Hide()
+
+        Dim result As DialogResult
+        result = MessageBox.Show("Do you want to login again?", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
+
+        If result = DialogResult.Yes Then
+            Login.Show()
+            Me.Hide()
+        Else
+            Application.Exit()
+        End If
     End Sub
 
 
