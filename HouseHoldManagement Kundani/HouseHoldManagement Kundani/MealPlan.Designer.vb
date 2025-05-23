@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class MealPlan
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,11 +20,11 @@ Partial Class MealPlan
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(MealPlan))
         Me.Button1 = New System.Windows.Forms.Button()
         Me.btnSuggest = New System.Windows.Forms.Button()
-        Me.btnPrint = New System.Windows.Forms.Button()
         Me.btnDelete = New System.Windows.Forms.Button()
         Me.btnEdit = New System.Windows.Forms.Button()
         Me.btnSave = New System.Windows.Forms.Button()
@@ -35,6 +35,7 @@ Partial Class MealPlan
         Me.DataGridView1 = New System.Windows.Forms.DataGridView()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.Label4 = New System.Windows.Forms.Label()
         Me.Label6 = New System.Windows.Forms.Label()
         Me.lstMealSuggestions = New System.Windows.Forms.ListBox()
         Me.DateTimePicker2 = New System.Windows.Forms.DateTimePicker()
@@ -58,8 +59,7 @@ Partial Class MealPlan
         Me.Label11 = New System.Windows.Forms.Label()
         Me.Label10 = New System.Windows.Forms.Label()
         Me.Label12 = New System.Windows.Forms.Label()
-        Me.Label4 = New System.Windows.Forms.Label()
-        Me.ComboBox4 = New System.Windows.Forms.ComboBox()
+        Me.Button2 = New System.Windows.Forms.Button()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel2.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -69,7 +69,8 @@ Partial Class MealPlan
         '
         'Button1
         '
-        Me.Button1.Location = New System.Drawing.Point(632, 495)
+        Me.Button1.Image = CType(resources.GetObject("Button1.Image"), System.Drawing.Image)
+        Me.Button1.Location = New System.Drawing.Point(625, 495)
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(41, 37)
         Me.Button1.TabIndex = 60
@@ -78,25 +79,18 @@ Partial Class MealPlan
         'btnSuggest
         '
         Me.btnSuggest.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.btnSuggest.Location = New System.Drawing.Point(570, 495)
+        Me.btnSuggest.Image = CType(resources.GetObject("btnSuggest.Image"), System.Drawing.Image)
+        Me.btnSuggest.Location = New System.Drawing.Point(558, 495)
         Me.btnSuggest.Name = "btnSuggest"
         Me.btnSuggest.Size = New System.Drawing.Size(41, 37)
         Me.btnSuggest.TabIndex = 59
         Me.btnSuggest.UseVisualStyleBackColor = True
         '
-        'btnPrint
-        '
-        Me.btnPrint.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.btnPrint.Location = New System.Drawing.Point(375, 495)
-        Me.btnPrint.Name = "btnPrint"
-        Me.btnPrint.Size = New System.Drawing.Size(41, 37)
-        Me.btnPrint.TabIndex = 58
-        Me.btnPrint.UseVisualStyleBackColor = True
-        '
         'btnDelete
         '
         Me.btnDelete.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.btnDelete.Location = New System.Drawing.Point(158, 495)
+        Me.btnDelete.Image = CType(resources.GetObject("btnDelete.Image"), System.Drawing.Image)
+        Me.btnDelete.Location = New System.Drawing.Point(156, 495)
         Me.btnDelete.Name = "btnDelete"
         Me.btnDelete.Size = New System.Drawing.Size(41, 37)
         Me.btnDelete.TabIndex = 57
@@ -105,7 +99,8 @@ Partial Class MealPlan
         'btnEdit
         '
         Me.btnEdit.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.btnEdit.Location = New System.Drawing.Point(91, 495)
+        Me.btnEdit.Image = CType(resources.GetObject("btnEdit.Image"), System.Drawing.Image)
+        Me.btnEdit.Location = New System.Drawing.Point(89, 495)
         Me.btnEdit.Name = "btnEdit"
         Me.btnEdit.Size = New System.Drawing.Size(41, 37)
         Me.btnEdit.TabIndex = 56
@@ -114,6 +109,7 @@ Partial Class MealPlan
         'btnSave
         '
         Me.btnSave.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.btnSave.Image = CType(resources.GetObject("btnSave.Image"), System.Drawing.Image)
         Me.btnSave.Location = New System.Drawing.Point(22, 495)
         Me.btnSave.Name = "btnSave"
         Me.btnSave.Size = New System.Drawing.Size(41, 37)
@@ -123,7 +119,8 @@ Partial Class MealPlan
         'btnHighlight
         '
         Me.btnHighlight.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.btnHighlight.Location = New System.Drawing.Point(449, 495)
+        Me.btnHighlight.Image = CType(resources.GetObject("btnHighlight.Image"), System.Drawing.Image)
+        Me.btnHighlight.Location = New System.Drawing.Point(424, 495)
         Me.btnHighlight.Name = "btnHighlight"
         Me.btnHighlight.Size = New System.Drawing.Size(41, 37)
         Me.btnHighlight.TabIndex = 54
@@ -132,7 +129,8 @@ Partial Class MealPlan
         'btnRefresh
         '
         Me.btnRefresh.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.btnRefresh.Location = New System.Drawing.Point(224, 495)
+        Me.btnRefresh.Image = CType(resources.GetObject("btnRefresh.Image"), System.Drawing.Image)
+        Me.btnRefresh.Location = New System.Drawing.Point(223, 495)
         Me.btnRefresh.Name = "btnRefresh"
         Me.btnRefresh.Size = New System.Drawing.Size(41, 37)
         Me.btnRefresh.TabIndex = 53
@@ -141,7 +139,8 @@ Partial Class MealPlan
         'btnFilter
         '
         Me.btnFilter.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.btnFilter.Location = New System.Drawing.Point(295, 495)
+        Me.btnFilter.Image = CType(resources.GetObject("btnFilter.Image"), System.Drawing.Image)
+        Me.btnFilter.Location = New System.Drawing.Point(290, 495)
         Me.btnFilter.Name = "btnFilter"
         Me.btnFilter.Size = New System.Drawing.Size(41, 37)
         Me.btnFilter.TabIndex = 52
@@ -150,7 +149,8 @@ Partial Class MealPlan
         'btnSort
         '
         Me.btnSort.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.btnSort.Location = New System.Drawing.Point(512, 495)
+        Me.btnSort.Image = CType(resources.GetObject("btnSort.Image"), System.Drawing.Image)
+        Me.btnSort.Location = New System.Drawing.Point(491, 495)
         Me.btnSort.Name = "btnSort"
         Me.btnSort.Size = New System.Drawing.Size(41, 37)
         Me.btnSort.TabIndex = 51
@@ -178,7 +178,6 @@ Partial Class MealPlan
         '
         Me.Panel2.BackColor = System.Drawing.SystemColors.ActiveCaption
         Me.Panel2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        Me.Panel2.Controls.Add(Me.ComboBox4)
         Me.Panel2.Controls.Add(Me.Label4)
         Me.Panel2.Controls.Add(Me.Label6)
         Me.Panel2.Controls.Add(Me.lstMealSuggestions)
@@ -194,10 +193,19 @@ Partial Class MealPlan
         Me.Panel2.Size = New System.Drawing.Size(326, 352)
         Me.Panel2.TabIndex = 48
         '
+        'Label4
+        '
+        Me.Label4.AutoSize = True
+        Me.Label4.Location = New System.Drawing.Point(26, 244)
+        Me.Label4.Name = "Label4"
+        Me.Label4.Size = New System.Drawing.Size(45, 15)
+        Me.Label4.TabIndex = 27
+        Me.Label4.Text = "Label4"
+        '
         'Label6
         '
         Me.Label6.AutoSize = True
-        Me.Label6.Location = New System.Drawing.Point(8, 260)
+        Me.Label6.Location = New System.Drawing.Point(26, 265)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(44, 15)
         Me.Label6.TabIndex = 7
@@ -404,31 +412,23 @@ Partial Class MealPlan
         Me.Label12.TabIndex = 13
         Me.Label12.Text = "Meal Name:"
         '
-        'Label4
+        'Button2
         '
-        Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(26, 244)
-        Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(45, 15)
-        Me.Label4.TabIndex = 27
-        Me.Label4.Text = "Label4"
-        '
-        'ComboBox4
-        '
-        Me.ComboBox4.FormattingEnabled = True
-        Me.ComboBox4.Location = New System.Drawing.Point(117, 236)
-        Me.ComboBox4.Name = "ComboBox4"
-        Me.ComboBox4.Size = New System.Drawing.Size(121, 23)
-        Me.ComboBox4.TabIndex = 28
+        Me.Button2.Image = CType(resources.GetObject("Button2.Image"), System.Drawing.Image)
+        Me.Button2.Location = New System.Drawing.Point(357, 495)
+        Me.Button2.Name = "Button2"
+        Me.Button2.Size = New System.Drawing.Size(41, 37)
+        Me.Button2.TabIndex = 29
+        Me.Button2.UseVisualStyleBackColor = True
         '
         'MealPlan
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(679, 549)
+        Me.Controls.Add(Me.Button2)
         Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.btnSuggest)
-        Me.Controls.Add(Me.btnPrint)
         Me.Controls.Add(Me.btnDelete)
         Me.Controls.Add(Me.btnEdit)
         Me.Controls.Add(Me.btnSave)
@@ -441,6 +441,7 @@ Partial Class MealPlan
         Me.Controls.Add(Me.Panel2)
         Me.Controls.Add(Me.Panel1)
         Me.Name = "MealPlan"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "MealPlan"
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel2.ResumeLayout(False)
@@ -456,7 +457,6 @@ Partial Class MealPlan
 
     Friend WithEvents Button1 As Button
     Friend WithEvents btnSuggest As Button
-    Friend WithEvents btnPrint As Button
     Friend WithEvents btnDelete As Button
     Friend WithEvents btnEdit As Button
     Friend WithEvents btnSave As Button
@@ -490,6 +490,6 @@ Partial Class MealPlan
     Friend WithEvents Label11 As Label
     Friend WithEvents Label10 As Label
     Friend WithEvents Label12 As Label
-    Friend WithEvents ComboBox4 As ComboBox
     Friend WithEvents Label4 As Label
+    Friend WithEvents Button2 As Button
 End Class

@@ -97,6 +97,11 @@ Public Class Family_Schedule
         End Try
     End Sub
     Private Sub Family_Schedule_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        LoadMealSchedule()
+        LoadFamilySchedules()
+         LoadFamilySchedule()
+        LoadMealEvents()
+
 
         Dim tooltip As New ToolTip
         tooltip.SetToolTip(btnSave, "Submit")
@@ -286,6 +291,7 @@ Public Class Family_Schedule
     Private Sub DataGridView1_SelectionChanged(sender As Object, e As EventArgs) Handles DataGridView1.SelectionChanged
         Try
 
+
             Debug.WriteLine("selecting data in the datagridview")
             If DataGridView1.SelectedRows.Count > 0 Then
                 Dim selectedRow As DataGridViewRow = DataGridView1.SelectedRows(0)
@@ -304,6 +310,8 @@ Public Class Family_Schedule
             Debug.WriteLine($"Stack Trace: {ex.StackTrace}")
             MessageBox.Show("Error saving inventory to database: " & ex.Message & vbNewLine & ex.StackTrace, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
+
+
 
     End Sub
 
@@ -870,6 +878,190 @@ Public Class Family_Schedule
             End Using
         End Using
     End Sub
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    'xilu
+    Public Sub AddMealToSchedule(mealDate As DateTime, mealTitle As String, mealDetails As String)
+
+        Using conn As New OleDbConnection(connectionString)
+            Dim query As String = "INSERT INTO FamilySchedule (DateOfEvent, Title, EventType) VALUES (?, ?, ?)"
+            Using cmd As New OleDbCommand(query, conn)
+                cmd.Parameters.AddWithValue("?", mealDate)
+                cmd.Parameters.AddWithValue("?", mealTitle)
+                ' cmd.Parameters.AddWithValue("?", mealDetails)
+                cmd.Parameters.AddWithValue("?", "Meal") ' Category for filtering in calendar
+
+                conn.Open()
+                cmd.ExecuteNonQuery()
+            End Using
+        End Using
+    End Sub
+    Public Sub LoadFamilySchedule()
+
+        Dim dt As New DataTable()
+
+        Using conn As New OleDbConnection(connectionString)
+            Dim query As String = "SELECT DateOfEvent, Title, EventType FROM FamilySchedule WHERE EventType = 'Meal' ORDER BY DateOfEvent"
+            Using cmd As New OleDbCommand(query, conn)
+                conn.Open()
+                Using reader As OleDbDataReader = cmd.ExecuteReader()
+                    dt.Load(reader)
+                End Using
+            End Using
+        End Using
+
+        ' Show the count of scheduled meals
+        MessageBox.Show("You have " & dt.Rows.Count & " meals scheduled.", "Meal Schedule Count", MessageBoxButtons.OK, MessageBoxIcon.Information)
+
+        ' Example: Bind to DataGridView or process for calendar
+        DataGridView1.DataSource = dt
+    End Sub
+
+    Dim mealDict As New Dictionary(Of Date, List(Of String))
+
+
+    Private Sub LoadMealSchedule()
+        mealDict.Clear()
+
+        Using conn As New OleDbConnection(connectionString)
+            Dim query As String = "SELECT DateOfEvent, Title FROM FamilySchedule WHERE EventType = 'Meal'"
+            Using cmd As New OleDbCommand(query, conn)
+                conn.Open()
+                Using reader As OleDbDataReader = cmd.ExecuteReader()
+                    While reader.Read()
+                        Dim mealDate As Date = CDate(reader("DateOfEvent")).Date
+                        Dim mealTitle As String = reader("Title").ToString()
+
+                        If Not mealDict.ContainsKey(mealDate) Then
+                            mealDict(mealDate) = New List(Of String)
+                        End If
+                        mealDict(mealDate).Add(mealTitle)
+                    End While
+                End Using
+            End Using
+        End Using
+
+        ' Bold meal dates in calendar
+        MonthCalendar1.BoldedDates = mealDict.Keys.ToArray()
+    End Sub
+
+    Private Sub MonthCalendarMeals_DateChanged(sender As Object, e As DateRangeEventArgs) Handles MonthCalendar1.DateChanged
+        Dim selectedDate As Date = MonthCalendar1.SelectionStart.Date
+
+        If mealDict.ContainsKey(selectedDate) Then
+            Dim meals As List(Of String) = mealDict(selectedDate)
+            Dim mealList As String = String.Join(Environment.NewLine, meals)
+            MessageBox.Show("Meals for " & selectedDate.ToShortDateString() & ":" & Environment.NewLine & mealList,
+                        "Meal Schedule", MessageBoxButtons.OK, MessageBoxIcon.Information)
+        Else
+            MessageBox.Show("No meals scheduled for " & selectedDate.ToShortDateString() & ".",
+                        "Meal Schedule", MessageBoxButtons.OK, MessageBoxIcon.Information)
+        End If
+        HighlightMealEvents()
+        LoadFamilySchedules()
+
+        'Dim selectedDate As Date = MonthCalendar1.SelectionStart.Date
+        HighlightMealRowsByDate(selectedDate)
+    End Sub
+    Private Sub HighlightMealEvents()
+        ' Loop through each row in the DataGridView
+        For Each row As DataGridViewRow In DataGridView1.Rows
+            If Not row.IsNewRow Then
+                Dim eventType As String = row.Cells("EventType").Value.ToString()
+                If eventType = "Meal" Then
+                    row.DefaultCellStyle.BackColor = Color.DarkRed
+                    row.DefaultCellStyle.ForeColor = Color.White
+                Else
+                    ' Optional: Reset other rows
+                    row.DefaultCellStyle.BackColor = Color.White
+                    row.DefaultCellStyle.ForeColor = Color.Black
+                End If
+            End If
+        Next
+    End Sub
+
+    Public Sub LoadFamilySchedules()
+        Dim dt As New DataTable()
+
+        Using conn As New OleDbConnection(connectionString)
+            Dim query As String = "SELECT DateOfEvent, Title, EventType FROM FamilySchedule WHERE EventType = 'Meal' ORDER BY DateOfEvent"
+            Using cmd As New OleDbCommand(query, conn)
+                conn.Open()
+                Using reader As OleDbDataReader = cmd.ExecuteReader()
+                    dt.Load(reader)
+                End Using
+            End Using
+        End Using
+
+        DataGridView1.DataSource = dt
+
+        ' Optional: highlight Meal events
+        HighlightMealEvents()
+    End Sub
+
+    Private Sub HighlightMealRowsByDate(selectedDate As Date)
+        For Each row As DataGridViewRow In DataGridView1.Rows
+            If Not row.IsNewRow Then
+                Dim rowDate As Date = CDate(row.Cells("DateOfEvent").Value).Date
+                Dim eventType As String = row.Cells("EventType").Value.ToString()
+
+                ' Reset all rows first
+                row.DefaultCellStyle.BackColor = Color.White
+                row.DefaultCellStyle.ForeColor = Color.Black
+
+                ' Highlight only matching Meal event rows for selected date
+                If rowDate = selectedDate AndAlso eventType = "Meal" Then
+                    row.DefaultCellStyle.BackColor = Color.Red
+                    row.DefaultCellStyle.ForeColor = Color.White
+                End If
+            End If
+        Next
+    End Sub
+
+    Private Sub Button1_Click_1(sender As Object, e As EventArgs) Handles Button1.Click
+        'LoadMealSchedule()
+        'LoadFamilySchedule()
+    End Sub
+
+
+
+
+    Private adapter As OleDbDataAdapter
+    Private dataTable As DataTable
+
+    Private Sub LoadMealEvents()
+        Try
+            conn.Open()
+
+            ' Query filtering EventType = 'Meal'
+            Dim query As String = "SELECT * FROM FamilySchedule WHERE EventType = 'Meal'"
+
+            adapter = New OleDbDataAdapter(query, conn)
+            dataTable = New DataTable()
+            adapter.Fill(dataTable)
+
+            ' Bind the filtered data to DataGridView
+            DataGridView1.DataSource = dataTable
+
+        Catch ex As Exception
+            MessageBox.Show("Error loading meal events: " & ex.Message)
+        Finally
+            conn.Close()
+        End Try
+    End Sub
 End Class
-
-

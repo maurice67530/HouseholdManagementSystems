@@ -30,10 +30,11 @@ Partial Class Expense
         Me.Button5 = New System.Windows.Forms.Button()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.ComboBox7 = New System.Windows.Forms.ComboBox()
+        Me.Label22 = New System.Windows.Forms.Label()
         Me.ComboBox6 = New System.Windows.Forms.ComboBox()
         Me.Label20 = New System.Windows.Forms.Label()
+        Me.TextBox9 = New System.Windows.Forms.TextBox()
         Me.TextBox8 = New System.Windows.Forms.TextBox()
-        Me.CheckBox1 = New System.Windows.Forms.CheckBox()
         Me.Label18 = New System.Windows.Forms.Label()
         Me.TextBox2 = New System.Windows.Forms.TextBox()
         Me.ComboBox1 = New System.Windows.Forms.ComboBox()
@@ -46,17 +47,12 @@ Partial Class Expense
         Me.Label7 = New System.Windows.Forms.Label()
         Me.Label8 = New System.Windows.Forms.Label()
         Me.Label4 = New System.Windows.Forms.Label()
-        Me.Label22 = New System.Windows.Forms.Label()
-        Me.TextBox9 = New System.Windows.Forms.TextBox()
+        Me.CheckBox1 = New System.Windows.Forms.CheckBox()
         Me.Label15 = New System.Windows.Forms.Label()
         Me.Label16 = New System.Windows.Forms.Label()
         Me.Panel2 = New System.Windows.Forms.Panel()
-        Me.Label21 = New System.Windows.Forms.Label()
-        Me.ListBox1 = New System.Windows.Forms.ListBox()
         Me.DateTimePicker2 = New System.Windows.Forms.DateTimePicker()
         Me.Label19 = New System.Windows.Forms.Label()
-        Me.TextBox7 = New System.Windows.Forms.TextBox()
-        Me.Label13 = New System.Windows.Forms.Label()
         Me.ComboBox5 = New System.Windows.Forms.ComboBox()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.Label9 = New System.Windows.Forms.Label()
@@ -71,7 +67,7 @@ Partial Class Expense
         Me.Button9 = New System.Windows.Forms.Button()
         Me.PrintDialog1 = New System.Windows.Forms.PrintDialog()
         Me.PrintDocument1 = New System.Drawing.Printing.PrintDocument()
-        Me.Label17 = New System.Windows.Forms.Label()
+        Me.statusLabel = New System.Windows.Forms.Label()
         Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
         Me.Button10 = New System.Windows.Forms.Button()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -84,7 +80,7 @@ Partial Class Expense
         Me.Button8.BackColor = System.Drawing.SystemColors.ActiveCaption
         Me.Button8.Cursor = System.Windows.Forms.Cursors.Hand
         Me.Button8.Image = CType(resources.GetObject("Button8.Image"), System.Drawing.Image)
-        Me.Button8.Location = New System.Drawing.Point(481, 470)
+        Me.Button8.Location = New System.Drawing.Point(483, 440)
         Me.Button8.Name = "Button8"
         Me.Button8.Size = New System.Drawing.Size(75, 51)
         Me.Button8.TabIndex = 133
@@ -94,7 +90,7 @@ Partial Class Expense
         '
         Me.DataGridView1.BackgroundColor = System.Drawing.SystemColors.ActiveCaption
         Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DataGridView1.Location = New System.Drawing.Point(10, 361)
+        Me.DataGridView1.Location = New System.Drawing.Point(12, 331)
         Me.DataGridView1.Name = "DataGridView1"
         Me.DataGridView1.Size = New System.Drawing.Size(643, 101)
         Me.DataGridView1.TabIndex = 132
@@ -104,7 +100,7 @@ Partial Class Expense
         Me.Button7.BackColor = System.Drawing.SystemColors.ActiveCaption
         Me.Button7.Cursor = System.Windows.Forms.Cursors.Hand
         Me.Button7.Image = CType(resources.GetObject("Button7.Image"), System.Drawing.Image)
-        Me.Button7.Location = New System.Drawing.Point(11, 469)
+        Me.Button7.Location = New System.Drawing.Point(13, 439)
         Me.Button7.Name = "Button7"
         Me.Button7.Size = New System.Drawing.Size(75, 51)
         Me.Button7.TabIndex = 131
@@ -115,7 +111,7 @@ Partial Class Expense
         Me.Button5.BackColor = System.Drawing.SystemColors.ActiveCaption
         Me.Button5.Cursor = System.Windows.Forms.Cursors.Hand
         Me.Button5.Image = CType(resources.GetObject("Button5.Image"), System.Drawing.Image)
-        Me.Button5.Location = New System.Drawing.Point(195, 469)
+        Me.Button5.Location = New System.Drawing.Point(197, 439)
         Me.Button5.Name = "Button5"
         Me.Button5.Size = New System.Drawing.Size(75, 51)
         Me.Button5.TabIndex = 129
@@ -128,7 +124,6 @@ Partial Class Expense
         Me.Panel1.Controls.Add(Me.ComboBox6)
         Me.Panel1.Controls.Add(Me.Label20)
         Me.Panel1.Controls.Add(Me.TextBox8)
-        Me.Panel1.Controls.Add(Me.CheckBox1)
         Me.Panel1.Controls.Add(Me.Label18)
         Me.Panel1.Controls.Add(Me.TextBox2)
         Me.Panel1.Controls.Add(Me.ComboBox1)
@@ -144,7 +139,7 @@ Partial Class Expense
         Me.Panel1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Panel1.Location = New System.Drawing.Point(10, 49)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(317, 302)
+        Me.Panel1.Size = New System.Drawing.Size(317, 272)
         Me.Panel1.TabIndex = 128
         '
         'ComboBox7
@@ -155,6 +150,15 @@ Partial Class Expense
         Me.ComboBox7.Name = "ComboBox7"
         Me.ComboBox7.Size = New System.Drawing.Size(198, 24)
         Me.ComboBox7.TabIndex = 94
+        '
+        'Label22
+        '
+        Me.Label22.AutoSize = True
+        Me.Label22.Location = New System.Drawing.Point(8, 138)
+        Me.Label22.Name = "Label22"
+        Me.Label22.Size = New System.Drawing.Size(54, 16)
+        Me.Label22.TabIndex = 93
+        Me.Label22.Text = "Search "
         '
         'ComboBox6
         '
@@ -168,11 +172,18 @@ Partial Class Expense
         'Label20
         '
         Me.Label20.AutoSize = True
-        Me.Label20.Location = New System.Drawing.Point(7, 236)
+        Me.Label20.Location = New System.Drawing.Point(6, 236)
         Me.Label20.Name = "Label20"
         Me.Label20.Size = New System.Drawing.Size(36, 16)
         Me.Label20.TabIndex = 90
         Me.Label20.Text = "Paid"
+        '
+        'TextBox9
+        '
+        Me.TextBox9.Location = New System.Drawing.Point(122, 137)
+        Me.TextBox9.Name = "TextBox9"
+        Me.TextBox9.Size = New System.Drawing.Size(188, 22)
+        Me.TextBox9.TabIndex = 92
         '
         'TextBox8
         '
@@ -180,17 +191,6 @@ Partial Class Expense
         Me.TextBox8.Name = "TextBox8"
         Me.TextBox8.Size = New System.Drawing.Size(198, 22)
         Me.TextBox8.TabIndex = 89
-        '
-        'CheckBox1
-        '
-        Me.CheckBox1.AutoSize = True
-        Me.CheckBox1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.CheckBox1.Location = New System.Drawing.Point(12, 272)
-        Me.CheckBox1.Name = "CheckBox1"
-        Me.CheckBox1.Size = New System.Drawing.Size(101, 19)
-        Me.CheckBox1.TabIndex = 88
-        Me.CheckBox1.Text = "Recurring ?"
-        Me.CheckBox1.UseVisualStyleBackColor = True
         '
         'Label18
         '
@@ -279,7 +279,7 @@ Partial Class Expense
         '
         Me.Label7.AutoSize = True
         Me.Label7.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label7.Location = New System.Drawing.Point(5, 69)
+        Me.Label7.Location = New System.Drawing.Point(4, 69)
         Me.Label7.Name = "Label7"
         Me.Label7.Size = New System.Drawing.Size(53, 16)
         Me.Label7.TabIndex = 51
@@ -299,33 +299,28 @@ Partial Class Expense
         '
         Me.Label4.AutoSize = True
         Me.Label4.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label4.Location = New System.Drawing.Point(4, 104)
+        Me.Label4.Location = New System.Drawing.Point(3, 104)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(33, 16)
         Me.Label4.TabIndex = 71
         Me.Label4.Text = "Tag"
         '
-        'Label22
+        'CheckBox1
         '
-        Me.Label22.AutoSize = True
-        Me.Label22.Location = New System.Drawing.Point(8, 216)
-        Me.Label22.Name = "Label22"
-        Me.Label22.Size = New System.Drawing.Size(54, 16)
-        Me.Label22.TabIndex = 93
-        Me.Label22.Text = "Search "
-        '
-        'TextBox9
-        '
-        Me.TextBox9.Location = New System.Drawing.Point(122, 215)
-        Me.TextBox9.Name = "TextBox9"
-        Me.TextBox9.Size = New System.Drawing.Size(188, 22)
-        Me.TextBox9.TabIndex = 92
+        Me.CheckBox1.AutoSize = True
+        Me.CheckBox1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.CheckBox1.Location = New System.Drawing.Point(11, 179)
+        Me.CheckBox1.Name = "CheckBox1"
+        Me.CheckBox1.Size = New System.Drawing.Size(101, 19)
+        Me.CheckBox1.TabIndex = 88
+        Me.CheckBox1.Text = "Recurring ?"
+        Me.CheckBox1.UseVisualStyleBackColor = True
         '
         'Label15
         '
         Me.Label15.AutoSize = True
         Me.Label15.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label15.Location = New System.Drawing.Point(8, 252)
+        Me.Label15.Location = New System.Drawing.Point(8, 205)
         Me.Label15.Name = "Label15"
         Me.Label15.Size = New System.Drawing.Size(131, 15)
         Me.Label15.TabIndex = 85
@@ -335,7 +330,7 @@ Partial Class Expense
         '
         Me.Label16.AutoSize = True
         Me.Label16.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label16.Location = New System.Drawing.Point(6, 272)
+        Me.Label16.Location = New System.Drawing.Point(8, 229)
         Me.Label16.Name = "Label16"
         Me.Label16.Size = New System.Drawing.Size(154, 15)
         Me.Label16.TabIndex = 86
@@ -344,16 +339,13 @@ Partial Class Expense
         'Panel2
         '
         Me.Panel2.BackColor = System.Drawing.SystemColors.GradientActiveCaption
-        Me.Panel2.Controls.Add(Me.Label21)
+        Me.Panel2.Controls.Add(Me.CheckBox1)
         Me.Panel2.Controls.Add(Me.Label22)
-        Me.Panel2.Controls.Add(Me.ListBox1)
-        Me.Panel2.Controls.Add(Me.TextBox9)
         Me.Panel2.Controls.Add(Me.DateTimePicker2)
         Me.Panel2.Controls.Add(Me.Label19)
         Me.Panel2.Controls.Add(Me.Label15)
+        Me.Panel2.Controls.Add(Me.TextBox9)
         Me.Panel2.Controls.Add(Me.Label16)
-        Me.Panel2.Controls.Add(Me.TextBox7)
-        Me.Panel2.Controls.Add(Me.Label13)
         Me.Panel2.Controls.Add(Me.ComboBox5)
         Me.Panel2.Controls.Add(Me.Label3)
         Me.Panel2.Controls.Add(Me.Label9)
@@ -363,32 +355,12 @@ Partial Class Expense
         Me.Panel2.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Panel2.Location = New System.Drawing.Point(336, 49)
         Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(317, 302)
+        Me.Panel2.Size = New System.Drawing.Size(317, 272)
         Me.Panel2.TabIndex = 122
-        '
-        'Label21
-        '
-        Me.Label21.AutoSize = True
-        Me.Label21.Location = New System.Drawing.Point(8, 175)
-        Me.Label21.Name = "Label21"
-        Me.Label21.Size = New System.Drawing.Size(76, 16)
-        Me.Label21.TabIndex = 91
-        Me.Label21.Text = "Bills Payed"
-        '
-        'ListBox1
-        '
-        Me.ListBox1.Cursor = System.Windows.Forms.Cursors.No
-        Me.ListBox1.FormattingEnabled = True
-        Me.ListBox1.HorizontalScrollbar = True
-        Me.ListBox1.ItemHeight = 16
-        Me.ListBox1.Location = New System.Drawing.Point(122, 169)
-        Me.ListBox1.Name = "ListBox1"
-        Me.ListBox1.Size = New System.Drawing.Size(188, 36)
-        Me.ListBox1.TabIndex = 90
         '
         'DateTimePicker2
         '
-        Me.DateTimePicker2.Location = New System.Drawing.Point(122, 135)
+        Me.DateTimePicker2.Location = New System.Drawing.Point(122, 108)
         Me.DateTimePicker2.Name = "DateTimePicker2"
         Me.DateTimePicker2.Size = New System.Drawing.Size(188, 22)
         Me.DateTimePicker2.TabIndex = 89
@@ -396,30 +368,11 @@ Partial Class Expense
         'Label19
         '
         Me.Label19.AutoSize = True
-        Me.Label19.Location = New System.Drawing.Point(8, 136)
+        Me.Label19.Location = New System.Drawing.Point(8, 109)
         Me.Label19.Name = "Label19"
         Me.Label19.Size = New System.Drawing.Size(67, 16)
         Me.Label19.TabIndex = 88
         Me.Label19.Text = "Start Date"
-        '
-        'TextBox7
-        '
-        Me.TextBox7.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox7.Location = New System.Drawing.Point(122, 101)
-        Me.TextBox7.Name = "TextBox7"
-        Me.TextBox7.ReadOnly = True
-        Me.TextBox7.Size = New System.Drawing.Size(188, 22)
-        Me.TextBox7.TabIndex = 84
-        '
-        'Label13
-        '
-        Me.Label13.AutoSize = True
-        Me.Label13.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label13.Location = New System.Drawing.Point(6, 105)
-        Me.Label13.Name = "Label13"
-        Me.Label13.Size = New System.Drawing.Size(94, 16)
-        Me.Label13.TabIndex = 80
-        Me.Label13.Text = "Recent Delete"
         '
         'ComboBox5
         '
@@ -483,7 +436,7 @@ Partial Class Expense
         Me.Button4.BackColor = System.Drawing.SystemColors.ActiveCaption
         Me.Button4.Cursor = System.Windows.Forms.Cursors.Hand
         Me.Button4.Image = CType(resources.GetObject("Button4.Image"), System.Drawing.Image)
-        Me.Button4.Location = New System.Drawing.Point(289, 469)
+        Me.Button4.Location = New System.Drawing.Point(291, 439)
         Me.Button4.Name = "Button4"
         Me.Button4.Size = New System.Drawing.Size(75, 51)
         Me.Button4.TabIndex = 127
@@ -494,7 +447,7 @@ Partial Class Expense
         Me.Button3.BackColor = System.Drawing.SystemColors.ActiveCaption
         Me.Button3.Cursor = System.Windows.Forms.Cursors.Hand
         Me.Button3.Image = CType(resources.GetObject("Button3.Image"), System.Drawing.Image)
-        Me.Button3.Location = New System.Drawing.Point(387, 470)
+        Me.Button3.Location = New System.Drawing.Point(389, 440)
         Me.Button3.Name = "Button3"
         Me.Button3.Size = New System.Drawing.Size(75, 51)
         Me.Button3.TabIndex = 126
@@ -514,9 +467,9 @@ Partial Class Expense
         Me.Button1.BackColor = System.Drawing.SystemColors.ActiveCaption
         Me.Button1.Cursor = System.Windows.Forms.Cursors.Hand
         Me.Button1.Image = CType(resources.GetObject("Button1.Image"), System.Drawing.Image)
-        Me.Button1.Location = New System.Drawing.Point(576, 468)
+        Me.Button1.Location = New System.Drawing.Point(578, 440)
         Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(75, 51)
+        Me.Button1.Size = New System.Drawing.Size(75, 49)
         Me.Button1.TabIndex = 124
         Me.Button1.UseVisualStyleBackColor = False
         '
@@ -536,7 +489,7 @@ Partial Class Expense
         Me.Button9.Cursor = System.Windows.Forms.Cursors.Hand
         Me.Button9.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Button9.Image = CType(resources.GetObject("Button9.Image"), System.Drawing.Image)
-        Me.Button9.Location = New System.Drawing.Point(13, 526)
+        Me.Button9.Location = New System.Drawing.Point(15, 496)
         Me.Button9.Name = "Button9"
         Me.Button9.Size = New System.Drawing.Size(72, 43)
         Me.Button9.TabIndex = 134
@@ -547,15 +500,14 @@ Partial Class Expense
         '
         Me.PrintDialog1.UseEXDialog = True
         '
-        'Label17
+        'statusLabel
         '
-        Me.Label17.AutoSize = True
-        Me.Label17.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        Me.Label17.Location = New System.Drawing.Point(510, 10)
-        Me.Label17.Name = "Label17"
-        Me.Label17.Size = New System.Drawing.Size(141, 15)
-        Me.Label17.TabIndex = 135
-        Me.Label17.Text = "No Connection to Database"
+        Me.statusLabel.AutoSize = True
+        Me.statusLabel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.statusLabel.Location = New System.Drawing.Point(510, 10)
+        Me.statusLabel.Name = "statusLabel"
+        Me.statusLabel.Size = New System.Drawing.Size(2, 15)
+        Me.statusLabel.TabIndex = 135
         '
         'Timer1
         '
@@ -566,7 +518,7 @@ Partial Class Expense
         Me.Button10.BackColor = System.Drawing.SystemColors.ActiveCaption
         Me.Button10.Cursor = System.Windows.Forms.Cursors.Hand
         Me.Button10.Image = CType(resources.GetObject("Button10.Image"), System.Drawing.Image)
-        Me.Button10.Location = New System.Drawing.Point(103, 470)
+        Me.Button10.Location = New System.Drawing.Point(105, 440)
         Me.Button10.Name = "Button10"
         Me.Button10.Size = New System.Drawing.Size(75, 51)
         Me.Button10.TabIndex = 136
@@ -576,9 +528,9 @@ Partial Class Expense
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(665, 576)
+        Me.ClientSize = New System.Drawing.Size(665, 546)
         Me.Controls.Add(Me.Button10)
-        Me.Controls.Add(Me.Label17)
+        Me.Controls.Add(Me.statusLabel)
         Me.Controls.Add(Me.Button9)
         Me.Controls.Add(Me.Button8)
         Me.Controls.Add(Me.DataGridView1)
@@ -623,8 +575,6 @@ Partial Class Expense
     Friend WithEvents Panel2 As Panel
     Friend WithEvents Label16 As Label
     Friend WithEvents Label15 As Label
-    Friend WithEvents TextBox7 As TextBox
-    Friend WithEvents Label13 As Label
     Friend WithEvents ComboBox5 As ComboBox
     Friend WithEvents Label3 As Label
     Friend WithEvents Label9 As Label
@@ -639,7 +589,7 @@ Partial Class Expense
     Friend WithEvents Button9 As Button
     Friend WithEvents PrintDialog1 As PrintDialog
     Friend WithEvents PrintDocument1 As Printing.PrintDocument
-    Friend WithEvents Label17 As Label
+    Friend WithEvents statusLabel As Label
     Friend WithEvents TextBox8 As TextBox
     Friend WithEvents CheckBox1 As CheckBox
     Friend WithEvents Label18 As Label
@@ -648,8 +598,6 @@ Partial Class Expense
     Friend WithEvents ComboBox6 As ComboBox
     Friend WithEvents Label20 As Label
     Friend WithEvents Timer1 As Timer
-    Friend WithEvents Label21 As Label
-    Friend WithEvents ListBox1 As ListBox
     Friend WithEvents Button10 As Button
     Friend WithEvents ComboBox7 As ComboBox
     Friend WithEvents Label22 As Label

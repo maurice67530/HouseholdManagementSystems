@@ -70,6 +70,7 @@ Partial Class chores
         Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
         Me.Button13 = New System.Windows.Forms.Button()
         Me.Label13 = New System.Windows.Forms.Label()
+        Me.statusLabel = New System.Windows.Forms.Label()
         CType(Me.DGVChores, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel2.SuspendLayout()
         Me.Panel1.SuspendLayout()
@@ -563,11 +564,21 @@ Partial Class chores
         Me.Label13.Size = New System.Drawing.Size(0, 13)
         Me.Label13.TabIndex = 48
         '
+        'statusLabel
+        '
+        Me.statusLabel.AutoSize = True
+        Me.statusLabel.Location = New System.Drawing.Point(7, 9)
+        Me.statusLabel.Name = "statusLabel"
+        Me.statusLabel.Size = New System.Drawing.Size(39, 13)
+        Me.statusLabel.TabIndex = 49
+        Me.statusLabel.Text = "Label2"
+        '
         'chores
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(746, 544)
+        Me.Controls.Add(Me.statusLabel)
         Me.Controls.Add(Me.Label13)
         Me.Controls.Add(Me.Button13)
         Me.Controls.Add(Me.Button10)
@@ -649,4 +660,5 @@ Partial Class chores
     Friend WithEvents Label17 As Label
     Friend WithEvents DateTimePicker3 As DateTimePicker
     Friend WithEvents DateTimePicker2 As DateTimePicker
+    Friend WithEvents statusLabel As Label
 End Class

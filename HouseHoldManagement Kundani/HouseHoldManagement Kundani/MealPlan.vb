@@ -5,10 +5,12 @@ Imports System.Data.OleDb
 Public Class MealPlan
 
 
-    ' Dim conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
     Public Property conn As New OleDbConnection(connectionString)
-    ' Connection string using relative path to the database
-
+    'Public Const connectionString As String = " Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Nedzamba\Source\Repos\maurice67530\HouseholdManagementSystems\HMS.accdb"
+    Dim eventType As String = "MealPlans"
+    Dim cmd As OleDbCommand
+    Dim da As OleDbDataAdapter
+    Dim dt As DataTable
 
     Private Sub btnEdit_Click(sender As Object, e As EventArgs) Handles btnEdit.Click
         Try
@@ -62,9 +64,9 @@ Public Class MealPlan
         tooltip.SetToolTip(btnRefresh, "Refresh")
         tooltip.SetToolTip(btnSort, "Sort")
         tooltip.SetToolTip(btnHighlight, "Highlight")
-        tooltip.SetToolTip(btnPrint, "Print")
         tooltip.SetToolTip(btnSuggest, "Suggest")
         tooltip.SetToolTip(btnFilter, "Filter")
+        tooltip.SetToolTip(Button2, "View Family Schedule")
 
         tooltip.SetToolTip(ComboBox3, "Select the meal")
         LoadMealPlanfromDatabase1()
@@ -82,8 +84,8 @@ Public Class MealPlan
                 End While
             End Using
         End Using
-
-        PopulateComboboxFromDatabase(ComboBox4)
+        ''hhhhhh
+        'PopulateComboboxFromDatabase(ComboBox4)
     End Sub
 
     Private mealPlanData As DataTable
@@ -119,38 +121,36 @@ Public Class MealPlan
             DataGridView1.DataSource = mealPlanData ' Display filtered data in DataGridView
         End Using
     End Sub
+
     Public Sub LoadMealPlanfromDatabase1()
         Try
-            Debug.WriteLine("Form loading the data")
-            Debug.WriteLine("Form loading  data failed")
 
-            Using conn As New OleDbConnection(connectionString)
+            Debug.WriteLine("DataGridview populated successfully MealPlanForm_Load")
+            Using conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
                 conn.Open()
 
-                'Update the table name if neccessary
-                Dim DataTable As String = "MealPlans"
+                ' Update the table name if necessary  
+                Dim tableName As String = "MealPlans"
 
-                'Create an OleDbCommand to select the data from the database
-                Dim cmd As New OleDbCommand($"SELECT*FROM {DataTable}", conn)
 
-                'create a DataAdapter and fill a DataTable
+                ' Create an OleDbCommand to select the data from the database  
+                Dim cmd As New OleDbCommand($"SELECT * FROM {tableName}", conn)
+
+                ' Create a DataAdapter and fill a DataTable  
                 Dim da As New OleDbDataAdapter(cmd)
                 Dim dt As New DataTable()
                 da.Fill(dt)
 
-                'Bind the DataTable to the DataGridView
+                ' Bind the DataTable to the DataGridView  
                 DataGridView1.DataSource = dt
             End Using
 
-        Catch ex As FormatException
-            Debug.WriteLine("initializing the data.")
-            MessageBox.Show("Please load the information.", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-            MessageBox.Show("&Error Loading task to database: " & ex.Message & vbNewLine & ex.StackTrace, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         Catch ex As Exception
-            Debug.WriteLine($"Form loaded unsuccessfully {ex.Message}")
-            MessageBox.Show("An unexpected error occured during loading the data.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-            MessageBox.Show("&unexpected Error:" & ex.Message & vbNewLine & ex.StackTrace, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-
+            Debug.WriteLine($"DataGridView population failed")
+            Debug.WriteLine($"Unexpected error in DataGridView: {ex.Message}")
+            Debug.WriteLine($"Error in PopulateDataGridView: {ex.Message}")
+            Debug.WriteLine($"Stack Trace: {ex.StackTrace}")
+            'MessageBox.Show("An error occurred while loading data into the grid.", "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
     End Sub
     Public Property meals As New List(Of MealPlans)
@@ -361,49 +361,104 @@ Public Class MealPlan
 
     Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
 
-
-        ''''''''SAVE''''''''''''''''''
-
-
         Try
-            Debug.WriteLine("Entering btnEdit_Click")
+
             Using conn As New OleDbConnection(connectionString)
                 conn.Open()
 
-                Dim tablename As String = "MealPlans"
-                Using cmd As New OleDbCommand("INSERT INTO MealPlans ([StartDate], [EndDate], [Meals], [MealName], [Items], [TotalCalories], [Description], [FilePath], [Calories], [Frequency]) VALUES (@StartDate, @EndDate, @Meals, @MealName, @Items, @TotalCalories, @Description, @FilePath, @Calories, @Frequency)", conn)
+                ' Update the table name if necessary  
 
-                    cmd.Parameters.AddWithValue("@StartDate", DateTimePicker1.Text)
-                    cmd.Parameters.AddWithValue("@EndDate", DateTimePicker2.Text)
-                    cmd.Parameters.AddWithValue("@Meals", lstMealSuggestions.SelectedItem.ToString)
-                    cmd.Parameters.AddWithValue("@MealName", TextBox4.Text)
-                    cmd.Parameters.AddWithValue("@Items", ComboBox3.SelectedItem.ToString)
-                    cmd.Parameters.AddWithValue("@TotalCalories", NumericUpDown1.Value)
-                    cmd.Parameters.AddWithValue("@Description", TextBox2.Text)
-                    cmd.Parameters.AddWithValue("@FilePath", TextBox3.Text)
-                    cmd.Parameters.AddWithValue("@Calories", ComboBox1.SelectedItem.ToString)
-                    cmd.Parameters.AddWithValue("@Frequency", ComboBox2.SelectedItem.ToString)
-                    cmd.ExecuteNonQuery()
-                End Using
-                MessageBox.Show("MealPlan Updated successfully")
+
+                ' Create an OleDbCommand to insert the Expense data into the database  
+                Dim cmd As New OleDbCommand("INSERT INTO MealPlans ([StartDate], [EndDate], [Meals], [MealName], [Items], [TotalCalories], [Description], [FilePath], [Calories], [Frequency]) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", conn)
+
+
+                Dim meals As New MealPlans
+
+                'Assign Values 
+                meals.StartDate = DateTimePicker1.Text
+                meals.EndDate = DateTimePicker2.Text
+                meals.Meals = lstMealSuggestions.SelectedItem.ToString()
+                meals.MealName = TextBox4.Text
+                meals.Items = ComboBox3.SelectedItem.ToString
+                meals.TotalCalories = NumericUpDown1.Value
+                meals.Description = TextBox2.Text
+                meals.FilePath = TextBox3.Text
+                meals.Calories = ComboBox1.SelectedItem.ToString
+                meals.Frequency = ComboBox2.SelectedItem.ToString
+
+
+                ' Set the parameter values from the UI controls  
+                'For Each exp As Expenses In expenses
+                cmd.Parameters.Clear()
+
+
+                cmd.Parameters.AddWithValue("@StartDate", DateTimePicker1.Text)
+                cmd.Parameters.AddWithValue("@EndDate", DateTimePicker2.Text)
+                cmd.Parameters.AddWithValue("@Meals", lstMealSuggestions.SelectedItem.ToString)
+                cmd.Parameters.AddWithValue("@MealName", TextBox4.Text)
+                cmd.Parameters.AddWithValue("@Items", ComboBox3.SelectedItem.ToString)
+                cmd.Parameters.AddWithValue("@TotalCalories", NumericUpDown1.Value)
+                cmd.Parameters.AddWithValue("@Description", TextBox2.Text)
+                cmd.Parameters.AddWithValue("@FilePath", TextBox3.Text)
+                cmd.Parameters.AddWithValue("@Calories", ComboBox1.SelectedItem.ToString)
+                cmd.Parameters.AddWithValue("@Frequency", ComboBox2.SelectedItem.ToString)
+
+                cmd.ExecuteNonQuery()
+
+                'Display a confirmation messageBox  
+                MsgBox("Schedule Information Added!" & vbCrLf &
+                "StartDate: " & meals.StartDate.ToString & vbCrLf &
+                "EndDate: " & meals.EndDate.ToString & vbCrLf &
+                "Meals: " & meals.Meals & vbCrLf &
+                "Items: " & meals.Items & vbCrLf &
+                 "MealName: " & meals.MealName & vbCrLf &
+                "TotalCalories: " & meals.TotalCalories & vbCrLf &
+                "Description: " & meals.Description & vbCrLf &
+                 "FilePath: " & meals.FilePath & vbCrLf &
+                 "Calories: " & meals.Calories & vbCrLf &
+                "Frequency: " & meals.Frequency.ToString(), vbInformation, "Schedule confirmation")
 
             End Using
 
-            Debug.WriteLine("The data has been edited successfully")
-        Catch ex As OleDbException
-            Debug.WriteLine($"Database saving in btnEdit_Click: {ex.Message}")
-            Debug.WriteLine($"Stack Trace: {ex.StackTrace}")
-            ' MessageBox.Show("error saving expense to database. please check the connection.", "Database error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         Catch ex As Exception
-            MessageBox.Show($"Unexpected error: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-            Debug.WriteLine($"General error in btnEdit_Click: {ex.Message}")
-            Debug.WriteLine($"Stack Trace: {ex.StackTrace}")
+            Debug.WriteLine($"Database error in btnAdd_Click: {ex.Message}")
+            MessageBox.Show("Error saving Schedule to database: " & ex.Message & vbNewLine & ex.StackTrace, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Debug.WriteLine("Exiting btnAdd")
+
         End Try
 
-        Debug.WriteLine("Existing btnSave_Click")
+
+        '' MealPlan Form - Add this code to btnAddMeal_Click
+
+        'Dim mealDate As Date = DateTimePicker1.Value.Date
+        'Dim mealTitle As String = TextBox4.Text.Trim()
+
+        'If mealTitle = "" Then
+        '    MessageBox.Show("Please enter a meal name.", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+        '    Exit Sub
+        'End If
 
 
+
+
+        'Using conn As New OleDbConnection(connectionString)
+        '    Dim query As String = "INSERT INTO FamilySchedule (DateOfEvent, Title, EventType) VALUES (?, ?, ?)"
+        '    Using cmd As New OleDbCommand(query, conn)
+        '        cmd.Parameters.AddWithValue("?", mealDate)
+        '        cmd.Parameters.AddWithValue("?", mealTitle)
+        '        cmd.Parameters.AddWithValue("?", "MealName")
+        '        conn.Open()
+        '        cmd.ExecuteNonQuery()
+        '    End Using
+        'End Using
+
+        'MessageBox.Show("Meal added to schedule successfully!", "Saved", MessageBoxButtons.OK, MessageBoxIcon.Information)
+
+        '' Optional: clear fields
+        'TextBox4.Clear()
     End Sub
+
 
     Private Sub btnHighlight_Click(sender As Object, e As EventArgs) Handles btnHighlight.Click
         Try
@@ -440,7 +495,6 @@ Public Class MealPlan
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
 
-
         Dim openFileDialog As New OpenFileDialog()
         openFileDialog.Filter = "Image Files|*.jpg;*.*.bmp"
 
@@ -460,19 +514,19 @@ Public Class MealPlan
             'open the database connection
             conn.Open()
 
-            'retrieve the firstname and surname columns from the personaldetails tabel
-            Dim query As String = "SELECT Preference FROM Users"
-            Dim cmd As New OleDbCommand(query, conn)
-            Dim reader As OleDbDataReader = cmd.ExecuteReader()
+            ''retrieve the firstname and surname columns from the personaldetails tabel
+            'Dim query As String = "SELECT Preference FROM Users"
+            'Dim cmd As New OleDbCommand(query, conn)
+            'Dim reader As OleDbDataReader = cmd.ExecuteReader()
 
-            'bind the retrieved data to the combobox
-            ComboBox4.Items.Clear()
-            While reader.Read()
-                ComboBox4.Items.Add($"{reader("Preference")}")
-            End While
+            ''bind the retrieved data to the combobox
+            'ComboBox4.Items.Clear()
+            'While reader.Read()
+            '    ComboBox4.Items.Add($"{reader("Preference")}")
+            'End While
 
-            'close the database
-            reader.Close()
+            ''close the database
+            'reader.Close()
 
         Catch ex As Exception
             Debug.WriteLine("Failed to initialize combobox")
@@ -487,4 +541,17 @@ Public Class MealPlan
         End Try
         Debug.WriteLine("Done with populating combobox from database")
     End Sub
+
+    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
+        If MessageBox.Show("Would you like to view the calendar?", "Open Family Schedule", MessageBoxButtons.YesNo) = DialogResult.Yes Then
+            Family_Schedule.ShowDialog()
+            'Family_Schedule.LoadFamilySchedule()
+            ''Family_Schedule.HighlightMealEvents()
+            'Family_Schedule.LoadFamilySchedules()
+
+            'Family_Schedule.Button1.Visible = True
+        End If
+
+    End Sub
+
 End Class

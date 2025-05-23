@@ -10,7 +10,7 @@ Public Class chores
     Public Property conn As New OleDbConnection(connectionString)
     Private Sub chores_Load(sender As System.Object, e As System.EventArgs) Handles MyBase.Load
         cmbChore.Visible = False
-
+        CheckDatabaseConnection(statusLabel)
         Dim conn As New OleDbConnection(connectionString)
         toolTip1.SetToolTip(Button1, "Save")
         toolTip1.SetToolTip(Button2, "Edit")
