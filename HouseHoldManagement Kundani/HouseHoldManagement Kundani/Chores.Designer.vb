@@ -45,14 +45,14 @@ Partial Class chores
         Me.Label16 = New System.Windows.Forms.Label()
         Me.Label10 = New System.Windows.Forms.Label()
         Me.cmbpriority = New System.Windows.Forms.ComboBox()
-        Me.Cmbfre = New System.Windows.Forms.ComboBox()
         Me.CMBstatus = New System.Windows.Forms.ComboBox()
         Me.ComboBox1 = New System.Windows.Forms.ComboBox()
         Me.Label9 = New System.Windows.Forms.Label()
-        Me.Label7 = New System.Windows.Forms.Label()
         Me.Label8 = New System.Windows.Forms.Label()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.TxtDes = New System.Windows.Forms.TextBox()
+        Me.Cmbfre = New System.Windows.Forms.ComboBox()
+        Me.Label7 = New System.Windows.Forms.Label()
         Me.cmbChore = New System.Windows.Forms.ComboBox()
         Me.DateTimePicker1 = New System.Windows.Forms.DateTimePicker()
         Me.Label6 = New System.Windows.Forms.Label()
@@ -298,15 +298,6 @@ Partial Class chores
         Me.cmbpriority.Size = New System.Drawing.Size(292, 24)
         Me.cmbpriority.TabIndex = 8
         '
-        'Cmbfre
-        '
-        Me.Cmbfre.FormattingEnabled = True
-        Me.Cmbfre.Items.AddRange(New Object() {"Daily", "Weekly", "Monthly", "Yearly"})
-        Me.Cmbfre.Location = New System.Drawing.Point(106, 238)
-        Me.Cmbfre.Name = "Cmbfre"
-        Me.Cmbfre.Size = New System.Drawing.Size(203, 21)
-        Me.Cmbfre.TabIndex = 15
-        '
         'CMBstatus
         '
         Me.CMBstatus.FormattingEnabled = True
@@ -336,19 +327,6 @@ Partial Class chores
         Me.Label9.Size = New System.Drawing.Size(55, 15)
         Me.Label9.TabIndex = 16
         Me.Label9.Text = "Recurring"
-        '
-        'Label7
-        '
-        Me.Label7.AutoSize = True
-        Me.Label7.BackColor = System.Drawing.Color.Transparent
-        Me.Label7.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        Me.Label7.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label7.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.Label7.Location = New System.Drawing.Point(19, 244)
-        Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(59, 15)
-        Me.Label7.TabIndex = 6
-        Me.Label7.Text = "Frequency"
         '
         'Label8
         '
@@ -384,6 +362,28 @@ Partial Class chores
         Me.TxtDes.Size = New System.Drawing.Size(292, 121)
         Me.TxtDes.TabIndex = 15
         '
+        'Cmbfre
+        '
+        Me.Cmbfre.FormattingEnabled = True
+        Me.Cmbfre.Items.AddRange(New Object() {"Daily", "Weekly", "Monthly", "Yearly"})
+        Me.Cmbfre.Location = New System.Drawing.Point(106, 238)
+        Me.Cmbfre.Name = "Cmbfre"
+        Me.Cmbfre.Size = New System.Drawing.Size(203, 21)
+        Me.Cmbfre.TabIndex = 15
+        '
+        'Label7
+        '
+        Me.Label7.AutoSize = True
+        Me.Label7.BackColor = System.Drawing.Color.Transparent
+        Me.Label7.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.Label7.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label7.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
+        Me.Label7.Location = New System.Drawing.Point(19, 244)
+        Me.Label7.Name = "Label7"
+        Me.Label7.Size = New System.Drawing.Size(59, 15)
+        Me.Label7.TabIndex = 6
+        Me.Label7.Text = "Frequency"
+        '
         'cmbChore
         '
         Me.cmbChore.ForeColor = System.Drawing.Color.White
@@ -396,6 +396,7 @@ Partial Class chores
         '
         'DateTimePicker1
         '
+        Me.DateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
         Me.DateTimePicker1.Location = New System.Drawing.Point(105, 192)
         Me.DateTimePicker1.Name = "DateTimePicker1"
         Me.DateTimePicker1.Size = New System.Drawing.Size(204, 20)
@@ -542,9 +543,6 @@ Partial Class chores
         Me.Button10.Size = New System.Drawing.Size(44, 54)
         Me.Button10.TabIndex = 46
         Me.Button10.UseVisualStyleBackColor = False
-        '
-        'Timer1
-        '
         '
         'Button13
         '
