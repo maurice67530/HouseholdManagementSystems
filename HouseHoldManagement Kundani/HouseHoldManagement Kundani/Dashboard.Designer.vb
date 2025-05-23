@@ -987,22 +987,24 @@ Partial Class Dashboard
         Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.SettingsToolStripMenuItem})
         Me.MenuStrip1.Location = New System.Drawing.Point(0, 0)
         Me.MenuStrip1.Name = "MenuStrip1"
-        Me.MenuStrip1.Size = New System.Drawing.Size(1437, 24)
+        Me.MenuStrip1.Size = New System.Drawing.Size(1284, 24)
         Me.MenuStrip1.Stretch = False
         Me.MenuStrip1.TabIndex = 129
         Me.MenuStrip1.Text = "MenuStrip1"
         '
         'SettingsToolStripMenuItem
         '
+        Me.SettingsToolStripMenuItem.ForeColor = System.Drawing.SystemColors.ControlText
+        Me.SettingsToolStripMenuItem.Image = CType(resources.GetObject("SettingsToolStripMenuItem.Image"), System.Drawing.Image)
         Me.SettingsToolStripMenuItem.Name = "SettingsToolStripMenuItem"
-        Me.SettingsToolStripMenuItem.Size = New System.Drawing.Size(61, 20)
+        Me.SettingsToolStripMenuItem.Size = New System.Drawing.Size(77, 20)
         Me.SettingsToolStripMenuItem.Text = "Settings"
         '
         'Dashboard
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1437, 881)
+        Me.ClientSize = New System.Drawing.Size(1284, 881)
         Me.Controls.Add(Me.Label38)
         Me.Controls.Add(Me.ListBox3)
         Me.Controls.Add(Me.Label35)
