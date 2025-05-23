@@ -97,6 +97,10 @@ Public Class Family_Schedule
         End Try
     End Sub
     Private Sub Family_Schedule_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        LoadMealSchedule()
+        LoadFamilySchedules()
+         LoadFamilySchedule()
+        LoadMealEvents()
 
 
         Dim tooltip As New ToolTip
@@ -1030,8 +1034,34 @@ Public Class Family_Schedule
     End Sub
 
     Private Sub Button1_Click_1(sender As Object, e As EventArgs) Handles Button1.Click
-        LoadMealSchedule()
-        LoadFamilySchedule()
+        'LoadMealSchedule()
+        'LoadFamilySchedule()
     End Sub
 
+
+
+
+    Private adapter As OleDbDataAdapter
+    Private dataTable As DataTable
+
+    Private Sub LoadMealEvents()
+        Try
+            conn.Open()
+
+            ' Query filtering EventType = 'Meal'
+            Dim query As String = "SELECT * FROM FamilySchedule WHERE EventType = 'Meal'"
+
+            adapter = New OleDbDataAdapter(query, conn)
+            dataTable = New DataTable()
+            adapter.Fill(dataTable)
+
+            ' Bind the filtered data to DataGridView
+            DataGridView1.DataSource = dataTable
+
+        Catch ex As Exception
+            MessageBox.Show("Error loading meal events: " & ex.Message)
+        Finally
+            conn.Close()
+        End Try
+    End Sub
 End Class
