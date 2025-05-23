@@ -26,7 +26,7 @@ Public Class Dashboard
 
         CheckDatabaseConnection(statusLabel)
         ' Show total users who have logged in
-        Label39.Text = "Users: " & GetTotalUsersLoggedIn().ToString()
+        Label39.Text = "Users who Loged in: " & GetTotalUsersLoggedIn().ToString()
 
         lblbadge.Region = New Region(New Drawing2D.GraphicsPath())
         Dim gp As New Drawing.Drawing2D.GraphicsPath()
@@ -298,7 +298,7 @@ Public Class Dashboard
 
         Dim total As Integer = 0
 
-        Dim query As String = "SELECT COUNT(*) FROM (SELECT UserName FROM Users GROUP BY UserName)"
+        Dim query As String = "SELECT COUNT(*) FROM (SELECT userName FROM Login GROUP BY userName)"
 
         Using conn As New OleDbConnection(connectionString)
 
