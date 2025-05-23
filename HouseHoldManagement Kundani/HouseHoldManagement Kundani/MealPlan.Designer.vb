@@ -35,6 +35,7 @@ Partial Class MealPlan
         Me.DataGridView1 = New System.Windows.Forms.DataGridView()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.ComboBox4 = New System.Windows.Forms.ComboBox()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.Label6 = New System.Windows.Forms.Label()
         Me.lstMealSuggestions = New System.Windows.Forms.ListBox()
@@ -60,7 +61,7 @@ Partial Class MealPlan
         Me.Label10 = New System.Windows.Forms.Label()
         Me.Label12 = New System.Windows.Forms.Label()
         Me.Button2 = New System.Windows.Forms.Button()
-        Me.ComboBox4 = New System.Windows.Forms.ComboBox()
+        Me.StatusLabel = New System.Windows.Forms.Label()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel2.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -194,6 +195,14 @@ Partial Class MealPlan
         Me.Panel2.Name = "Panel2"
         Me.Panel2.Size = New System.Drawing.Size(326, 352)
         Me.Panel2.TabIndex = 48
+        '
+        'ComboBox4
+        '
+        Me.ComboBox4.FormattingEnabled = True
+        Me.ComboBox4.Location = New System.Drawing.Point(117, 236)
+        Me.ComboBox4.Name = "ComboBox4"
+        Me.ComboBox4.Size = New System.Drawing.Size(121, 23)
+        Me.ComboBox4.TabIndex = 28
         '
         'Label4
         '
@@ -423,19 +432,21 @@ Partial Class MealPlan
         Me.Button2.TabIndex = 29
         Me.Button2.UseVisualStyleBackColor = True
         '
-        'ComboBox4
+        'StatusLabel
         '
-        Me.ComboBox4.FormattingEnabled = True
-        Me.ComboBox4.Location = New System.Drawing.Point(117, 236)
-        Me.ComboBox4.Name = "ComboBox4"
-        Me.ComboBox4.Size = New System.Drawing.Size(121, 23)
-        Me.ComboBox4.TabIndex = 28
+        Me.StatusLabel.AutoSize = True
+        Me.StatusLabel.Location = New System.Drawing.Point(3, 9)
+        Me.StatusLabel.Name = "StatusLabel"
+        Me.StatusLabel.Size = New System.Drawing.Size(45, 13)
+        Me.StatusLabel.TabIndex = 61
+        Me.StatusLabel.Text = "Label13"
         '
         'MealPlan
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(679, 549)
+        Me.Controls.Add(Me.StatusLabel)
         Me.Controls.Add(Me.Button2)
         Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.btnSuggest)
@@ -503,4 +514,5 @@ Partial Class MealPlan
     Friend WithEvents Label4 As Label
     Friend WithEvents Button2 As Button
     Friend WithEvents ComboBox4 As ComboBox
+    Friend WithEvents StatusLabel As Label
 End Class

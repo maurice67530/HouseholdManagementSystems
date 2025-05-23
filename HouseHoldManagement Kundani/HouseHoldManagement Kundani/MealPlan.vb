@@ -53,6 +53,8 @@ Public Class MealPlan
     End Sub
 
     Private Sub MealPlan_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        CheckDatabaseConnection(StatusLabel)
+
         ComboBox1.Items.AddRange(New String() {"<500", "500-1000", ">1000"})
         ComboBox2.Items.AddRange(New String() {"Daily", "Weekly", "Monthly"})
 
