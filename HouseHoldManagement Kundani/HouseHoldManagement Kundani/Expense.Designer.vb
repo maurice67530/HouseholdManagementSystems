@@ -54,8 +54,8 @@ Partial Class Expense
         Me.Label1 = New System.Windows.Forms.Label()
         Me.ComboBox2 = New System.Windows.Forms.ComboBox()
         Me.Label21 = New System.Windows.Forms.Label()
-        Me.ListBox1 = New System.Windows.Forms.ListBox()
         Me.DateTimePicker2 = New System.Windows.Forms.DateTimePicker()
+        Me.ListBox1 = New System.Windows.Forms.ListBox()
         Me.Label19 = New System.Windows.Forms.Label()
         Me.ComboBox5 = New System.Windows.Forms.ComboBox()
         Me.Label3 = New System.Windows.Forms.Label()
@@ -71,7 +71,7 @@ Partial Class Expense
         Me.Button9 = New System.Windows.Forms.Button()
         Me.PrintDialog1 = New System.Windows.Forms.PrintDialog()
         Me.PrintDocument1 = New System.Drawing.Printing.PrintDocument()
-        Me.Label17 = New System.Windows.Forms.Label()
+        Me.statusLabel = New System.Windows.Forms.Label()
         Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
         Me.Button10 = New System.Windows.Forms.Button()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -392,6 +392,13 @@ Partial Class Expense
         Me.Label21.TabIndex = 91
         Me.Label21.Text = "Expenses Paid"
         '
+        'DateTimePicker2
+        '
+        Me.DateTimePicker2.Location = New System.Drawing.Point(122, 108)
+        Me.DateTimePicker2.Name = "DateTimePicker2"
+        Me.DateTimePicker2.Size = New System.Drawing.Size(188, 22)
+        Me.DateTimePicker2.TabIndex = 89
+        '
         'ListBox1
         '
         Me.ListBox1.Cursor = System.Windows.Forms.Cursors.No
@@ -401,13 +408,6 @@ Partial Class Expense
         Me.ListBox1.Name = "ListBox1"
         Me.ListBox1.Size = New System.Drawing.Size(188, 52)
         Me.ListBox1.TabIndex = 90
-        '
-        'DateTimePicker2
-        '
-        Me.DateTimePicker2.Location = New System.Drawing.Point(122, 108)
-        Me.DateTimePicker2.Name = "DateTimePicker2"
-        Me.DateTimePicker2.Size = New System.Drawing.Size(188, 22)
-        Me.DateTimePicker2.TabIndex = 89
         '
         'Label19
         '
@@ -544,15 +544,14 @@ Partial Class Expense
         '
         Me.PrintDialog1.UseEXDialog = True
         '
-        'Label17
+        'statusLabel
         '
-        Me.Label17.AutoSize = True
-        Me.Label17.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        Me.Label17.Location = New System.Drawing.Point(510, 10)
-        Me.Label17.Name = "Label17"
-        Me.Label17.Size = New System.Drawing.Size(141, 15)
-        Me.Label17.TabIndex = 135
-        Me.Label17.Text = "No Connection to Database"
+        Me.statusLabel.AutoSize = True
+        Me.statusLabel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.statusLabel.Location = New System.Drawing.Point(510, 10)
+        Me.statusLabel.Name = "statusLabel"
+        Me.statusLabel.Size = New System.Drawing.Size(2, 15)
+        Me.statusLabel.TabIndex = 135
         '
         'Timer1
         '
@@ -575,7 +574,7 @@ Partial Class Expense
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(665, 576)
         Me.Controls.Add(Me.Button10)
-        Me.Controls.Add(Me.Label17)
+        Me.Controls.Add(Me.statusLabel)
         Me.Controls.Add(Me.Button9)
         Me.Controls.Add(Me.Button8)
         Me.Controls.Add(Me.DataGridView1)
@@ -634,7 +633,7 @@ Partial Class Expense
     Friend WithEvents Button9 As Button
     Friend WithEvents PrintDialog1 As PrintDialog
     Friend WithEvents PrintDocument1 As Printing.PrintDocument
-    Friend WithEvents Label17 As Label
+    Friend WithEvents statusLabel As Label
     Friend WithEvents TextBox8 As TextBox
     Friend WithEvents CheckBox1 As CheckBox
     Friend WithEvents Label18 As Label

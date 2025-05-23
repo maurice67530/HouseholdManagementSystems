@@ -566,7 +566,7 @@ Public Class Dashboard
 
             ' Configure SMTP client
 
-            Dim smtpClient As New SmtpClient("smtp.gmail.com") With {.Port = 587, .EnableSsl = True, .Credentials = New NetworkCredential("nethonondamudzunga45@gmail.com", "slwo xavj lool amzu")}
+            Dim smtpClient As New SmtpClient(My.Settings.Smtpserver) With {.Port = 587, .EnableSsl = True, .Credentials = New NetworkCredential("nethonondamudzunga45@gmail.com", "slwo xavj lool amzu")}
 
 
             ' Create the email message
