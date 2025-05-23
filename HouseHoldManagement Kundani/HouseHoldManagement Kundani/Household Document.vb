@@ -223,7 +223,7 @@ Public Class Household_Document
     End Sub
 
     Private Sub Household_Document_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-
+        CheckDatabaseConnection(StatusLabel)
         'LoadHouseholdDocument()
         'LoadFilteredDocuments()
         LoadDocuments()
