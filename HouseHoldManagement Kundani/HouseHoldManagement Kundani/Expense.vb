@@ -92,7 +92,7 @@ Public Class Expense
                     ' Assuming TextBox2 contains the expense amount
                     ' Use the BillName or other identifier to locate the budget record
                     Dim budgetIdentifier As String = TextBox8.Text ' or other relevant identifier
-                    UpdateBudget(budgetIdentifier, expenseAmount)
+                    'UpdateBudget(budgetIdentifier, expenseAmount)
                 Else
                     MessageBox.Show("Invalid expense amount.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
                 End If
@@ -123,14 +123,14 @@ Public Class Expense
         Debug.WriteLine("Exiting btnSubmit")
     End Sub
 
-    Private Sub UpdateBudget(budgetIdentifier As String, expenseAmount As Decimal)
+    Private Sub UpdateBudget(expenseAmount As Decimal)
         Using conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
             conn.Open()
             Try
                 ' Retrieve current budget amount
-                Dim selectQuery As String = "SELECT [BudgetAmount] FROM [Budget] WHERE [ID] = ?"
+                Dim selectQuery As String = "SELECT [BudgetAmount] FROM [Budget] "
                 Dim selectCmd As New OleDbCommand(selectQuery, conn)
-                selectCmd.Parameters.AddWithValue("@ID", budgetIdentifier)
+
 
                 Dim currentBudget As Object = selectCmd.ExecuteScalar()
 
@@ -151,10 +151,10 @@ Public Class Expense
                 End If
 
                 ' Update the budget with the new amount
-                Dim updateQuery As String = "UPDATE [Budget] SET [BudgetAmount] = ? WHERE [ID] = ?"
+                Dim updateQuery As String = "UPDATE [Budget] SET [BudgetAmount] = ? "
                 Dim updateCmd As New OleDbCommand(updateQuery, conn)
                 updateCmd.Parameters.AddWithValue("@Amount", newBudgetAmount)
-                updateCmd.Parameters.AddWithValue("@ID", budgetIdentifier)
+
 
                 updateCmd.ExecuteNonQuery()
 
