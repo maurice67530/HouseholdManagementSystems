@@ -437,9 +437,8 @@ Partial Class MealPlan
         Me.StatusLabel.AutoSize = True
         Me.StatusLabel.Location = New System.Drawing.Point(3, 9)
         Me.StatusLabel.Name = "StatusLabel"
-        Me.StatusLabel.Size = New System.Drawing.Size(45, 13)
+        Me.StatusLabel.Size = New System.Drawing.Size(0, 13)
         Me.StatusLabel.TabIndex = 61
-        Me.StatusLabel.Text = "Label13"
         '
         'MealPlan
         '
