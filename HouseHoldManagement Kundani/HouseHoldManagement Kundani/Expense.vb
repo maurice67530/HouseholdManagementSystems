@@ -961,7 +961,8 @@ Public Class Expense
         Dim expenseQuery As String = "SELECT * FROM Expense" ' Fetch all expense records
         'Dim budgetQuery As String = "SELECT BudgetAmount FROM Budget WHERE ID=?" ' Adjust as needed
 
-        Using conn As New OleDbConnection(connectionString)
+        Using conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
+            conn.Open()
             Dim expenseCommand As New OleDbCommand(expenseQuery, conn)
             'Dim budgetCommand As New OleDbCommand(budgetQuery, conn)
             Dim budgetID As Integer = 1 ' Replace with actual Budget record ID
@@ -969,7 +970,7 @@ Public Class Expense
             Dim budgetCommand As New OleDbCommand(budgetQuery, conn)
             budgetCommand.Parameters.AddWithValue("?", budgetID)
             Try
-                conn.Open()
+
 
                 ' Get current budget
                 Dim currentBudget As Decimal = 0
