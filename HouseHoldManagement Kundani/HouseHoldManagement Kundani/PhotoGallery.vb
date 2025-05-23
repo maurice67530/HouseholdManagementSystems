@@ -5,6 +5,7 @@ Public Class PhotoGallery
 
     Public Folderpath As String = "\\MUDAUMURANGI\Users\Murangi\Source\Repos\maurice67530\HouseholdManagementSystems\Photo Gallery"
     Private Sub PhotoGallery_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        CheckDatabaseConnection(statusLabel)
 
 
         PopulateComboboxFromDatabase(ComboBox1)

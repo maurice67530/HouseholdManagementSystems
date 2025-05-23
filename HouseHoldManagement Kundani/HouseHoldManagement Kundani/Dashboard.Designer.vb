@@ -54,7 +54,7 @@ Partial Class Dashboard
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.Label39 = New System.Windows.Forms.Label()
         Me.Label37 = New System.Windows.Forms.Label()
-        Me.Label36 = New System.Windows.Forms.Label()
+        Me.statusLabel = New System.Windows.Forms.Label()
         Me.Label28 = New System.Windows.Forms.Label()
         Me.Label23 = New System.Windows.Forms.Label()
         Me.Label22 = New System.Windows.Forms.Label()
@@ -331,7 +331,7 @@ Partial Class Dashboard
         Me.Panel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         Me.Panel1.Controls.Add(Me.Label39)
         Me.Panel1.Controls.Add(Me.Label37)
-        Me.Panel1.Controls.Add(Me.Label36)
+        Me.Panel1.Controls.Add(Me.statusLabel)
         Me.Panel1.Controls.Add(Me.Label28)
         Me.Panel1.Controls.Add(Me.Label23)
         Me.Panel1.Controls.Add(Me.Label22)
@@ -369,14 +369,13 @@ Partial Class Dashboard
         Me.Label37.TabIndex = 127
         Me.Label37.Text = "Database Status:"
         '
-        'Label36
+        'statusLabel
         '
-        Me.Label36.AutoSize = True
-        Me.Label36.Location = New System.Drawing.Point(956, 12)
-        Me.Label36.Name = "Label36"
-        Me.Label36.Size = New System.Drawing.Size(45, 13)
-        Me.Label36.TabIndex = 127
-        Me.Label36.Text = "Label36"
+        Me.statusLabel.AutoSize = True
+        Me.statusLabel.Location = New System.Drawing.Point(956, 12)
+        Me.statusLabel.Name = "statusLabel"
+        Me.statusLabel.Size = New System.Drawing.Size(0, 13)
+        Me.statusLabel.TabIndex = 127
         '
         'Label28
         '
@@ -1116,7 +1115,7 @@ Partial Class Dashboard
     Friend WithEvents Label33 As Label
     Friend WithEvents Label34 As Label
     Friend WithEvents Label35 As Label
-    Friend WithEvents Label36 As Label
+    Friend WithEvents statusLabel As Label
     Friend WithEvents Label37 As Label
     Friend WithEvents ListBox3 As ListBox
     Friend WithEvents Label38 As Label
