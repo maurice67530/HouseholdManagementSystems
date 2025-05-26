@@ -357,12 +357,7 @@ Public Class Personnel
         Next
     End Sub
     Private Sub BtnAddpicture_Click(sender As Object, e As EventArgs) Handles BtnAddpicture.Click
-        'OpenFileDialog1.Filter = "Bitmaps (*.bmp)|*.bmp| (*.jpg)|*.jpg"
-        'If OpenFileDialog1.ShowDialog() = DialogResult.OK Then
-        '    PictureBox1.Image = System.Drawing.Image.FromFile(OpenFileDialog1.FileName)
-        '    TextBox7.Text = OpenFileDialog1.FileName
 
-        'End If
         'Dim OpenFileDialog As New OpenFileDialog()
         'OpenFileDialog.Filter = "Bitmaps (*.jpg)|*.jpg"
         'If OpenFileDialog.ShowDialog() = DialogResult.OK Then
