@@ -18,7 +18,7 @@ End Class
 
 Public Class Logging
     ' Properties of the Login class
-    Public Property Username As String
+    Public Property username As String
     Public Property Password As Integer
 
 End Class

@@ -191,6 +191,27 @@
   <metadata name="OpenFileDialog1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
+  <data name="PictureBoxPreview.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
+        EwAACxMBAJqcGAAAA45JREFUeF7tnDuvTFEYho9bCKIiLg0SDUFF5xohhIhLolfQSXRKt8qlOCoRBYlf
+        QEMIv4HGLRoaQkjcQkjwvnEmGcu3Z69vzV4ze815n+RJZM7sNcn3mNlzzr6MCSGEEEIIIYQQQgghhBBC
+        TLAEXoRP4Tf4W5pyNk8gZ8WZNcIB+BlaLyir5cz2wb7YBn9C6wVkvT/gFpjEDPgCWgvLeJ9DztLNbmgt
+        KP3uhG7OQmsx6fcMdHMZWotJv5ylmyvQWkz65SzdKEBzKkCin+BteA3ehG+g9bw6FcApB38MzoTdTIUH
+        4UtobVelAjh8C1fDXiyAD6G1vaUCONwOY1gGv0BrjVAFiPQu9HAOWuuEKkCkR6CHddBaJ1QBIt0EPcyF
+        1jqhWQOcMB4r1c3QwzxorROaNQA5Ba2fleZR6GE9tNYJzR6AjEKEe9DDBWitEzqQAGQUIuyAMSyHX6G1
+        RujAApDSI7yDa2AvFsJH0NrecqABSOkReDz3OJwFu5kGD8FX0NquyoEHIKPwccTfdO/A6/AW5J8prOfV
+        OZQAZJS+ovbj0AIQRRhyANLkxxHP1ODpHtbP2urQA5Am3gn85jEf8oyN7xOPlWArApB+InSG36GkCK0J
+        QFIihMPvUEqEVgUgnghVw+9QQoTWBSCxO+bDsA6eQNzmHXMrA5CYdwIHG3OWcZvfCa0NQGIj7Id1NBWB
+        H3sb4euux/qx1QFImyJ073NWwiYitD4AiYnAwa6CdaRGsHb4TUQoIgCJ2TFfhTF4d8wcPs/3sVgL+Wdq
+        a7sYiwlA6iI8gLHERuD/8Krhd+gnQlEBSK8Il6CH2AgxX3dTIxQXgJyE4Wu9hylXH8ZE+AB5wKWOlAhF
+        BiB74H3Iy2NvwKUwlZgIK2AM3gjFBmiaXhF4NehsGIsnggJ0URVhHHphhHAdSwUI2AB5evkv+BHyJNvw
+        WoBYrJmEKkAFc+CUv/9MxppJqAJkxJpJqAJkxJpJqAJkxJpJqAJkxJpJqAJkxJpJqAJkxJpJqAJkxJpJ
+        qAJkxJpJqAJkxJpJqAJkxJpJaNYAfN5k1ppJKJ/nJnZxWa8CDNmkALplWXMm3bJMN+1rztPQzS5oLSb9
+        xl57/A+82ShvOmotKON9BqfDJLZC3bo4XR579t4A5D94ajjvoWa9gKyWx5r3wkZYDM/Dx1C3r6+Ws+GM
+        eJB/ERRCCCGEEEIIIYQQQgghxKRnbOwPaWC519jScigAAAAASUVORK5CYII=
+</value>
+  </data>
   <data name="Button4.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         R0lGODlhKAAoAPcAAAD/AE56tU97tVB8tlF9t1J9t1J+t1N+uFN/uFN/uVR/uFR/uVSAuVV/uFWAuVWA
