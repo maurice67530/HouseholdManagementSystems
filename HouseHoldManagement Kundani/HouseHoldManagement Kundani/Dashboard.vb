@@ -367,8 +367,6 @@ Public Class Dashboard
     Private Sub Button8_Click_1(sender As Object, e As EventArgs) Handles Button8.Click
         PhotoGallery.ShowDialog()
     End Sub
-
-
     Private Sub Button12_Click(sender As Object, e As EventArgs) Handles Button12.Click
         Expense.ShowDialog()
     End Sub
@@ -380,7 +378,6 @@ Public Class Dashboard
     Private Sub Button5_Click_1(sender As Object, e As EventArgs) Handles Button5.Click
         Personnel.ShowDialog()
     End Sub
-
 
     Private Function CheckExpense() As Boolean
         Dim BudgetLimit As Decimal = 700
@@ -404,14 +401,14 @@ Public Class Dashboard
                 MessageBox.Show("Alert! You have used more than 80% of your budget", "Budget Alert", MessageBoxButtons.OK, MessageBoxIcon.Warning)
 
                 Dim messageBody As String = $"Alert! Budget Alert:{vbCrLf}{vbCrLf}Total Expenses: {TotalExpense}{vbCrLf}Budget Limit: {BudgetLimit}"
-                SendEmail("nethonondamudzunga45@gmail.com", "Budget Alert", messageBody)
+                SendEmail(My.Settings.RecipientEmail, "Budget Alert", messageBody)
                 MessageBox.Show("Budget Alert Sent Successfully!", "Budget Alert", MessageBoxButtons.OK, MessageBoxIcon.Information)
             Else
                 ' Less than 80% – Budget under control
                 MessageBox.Show("Your budget is under control.", "Budget Status", MessageBoxButtons.OK, MessageBoxIcon.Information)
 
                 Dim messageBody As String = $"Budget Status: Under Control{vbCrLf}{vbCrLf}Total Expenses: {TotalExpense}{vbCrLf}Budget Limit: {BudgetLimit}"
-                SendEmail("nethonondamudzunga45@gmail.com", "Budget Status", messageBody)
+                SendEmail(My.Settings.RecipientEmail, "Budget Status", messageBody)
                 MessageBox.Show("Budget Status Email Sent Successfully!", "Budget Status", MessageBoxButtons.OK, MessageBoxIcon.Information)
             End If
 
@@ -477,7 +474,7 @@ Public Class Dashboard
 
             Dim messageBody As String = $"Alert! overdueChore:{vbCrLf}{vbCrLf}{overdueChore}"
 
-            SendEmail("nethonondamudzunga45@gmail.com", "overdueChore Alert", messageBody)
+            SendEmail(My.Settings.RecipientEmail, "overdueChore Alert", messageBody)
 
             ' Notify that the email was sent
 
@@ -545,7 +542,7 @@ Public Class Dashboard
 
             Dim messageBody As String = $"Alert! The following grocery items have expired:{vbCrLf}{vbCrLf}{expiredGroceries}"
 
-            SendEmail("nethonondamudzunga45@gmail.com", "Grocery Expiry Alert", messageBody)
+            SendEmail(My.Settings.RecipientEmail, "Grocery Expiry Alert", messageBody)
 
             ' Notify that the email was sent
 
@@ -559,19 +556,18 @@ Public Class Dashboard
     End Function
 
     ' Function to send email
-
     Private Sub SendEmail(recipient As String, subject As String, messageBody As String)
 
         Try
 
             ' Configure SMTP client
 
-            Dim smtpClient As New SmtpClient(My.Settings.Smtpserver) With {.Port = 587, .EnableSsl = True, .Credentials = New NetworkCredential("nethonondamudzunga45@gmail.com", "slwo xavj lool amzu")}
+            Dim smtpClient As New SmtpClient(My.Settings.Smtpserver) With {.Port = 587, .EnableSsl = True, .Credentials = New NetworkCredential(My.Settings.EmailFrom, My.Settings.Password)}
 
 
             ' Create the email message
 
-            Dim mailMessage As New MailMessage() With {.From = New MailAddress("nethonondamudzunga45@gmail.com"), .Subject = subject, .Body = messageBody}
+            Dim mailMessage As New MailMessage() With {.From = New MailAddress(My.Settings.EmailFrom), .Subject = subject, .Body = messageBody}
 
 
 
@@ -642,11 +638,7 @@ Public Class Dashboard
             Label13.Text = "Budget is under control"
             Label13.ForeColor = Color.Green
         End If
-
-
         blinkState = Not blinkState
-
-
     End Sub
 
     Private Function GetTotalExpenses() As Double
@@ -938,8 +930,6 @@ Public Class Dashboard
     Private photoList As New List(Of String)()
     Private currentPhotoIndex As Integer = 0
     Private WithEvents photoTimer As New Timer()
-
-
 
     Private Sub LoadRecentPhotos()
         photoList.Clear()
@@ -1450,6 +1440,11 @@ Public Class Dashboard
     End Sub
 
     Private Sub Panel1_Paint(sender As Object, e As PaintEventArgs) Handles Panel1.Paint
+
+    End Sub
+
+    Private Sub SettingsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SettingsToolStripMenuItem.Click
+        Settings.Show()
 
     End Sub
 End Class

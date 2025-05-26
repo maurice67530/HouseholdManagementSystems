@@ -866,6 +866,7 @@ Public Class chores
             Button1.Visible = True
         End If
     End Sub
+
     Private Sub CheckDailyChoreOverload()
         Dim choreCounts As New Dictionary(Of String, Dictionary(Of Date, Integer))
 
@@ -893,10 +894,51 @@ Public Class chores
         ' Check for overloads and show message
         For Each person In choreCounts.Keys
             For Each choreDate In choreCounts(person).Keys
+
+
+                ' Show message if conflict found
                 If choreCounts(person)(choreDate) >= 3 Then
-                    MessageBox.Show($"{person} has {choreCounts(person)(choreDate)} chores on {choreDate:d}. Please review the schedule.",
-                                    "Daily Chore Overload", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-                    Exit Sub ' Show message once for the first overload found
+                    Dim result = MessageBox.Show($"{person} has {choreCounts(person)(choreDate)} chores on {choreDate:d}. Do you want to reschedule chores for {person}?.",
+                                    "Daily Chore Overload", MessageBoxButtons.YesNo, MessageBoxIcon.Warning)
+
+                    If result = DialogResult.Yes Then
+                        'logic here
+
+                        ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
+                        If result = DialogResult.Yes Then
+                            ' Find new available date for this person
+                            Dim newDate As Date = choreDate.AddDays(1)
+                            While choreCounts(person).ContainsKey(newDate.Date)
+                                newDate = newDate.AddDays(1)
+                            End While
+
+                            ' Find rows to update with this date
+                            For Each row As DataGridViewRow In DGVChores.Rows
+                                If Not row.IsNewRow Then
+                                    Dim rPerson = row.Cells("AssignedTo").Value?.ToString().Trim()
+                                    Dim rFreq = row.Cells("Frequency").Value?.ToString().Trim()
+                                    Dim rDateStr = row.Cells("DueDate").Value?.ToString().Trim()
+                                    If rPerson = person AndAlso rFreq = "Daily" AndAlso Date.TryParse(rDateStr, Nothing) Then
+                                        Dim rDate As Date = Date.Parse(rDateStr)
+                                        If rDate.Date = choreDate.Date Then
+                                            row.Cells("DueDate").Value = newDate.ToShortDateString()
+                                            Exit For ' Update only one chore to fix overload
+                                        End If
+                                    End If
+                                End If
+                            Next
+                        End If
+                        ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+                        MessageBox.Show($"{person} will now do 2 chores on {choreDate:d}. 1 chores has been scheduled to a new date",
+                                    "Daily Chore Overload", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                        '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+                    Else
+                        MessageBox.Show($"{person} will do 3+ chores on this day: {choreDate:d}.",
+                                    "Daily Chore Overload", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                    End If
+
+
+
                 End If
             Next
         Next
@@ -962,5 +1004,72 @@ Public Class chores
         End Using
     End Sub
 
+    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
+        Try
+            Debug.WriteLine("entering button update")
+            If DGVChores.SelectedRows.Count = 0 Then
+                MessageBox.Show("Please select a record to update.", "No Selection", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                Return
+
+            End If
+            If DGVChores.SelectedRows.Count > 0 Then
+                Debug.WriteLine("A row is selected for update")
+            Else
+                MessageBox.Show("Please select a Chore to update.", "update Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                Debug.WriteLine("No row selected, exiting Button Update")
+            End If
+
+            Debug.WriteLine("Exiting Button Update")
+            Dim Title As String = TxtTitle.Text
+            Dim AssignedTo As String = CmbASS.SelectedItem
+            Dim Priority As String = cmbpriority.SelectedItem
+            Dim Status As String = CMBstatus.SelectedItem
+            Dim Frequency As String = Cmbfre.SelectedItem
+            Dim DueDate As String = DateTimePicker1.Value
+            Dim Recurring As String = ComboBox1.SelectedItem
+            Dim Description As String = TxtDes.Text
+            Dim StartTime As String = DateTimePicker2.Value
+            Dim EndTime As String = DateTimePicker3.Value
+            Using conn As New OleDbConnection(connectionString)
+                conn.Open()
+                'Get the ID of the selected row (assuming your table has a primary key named "ID")  
+                Dim selectedRow As DataGridViewRow = DGVChores.SelectedRows(0)
+                Dim ID As Integer = Convert.ToInt32(selectedRow.Cells("ID").Value) ' Change "ID" to your primary key column name  
+
+                'Create an OleDbCommand to update the personnel data in the database         
+                Dim cmd As New OleDbCommand("UPDATE Chores SET [Title] = ?, [AssignedTo] = ?, [Priority] = ?, [Status] = ?, [Frequency] = ?, [DueDate] = ?, [Recurring]= ?, [Description] = ?, [StartTime] = ?, [EndTime] = ? WHERE [ID] = ?", conn)
+                'Set the parameter values from the UI controls  
+                cmd.Parameters.AddWithValue("@Title", TxtTitle.Text)
+                cmd.Parameters.AddWithValue("@AssignedTo", CmbASS.SelectedItem)
+                cmd.Parameters.AddWithValue("@Priority", cmbpriority.SelectedItem)
+                cmd.Parameters.AddWithValue("@Status", CMBstatus.SelectedItem)
+                cmd.Parameters.AddWithValue("@Frequency", Cmbfre.SelectedItem)
+                cmd.Parameters.AddWithValue("@DueDate", DateTimePicker1.Value)
+                cmd.Parameters.AddWithValue("@Recurring", ComboBox1.SelectedItem)
+                cmd.Parameters.AddWithValue("@Description", TxtDes.Text)
+                cmd.Parameters.AddWithValue("@StartTime", DateTimePicker2.Value)
+                cmd.Parameters.AddWithValue("@EndTime", DateTimePicker3.Value)
+                cmd.Parameters.AddWithValue("@ID", ID)
+                MsgBox("Chores Updated Successfuly!", vbInformation, "Update Confirmation")
+                cmd.ExecuteNonQuery()
+            End Using
+        Catch ex As FormatException
+            Debug.WriteLine($"Format Error in Button Update: {ex.Message}")
+            Debug.WriteLine($"Stack Trace: {ex.StackTrace}")
+            MessageBox.Show($"Error updating chores in database: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            MessageBox.Show("Error saving chores to database: " & ex.Message & vbNewLine & ex.StackTrace, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        Catch ex As Exception
+            Debug.WriteLine($"unexpected error Button Update: {ex.Message}")
+            Debug.WriteLine($"Stack Trace: {ex.StackTrace}")
+            MessageBox.Show($"Unexpected error: {ex.Message}", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            MessageBox.Show("Error saving chores to database: " & ex.Message & vbNewLine & ex.StackTrace, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
+        loadChoresFromDatabase()
+        Debug.WriteLine("exited button edit")
+        CheckPendingChores()
+    End Sub
+
     'DZOVHUYESA HAFHA
+
+
 End Class
