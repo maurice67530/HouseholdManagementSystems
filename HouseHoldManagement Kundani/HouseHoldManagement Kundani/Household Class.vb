@@ -114,6 +114,8 @@ Public Class Person
     Public Property Age As Integer
     Public Property Contact As Integer
     Public Property Photo As String
+    Public Property Dietary As String
+
 End Class
 Public Class FamilySchedule
     Public Property ScheduleID As String
