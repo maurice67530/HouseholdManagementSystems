@@ -57,6 +57,8 @@ Partial Class Household_Document
         Me.WebBrowser1 = New System.Windows.Forms.WebBrowser()
         Me.Button4 = New System.Windows.Forms.Button()
         Me.StatusLabel = New System.Windows.Forms.Label()
+        Me.ComboBox4 = New System.Windows.Forms.ComboBox()
+        Me.Label11 = New System.Windows.Forms.Label()
         Me.Panel2.SuspendLayout()
         Me.Panel1.SuspendLayout()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -66,6 +68,8 @@ Partial Class Household_Document
         'Panel2
         '
         Me.Panel2.BackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.Panel2.Controls.Add(Me.Label11)
+        Me.Panel2.Controls.Add(Me.ComboBox4)
         Me.Panel2.Controls.Add(Me.ComboBox3)
         Me.Panel2.Controls.Add(Me.TextBox1)
         Me.Panel2.Controls.Add(Me.Label8)
@@ -311,9 +315,10 @@ Partial Class Household_Document
         '
         'PictureBoxPreview
         '
-        Me.PictureBoxPreview.Location = New System.Drawing.Point(305, 184)
+        Me.PictureBoxPreview.Image = CType(resources.GetObject("PictureBoxPreview.Image"), System.Drawing.Image)
+        Me.PictureBoxPreview.Location = New System.Drawing.Point(305, 181)
         Me.PictureBoxPreview.Name = "PictureBoxPreview"
-        Me.PictureBoxPreview.Size = New System.Drawing.Size(213, 91)
+        Me.PictureBoxPreview.Size = New System.Drawing.Size(213, 103)
         Me.PictureBoxPreview.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
         Me.PictureBoxPreview.TabIndex = 38
         Me.PictureBoxPreview.TabStop = False
@@ -343,6 +348,23 @@ Partial Class Household_Document
         Me.StatusLabel.Name = "StatusLabel"
         Me.StatusLabel.Size = New System.Drawing.Size(0, 13)
         Me.StatusLabel.TabIndex = 41
+        '
+        'ComboBox4
+        '
+        Me.ComboBox4.FormattingEnabled = True
+        Me.ComboBox4.Location = New System.Drawing.Point(84, 183)
+        Me.ComboBox4.Name = "ComboBox4"
+        Me.ComboBox4.Size = New System.Drawing.Size(205, 21)
+        Me.ComboBox4.TabIndex = 42
+        '
+        'Label11
+        '
+        Me.Label11.AutoSize = True
+        Me.Label11.Location = New System.Drawing.Point(3, 191)
+        Me.Label11.Name = "Label11"
+        Me.Label11.Size = New System.Drawing.Size(61, 13)
+        Me.Label11.TabIndex = 43
+        Me.Label11.Text = "BelongsTo:"
         '
         'Household_Document
         '
@@ -408,4 +430,6 @@ Partial Class Household_Document
     Friend WithEvents WebBrowser1 As WebBrowser
     Friend WithEvents Button4 As Button
     Friend WithEvents StatusLabel As Label
+    Friend WithEvents ComboBox4 As ComboBox
+    Friend WithEvents Label11 As Label
 End Class

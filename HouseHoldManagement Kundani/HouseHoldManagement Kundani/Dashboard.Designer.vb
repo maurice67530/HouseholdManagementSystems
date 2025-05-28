@@ -23,12 +23,12 @@ Partial Class Dashboard
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim ChartArea1 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
-        Dim Legend1 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
-        Dim Series1 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
-        Dim ChartArea2 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
-        Dim Legend2 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
-        Dim Series2 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
+        Dim ChartArea3 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
+        Dim Legend3 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
+        Dim Series3 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
+        Dim ChartArea4 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
+        Dim Legend4 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
+        Dim Series4 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Dashboard))
         Me.Label7 = New System.Windows.Forms.Label()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
@@ -112,6 +112,8 @@ Partial Class Dashboard
         Me.Label35 = New System.Windows.Forms.Label()
         Me.ListBox3 = New System.Windows.Forms.ListBox()
         Me.Label38 = New System.Windows.Forms.Label()
+        Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
+        Me.SettingsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.GroupBox1.SuspendLayout()
         Me.Panel2.SuspendLayout()
         Me.Panel1.SuspendLayout()
@@ -121,6 +123,7 @@ Partial Class Dashboard
         Me.Panel5.SuspendLayout()
         Me.Panel6.SuspendLayout()
         Me.Panel7.SuspendLayout()
+        Me.MenuStrip1.SuspendLayout()
         Me.SuspendLayout()
         '
         'Label7
@@ -253,7 +256,7 @@ Partial Class Dashboard
         Me.Panel2.Controls.Add(Me.Label6)
         Me.Panel2.Controls.Add(Me.Label8)
         Me.Panel2.Controls.Add(Me.Label14)
-        Me.Panel2.Location = New System.Drawing.Point(441, 115)
+        Me.Panel2.Location = New System.Drawing.Point(435, 134)
         Me.Panel2.Name = "Panel2"
         Me.Panel2.Size = New System.Drawing.Size(211, 140)
         Me.Panel2.TabIndex = 92
@@ -310,7 +313,7 @@ Partial Class Dashboard
         '
         'Panel4
         '
-        Me.Panel4.Location = New System.Drawing.Point(602, 256)
+        Me.Panel4.Location = New System.Drawing.Point(596, 275)
         Me.Panel4.Name = "Panel4"
         Me.Panel4.Size = New System.Drawing.Size(41, 15)
         Me.Panel4.TabIndex = 0
@@ -319,7 +322,7 @@ Partial Class Dashboard
         '
         Me.Label13.AutoSize = True
         Me.Label13.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label13.Location = New System.Drawing.Point(441, 256)
+        Me.Label13.Location = New System.Drawing.Point(435, 275)
         Me.Label13.Name = "Label13"
         Me.Label13.Size = New System.Drawing.Size(59, 15)
         Me.Label13.TabIndex = 88
@@ -345,7 +348,7 @@ Partial Class Dashboard
         Me.Panel1.Controls.Add(Me.TextBox3)
         Me.Panel1.Controls.Add(Me.Label17)
         Me.Panel1.Controls.Add(Me.TextBox2)
-        Me.Panel1.Location = New System.Drawing.Point(12, 8)
+        Me.Panel1.Location = New System.Drawing.Point(6, 27)
         Me.Panel1.Name = "Panel1"
         Me.Panel1.Size = New System.Drawing.Size(1419, 94)
         Me.Panel1.TabIndex = 109
@@ -506,7 +509,7 @@ Partial Class Dashboard
         '
         'FlowLayoutPanel2
         '
-        Me.FlowLayoutPanel2.Location = New System.Drawing.Point(833, 279)
+        Me.FlowLayoutPanel2.Location = New System.Drawing.Point(827, 298)
         Me.FlowLayoutPanel2.Name = "FlowLayoutPanel2"
         Me.FlowLayoutPanel2.Size = New System.Drawing.Size(365, 260)
         Me.FlowLayoutPanel2.TabIndex = 107
@@ -515,40 +518,40 @@ Partial Class Dashboard
         '
         Me.FlowLayoutPanel1.BackColor = System.Drawing.SystemColors.GradientInactiveCaption
         Me.FlowLayoutPanel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        Me.FlowLayoutPanel1.Location = New System.Drawing.Point(649, 571)
+        Me.FlowLayoutPanel1.Location = New System.Drawing.Point(643, 590)
         Me.FlowLayoutPanel1.Name = "FlowLayoutPanel1"
         Me.FlowLayoutPanel1.Size = New System.Drawing.Size(193, 264)
         Me.FlowLayoutPanel1.TabIndex = 104
         '
         'Chart2
         '
-        ChartArea1.Name = "ChartArea1"
-        Me.Chart2.ChartAreas.Add(ChartArea1)
-        Legend1.Name = "Legend1"
-        Me.Chart2.Legends.Add(Legend1)
-        Me.Chart2.Location = New System.Drawing.Point(441, 277)
+        ChartArea3.Name = "ChartArea1"
+        Me.Chart2.ChartAreas.Add(ChartArea3)
+        Legend3.Name = "Legend1"
+        Me.Chart2.Legends.Add(Legend3)
+        Me.Chart2.Location = New System.Drawing.Point(435, 296)
         Me.Chart2.Name = "Chart2"
-        Series1.ChartArea = "ChartArea1"
-        Series1.Legend = "Legend1"
-        Series1.Name = "Expense"
-        Me.Chart2.Series.Add(Series1)
+        Series3.ChartArea = "ChartArea1"
+        Series3.Legend = "Legend1"
+        Series3.Name = "Expense"
+        Me.Chart2.Series.Add(Series3)
         Me.Chart2.Size = New System.Drawing.Size(387, 262)
         Me.Chart2.TabIndex = 103
         Me.Chart2.Text = "Chart2"
         '
         'Chart1
         '
-        ChartArea2.Name = "ChartArea1"
-        Me.Chart1.ChartAreas.Add(ChartArea2)
-        Legend2.Name = "Legend1"
-        Me.Chart1.Legends.Add(Legend2)
-        Me.Chart1.Location = New System.Drawing.Point(848, 571)
+        ChartArea4.Name = "ChartArea1"
+        Me.Chart1.ChartAreas.Add(ChartArea4)
+        Legend4.Name = "Legend1"
+        Me.Chart1.Legends.Add(Legend4)
+        Me.Chart1.Location = New System.Drawing.Point(842, 590)
         Me.Chart1.Name = "Chart1"
-        Series2.ChartArea = "ChartArea1"
-        Series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Pie
-        Series2.Legend = "Legend1"
-        Series2.Name = "Expense"
-        Me.Chart1.Series.Add(Series2)
+        Series4.ChartArea = "ChartArea1"
+        Series4.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Pie
+        Series4.Legend = "Legend1"
+        Series4.Name = "Expense"
+        Me.Chart1.Series.Add(Series4)
         Me.Chart1.Size = New System.Drawing.Size(350, 264)
         Me.Chart1.TabIndex = 102
         Me.Chart1.Text = "Chart1"
@@ -700,7 +703,7 @@ Partial Class Dashboard
         Me.Panel3.Controls.Add(Me.Button11)
         Me.Panel3.Controls.Add(Me.Button13)
         Me.Panel3.Controls.Add(Me.Button7)
-        Me.Panel3.Location = New System.Drawing.Point(12, 115)
+        Me.Panel3.Location = New System.Drawing.Point(6, 134)
         Me.Panel3.Name = "Panel3"
         Me.Panel3.Size = New System.Drawing.Size(423, 353)
         Me.Panel3.TabIndex = 110
@@ -715,7 +718,7 @@ Partial Class Dashboard
         Me.Panel5.Controls.Add(Me.Button6)
         Me.Panel5.Controls.Add(Me.Button16)
         Me.Panel5.Controls.Add(Me.Button5)
-        Me.Panel5.Location = New System.Drawing.Point(12, 482)
+        Me.Panel5.Location = New System.Drawing.Point(6, 501)
         Me.Panel5.Name = "Panel5"
         Me.Panel5.Size = New System.Drawing.Size(423, 353)
         Me.Panel5.TabIndex = 0
@@ -757,7 +760,7 @@ Partial Class Dashboard
         '
         Me.Tasks.BackColor = System.Drawing.SystemColors.InactiveCaption
         Me.Tasks.FormattingEnabled = True
-        Me.Tasks.Location = New System.Drawing.Point(441, 571)
+        Me.Tasks.Location = New System.Drawing.Point(435, 590)
         Me.Tasks.Name = "Tasks"
         Me.Tasks.Size = New System.Drawing.Size(202, 264)
         Me.Tasks.TabIndex = 113
@@ -773,7 +776,7 @@ Partial Class Dashboard
         Me.Panel6.Controls.Add(Me.Label16)
         Me.Panel6.Controls.Add(Me.Label19)
         Me.Panel6.Controls.Add(Me.Label15)
-        Me.Panel6.Location = New System.Drawing.Point(658, 117)
+        Me.Panel6.Location = New System.Drawing.Point(652, 136)
         Me.Panel6.Name = "Panel6"
         Me.Panel6.Size = New System.Drawing.Size(540, 140)
         Me.Panel6.TabIndex = 116
@@ -824,7 +827,7 @@ Partial Class Dashboard
         '
         Me.Label25.AutoSize = True
         Me.Label25.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label25.Location = New System.Drawing.Point(501, 555)
+        Me.Label25.Location = New System.Drawing.Point(495, 574)
         Me.Label25.Name = "Label25"
         Me.Label25.Size = New System.Drawing.Size(51, 16)
         Me.Label25.TabIndex = 117
@@ -834,7 +837,7 @@ Partial Class Dashboard
         '
         Me.Label26.AutoSize = True
         Me.Label26.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label26.Location = New System.Drawing.Point(715, 555)
+        Me.Label26.Location = New System.Drawing.Point(709, 574)
         Me.Label26.Name = "Label26"
         Me.Label26.Size = New System.Drawing.Size(77, 16)
         Me.Label26.TabIndex = 118
@@ -844,7 +847,7 @@ Partial Class Dashboard
         '
         Me.Label27.AutoSize = True
         Me.Label27.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label27.Location = New System.Drawing.Point(970, 261)
+        Me.Label27.Location = New System.Drawing.Point(964, 280)
         Me.Label27.Name = "Label27"
         Me.Label27.Size = New System.Drawing.Size(109, 16)
         Me.Label27.TabIndex = 119
@@ -854,7 +857,7 @@ Partial Class Dashboard
         '
         Me.FlowLayoutPanel3.BackColor = System.Drawing.SystemColors.GradientInactiveCaption
         Me.FlowLayoutPanel3.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        Me.FlowLayoutPanel3.Location = New System.Drawing.Point(1204, 279)
+        Me.FlowLayoutPanel3.Location = New System.Drawing.Point(1198, 298)
         Me.FlowLayoutPanel3.Name = "FlowLayoutPanel3"
         Me.FlowLayoutPanel3.Size = New System.Drawing.Size(227, 170)
         Me.FlowLayoutPanel3.TabIndex = 120
@@ -892,7 +895,7 @@ Partial Class Dashboard
         'ListBox1
         '
         Me.ListBox1.FormattingEnabled = True
-        Me.ListBox1.Location = New System.Drawing.Point(1204, 727)
+        Me.ListBox1.Location = New System.Drawing.Point(1198, 746)
         Me.ListBox1.Name = "ListBox1"
         Me.ListBox1.Size = New System.Drawing.Size(227, 108)
         Me.ListBox1.TabIndex = 0
@@ -900,7 +903,7 @@ Partial Class Dashboard
         'ListBox2
         '
         Me.ListBox2.FormattingEnabled = True
-        Me.ListBox2.Location = New System.Drawing.Point(1204, 571)
+        Me.ListBox2.Location = New System.Drawing.Point(1198, 590)
         Me.ListBox2.Name = "ListBox2"
         Me.ListBox2.Size = New System.Drawing.Size(227, 121)
         Me.ListBox2.TabIndex = 121
@@ -913,7 +916,7 @@ Partial Class Dashboard
         Me.Panel7.Controls.Add(Me.Label30)
         Me.Panel7.Controls.Add(Me.Label32)
         Me.Panel7.Controls.Add(Me.Label31)
-        Me.Panel7.Location = New System.Drawing.Point(1204, 120)
+        Me.Panel7.Location = New System.Drawing.Point(1198, 139)
         Me.Panel7.Name = "Panel7"
         Me.Panel7.Size = New System.Drawing.Size(227, 135)
         Me.Panel7.TabIndex = 122
@@ -932,7 +935,7 @@ Partial Class Dashboard
         '
         Me.Label33.AutoSize = True
         Me.Label33.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label33.Location = New System.Drawing.Point(1201, 553)
+        Me.Label33.Location = New System.Drawing.Point(1195, 572)
         Me.Label33.Name = "Label33"
         Me.Label33.Size = New System.Drawing.Size(135, 15)
         Me.Label33.TabIndex = 124
@@ -942,7 +945,7 @@ Partial Class Dashboard
         '
         Me.Label34.AutoSize = True
         Me.Label34.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label34.Location = New System.Drawing.Point(1201, 698)
+        Me.Label34.Location = New System.Drawing.Point(1195, 717)
         Me.Label34.Name = "Label34"
         Me.Label34.Size = New System.Drawing.Size(190, 15)
         Me.Label34.TabIndex = 125
@@ -952,7 +955,7 @@ Partial Class Dashboard
         '
         Me.Label35.AutoSize = True
         Me.Label35.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label35.Location = New System.Drawing.Point(1204, 261)
+        Me.Label35.Location = New System.Drawing.Point(1198, 280)
         Me.Label35.Name = "Label35"
         Me.Label35.Size = New System.Drawing.Size(185, 15)
         Me.Label35.TabIndex = 126
@@ -961,7 +964,7 @@ Partial Class Dashboard
         'ListBox3
         '
         Me.ListBox3.FormattingEnabled = True
-        Me.ListBox3.Location = New System.Drawing.Point(1207, 470)
+        Me.ListBox3.Location = New System.Drawing.Point(1201, 489)
         Me.ListBox3.Name = "ListBox3"
         Me.ListBox3.ScrollAlwaysVisible = True
         Me.ListBox3.SelectionMode = System.Windows.Forms.SelectionMode.None
@@ -972,17 +975,36 @@ Partial Class Dashboard
         '
         Me.Label38.AutoSize = True
         Me.Label38.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label38.Location = New System.Drawing.Point(1204, 452)
+        Me.Label38.Location = New System.Drawing.Point(1198, 471)
         Me.Label38.Name = "Label38"
         Me.Label38.Size = New System.Drawing.Size(172, 15)
         Me.Label38.TabIndex = 128
         Me.Label38.Text = "Recently Added Groceries"
         '
+        'MenuStrip1
+        '
+        Me.MenuStrip1.BackColor = System.Drawing.Color.Transparent
+        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.SettingsToolStripMenuItem})
+        Me.MenuStrip1.Location = New System.Drawing.Point(0, 0)
+        Me.MenuStrip1.Name = "MenuStrip1"
+        Me.MenuStrip1.Size = New System.Drawing.Size(1284, 24)
+        Me.MenuStrip1.Stretch = False
+        Me.MenuStrip1.TabIndex = 129
+        Me.MenuStrip1.Text = "MenuStrip1"
+        '
+        'SettingsToolStripMenuItem
+        '
+        Me.SettingsToolStripMenuItem.ForeColor = System.Drawing.SystemColors.ControlText
+        Me.SettingsToolStripMenuItem.Image = CType(resources.GetObject("SettingsToolStripMenuItem.Image"), System.Drawing.Image)
+        Me.SettingsToolStripMenuItem.Name = "SettingsToolStripMenuItem"
+        Me.SettingsToolStripMenuItem.Size = New System.Drawing.Size(77, 20)
+        Me.SettingsToolStripMenuItem.Text = "Settings"
+        '
         'Dashboard
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1437, 854)
+        Me.ClientSize = New System.Drawing.Size(1284, 881)
         Me.Controls.Add(Me.Label38)
         Me.Controls.Add(Me.ListBox3)
         Me.Controls.Add(Me.Label35)
@@ -1017,6 +1039,8 @@ Partial Class Dashboard
         Me.Controls.Add(Me.Label4)
         Me.Controls.Add(Me.Label3)
         Me.Controls.Add(Me.Label2)
+        Me.Controls.Add(Me.MenuStrip1)
+        Me.MainMenuStrip = Me.MenuStrip1
         Me.Name = "Dashboard"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Dashboard"
@@ -1033,6 +1057,8 @@ Partial Class Dashboard
         Me.Panel6.PerformLayout()
         Me.Panel7.ResumeLayout(False)
         Me.Panel7.PerformLayout()
+        Me.MenuStrip1.ResumeLayout(False)
+        Me.MenuStrip1.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -1120,4 +1146,6 @@ Partial Class Dashboard
     Friend WithEvents ListBox3 As ListBox
     Friend WithEvents Label38 As Label
     Friend WithEvents Label39 As Label
+    Friend WithEvents MenuStrip1 As MenuStrip
+    Friend WithEvents SettingsToolStripMenuItem As ToolStripMenuItem
 End Class

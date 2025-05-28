@@ -18,7 +18,7 @@ End Class
 
 Public Class Logging
     ' Properties of the Login class
-    Public Property Username As String
+    Public Property username As String
     Public Property Password As Integer
 
 End Class
@@ -114,6 +114,8 @@ Public Class Person
     Public Property Age As Integer
     Public Property Contact As Integer
     Public Property Photo As String
+    Public Property Dietary As String
+
 End Class
 Public Class FamilySchedule
     Public Property ScheduleID As String
