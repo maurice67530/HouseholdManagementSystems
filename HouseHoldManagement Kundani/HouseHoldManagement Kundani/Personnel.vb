@@ -196,6 +196,8 @@ Public Class Personnel
                 Dim Age As String = TextBox5.Text
                 Dim PostalCode As String = TextBox6.Text
                 Dim MaritalStatus As String = ComboBox2.SelectedItem.ToString
+                Dim DateOfBirth As String = DateTimePicker1.Value
+
                 Dim Photo As String = TextBox7.Text
                 Dim Dietary As String = ComboBox4.SelectedItem.ToString
                 ' Get the ID of the selected row (assuming your table has a primary key named "ID")  
@@ -217,7 +219,7 @@ Public Class Personnel
                 cmd.Parameters.AddWithValue("MaritalStatus", MaritalStatus)
                 cmd.Parameters.AddWithValue("Photo", Photo)
                 cmd.Parameters.AddWithValue("Dietary", Dietary)
-
+                cmd.Parameters.AddWithValue(" DateOfBirth", DateOfBirth)
                 cmd.Parameters.AddWithValue("ID", ID)
 
                 ' Execute the SQL command to update the data
