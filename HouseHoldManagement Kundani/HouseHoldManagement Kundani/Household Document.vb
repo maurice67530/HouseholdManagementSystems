@@ -45,7 +45,7 @@ Public Class Household_Document
                 cmd.Parameters.AddWithValue("?", TextBox2.Text)
                 cmd.Parameters.AddWithValue("?", ComboBox1.Text)
                 cmd.Parameters.AddWithValue("?", destinationPath) ' Save full UNC path
-                cmd.Parameters.AddWithValue("?", Environment.UserName)
+                cmd.Parameters.AddWithValue("?", ComboBox3.Text)
                 cmd.Parameters.AddWithValue("?", DateTime.Now)
                 cmd.ExecuteNonQuery()
             End Using
@@ -61,14 +61,14 @@ Public Class Household_Document
             Debug.WriteLine("populate combobox successful")
             'open the database connection
             conn.Open()
-            'retrieve the firstname and surname columns from the personaldetails tabel
-            Dim query As String = "SELECT FirstName, LastName FROM PersonalDetails"
+            'retrieve the firstname and surname columns from the Login tabel
+            Dim query As String = "SELECT userName FROM Login"
             Dim cmd As New OleDbCommand(query, conn)
             Dim reader As OleDbDataReader = cmd.ExecuteReader()
             'bind the retrieved data to the combobox
             ComboBox3.Items.Clear()
             While reader.Read()
-                ComboBox3.Items.Add($"{reader("FirstName")} {reader("LastName")}")
+                ComboBox3.Items.Add($"{reader("userName")}")
             End While
             'close the database
             reader.Close()
@@ -486,19 +486,11 @@ Public Class Household_Document
         End Using
     End Sub
 
-    Private Sub Panel1_Paint(sender As Object, e As PaintEventArgs) Handles Panel1.Paint
-
-    End Sub
-
-    Private Sub Label1_Click(sender As Object, e As EventArgs) Handles Label1.Click
-
-    End Sub
-
     Private Sub DataGridView1_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridView1.CellContentClick
 
     End Sub
 
-    Private Sub DataGridView1_DataBindingComplete(sender As Object, e As DataGridViewBindingCompleteEventArgs) Handles DataGridView1.DataBindingComplete
+    Private Sub DataGridView1_CellMouseMove(sender As Object, e As DataGridViewCellMouseEventArgs) Handles DataGridView1.CellMouseMove
         HighlightRowsByCategory()
     End Sub
 End Class
