@@ -388,7 +388,8 @@ Public Class Personnel
         '    File.Copy(sourcePath, destinationPath, True) ' Overwrite if exists
         'End If
 
-        If OpenFileDialog1.ShowDialog = DialogResult.OK Then
+
+        If OpenFileDialog1.ShowDialog() = DialogResult.OK Then
             Try
                 Dim selectedPath As String = OpenFileDialog1.FileName
                 Dim imageName As String = Path.GetFileName(selectedPath)
@@ -400,30 +401,25 @@ Public Class Personnel
                 Using conn As New OleDb.OleDbConnection(connectionString)
                     conn.Open()
 
-                    ' Check if the image is already saved
-                    'Using checkCmd As New OleDb.OleDbCommand("SELECT COUNT(*) FROM PersonalDetails WHERE FilePath = ?", conn)
-                    '    checkCmd.Parameters.AddWithValue("?", dbFilePath)
-                    '    Dim count As Integer = Convert.ToInt32(checkCmd.ExecuteScalar())
+                    ' (Your database code here if needed)
 
-                    'If count > 0 Then
-                    '    MsgBox("This image has already been uploaded.", vbInformation, "Information")
-                    '    Exit Sub
-                    'End If
                 End Using
 
-                    ' Create folder if it doesn't exist
-                    If Not Directory.Exists(Folderpath) Then
-                        Directory.CreateDirectory(Folderpath)
-                    End If
+                ' Create folder if it doesn't exist
+                If Not Directory.Exists(Folderpath) Then
+                    Directory.CreateDirectory(Folderpath)
+                End If
 
-                    ' Copy the image if it doesn't already exist at the destination
-                    If Not File.Exists(destinationPath) Then
-                        File.Copy(selectedPath, destinationPath, True)
-                    End If
-                'End Using
+                ' Copy the image if it doesn't already exist at the destination
+                If Not File.Exists(destinationPath) Then
+                    File.Copy(selectedPath, destinationPath, True)
+                End If
 
                 ' Load and display the image in PictureBox1
                 PictureBox1.Image = Image.FromFile(destinationPath)
+
+                ' Display the selected file path in TextBox7
+                TextBox7.Text = selectedPath
 
                 MessageBox.Show("Photo saved to database and network folder.")
             Catch ex As Exception
@@ -432,6 +428,8 @@ Public Class Personnel
         End If
 
     End Sub
+
+
 
     Private Sub BtnDailyTasks_Click(sender As Object, e As EventArgs) Handles BtnDailyTasks.Click
         chores.ShowDialog()
