@@ -357,34 +357,80 @@ Public Class Personnel
                 CType(ctrl, DateTimePicker).Value = DateTimePicker.MinimumDateTime ' or set to a specific date  
             End If
         Next
+
     End Sub
+    'Dim OpenFileDialog As New OpenFileDialog()
+    'OpenFileDialog.Filter = "Bitmaps (*.jpg)|*.jpg"
+    'If OpenFileDialog.ShowDialog() = DialogResult.OK Then
+    '    PictureBox1.ImageLocation = OpenFileDialog.FileName
+    '    TextBox7.Text = OpenFileDialog.FileName
+    'End If
     Private Sub BtnAddpicture_Click(sender As Object, e As EventArgs) Handles BtnAddpicture.Click
 
-        'Dim OpenFileDialog As New OpenFileDialog()
-        'OpenFileDialog.Filter = "Bitmaps (*.jpg)|*.jpg"
-        'If OpenFileDialog.ShowDialog() = DialogResult.OK Then
-        '    PictureBox1.ImageLocation = OpenFileDialog.FileName
-        '    TextBox7.Text = OpenFileDialog.FileName
+
+
+        'Dim ofd As New OpenFileDialog()
+        'ofd.Filter = "Documents|*.pdf;*.docx;*.xlsx;*.jpg;*.png|All files|*.*"
+
+        'If ofd.ShowDialog() = DialogResult.OK Then
+        '    Dim sourcePath As String = ofd.FileName
+        '    Dim fileName As String = IO.Path.GetFileName(sourcePath)
+
+        '    ' Define your network folder and category subfolder
+        '    Dim networkFolder As String = "\\KHODANIRAPHALAL\Users\Raphalalani\Source\Repos\maurice67530\HouseholdManagementSystems\Personnel Pictures" ' <-- Replace with your actual path
+        '    Dim categoryFolder As String = Path.Combine(networkFolder, ComboBox1.Text)
+
+        '    ' Ensure the category folder exists
+        '    Directory.CreateDirectory(categoryFolder)
+
+        '    ' Build destination path and copy file
+        '    Dim destinationPath As String = Path.Combine(categoryFolder, fileName)
+        '    File.Copy(sourcePath, destinationPath, True) ' Overwrite if exists
         'End If
 
-        Dim ofd As New OpenFileDialog()
-        ofd.Filter = "Documents|*.pdf;*.docx;*.xlsx;*.jpg;*.png|All files|*.*"
+        If OpenFileDialog1.ShowDialog = DialogResult.OK Then
+            Try
+                Dim selectedPath As String = OpenFileDialog1.FileName
+                Dim imageName As String = Path.GetFileName(selectedPath)
+                Dim destinationPath As String = Path.Combine(Folderpath, imageName)
 
-        If ofd.ShowDialog() = DialogResult.OK Then
-            Dim sourcePath As String = ofd.FileName
-            Dim fileName As String = IO.Path.GetFileName(sourcePath)
+                ' Save only the full UNC path to database for portability
+                Dim dbFilePath As String = destinationPath
 
-            ' Define your network folder and category subfolder
-            Dim networkFolder As String = "\\KHODANIRAPHALAL\Users\Raphalalani\Source\Repos\maurice67530\HouseholdManagementSystems\Personnel Pictures" ' <-- Replace with your actual path
-            Dim categoryFolder As String = Path.Combine(networkFolder, ComboBox1.Text)
+                Using conn As New OleDb.OleDbConnection(connectionString)
+                    conn.Open()
 
-            ' Ensure the category folder exists
-            Directory.CreateDirectory(categoryFolder)
+                    ' Check if the image is already saved
+                    'Using checkCmd As New OleDb.OleDbCommand("SELECT COUNT(*) FROM PersonalDetails WHERE FilePath = ?", conn)
+                    '    checkCmd.Parameters.AddWithValue("?", dbFilePath)
+                    '    Dim count As Integer = Convert.ToInt32(checkCmd.ExecuteScalar())
 
-            ' Build destination path and copy file
-            Dim destinationPath As String = Path.Combine(categoryFolder, fileName)
-            File.Copy(sourcePath, destinationPath, True) ' Overwrite if exists
+                    'If count > 0 Then
+                    '    MsgBox("This image has already been uploaded.", vbInformation, "Information")
+                    '    Exit Sub
+                    'End If
+                End Using
+
+                    ' Create folder if it doesn't exist
+                    If Not Directory.Exists(Folderpath) Then
+                        Directory.CreateDirectory(Folderpath)
+                    End If
+
+                    ' Copy the image if it doesn't already exist at the destination
+                    If Not File.Exists(destinationPath) Then
+                        File.Copy(selectedPath, destinationPath, True)
+                    End If
+                'End Using
+
+                ' Load and display the image in PictureBox1
+                PictureBox1.Image = Image.FromFile(destinationPath)
+
+                MessageBox.Show("Photo saved to database and network folder.")
+            Catch ex As Exception
+                MessageBox.Show("Error: " & ex.Message)
+            End Try
         End If
+
     End Sub
 
     Private Sub BtnDailyTasks_Click(sender As Object, e As EventArgs) Handles BtnDailyTasks.Click
@@ -422,4 +468,6 @@ Public Class Personnel
     Private Sub ListBox1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ListBox1.SelectedIndexChanged
 
     End Sub
+
+
 End Class
