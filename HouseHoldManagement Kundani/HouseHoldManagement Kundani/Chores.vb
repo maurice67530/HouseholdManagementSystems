@@ -5,6 +5,20 @@ Imports System.Linq
 Imports System.Windows.Forms
 Imports System.Net.Mail
 Public Class chores
+    ' ' Dictionary to store people and their chores
+    ' Dim choreAssignments As New Dictionary(Of String, List(Of String)) From {
+    '    {"Mulalo Ndou", New List(Of String) From {"u bikaa", "ukuvha", "ukhura", "ulima"}},
+    '    {"khodi Rasta", New List(Of String) From {"uu swiela", "u kuvha", "uka madi", "u sheledza"}},
+    '    {"Rolivhuwa Singo", New List(Of String) From {"u koropa"}}
+    '}
+
+
+    Dim choreAssignments As New Dictionary(Of String, List(Of String))
+    Dim connectionString As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=\\MUDAUMURANGI\Users\Murangi\Source\Repos\maurice67530\HouseholdManagementSystems\HMS.accdb"
+
+
+
+
     Private toolTip1 As New ToolTip()
     Public Property AssignedTo As String
     Public Property conn As New OleDbConnection(connectionString)
@@ -53,7 +67,7 @@ Public Class chores
         Finally
 
             PopulateComboboxFromDatabase(CmbASS)
-            loadChoresFromDatabase()
+            ' loadChoresFromDatabase()
             ' Close the database connection  
             conn.Close()
         End Try
@@ -67,6 +81,31 @@ Public Class chores
         'Timer1.Interval = 1000
         'Timer1.Enabled = True
 
+
+
+        LoadChoressFromDatabase()
+        ' Populate ComboBox with names
+        CmbASS.Items.AddRange(choreAssignments.Keys.ToArray())
+        If CmbASS.Items.Count > 0 Then
+            CmbASS.SelectedIndex = 0 ' Default selection
+        End If
+    End Sub
+    Private Sub LoadChoressFromDatabase()
+        choreAssignments.Clear()
+        Using conn As New OleDbConnection(connectionString)
+            Dim query As String = "SELECT Title, AssignedTo FROM Chores"
+            Dim cmd As New OleDbCommand(query, conn)
+            conn.Open()
+            Dim reader As OleDbDataReader = cmd.ExecuteReader()
+            While reader.Read()
+                Dim chore As String = reader("Title").ToString()
+                Dim person As String = reader("AssignedTo").ToString()
+                If Not choreAssignments.ContainsKey(person) Then
+                    choreAssignments(person) = New List(Of String)()
+                End If
+                choreAssignments(person).Add(chore)
+            End While
+        End Using
     End Sub
     Private Sub LinkLabel1_LinkClicked(sender As System.Object, e As System.Windows.Forms.LinkLabelLinkClickedEventArgs) Handles LinkLabel1.LinkClicked
         Expense.ShowDialog()
@@ -181,7 +220,7 @@ Public Class chores
 
             If DGVChores.SelectedRows.Count > 0 Then
                 Dim selectedRow As DataGridViewRow = DGVChores.SelectedRows(0)
-                Debug.WriteLine("row selected on dgv")
+                Debug.WriteLine("Row selected on dgv")
 
                 TxtTitle.Text = selectedRow.Cells("Title").Value.ToString()
                 CmbASS.SelectedItem = selectedRow.Cells("AssignedTo").Value.ToString()
@@ -194,7 +233,9 @@ Public Class chores
                 DateTimePicker2.Value = selectedRow.Cells("StartTime").Value.ToString()
                 DateTimePicker3.Value = selectedRow.Cells("EndTime").Value.ToString()
             End If
+
             Button1.Enabled = True
+
         Catch ex As Exception
             Debug.WriteLine("Data not selected: Error")
             Debug.WriteLine($"Stack Trace: {ex.StackTrace}")
@@ -207,7 +248,7 @@ Public Class chores
             'open the database connection
             conn.Open()
 
-            'retrieve the firstname and surname columns from the personaldetails tabel
+            'retrieve the firstname and surname columns from the personaldetails table
             Dim query As String = "SELECT FirstName, LastName FROM PersonalDetails"
             Dim cmd As New OleDbCommand(query, conn)
             Dim reader As OleDbDataReader = cmd.ExecuteReader()
@@ -448,7 +489,6 @@ Public Class chores
         End Using
     End Function
     Private Sub CheckRecurringChores()
-
         Using con As New OleDbConnection(connectionString)
             Dim query As String = "SELECT Title FROM Chores WHERE Frequency <> 'One-Time' AND Frequency IS NOT NULL"
 
@@ -506,17 +546,12 @@ Public Class chores
     End Sub
     Private Sub Button12_Click_1(sender As Object, e As EventArgs) Handles Button12.Click
         Dim choreID As Integer = GetSelectedChoreID()
-
         If choreID = 0 Then
-
             MsgBox("Please select a chore first.", MsgBoxStyle.Exclamation, "Selection Required")
-
             Return
-
         End If
 
         CompleteChore(choreID)
-
         ' Refresh DataGridView after updating
         loadChoresFromDatabase()
         CheckPendingChores()
@@ -533,7 +568,6 @@ Public Class chores
         Using conn As New OleDb.OleDbConnection(connString)
             Try
                 conn.Open()
-
                 ' Get chore details
                 Dim query As String = "SELECT Title, AssignedTo, Frequency, Recurring, DueDate FROM Chores WHERE ID = @ID"
                 Using cmd As New OleDb.OleDbCommand(query, conn)
@@ -620,7 +654,6 @@ Public Class chores
                 MsgBox("Error retrieving next available person: " & ex.Message, MsgBoxStyle.Critical, "Error")
             End Try
         End Using
-
         Return availablePerson
     End Function
     ' Calculate the next due date based on frequency (Daily, Weekly, Monthly)
@@ -660,7 +693,7 @@ Public Class chores
         Timer1.Start()
         'TextBox1.AppendText("Schedules started ." & vbCrLf)
         'Define a list of chores
-        Label13.Text = ($"chores checked  {DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")}" & vbCrLf)
+        Label13.Text = ($"Chores has been checked on the: {DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")}" & vbCrLf)
 
         'Check If any chores are due (Pending) for the selected frequency (daily, weekly, monthly)
         ' Dim selectedFrequency As String = ComboBox2.SelectedItem.ToString()
@@ -780,15 +813,19 @@ Public Class chores
             End Try
         End Using
     End Sub
-
     Private Sub Button13_Click(sender As Object, e As EventArgs) Handles Button13.Click
         CheckDailyChoreOverload()
     End Sub
     Private Sub cmbAssignedTo_SelectedIndexChanged(sender As Object, e As EventArgs) Handles CmbASS.SelectedIndexChanged
         Dim selectedPerson As String = CmbASS.SelectedItem.ToString()
         CheckTimeOverlapForPerson(selectedPerson)
+
+        ListBoxChores.Items.Clear()
+        Dim selectedPersons As String = CmbASS.SelectedItem.ToString()
+        If choreAssignments.ContainsKey(selectedPerson) Then
+            ListBoxChores.Items.AddRange(choreAssignments(selectedPerson).ToArray())
+        End If
     End Sub
-    ''maaano
     Private Sub CheckTimeOverlapForPerson(person As String)
         Dim conflictRows As New HashSet(Of Integer)
 
@@ -866,7 +903,6 @@ Public Class chores
             Button1.Visible = True
         End If
     End Sub
-
     Private Sub CheckDailyChoreOverload()
         Dim choreCounts As New Dictionary(Of String, Dictionary(Of Date, Integer))
 
@@ -928,17 +964,14 @@ Public Class chores
                                 End If
                             Next
                         End If
-                        ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+                        '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
                         MessageBox.Show($"{person} will now do 2 chores on {choreDate:d}. 1 chores has been scheduled to a new date",
                                     "Daily Chore Overload", MessageBoxButtons.OK, MessageBoxIcon.Information)
-                        '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+                        '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
                     Else
                         MessageBox.Show($"{person} will do 3+ chores on this day: {choreDate:d}.",
                                     "Daily Chore Overload", MessageBoxButtons.OK, MessageBoxIcon.Information)
                     End If
-
-
-
                 End If
             Next
         Next
@@ -958,7 +991,6 @@ Public Class chores
                 End If
             End If
         Next
-
         ' Sort the list by hour to make adjustments sequential
         personChores.Sort(Function(x, y) x.Item2.CompareTo(y.Item2))
 
@@ -983,7 +1015,6 @@ Public Class chores
             Dim endTime As DateTime = startTime.AddHours(1)
             DGVChores.Rows(index).Cells("EndTime").Value = endTime.ToString("HH:mm")
         Next
-
         SaveResolvedConflictsToDatabase()
         MessageBox.Show("Conflicts resolved successfully.", "Resolved", MessageBoxButtons.OK, MessageBoxIcon.Information)
     End Sub
@@ -998,13 +1029,12 @@ Public Class chores
                 cmd.Parameters.AddWithValue("@StartTime", DateTime.Parse(row.Cells("StartTime").Value.ToString()))
                 cmd.Parameters.AddWithValue("@EndTime", DateTime.Parse(row.Cells("EndTime").Value.ToString()))
                 cmd.Parameters.AddWithValue("@ID", Convert.ToInt32(row.Cells("ID").Value)) ' Assumes "ID" column exists
-
                 cmd.ExecuteNonQuery()
             Next
         End Using
     End Sub
-
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
+
         Try
             Debug.WriteLine("entering button update")
             If DGVChores.SelectedRows.Count = 0 Then
@@ -1012,6 +1042,7 @@ Public Class chores
                 Return
 
             End If
+
             If DGVChores.SelectedRows.Count > 0 Then
                 Debug.WriteLine("A row is selected for update")
             Else
@@ -1068,8 +1099,5 @@ Public Class chores
         Debug.WriteLine("exited button edit")
         CheckPendingChores()
     End Sub
-
     'DZOVHUYESA HAFHA
-
-
 End Class
