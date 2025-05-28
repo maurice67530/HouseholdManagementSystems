@@ -25,7 +25,7 @@ Public Class Inventory
         End Try
     End Sub
         Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
-            Try
+        Try
             Using conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
 
                 conn.Open()
@@ -50,16 +50,18 @@ Public Class Inventory
 
             End Using
         Catch ex As OleDbException
-                Debug.WriteLine($"Database error: {ex.Message}")
-                Debug.Write($"Stack Trace: {ex.StackTrace}")
-                MessageBox.Show("Error saving inventory to database: Please check the connectivity." & ex.Message & vbNewLine & ex.StackTrace, "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-            Catch ex As Exception
-                Debug.WriteLine($"General error: {ex.Message}")
+            Debug.WriteLine($"Database error: {ex.Message}")
+            Debug.Write($"Stack Trace: {ex.StackTrace}")
+            MessageBox.Show("Error saving inventory to database: Please check the connectivity." & ex.Message & vbNewLine & ex.StackTrace, "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        Catch ex As Exception
+            Debug.WriteLine($"General error: {ex.Message}")
 
-                MessageBox.Show("Unexpected Error: " & ex.Message & vbNewLine & ex.StackTrace, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-            Finally
-            End Try
-        End Sub
+            MessageBox.Show("Unexpected Error: " & ex.Message & vbNewLine & ex.StackTrace, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        Finally
+        End Try
+
+
+    End Sub
         Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
             Debug.WriteLine("Entering button update click")
             If DataGridView1.SelectedRows.Count = 0 Then
@@ -211,10 +213,10 @@ Public Class Inventory
                     ComboBox2.Text = selectedRow.Cells("Unit").Value.ToString()
                 End If
 
-                ' Enable/disable the buttons based on the selected person  
-                Button1.Enabled = False
+            ' Enable/disable the buttons based on the selected person  
+            Button1.Enabled = True
 
-            Catch ex As Exception
+        Catch ex As Exception
                 Debug.WriteLine("Data not selected: Error")
                 Debug.Write($"Stack Trace: {ex.StackTrace}")
             End Try
