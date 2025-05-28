@@ -62,6 +62,8 @@ Partial Class Personnel
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Label15 = New System.Windows.Forms.Label()
         Me.ComboBox4 = New System.Windows.Forms.ComboBox()
+        Me.ListBox1 = New System.Windows.Forms.ListBox()
+        Me.Label16 = New System.Windows.Forms.Label()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -237,9 +239,9 @@ Partial Class Personnel
         '
         Me.PictureBox1.BackColor = System.Drawing.SystemColors.ActiveCaption
         Me.PictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.PictureBox1.Location = New System.Drawing.Point(414, 84)
+        Me.PictureBox1.Location = New System.Drawing.Point(414, 82)
         Me.PictureBox1.Name = "PictureBox1"
-        Me.PictureBox1.Size = New System.Drawing.Size(327, 297)
+        Me.PictureBox1.Size = New System.Drawing.Size(278, 238)
         Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
         Me.PictureBox1.TabIndex = 141
         Me.PictureBox1.TabStop = False
@@ -259,9 +261,9 @@ Partial Class Personnel
         'DateTimePicker1
         '
         Me.DateTimePicker1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.DateTimePicker1.Location = New System.Drawing.Point(502, 395)
+        Me.DateTimePicker1.Location = New System.Drawing.Point(502, 400)
         Me.DateTimePicker1.Name = "DateTimePicker1"
-        Me.DateTimePicker1.Size = New System.Drawing.Size(239, 21)
+        Me.DateTimePicker1.Size = New System.Drawing.Size(190, 21)
         Me.DateTimePicker1.TabIndex = 139
         '
         'ComboBox3
@@ -420,7 +422,7 @@ Partial Class Personnel
         Me.Label3.AutoSize = True
         Me.Label3.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         Me.Label3.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label3.Location = New System.Drawing.Point(414, 399)
+        Me.Label3.Location = New System.Drawing.Point(414, 404)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(82, 17)
         Me.Label3.TabIndex = 123
@@ -468,11 +470,30 @@ Partial Class Personnel
         Me.ComboBox4.Size = New System.Drawing.Size(269, 21)
         Me.ComboBox4.TabIndex = 158
         '
+        'ListBox1
+        '
+        Me.ListBox1.FormattingEnabled = True
+        Me.ListBox1.Location = New System.Drawing.Point(502, 326)
+        Me.ListBox1.Name = "ListBox1"
+        Me.ListBox1.Size = New System.Drawing.Size(190, 56)
+        Me.ListBox1.TabIndex = 159
+        '
+        'Label16
+        '
+        Me.Label16.AutoSize = True
+        Me.Label16.Location = New System.Drawing.Point(422, 339)
+        Me.Label16.Name = "Label16"
+        Me.Label16.Size = New System.Drawing.Size(45, 13)
+        Me.Label16.TabIndex = 160
+        Me.Label16.Text = "Label16"
+        '
         'Personnel
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(762, 596)
+        Me.ClientSize = New System.Drawing.Size(768, 612)
+        Me.Controls.Add(Me.Label16)
+        Me.Controls.Add(Me.ListBox1)
         Me.Controls.Add(Me.ComboBox4)
         Me.Controls.Add(Me.Label15)
         Me.Controls.Add(Me.Button1)
@@ -560,4 +581,6 @@ Partial Class Personnel
     Friend WithEvents Label1 As Label
     Friend WithEvents Label15 As Label
     Friend WithEvents ComboBox4 As ComboBox
+    Friend WithEvents ListBox1 As ListBox
+    Friend WithEvents Label16 As Label
 End Class

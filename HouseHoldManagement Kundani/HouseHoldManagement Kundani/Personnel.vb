@@ -99,99 +99,7 @@ Public Class Personnel
             MessageBox.Show("Unexpected Error: " & ex.Message & vbNewLine & ex.StackTrace, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
 
         End Try
-        ''If OpenFileDialog1.ShowDialog = DialogResult.OK Then
-        'Try
-        'Dim selectedPath As String = OpenFileDialog1.FileName
-        'Dim imageName As String = Path.GetFileName(selectedPath)
-        'Dim destinationPath As String = Path.Combine(Folderpath, imageName)
 
-        '' Save only the full UNC path to database for portability
-        'Dim dbFilePath As String = destinationPath
-
-        'Using conn As New OleDb.OleDbConnection(connectionString)
-        '    conn.Open()
-
-        '    ' Check if the image is already saved
-        '    Using checkCmd As New OleDb.OleDbCommand("SELECT COUNT(*) FROM PersonalDetails WHERE FilePath = ?", conn)
-        '        checkCmd.Parameters.AddWithValue("?", dbFilePath)
-        '        Dim count As Integer = Convert.ToInt32(checkCmd.ExecuteScalar())
-
-        '        If count > 0 Then
-        '            MsgBox("This image has already been uploaded.", vbInformation, vbOKCancel)
-        '            Exit Sub
-        '        End If
-        '    End Using
-
-        ''    ' Only copy if not already existing in destination folder
-        ''    If Not Directory.Exists(Folderpath) Then
-        ''        Directory.CreateDirectory(Folderpath)
-        ''    End If
-
-        ''    ' Optional: Check file existence in destination folder too
-        ''    If Not File.Exists(destinationPath) Then
-        ''        File.Copy(selectedPath, destinationPath, True)
-        ''    End If
-
-        '' Save new record
-        ''Using cmd As New OleDb.OleDbCommand("INSERT INTO PersonalDetails ( FirstName, LastName, DateOfBirth, Gender, Contact, Email, Role, Age, PostalCode, MaritalStatus, Photo, Dietary ) VALUES ( ?, ?, ?, ?, ?, ?, ?, ? ,?, ?, ?, ?)", connec)
-
-        ''    Dim person As New Person
-
-        ''        'Assign Values 
-        'Person.FirstName = TextBox1.Text
-        '    person.LastName = TextBox2.Text
-        '    'person.DateOfBirth = DateTimePicker1.Value.ToString()
-        'person.Gender = ComboBox3.SelectedItem.ToString()
-        'person.Contact = TextBox3.Text
-        'person.Email = TextBox4.Text
-        'person.Role = ComboBox1.SelectedItem.ToString()
-        'person.Age = TextBox5.Text
-        'person.postalcode = TextBox6.Text
-        'person.MaritalStatus = ComboBox2.SelectedItem.ToString
-        'person.Photo = TextBox7.Text
-        'person.Dietary = ComboBox4.SelectedItem.ToString
-        ''For Each person As person In Personal
-        'cmd.Parameters.Clear()
-
-        ''cmd.Parameters.AddWithValue("?", dbFilePath) '
-        'cmd.Parameters.AddWithValue("@FirstName", person.FirstName)
-        'cmd.Parameters.AddWithValue("@LastName", person.LastName)
-        'cmd.Parameters.AddWithValue("@DateOfBirth", person.DateOfBirth)
-        'cmd.Parameters.AddWithValue("@Gender", person.Gender)
-        'cmd.Parameters.AddWithValue("@Contact", person.Contact)
-        'cmd.Parameters.AddWithValue("@Email", person.Email)
-        'cmd.Parameters.AddWithValue("@Role", person.Role)
-        'cmd.Parameters.AddWithValue("@Age", person.Age)
-        'cmd.Parameters.AddWithValue("@PostalCode", person.postalcode)
-        'cmd.Parameters.AddWithValue("@MaritalStatus", person.MaritalStatus)
-        'cmd.Parameters.AddWithValue("@Photo", person.Photo)
-        ''            cmd.Parameters.AddWithValue("@Dietary", person.Dietary)
-        '            cmd.ExecuteNonQuery()
-
-        '            MsgBox(" You are now added as a member of the HoseHold Managment System!" & vbCrLf &
-        '          "FirstName: " & person.FirstName & vbCrLf &
-        '                          "LastName: " & person.LastName & vbCrLf &
-        '                          "Birth of Date:" & person.DateOfBirth & vbCrLf &
-        '                          "Gender: " & person.Gender & vbCrLf &
-        '                          "Contact Number: " & person.Contact & vbCrLf &
-        '                          "Email: " & person.Email & vbCrLf &
-        '                          "Role: " & person.Role & vbCrLf &
-        '                          "Age: " & person.Age & vbCrLf &
-        '                          "Postal Code: " & person.postalcode & vbCrLf &
-        '                          "Photo: " & person.Photo & vbCrLf &
-        '                          "Dietary: " & person.Dietary & vbCrLf &
-        '                          "MaritalStatus: " & person.MaritalStatus & vbCrLf, vbInformation, "Credentials  confirmation")
-
-
-        '            MessageBox.Show("Photo saved to database and network folder.")
-
-        '        End Using
-        '    End Using
-
-        'Catch ex As Exception
-        '        MessageBox.Show("Error: " & ex.Message)
-        '    End Try
-        ''End If
         connec.Close()
         Debug.WriteLine("Exiting btnSubmit")
         'connec.Close()
@@ -504,6 +412,14 @@ Public Class Personnel
     End Sub
 
     Private Sub Label13_Click(sender As Object, e As EventArgs) Handles Label13.Click
+
+    End Sub
+
+    Private Sub PictureBox1_Click(sender As Object, e As EventArgs) Handles PictureBox1.Click
+
+    End Sub
+
+    Private Sub ListBox1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ListBox1.SelectedIndexChanged
 
     End Sub
 End Class
