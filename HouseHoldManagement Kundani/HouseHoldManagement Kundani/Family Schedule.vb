@@ -1033,14 +1033,6 @@ Public Class Family_Schedule
         Next
     End Sub
 
-    Private Sub Button1_Click_1(sender As Object, e As EventArgs) Handles Button1.Click
-        'LoadMealSchedule()
-        'LoadFamilySchedule()
-    End Sub
-
-
-
-
     Private adapter As OleDbDataAdapter
     Private dataTable As DataTable
 

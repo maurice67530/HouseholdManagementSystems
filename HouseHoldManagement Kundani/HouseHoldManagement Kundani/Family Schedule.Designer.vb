@@ -50,7 +50,6 @@ Partial Class Family_Schedule
         Me.btnUpdate = New System.Windows.Forms.Button()
         Me.btnDelete = New System.Windows.Forms.Button()
         Me.Panel3 = New System.Windows.Forms.Panel()
-        Me.Button1 = New System.Windows.Forms.Button()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel2.SuspendLayout()
         Me.Panel1.SuspendLayout()
@@ -291,21 +290,11 @@ Partial Class Family_Schedule
         Me.Panel3.Size = New System.Drawing.Size(643, 50)
         Me.Panel3.TabIndex = 23
         '
-        'Button1
-        '
-        Me.Button1.Location = New System.Drawing.Point(426, 498)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(75, 23)
-        Me.Button1.TabIndex = 24
-        Me.Button1.Text = "Button1"
-        Me.Button1.UseVisualStyleBackColor = True
-        '
         'Family_Schedule
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(673, 545)
-        Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.Panel3)
         Me.Controls.Add(Me.DataGridView1)
         Me.Controls.Add(Me.btnSave)
@@ -354,5 +343,4 @@ Partial Class Family_Schedule
     Friend WithEvents ListView1 As ListView
     Friend WithEvents ComboBox3 As ComboBox
     Friend WithEvents Panel3 As Panel
-    Friend WithEvents Button1 As Button
 End Class
