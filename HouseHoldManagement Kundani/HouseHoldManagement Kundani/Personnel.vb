@@ -133,11 +133,11 @@ Public Class Personnel
                     End If
 
                     ' Save new record
-                    Using cmd As New OleDb.OleDbCommand("INSERT INTO PersonalDetails ( FirstName, LastName, DateOfBirth, Gender, Contact, Email, Role, Age, PostalCode, MaritalStatus, Photo, Dietary ) VALUES ( ?, ?, ?, ?, ?, ?, ?, ? ,?, ?, ?, ?)", connec)
+                    Using cmd As New OleDb.OleDbCommand("INSERT INTO PersonalDetails ( FirstName, LastName, DateOfBirth, Gender, Contact, Email, Role, Age, PostalCode, MaritalStatus, Photo, Dietary ) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", connec)
 
                         Dim person As New Person
 
-                        '        'Assign Values 
+                        ' Assign Values
                         person.FirstName = TextBox1.Text
                         person.LastName = TextBox2.Text
                         person.DateOfBirth = DateTimePicker1.Value.ToString()
@@ -147,25 +147,28 @@ Public Class Personnel
                         person.Role = ComboBox1.SelectedItem.ToString()
                         person.Age = TextBox5.Text
                         person.postalcode = TextBox6.Text
-                        person.MaritalStatus = ComboBox2.SelectedItem.ToString
+                        person.MaritalStatus = ComboBox2.SelectedItem.ToString()
                         person.Photo = TextBox7.Text
-                        person.Dietary = ComboBox4.SelectedItem.ToString
-                        'For Each person As person In Personal
+                        person.Dietary = ComboBox4.SelectedItem.ToString()
+
+                        ' Clear previous parameters (if any)
                         cmd.Parameters.Clear()
 
+                        ' Add parameters in the exact order of the columns in the INSERT statement
                         cmd.Parameters.AddWithValue("?", dbFilePath) '
-                        cmd.Parameters.AddWithValue("@FirstName", Person.FirstName)
-                        cmd.Parameters.AddWithValue("@LastName", Person.LastName)
-                        cmd.Parameters.AddWithValue("@DateOfBirth", Person.DateOfBirth)
-                        cmd.Parameters.AddWithValue("@Gender", Person.Gender)
-                        cmd.Parameters.AddWithValue("@Contact", Person.Contact)
-                        cmd.Parameters.AddWithValue("@Email", Person.Email)
-                        cmd.Parameters.AddWithValue("@Role", Person.Role)
-                        cmd.Parameters.AddWithValue("@Age", Person.Age)
-                        cmd.Parameters.AddWithValue("@PostalCode", Person.postalcode)
-                        cmd.Parameters.AddWithValue("@MaritalStatus", Person.MaritalStatus)
-                        cmd.Parameters.AddWithValue("@Photo", Person.Photo)
-                        cmd.Parameters.AddWithValue("@Dietary", Person.Dietary)
+                        cmd.Parameters.AddWithValue("?", person.FirstName)
+                        cmd.Parameters.AddWithValue("?", person.LastName)
+                        cmd.Parameters.AddWithValue("?", person.DateOfBirth)
+                        cmd.Parameters.AddWithValue("?", person.Gender)
+                        cmd.Parameters.AddWithValue("?", person.Contact)
+                        cmd.Parameters.AddWithValue("?", person.Email)
+                        cmd.Parameters.AddWithValue("?", person.Role)
+                        cmd.Parameters.AddWithValue("?", person.Age)
+                        cmd.Parameters.AddWithValue("?", person.postalcode)
+                        cmd.Parameters.AddWithValue("?", person.MaritalStatus)
+                        cmd.Parameters.AddWithValue("?", person.Photo)
+                        cmd.Parameters.AddWithValue("?", person.Dietary)
+
                         cmd.ExecuteNonQuery()
 
                         MsgBox(" You are now added as a member of the HoseHold Managment System!" & vbCrLf &
