@@ -108,7 +108,7 @@ Public Class Personnel
         toolTip.ShowAlways = True
 
         toolTip1.SetToolTip(BtnBack, "Back")
-        toolTip1.SetToolTip(BtnAddpicture, "Add a Picture")
+        'toolTip1.SetToolTip(BtnAddpicture, "Add a Picture")
         toolTip1.SetToolTip(BtnEdit, "Edit")
         toolTip1.SetToolTip(BtnDelete, "Delete")
         toolTip1.SetToolTip(BtnClear, "Clear")
