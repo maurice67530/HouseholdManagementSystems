@@ -10,8 +10,6 @@ Public Class Settings
         TextBox8.Text = My.Settings.EmailFrom
         TextBox9.Text = My.Settings.Password
         TextBox10.Text = My.Settings.RecipientEmail
-        'SendEmail("Login Notification", "Welcome back, user!")
-        ' SendEmaill(recipient As String, subject As String, messageBody As String)
     End Sub
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click

@@ -124,6 +124,9 @@ Public Class FamilySchedule
     Public Property EndTime As String
     Public Property AssignedTo As String
     Public Property EventType As String
+    Public Property IsBudgetRequired As String
+    Public Property Amount As Integer
+
 End Class
 Public Class BudgetClass
     Public Property Person As String
