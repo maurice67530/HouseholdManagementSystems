@@ -11,6 +11,97 @@ Public Class Household_Document
     Public Property conn As New OleDbConnection(connectionString)
 
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
+        'If TextBox1.Text = "" OrElse TextBox2.Text = "" Then
+
+        '    MsgBox("Fill in the missing fields", MsgBoxStyle.Exclamation)
+
+        '    Exit Sub
+
+        'End If
+
+        'If ComboBox3.SelectedItem Is Nothing Then
+
+        '    MsgBox("Please select a personnel to assign this document to.", MsgBoxStyle.Exclamation)
+
+        '    Exit Sub
+
+        'End If
+
+        'Dim ofd As New OpenFileDialog()
+
+        'ofd.Filter = "Documents|*.pdf;*.docx;*.xlsx;*.jpg;*.png|All files|*.*"
+
+        'If ofd.ShowDialog() = DialogResult.OK Then
+
+        '    Dim sourcePath As String = ofd.FileName
+
+        '    Dim fileName As String = IO.Path.GetFileName(sourcePath)
+
+        '    Dim networkFolder As String = "\\MUDAUMURANGI\Users\Murangi\Source\Repos\maurice67530\HouseholdManagementSystems\House Hold Documents"
+
+        '    Dim categoryFolder As String = Path.Combine(networkFolder, ComboBox1.Text)
+
+        '    Directory.CreateDirectory(categoryFolder)
+
+        '    Dim destinationPath As String = Path.Combine(categoryFolder, fileName)
+
+        '    File.Copy(sourcePath, destinationPath, True)
+
+        '    ' Save document to HouseholdDocument table
+
+        '    Using conn As New OleDb.OleDbConnection(connectionString)
+
+        '        conn.Open()
+
+        '        ' Insert into HouseholdDocument
+
+        '        Dim docCmd As New OleDb.OleDbCommand("INSERT INTO HouseholdDocument (HouseholdID, Title, Notes, Category, FilePath, UploadedBy, UploadDate, BelongsTo) VALUES (?, ?, ?, ?, ?, ?, ?)", conn)
+
+        '        docCmd.Parameters.AddWithValue("?", 1) ' You can replace with actual household ID
+
+        '        docCmd.Parameters.AddWithValue("?", TextBox1.Text)
+
+        '        docCmd.Parameters.AddWithValue("?", TextBox2.Text)
+
+        '        docCmd.Parameters.AddWithValue("?", ComboBox1.Text)
+
+        '        docCmd.Parameters.AddWithValue("?", destinationPath)
+
+        '        docCmd.Parameters.AddWithValue("?", ComboBox3.Text) ' Who uploaded
+
+        '        docCmd.Parameters.AddWithValue("?", DateTime.Now)
+
+        '        docCmd.ExecuteNonQuery()
+
+        '        ' Get the last inserted ID (only works if ID is AutoNumber and no triggers)
+
+        '        Dim docIDCmd As New OleDb.OleDbCommand("SELECT @@IDENTITY", conn)
+
+        '        Dim lastDocID As Integer = CInt(docIDCmd.ExecuteScalar())
+
+        '        ' Insert into DocumentAssignments to link to personnel
+
+        '        Dim assignCmd As New OleDb.OleDbCommand("INSERT INTO HouseholdDocument (DocumentID, PersonnelID, Category, AssignedBy, DateAssigned) VALUES (?, ?, ?, ?, ?)", conn)
+
+        '        assignCmd.Parameters.AddWithValue("?", lastDocID)
+
+        '        assignCmd.Parameters.AddWithValue("?", CInt(ComboBox3.SelectedValue)) ' Personnel ID
+
+        '        assignCmd.Parameters.AddWithValue("?", ComboBox1.Text) ' Category
+
+        '        assignCmd.Parameters.AddWithValue("?", ComboBox3.Text) ' Who assigned it
+
+        '        assignCmd.Parameters.AddWithValue("?", DateTime.Now)
+
+        '        assignCmd.ExecuteNonQuery()
+
+        '    End Using
+
+        '    MessageBox.Show("Document uploaded and linked to personnel successfully.")
+
+        '    LoadDocuments()
+
+        'End If
 
 
         If TextBox1.Text = "" OrElse TextBox2.Text = "" Then
@@ -45,7 +136,7 @@ Public Class Household_Document
                 cmd.Parameters.AddWithValue("?", TextBox2.Text)
                 cmd.Parameters.AddWithValue("?", ComboBox1.Text)
                 cmd.Parameters.AddWithValue("?", destinationPath) ' Save full UNC path
-                cmd.Parameters.AddWithValue("?", Environment.UserName)
+                cmd.Parameters.AddWithValue("?", ComboBox3.Text)
                 cmd.Parameters.AddWithValue("?", DateTime.Now)
                 cmd.ExecuteNonQuery()
             End Using
@@ -54,8 +145,7 @@ Public Class Household_Document
             LoadDocuments()
         End If
     End Sub
-
-    Public Sub PopulateComboboxFromDatabase(ByRef comboBox As ComboBox)
+    Public Sub PopulateComboboxeFromDatabase(ByRef comboBox As ComboBox)
         Dim conn As New OleDbConnection(connectionString)
         Try
             Debug.WriteLine("populate combobox successful")
@@ -66,9 +156,38 @@ Public Class Household_Document
             Dim cmd As New OleDbCommand(query, conn)
             Dim reader As OleDbDataReader = cmd.ExecuteReader()
             'bind the retrieved data to the combobox
+            ComboBox4.Items.Clear()
+            While reader.Read()
+                ComboBox4.Items.Add($"{reader("FirstName")} {reader("LastName")}")
+            End While
+            'close the database
+            reader.Close()
+        Catch ex As Exception
+            'handle any exeptions that may occur  
+            Debug.WriteLine("failed to populate combobox")
+            Debug.WriteLine($"Stack Trace: {ex.StackTrace}")
+            MessageBox.Show($"Error: {ex.StackTrace}")
+        Finally
+            'close the database connection
+            If conn.State = ConnectionState.Open Then
+                conn.Close()
+            End If
+        End Try
+    End Sub
+    Public Sub PopulateComboboxFromDatabase(ByRef comboBox As ComboBox)
+        Dim conn As New OleDbConnection(connectionString)
+        Try
+            Debug.WriteLine("populate combobox successful")
+            'open the database connection
+            conn.Open()
+            'retrieve the firstname and surname columns from the Login tabel
+            Dim query As String = "SELECT userName FROM Login"
+            Dim cmd As New OleDbCommand(query, conn)
+            Dim reader As OleDbDataReader = cmd.ExecuteReader()
+            'bind the retrieved data to the combobox
             ComboBox3.Items.Clear()
             While reader.Read()
-                ComboBox3.Items.Add($"{reader("FirstName")} {reader("LastName")}")
+                ComboBox3.Items.Add($"{reader("userName")}")
             End While
             'close the database
             reader.Close()
@@ -130,49 +249,7 @@ Public Class Household_Document
 
     End Sub
 
-    'Private Sub LoadHouseholdDocument()
-    '    Try
-    '        Using conn As New OleDbConnection(connectionString)
-    '            Dim tablename As String = "HouseholdDocument"
-    '            Dim cmd As New OleDbCommand($"SELECT * FROM {tablename}", conn)
-    '            Dim da As New OleDbDataAdapter(cmd)
-    '            Dim dt As New DataTable()
-    '            da.Fill(dt)
-    '            DataGridView1.DataSource = dt
 
-    '            ' Apply color formatting based on Category column
-    '            For Each row As DataGridViewRow In DataGridView1.Rows
-    '                If Not row.IsNewRow Then
-    '                    Dim category As String = row.Cells("Category").Value.ToString().ToLower()
-    '                    Select Case category
-    '                        Case "bills"
-    '                            row.DefaultCellStyle.BackColor = Color.LightBlue
-    '                        Case "medical"
-    '                            row.DefaultCellStyle.BackColor = Color.LightPink
-    '                        Case "school"
-    '                            row.DefaultCellStyle.BackColor = Color.LightGreen
-    '                        Case "finance"
-    '                            row.DefaultCellStyle.BackColor = Color.Khaki
-    '                        Case "insurance"
-    '                            row.DefaultCellStyle.BackColor = Color.Orange
-    '                        Case "work"
-    '                            row.DefaultCellStyle.BackColor = Color.LightGray
-    '                        Case "mics", "misc", "miscellaneous"
-    '                            row.DefaultCellStyle.BackColor = Color.Plum
-    '                        Case Else
-    '                            row.DefaultCellStyle.BackColor = Color.White
-    '                    End Select
-    '                End If
-    '            Next
-
-    '        End Using
-
-    '    Catch ex As OleDbException
-    '        MessageBox.Show("Error Loading HouseholdDocument to database: " & ex.Message & vbNewLine & ex.StackTrace, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-    '    Catch ex As Exception
-    '        MessageBox.Show("Unexpected Error: " & ex.Message & vbNewLine & ex.StackTrace, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-    '    End Try
-    'End Sub
     Private Sub HighlightRowsByCategory()
         For Each row As DataGridViewRow In DataGridView1.Rows
             If Not row.IsNewRow Then
@@ -227,7 +304,7 @@ Public Class Household_Document
         'LoadHouseholdDocument()
         'LoadFilteredDocuments()
         LoadDocuments()
-
+        PopulateComboboxeFromDatabase(ComboBox4)
         'LoadhouseholddocumentDataFromDatabase()
         LoadHouseholdDocumentDatafromDatabase()
         PopulateComboboxFromDatabase(ComboBox3)
@@ -486,19 +563,11 @@ Public Class Household_Document
         End Using
     End Sub
 
-    Private Sub Panel1_Paint(sender As Object, e As PaintEventArgs) Handles Panel1.Paint
-
-    End Sub
-
-    Private Sub Label1_Click(sender As Object, e As EventArgs) Handles Label1.Click
-
-    End Sub
-
     Private Sub DataGridView1_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridView1.CellContentClick
 
     End Sub
 
-    Private Sub DataGridView1_DataBindingComplete(sender As Object, e As DataGridViewBindingCompleteEventArgs) Handles DataGridView1.DataBindingComplete
+    Private Sub DataGridView1_CellMouseMove(sender As Object, e As DataGridViewCellMouseEventArgs) Handles DataGridView1.CellMouseMove
         HighlightRowsByCategory()
     End Sub
 End Class

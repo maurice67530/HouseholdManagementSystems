@@ -1,27 +1,18 @@
 ﻿Imports System.IO
 Imports System.Data.OleDb
 Public Class Personnel
-    ' Connection to the database
-    'Dim conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
     Dim connec As New OleDbConnection(HouseHoldManagment_Module.connectionString)
 
     ' Create a ToolTip object
     Private toolTip As New ToolTip()
     Private toolTip1 As New ToolTip()
+
+
+    Public Folderpath As String = "\\MUDAUMURANGI\Users\Murangi\Source\Repos\maurice67530\HouseholdManagementSystems\Personnel Pictures"
+
+
+
     Private Sub BtnSave_Click(sender As Object, e As EventArgs) Handles BtnSave.Click
-        '' Get user input from TextBoxes
-        'FirstName = TextBox1.Text
-        'LastName = TextBox2.Text
-        'DateOfBirth = DateTimePicker1.Value
-        'Email = TextBox4.Text
-        'Contact = TextBox3.Text
-        'Age = TextBox5.Text
-        'Role = ComboBox1.SelectedItem.ToString
-        'PostalCode = TextBox6.Text
-        'Gender = ComboBox3.SelectedItem.ToString
-        'MaritalStatus = ComboBox2.SelectedItem.ToString
-
-
 
         Debug.WriteLine("Entering btnSubmit")
 
@@ -35,7 +26,7 @@ Public Class Personnel
                 'Dim tableName As String = "Personnel"
 
                 ' Create an OleDbCommand to insert the personnel data into the database  
-                Dim cmd As New OleDbCommand("INSERT INTO PersonalDetails ( FirstName, LastName, DateOfBirth, Gender, Contact, Email, Role, Age, PostalCode, MaritalStatus, Photo ) VALUES ( ?, ?, ?, ?, ?, ?, ?, ? ,?, ?, ?)", connec)
+                Dim cmd As New OleDbCommand("INSERT INTO PersonalDetails ( FirstName, LastName, DateOfBirth, Gender, Contact, Email, Role, Age, PostalCode, MaritalStatus, Photo, Dietary ) VALUES ( ?, ?, ?, ?, ?, ?, ?, ? ,?, ?, ?, ?)", connec)
 
                 ' Set the parameter values from the UI controls 
                 'Class declaretions
@@ -53,6 +44,7 @@ Public Class Personnel
                 person.postalcode = TextBox6.Text
                 person.MaritalStatus = ComboBox2.SelectedItem.ToString
                 person.Photo = TextBox7.Text
+                person.Dietary = ComboBox4.SelectedItem.ToString
                 'For Each person As person In Personal
                 cmd.Parameters.Clear()
 
@@ -68,7 +60,7 @@ Public Class Personnel
                 cmd.Parameters.AddWithValue("@PostalCode", person.postalcode)
                 cmd.Parameters.AddWithValue("@MaritalStatus", person.MaritalStatus)
                 cmd.Parameters.AddWithValue("@Photo", person.Photo)
-
+                cmd.Parameters.AddWithValue("@Dietary", person.Dietary)
 
                 'cmd.Parameters.AddWithValue("@PhysicalAddres", TextBox7.Text)
                 'cmd.Parameters.AddWithValue("@HealthStatus", person.HealthStatus)
@@ -84,6 +76,7 @@ Public Class Personnel
                       "Age: " & person.Age & vbCrLf &
                       "Postal Code: " & person.postalcode & vbCrLf &
                       "Photo: " & person.Photo & vbCrLf &
+                      "Dietary: " & person.Dietary & vbCrLf &
                       "Health Status: " & person.MaritalStatus & vbCrLf, vbInformation, "Credentials  confirmation")
 
                 MessageBox.Show("Personnel information saved to Database successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
@@ -106,6 +99,7 @@ Public Class Personnel
             MessageBox.Show("Unexpected Error: " & ex.Message & vbNewLine & ex.StackTrace, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
 
         End Try
+
         connec.Close()
         Debug.WriteLine("Exiting btnSubmit")
         'connec.Close()
@@ -170,7 +164,7 @@ Public Class Personnel
             TextBox7.Text = row.Cells("Photo").Value.ToString()
             PictureBox1.ImageLocation = row.Cells("Photo").Value.ToString()
             ComboBox2.SelectedItem = row.Cells("MaritalStatus").Value.ToString()
-            'TextBox7.Text = row.Cells("Deleter").Value.ToString()
+            ComboBox4.SelectedItem = row.Cells("Dietary").Value.ToString()
         End If
 
     End Sub
@@ -195,21 +189,21 @@ Public Class Personnel
 
                 Dim FirstName As String = TextBox1.Text
                 Dim LastName As String = TextBox2.Text
-                Dim Gender As String = ComboBox3.Text
+                Dim Gender As String = ComboBox3.SelectedItem.ToString
                 Dim Contact As String = TextBox3.Text
                 Dim Email As String = TextBox4.Text
-                Dim Role As String = ComboBox1.Text
+                Dim Role As String = ComboBox1.SelectedItem.ToString
                 Dim Age As String = TextBox5.Text
                 Dim PostalCode As String = TextBox6.Text
                 Dim MaritalStatus As String = ComboBox2.SelectedItem.ToString
                 Dim Photo As String = TextBox7.Text
-
+                Dim Dietary As String = ComboBox4.SelectedItem.ToString
                 ' Get the ID of the selected row (assuming your table has a primary key named "ID")  
                 Dim selectedRow As DataGridViewRow = DataGridView1.SelectedRows(0)
                 Dim ID As Integer = Convert.ToInt32(selectedRow.Cells("ID").Value) ' Change "ID" to your primary key column name  
 
                 ' Create an OleDbCommand to update the personnel data in the database  
-                Dim cmd As New OleDbCommand("UPDATE [PersonalDetails] SET [FirstName] = ?, [LastName] = ?, [Gender] = ?, [Contact] = ?, [Email] = ?, [Role] = ?, [Age] = ?, [PostalCode] = ?, [MaritalStatus] = ?, [Photo] = ? WHERE ID = ?", connec)
+                Dim cmd As New OleDbCommand("UPDATE [PersonalDetails] SET [FirstName] = ?, [LastName] = ?, [Gender] = ?, [Contact] = ?, [Email] = ?, [Role] = ?, [Age] = ?, [PostalCode] = ?, [MaritalStatus] = ?, [Photo] = ?, [Dietary] = ? WHERE ID = ?", connec)
 
                 ' Set the parameter values from the UI controls  
                 cmd.Parameters.AddWithValue("@FirstName", FirstName)
@@ -222,6 +216,8 @@ Public Class Personnel
                 cmd.Parameters.AddWithValue("@PostalCode", PostalCode)
                 cmd.Parameters.AddWithValue("MaritalStatus", MaritalStatus)
                 cmd.Parameters.AddWithValue("Photo", Photo)
+                cmd.Parameters.AddWithValue("Dietary", Dietary)
+
                 cmd.Parameters.AddWithValue("ID", ID)
 
                 ' Execute the SQL command to update the data
@@ -310,6 +306,8 @@ Public Class Personnel
                 TextBox7.Text = row.Cells("Photo").Value.ToString()
                 PictureBox1.ImageLocation = row.Cells("Photo").Value.ToString()
                 DateTimePicker1.Value = row.Cells("DateOfBirth").Value.ToString()
+                ComboBox4.SelectedItem = row.Cells("Dietary").Value.ToString()
+
             End If
         End If
     End Sub
@@ -336,6 +334,7 @@ Public Class Personnel
         ComboBox1.Text = ""
         ComboBox2.Text = ""
         ComboBox3.Text = ""
+        ComboBox4.Text = ""
     End Sub
     Public Sub ClearControls(ByVal FORM As Form)
         ' Clear TextBoxes  
@@ -358,24 +357,82 @@ Public Class Personnel
                 CType(ctrl, DateTimePicker).Value = DateTimePicker.MinimumDateTime ' or set to a specific date  
             End If
         Next
-    End Sub
-    Private Sub BtnAddpicture_Click(sender As Object, e As EventArgs) Handles BtnAddpicture.Click
-        'OpenFileDialog1.Filter = "Bitmaps (*.bmp)|*.bmp| (*.jpg)|*.jpg"
-        'If OpenFileDialog1.ShowDialog() = DialogResult.OK Then
-        '    PictureBox1.Image = System.Drawing.Image.FromFile(OpenFileDialog1.FileName)
-        '    TextBox7.Text = OpenFileDialog1.FileName
 
-        'End If
-        Dim OpenFileDialog As New OpenFileDialog()
-        OpenFileDialog.Filter = "Bitmaps (*.jpg)|*.jpg"
-        If OpenFileDialog.ShowDialog() = DialogResult.OK Then
-            PictureBox1.ImageLocation = OpenFileDialog.FileName
-            TextBox7.Text = OpenFileDialog.FileName
-        End If
     End Sub
+    'Dim OpenFileDialog As New OpenFileDialog()
+    'OpenFileDialog.Filter = "Bitmaps (*.jpg)|*.jpg"
+    'If OpenFileDialog.ShowDialog() = DialogResult.OK Then
+    '    PictureBox1.ImageLocation = OpenFileDialog.FileName
+    '    TextBox7.Text = OpenFileDialog.FileName
+    'End If
+    Private Sub BtnAddpicture_Click(sender As Object, e As EventArgs) Handles BtnAddpicture.Click
+
+
+
+        'Dim ofd As New OpenFileDialog()
+        'ofd.Filter = "Documents|*.pdf;*.docx;*.xlsx;*.jpg;*.png|All files|*.*"
+
+        'If ofd.ShowDialog() = DialogResult.OK Then
+        '    Dim sourcePath As String = ofd.FileName
+        '    Dim fileName As String = IO.Path.GetFileName(sourcePath)
+
+        '    ' Define your network folder and category subfolder
+        '    Dim networkFolder As String = "\\KHODANIRAPHALAL\Users\Raphalalani\Source\Repos\maurice67530\HouseholdManagementSystems\Personnel Pictures" ' <-- Replace with your actual path
+        '    Dim categoryFolder As String = Path.Combine(networkFolder, ComboBox1.Text)
+
+        '    ' Ensure the category folder exists
+        '    Directory.CreateDirectory(categoryFolder)
+
+        '    ' Build destination path and copy file
+        '    Dim destinationPath As String = Path.Combine(categoryFolder, fileName)
+        '    File.Copy(sourcePath, destinationPath, True) ' Overwrite if exists
+        'End If
+
+
+        If OpenFileDialog1.ShowDialog() = DialogResult.OK Then
+            Try
+                Dim selectedPath As String = OpenFileDialog1.FileName
+                Dim imageName As String = Path.GetFileName(selectedPath)
+                Dim destinationPath As String = Path.Combine(Folderpath, imageName)
+
+                ' Save only the full UNC path to database for portability
+                Dim dbFilePath As String = destinationPath
+
+                Using conn As New OleDb.OleDbConnection(connectionString)
+                    conn.Open()
+
+                    ' (Your database code here if needed)
+
+                End Using
+
+                ' Create folder if it doesn't exist
+                If Not Directory.Exists(Folderpath) Then
+                    Directory.CreateDirectory(Folderpath)
+                End If
+
+                ' Copy the image if it doesn't already exist at the destination
+                If Not File.Exists(destinationPath) Then
+                    File.Copy(selectedPath, destinationPath, True)
+                End If
+
+                ' Load and display the image in PictureBox1
+                PictureBox1.Image = Image.FromFile(destinationPath)
+
+                ' Display the selected file path in TextBox7
+                TextBox7.Text = selectedPath
+
+                MessageBox.Show("Photo saved to database and network folder.")
+            Catch ex As Exception
+                MessageBox.Show("Error: " & ex.Message)
+            End Try
+        End If
+
+    End Sub
+
+
 
     Private Sub BtnDailyTasks_Click(sender As Object, e As EventArgs) Handles BtnDailyTasks.Click
-        Chores.ShowDialog()
+        chores.ShowDialog()
     End Sub
 
     Private Sub BtnClear_Click(sender As Object, e As EventArgs) Handles BtnClear.Click
@@ -390,6 +447,7 @@ Public Class Personnel
         ComboBox2.Text = ""
         ComboBox3.Text = ""
         TextBox7.Text = ""
+        ComboBox4.Text = ""
         PictureBox1.ImageLocation = ""
     End Sub
 
@@ -400,4 +458,14 @@ Public Class Personnel
     Private Sub Label13_Click(sender As Object, e As EventArgs) Handles Label13.Click
 
     End Sub
+
+    Private Sub PictureBox1_Click(sender As Object, e As EventArgs) Handles PictureBox1.Click
+
+    End Sub
+
+    Private Sub ListBox1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ListBox1.SelectedIndexChanged
+
+    End Sub
+
+
 End Class
