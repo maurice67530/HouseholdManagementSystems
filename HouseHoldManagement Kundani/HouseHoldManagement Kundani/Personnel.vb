@@ -14,184 +14,83 @@ Public Class Personnel
 
     Private Sub BtnSave_Click(sender As Object, e As EventArgs) Handles BtnSave.Click
 
-        Debug.WriteLine("Entering btnSubmit")
+        If OpenFileDialog1.ShowDialog = DialogResult.OK Then
+            Try
+                Dim selectedPath As String = OpenFileDialog1.FileName
+                Dim imageName As String = Path.GetFileName(selectedPath)
+                Dim destinationPath As String = Path.Combine(Folderpath, imageName)
 
-        Try
-            Debug.WriteLine("User confirmed btnSubmit")
+                ' Save only the full UNC path to database for portability
+                Dim dbFilePath As String = destinationPath
 
-            Using connec As New OleDbConnection(HouseHoldManagment_Module.connectionString)
-                connec.Open()
+                Using conn As New OleDb.OleDbConnection(connectionString)
+                    conn.Open()
 
-                ' Update the table name if necessary  
-                'Dim tableName As String = "Personnel"
+                    ' Check if the image is already saved
+                    Using checkCmd As New OleDb.OleDbCommand("SELECT COUNT(*) FROM Photos WHERE FilePath = ?", conn)
+                        checkCmd.Parameters.AddWithValue("?", dbFilePath)
+                        Dim count As Integer = Convert.ToInt32(checkCmd.ExecuteScalar())
 
-                ' Create an OleDbCommand to insert the personnel data into the database  
-                Dim cmd As New OleDbCommand("INSERT INTO PersonalDetails ( FirstName, LastName, DateOfBirth, Gender, Contact, Email, Role, Age, PostalCode, MaritalStatus, Photo, Dietary ) VALUES ( ?, ?, ?, ?, ?, ?, ?, ? ,?, ?, ?, ?)", connec)
+                        If count > 0 Then
+                            MsgBox("This image has already been uploaded.", vbInformation, vbOKCancel)
+                            Exit Sub
+                        End If
+                    End Using
 
-                ' Set the parameter values from the UI controls 
-                'Class declaretions
-                Dim person As New Person
+                    ' Only copy if not already existing in destination folder
+                    If Not Directory.Exists(Folderpath) Then
+                        Directory.CreateDirectory(Folderpath)
+                    End If
 
-                'Assign Values 
-                person.FirstName = TextBox1.Text
-                person.LastName = TextBox2.Text
-                person.DateOfBirth = DateTimePicker1.Value.ToString()
-                person.Gender = ComboBox3.SelectedItem.ToString()
-                person.Contact = TextBox3.Text
-                person.Email = TextBox4.Text
-                person.Role = ComboBox1.SelectedItem.ToString()
-                person.Age = TextBox5.Text
-                person.postalcode = TextBox6.Text
-                person.MaritalStatus = ComboBox2.SelectedItem.ToString
-                person.Photo = TextBox7.Text
-                person.Dietary = ComboBox4.SelectedItem.ToString
-                'For Each person As person In Personal
-                cmd.Parameters.Clear()
+                    ' Optional: Check file existence in destination folder too
+                    If Not File.Exists(destinationPath) Then
+                        File.Copy(selectedPath, destinationPath, True)
+                    End If
 
-                'cmd.Parameters.AddWithValue("@ID",TextBox8)
-                cmd.Parameters.AddWithValue("@FirstName", person.FirstName)
-                cmd.Parameters.AddWithValue("@LastName", person.LastName)
-                cmd.Parameters.AddWithValue("@DateOfBirth", person.DateOfBirth)
-                cmd.Parameters.AddWithValue("@Gender", person.Gender)
-                cmd.Parameters.AddWithValue("@Contact", person.Contact)
-                cmd.Parameters.AddWithValue("@Email", person.Email)
-                cmd.Parameters.AddWithValue("@Role", person.Role)
-                cmd.Parameters.AddWithValue("@Age", person.Age)
-                cmd.Parameters.AddWithValue("@PostalCode", person.postalcode)
-                cmd.Parameters.AddWithValue("@MaritalStatus", person.MaritalStatus)
-                cmd.Parameters.AddWithValue("@Photo", person.Photo)
-                cmd.Parameters.AddWithValue("@Dietary", person.Dietary)
+                    ' Save new record
 
-                'cmd.Parameters.AddWithValue("@PhysicalAddres", TextBox7.Text)
-                'cmd.Parameters.AddWithValue("@HealthStatus", person.HealthStatus)
+                    Using cmd As New OleDb.OleDbCommand("INSERT INTO PersonalDetails ([Photo], [FirstName], [LastName], [DateOfBirth], [Gender], [Contact], [Email], [Role], [Age], [PostalCode], [MaritalStatus], [Dietary] ) VALUES ( ?, ?, ?, ?, ?, ?, ?, ? ,?, ?, ?, ?)", conn)
+                        Dim person As New Person
+                        cmd.Parameters.AddWithValue("?", dbFilePath)
 
-                MsgBox(" You are now added as a member of the HoseHold Managment System!" & vbCrLf &
-                      "FirstName: " & person.FirstName & vbCrLf &
-                      "LastName: " & person.LastName & vbCrLf &
-                      "Birth of Date:" & person.DateOfBirth & vbCrLf &
-                      "Gender: " & person.Gender & vbCrLf &
-                      "Contact Number: " & person.Contact & vbCrLf &
-                      "Email: " & person.Email & vbCrLf &
-                      "Role: " & person.Role & vbCrLf &
-                      "Age: " & person.Age & vbCrLf &
-                      "Postal Code: " & person.postalcode & vbCrLf &
-                      "Photo: " & person.Photo & vbCrLf &
-                      "Dietary: " & person.Dietary & vbCrLf &
-                      "Health Status: " & person.MaritalStatus & vbCrLf, vbInformation, "Credentials  confirmation")
-
-                MessageBox.Show("Personnel information saved to Database successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
-
-                ' Execute the SQL command to insert the data  
-                cmd.ExecuteNonQuery()
-                'Next
-
-            End Using
-        Catch ex As OleDbException
-            Debug.WriteLine($" Database error in Button_Click: {ex.Message}")
-            Debug.WriteLine($"Stack Trace : {ex.StackTrace}")
-            MessageBox.Show($"Error saving personnel to database: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-
-            ' MessageBox.Show("Error saving personnel to database: " & ex.Message & vbNewLine & ex.StackTrace, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-        Catch ex As Exception
-            Debug.WriteLine($" General error in Button: {ex.Message}")
-            Debug.WriteLine($"Stack Trace : {ex.StackTrace}")
-            Debug.WriteLine(" Failed to save")
-            MessageBox.Show("Unexpected Error: " & ex.Message & vbNewLine & ex.StackTrace, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-
-        End Try
-        ''If OpenFileDialog1.ShowDialog = DialogResult.OK Then
-        'Try
-        'Dim selectedPath As String = OpenFileDialog1.FileName
-        'Dim imageName As String = Path.GetFileName(selectedPath)
-        'Dim destinationPath As String = Path.Combine(Folderpath, imageName)
-
-        '' Save only the full UNC path to database for portability
-        'Dim dbFilePath As String = destinationPath
-
-        'Using conn As New OleDb.OleDbConnection(connectionString)
-        '    conn.Open()
-
-        '    ' Check if the image is already saved
-        '    Using checkCmd As New OleDb.OleDbCommand("SELECT COUNT(*) FROM PersonalDetails WHERE FilePath = ?", conn)
-        '        checkCmd.Parameters.AddWithValue("?", dbFilePath)
-        '        Dim count As Integer = Convert.ToInt32(checkCmd.ExecuteScalar())
-
-        '        If count > 0 Then
-        '            MsgBox("This image has already been uploaded.", vbInformation, vbOKCancel)
-        '            Exit Sub
-        '        End If
-        '    End Using
-
-        ''    ' Only copy if not already existing in destination folder
-        ''    If Not Directory.Exists(Folderpath) Then
-        ''        Directory.CreateDirectory(Folderpath)
-        ''    End If
-
-        ''    ' Optional: Check file existence in destination folder too
-        ''    If Not File.Exists(destinationPath) Then
-        ''        File.Copy(selectedPath, destinationPath, True)
-        ''    End If
-
-        '' Save new record
-        ''Using cmd As New OleDb.OleDbCommand("INSERT INTO PersonalDetails ( FirstName, LastName, DateOfBirth, Gender, Contact, Email, Role, Age, PostalCode, MaritalStatus, Photo, Dietary ) VALUES ( ?, ?, ?, ?, ?, ?, ?, ? ,?, ?, ?, ?)", connec)
-
-        ''    Dim person As New Person
-
-        ''        'Assign Values 
-        'Person.FirstName = TextBox1.Text
-        '    person.LastName = TextBox2.Text
-        '    'person.DateOfBirth = DateTimePicker1.Value.ToString()
-        'person.Gender = ComboBox3.SelectedItem.ToString()
-        'person.Contact = TextBox3.Text
-        'person.Email = TextBox4.Text
-        'person.Role = ComboBox1.SelectedItem.ToString()
-        'person.Age = TextBox5.Text
-        'person.postalcode = TextBox6.Text
-        'person.MaritalStatus = ComboBox2.SelectedItem.ToString
-        'person.Photo = TextBox7.Text
-        'person.Dietary = ComboBox4.SelectedItem.ToString
-        ''For Each person As person In Personal
-        'cmd.Parameters.Clear()
-
-        ''cmd.Parameters.AddWithValue("?", dbFilePath) '
-        'cmd.Parameters.AddWithValue("@FirstName", person.FirstName)
-        'cmd.Parameters.AddWithValue("@LastName", person.LastName)
-        'cmd.Parameters.AddWithValue("@DateOfBirth", person.DateOfBirth)
-        'cmd.Parameters.AddWithValue("@Gender", person.Gender)
-        'cmd.Parameters.AddWithValue("@Contact", person.Contact)
-        'cmd.Parameters.AddWithValue("@Email", person.Email)
-        'cmd.Parameters.AddWithValue("@Role", person.Role)
-        'cmd.Parameters.AddWithValue("@Age", person.Age)
-        'cmd.Parameters.AddWithValue("@PostalCode", person.postalcode)
-        'cmd.Parameters.AddWithValue("@MaritalStatus", person.MaritalStatus)
-        'cmd.Parameters.AddWithValue("@Photo", person.Photo)
-        ''            cmd.Parameters.AddWithValue("@Dietary", person.Dietary)
-        '            cmd.ExecuteNonQuery()
-
-        '            MsgBox(" You are now added as a member of the HoseHold Managment System!" & vbCrLf &
-        '          "FirstName: " & person.FirstName & vbCrLf &
-        '                          "LastName: " & person.LastName & vbCrLf &
-        '                          "Birth of Date:" & person.DateOfBirth & vbCrLf &
-        '                          "Gender: " & person.Gender & vbCrLf &
-        '                          "Contact Number: " & person.Contact & vbCrLf &
-        '                          "Email: " & person.Email & vbCrLf &
-        '                          "Role: " & person.Role & vbCrLf &
-        '                          "Age: " & person.Age & vbCrLf &
-        '                          "Postal Code: " & person.postalcode & vbCrLf &
-        '                          "Photo: " & person.Photo & vbCrLf &
-        '                          "Dietary: " & person.Dietary & vbCrLf &
-        '                          "MaritalStatus: " & person.MaritalStatus & vbCrLf, vbInformation, "Credentials  confirmation")
+                        cmd.Parameters.AddWithValue("?", TextBox1.Text)
+                        cmd.Parameters.AddWithValue("?", TextBox2.Text)
+                        cmd.Parameters.AddWithValue("?", DateTimePicker1.Value)
+                        cmd.Parameters.AddWithValue("?", ComboBox3.SelectedItem.ToString())
+                        cmd.Parameters.AddWithValue("?", TextBox3.Text)
+                        cmd.Parameters.AddWithValue("?", TextBox4.Text)
+                        cmd.Parameters.AddWithValue("?", ComboBox1.SelectedItem.ToString())
+                        cmd.Parameters.AddWithValue("?", TextBox5.Text)
+                        cmd.Parameters.AddWithValue("?", TextBox6.Text)
+                        cmd.Parameters.AddWithValue("?", ComboBox2.SelectedItem.ToString())
+                        cmd.Parameters.AddWithValue("?", ComboBox4.SelectedItem.ToString())
 
 
-        '            MessageBox.Show("Photo saved to database and network folder.")
+                        cmd.ExecuteNonQuery()
+                        MsgBox(" You are now added as a member of the HoseHold Managment System!" & vbCrLf &
+                              "FirstName: " & Person.FirstName & vbCrLf &
+                              "LastName: " & Person.LastName & vbCrLf &
+                              "Birth of Date:" & Person.DateOfBirth & vbCrLf &
+                              "Gender: " & Person.Gender & vbCrLf &
+                              "Contact Number: " & Person.Contact & vbCrLf &
+                              "Email: " & Person.Email & vbCrLf &
+                              "Role: " & Person.Role & vbCrLf &
+                              "Age: " & Person.Age & vbCrLf &
+                              "Postal Code: " & Person.postalcode & vbCrLf &
+                              "Photo: " & Person.Photo & vbCrLf &
+                              "Dietary: " & Person.Dietary & vbCrLf &
+                              "Health Status: " & Person.MaritalStatus & vbCrLf, vbInformation, "Credentials  confirmation")
+                    End Using
+                End Using
+                conn.Close()
+                MessageBox.Show("Photo saved to database and network folder.")
+            Catch ex As Exception
+                MessageBox.Show("Error: " & ex.Message)
+            End Try
+        End If
+        MessageBox.Show("Personnel information saved to Database successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
 
-        '        End Using
-        '    End Using
 
-        'Catch ex As Exception
-        '        MessageBox.Show("Error: " & ex.Message)
-        '    End Try
-        ''End If
         connec.Close()
         Debug.WriteLine("Exiting btnSubmit")
         'connec.Close()
@@ -209,7 +108,7 @@ Public Class Personnel
         toolTip.ShowAlways = True
 
         toolTip1.SetToolTip(BtnBack, "Back")
-        toolTip1.SetToolTip(BtnAddpicture, "Add a Picture")
+        'toolTip1.SetToolTip(BtnAddpicture, "Add a Picture")
         toolTip1.SetToolTip(BtnEdit, "Edit")
         toolTip1.SetToolTip(BtnDelete, "Delete")
         toolTip1.SetToolTip(BtnClear, "Clear")
@@ -288,6 +187,8 @@ Public Class Personnel
                 Dim Age As String = TextBox5.Text
                 Dim PostalCode As String = TextBox6.Text
                 Dim MaritalStatus As String = ComboBox2.SelectedItem.ToString
+                Dim DateOfBirth As String = DateTimePicker1.Value
+
                 Dim Photo As String = TextBox7.Text
                 Dim Dietary As String = ComboBox4.SelectedItem.ToString
                 ' Get the ID of the selected row (assuming your table has a primary key named "ID")  
@@ -309,7 +210,7 @@ Public Class Personnel
                 cmd.Parameters.AddWithValue("MaritalStatus", MaritalStatus)
                 cmd.Parameters.AddWithValue("Photo", Photo)
                 cmd.Parameters.AddWithValue("Dietary", Dietary)
-
+                cmd.Parameters.AddWithValue(" DateOfBirth", DateOfBirth)
                 cmd.Parameters.AddWithValue("ID", ID)
 
                 ' Execute the SQL command to update the data
@@ -449,35 +350,17 @@ Public Class Personnel
                 CType(ctrl, DateTimePicker).Value = DateTimePicker.MinimumDateTime ' or set to a specific date  
             End If
         Next
+
     End Sub
-    Private Sub BtnAddpicture_Click(sender As Object, e As EventArgs) Handles BtnAddpicture.Click
+    'Dim OpenFileDialog As New OpenFileDialog()
+    'OpenFileDialog.Filter = "Bitmaps (*.jpg)|*.jpg"
+    'If OpenFileDialog.ShowDialog() = DialogResult.OK Then
+    '    PictureBox1.ImageLocation = OpenFileDialog.FileName
+    '    TextBox7.Text = OpenFileDialog.FileName
+    'End If
 
-        'Dim OpenFileDialog As New OpenFileDialog()
-        'OpenFileDialog.Filter = "Bitmaps (*.jpg)|*.jpg"
-        'If OpenFileDialog.ShowDialog() = DialogResult.OK Then
-        '    PictureBox1.ImageLocation = OpenFileDialog.FileName
-        '    TextBox7.Text = OpenFileDialog.FileName
-        'End If
 
-        Dim ofd As New OpenFileDialog()
-        ofd.Filter = "Documents|*.pdf;*.docx;*.xlsx;*.jpg;*.png|All files|*.*"
 
-        If ofd.ShowDialog() = DialogResult.OK Then
-            Dim sourcePath As String = ofd.FileName
-            Dim fileName As String = IO.Path.GetFileName(sourcePath)
-
-            ' Define your network folder and category subfolder
-            Dim networkFolder As String = "\\KHODANIRAPHALAL\Users\Raphalalani\Source\Repos\maurice67530\HouseholdManagementSystems\Personnel Pictures" ' <-- Replace with your actual path
-            Dim categoryFolder As String = Path.Combine(networkFolder, ComboBox1.Text)
-
-            ' Ensure the category folder exists
-            Directory.CreateDirectory(categoryFolder)
-
-            ' Build destination path and copy file
-            Dim destinationPath As String = Path.Combine(categoryFolder, fileName)
-            File.Copy(sourcePath, destinationPath, True) ' Overwrite if exists
-        End If
-    End Sub
 
     Private Sub BtnDailyTasks_Click(sender As Object, e As EventArgs) Handles BtnDailyTasks.Click
         chores.ShowDialog()
@@ -506,4 +389,16 @@ Public Class Personnel
     Private Sub Label13_Click(sender As Object, e As EventArgs) Handles Label13.Click
 
     End Sub
+
+    Private Sub PictureBox1_Click(sender As Object, e As EventArgs) Handles PictureBox1.Click
+
+    End Sub
+
+    Private Sub ListBox1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ListBox1.SelectedIndexChanged
+
+    End Sub
+
+
+
+
 End Class
