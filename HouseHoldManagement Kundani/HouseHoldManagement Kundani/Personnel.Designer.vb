@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class Personnel
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,7 +20,7 @@ Partial Class Personnel
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Personnel))
         Me.Button1 = New System.Windows.Forms.Button()
@@ -35,7 +35,6 @@ Partial Class Personnel
         Me.BtnDailyTasks = New System.Windows.Forms.Button()
         Me.BtnClear = New System.Windows.Forms.Button()
         Me.BtnDelete = New System.Windows.Forms.Button()
-        Me.BtnAddpicture = New System.Windows.Forms.Button()
         Me.BtnBack = New System.Windows.Forms.Button()
         Me.BtnEdit = New System.Windows.Forms.Button()
         Me.BtnSave = New System.Windows.Forms.Button()
@@ -72,7 +71,7 @@ Partial Class Personnel
         '
         Me.Button1.BackColor = System.Drawing.SystemColors.ActiveCaption
         Me.Button1.Image = CType(resources.GetObject("Button1.Image"), System.Drawing.Image)
-        Me.Button1.Location = New System.Drawing.Point(565, 567)
+        Me.Button1.Location = New System.Drawing.Point(550, 569)
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(75, 37)
         Me.Button1.TabIndex = 156
@@ -92,6 +91,7 @@ Partial Class Personnel
         'TextBox8
         '
         Me.TextBox8.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.TextBox8.Cursor = System.Windows.Forms.Cursors.No
         Me.TextBox8.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TextBox8.Location = New System.Drawing.Point(123, 56)
         Me.TextBox8.Name = "TextBox8"
@@ -136,8 +136,10 @@ Partial Class Personnel
         '
         'TextBox7
         '
+        Me.TextBox7.Cursor = System.Windows.Forms.Cursors.No
         Me.TextBox7.Location = New System.Drawing.Point(124, 358)
         Me.TextBox7.Name = "TextBox7"
+        Me.TextBox7.ReadOnly = True
         Me.TextBox7.Size = New System.Drawing.Size(268, 20)
         Me.TextBox7.TabIndex = 155
         '
@@ -156,7 +158,7 @@ Partial Class Personnel
         Me.BtnDailyTasks.BackColor = System.Drawing.SystemColors.ActiveCaption
         Me.BtnDailyTasks.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnDailyTasks.Image = CType(resources.GetObject("BtnDailyTasks.Image"), System.Drawing.Image)
-        Me.BtnDailyTasks.Location = New System.Drawing.Point(479, 567)
+        Me.BtnDailyTasks.Location = New System.Drawing.Point(455, 570)
         Me.BtnDailyTasks.Name = "BtnDailyTasks"
         Me.BtnDailyTasks.Size = New System.Drawing.Size(66, 38)
         Me.BtnDailyTasks.TabIndex = 150
@@ -168,7 +170,7 @@ Partial Class Personnel
         Me.BtnClear.BackColor = System.Drawing.SystemColors.ActiveCaption
         Me.BtnClear.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnClear.Image = CType(resources.GetObject("BtnClear.Image"), System.Drawing.Image)
-        Me.BtnClear.Location = New System.Drawing.Point(392, 567)
+        Me.BtnClear.Location = New System.Drawing.Point(331, 568)
         Me.BtnClear.Name = "BtnClear"
         Me.BtnClear.Size = New System.Drawing.Size(66, 37)
         Me.BtnClear.TabIndex = 149
@@ -180,25 +182,12 @@ Partial Class Personnel
         Me.BtnDelete.BackColor = System.Drawing.SystemColors.ActiveCaption
         Me.BtnDelete.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnDelete.Image = CType(resources.GetObject("BtnDelete.Image"), System.Drawing.Image)
-        Me.BtnDelete.Location = New System.Drawing.Point(293, 565)
+        Me.BtnDelete.Location = New System.Drawing.Point(207, 568)
         Me.BtnDelete.Name = "BtnDelete"
-        Me.BtnDelete.Size = New System.Drawing.Size(74, 39)
+        Me.BtnDelete.Size = New System.Drawing.Size(74, 37)
         Me.BtnDelete.TabIndex = 148
         Me.BtnDelete.TextAlign = System.Drawing.ContentAlignment.BottomCenter
         Me.BtnDelete.UseVisualStyleBackColor = False
-        '
-        'BtnAddpicture
-        '
-        Me.BtnAddpicture.BackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.BtnAddpicture.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.BtnAddpicture.ForeColor = System.Drawing.SystemColors.ControlText
-        Me.BtnAddpicture.Image = CType(resources.GetObject("BtnAddpicture.Image"), System.Drawing.Image)
-        Me.BtnAddpicture.Location = New System.Drawing.Point(104, 567)
-        Me.BtnAddpicture.Name = "BtnAddpicture"
-        Me.BtnAddpicture.Size = New System.Drawing.Size(71, 38)
-        Me.BtnAddpicture.TabIndex = 147
-        Me.BtnAddpicture.TextAlign = System.Drawing.ContentAlignment.BottomCenter
-        Me.BtnAddpicture.UseVisualStyleBackColor = False
         '
         'BtnBack
         '
@@ -217,9 +206,9 @@ Partial Class Personnel
         Me.BtnEdit.BackColor = System.Drawing.SystemColors.ActiveCaption
         Me.BtnEdit.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnEdit.Image = CType(resources.GetObject("BtnEdit.Image"), System.Drawing.Image)
-        Me.BtnEdit.Location = New System.Drawing.Point(200, 567)
+        Me.BtnEdit.Location = New System.Drawing.Point(108, 565)
         Me.BtnEdit.Name = "BtnEdit"
-        Me.BtnEdit.Size = New System.Drawing.Size(72, 37)
+        Me.BtnEdit.Size = New System.Drawing.Size(72, 39)
         Me.BtnEdit.TabIndex = 145
         Me.BtnEdit.TextAlign = System.Drawing.ContentAlignment.BottomCenter
         Me.BtnEdit.UseVisualStyleBackColor = False
@@ -229,7 +218,7 @@ Partial Class Personnel
         Me.BtnSave.BackColor = System.Drawing.SystemColors.ActiveCaption
         Me.BtnSave.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnSave.Image = CType(resources.GetObject("BtnSave.Image"), System.Drawing.Image)
-        Me.BtnSave.Location = New System.Drawing.Point(662, 565)
+        Me.BtnSave.Location = New System.Drawing.Point(662, 569)
         Me.BtnSave.Name = "BtnSave"
         Me.BtnSave.Size = New System.Drawing.Size(75, 39)
         Me.BtnSave.TabIndex = 144
@@ -510,7 +499,6 @@ Partial Class Personnel
         Me.Controls.Add(Me.BtnDailyTasks)
         Me.Controls.Add(Me.BtnClear)
         Me.Controls.Add(Me.BtnDelete)
-        Me.Controls.Add(Me.BtnAddpicture)
         Me.Controls.Add(Me.BtnBack)
         Me.Controls.Add(Me.BtnEdit)
         Me.Controls.Add(Me.BtnSave)
@@ -557,7 +545,6 @@ Partial Class Personnel
     Friend WithEvents BtnDailyTasks As Button
     Friend WithEvents BtnClear As Button
     Friend WithEvents BtnDelete As Button
-    Friend WithEvents BtnAddpicture As Button
     Friend WithEvents BtnBack As Button
     Friend WithEvents BtnEdit As Button
     Friend WithEvents BtnSave As Button
