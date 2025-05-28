@@ -1449,4 +1449,8 @@ Public Class Dashboard
         Settings.Show()
 
     End Sub
+
+    Private Sub HouseholdDocsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles HouseholdDocsToolStripMenuItem.Click
+
+    End Sub
 End Class

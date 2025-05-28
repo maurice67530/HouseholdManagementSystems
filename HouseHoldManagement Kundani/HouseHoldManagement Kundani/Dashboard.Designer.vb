@@ -23,12 +23,12 @@ Partial Class Dashboard
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim ChartArea3 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
-        Dim Legend3 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
-        Dim Series3 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
-        Dim ChartArea4 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
-        Dim Legend4 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
-        Dim Series4 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
+        Dim ChartArea1 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
+        Dim Legend1 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
+        Dim Series1 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
+        Dim ChartArea2 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
+        Dim Legend2 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
+        Dim Series2 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Dashboard))
         Me.Label7 = New System.Windows.Forms.Label()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
@@ -114,6 +114,7 @@ Partial Class Dashboard
         Me.Label38 = New System.Windows.Forms.Label()
         Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
         Me.SettingsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.HouseholdDocsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.GroupBox1.SuspendLayout()
         Me.Panel2.SuspendLayout()
         Me.Panel1.SuspendLayout()
@@ -525,33 +526,33 @@ Partial Class Dashboard
         '
         'Chart2
         '
-        ChartArea3.Name = "ChartArea1"
-        Me.Chart2.ChartAreas.Add(ChartArea3)
-        Legend3.Name = "Legend1"
-        Me.Chart2.Legends.Add(Legend3)
+        ChartArea1.Name = "ChartArea1"
+        Me.Chart2.ChartAreas.Add(ChartArea1)
+        Legend1.Name = "Legend1"
+        Me.Chart2.Legends.Add(Legend1)
         Me.Chart2.Location = New System.Drawing.Point(435, 296)
         Me.Chart2.Name = "Chart2"
-        Series3.ChartArea = "ChartArea1"
-        Series3.Legend = "Legend1"
-        Series3.Name = "Expense"
-        Me.Chart2.Series.Add(Series3)
+        Series1.ChartArea = "ChartArea1"
+        Series1.Legend = "Legend1"
+        Series1.Name = "Expense"
+        Me.Chart2.Series.Add(Series1)
         Me.Chart2.Size = New System.Drawing.Size(387, 262)
         Me.Chart2.TabIndex = 103
         Me.Chart2.Text = "Chart2"
         '
         'Chart1
         '
-        ChartArea4.Name = "ChartArea1"
-        Me.Chart1.ChartAreas.Add(ChartArea4)
-        Legend4.Name = "Legend1"
-        Me.Chart1.Legends.Add(Legend4)
+        ChartArea2.Name = "ChartArea1"
+        Me.Chart1.ChartAreas.Add(ChartArea2)
+        Legend2.Name = "Legend1"
+        Me.Chart1.Legends.Add(Legend2)
         Me.Chart1.Location = New System.Drawing.Point(842, 590)
         Me.Chart1.Name = "Chart1"
-        Series4.ChartArea = "ChartArea1"
-        Series4.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Pie
-        Series4.Legend = "Legend1"
-        Series4.Name = "Expense"
-        Me.Chart1.Series.Add(Series4)
+        Series2.ChartArea = "ChartArea1"
+        Series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Pie
+        Series2.Legend = "Legend1"
+        Series2.Name = "Expense"
+        Me.Chart1.Series.Add(Series2)
         Me.Chart1.Size = New System.Drawing.Size(350, 264)
         Me.Chart1.TabIndex = 102
         Me.Chart1.Text = "Chart1"
@@ -984,7 +985,7 @@ Partial Class Dashboard
         'MenuStrip1
         '
         Me.MenuStrip1.BackColor = System.Drawing.Color.Transparent
-        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.SettingsToolStripMenuItem})
+        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.SettingsToolStripMenuItem, Me.HouseholdDocsToolStripMenuItem})
         Me.MenuStrip1.Location = New System.Drawing.Point(0, 0)
         Me.MenuStrip1.Name = "MenuStrip1"
         Me.MenuStrip1.Size = New System.Drawing.Size(1284, 24)
@@ -999,6 +1000,12 @@ Partial Class Dashboard
         Me.SettingsToolStripMenuItem.Name = "SettingsToolStripMenuItem"
         Me.SettingsToolStripMenuItem.Size = New System.Drawing.Size(77, 20)
         Me.SettingsToolStripMenuItem.Text = "Settings"
+        '
+        'HouseholdDocsToolStripMenuItem
+        '
+        Me.HouseholdDocsToolStripMenuItem.Name = "HouseholdDocsToolStripMenuItem"
+        Me.HouseholdDocsToolStripMenuItem.Size = New System.Drawing.Size(105, 20)
+        Me.HouseholdDocsToolStripMenuItem.Text = "Household docs"
         '
         'Dashboard
         '
@@ -1148,4 +1155,5 @@ Partial Class Dashboard
     Friend WithEvents Label39 As Label
     Friend WithEvents MenuStrip1 As MenuStrip
     Friend WithEvents SettingsToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents HouseholdDocsToolStripMenuItem As ToolStripMenuItem
 End Class

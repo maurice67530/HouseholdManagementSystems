@@ -45,6 +45,8 @@ Partial Class MealPlan
         Me.Label9 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.Label13 = New System.Windows.Forms.Label()
+        Me.ComboBox4 = New System.Windows.Forms.ComboBox()
         Me.ComboBox1 = New System.Windows.Forms.ComboBox()
         Me.TextBox4 = New System.Windows.Forms.TextBox()
         Me.Label3 = New System.Windows.Forms.Label()
@@ -60,8 +62,6 @@ Partial Class MealPlan
         Me.Label10 = New System.Windows.Forms.Label()
         Me.Label12 = New System.Windows.Forms.Label()
         Me.Button2 = New System.Windows.Forms.Button()
-        Me.Label13 = New System.Windows.Forms.Label()
-        Me.ComboBox4 = New System.Windows.Forms.ComboBox()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel2.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -217,9 +217,9 @@ Partial Class MealPlan
         '
         Me.lstMealSuggestions.FormattingEnabled = True
         Me.lstMealSuggestions.ItemHeight = 15
-        Me.lstMealSuggestions.Location = New System.Drawing.Point(117, 263)
+        Me.lstMealSuggestions.Location = New System.Drawing.Point(58, 266)
         Me.lstMealSuggestions.Name = "lstMealSuggestions"
-        Me.lstMealSuggestions.Size = New System.Drawing.Size(189, 79)
+        Me.lstMealSuggestions.Size = New System.Drawing.Size(259, 79)
         Me.lstMealSuggestions.TabIndex = 26
         '
         'DateTimePicker2
@@ -301,6 +301,23 @@ Partial Class MealPlan
         Me.Panel1.Size = New System.Drawing.Size(319, 352)
         Me.Panel1.TabIndex = 47
         '
+        'Label13
+        '
+        Me.Label13.AutoSize = True
+        Me.Label13.Location = New System.Drawing.Point(7, 149)
+        Me.Label13.Name = "Label13"
+        Me.Label13.Size = New System.Drawing.Size(46, 15)
+        Me.Label13.TabIndex = 61
+        Me.Label13.Text = "Person"
+        '
+        'ComboBox4
+        '
+        Me.ComboBox4.FormattingEnabled = True
+        Me.ComboBox4.Location = New System.Drawing.Point(118, 141)
+        Me.ComboBox4.Name = "ComboBox4"
+        Me.ComboBox4.Size = New System.Drawing.Size(121, 23)
+        Me.ComboBox4.TabIndex = 62
+        '
         'ComboBox1
         '
         Me.ComboBox1.FormattingEnabled = True
@@ -342,7 +359,7 @@ Partial Class MealPlan
         'ComboBox3
         '
         Me.ComboBox3.FormattingEnabled = True
-        Me.ComboBox3.Location = New System.Drawing.Point(120, 146)
+        Me.ComboBox3.Location = New System.Drawing.Point(121, 279)
         Me.ComboBox3.Name = "ComboBox3"
         Me.ComboBox3.Size = New System.Drawing.Size(121, 23)
         Me.ComboBox3.TabIndex = 22
@@ -383,7 +400,7 @@ Partial Class MealPlan
         'Label5
         '
         Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(4, 150)
+        Me.Label5.Location = New System.Drawing.Point(19, 287)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(40, 15)
         Me.Label5.TabIndex = 6
@@ -424,23 +441,6 @@ Partial Class MealPlan
         Me.Button2.Size = New System.Drawing.Size(41, 37)
         Me.Button2.TabIndex = 29
         Me.Button2.UseVisualStyleBackColor = True
-        '
-        'Label13
-        '
-        Me.Label13.AutoSize = True
-        Me.Label13.Location = New System.Drawing.Point(7, 282)
-        Me.Label13.Name = "Label13"
-        Me.Label13.Size = New System.Drawing.Size(46, 15)
-        Me.Label13.TabIndex = 61
-        Me.Label13.Text = "Person"
-        '
-        'ComboBox4
-        '
-        Me.ComboBox4.FormattingEnabled = True
-        Me.ComboBox4.Location = New System.Drawing.Point(119, 276)
-        Me.ComboBox4.Name = "ComboBox4"
-        Me.ComboBox4.Size = New System.Drawing.Size(121, 23)
-        Me.ComboBox4.TabIndex = 62
         '
         'MealPlan
         '
