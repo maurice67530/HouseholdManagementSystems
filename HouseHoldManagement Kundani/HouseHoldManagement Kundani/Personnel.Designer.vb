@@ -484,7 +484,7 @@ Partial Class Personnel
         'ComboBox5
         '
         Me.ComboBox5.FormattingEnabled = True
-        Me.ComboBox5.Items.AddRange(New Object() {"Plants, Meat", "No Meat, Fish, Poultry", "Not Meat, any Animal Product  ", "Only SeaFood ,Fish", "Mainly vegetarian but occasionally eat Meat, Fish", "Very-Low Carbonhydrate, High Fat Diet", "Limits Carbonhydrate Intake", "No dairy Products", "Focuses on Dutrientdense Food"})
+        Me.ComboBox5.Items.AddRange(New Object() {"Plants, Meat", "No Meat, Fish, Poultry", "Not Meat", " SeaFood ,Fish", "vegetarian ", "Very-Low Carbonhydrate, High Fat Diet", "Limits Carbonhydrate Intake", "No dairy Products"})
         Me.ComboBox5.Location = New System.Drawing.Point(121, 390)
         Me.ComboBox5.Name = "ComboBox5"
         Me.ComboBox5.Size = New System.Drawing.Size(266, 21)
