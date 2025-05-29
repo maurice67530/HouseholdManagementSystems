@@ -73,7 +73,7 @@ Partial Class Personnel
         '
         Me.Button1.BackColor = System.Drawing.SystemColors.ActiveCaption
         Me.Button1.Image = CType(resources.GetObject("Button1.Image"), System.Drawing.Image)
-        Me.Button1.Location = New System.Drawing.Point(546, 578)
+        Me.Button1.Location = New System.Drawing.Point(555, 579)
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(75, 37)
         Me.Button1.TabIndex = 156
@@ -160,7 +160,7 @@ Partial Class Personnel
         Me.BtnDailyTasks.BackColor = System.Drawing.SystemColors.ActiveCaption
         Me.BtnDailyTasks.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnDailyTasks.Image = CType(resources.GetObject("BtnDailyTasks.Image"), System.Drawing.Image)
-        Me.BtnDailyTasks.Location = New System.Drawing.Point(451, 579)
+        Me.BtnDailyTasks.Location = New System.Drawing.Point(458, 578)
         Me.BtnDailyTasks.Name = "BtnDailyTasks"
         Me.BtnDailyTasks.Size = New System.Drawing.Size(66, 38)
         Me.BtnDailyTasks.TabIndex = 150
@@ -172,7 +172,7 @@ Partial Class Personnel
         Me.BtnClear.BackColor = System.Drawing.SystemColors.ActiveCaption
         Me.BtnClear.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnClear.Image = CType(resources.GetObject("BtnClear.Image"), System.Drawing.Image)
-        Me.BtnClear.Location = New System.Drawing.Point(327, 577)
+        Me.BtnClear.Location = New System.Drawing.Point(351, 580)
         Me.BtnClear.Name = "BtnClear"
         Me.BtnClear.Size = New System.Drawing.Size(66, 37)
         Me.BtnClear.TabIndex = 149
@@ -184,7 +184,7 @@ Partial Class Personnel
         Me.BtnDelete.BackColor = System.Drawing.SystemColors.ActiveCaption
         Me.BtnDelete.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnDelete.Image = CType(resources.GetObject("BtnDelete.Image"), System.Drawing.Image)
-        Me.BtnDelete.Location = New System.Drawing.Point(203, 577)
+        Me.BtnDelete.Location = New System.Drawing.Point(234, 579)
         Me.BtnDelete.Name = "BtnDelete"
         Me.BtnDelete.Size = New System.Drawing.Size(74, 37)
         Me.BtnDelete.TabIndex = 148
@@ -196,7 +196,7 @@ Partial Class Personnel
         Me.BtnBack.BackColor = System.Drawing.SystemColors.ActiveCaption
         Me.BtnBack.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnBack.Image = CType(resources.GetObject("BtnBack.Image"), System.Drawing.Image)
-        Me.BtnBack.Location = New System.Drawing.Point(12, 574)
+        Me.BtnBack.Location = New System.Drawing.Point(12, 577)
         Me.BtnBack.Name = "BtnBack"
         Me.BtnBack.Size = New System.Drawing.Size(68, 39)
         Me.BtnBack.TabIndex = 146
@@ -208,7 +208,7 @@ Partial Class Personnel
         Me.BtnEdit.BackColor = System.Drawing.SystemColors.ActiveCaption
         Me.BtnEdit.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnEdit.Image = CType(resources.GetObject("BtnEdit.Image"), System.Drawing.Image)
-        Me.BtnEdit.Location = New System.Drawing.Point(104, 574)
+        Me.BtnEdit.Location = New System.Drawing.Point(122, 578)
         Me.BtnEdit.Name = "BtnEdit"
         Me.BtnEdit.Size = New System.Drawing.Size(72, 39)
         Me.BtnEdit.TabIndex = 145
@@ -456,7 +456,7 @@ Partial Class Personnel
         'ComboBox4
         '
         Me.ComboBox4.FormattingEnabled = True
-        Me.ComboBox4.Items.AddRange(New Object() {"Omnivore (Plants and Animal Foods)", "Vegetarian( No Meat, Fish OR Poultry)", "Vegan( Not Meat/ any Animal Product (Eggs,Dairy) ", "Pescatarian( Only SeaFood & Fish)", "Flexitarian(Mainly vegetarian but occasionally eat meat/ fish)", "Ketogenic( Very-Low Carbonhydrate, High Fat Diet)", "Low-Carb( Limits Carbonhydrate Intake)", "Dairy-Free( No dairy Products)", "Nutritarian( Focuses on nutrient-dense Food)", "Halal( Only Food Permissible under Religion Law)"})
+        Me.ComboBox4.Items.AddRange(New Object() {"Omnivore ", "Vegetarian", "Vegan", "Pescatarian", "Flexitarian", "Ketogenic", "Low-Carb", "Dairy-Free", "Nutritarian"})
         Me.ComboBox4.Location = New System.Drawing.Point(117, 366)
         Me.ComboBox4.Name = "ComboBox4"
         Me.ComboBox4.Size = New System.Drawing.Size(268, 21)

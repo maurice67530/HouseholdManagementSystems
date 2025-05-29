@@ -68,20 +68,22 @@ Public Class Personnel
 
 
                         cmd.ExecuteNonQuery()
-                        MsgBox(" You are now added as a member of the HoseHold Managment System!" & vbCrLf &
-                              "FirstName: " & person.FirstName & vbCrLf &
-                              "LastName: " & person.LastName & vbCrLf &
-                              "Birth of Date:" & person.DateOfBirth & vbCrLf &
-                              "Gender: " & person.Gender & vbCrLf &
-                              "Contact Number: " & person.Contact & vbCrLf &
-                              "Email: " & person.Email & vbCrLf &
-                              "Role: " & person.Role & vbCrLf &
-                              "Age: " & person.Age & vbCrLf &
-                              "Postal Code: " & person.postalcode & vbCrLf &
-                              "Photo: " & person.Photo & vbCrLf &
-                              "Dietary: " & person.Dietary & vbCrLf &
-                              "Food Type: " & person.FoodType & vbCrLf &
-                              "Health Status: " & person.MaritalStatus & vbCrLf, vbInformation, "Credentials  confirmation")
+                        'MsgBox(" You are now added as a member of the HoseHold Managment System!" & vbCrLf &
+                        '      "FirstName: " & person.FirstName & vbCrLf &
+                        '      "LastName: " & person.LastName & vbCrLf &
+                        '      "Birth of Date:" & person.DateOfBirth & vbCrLf &
+                        '      "Gender: " & person.Gender & vbCrLf &
+                        '      "Contact Number: " & person.Contact & vbCrLf &
+                        '      "Email: " & person.Email & vbCrLf &
+                        '      "Role: " & person.Role & vbCrLf &
+                        '      "Age: " & person.Age & vbCrLf &
+                        '      "Postal Code: " & person.postalcode & vbCrLf &
+                        '      "Photo: " & person.Photo & vbCrLf &
+                        '      "Dietary: " & person.Dietary & vbCrLf &
+                        '      "Food Type: " & person.FoodType & vbCrLf &
+                        '      "Health Status: " & person.MaritalStatus & vbCrLf, vbInformation, "Credentials  confirmation")
+                        MessageBox.Show("Personnel information saved to Database successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
+
                     End Using
                 End Using
                 conn.Close()
@@ -90,7 +92,6 @@ Public Class Personnel
                 MessageBox.Show("Error: " & ex.Message)
             End Try
         End If
-        MessageBox.Show("Personnel information saved to Database successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
 
 
         connec.Close()
