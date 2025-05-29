@@ -85,6 +85,9 @@ Public Class Login
 
             In_App_Message.TextBox1.Text = username
             In_App_Message.Label6.Text = "Logged in as:" & username
+
+
+            Household_Document.TextBox5.Text = username
             Me.Hide()
 
 
