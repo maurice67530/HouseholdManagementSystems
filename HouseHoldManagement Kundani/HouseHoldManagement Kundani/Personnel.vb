@@ -3,7 +3,7 @@ Imports System.Data.OleDb
 Public Class Personnel
     Dim connec As New OleDbConnection(HouseHoldManagment_Module.connectionString)
 
-    ' Create a ToolTip object
+    ' Create a ToolTip object''
     Private toolTip As New ToolTip()
     Private toolTip1 As New ToolTip()
 
