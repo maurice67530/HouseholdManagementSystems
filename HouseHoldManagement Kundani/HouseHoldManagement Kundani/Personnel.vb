@@ -352,15 +352,6 @@ Public Class Personnel
         Next
 
     End Sub
-    'Dim OpenFileDialog As New OpenFileDialog()
-    'OpenFileDialog.Filter = "Bitmaps (*.jpg)|*.jpg"
-    'If OpenFileDialog.ShowDialog() = DialogResult.OK Then
-    '    PictureBox1.ImageLocation = OpenFileDialog.FileName
-    '    TextBox7.Text = OpenFileDialog.FileName
-    'End If
-
-
-
 
     Private Sub BtnDailyTasks_Click(sender As Object, e As EventArgs) Handles BtnDailyTasks.Click
         chores.ShowDialog()
@@ -385,20 +376,6 @@ Public Class Personnel
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         LoadData()
     End Sub
-
-    Private Sub Label13_Click(sender As Object, e As EventArgs) Handles Label13.Click
-
-    End Sub
-
-    Private Sub PictureBox1_Click(sender As Object, e As EventArgs) Handles PictureBox1.Click
-
-    End Sub
-
-    Private Sub ListBox1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ListBox1.SelectedIndexChanged
-
-    End Sub
-
-
 
 
 End Class
