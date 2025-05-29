@@ -16,91 +16,146 @@ Public Class Personnel
 
         Debug.WriteLine("Entering btnSubmit")
 
-        Try
-            Debug.WriteLine("User confirmed btnSubmit")
+        'Try
+        '    Debug.WriteLine("User confirmed btnSubmit")
 
-            Using connec As New OleDbConnection(HouseHoldManagment_Module.connectionString)
-                connec.Open()
+        '    Using connec As New OleDbConnection(HouseHoldManagment_Module.connectionString)
+        '        connec.Open()
 
-                ' Update the table name if necessary  
-                'Dim tableName As String = "Personnel"
+        '        ' Update the table name if necessary  
+        '        'Dim tableName As String = "Personnel"
 
-                ' Create an OleDbCommand to insert the personnel data into the database  
-                Dim cmd As New OleDbCommand("INSERT INTO PersonalDetails ( FirstName, LastName, DateOfBirth, Gender, Contact, Email, Role, Age, PostalCode, MaritalStatus, Photo, Dietary ) VALUES ( ?, ?, ?, ?, ?, ?, ?, ? ,?, ?, ?, ?)", connec)
+        '        ' Create an OleDbCommand to insert the personnel data into the database  
+        '        Dim cmd As New OleDbCommand("INSERT INTO PersonalDetails ( FirstName, LastName, DateOfBirth, Gender, Contact, Email, Role, Age, PostalCode, MaritalStatus, Photo, Dietary ) VALUES ( ?, ?, ?, ?, ?, ?, ?, ? ,?, ?, ?, ?)", connec)
 
-                ' Set the parameter values from the UI controls 
-                'Class declaretions
-                Dim person As New Person
+        '        ' Set the parameter values from the UI controls 
+        '        'Class declaretions
+        '        Dim person As New Person
 
-                'Assign Values 
-                person.FirstName = TextBox1.Text
-                person.LastName = TextBox2.Text
-                person.DateOfBirth = DateTimePicker1.Value.ToString()
-                person.Gender = ComboBox3.SelectedItem.ToString()
-                person.Contact = TextBox3.Text
-                person.Email = TextBox4.Text
-                person.Role = ComboBox1.SelectedItem.ToString()
-                person.Age = TextBox5.Text
-                person.postalcode = TextBox6.Text
-                person.MaritalStatus = ComboBox2.SelectedItem.ToString
-                person.Photo = TextBox7.Text
-                person.Dietary = ComboBox4.SelectedItem.ToString
-                'For Each person As person In Personal
-                cmd.Parameters.Clear()
+        '        'Assign Values 
+        '        person.FirstName = 
+        '        person.LastName = 
+        '        person.DateOfBirth = 
+        '        person.Gender = 
+        '        person.Contact =
+        '        person.Email = 
+        '        person.Role = 
+        '        person.Age = 
+        '        person.postalcode = 
+        '        person.MaritalStatus = 
+        '        person.Photo = 
+        '        person.Dietary = 
+        '        'For Each person As person In Personal
+        '        cmd.Parameters.Clear()
 
-                'cmd.Parameters.AddWithValue("@ID",TextBox8)
-                cmd.Parameters.AddWithValue("@FirstName", person.FirstName)
-                cmd.Parameters.AddWithValue("@LastName", person.LastName)
-                cmd.Parameters.AddWithValue("@DateOfBirth", person.DateOfBirth)
-                cmd.Parameters.AddWithValue("@Gender", person.Gender)
-                cmd.Parameters.AddWithValue("@Contact", person.Contact)
-                cmd.Parameters.AddWithValue("@Email", person.Email)
-                cmd.Parameters.AddWithValue("@Role", person.Role)
-                cmd.Parameters.AddWithValue("@Age", person.Age)
-                cmd.Parameters.AddWithValue("@PostalCode", person.postalcode)
-                cmd.Parameters.AddWithValue("@MaritalStatus", person.MaritalStatus)
-                cmd.Parameters.AddWithValue("@Photo", person.Photo)
-                cmd.Parameters.AddWithValue("@Dietary", person.Dietary)
+        '        'cmd.Parameters.AddWithValue("@ID",TextBox8)
+        '        cmd.Parameters.AddWithValue("@FirstName", person.FirstName)
+        '        cmd.Parameters.AddWithValue("@LastName", person.LastName)
+        '        cmd.Parameters.AddWithValue("@DateOfBirth", person.DateOfBirth)
+        '        cmd.Parameters.AddWithValue("@Gender", person.Gender)
+        '        cmd.Parameters.AddWithValue("@Contact", person.Contact)
+        '        cmd.Parameters.AddWithValue("@Email", person.Email)
+        '        cmd.Parameters.AddWithValue("@Role", person.Role)
+        '        cmd.Parameters.AddWithValue("@Age", person.Age)
+        '        cmd.Parameters.AddWithValue("@PostalCode", person.postalcode)
+        '        cmd.Parameters.AddWithValue("@MaritalStatus", person.MaritalStatus)
+        '        cmd.Parameters.AddWithValue("@Photo", person.Photo)
+        '        cmd.Parameters.AddWithValue("@Dietary", person.Dietary)
 
-                'cmd.Parameters.AddWithValue("@PhysicalAddres", TextBox7.Text)
-                'cmd.Parameters.AddWithValue("@HealthStatus", person.HealthStatus)
+        '        'cmd.Parameters.AddWithValue("@PhysicalAddres", TextBox7.Text)
+        '        'cmd.Parameters.AddWithValue("@HealthStatus", person.HealthStatus)
 
-                MsgBox(" You are now added as a member of the HoseHold Managment System!" & vbCrLf &
-                      "FirstName: " & person.FirstName & vbCrLf &
-                      "LastName: " & person.LastName & vbCrLf &
-                      "Birth of Date:" & person.DateOfBirth & vbCrLf &
-                      "Gender: " & person.Gender & vbCrLf &
-                      "Contact Number: " & person.Contact & vbCrLf &
-                      "Email: " & person.Email & vbCrLf &
-                      "Role: " & person.Role & vbCrLf &
-                      "Age: " & person.Age & vbCrLf &
-                      "Postal Code: " & person.postalcode & vbCrLf &
-                      "Photo: " & person.Photo & vbCrLf &
-                      "Dietary: " & person.Dietary & vbCrLf &
-                      "Health Status: " & person.MaritalStatus & vbCrLf, vbInformation, "Credentials  confirmation")
+        '        MsgBox(" You are now added as a member of the HoseHold Managment System!" & vbCrLf &
+        '              "FirstName: " & person.FirstName & vbCrLf &
+        '              "LastName: " & person.LastName & vbCrLf &
+        '              "Birth of Date:" & person.DateOfBirth & vbCrLf &
+        '              "Gender: " & person.Gender & vbCrLf &
+        '              "Contact Number: " & person.Contact & vbCrLf &
+        '              "Email: " & person.Email & vbCrLf &
+        '              "Role: " & person.Role & vbCrLf &
+        '              "Age: " & person.Age & vbCrLf &
+        '              "Postal Code: " & person.postalcode & vbCrLf &
+        '              "Photo: " & person.Photo & vbCrLf &
+        '              "Dietary: " & person.Dietary & vbCrLf &
+        '              "Health Status: " & person.MaritalStatus & vbCrLf, vbInformation, "Credentials  confirmation")
 
-                MessageBox.Show("Personnel information saved to Database successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
+        '        MessageBox.Show("Personnel information saved to Database successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
 
-                ' Execute the SQL command to insert the data  
-                cmd.ExecuteNonQuery()
-                'Next
+        '        ' Execute the SQL command to insert the data  
+        '        cmd.ExecuteNonQuery()
+        '        'Next
 
-            End Using
-        Catch ex As OleDbException
-            Debug.WriteLine($" Database error in Button_Click: {ex.Message}")
-            Debug.WriteLine($"Stack Trace : {ex.StackTrace}")
-            MessageBox.Show($"Error saving personnel to database: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        '    End Using
+        'Catch ex As OleDbException
+        '    Debug.WriteLine($" Database error in Button_Click: {ex.Message}")
+        '    Debug.WriteLine($"Stack Trace : {ex.StackTrace}")
+        '    MessageBox.Show($"Error saving personnel to database: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
 
-            ' MessageBox.Show("Error saving personnel to database: " & ex.Message & vbNewLine & ex.StackTrace, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-        Catch ex As Exception
-            Debug.WriteLine($" General error in Button: {ex.Message}")
-            Debug.WriteLine($"Stack Trace : {ex.StackTrace}")
-            Debug.WriteLine(" Failed to save")
-            MessageBox.Show("Unexpected Error: " & ex.Message & vbNewLine & ex.StackTrace, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        '    ' MessageBox.Show("Error saving personnel to database: " & ex.Message & vbNewLine & ex.StackTrace, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        'Catch ex As Exception
+        '    Debug.WriteLine($" General error in Button: {ex.Message}")
+        '    Debug.WriteLine($"Stack Trace : {ex.StackTrace}")
+        '    Debug.WriteLine(" Failed to save")
+        '    MessageBox.Show("Unexpected Error: " & ex.Message & vbNewLine & ex.StackTrace, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
 
-        End Try
+        'End Try
+        If OpenFileDialog1.ShowDialog = DialogResult.OK Then
+            Try
+                Dim selectedPath As String = OpenFileDialog1.FileName
+                Dim imageName As String = Path.GetFileName(selectedPath)
+                Dim destinationPath As String = Path.Combine(Folderpath, imageName)
 
-        connec.Close()
+                ' Save only the full UNC path to database for portability
+                Dim dbFilePath As String = destinationPath
+
+                Using conn As New OleDb.OleDbConnection(connectionString)
+                    conn.Open()
+
+
+
+                    ' Only copy if not already existing in destination folder
+                    If Not Directory.Exists(Folderpath) Then
+                        Directory.CreateDirectory(Folderpath)
+                    End If
+
+                    ' Optional: Check file existence in destination folder too
+                    If Not File.Exists(destinationPath) Then
+                        File.Copy(selectedPath, destinationPath, True)
+                    End If
+
+                    ' Save new record
+                    Using cmd As New OleDb.OleDbCommand("INSERT INTO PersonalDetails ([FirstName], [LastName], [DateOfBirth], [Gender], [Contact], [Email], [Role], [Age], [PostalCode], [MaritalStatus], [Photo], [Dietary], [FoodType] ) VALUES ( ?, ?, ?, ?, ?, ?, ?, ? ,?, ?, ?, ?, ?)", conn)
+                        Dim person As New Person
+
+                        cmd.Parameters.AddWithValue("?", dbFilePath)
+                        cmd.Parameters.AddWithValue("?", TextBox1.Text)
+                        cmd.Parameters.AddWithValue("?", TextBox2.Text)
+                        cmd.Parameters.AddWithValue("?", DateTimePicker1.Value.ToString())
+                        cmd.Parameters.AddWithValue("?", ComboBox3.SelectedItem.ToString())
+                        cmd.Parameters.AddWithValue("?", TextBox3.Text)
+                        cmd.Parameters.AddWithValue("?", TextBox4.Text)
+                        cmd.Parameters.AddWithValue("?", ComboBox1.SelectedItem.ToString())
+                        cmd.Parameters.AddWithValue("?", TextBox5.Text)
+                        cmd.Parameters.AddWithValue("?", TextBox6.Text)
+                        cmd.Parameters.AddWithValue("?", ComboBox2.SelectedItem.ToString())
+                        cmd.Parameters.AddWithValue("?", ComboBox4.SelectedItem.ToString())
+                        cmd.Parameters.AddWithValue("?", ComboBox5.SelectedItem.ToString())
+                        cmd.Parameters.AddWithValue("?", person.Photo)
+
+                        cmd.ExecuteNonQuery()
+
+                        MessageBox.Show("Personnel information saved to Database successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                        MessageBox.Show("Photo saved to database and network folder.")
+
+                    End Using
+                End Using
+
+            Catch ex As Exception
+                MessageBox.Show("Error: " & ex.Message)
+            End Try
+        End If
+
+        conn.Close()
         Debug.WriteLine("Exiting btnSubmit")
         'connec.Close()
         LoadData()
@@ -117,7 +172,7 @@ Public Class Personnel
         toolTip.ShowAlways = True
 
         toolTip1.SetToolTip(BtnBack, "Back")
-        toolTip1.SetToolTip(BtnAddpicture, "Add a Picture")
+        'toolTip1.SetToolTip(BtnAddpicture, "Add a Picture")
         toolTip1.SetToolTip(BtnEdit, "Edit")
         toolTip1.SetToolTip(BtnDelete, "Delete")
         toolTip1.SetToolTip(BtnClear, "Clear")
@@ -144,29 +199,31 @@ Public Class Personnel
 
     End Sub
 
-    Private Sub DataGridView1_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridView1.CellContentClick
-        ' When a row is clicked in the DataGridView
+    'Private Sub DataGridView1_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridView1.CellContentClick
+    '    ' When a row is clicked in the DataGridView
 
-        ' Check if a valid row is clicked (not header)
-        If e.RowIndex >= 0 Then
-            Dim row As DataGridViewRow = DataGridView1.Rows(e.RowIndex)
+    '    ' Check if a valid row is clicked (not header)
+    '    If e.RowIndex >= 0 Then
+    '        Dim row As DataGridViewRow = DataGridView1.Rows(e.RowIndex)
 
-            ' Fill the form fields with the values from the selected row
-            TextBox1.Text = row.Cells("FirstName").Value.ToString()
-            TextBox2.Text = row.Cells("LastName").Value.ToString()
-            DateTimePicker1.Value = Convert.ToDateTime(row.Cells("DateOfBirth").Value)
-            TextBox4.Text = row.Cells("Email").Value.ToString()
-            TextBox3.Text = row.Cells("Contact").Value.ToString()
-            TextBox5.Text = row.Cells("Age").Value.ToString()
-            ComboBox1.Text = row.Cells("Role").Value.ToString()
-            ComboBox3.Text = row.Cells("Gender").Value.ToString()
-            TextBox6.Text = row.Cells("PostalCode").Value.ToString()
-            TextBox7.Text = row.Cells("Photo").Value.ToString()
-            PictureBox1.ImageLocation = row.Cells("Photo").Value.ToString()
-            ComboBox2.SelectedItem = row.Cells("MaritalStatus").Value.ToString()
-            ComboBox4.SelectedItem = row.Cells("Dietary").Value.ToString()
-        End If
-    End Sub
+    '        ' Fill the form fields with the values from the selected row
+    '        TextBox1.Text = row.Cells("FirstName").Value.ToString()
+    '        TextBox2.Text = row.Cells("LastName").Value.ToString()
+    '        DateTimePicker1.Value = Convert.ToDateTime(row.Cells("DateOfBirth").Value)
+    '        TextBox4.Text = row.Cells("Email").Value.ToString()
+    '        TextBox3.Text = row.Cells("Contact").Value.ToString()
+    '        TextBox5.Text = row.Cells("Age").Value.ToString()
+    '        ComboBox1.Text = row.Cells("Role").Value.ToString()
+    '        ComboBox3.Text = row.Cells("Gender").Value.ToString()
+    '        TextBox6.Text = row.Cells("PostalCode").Value.ToString()
+    '        TextBox7.Text = row.Cells("Photo").Value.ToString()
+    '        PictureBox1.ImageLocation = row.Cells("Photo").Value.ToString()
+    '        ComboBox2.SelectedItem = row.Cells("MaritalStatus").Value.ToString()
+    '        ComboBox4.SelectedItem = row.Cells("Dietary").Value.ToString()
+    '        ComboBox5.SelectedItem = row.Cells("FoodType").Value.ToString()
+
+    '    End If
+    'End Sub
     Private Sub BtnEdit_Click(sender As Object, e As EventArgs) Handles BtnEdit.Click
         Debug.WriteLine("Entering btnEdit")
 
@@ -195,26 +252,33 @@ Public Class Personnel
                 Dim MaritalStatus As String = ComboBox2.SelectedItem.ToString
                 Dim Photo As String = TextBox7.Text
                 Dim Dietary As String = ComboBox4.SelectedItem.ToString
+                Dim FoodType As String = ComboBox5.SelectedItem.ToString
+                Dim DateOfBirth As String = DateTimePicker1.Value
+
+
                 ' Get the ID of the selected row (assuming your table has a primary key named "ID")  
                 Dim selectedRow As DataGridViewRow = DataGridView1.SelectedRows(0)
                 Dim ID As Integer = Convert.ToInt32(selectedRow.Cells("ID").Value) ' Change "ID" to your primary key column name  
 
                 ' Create an OleDbCommand to update the personnel data in the database  
-                Dim cmd As New OleDbCommand("UPDATE [PersonalDetails] SET [FirstName] = ?, [LastName] = ?, [Gender] = ?, [Contact] = ?, [Email] = ?, [Role] = ?, [Age] = ?, [PostalCode] = ?, [MaritalStatus] = ?, [Photo] = ?, [Dietary] = ? WHERE ID = ?", connec)
+                Dim cmd As New OleDbCommand("UPDATE [PersonalDetails] SET [FirstName] = ?, [LastName] = ?, [Gender] = ?, [Contact] = ?, [Email] = ?, [Role] = ?, [Age] = ?, [PostalCode] = ?, [MaritalStatus] = ?, [Photo] = ?, [Dietary] = ?, [FoodType] = ?, [DateOfBirth] = ? WHERE ID = ?", connec)
 
                 ' Set the parameter values from the UI controls  
-                cmd.Parameters.AddWithValue("@FirstName", FirstName)
-                cmd.Parameters.AddWithValue("@LastName", LastName)
-                cmd.Parameters.AddWithValue("@Gender", Gender)
-                cmd.Parameters.AddWithValue("@Contact", Contact)
-                cmd.Parameters.AddWithValue("@Email", Email)
-                cmd.Parameters.AddWithValue("@Role", Role)
-                cmd.Parameters.AddWithValue("@Age", Age)
-                cmd.Parameters.AddWithValue("@PostalCode", PostalCode)
-                cmd.Parameters.AddWithValue("MaritalStatus", MaritalStatus)
-                cmd.Parameters.AddWithValue("Photo", Photo)
-                cmd.Parameters.AddWithValue("Dietary", Dietary)
-                cmd.Parameters.AddWithValue("ID", ID)
+                cmd.Parameters.AddWithValue("?", FirstName)
+                cmd.Parameters.AddWithValue("?", LastName)
+                cmd.Parameters.AddWithValue("?", Gender)
+                cmd.Parameters.AddWithValue("?", Contact)
+                cmd.Parameters.AddWithValue("?", Email)
+                cmd.Parameters.AddWithValue("?", Role)
+                cmd.Parameters.AddWithValue("?", Age)
+                cmd.Parameters.AddWithValue("?", PostalCode)
+                cmd.Parameters.AddWithValue("?", MaritalStatus)
+                cmd.Parameters.AddWithValue("?", Photo)
+                cmd.Parameters.AddWithValue("?", Dietary)
+                cmd.Parameters.AddWithValue("?", FoodType)
+                cmd.Parameters.AddWithValue("?", DateOfBirth)
+
+                cmd.Parameters.AddWithValue("?", ID)
 
                 ' Execute the SQL command to update the data
                 cmd.ExecuteNonQuery()
@@ -297,10 +361,20 @@ Public Class Personnel
                 ComboBox1.SelectedItem = row.Cells("Role").Value.ToString()
                 ComboBox3.SelectedItem = row.Cells("Gender").Value.ToString()
                 TextBox6.Text = row.Cells("PostalCode").Value.ToString()
-                TextBox7.Text = row.Cells("Photo").Value.ToString()
-                PictureBox1.ImageLocation = row.Cells("Photo").Value.ToString()
+                'TextBox7.Text = row.Cells("Photo").Value.ToString()
+                'PictureBox1.ImageLocation = row.Cells("Photo").Value.ToString()
                 DateTimePicker1.Value = row.Cells("DateOfBirth").Value.ToString()
                 ComboBox4.SelectedItem = row.Cells("Dietary").Value.ToString()
+
+                ' Try to load the image from the UNC path in FilePath
+                Dim filePath As String = row.Cells("Photo").Value.ToString()
+                If Not String.IsNullOrWhiteSpace(filePath) AndAlso File.Exists(filePath) Then
+                    PictureBox1.ImageLocation = filePath
+                    PictureBox1.Image = Image.FromFile(filePath)
+                Else
+                    PictureBox1.Image = Nothing
+                    MessageBox.Show("Image not found at " & filePath)
+                End If
 
             End If
         End If
@@ -365,6 +439,8 @@ Public Class Personnel
         ComboBox2.Text = ""
         ComboBox3.Text = ""
         ComboBox4.Text = ""
+        ComboBox5.Text = ""
+
     End Sub
     Public Sub ClearControls(ByVal FORM As Form)
         ' Clear TextBoxes  
@@ -388,34 +464,7 @@ Public Class Personnel
             End If
         Next
     End Sub
-    Private Sub BtnAddpicture_Click(sender As Object, e As EventArgs) Handles BtnAddpicture.Click
 
-        'Dim OpenFileDialog As New OpenFileDialog()
-        'OpenFileDialog.Filter = "Bitmaps (*.jpg)|*.jpg"
-        'If OpenFileDialog.ShowDialog() = DialogResult.OK Then
-        '    PictureBox1.ImageLocation = OpenFileDialog.FileName
-        '    TextBox7.Text = OpenFileDialog.FileName
-        'End If
-
-        Dim ofd As New OpenFileDialog()
-        ofd.Filter = "Documents|*.pdf;*.docx;*.xlsx;*.jpg;*.png|All files|*.*"
-
-        If ofd.ShowDialog() = DialogResult.OK Then
-            Dim sourcePath As String = ofd.FileName
-            Dim fileName As String = IO.Path.GetFileName(sourcePath)
-
-            ' Define your network folder and category subfolder
-            Dim networkFolder As String = "\\KHODANIRAPHALAL\Users\Raphalalani\Source\Repos\maurice67530\HouseholdManagementSystems\Personnel Pictures" ' <-- Replace with your actual path
-            Dim categoryFolder As String = Path.Combine(networkFolder, ComboBox1.Text)
-
-            ' Ensure the category folder exists
-            Directory.CreateDirectory(categoryFolder)
-
-            ' Build destination path and copy file
-            Dim destinationPath As String = Path.Combine(categoryFolder, fileName)
-            File.Copy(sourcePath, destinationPath, True) ' Overwrite if exists
-        End If
-    End Sub
 
     Private Sub BtnDailyTasks_Click(sender As Object, e As EventArgs) Handles BtnDailyTasks.Click
         chores.ShowDialog()
@@ -434,6 +483,8 @@ Public Class Personnel
         ComboBox3.Text = ""
         TextBox7.Text = ""
         ComboBox4.Text = ""
+        ComboBox5.Text = ""
+
         PictureBox1.ImageLocation = ""
     End Sub
 
