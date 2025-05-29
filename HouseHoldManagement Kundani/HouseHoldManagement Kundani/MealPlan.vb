@@ -543,11 +543,20 @@ Public Class MealPlan
     End Sub
 
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
+        'If MessageBox.Show("Would you like to view the calendar?", "Open Family Schedule", MessageBoxButtons.YesNo) = DialogResult.Yes Then
+        '    Family_Schedule.ShowDialog()
+
+        'End If
         If MessageBox.Show("Would you like to view the calendar?", "Open Family Schedule", MessageBoxButtons.YesNo) = DialogResult.Yes Then
-            Family_Schedule.ShowDialog()
+            ' Create the Family Schedule form
+            Dim familyScheduleForm As New Family_Schedule()
 
+            ' Enable auto-filtering
+            familyScheduleForm.AutoFilterEnabled = True
+
+            ' Show the form
+            familyScheduleForm.ShowDialog()
         End If
-
     End Sub
 
 End Class
