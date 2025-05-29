@@ -97,16 +97,13 @@ Public Class Family_Schedule
         End Try
     End Sub
     Private Sub Family_Schedule_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        LoadMealSchedule()
-        LoadFamilySchedules()
-         LoadFamilySchedule()
-        LoadMealEvents()
 
 
         Dim tooltip As New ToolTip
         tooltip.SetToolTip(btnSave, "Submit")
         tooltip.SetToolTip(btnUpdate, "Update")
         tooltip.SetToolTip(btnDelete, "Delete")
+        tooltip.SetToolTip(Button1, " Filter meal")
 
         PopulateComboboxFromDatabase(ComboBox1)
         LoadScheduleFromDatabase()
@@ -893,7 +890,7 @@ Public Class Family_Schedule
 
 
 
-
+#Region "Mulanga"
 
     'xilu
     Public Sub AddMealToSchedule(mealDate As DateTime, mealTitle As String, mealDetails As String)
@@ -1056,4 +1053,13 @@ Public Class Family_Schedule
             conn.Close()
         End Try
     End Sub
+
+    Private Sub Button1_Click_1(sender As Object, e As EventArgs) Handles Button1.Click
+        LoadMealSchedule()
+        LoadFamilySchedules()
+        LoadFamilySchedule()
+        LoadMealEvents()
+
+    End Sub
+#End Region
 End Class

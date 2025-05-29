@@ -50,6 +50,7 @@ Partial Class Family_Schedule
         Me.btnUpdate = New System.Windows.Forms.Button()
         Me.btnDelete = New System.Windows.Forms.Button()
         Me.Panel3 = New System.Windows.Forms.Panel()
+        Me.Button1 = New System.Windows.Forms.Button()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel2.SuspendLayout()
         Me.Panel1.SuspendLayout()
@@ -264,7 +265,7 @@ Partial Class Family_Schedule
         '
         Me.btnUpdate.BackColor = System.Drawing.SystemColors.ActiveCaption
         Me.btnUpdate.Image = CType(resources.GetObject("btnUpdate.Image"), System.Drawing.Image)
-        Me.btnUpdate.Location = New System.Drawing.Point(297, 498)
+        Me.btnUpdate.Location = New System.Drawing.Point(231, 498)
         Me.btnUpdate.Name = "btnUpdate"
         Me.btnUpdate.Size = New System.Drawing.Size(75, 44)
         Me.btnUpdate.TabIndex = 20
@@ -290,11 +291,22 @@ Partial Class Family_Schedule
         Me.Panel3.Size = New System.Drawing.Size(643, 50)
         Me.Panel3.TabIndex = 23
         '
+        'Button1
+        '
+        Me.Button1.BackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.Button1.Image = CType(resources.GetObject("Button1.Image"), System.Drawing.Image)
+        Me.Button1.Location = New System.Drawing.Point(400, 498)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(75, 44)
+        Me.Button1.TabIndex = 24
+        Me.Button1.UseVisualStyleBackColor = False
+        '
         'Family_Schedule
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(673, 545)
+        Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.Panel3)
         Me.Controls.Add(Me.DataGridView1)
         Me.Controls.Add(Me.btnSave)
@@ -343,4 +355,5 @@ Partial Class Family_Schedule
     Friend WithEvents ListView1 As ListView
     Friend WithEvents ComboBox3 As ComboBox
     Friend WithEvents Panel3 As Panel
+    Friend WithEvents Button1 As Button
 End Class
