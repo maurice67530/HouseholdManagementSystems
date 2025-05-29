@@ -49,7 +49,7 @@ Public Class Personnel
 
                     ' Save new record
 
-                    Using cmd As New OleDb.OleDbCommand("INSERT INTO PersonalDetails ([Photo], [FirstName], [LastName], [DateOfBirth], [Gender], [Contact], [Email], [Role], [Age], [PostalCode], [MaritalStatus], [Dietary] ) VALUES ( ?, ?, ?, ?, ?, ?, ?, ? ,?, ?, ?, ?)", conn)
+                    Using cmd As New OleDb.OleDbCommand("INSERT INTO PersonalDetails ([Photo], [FirstName], [LastName], [DateOfBirth], [Gender], [Contact], [Email], [Role], [Age], [PostalCode], [MaritalStatus], [Dietary], [FoodType] ) VALUES ( ?, ?, ?, ?, ?, ?, ?, ? ,?, ?, ?, ?, ?)", conn)
                         Dim person As New Person
                         cmd.Parameters.AddWithValue("?", dbFilePath)
 
@@ -64,22 +64,24 @@ Public Class Personnel
                         cmd.Parameters.AddWithValue("?", TextBox6.Text)
                         cmd.Parameters.AddWithValue("?", ComboBox2.SelectedItem.ToString())
                         cmd.Parameters.AddWithValue("?", ComboBox4.SelectedItem.ToString())
+                        cmd.Parameters.AddWithValue("?", ComboBox5.SelectedItem.ToString())
 
 
                         cmd.ExecuteNonQuery()
                         MsgBox(" You are now added as a member of the HoseHold Managment System!" & vbCrLf &
-                              "FirstName: " & Person.FirstName & vbCrLf &
-                              "LastName: " & Person.LastName & vbCrLf &
-                              "Birth of Date:" & Person.DateOfBirth & vbCrLf &
-                              "Gender: " & Person.Gender & vbCrLf &
-                              "Contact Number: " & Person.Contact & vbCrLf &
-                              "Email: " & Person.Email & vbCrLf &
-                              "Role: " & Person.Role & vbCrLf &
-                              "Age: " & Person.Age & vbCrLf &
-                              "Postal Code: " & Person.postalcode & vbCrLf &
-                              "Photo: " & Person.Photo & vbCrLf &
-                              "Dietary: " & Person.Dietary & vbCrLf &
-                              "Health Status: " & Person.MaritalStatus & vbCrLf, vbInformation, "Credentials  confirmation")
+                              "FirstName: " & person.FirstName & vbCrLf &
+                              "LastName: " & person.LastName & vbCrLf &
+                              "Birth of Date:" & person.DateOfBirth & vbCrLf &
+                              "Gender: " & person.Gender & vbCrLf &
+                              "Contact Number: " & person.Contact & vbCrLf &
+                              "Email: " & person.Email & vbCrLf &
+                              "Role: " & person.Role & vbCrLf &
+                              "Age: " & person.Age & vbCrLf &
+                              "Postal Code: " & person.postalcode & vbCrLf &
+                              "Photo: " & person.Photo & vbCrLf &
+                              "Dietary: " & person.Dietary & vbCrLf &
+                              "Food Type: " & person.FoodType & vbCrLf &
+                              "Health Status: " & person.MaritalStatus & vbCrLf, vbInformation, "Credentials  confirmation")
                     End Using
                 End Using
                 conn.Close()
@@ -156,6 +158,7 @@ Public Class Personnel
             PictureBox1.ImageLocation = row.Cells("Photo").Value.ToString()
             ComboBox2.SelectedItem = row.Cells("MaritalStatus").Value.ToString()
             ComboBox4.SelectedItem = row.Cells("Dietary").Value.ToString()
+            ComboBox5.SelectedItem = row.Cells("FoodType").Value.ToString()
         End If
 
     End Sub
@@ -191,12 +194,14 @@ Public Class Personnel
 
                 Dim Photo As String = TextBox7.Text
                 Dim Dietary As String = ComboBox4.SelectedItem.ToString
+                Dim FoodType As String = ComboBox5.SelectedItem.ToString
+
                 ' Get the ID of the selected row (assuming your table has a primary key named "ID")  
                 Dim selectedRow As DataGridViewRow = DataGridView1.SelectedRows(0)
                 Dim ID As Integer = Convert.ToInt32(selectedRow.Cells("ID").Value) ' Change "ID" to your primary key column name  
 
                 ' Create an OleDbCommand to update the personnel data in the database  
-                Dim cmd As New OleDbCommand("UPDATE [PersonalDetails] SET [FirstName] = ?, [LastName] = ?, [Gender] = ?, [Contact] = ?, [Email] = ?, [Role] = ?, [Age] = ?, [PostalCode] = ?, [MaritalStatus] = ?, [Photo] = ?, [Dietary] = ? WHERE ID = ?", connec)
+                Dim cmd As New OleDbCommand("UPDATE [PersonalDetails] SET [FirstName] = ?, [LastName] = ?, [Gender] = ?, [Contact] = ?, [Email] = ?, [Role] = ?, [Age] = ?, [PostalCode] = ?, [MaritalStatus] = ?, [Photo] = ?, [Dietary] = ?, [FoodType] = ? WHERE ID = ?", connec)
 
                 ' Set the parameter values from the UI controls  
                 cmd.Parameters.AddWithValue("@FirstName", FirstName)
@@ -207,11 +212,12 @@ Public Class Personnel
                 cmd.Parameters.AddWithValue("@Role", Role)
                 cmd.Parameters.AddWithValue("@Age", Age)
                 cmd.Parameters.AddWithValue("@PostalCode", PostalCode)
-                cmd.Parameters.AddWithValue("MaritalStatus", MaritalStatus)
-                cmd.Parameters.AddWithValue("Photo", Photo)
-                cmd.Parameters.AddWithValue("Dietary", Dietary)
-                cmd.Parameters.AddWithValue(" DateOfBirth", DateOfBirth)
-                cmd.Parameters.AddWithValue("ID", ID)
+                cmd.Parameters.AddWithValue("@MaritalStatus", MaritalStatus)
+                cmd.Parameters.AddWithValue("@Photo", Photo)
+                cmd.Parameters.AddWithValue("@Dietary", Dietary)
+                cmd.Parameters.AddWithValue("@DateOfBirth", DateOfBirth)
+                cmd.Parameters.AddWithValue("@FoodType", FoodType)
+                cmd.Parameters.AddWithValue("@ID", ID)
 
                 ' Execute the SQL command to update the data
                 cmd.ExecuteNonQuery()
@@ -300,6 +306,7 @@ Public Class Personnel
                 PictureBox1.ImageLocation = row.Cells("Photo").Value.ToString()
                 DateTimePicker1.Value = row.Cells("DateOfBirth").Value.ToString()
                 ComboBox4.SelectedItem = row.Cells("Dietary").Value.ToString()
+                ComboBox5.SelectedItem = row.Cells("FoodType").Value.ToString()
 
             End If
         End If
@@ -328,6 +335,8 @@ Public Class Personnel
         ComboBox2.Text = ""
         ComboBox3.Text = ""
         ComboBox4.Text = ""
+        ComboBox5.Text = ""
+
     End Sub
     Public Sub ClearControls(ByVal FORM As Form)
         ' Clear TextBoxes  
@@ -380,25 +389,13 @@ Public Class Personnel
         TextBox7.Text = ""
         ComboBox4.Text = ""
         PictureBox1.ImageLocation = ""
+        ComboBox5.Text = ""
+
     End Sub
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         LoadData()
     End Sub
-
-    Private Sub Label13_Click(sender As Object, e As EventArgs) Handles Label13.Click
-
-    End Sub
-
-    Private Sub PictureBox1_Click(sender As Object, e As EventArgs) Handles PictureBox1.Click
-
-    End Sub
-
-    Private Sub ListBox1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ListBox1.SelectedIndexChanged
-
-    End Sub
-
-
 
 
 End Class
