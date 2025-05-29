@@ -380,7 +380,9 @@ Public Class Personnel
         End If
 
 
-        'DONGOLA
+
+#Region "DONGOLA"
+
         If DataGridView1.SelectedRows.Count > 0 Then
             ' Get selected row
             Dim selectedRow As DataGridViewRow = DataGridView1.SelectedRows(0)
@@ -406,6 +408,7 @@ Public Class Personnel
                 End Try
             End Using
         End If
+#End Region
     End Sub
     Private Sub ClearForm()
         TextBox8.Clear()
