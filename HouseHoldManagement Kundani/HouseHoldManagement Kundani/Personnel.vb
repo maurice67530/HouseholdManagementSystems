@@ -366,15 +366,15 @@ Public Class Personnel
                 DateTimePicker1.Value = row.Cells("DateOfBirth").Value.ToString()
                 ComboBox4.SelectedItem = row.Cells("Dietary").Value.ToString()
 
-                ' Try to load the image from the UNC path in FilePath
-                Dim filePath As String = row.Cells("Photo").Value.ToString()
-                If Not String.IsNullOrWhiteSpace(filePath) AndAlso File.Exists(filePath) Then
-                    PictureBox1.ImageLocation = filePath
-                    PictureBox1.Image = Image.FromFile(filePath)
-                Else
-                    PictureBox1.Image = Nothing
-                    MessageBox.Show("Image not found at " & filePath)
-                End If
+                '' Try to load the image from the UNC path in FilePath
+                'Dim filePath As String = row.Cells("Photo").Value.ToString()
+                'If Not String.IsNullOrWhiteSpace(filePath) AndAlso File.Exists(filePath) Then
+                '    PictureBox1.ImageLocation = filePath
+                '    PictureBox1.Image = Image.FromFile(filePath)
+                'Else
+                '    PictureBox1.Image = Nothing
+                '    MessageBox.Show("Image not found at " & filePath)
+                'End If
 
             End If
         End If
