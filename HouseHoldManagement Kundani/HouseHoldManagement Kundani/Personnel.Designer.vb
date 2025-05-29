@@ -92,6 +92,7 @@ Partial Class Personnel
         'TextBox8
         '
         Me.TextBox8.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.TextBox8.Cursor = System.Windows.Forms.Cursors.No
         Me.TextBox8.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TextBox8.Location = New System.Drawing.Point(123, 56)
         Me.TextBox8.Name = "TextBox8"
@@ -124,7 +125,7 @@ Partial Class Personnel
         Me.Label14.AutoSize = True
         Me.Label14.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         Me.Label14.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label14.Location = New System.Drawing.Point(414, 64)
+        Me.Label14.Location = New System.Drawing.Point(414, 61)
         Me.Label14.Name = "Label14"
         Me.Label14.Size = New System.Drawing.Size(47, 17)
         Me.Label14.TabIndex = 142
@@ -474,9 +475,9 @@ Partial Class Personnel
         'ListBox1
         '
         Me.ListBox1.FormattingEnabled = True
-        Me.ListBox1.Location = New System.Drawing.Point(514, 361)
+        Me.ListBox1.Location = New System.Drawing.Point(490, 361)
         Me.ListBox1.Name = "ListBox1"
-        Me.ListBox1.Size = New System.Drawing.Size(223, 82)
+        Me.ListBox1.Size = New System.Drawing.Size(247, 82)
         Me.ListBox1.TabIndex = 159
         '
         'Label16

@@ -166,9 +166,7 @@ Public Class Personnel
             ComboBox2.SelectedItem = row.Cells("MaritalStatus").Value.ToString()
             ComboBox4.SelectedItem = row.Cells("Dietary").Value.ToString()
         End If
-
     End Sub
-
     Private Sub BtnEdit_Click(sender As Object, e As EventArgs) Handles BtnEdit.Click
         Debug.WriteLine("Entering btnEdit")
 
@@ -185,7 +183,6 @@ Public Class Personnel
 
             Using connec As New OleDbConnection(HouseHoldManagment_Module.connectionString)
                 connec.Open()
-
 
                 Dim FirstName As String = TextBox1.Text
                 Dim LastName As String = TextBox2.Text
@@ -217,15 +214,12 @@ Public Class Personnel
                 cmd.Parameters.AddWithValue("MaritalStatus", MaritalStatus)
                 cmd.Parameters.AddWithValue("Photo", Photo)
                 cmd.Parameters.AddWithValue("Dietary", Dietary)
-
                 cmd.Parameters.AddWithValue("ID", ID)
 
                 ' Execute the SQL command to update the data
                 cmd.ExecuteNonQuery()
 
-
                 MsgBox("Personnel information updated!")
-
 
                 LoadData()
 
@@ -310,19 +304,43 @@ Public Class Personnel
 
             End If
         End If
+
+
+        'DONGOLA
+        If DataGridView1.SelectedRows.Count > 0 Then
+            ' Get selected row
+            Dim selectedRow As DataGridViewRow = DataGridView1.SelectedRows(0)
+            ' Get FirstName and LastName
+            Dim firstName As String = selectedRow.Cells("FirstName").Value.ToString()
+            Dim lastName As String = selectedRow.Cells("LastName").Value.ToString()
+            Dim fullName As String = $"{firstName} {lastName}"
+            ' Clear previous items in ListBox
+            ListBox1.Items.Clear()
+            ' Fetch chores from database
+            Using conn As New OleDbConnection(connString)
+                Dim query As String = "SELECT Title FROM Chores WHERE AssignedTo = @AssignedTo"
+                Dim cmd As New OleDbCommand(query, conn)
+                cmd.Parameters.AddWithValue("@AssignedTo", fullName)
+                Try
+                    conn.Open()
+                    Dim reader As OleDbDataReader = cmd.ExecuteReader()
+                    While reader.Read()
+                        ListBox1.Items.Add(reader("Title").ToString())
+                    End While
+                Catch ex As Exception
+                    MessageBox.Show("Error fetching chores: " & ex.Message)
+                End Try
+            End Using
+        End If
     End Sub
     Private Sub ClearForm()
         TextBox8.Clear()
         TextBox1.Clear()
         TextBox2.Clear()
-        'DateTimePicker1.CLEAR
         TextBox4.Clear()
         TextBox3.Clear()
         TextBox5.Clear()
-        'ComboBox1.CLEAR
-        'ComboBox3.CLEAR
         TextBox6.Clear()
-        'ComboBox2.CLEAR
 
         TextBox1.Text = ""
         TextBox2.Text = ""
@@ -422,4 +440,9 @@ Public Class Personnel
     Private Sub ListBox1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ListBox1.SelectedIndexChanged
 
     End Sub
+
+    'DONGOLA
+    Private connString As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=\\MUDAUMURANGI\Users\Murangi\Source\Repos\maurice67530\HouseholdManagementSystems\HMS.accdb"
+
+
 End Class
