@@ -115,6 +115,8 @@ Public Class Person
     Public Property Contact As Integer
     Public Property Photo As String
     Public Property Dietary As String
+    Public Property FoodType As String
+
 
 End Class
 Public Class FamilySchedule
