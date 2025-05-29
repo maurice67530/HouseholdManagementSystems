@@ -159,3 +159,12 @@ Public Class HouseholdDocument
     Public Property UploadDate As String
 
 End Class
+Public Class Photo_Gallery
+    Public Property Description As String
+    Public Property FilePath As String
+    Public Property DateAdded As String
+    Public Property FamilyMember As String
+    Public Property Photographer As String
+    Public Property Album As String
+
+End Class
