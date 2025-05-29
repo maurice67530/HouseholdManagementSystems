@@ -228,6 +228,10 @@ Public Class In_App_Message
     Private Sub NotifyIcon1_MouseDoubleClick(sender As Object, e As MouseEventArgs) Handles NotifyIcon1.MouseDoubleClick
 
     End Sub
+
+    Private Sub TextBox1_TextChanged_1(sender As Object, e As EventArgs) Handles TextBox1.TextChanged
+
+    End Sub
 End Class
 
 
