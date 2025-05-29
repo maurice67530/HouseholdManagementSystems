@@ -290,70 +290,27 @@ Public Class Personnel
     End Sub
 
     Private Sub DataGridView1_SelectionChanged(sender As Object, e As EventArgs) Handles DataGridView1.SelectionChanged
-        'If DataGridView1.SelectedRows.Count > 0 Then
-        '    Dim row As DataGridViewRow = DataGridView1.SelectedRows(0)
-        '    If Not row.IsNewRow Then
-        '        TextBox8.Text = row.Cells("ID").Value.ToString()
-        '        TextBox1.Text = row.Cells("FirstName").Value.ToString()
-        '        TextBox2.Text = row.Cells("LastName").Value.ToString()
-        '        TextBox3.Text = row.Cells("Contact").Value.ToString()
-        '        TextBox4.Text = row.Cells("Email").Value.ToString()
-        '        TextBox5.Text = row.Cells("Age").Value.ToString()
-        '        ComboBox2.SelectedItem = row.Cells("MaritalStatus").Value.ToString()
-        '        ComboBox1.SelectedItem = row.Cells("Role").Value.ToString()
-        '        ComboBox3.SelectedItem = row.Cells("Gender").Value.ToString()
-        '        TextBox6.Text = row.Cells("PostalCode").Value.ToString()
-        '        'TextBox7.Text = row.Cells("Photo").Value.ToString()
-        '        'PictureBox1.ImageLocation = row.Cells("Photo").Value.ToString()
-        '        DateTimePicker1.Value = row.Cells("DateOfBirth").Value.ToString()
-        '        ComboBox4.SelectedItem = row.Cells("Dietary").Value.ToString()
-        '        ComboBox5.SelectedItem = row.Cells("FoodType").Value.ToString()
-        '        ' Try to load the image from the UNC path in FilePath
-        '        Dim filePath As String = row.Cells("Photo").Value?.ToString()
-        '        If Not String.IsNullOrWhiteSpace(filePath) AndAlso File.Exists(filePath) Then
-        '            PictureBox1.ImageLocation = filePath
-        '            PictureBox1.Image = Image.FromFile(filePath)
-        '        Else
-        '            PictureBox1.Image = Nothing
-        '            MessageBox.Show("Image not found at " & filePath)
-        '        End If
-        '    End If
-        'End If
+        If DataGridView1.SelectedRows.Count > 0 Then
+            Dim row As DataGridViewRow = DataGridView1.SelectedRows(0)
+            If Not row.IsNewRow Then
+                TextBox8.Text = row.Cells("ID").Value.ToString()
+                TextBox1.Text = row.Cells("FirstName").Value.ToString()
+                TextBox2.Text = row.Cells("LastName").Value.ToString()
+                TextBox3.Text = row.Cells("Contact").Value.ToString()
+                TextBox4.Text = row.Cells("Email").Value.ToString()
+                TextBox5.Text = row.Cells("Age").Value.ToString()
+                ComboBox2.SelectedItem = row.Cells("MaritalStatus").Value.ToString()
+                ComboBox1.SelectedItem = row.Cells("Role").Value.ToString()
+                ComboBox3.SelectedItem = row.Cells("Gender").Value.ToString()
+                TextBox6.Text = row.Cells("PostalCode").Value.ToString()
+                TextBox7.Text = row.Cells("Photo").Value.ToString()
+                PictureBox1.ImageLocation = row.Cells("Photo").Value.ToString()
+                DateTimePicker1.Value = row.Cells("DateOfBirth").Value.ToString()
+                ComboBox4.SelectedItem = row.Cells("Dietary").Value.ToString()
+                ComboBox5.SelectedItem = row.Cells("FoodType").Value.ToString()
 
-        Try
-            If DataGridView1.SelectedRows.Count > 0 Then
-                Dim selectedRow As DataGridViewRow = DataGridView1.SelectedRows(0)
-
-                ' Populate controls
-                TextBox8.Text = selectedRow.Cells("ID").Value.ToString()
-                TextBox1.Text = selectedRow.Cells("FirstName").Value.ToString()
-                TextBox2.Text = selectedRow.Cells("LastName").Value.ToString()
-                TextBox3.Text = selectedRow.Cells("Contact").Value.ToString()
-                TextBox4.Text = selectedRow.Cells("Email").Value.ToString()
-                TextBox5.Text = selectedRow.Cells("Age").Value.ToString()
-                ComboBox2.SelectedItem = selectedRow.Cells("MaritalStatus").Value.ToString()
-                ComboBox1.SelectedItem = selectedRow.Cells("Role").Value.ToString()
-                ComboBox3.SelectedItem = selectedRow.Cells("Gender").Value.ToString()
-                TextBox6.Text = selectedRow.Cells("PostalCode").Value.ToString()
-                'TextBox7.Text = row.Cells("Photo").Value.ToString()
-                'PictureBox1.ImageLocation = row.Cells("Photo").Value.ToString()
-                DateTimePicker1.Value = selectedRow.Cells("DateOfBirth").Value.ToString()
-                ComboBox4.SelectedItem = selectedRow.Cells("Dietary").Value.ToString()
-                ComboBox5.SelectedItem = selectedRow.Cells("FoodType").Value.ToString()
-
-                ' Try to load the image from the UNC path in FilePath
-                Dim filePath As String = selectedRow.Cells("Photo").Value.ToString()
-                If Not String.IsNullOrWhiteSpace(filePath) AndAlso File.Exists(filePath) Then
-                    PictureBox1.ImageLocation = filePath
-                    PictureBox1.Image = Image.FromFile(filePath)
-                Else
-                    PictureBox1.Image = Nothing
-                    MessageBox.Show("Image not found at " & filePath)
-                End If
             End If
-        Catch ex As Exception
-            MessageBox.Show("Error selecting data: " & ex.Message)
-        End Try
+        End If
     End Sub
     Private Sub ClearForm()
         TextBox8.Clear()
