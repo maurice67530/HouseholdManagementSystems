@@ -449,6 +449,43 @@ Public Class Personnel
         End If
 #End Region
 
+#Region "Murangi"
+
+        If DataGridView1.SelectedRows.Count > 0 Then
+            ' Get selected row
+            Dim selectedRow As DataGridViewRow = DataGridView1.SelectedRows(0)
+            ' Get FirstName and LastName
+            Dim firstName As String = selectedRow.Cells("FirstName").Value.ToString()
+            Dim lastName As String = selectedRow.Cells("LastName").Value.ToString()
+            Dim fullName As String = $"{firstName} {lastName}"
+
+            ' Clear previous items in ListBox
+
+
+            ' Add Chores heading
+            ListBox1.Items.Add("Documents:")
+            ListBox1.Items.Add("---------------")
+
+            ' Fetch chores from database
+            Using conn As New OleDbConnection(connString)
+                Dim query As String = "SELECT Category FROM HouseholdDocument WHERE BelongsTo = @BelongsTo"
+                Dim cmd As New OleDbCommand(query, conn)
+                cmd.Parameters.AddWithValue("@BelongsTo", fullName)
+                Try
+                    conn.Open()
+                    Dim reader As OleDbDataReader = cmd.ExecuteReader()
+                    While reader.Read()
+                        ListBox1.Items.Add(reader("Category").ToString())
+                    End While
+                Catch ex As Exception
+                    MessageBox.Show("Error fetching chores: " & ex.Message)
+                End Try
+            End Using
+        End If
+
+
+#End Region
+
 
 
     End Sub
