@@ -1,6 +1,9 @@
 ﻿Imports System.IO
 Imports System.Data.OleDb
 Public Class Personnel
+
+    Private documentPaths As New Dictionary(Of String, String)()
+
     Dim connec As New OleDbConnection(HouseHoldManagment_Module.connectionString)
 
     ' Create a ToolTip object''
@@ -456,36 +459,40 @@ Public Class Personnel
         If DataGridView1.SelectedRows.Count > 0 Then
             ' Get selected row
             Dim selectedRow As DataGridViewRow = DataGridView1.SelectedRows(0)
-            ' Get FirstName and LastName
             Dim firstName As String = selectedRow.Cells("FirstName").Value.ToString()
             Dim lastName As String = selectedRow.Cells("LastName").Value.ToString()
             Dim fullName As String = $"{firstName} {lastName}"
 
-            ' Clear previous items in ListBox
-
-
-            ' Add Chores heading
+            ' Now load their documents
+            'ListBox1.Items.Clear()
+            'documentPaths.Clear()
 
             ListBox1.Items.Add("---------------")
             ListBox1.Items.Add("Documents:")
-            ' Fetch chores from database
+
             Using conn As New OleDbConnection(connString)
-                Dim query As String = "SELECT Category FROM HouseholdDocument WHERE BelongsTo = @BelongsTo"
-                Dim cmd As New OleDbCommand(query, conn)
-                cmd.Parameters.AddWithValue("@BelongsTo", fullName)
-                Try
-                    conn.Open()
-                    Dim reader As OleDbDataReader = cmd.ExecuteReader()
-                    While reader.Read()
-                        ListBox1.Items.Add(reader("Category").ToString())
-                    End While
-                Catch ex As Exception
-                    MessageBox.Show("Error fetching chores: " & ex.Message)
-                End Try
+                Dim query As String = "SELECT Category, FilePath FROM HouseholdDocument WHERE BelongsTo = @BelongsTo"
+                Using cmd As New OleDbCommand(query, conn)
+                    cmd.Parameters.AddWithValue("@BelongsTo", fullName)
+                    Try
+                        conn.Open()
+                        Using reader As OleDbDataReader = cmd.ExecuteReader()
+                            While reader.Read()
+                                Dim category As String = reader("Category").ToString()
+                                Dim filePath As String = reader("FilePath").ToString()
+
+                                ListBox1.Items.Add(category)
+                                documentPaths(category) = filePath
+                            End While
+                        End Using
+                    Catch ex As Exception
+                        MessageBox.Show("Error fetching documents: " & ex.Message)
+                    End Try
+                End Using
             End Using
+
             ListBox1.Items.Add("---------------")
         End If
-
 
 #End Region
 
@@ -574,8 +581,23 @@ Public Class Personnel
     End Sub
 
     Private Sub ListBox1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ListBox1.SelectedIndexChanged
+        Dim selectedCategory As String = ListBox1.SelectedItem?.ToString()
 
+        If String.IsNullOrWhiteSpace(selectedCategory) OrElse selectedCategory = "Documents:" OrElse selectedCategory = "---------------" Then
+            Exit Sub
+        End If
+
+        If documentPaths.ContainsKey(selectedCategory) Then
+            Dim filePath As String = documentPaths(selectedCategory)
+
+            If IO.File.Exists(filePath) Then
+                Process.Start(filePath)
+            Else
+                MessageBox.Show("File not found: " & filePath)
+            End If
+        End If
     End Sub
+
 
     'DONGOLA
     Private connString As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=\\MUDAUMURANGI\Users\Murangi\Source\Repos\maurice67530\HouseholdManagementSystems\HMS.accdb"
