@@ -78,7 +78,7 @@ Public Class Login
 
             ' After successful login
             Dim dashboard As New Dashboard()
-            dashboard.CurrentUserName = TextBox1.Text.Trim() ' Pass the username from the TextBox
+            'dashboard.CurrentUserName = TextBox1.Text.Trim() ' Pass the username from the TextBox
 
 
             MessageBox.Show("Login successful. :" & FullNames & role, "Welcome!", MessageBoxButtons.OK, MessageBoxIcon.Information)
