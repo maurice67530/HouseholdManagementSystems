@@ -173,7 +173,7 @@ Public Class Personnel
         toolTip.InitialDelay = 500
         toolTip.ReshowDelay = 200
         toolTip.ShowAlways = True
-
+        CheckDatabaseConnection(StatusLabel)
         toolTip1.SetToolTip(BtnBack, "Back")
         'toolTip1.SetToolTip(BtnAddpicture, "Add a Picture")
         toolTip1.SetToolTip(BtnEdit, "Edit")

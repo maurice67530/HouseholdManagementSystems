@@ -54,6 +54,7 @@ Partial Class Grocery_Items
         Me.Label8 = New System.Windows.Forms.Label()
         Me.Label9 = New System.Windows.Forms.Label()
         Me.TextBox5 = New System.Windows.Forms.TextBox()
+        Me.statusLabel = New System.Windows.Forms.Label()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel1.SuspendLayout()
         Me.Panel3.SuspendLayout()
@@ -328,11 +329,20 @@ Partial Class Grocery_Items
         Me.TextBox5.Size = New System.Drawing.Size(100, 20)
         Me.TextBox5.TabIndex = 35
         '
+        'statusLabel
+        '
+        Me.statusLabel.AutoSize = True
+        Me.statusLabel.Location = New System.Drawing.Point(0, 0)
+        Me.statusLabel.Name = "statusLabel"
+        Me.statusLabel.Size = New System.Drawing.Size(0, 13)
+        Me.statusLabel.TabIndex = 103
+        '
         'Grocery_Items
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(641, 485)
+        Me.Controls.Add(Me.statusLabel)
         Me.Controls.Add(Me.btnSubmit)
         Me.Controls.Add(Me.Button5)
         Me.Controls.Add(Me.Button1)
@@ -353,6 +363,7 @@ Partial Class Grocery_Items
         Me.Panel2.ResumeLayout(False)
         Me.Panel2.PerformLayout()
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
 
@@ -386,4 +397,5 @@ Partial Class Grocery_Items
     Friend WithEvents Label8 As Label
     Friend WithEvents Label9 As Label
     Friend WithEvents TextBox5 As TextBox
+    Friend WithEvents statusLabel As Label
 End Class

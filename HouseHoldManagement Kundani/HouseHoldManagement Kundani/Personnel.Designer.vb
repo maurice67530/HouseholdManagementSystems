@@ -65,6 +65,7 @@ Partial Class Personnel
         Me.Label16 = New System.Windows.Forms.Label()
         Me.ComboBox5 = New System.Windows.Forms.ComboBox()
         Me.Label17 = New System.Windows.Forms.Label()
+        Me.StatusLabel = New System.Windows.Forms.Label()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -500,11 +501,20 @@ Partial Class Personnel
         Me.Label17.TabIndex = 162
         Me.Label17.Text = "Food Type"
         '
+        'StatusLabel
+        '
+        Me.StatusLabel.AutoSize = True
+        Me.StatusLabel.Location = New System.Drawing.Point(0, 0)
+        Me.StatusLabel.Name = "StatusLabel"
+        Me.StatusLabel.Size = New System.Drawing.Size(0, 13)
+        Me.StatusLabel.TabIndex = 163
+        '
         'Personnel
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(747, 604)
+        Me.Controls.Add(Me.StatusLabel)
         Me.Controls.Add(Me.Label17)
         Me.Controls.Add(Me.ComboBox5)
         Me.Controls.Add(Me.Label16)
@@ -598,4 +608,5 @@ Partial Class Personnel
     Friend WithEvents Label16 As Label
     Friend WithEvents ComboBox5 As ComboBox
     Friend WithEvents Label17 As Label
+    Friend WithEvents StatusLabel As Label
 End Class
