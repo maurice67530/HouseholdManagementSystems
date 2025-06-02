@@ -6,7 +6,7 @@ Public Class Grocery_Items
     Private Sub Grocery_Items_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         LoadGroceryItemDataFromDatabase()
         '  notify()
-
+        CheckDatabaseConnection(statusLabel)
         'Set tooltips for buttons
         ToolTip1.SetToolTip(btnSubmit, "Submit")
         ToolTip1.SetToolTip(Button5, "Update")

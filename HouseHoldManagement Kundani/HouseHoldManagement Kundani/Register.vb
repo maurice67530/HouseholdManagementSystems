@@ -52,6 +52,7 @@ Public Class Register
 
     Private Sub Register_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         ComboBox1.Items.AddRange(New String() {"Admin", "Member", "Finance", "Chef"})
+        CheckDatabaseConnection(StatusLabel)
     End Sub
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click

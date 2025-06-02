@@ -130,14 +130,15 @@ Public Class Household_Document
             ' Save path and metadata to the database
             Using conn As New OleDb.OleDbConnection(connectionString)
                 conn.Open()
-                Dim cmd As New OleDb.OleDbCommand("INSERT INTO HouseholdDocument (HouseholdID, Title, Notes, Category, FilePath, UploadedBy, UploadDate) VALUES (?, ?, ?, ?, ?, ?, ?)", conn)
+                Dim cmd As New OleDb.OleDbCommand("INSERT INTO HouseholdDocument (HouseholdID, Title, Notes, Category, FilePath, UploadedBy, UploadDate, BelongsTo) VALUES (?, ?, ?, ?, ?, ?, ?, ?)", conn)
                 cmd.Parameters.AddWithValue("?", 1)
                 cmd.Parameters.AddWithValue("?", TextBox1.Text)
                 cmd.Parameters.AddWithValue("?", TextBox2.Text)
                 cmd.Parameters.AddWithValue("?", ComboBox1.Text)
                 cmd.Parameters.AddWithValue("?", destinationPath) ' Save full UNC path
-                cmd.Parameters.AddWithValue("?", ComboBox3.Text)
+                cmd.Parameters.AddWithValue("?", TextBox5.Text)
                 cmd.Parameters.AddWithValue("?", DateTime.Now)
+                cmd.Parameters.AddWithValue("?", ComboBox4.Text)
                 cmd.ExecuteNonQuery()
             End Using
 
@@ -185,9 +186,9 @@ Public Class Household_Document
             Dim cmd As New OleDbCommand(query, conn)
             Dim reader As OleDbDataReader = cmd.ExecuteReader()
             'bind the retrieved data to the combobox
-            ComboBox3.Items.Clear()
+            ComboBox4.Items.Clear()
             While reader.Read()
-                ComboBox3.Items.Add($"{reader("userName")}")
+                ComboBox4.Items.Add($"{reader("userName")}")
             End While
             'close the database
             reader.Close()
@@ -303,11 +304,12 @@ Public Class Household_Document
         CheckDatabaseConnection(StatusLabel)
         'LoadHouseholdDocument()
         'LoadFilteredDocuments()
+        Dashboard.TextBox1.Text = TextBox5.Text
         LoadDocuments()
         PopulateComboboxeFromDatabase(ComboBox4)
         'LoadhouseholddocumentDataFromDatabase()
         LoadHouseholdDocumentDatafromDatabase()
-        PopulateComboboxFromDatabase(ComboBox3)
+        'PopulateComboboxFromDatabase(ComboBox3)
         'ViewDocument()
         ToolTip1.SetToolTip(Button2, "Upload")
         ToolTip1.SetToolTip(Button1, "Open")
@@ -428,7 +430,7 @@ Public Class Household_Document
                 TextBox2.Text = selectedRow.Cells("Notes").Value.ToString()
                 TextBox3.Text = selectedRow.Cells("FilePath").Value.ToString()
                 DateTimePicker1.Text = selectedRow.Cells("UploadDate").Value.ToString()
-                ComboBox3.Text = selectedRow.Cells("UploadedBy").Value.ToString()
+                TextBox5.Text = selectedRow.Cells("UploadedBy").Value.ToString()
 
             End If
 
@@ -540,7 +542,7 @@ Public Class Household_Document
     ' Load filtered document data based on category
     Private Sub LoadFilteredDocuments()
         Using dbConnection As New OleDbConnection(connectionString)
-            Dim selectedCategory As String = ComboBox3.SelectedItem?.ToString()
+            Dim selectedCategory As String = ComboBox1.SelectedItem?.ToString()
             Dim query As String = "SELECT * FROM HouseholdDocument WHERE 1=1"
 
             ' Add category filter if selected
@@ -569,5 +571,9 @@ Public Class Household_Document
 
     Private Sub DataGridView1_CellMouseMove(sender As Object, e As DataGridViewCellMouseEventArgs) Handles DataGridView1.CellMouseMove
         HighlightRowsByCategory()
+    End Sub
+
+    Private Sub TextBox5_TextChanged(sender As Object, e As EventArgs) Handles TextBox5.TextChanged
+
     End Sub
 End Class

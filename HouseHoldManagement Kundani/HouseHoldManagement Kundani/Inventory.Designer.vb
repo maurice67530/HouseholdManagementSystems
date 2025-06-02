@@ -55,6 +55,7 @@ Partial Class Inventory
         Me.Label1 = New System.Windows.Forms.Label()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
+        Me.StatusLabel = New System.Windows.Forms.Label()
         Me.Panel1.SuspendLayout()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -354,11 +355,20 @@ Partial Class Inventory
         'Timer1
         '
         '
+        'StatusLabel
+        '
+        Me.StatusLabel.AutoSize = True
+        Me.StatusLabel.Location = New System.Drawing.Point(0, 0)
+        Me.StatusLabel.Name = "StatusLabel"
+        Me.StatusLabel.Size = New System.Drawing.Size(0, 13)
+        Me.StatusLabel.TabIndex = 106
+        '
         'Inventory
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(569, 380)
+        Me.Controls.Add(Me.StatusLabel)
         Me.Controls.Add(Me.Panel1)
         Me.Controls.Add(Me.Button9)
         Me.Controls.Add(Me.Button8)
@@ -413,4 +423,5 @@ Partial Class Inventory
     Friend WithEvents Label1 As Label
     Friend WithEvents ToolTip1 As ToolTip
     Friend WithEvents Timer1 As Timer
+    Friend WithEvents StatusLabel As Label
 End Class

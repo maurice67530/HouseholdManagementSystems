@@ -55,7 +55,7 @@ Public Class MealPlan
     Private Sub MealPlan_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         ComboBox1.Items.AddRange(New String() {"<500", "500-1000", ">1000"})
         ComboBox2.Items.AddRange(New String() {"Daily", "Weekly", "Monthly"})
-
+        CheckDatabaseConnection(StatusLabel)
         lstMealSuggestions.Items.AddRange(New String() {"Noodles", "Chicken Curry", "Kota"})
         Dim tooltip As New ToolTip
         tooltip.SetToolTip(btnSave, "Save")
@@ -545,13 +545,18 @@ Public Class MealPlan
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
         'If MessageBox.Show("Would you like to view the calendar?", "Open Family Schedule", MessageBoxButtons.YesNo) = DialogResult.Yes Then
         '    Family_Schedule.ShowDialog()
-        '    Family_Schedule.LoadFamilySchedule()
-        '    'Family_Schedule.HighlightMealEvents()
-        '    Family_Schedule.LoadFamilySchedules()
 
-        '    Family_Schedule.btnFilte.Visible = True
         'End If
+        If MessageBox.Show("Would you like to view the calendar?", "Open Family Schedule", MessageBoxButtons.YesNo) = DialogResult.Yes Then
+            ' Create the Family Schedule form
+            Dim familyScheduleForm As New Family_Schedule()
 
+            ' Enable auto-filtering
+            familyScheduleForm.AutoFilterEnabled = True
+
+            ' Show the form
+            familyScheduleForm.ShowDialog()
+        End If
     End Sub
 
 End Class

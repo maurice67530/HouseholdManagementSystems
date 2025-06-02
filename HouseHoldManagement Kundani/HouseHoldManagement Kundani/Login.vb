@@ -73,6 +73,14 @@ Public Class Login
             Dim FullNames As String = reader("FullNames").ToString()
             Dim role As String = reader("Role").ToString()
 
+
+            '''''
+
+            ' After successful login
+            Dim dashboard As New Dashboard()
+            dashboard.CurrentUserName = TextBox1.Text.Trim() ' Pass the username from the TextBox
+
+
             MessageBox.Show("Login successful. :" & FullNames & role, "Welcome!", MessageBoxButtons.OK, MessageBoxIcon.Information)
 
             Dashboard.TextBox3.Text = username
@@ -85,6 +93,9 @@ Public Class Login
 
             In_App_Message.TextBox1.Text = username
             In_App_Message.Label6.Text = "Logged in as:" & username
+
+
+            Household_Document.TextBox5.Text = username
             Me.Hide()
 
 

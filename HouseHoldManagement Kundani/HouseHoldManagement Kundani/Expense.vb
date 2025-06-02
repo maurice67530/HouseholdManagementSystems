@@ -506,7 +506,7 @@ Public Class Expense
         'PopulateMessagesFromDatabase()
         LoadExpenseDataFromDatabase()
         PopulateComboboxFromDatabase(ComboBox3)
-        'PopulatelistboxFromDatabase(ListBox1)
+        ''PopulatelistboxFromDatabase(ListBox1)
 
     End Sub
 

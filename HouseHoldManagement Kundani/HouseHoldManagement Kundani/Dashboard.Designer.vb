@@ -114,6 +114,7 @@ Partial Class Dashboard
         Me.Label38 = New System.Windows.Forms.Label()
         Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
         Me.SettingsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.HouseHoldDocsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.GroupBox1.SuspendLayout()
         Me.Panel2.SuspendLayout()
         Me.Panel1.SuspendLayout()
@@ -984,10 +985,10 @@ Partial Class Dashboard
         'MenuStrip1
         '
         Me.MenuStrip1.BackColor = System.Drawing.Color.Transparent
-        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.SettingsToolStripMenuItem})
+        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.SettingsToolStripMenuItem, Me.HouseHoldDocsToolStripMenuItem})
         Me.MenuStrip1.Location = New System.Drawing.Point(0, 0)
         Me.MenuStrip1.Name = "MenuStrip1"
-        Me.MenuStrip1.Size = New System.Drawing.Size(1284, 24)
+        Me.MenuStrip1.Size = New System.Drawing.Size(1430, 24)
         Me.MenuStrip1.Stretch = False
         Me.MenuStrip1.TabIndex = 129
         Me.MenuStrip1.Text = "MenuStrip1"
@@ -1000,11 +1001,18 @@ Partial Class Dashboard
         Me.SettingsToolStripMenuItem.Size = New System.Drawing.Size(77, 20)
         Me.SettingsToolStripMenuItem.Text = "Settings"
         '
+        'HouseHoldDocsToolStripMenuItem
+        '
+        Me.HouseHoldDocsToolStripMenuItem.Image = CType(resources.GetObject("HouseHoldDocsToolStripMenuItem.Image"), System.Drawing.Image)
+        Me.HouseHoldDocsToolStripMenuItem.Name = "HouseHoldDocsToolStripMenuItem"
+        Me.HouseHoldDocsToolStripMenuItem.Size = New System.Drawing.Size(126, 20)
+        Me.HouseHoldDocsToolStripMenuItem.Text = "House Hold docs"
+        '
         'Dashboard
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1284, 881)
+        Me.ClientSize = New System.Drawing.Size(1430, 881)
         Me.Controls.Add(Me.Label38)
         Me.Controls.Add(Me.ListBox3)
         Me.Controls.Add(Me.Label35)
@@ -1148,4 +1156,5 @@ Partial Class Dashboard
     Friend WithEvents Label39 As Label
     Friend WithEvents MenuStrip1 As MenuStrip
     Friend WithEvents SettingsToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents HouseHoldDocsToolStripMenuItem As ToolStripMenuItem
 End Class

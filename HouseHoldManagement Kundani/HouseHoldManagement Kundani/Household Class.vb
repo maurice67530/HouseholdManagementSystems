@@ -115,6 +115,8 @@ Public Class Person
     Public Property Contact As Integer
     Public Property Photo As String
     Public Property Dietary As String
+    Public Property FoodType As String
+
 
 End Class
 Public Class FamilySchedule
@@ -155,5 +157,14 @@ Public Class HouseholdDocument
     Public Property FilePath As String
     Public Property UploadedBy As String
     Public Property UploadDate As String
+
+End Class
+Public Class Photo_Gallery
+    Public Property Description As String
+    Public Property FilePath As String
+    Public Property DateAdded As String
+    Public Property FamilyMember As String
+    Public Property Photographer As String
+    Public Property Album As String
 
 End Class

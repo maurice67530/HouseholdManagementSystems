@@ -33,9 +33,10 @@ Public Class Task_Management
         End Using
     End Sub
         Private Sub Task_Management_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        CheckDatabaseConnection(StatusLabel)
+        LoadTasksDataFromDatabase()
 
-            LoadTasksDataFromDatabase()
-            Dim tooltip As New ToolTip
+        Dim tooltip As New ToolTip
             tooltip.SetToolTip(Button1, "Submit")
             tooltip.SetToolTip(Button4, "Refresh")
             tooltip.SetToolTip(Button3, "Delete")

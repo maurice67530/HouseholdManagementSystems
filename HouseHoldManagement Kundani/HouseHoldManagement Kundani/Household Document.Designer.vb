@@ -25,7 +25,8 @@ Partial Class Household_Document
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Household_Document))
         Me.Panel2 = New System.Windows.Forms.Panel()
-        Me.ComboBox3 = New System.Windows.Forms.ComboBox()
+        Me.Label11 = New System.Windows.Forms.Label()
+        Me.ComboBox4 = New System.Windows.Forms.ComboBox()
         Me.TextBox1 = New System.Windows.Forms.TextBox()
         Me.Label8 = New System.Windows.Forms.Label()
         Me.DateTimePicker1 = New System.Windows.Forms.DateTimePicker()
@@ -57,8 +58,7 @@ Partial Class Household_Document
         Me.WebBrowser1 = New System.Windows.Forms.WebBrowser()
         Me.Button4 = New System.Windows.Forms.Button()
         Me.StatusLabel = New System.Windows.Forms.Label()
-        Me.ComboBox4 = New System.Windows.Forms.ComboBox()
-        Me.Label11 = New System.Windows.Forms.Label()
+        Me.TextBox5 = New System.Windows.Forms.TextBox()
         Me.Panel2.SuspendLayout()
         Me.Panel1.SuspendLayout()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -68,9 +68,9 @@ Partial Class Household_Document
         'Panel2
         '
         Me.Panel2.BackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.Panel2.Controls.Add(Me.TextBox5)
         Me.Panel2.Controls.Add(Me.Label11)
         Me.Panel2.Controls.Add(Me.ComboBox4)
-        Me.Panel2.Controls.Add(Me.ComboBox3)
         Me.Panel2.Controls.Add(Me.TextBox1)
         Me.Panel2.Controls.Add(Me.Label8)
         Me.Panel2.Controls.Add(Me.DateTimePicker1)
@@ -83,13 +83,22 @@ Partial Class Household_Document
         Me.Panel2.Size = New System.Drawing.Size(297, 218)
         Me.Panel2.TabIndex = 25
         '
-        'ComboBox3
+        'Label11
         '
-        Me.ComboBox3.FormattingEnabled = True
-        Me.ComboBox3.Location = New System.Drawing.Point(84, 141)
-        Me.ComboBox3.Name = "ComboBox3"
-        Me.ComboBox3.Size = New System.Drawing.Size(205, 21)
-        Me.ComboBox3.TabIndex = 23
+        Me.Label11.AutoSize = True
+        Me.Label11.Location = New System.Drawing.Point(3, 191)
+        Me.Label11.Name = "Label11"
+        Me.Label11.Size = New System.Drawing.Size(61, 13)
+        Me.Label11.TabIndex = 43
+        Me.Label11.Text = "BelongsTo:"
+        '
+        'ComboBox4
+        '
+        Me.ComboBox4.FormattingEnabled = True
+        Me.ComboBox4.Location = New System.Drawing.Point(84, 183)
+        Me.ComboBox4.Name = "ComboBox4"
+        Me.ComboBox4.Size = New System.Drawing.Size(205, 21)
+        Me.ComboBox4.TabIndex = 42
         '
         'TextBox1
         '
@@ -349,22 +358,13 @@ Partial Class Household_Document
         Me.StatusLabel.Size = New System.Drawing.Size(0, 13)
         Me.StatusLabel.TabIndex = 41
         '
-        'ComboBox4
+        'TextBox5
         '
-        Me.ComboBox4.FormattingEnabled = True
-        Me.ComboBox4.Location = New System.Drawing.Point(84, 183)
-        Me.ComboBox4.Name = "ComboBox4"
-        Me.ComboBox4.Size = New System.Drawing.Size(205, 21)
-        Me.ComboBox4.TabIndex = 42
-        '
-        'Label11
-        '
-        Me.Label11.AutoSize = True
-        Me.Label11.Location = New System.Drawing.Point(3, 191)
-        Me.Label11.Name = "Label11"
-        Me.Label11.Size = New System.Drawing.Size(61, 13)
-        Me.Label11.TabIndex = 43
-        Me.Label11.Text = "BelongsTo:"
+        Me.TextBox5.Location = New System.Drawing.Point(84, 141)
+        Me.TextBox5.Name = "TextBox5"
+        Me.TextBox5.ReadOnly = True
+        Me.TextBox5.Size = New System.Drawing.Size(205, 20)
+        Me.TextBox5.TabIndex = 44
         '
         'Household_Document
         '
@@ -400,7 +400,6 @@ Partial Class Household_Document
     Friend WithEvents Panel2 As Panel
     Friend WithEvents DateTimePicker1 As DateTimePicker
     Friend WithEvents Label2 As Label
-    Friend WithEvents ComboBox3 As ComboBox
     Friend WithEvents ComboBox1 As ComboBox
     Friend WithEvents Label7 As Label
     Friend WithEvents Label8 As Label
@@ -432,4 +431,5 @@ Partial Class Household_Document
     Friend WithEvents StatusLabel As Label
     Friend WithEvents ComboBox4 As ComboBox
     Friend WithEvents Label11 As Label
+    Friend WithEvents TextBox5 As TextBox
 End Class
