@@ -393,9 +393,9 @@ Public Class Personnel
             ListBox1.Items.Clear()
 
             ' Add Chores heading
-            ListBox1.Items.Add("Chores:")
-            ListBox1.Items.Add("---------------")
 
+            ListBox1.Items.Add("---------------")
+            ListBox1.Items.Add("Chores:")
             ' Fetch chores from database
             Using conn As New OleDbConnection(connString)
                 Dim query As String = "SELECT Title FROM Chores WHERE AssignedTo = @AssignedTo"
@@ -411,6 +411,7 @@ Public Class Personnel
                     MessageBox.Show("Error fetching chores: " & ex.Message)
                 End Try
             End Using
+            ListBox1.Items.Add("---------------")
         End If
 #End Region
 
@@ -426,9 +427,9 @@ Public Class Personnel
             'ListBox1.Items.Clear()
 
             ' Add Chores heading
-            ListBox1.Items.Add("Expense :")
-            ListBox1.Items.Add("---------------")
 
+            ListBox1.Items.Add("---------------")
+            ListBox1.Items.Add("Expense :")
             ' Fetch chores from database
             Using conn As New OleDbConnection(connString)
                 Dim query As String = "SELECT BillName, Amount FROM Expense WHERE Person = @Person"
@@ -446,6 +447,7 @@ Public Class Personnel
                     MessageBox.Show("Error fetching Expense: " & ex.Message)
                 End Try
             End Using
+            ListBox1.Items.Add("---------------")
         End If
 #End Region
 
@@ -463,9 +465,9 @@ Public Class Personnel
 
 
             ' Add Chores heading
-            ListBox1.Items.Add("Documents:")
-            ListBox1.Items.Add("---------------")
 
+            ListBox1.Items.Add("---------------")
+            ListBox1.Items.Add("Documents:")
             ' Fetch chores from database
             Using conn As New OleDbConnection(connString)
                 Dim query As String = "SELECT Category FROM HouseholdDocument WHERE BelongsTo = @BelongsTo"
@@ -481,6 +483,7 @@ Public Class Personnel
                     MessageBox.Show("Error fetching chores: " & ex.Message)
                 End Try
             End Using
+            ListBox1.Items.Add("---------------")
         End If
 
 
