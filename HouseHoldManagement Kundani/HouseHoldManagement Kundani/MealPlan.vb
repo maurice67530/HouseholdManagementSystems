@@ -332,6 +332,8 @@ Public Class MealPlan
 
     Private Sub btnSuggest_Click(sender As Object, e As EventArgs) Handles btnSuggest.Click
 
+
+
         Dim suggestedMeals As New List(Of String)
         Dim dietaryPreference As String = ""
         Dim allowedFoodTypes As New List(Of String)
@@ -442,9 +444,6 @@ Public Class MealPlan
         Catch ex As Exception
             MsgBox("Error: " & ex.Message)
         End Try
-
-
-
 
 
 
