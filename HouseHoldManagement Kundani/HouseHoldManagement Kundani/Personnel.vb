@@ -365,23 +365,20 @@ Public Class Personnel
                 'PictureBox1.ImageLocation = row.Cells("Photo").Value.ToString()
                 DateTimePicker1.Value = row.Cells("DateOfBirth").Value.ToString()
                 ComboBox4.SelectedItem = row.Cells("Dietary").Value.ToString()
+                ComboBox5.SelectedItem = row.Cells("FoodType").Value.ToString()
 
                 ' Try to load the image from the UNC path in FilePath
-                Dim filePath As String = row.Cells("Photo").Value.ToString()
-                If Not String.IsNullOrWhiteSpace(filePath) AndAlso File.Exists(filePath) Then
-                    PictureBox1.ImageLocation = filePath
-                    PictureBox1.Image = Image.FromFile(filePath)
-                Else
-                    PictureBox1.Image = Nothing
-                    MessageBox.Show("Image not found at " & filePath)
-                End If
+                Dim filePath As String = row.Cells("Photo").Value?.ToString()
+                'If Not String.IsNullOrWhiteSpace(filePath) AndAlso File.Exists(filePath) Then
+                PictureBox1.ImageLocation = filePath
+                PictureBox1.Image = Image.FromFile(filePath)
+                '    Else
+                '        PictureBox1.Image = Nothing
+                '        MessageBox.Show("Image not found at " & filePath)
+                '    End If
 
             End If
         End If
-
-
-
-
 
 #Region "DONGOLA"
 
@@ -412,6 +409,41 @@ Public Class Personnel
                     End While
                 Catch ex As Exception
                     MessageBox.Show("Error fetching chores: " & ex.Message)
+                End Try
+            End Using
+        End If
+#End Region
+
+#Region "Rasta"
+        If DataGridView1.SelectedRows.Count > 0 Then
+            ' Get selected row
+            Dim selectedRow As DataGridViewRow = DataGridView1.SelectedRows(0)
+            ' Get FirstName and LastName
+            Dim firstName As String = selectedRow.Cells("FirstName").Value.ToString()
+            Dim lastName As String = selectedRow.Cells("LastName").Value.ToString()
+            Dim fullName As String = $"{firstName} {lastName}"
+            ' Clear previous items in ListBox
+            'ListBox1.Items.Clear()
+
+            ' Add Chores heading
+            ListBox1.Items.Add("Expense :")
+            ListBox1.Items.Add("---------------")
+
+            ' Fetch chores from database
+            Using conn As New OleDbConnection(connString)
+                Dim query As String = "SELECT BillName, Amount FROM Expense WHERE Person = @Person"
+                Dim cmd As New OleDbCommand(query, conn)
+                cmd.Parameters.AddWithValue("@Person", fullName)
+                Try
+                    conn.Open()
+                    Dim reader As OleDbDataReader = cmd.ExecuteReader()
+                    While reader.Read()
+                        ListBox1.Items.Add(reader("BillName").ToString() & reader("Amount").ToString())
+                        'ListBox1.Items.Add("---------------")
+
+                    End While
+                Catch ex As Exception
+                    MessageBox.Show("Error fetching Expense: " & ex.Message)
                 End Try
             End Using
         End If
