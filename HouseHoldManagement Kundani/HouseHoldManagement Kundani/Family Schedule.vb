@@ -97,7 +97,7 @@ Public Class Family_Schedule
         End Try
     End Sub
     Private Sub Family_Schedule_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-
+        CheckDatabaseConnection(statusLabel)
 
         Dim tooltip As New ToolTip
         tooltip.SetToolTip(btnSave, "Submit")

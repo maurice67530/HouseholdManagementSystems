@@ -51,6 +51,7 @@ Partial Class Family_Schedule
         Me.btnDelete = New System.Windows.Forms.Button()
         Me.Panel3 = New System.Windows.Forms.Panel()
         Me.Button1 = New System.Windows.Forms.Button()
+        Me.statusLabel = New System.Windows.Forms.Label()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel2.SuspendLayout()
         Me.Panel1.SuspendLayout()
@@ -286,9 +287,9 @@ Partial Class Family_Schedule
         Me.Panel3.BackColor = System.Drawing.SystemColors.GradientActiveCaption
         Me.Panel3.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         Me.Panel3.Controls.Add(Me.Label1)
-        Me.Panel3.Location = New System.Drawing.Point(12, 12)
+        Me.Panel3.Location = New System.Drawing.Point(12, 16)
         Me.Panel3.Name = "Panel3"
-        Me.Panel3.Size = New System.Drawing.Size(643, 50)
+        Me.Panel3.Size = New System.Drawing.Size(643, 46)
         Me.Panel3.TabIndex = 23
         '
         'Button1
@@ -301,11 +302,20 @@ Partial Class Family_Schedule
         Me.Button1.TabIndex = 24
         Me.Button1.UseVisualStyleBackColor = False
         '
+        'statusLabel
+        '
+        Me.statusLabel.AutoSize = True
+        Me.statusLabel.Location = New System.Drawing.Point(0, 0)
+        Me.statusLabel.Name = "statusLabel"
+        Me.statusLabel.Size = New System.Drawing.Size(0, 13)
+        Me.statusLabel.TabIndex = 25
+        '
         'Family_Schedule
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(673, 545)
+        Me.Controls.Add(Me.statusLabel)
         Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.Panel3)
         Me.Controls.Add(Me.DataGridView1)
@@ -325,6 +335,7 @@ Partial Class Family_Schedule
         Me.Panel3.ResumeLayout(False)
         Me.Panel3.PerformLayout()
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
 
@@ -356,4 +367,5 @@ Partial Class Family_Schedule
     Friend WithEvents ComboBox3 As ComboBox
     Friend WithEvents Panel3 As Panel
     Friend WithEvents Button1 As Button
+    Friend WithEvents statusLabel As Label
 End Class

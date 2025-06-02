@@ -278,8 +278,8 @@ Public Class Inventory
 
         Private Sub Inventory_Load(sender As Object, e As EventArgs) Handles MyBase.Load
             LoadInventorydataFromDatabase()
-
-            ToolTip1.SetToolTip(Button1, "Save")
+        CheckDatabaseConnection(StatusLabel)
+        ToolTip1.SetToolTip(Button1, "Save")
             ToolTip1.SetToolTip(Button2, "Edit")
             ToolTip1.SetToolTip(Button3, "Delete")
             ToolTip1.SetToolTip(Button4, "Clear")
