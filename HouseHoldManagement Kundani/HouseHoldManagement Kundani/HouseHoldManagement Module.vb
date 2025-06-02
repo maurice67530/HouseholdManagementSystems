@@ -26,6 +26,50 @@ Module HouseHoldManagment_Module
             Return Convert.ToInt32(checkCmd.ExecuteScalar()) > 0
         End Using
     End Function
+    Public Function GetSchoolTripDates() As List(Of Date)
+        Dim results As New List(Of Date)
+        Try
+            Using conn As New OleDbConnection(connectionString)
+                conn.Open()
+                Dim cmd As New OleDbCommand("SELECT StartDate FROM Budget", conn)
+                Using reader = cmd.ExecuteReader()
+                    While reader.Read()
+                        If Not IsDBNull(reader("StartDate")) Then
+                            results.Add(CDate(reader("StartDate")))
+                        End If
+                    End While
+                End Using
+            End Using
+        Catch ex As Exception
+            MessageBox.Show("Error loading School Trip dates: " & ex.Message)
+        End Try
+        Return results
+    End Function
+
+    Public Function GetDoctorVisitDates() As Dictionary(Of Date, String)
+        Dim results As New Dictionary(Of Date, String)
+        Try
+            Using conn As New OleDbConnection(connectionString)
+                conn.Open()
+                Dim cmd As New OleDbCommand("SELECT DateOfexpenses, Person FROM Expense", conn)
+                Using reader = cmd.ExecuteReader()
+                    While reader.Read()
+                        If Not IsDBNull(reader("DateOfexpenses")) AndAlso Not IsDBNull(reader("Person")) Then
+                            Dim dt As Date = CDate(reader("DateOfexpenses"))
+                            Dim person As String = reader("Person").ToString()
+                            If Not results.ContainsKey(dt) Then
+                                results.Add(dt, person)
+                            End If
+                        End If
+                    End While
+                End Using
+            End Using
+        Catch ex As Exception
+            MessageBox.Show("Error loading Doctor Visit dates: " & ex.Message)
+            ' MessageBox.Show("Error saving Schedule to database: " & ex.Message & vbNewLine & ex.StackTrace, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
+        Return results
+    End Function
     Public Function Getconnection() As OleDbConnection
         Return New OleDbConnection(connectionString)
     End Function
