@@ -1,4 +1,12 @@
 ﻿Imports System.Data.OleDb
+Imports System.Drawing
+Imports System.IO
+Imports System.Net
+
+
+
+
+
 Public Class Family_Schedule
     Public Property conn As New OleDbConnection(connectionString)
     'Public Const connectionString As String = " Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Nedzamba\Source\Repos\maurice67530\HouseholdManagementSystems\HMS.accdb"
@@ -115,6 +123,10 @@ Public Class Family_Schedule
 
         ' IntegrateChores()
         LoadFamilyCalendar()
+
+        Me.Text = "Family Schedule Photo Viewer"
+        PictureBox1.SizeMode = PictureBoxSizeMode.Zoom
+
     End Sub
     Private Sub LoadFamilyCalendar()
         Dim conStr As String = (HouseHoldManagment_Module.connectionString)
@@ -616,6 +628,42 @@ Public Class Family_Schedule
             Dim message As String = "Events on " & selectedDate.ToShortDateString() & ":" & vbCrLf & String.Join(vbCrLf, eventsOnDate)
             MessageBox.Show(message, "Family Calendar")
         End If
+
+
+        ''''''''''''''''''''''''''''''''''''''''''''''''''''''
+        ' Dim selectedDate As Date = MonthCalendar1.SelectionStart.Date
+        Dim FilePath As String = GetPhotoPathByDate(selectedDate)
+
+        If Not String.IsNullOrEmpty(FilePath) Then
+            ' Check if photoPath is a valid URL or file path
+            If Uri.IsWellFormedUriString(FilePath, UriKind.Absolute) Then
+                Try
+                    Dim webClient As New WebClient()
+                    Dim imageBytes As Byte() = webClient.DownloadData(FilePath)
+                    Using ms As New MemoryStream(imageBytes)
+                        PictureBox1.Image = Image.FromStream(ms)
+                    End Using
+                Catch ex As Exception
+                    MessageBox.Show("Error downloading image: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                End Try
+            ElseIf File.Exists(FilePath) Then
+                Try
+                    PictureBox1.Image = Image.FromFile(FilePath)
+                Catch ex As Exception
+                    MessageBox.Show("Error loading local image: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                End Try
+            Else
+                '        PictureBox1.Image = Nothing
+                '        MessageBox.Show("Photo not found on local system or invalid URL.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                '    End If
+                'Else
+                PictureBox1.Image = Nothing
+            MessageBox.Show("No photo found for the selected date.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information)
+        End If
+
+        ' Color the date with pink for photos
+        HighlightPhotoDate(selectedDate)
+
     End Sub
 
     Private Sub ListView1_ItemDrag(sender As Object, e As ItemDragEventArgs) Handles ListView1.ItemDrag
@@ -1062,4 +1110,80 @@ Public Class Family_Schedule
 
     End Sub
 #End Region
+
+
+
+
+#Region "Rinae"
+
+
+    ''' Change this to the path where your photos are saved
+
+    'Private photoDirectory As String = "\\MUDAUMURANGI\Users\Murangi\Source\Repos\maurice67530\HouseholdManagementSystems\Photo Gallery\download.jpg"
+
+    'Private Sub MonthCalendar1_DateSelected(sender As Object, e As DateRangeEventArgs) Handles MonthCalendar1.DateSelected
+
+    '    Dim selectedDate As Date = e.Start
+
+    '    ' Get the selected date
+
+    '    ' Format the date to match the photo filename
+    '    Dim query As String = "SELECT FilePath FROM Photos WHERE DateAdded = @SelectedDate"
+    '    Dim photoFileName As String = selectedDate.ToString("yyyy-MM-dd") & ".jpg"
+
+    '    Dim filepath As String = System.IO.Path.Combine(photoDirectory, photoFileName)
+
+    '    ' Check if the photo exists
+
+    '    If System.IO.File.Exists(filepath) Then
+
+    '        ' Load and show the photo in the PictureBox
+
+    '        PictureBox1.Image = Image.FromFile(filepath)
+
+    '    Else
+
+    '        ' Clear the PictureBox if no photo exists
+
+    '        PictureBox1.Image = Nothing
+
+    '        MessageBox.Show("No photo found for the selected date.", "Photo Not Found", MessageBoxButtons.OK, MessageBoxIcon.Information)
+
+    '    End If
+
+    'End Sub
+
+
+
+    Private Function GetPhotoPathByDate(DateAdded As Date) As String
+        Dim resultPath As String = String.Empty
+
+        Using connection As New OleDbConnection(connectionString)
+            Dim query As String = "SELECT FilePath FROM Photos WHERE DateAdded = ?"
+            Using command As New OleDbCommand(query, connection)
+                command.Parameters.AddWithValue("@DateAdded", DateAdded)
+                connection.Open()
+                Dim reader As OleDbDataReader = command.ExecuteReader()
+                If reader.Read() Then
+                    resultPath = reader("FilePath").ToString()
+                End If
+            End Using
+        End Using
+
+        Return resultPath
+    End Function
+
+    Private Sub HighlightPhotoDate(selectedDate As Date)
+            For Each dateItem As DateTime In MonthCalendar1.BoldedDates
+                If dateItem.Date = selectedDate.Date Then
+                    ' Highlight selected date in pink
+                    MonthCalendar1.AddBoldedDate(selectedDate)
+                    MonthCalendar1.ForeColor = Color.Pink
+                End If
+            Next
+        End Sub
+
+
+#End Region
+
 End Class
