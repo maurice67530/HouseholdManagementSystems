@@ -1,6 +1,7 @@
 ﻿
 Imports System.IO
 Imports System.Data.OleDb
+Imports System.Globalization
 
 Public Class MealPlan
 
@@ -86,7 +87,7 @@ Public Class MealPlan
                 End While
             End Using
         End Using
-        ''hhhhhh
+
 
 
     End Sub
@@ -271,642 +272,122 @@ Public Class MealPlan
             MessageBox.Show("Please select an meals to delete.", "deletetion error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
         End If
     End Sub
-    Public Function SuggestMeals() As List(Of String)
-        'Dim suggestedMeals As New List(Of String)
 
-        'Try
-        '    Using connect As New OleDbConnection(connectionString)
 
-        '    End Using
-        '    conn.Open()
 
-        '    ' Get all meal recipes
-        '    Dim mealQuery As String = "SELECT ItemName,Ingredients FROM Recipe"
-        '    Dim mealCommand As New OleDb.OleDbCommand(mealQuery, conn)
-        '    Dim mealReader As OleDb.OleDbDataReader = mealCommand.ExecuteReader()
-
-        '    While mealReader.Read()
-        '        Dim mealName As String = mealReader("ItemName").ToString()
-        '        Dim requiredIngredients As String() = mealReader("Ingredients").ToString().Split(",")
-
-        '        Dim allIngredientsAvailable As Boolean = True
-
-        '        ' Check if all required ingredients exist in GroceryInventory and are not expired
-        '        For Each ingredient In requiredIngredients
-        '            Dim trimmedIngredient As String = ingredient.Trim()
-        '            Dim checkQuery As String = "SELECT ExpiryDate FROM Inventory WHERE Category AND Quantity > 0"
-        '            Dim checkCommand As New OleDb.OleDbCommand(checkQuery, conn)
-        '            checkCommand.Parameters.AddWithValue("@Ingredients", trimmedIngredient)
-
-        '            Dim expirationDate As Object = checkCommand.ExecuteScalar()
-
-        '            ' Check if the ingredient exists and its expiration date
-        '            If expirationDate Is Nothing Then
-        '                allIngredientsAvailable = False
-        '            Else
-        '                ' Validate that the ingredient is not expired
-        '                If Convert.ToDateTime(expirationDate) < DateTime.Now Then
-        '                    allIngredientsAvailable = False
-        '                End If
-        '            End If
-
-        '            If Not allIngredientsAvailable Then
-        '                Exit For
-        '            End If
-        '        Next
-
-        '        ' If all ingredients are available and not expired, add the meal to suggested list
-        '        If allIngredientsAvailable Then
-        '            suggestedMeals.Add(mealName)
-        '        End If
-        '    End While
-        '    mealReader.Close()
-
-
-
-        'Catch ex As Exception
-        '    MsgBox("Error suggesting meals: " & ex.Message, MsgBoxStyle.Critical, "Database Error")
-        'Finally
-        '    conn.Close()
-        'End Try
-
-        'Return suggestedMeals
-
-
-        ''''''
-
-
-
-        'Dim suggestedMeals As New List(Of String)
-        'Dim missingIngredients As New List(Of String)
-
-        'Try
-        '    Using conn As New OleDbConnection(connectionString)
-        '        conn.Open()
-
-        '        Dim mealQuery As String = "SELECT ItemName, Ingredients FROM Recipe"
-        '        Using mealCommand As New OleDbCommand(mealQuery, conn)
-        '            Using mealReader As OleDbDataReader = mealCommand.ExecuteReader()
-        '                While mealReader.Read()
-        '                    Dim mealName As String = mealReader("ItemName").ToString()
-        '                    Dim requiredIngredients As String() = mealReader("Ingredients").ToString().Split(","c)
-        '                    Dim allIngredientsAvailable As Boolean = True
-        '                    Dim tempMissing As New List(Of String)
-
-        '                    ' Check all ingredients
-        '                    For Each ingredient In requiredIngredients
-        '                        Dim trimmedIngredient As String = ingredient.Trim()
-
-        '                        Dim checkQuery As String = "SELECT Quantity, ExpiryDate FROM Inventory WHERE ItemName = ?"
-        '                        Using checkCommand As New OleDbCommand(checkQuery, conn)
-        '                            checkCommand.Parameters.AddWithValue("?", trimmedIngredient)
-        '                            Using reader As OleDbDataReader = checkCommand.ExecuteReader()
-        '                                If reader.Read() Then
-        '                                    Dim quantity As Integer = Convert.ToInt32(reader("Quantity"))
-        '                                    Dim expiry As Date = Convert.ToDateTime(reader("ExpiryDate"))
-
-        '                                    If quantity <= 0 Or expiry < Date.Today Then
-        '                                        allIngredientsAvailable = False
-        '                                        tempMissing.Add(trimmedIngredient & " (expired or out of stock)")
-        '                                        Exit For
-        '                                    End If
-        '                                Else
-        '                                    allIngredientsAvailable = False
-        '                                    tempMissing.Add(trimmedIngredient & " (not found)")
-        '                                    Exit For
-        '                                End If
-        '                            End Using
-        '                        End Using
-        '                    Next
-
-        '                    ' If available, subtract quantity and add to list
-        '                    If allIngredientsAvailable Then
-        '                        suggestedMeals.Add(mealName)
-
-        '                        ' Subtract 1 from each ingredient
-        '                        For Each ingredient In requiredIngredients
-        '                            Dim trimmedIngredient As String = ingredient.Trim()
-
-        '                            Dim updateQuery As String = "UPDATE Inventory SET Quantity = Quantity - 1 WHERE ItemName = ?"
-        '                            Using updateCommand As New OleDbCommand(updateQuery, conn)
-        '                                updateCommand.Parameters.AddWithValue("?", trimmedIngredient)
-        '                                updateCommand.ExecuteNonQuery()
-        '                            End Using
-        '                        Next
-        '                    Else
-        '                        missingIngredients.AddRange(tempMissing)
-        '                    End If
-        '                End While
-        '            End Using
-        '        End Using
-        '    End Using
-
-        '    ' Show missing ingredients if no meals suggested
-        '    If suggestedMeals.Count = 0 AndAlso missingIngredients.Count > 0 Then
-        '        lstMealSuggestions.Items.Add("No meals can be prepared.")
-        '        lstMealSuggestions.Items.Add("Missing or expired ingredients:")
-        '        For Each item In missingIngredients.Distinct()
-        '            lstMealSuggestions.Items.Add(" - " & item)
-        '        Next
-        '    End If
-
-        'Catch ex As Exception
-        '    MsgBox("Error suggesting meals: " & ex.Message, MsgBoxStyle.Critical, "Database Error")
-        'End Try
-
-        'Return suggestedMeals
-
-
-
-
-        ''''''
-
-
-
-        ''Public Function SuggestMeals() As List(Of String)
-        'Dim suggestedMeals As New List(Of String)
-        'Dim missingIngredients As New List(Of String)
-
-        'Try
-        '    Using conn As New OleDbConnection(connectionString)
-        '        conn.Open()
-
-        '        Dim mealQuery As String = "SELECT ItemName, Ingredients FROM Recipe"
-        '        Using mealCommand As New OleDbCommand(mealQuery, conn)
-        '            Using mealReader As OleDbDataReader = mealCommand.ExecuteReader()
-        '                While mealReader.Read()
-        '                    Dim mealName As String = mealReader("ItemName").ToString()
-        '                    Dim ingredients As String() = mealReader("Ingredients").ToString().Split(","c)
-        '                    Dim allAvailable As Boolean = True
-        '                    Dim tempMissing As New List(Of String)
-
-        '                    ' Check each ingredient
-        '                    For Each ing In ingredients
-        '                        Dim ingredient = ing.Trim()
-        '                        Dim checkCmd As New OleDbCommand("SELECT Quantity, ExpiryDate FROM Inventory WHERE ItemName = ?", conn)
-        '                        checkCmd.Parameters.AddWithValue("?", ingredient)
-
-        '                        Using reader = checkCmd.ExecuteReader()
-        '                            If reader.Read() Then
-        '                                Dim qty As Integer = Convert.ToInt32(reader("Quantity"))
-        '                                Dim expiry As Date = Convert.ToDateTime(reader("ExpiryDate"))
-
-        '                                If qty <= 0 Or expiry < Date.Today Then
-        '                                    allAvailable = False
-        '                                    tempMissing.Add(ingredient & " (expired or no stock)")
-        '                                    Exit For
-        '                                End If
-        '                            Else
-        '                                allAvailable = False
-        '                                tempMissing.Add(ingredient & " (not found)")
-        '                                Exit For
-        '                            End If
-        '                        End Using
-        '                    Next
-
-        '                    ' If all ingredients are fine, add meal and subtract quantities
-        '                    If allAvailable Then
-        '                        suggestedMeals.Add(mealName)
-
-        '                        For Each ing In ingredients
-        '                            Dim ingredient = ing.Trim()
-        '                            Dim updateCmd As New OleDbCommand("UPDATE Inventory SET Quantity = Quantity - 1 WHERE ItemName = ?", conn)
-        '                            updateCmd.Parameters.AddWithValue("?", ingredient)
-        '                            updateCmd.ExecuteNonQuery()
-        '                        Next
-        '                    Else
-        '                        missingIngredients.AddRange(tempMissing)
-        '                    End If
-        '                End While
-        '            End Using
-        '        End Using
-        '    End Using
-
-        '    ' Show message if none found
-        '    If suggestedMeals.Count = 0 AndAlso missingIngredients.Count > 0 Then
-        '        lstMealSuggestions.Items.Add("No meals can be prepared.")
-        '        For Each m In missingIngredients.Distinct()
-        '            lstMealSuggestions.Items.Add(" - " & m)
-        '        Next
-        '    End If
-
-        'Catch ex As Exception
-        '    MsgBox("Error: " & ex.Message)
-        'End Try
-
-        'Return suggestedMeals
-
-
-
-
-
-
-
-
-        'hhhhh
-
-
-
-        'Dim suggestedMeals As New List(Of String)
-        'Dim missingIngredients As New List(Of String)
-        'Dim dietaryPreference As String = ""
-        'Dim selectedPerson As String = ComboBox4.SelectedItem.ToString()
-
-        'Try
-        '    Using conn As New OleDbConnection(connectionString)
-        '        conn.Open()
-
-        '        ' Get dietary preference
-        '        Dim dietCmd As New OleDbCommand("SELECT Dietary FROM PersonalDetails WHERE FirstName = ?", conn)
-        '        dietCmd.Parameters.AddWithValue("?", selectedPerson)
-        '        Dim result = dietCmd.ExecuteScalar()
-        '        If result IsNot Nothing Then
-        '            dietaryPreference = result.ToString().ToLower()
-        '        End If
-
-        '        ' Meal suggestions
-        '        Dim mealQuery As String = "SELECT ItemName, Ingredients FROM Recipe"
-        '        Using mealCommand As New OleDbCommand(mealQuery, conn)
-        '            Using mealReader As OleDbDataReader = mealCommand.ExecuteReader()
-        '                While mealReader.Read()
-        '                    Dim mealName As String = mealReader("ItemName").ToString()
-        '                    Dim ingredients As String() = mealReader("Ingredients").ToString().Split(","c)
-        '                    Dim allAvailable As Boolean = True
-        '                    Dim tempMissing As New List(Of String)
-
-        '                    ' Dietary check
-        '                    Dim mealContainsMeat As Boolean = ingredients.Any(Function(ing) ing.ToLower().Contains("chicken") OrElse ing.ToLower().Contains("beef") OrElse ing.ToLower().Contains("fish") OrElse ing.ToLower().Contains("pork") OrElse ing.ToLower().Contains("wors") OrElse ing.ToLower().Contains("sausage"))
-
-        '                    If dietaryPreference = "vegan" AndAlso mealContainsMeat Then
-        '                        MsgBox(selectedPerson & " is vegan and does not eat " & mealName)
-        '                        Return suggestedMeals
-        '                    End If
-
-        '                    If dietaryPreference = "vegetarian" AndAlso mealContainsMeat Then
-        '                        MsgBox(selectedPerson & " is vegetarian and does not eat " & mealName)
-        '                        Return suggestedMeals
-        '                    End If
-
-        '                    ' Check each ingredient
-        '                    For Each ing In ingredients
-        '                        Dim ingredient = ing.Trim()
-        '                        Dim checkCmd As New OleDbCommand("SELECT Quantity, ExpiryDate FROM Inventory WHERE ItemName = ?", conn)
-        '                        checkCmd.Parameters.AddWithValue("?", ingredient)
-        '                        Using reader = checkCmd.ExecuteReader()
-        '                            If reader.Read() Then
-        '                                Dim qty As Integer = Convert.ToInt32(reader("Quantity"))
-        '                                Dim expiry As Date = Convert.ToDateTime(reader("ExpiryDate"))
-        '                                If qty <= 0 Or expiry < Date.Today Then
-        '                                    allAvailable = False
-        '                                    tempMissing.Add(ingredient & " (expired or no stock)")
-        '                                    Exit For
-        '                                End If
-        '                            Else
-        '                                allAvailable = False
-        '                                tempMissing.Add(ingredient & " (not found)")
-        '                                Exit For
-        '                            End If
-        '                        End Using
-        '                    Next
-
-        '                    ' If all ingredients are fine, add meal and subtract quantities
-        '                    If allAvailable Then
-        '                        suggestedMeals.Add(mealName)
-        '                        For Each ing In ingredients
-        '                            Dim ingredient = ing.Trim()
-        '                            Dim updateCmd As New OleDbCommand("UPDATE Inventory SET Quantity = Quantity - 1 WHERE ItemName = ?", conn)
-        '                            updateCmd.Parameters.AddWithValue("?", ingredient)
-        '                            updateCmd.ExecuteNonQuery()
-        '                        Next
-        '                    Else
-        '                        missingIngredients.AddRange(tempMissing)
-        '                    End If
-        '                End While
-        '            End Using
-        '        End Using
-        '    End Using
-
-        '    ' Show message if none found
-        '    If suggestedMeals.Count = 0 AndAlso missingIngredients.Count > 0 Then
-        '        lstMealSuggestions.Items.Add("No meals can be prepared.")
-        '        For Each m In missingIngredients.Distinct()
-        '            lstMealSuggestions.Items.Add(" - " & m)
-        '        Next
-        '    End If
-
-        'Catch ex As Exception
-        '    MsgBox("Error: " & ex.Message)
-        'End Try
-
-        'Return suggestedMeals
-
-
-        'Dim suggestedMeals As New List(Of String)
-        'Dim selectedItem As String = ComboBox3.SelectedItem.ToString().ToLower()
-
-        'Try
-        '    Using conn As New OleDbConnection(connectionString)
-        '        conn.Open()
-
-        '        Dim mealQuery As String = "SELECT ItemName, Ingredients FROM Recipe"
-        '        Using mealCommand As New OleDbCommand(mealQuery, conn)
-        '            Using mealReader As OleDbDataReader = mealCommand.ExecuteReader()
-        '                While mealReader.Read()
-        '                    Dim mealName As String = mealReader("ItemName").ToString()
-        '                    Dim ingredients As String() = mealReader("Ingredients").ToString().Split(","c).Select(Function(i) i.Trim().ToLower()).ToArray()
-
-        '                    If Not ingredients.Contains(selectedItem) OrElse ingredients.Length <= 1 Then
-        '                        Continue While
-        '                    End If
-
-        '                    Dim allAvailable As Boolean = True
-
-        '                    For Each ingredient In ingredients
-        '                        Dim checkCmd As New OleDbCommand("SELECT Quantity, ExpiryDate FROM Inventory WHERE ItemName = ?", conn)
-        '                        checkCmd.Parameters.AddWithValue("?", ingredient)
-
-        '                        Using reader = checkCmd.ExecuteReader()
-        '                            If reader.Read() Then
-        '                                Dim qty As Integer = Convert.ToInt32(reader("Quantity"))
-        '                                Dim expiry As Date = Convert.ToDateTime(reader("ExpiryDate"))
-
-        '                                If expiry < Date.Today Then
-        '                                    MsgBox("Item '" & ingredient & "' is expired.", MsgBoxStyle.Exclamation)
-        '                                    allAvailable = False
-        '                                    Exit For
-        '                                ElseIf qty <= 0 Then
-        '                                    MsgBox("Item '" & ingredient & "' has 0 stock.", MsgBoxStyle.Critical)
-        '                                    allAvailable = False
-        '                                    Exit For
-        '                                ElseIf qty < 3 Then
-        '                                    MsgBox("Alert: Item '" & ingredient & "' is running low (less than 3 in stock).", MsgBoxStyle.Information)
-        '                                End If
-        '                            Else
-        '                                allAvailable = False
-        '                                Exit For
-        '                            End If
-        '                        End Using
-        '                    Next
-
-        '                    If allAvailable Then
-        '                        suggestedMeals.Add(mealName)
-        '                    End If
-        '                End While
-        '            End Using
-        '        End Using
-        '    End Using
-
-        '    lstMealSuggestions.Items.Clear()
-        '    If suggestedMeals.Count = 0 Then
-        '        lstMealSuggestions.Items.Add("No meals can be prepared with '" & ComboBox3.SelectedItem.ToString() & "'.")
-        '    Else
-        '        For Each meal In suggestedMeals
-        '            lstMealSuggestions.Items.Add("✓ " & meal)
-        '        Next
-        '    End If
-
-        'Catch ex As Exception
-        '    MsgBox("Error: " & ex.Message)
-        'End Try
-
-        'Return suggestedMeals
-
-
-
-
-
-        'Dim suggestedMeals As New List(Of String)
-        'Dim selectedItem As String = ComboBox4.SelectedItem.ToString().ToLower()
-        'Dim selectedPerson As String = ComboBox3.SelectedItem.ToString()
-
-        'Try
-        '    Using conn As New OleDbConnection(connectionString)
-        '        conn.Open()
-
-        '        ' Step 1: Check if the person is vegan
-        '        Dim isVegan As Boolean = False
-        '        Dim prefCmd As New OleDbCommand("SELECT Diatary FROM PersonalDetails WHERE FirstName = ?", conn)
-        '        prefCmd.Parameters.AddWithValue("?", selectedPerson)
-        '        Dim prefResult As Object = prefCmd.ExecuteScalar()
-        '        If prefResult IsNot Nothing AndAlso prefResult.ToString().ToLower() = "vegan" Then
-        '            isVegan = True
-        '        End If
-
-        '        ' Step 2: Load meat items from Inventory
-        '        Dim meatItems As New List(Of String)
-        '        Dim meatCmd As New OleDbCommand("SELECT ItemName FROM Inventory WHERE Category = 'Meat'", conn)
-        '        Using meatReader As OleDbDataReader = meatCmd.ExecuteReader()
-        '            While meatReader.Read()
-        '                meatItems.Add(meatReader("ItemName").ToString().ToLower())
-        '            End While
-        '        End Using
-
-        '        ' Step 3: Load meals from Recipe table
-        '        Dim mealQuery As String = "SELECT ItemName, Ingredients FROM Recipe"
-        '        Using mealCommand As New OleDbCommand(mealQuery, conn)
-        '            Using mealReader As OleDbDataReader = mealCommand.ExecuteReader()
-        '                While mealReader.Read()
-        '                    Dim mealName As String = mealReader("ItemName").ToString()
-        '                    Dim ingredients As String() = mealReader("Ingredients").ToString().Split(","c).Select(Function(i) i.Trim().ToLower()).ToArray()
-
-        '                    If Not ingredients.Contains(selectedItem) OrElse ingredients.Length <= 1 Then Continue While
-
-        '                    ' Step 4: Skip meal if vegan and it contains meat
-        '                    If isVegan AndAlso ingredients.Any(Function(i) meatItems.Contains(i)) Then
-        '                        Continue While
-        '                    End If
-
-        '                    ' Step 5: Check all ingredients availability
-        '                    Dim allAvailable As Boolean = True
-        '                    For Each ingredient In ingredients
-        '                        Dim checkCmd As New OleDbCommand("SELECT Quantity, ExpiryDate FROM Inventory WHERE ItemName = ?", conn)
-        '                        checkCmd.Parameters.AddWithValue("?", ingredient)
-        '                        Using reader = checkCmd.ExecuteReader()
-        '                            If reader.Read() Then
-        '                                Dim qty As Integer = Convert.ToInt32(reader("Quantity"))
-        '                                Dim expiry As Date = Convert.ToDateTime(reader("ExpiryDate"))
-
-        '                                If expiry < Date.Today Then
-        '                                    MsgBox("Item '" & ingredient & "' is expired.", MsgBoxStyle.Exclamation)
-        '                                    allAvailable = False
-        '                                    Exit For
-        '                                ElseIf qty <= 0 Then
-        '                                    MsgBox("Item '" & ingredient & "' has 0 stock.", MsgBoxStyle.Critical)
-        '                                    allAvailable = False
-        '                                    Exit For
-        '                                ElseIf qty < 3 Then
-        '                                    MsgBox("Alert: Item '" & ingredient & "' is running low.", MsgBoxStyle.Information)
-        '                                End If
-        '                            Else
-        '                                allAvailable = False
-        '                                Exit For
-        '                            End If
-        '                        End Using
-        '                    Next
-
-        '                    If allAvailable Then
-        '                        suggestedMeals.Add(mealName)
-        '                    End If
-        '                End While
-        '            End Using
-        '        End Using
-        '    End Using
-
-        '    ' Show suggestions
-        '    lstMealSuggestions.Items.Clear()
-        '    If suggestedMeals.Count = 0 Then
-        '        lstMealSuggestions.Items.Add("No meals can be prepared with '" & ComboBox3.SelectedItem.ToString() & "'.")
-        '    Else
-        '        For Each meal In suggestedMeals
-        '            lstMealSuggestions.Items.Add("✓ " & meal)
-        '        Next
-        '    End If
-
-        'Catch ex As Exception
-        '    MsgBox("Error: " & ex.Message)
-        'End Try
-
-        'Return suggestedMeals
-
-
-        '''''''''''''''''''''''''''''''
+    Private Sub btnSuggest_Click(sender As Object, e As EventArgs) Handles btnSuggest.Click
 
 
         Dim suggestedMeals As New List(Of String)
-        Dim selectedItem As String = ComboBox3.SelectedItem.ToString().ToLower()
+        Dim dietaryPreference As String = ""
+        Dim allowedFoodTypes As New List(Of String)
+
+        If ComboBox4.SelectedItem Is Nothing OrElse ComboBox3.SelectedItem Is Nothing Then
+            MsgBox("Please select a person and an ingredient.")
+            Return
+        End If
+
         Dim selectedPerson As String = ComboBox4.SelectedItem.ToString()
+        Dim selectedIngredient As String = ComboBox3.SelectedItem.ToString().ToLower()
 
         Try
             Using conn As New OleDbConnection(connectionString)
                 conn.Open()
 
-                ' Step 1: Check if the person is vegan
-                Dim isVegan As Boolean = False
-                Dim prefCmd As New OleDbCommand("SELECT Dietary FROM PersonalDetails WHERE FirstName = ?", conn)
-                prefCmd.Parameters.AddWithValue("?", selectedPerson)
-                Dim prefResult As Object = prefCmd.ExecuteScalar()
-                If prefResult IsNot Nothing AndAlso prefResult.ToString().ToLower() = "vegan" Then
-                    isVegan = True
+                ' Get person's first and last name
+                Dim names = selectedPerson.Split(" "c)
+                If names.Length < 2 Then
+                    MsgBox("Please select a full name with First and Last name.")
+                    Return
                 End If
 
-                ' Step 2: Load meat items from Inventory
-                Dim meatItems As New List(Of String)
-                Dim meatCmd As New OleDbCommand("SELECT ItemName FROM Inventory WHERE Category = 'Meat'", conn)
-                Using meatReader As OleDbDataReader = meatCmd.ExecuteReader()
-                    While meatReader.Read()
-                        meatItems.Add(meatReader("ItemName").ToString().ToLower())
-                    End While
+                Dim firstName As String = names(0).Trim()
+                Dim lastName As String = names(1).Trim()
+
+                ' Get dietary preference and food types
+                Dim personCmd As New OleDbCommand("SELECT Dietary, FoodType FROM PersonalDetails WHERE FirstName = ? AND LastName = ?", conn)
+                personCmd.Parameters.AddWithValue("?", firstName)
+                personCmd.Parameters.AddWithValue("?", lastName)
+
+                Using reader = personCmd.ExecuteReader()
+                    If reader.Read() Then
+                        dietaryPreference = reader("Dietary").ToString().ToLower()
+                        allowedFoodTypes = reader("FoodType").ToString().ToLower().Split(","c).Select(Function(f) f.Trim()).ToList()
+                        MsgBox($"{firstName} {lastName} has a '{dietaryPreference}' preference. Allowed food types: {String.Join(", ", allowedFoodTypes)}")
+                    Else
+                        MsgBox("No dietary info found for " & selectedPerson)
+                        Return
+                    End If
                 End Using
 
-                ' Step 3: Load meals from Recipe table
+                lstMealSuggestions.Items.Clear()
+
+                ' Find meals that use the selected ingredient
                 Dim mealQuery As String = "SELECT ItemName, Ingredients FROM Recipe"
-                Using mealCommand As New OleDbCommand(mealQuery, conn)
-                    Using mealReader As OleDbDataReader = mealCommand.ExecuteReader()
+                Dim ingredientUsedInMeals As New List(Of String)
+
+                Using mealCmd As New OleDbCommand(mealQuery, conn)
+                    Using mealReader As OleDbDataReader = mealCmd.ExecuteReader()
                         While mealReader.Read()
                             Dim mealName As String = mealReader("ItemName").ToString()
-                            Dim ingredients As String() = mealReader("Ingredients").ToString().Split(","c).Select(Function(i) i.Trim().ToLower()).ToArray()
+                            Dim ingredients As String() = mealReader("Ingredients").ToString().ToLower().Split(","c).Select(Function(x) x.Trim()).ToArray()
 
-                            If Not ingredients.Contains(selectedItem) OrElse ingredients.Length <= 1 Then Continue While
+                            ' Only check meals that include the selected ingredient
+                            If Not ingredients.Contains(selectedIngredient) Then Continue While
 
-                            ' Step 4: Skip meal if vegan and it contains meat
-                            If isVegan AndAlso ingredients.Any(Function(i) meatItems.Contains(i)) Then
-                                Continue While
-                            End If
+                            ingredientUsedInMeals.Add(mealName)
 
-                            ' Step 5: Check all ingredients availability
-                            Dim allAvailable As Boolean = True
-                            For Each ingredient In ingredients
-                                Dim checkCmd As New OleDbCommand("SELECT Quantity, ExpiryDate FROM Inventory WHERE ItemName = ?", conn)
-                                checkCmd.Parameters.AddWithValue("?", ingredient)
-                                Using reader = checkCmd.ExecuteReader()
-                                    If reader.Read() Then
-                                        Dim qty As Integer = Convert.ToInt32(reader("Quantity"))
-                                        Dim expiry As Date = Convert.ToDateTime(reader("ExpiryDate"))
+                            ' Check selected ingredient in inventory
+                            Dim invCmd As New OleDbCommand("SELECT Quantity, ExpiryDate, Category FROM Inventory WHERE LCASE(TRIM(ItemName)) = ?", conn)
+                            invCmd.Parameters.AddWithValue("?", selectedIngredient)
 
-                                        If expiry < Date.Today Then
-                                            MsgBox("Item '" & ingredient & "' is expired.", MsgBoxStyle.Exclamation)
-                                            allAvailable = False
-                                            Exit For
-                                        ElseIf qty <= 0 Then
-                                            MsgBox("Item '" & ingredient & "' has 0 stock.", MsgBoxStyle.Critical)
-                                            allAvailable = False
-                                            Exit For
-                                        ElseIf qty < 3 Then
-                                            MsgBox("Alert: Item '" & ingredient & "' is running low.", MsgBoxStyle.Information)
-                                        End If
-                                    Else
-                                        allAvailable = False
-                                        Exit For
+                            Using invReader = invCmd.ExecuteReader()
+                                If invReader.Read() Then
+                                    Dim qty As Integer = Convert.ToInt32(invReader("Quantity"))
+                                    Dim expiry As Date = Convert.ToDateTime(invReader("ExpiryDate"))
+                                    Dim category As String = invReader("Category").ToString().ToLower().Trim()
+
+                                    If qty <= 0 OrElse expiry < Date.Today Then
+                                        MsgBox("❌ Cannot suggest '" & mealName & "' because '" & selectedIngredient & "' is expired or out of stock.")
+                                        Continue While
                                     End If
-                                End Using
-                            Next
 
-                            If allAvailable Then
-                                suggestedMeals.Add(mealName)
-                            End If
+                                    If Not allowedFoodTypes.Contains(category) Then
+                                        MsgBox("❌ Cannot suggest '" & mealName & "' because '" & selectedIngredient & "' (category '" & category & "') is not allowed for " & dietaryPreference & " diet.")
+                                        Continue While
+                                    End If
+                                Else
+                                    MsgBox("❌ Cannot suggest '" & mealName & "' because '" & selectedIngredient & "' is not found in inventory.")
+                                    Continue While
+                                End If
+                            End Using
+
+                            ' If all OK, suggest the meal
+                            suggestedMeals.Add(mealName)
                         End While
                     End Using
                 End Using
-            End Using
 
-            ' Show suggestions
-            lstMealSuggestions.Items.Clear()
-            If suggestedMeals.Count = 0 Then
-                lstMealSuggestions.Items.Add("No meals can be prepared with '" & ComboBox3.SelectedItem.ToString() & "'.")
-            Else
-                For Each meal In suggestedMeals
-                    lstMealSuggestions.Items.Add("✓ " & meal)
-                Next
-            End If
+                ' Show suggested meals
+                lstMealSuggestions.Items.Clear()
+                If suggestedMeals.Count > 0 Then
+                    lstMealSuggestions.Items.Add("✅ You can make these meals using '" & selectedIngredient & "':")
+                    For Each meal In suggestedMeals
+                        lstMealSuggestions.Items.Add(" - " & meal)
+                    Next
+
+                    ' Show message if selected ingredient is used in multiple meals
+                    If ingredientUsedInMeals.Count > 1 Then
+                        MsgBox("The ingredient '" & selectedIngredient & "' is used in multiple meals. You can still make: " & String.Join(", ", suggestedMeals))
+                    End If
+                Else
+                    lstMealSuggestions.Items.Add("❌ No valid meals found with the selected ingredient.")
+                End If
+            End Using
 
         Catch ex As Exception
             MsgBox("Error: " & ex.Message)
         End Try
-
-        Return suggestedMeals
-
-
-
-
-
-
-
-    End Function
-
-
-    Private Sub btnSuggest_Click(sender As Object, e As EventArgs) Handles btnSuggest.Click
-
-        ''Module1.Mains()
-
-        'lstMealSuggestions.Items.Clear()
-        'TextBox4.ReadOnly = True
-        'Dim meals As List(Of String) = SuggestMeals()
-
-        'If meals.Count > 0 Then
-        '    For Each meal In meals
-        '        lstMealSuggestions.Items.Add(meal)
-
-        '    Next
-        '    MsgBox("Meal Suggestions have been prepared with current Grocery Items.", MsgBoxStyle.Information, "No Available Meals")
-        '    'FetchAlternativeMeals(SuggestMeals)
-        'Else
-        '    MsgBox("No meals can be prepared with current inventory.", MsgBoxStyle.Exclamation, "No Available Meals")
-        'End If
-
-
-
-        lstMealSuggestions.Items.Clear()
-
-        Dim meals As List(Of String) = SuggestMeals()
-
-        If meals.Count > 0 Then
-            lstMealSuggestions.Items.Add("Meals you can prepare:")
-            For Each meal In meals
-                lstMealSuggestions.Items.Add(" - " & meal)
-            Next
-        End If
-
-
 
 
 
@@ -991,34 +472,6 @@ Public Class MealPlan
         End Try
 
 
-        '' MealPlan Form - Add this code to btnAddMeal_Click
-
-        'Dim mealDate As Date = DateTimePicker1.Value.Date
-        'Dim mealTitle As String = TextBox4.Text.Trim()
-
-        'If mealTitle = "" Then
-        '    MessageBox.Show("Please enter a meal name.", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-        '    Exit Sub
-        'End If
-
-
-
-
-        'Using conn As New OleDbConnection(connectionString)
-        '    Dim query As String = "INSERT INTO FamilySchedule (DateOfEvent, Title, EventType) VALUES (?, ?, ?)"
-        '    Using cmd As New OleDbCommand(query, conn)
-        '        cmd.Parameters.AddWithValue("?", mealDate)
-        '        cmd.Parameters.AddWithValue("?", mealTitle)
-        '        cmd.Parameters.AddWithValue("?", "MealName")
-        '        conn.Open()
-        '        cmd.ExecuteNonQuery()
-        '    End Using
-        'End Using
-
-        'MessageBox.Show("Meal added to schedule successfully!", "Saved", MessageBoxButtons.OK, MessageBoxIcon.Information)
-
-        '' Optional: clear fields
-        'TextBox4.Clear()
     End Sub
 
 
@@ -1069,40 +522,7 @@ Public Class MealPlan
     Private Sub Panel2_Paint(sender As Object, e As PaintEventArgs) Handles Panel2.Paint
 
     End Sub
-    'Public Sub PopulateComboboxFromDatabase(ByRef comboBox As ComboBox)
-    '    Dim conn As New OleDbConnection(connectionString)
-    '    Try
-    '        Debug.WriteLine("Populating combobox: combobox populated from database")
-    '        'open the database connection
-    '        conn.Open()
 
-    '        ''retrieve the firstname and surname columns from the personaldetails tabel
-    '        'Dim query As String = "SELECT Preference FROM Users"
-    '        'Dim cmd As New OleDbCommand(query, conn)
-    '        'Dim reader As OleDbDataReader = cmd.ExecuteReader()
-
-    '        ''bind the retrieved data to the combobox
-    '        'ComboBox4.Items.Clear()
-    '        'While reader.Read()
-    '        '    ComboBox4.Items.Add($"{reader("Preference")}")
-    '        'End While
-
-    '        ''close the database
-    '        'reader.Close()
-
-    '    Catch ex As Exception
-    '        Debug.WriteLine("Failed to initialize combobox")
-    '        Debug.Write($"Stack Trace: {ex.StackTrace}")
-    '        'handle any exeptions that may occur
-    '        MessageBox.Show($"Error: {ex.Message}")
-    '    Finally
-    '        'close the database connection
-    '        If conn.State = ConnectionState.Open Then
-    '            conn.Close()
-    '        End If
-    '    End Try
-    '    Debug.WriteLine("Done with populating combobox from database")
-    'End Sub
 
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
         'If MessageBox.Show("Would you like to view the calendar?", "Open Family Schedule", MessageBoxButtons.YesNo) = DialogResult.Yes Then
@@ -1116,39 +536,6 @@ Public Class MealPlan
 
     End Sub
     Public Sub PopulateComboboxFromDatabase(ByRef comboBox As ComboBox)
-        '    Dim conn As New OleDbConnection(connectionString)
-        '    Try
-        '        Debug.WriteLine("populate combobox successful")
-        '        'open the database connection
-        '        conn.Open()
-
-        '        'retrieve the firstname and surname columns from the personaldetails tabel
-        '        Dim query As String = "SELECT FirstName, LastName FROM PersonalDetails"
-        '        Dim cmd As New OleDbCommand(query, conn)
-        '        Dim reader As OleDbDataReader = cmd.ExecuteReader()
-
-        '        'bind the retrieved data to the combobox
-        '        ComboBox4.Items.Clear()
-        '        While reader.Read()
-        '            ComboBox4.Items.Add($"{reader("FirstName")} {reader("LastName")}")
-        '        End While
-
-        '        'close the database
-        '        reader.Close()
-
-        '    Catch ex As Exception
-        '        'handle any exeptions that may occur  
-        '        Debug.WriteLine("failed to populate combobox")
-        '        Debug.WriteLine($"Stack Trace: {ex.StackTrace}")
-        '        MessageBox.Show($"Error: {ex.StackTrace}")
-        '    Finally
-        '        'close the database connection
-        '        If conn.State = ConnectionState.Open Then
-        '            conn.Close()
-        '        End If
-        '    End Try
-        'End Sub
-
 
 
 
@@ -1184,21 +571,52 @@ Public Class MealPlan
     End Sub
 
     Private Sub ComboBox4_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ComboBox4.SelectedIndexChanged
-        If ComboBox4.SelectedItem IsNot Nothing Then
-            ' Split the selected item by the hyphen separator
-            Dim selectedText As String = ComboBox4.SelectedItem.ToString()
-            Dim parts() As String = selectedText.Split("-"c)
 
-            If parts.Length = 2 Then
-                Dim fullName As String = parts(0).Trim()
-                Dim dietary As String = parts(1).Trim()
-
-                'MessageBox.Show($"{fullName}'s is a {dietary}", "Diet Info")
-            End If
-        End If
     End Sub
 
     Private Sub ComboBox3_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ComboBox3.SelectedIndexChanged
+        If ComboBox3.SelectedItem Is Nothing Then Exit Sub
+
+        Dim selectedIngredient As String = ComboBox3.SelectedItem.ToString().Trim().ToLower()
+
+        Try
+            Using conn As New OleDbConnection(connectionString)
+                conn.Open()
+
+                Dim cmd As New OleDbCommand("SELECT Quantity, ExpiryDate FROM Inventory WHERE LCASE(TRIM(ItemName)) = ?", conn)
+                cmd.Parameters.AddWithValue("?", selectedIngredient)
+
+                Using reader = cmd.ExecuteReader()
+                    If reader.Read() Then
+                        Dim qty As Integer = Convert.ToInt32(reader("Quantity"))
+                        Dim expiryDate As Date = Convert.ToDateTime(reader("ExpiryDate"))
+
+                        If qty <= 0 Then
+                            MessageBox.Show(selectedIngredient & " is out of stock.", "Out of Stock", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                            Return
+                        End If
+
+                        If expiryDate < Date.Today Then
+                            MessageBox.Show(selectedIngredient & " is expired (Expiry: " & expiryDate.ToShortDateString() & ").", "Expired Item", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                            Return
+                        End If
+
+                    Else
+                        MessageBox.Show(selectedIngredient & " was not found in the inventory.", "Not Found", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                        Return
+                    End If
+                End Using
+            End Using
+
+        Catch ex As Exception
+            MessageBox.Show("Error checking ingredient: " & ex.Message)
+        End Try
+
+
+
+    End Sub
+
+    Private Sub lstMealSuggestions_SelectedIndexChanged(sender As Object, e As EventArgs) Handles lstMealSuggestions.SelectedIndexChanged
 
     End Sub
 End Class
