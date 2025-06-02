@@ -1,6 +1,8 @@
 ﻿Imports System.Data.OleDb
+Imports System.IO
 Public Class Family_Schedule
     Private EventDictionary As New Dictionary(Of Date, List(Of String))
+    Dim photoDates As New List(Of Date)
     Dim budget As Decimal = 7000
     Dim budgetlabel As New Label()
     Dim hasUnsavedChanges As Boolean = False
@@ -107,6 +109,8 @@ Public Class Family_Schedule
         End Try
     End Sub
     Private Sub Family_Schedule_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
+        LoadPhotoDates()
 
         Dim tooltip As New ToolTip
         tooltip.SetToolTip(btnSave, "Submit")
@@ -425,6 +429,7 @@ Public Class Family_Schedule
                 MessageBox.Show("There is a " & item.SubItems(1).Text & " on " & selectedDate.ToShortDateString(), "Event Reminder")
                 Exit Sub
             End If
+
         Next
     End Sub
     Private Sub ListView1_ItemDrag(sender As Object, e As ItemDragEventArgs) Handles ListView1.ItemDrag
@@ -975,6 +980,64 @@ Public Class Family_Schedule
             MessageBox.Show("Error saving updated budget: " & ex.Message, "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
     End Sub
+
+#Region "Xiluva"
+    Private Sub DisplayPhotoByDate(selectedDate As Date)
+        Try
+            conn.Open()
+            Dim cmd As New OleDbCommand("SELECT TOP 1 FilePath FROM Photos WHERE DateValue(DateAdded) = ?", conn)
+            cmd.Parameters.AddWithValue("?", selectedDate.Date)
+
+            Dim reader As OleDbDataReader = cmd.ExecuteReader()
+
+            If reader.Read() Then
+                Dim filePath As String = reader("FilePath").ToString()
+                If File.Exists(filePath) Then
+                    PictureBox1.Image = Image.FromFile(filePath)
+                Else
+                    PictureBox1.Image = Nothing
+                    MessageBox.Show("Image file not found at path: " & filePath)
+                End If
+            Else
+                PictureBox1.Image = Nothing
+                MessageBox.Show("No photo found for this date.")
+            End If
+            reader.Close()
+
+        Catch ex As Exception
+            MessageBox.Show("Error displaying photo: " & ex.Message)
+        Finally
+            conn.Close()
+        End Try
+    End Sub
+
+    Private Sub LoadPhotoDates()
+        photoDates.Clear()
+        MonthCalendar1.BoldedDates = {} ' Clear previous bolded dates
+
+        Try
+            conn.Open()
+            Dim cmd As New OleDbCommand("SELECT DISTINCT DateValue(DateAdded) AS PhotoDate FROM Photos", conn)
+            Dim reader As OleDbDataReader = cmd.ExecuteReader()
+
+            While reader.Read()
+                photoDates.Add(Convert.ToDateTime(reader("PhotoDate")))
+            End While
+            reader.Close()
+
+            MonthCalendar1.BoldedDates = photoDates.ToArray()
+
+        Catch ex As Exception
+            MessageBox.Show("Error loading photo dates: " & ex.Message)
+        Finally
+            conn.Close()
+        End Try
+    End Sub
+
+    Private Sub MonthCalendar1_DateSelected(sender As Object, e As DateRangeEventArgs) Handles MonthCalendar1.DateSelected
+        DisplayPhotoByDate(e.Start)
+    End Sub
+#End Region
 End Class
 
 
