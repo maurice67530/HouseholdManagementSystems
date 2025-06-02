@@ -130,7 +130,7 @@ Public Class Household_Document
             ' Save path and metadata to the database
             Using conn As New OleDb.OleDbConnection(connectionString)
                 conn.Open()
-                Dim cmd As New OleDb.OleDbCommand("INSERT INTO HouseholdDocument (HouseholdID, Title, Notes, Category, FilePath, UploadedBy, UploadDate) VALUES (?, ?, ?, ?, ?, ?, ?)", conn)
+                Dim cmd As New OleDb.OleDbCommand("INSERT INTO HouseholdDocument (HouseholdID, Title, Notes, Category, FilePath, UploadedBy, UploadDate, BelongsTo) VALUES (?, ?, ?, ?, ?, ?, ?, ?)", conn)
                 cmd.Parameters.AddWithValue("?", 1)
                 cmd.Parameters.AddWithValue("?", TextBox1.Text)
                 cmd.Parameters.AddWithValue("?", TextBox2.Text)
@@ -138,6 +138,7 @@ Public Class Household_Document
                 cmd.Parameters.AddWithValue("?", destinationPath) ' Save full UNC path
                 cmd.Parameters.AddWithValue("?", TextBox5.Text)
                 cmd.Parameters.AddWithValue("?", DateTime.Now)
+                cmd.Parameters.AddWithValue("?", ComboBox4.Text)
                 cmd.ExecuteNonQuery()
             End Using
 

@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class Personnel
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,7 +20,7 @@ Partial Class Personnel
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Personnel))
         Me.Button1 = New System.Windows.Forms.Button()
@@ -231,7 +231,7 @@ Partial Class Personnel
         Me.PictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.PictureBox1.Location = New System.Drawing.Point(410, 68)
         Me.PictureBox1.Name = "PictureBox1"
-        Me.PictureBox1.Size = New System.Drawing.Size(323, 270)
+        Me.PictureBox1.Size = New System.Drawing.Size(323, 254)
         Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
         Me.PictureBox1.TabIndex = 141
         Me.PictureBox1.TabStop = False
@@ -464,9 +464,9 @@ Partial Class Personnel
         '
         Me.ListBox1.BackColor = System.Drawing.SystemColors.GradientActiveCaption
         Me.ListBox1.FormattingEnabled = True
-        Me.ListBox1.Location = New System.Drawing.Point(484, 349)
+        Me.ListBox1.Location = New System.Drawing.Point(483, 328)
         Me.ListBox1.Name = "ListBox1"
-        Me.ListBox1.Size = New System.Drawing.Size(247, 82)
+        Me.ListBox1.Size = New System.Drawing.Size(249, 108)
         Me.ListBox1.TabIndex = 159
         '
         'Label16
@@ -474,7 +474,7 @@ Partial Class Personnel
         Me.Label16.AutoSize = True
         Me.Label16.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
         Me.Label16.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label16.Location = New System.Drawing.Point(410, 349)
+        Me.Label16.Location = New System.Drawing.Point(410, 328)
         Me.Label16.Name = "Label16"
         Me.Label16.Size = New System.Drawing.Size(63, 18)
         Me.Label16.TabIndex = 160
