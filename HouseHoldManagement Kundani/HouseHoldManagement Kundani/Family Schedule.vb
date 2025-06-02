@@ -115,7 +115,16 @@ Public Class Family_Schedule
 
         ' IntegrateChores()
         LoadFamilyCalendar()
+
+        If AutoFilterEnabled Then
+            ' Perform filtering when auto-filter is enabled
+            LoadMealSchedule()
+            LoadFamilySchedules()
+            LoadFamilySchedule()
+            LoadMealEvents()
+        End If
     End Sub
+    Public Property AutoFilterEnabled As Boolean = False
     Private Sub LoadFamilyCalendar()
         Dim conStr As String = (HouseHoldManagment_Module.connectionString)
         Dim con As New OleDbConnection(conStr)
@@ -1055,10 +1064,10 @@ Public Class Family_Schedule
     End Sub
 
     Private Sub Button1_Click_1(sender As Object, e As EventArgs) Handles Button1.Click
-        LoadMealSchedule()
-        LoadFamilySchedules()
-        LoadFamilySchedule()
-        LoadMealEvents()
+        'LoadMealSchedule()
+        'LoadFamilySchedules()
+        'LoadFamilySchedule()
+        'LoadMealEvents()
 
     End Sub
 #End Region

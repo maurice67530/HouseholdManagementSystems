@@ -397,6 +397,8 @@ Public Class Personnel
         End If
 #End Region
 
+
+
 #Region "DONGOLA"
 
         If DataGridView1.SelectedRows.Count > 0 Then
@@ -408,6 +410,11 @@ Public Class Personnel
             Dim fullName As String = $"{firstName} {lastName}"
             ' Clear previous items in ListBox
             ListBox1.Items.Clear()
+
+            ' Add Chores heading
+            ListBox1.Items.Add("Chores:")
+            ListBox1.Items.Add("---------------")
+
             ' Fetch chores from database
             Using conn As New OleDbConnection(connString)
                 Dim query As String = "SELECT Title FROM Chores WHERE AssignedTo = @AssignedTo"
@@ -425,6 +432,8 @@ Public Class Personnel
             End Using
         End If
 #End Region
+
+
     End Sub
     Private Sub ClearForm()
         TextBox8.Clear()
