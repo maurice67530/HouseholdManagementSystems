@@ -1,5 +1,6 @@
 ﻿Imports System.Data.OleDb
 Public Class Family_Schedule
+    Private EventDictionary As New Dictionary(Of Date, List(Of String))
     Dim budget As Decimal = 7000
     Dim budgetlabel As New Label()
     Dim hasUnsavedChanges As Boolean = False
@@ -20,7 +21,7 @@ Public Class Family_Schedule
     .EndTime = DateTimePicker3.Text,
     .AssignedTo = ComboBox1.SelectedItem.ToString,
     .EventType = ComboBox3.SelectedItem.ToString,
-    .IsBudgetRequired = CheckBox1.Checked,
+    .IsBudgetRequired = ComboBox2.SelectedItem.ToString,
     .Amount = TextBox3.Text
     }
 
@@ -46,7 +47,7 @@ Public Class Family_Schedule
                 cmd.Parameters.AddWithValue("@EndTime", DateTimePicker3.Text)
                 cmd.Parameters.AddWithValue("@AssignedTo", ComboBox1.SelectedItem.ToString())
                 cmd.Parameters.AddWithValue("@EventType", ComboBox3.SelectedItem.ToString())
-                cmd.Parameters.AddWithValue("@IsBudgetRequired", CheckBox1.Checked)
+                cmd.Parameters.AddWithValue("@IsBudgetRequired", ComboBox2.SelectedItem.ToString())
                 cmd.Parameters.AddWithValue("@Amount", TextBox3.Text)
 
                 Dim rowsAffected As Integer = cmd.ExecuteNonQuery()
@@ -70,7 +71,7 @@ Public Class Family_Schedule
 
         End Try
         LoadScheduleFromDatabase()
-       
+        SubtractEventAmount()
     End Sub
     Public Sub LoadScheduleFromDatabase()
         Try
@@ -126,28 +127,14 @@ Public Class Family_Schedule
         LoadFamilyCalendar()
         LoadScheduleFromDatabase()
 
-
-        ' Setup and display the budget label
-        budgetlabel.Name = "budget"
-        budgetlabel.Text = "Budget: R" & budget.ToString("N2")
-        budgetlabel.AutoSize = True
-        budgetlabel.Location = New Point(3, 0) ' Position inside the Panel
-        budgetlabel.Font = New Font("Segoe UI", 12, FontStyle.Bold)
-        budgetlabel.Visible = True
-        Panel3.Controls.Add(budgetlabel)
-
-        ComboBox3.DropDownStyle = ComboBoxStyle.DropDown ' Allow typing
-
-        ' Hardcoded event dates
-        EventDates("School Trips") = New List(Of Date) From {
-            #6/15/2025#, #7/10/2025#, #8/25/2025#
-        }
-
-        EventDates("Doctor's Visit") = New List(Of Date) From {
-            #6/18/2025#, #7/05/2025#, #8/22/2025#
-            }
-
-
+        LoadBudgetAmount()
+        'ComboBox3.Items.Clear()
+        If Not ComboBox3.Items.Contains("Doctor's Visit") Then
+            ComboBox3.Items.Add("Doctor's Visit")
+        End If
+        If Not ComboBox3.Items.Contains("School Trip") Then
+            ComboBox3.Items.Add("School Trip")
+        End If
     End Sub
 
     Private Sub LoadFamilyCalendar()
@@ -271,7 +258,7 @@ Public Class Family_Schedule
             Dim EndTime As String = DateTimePicker3.Text
             Dim AssignedTo As String = ComboBox1.Text
             Dim EventType As String = ComboBox3.Text
-            Dim IsBudgetRequired As String = CheckBox1.Checked
+            Dim IsBudgetRequired As String = ComboBox2.Text
             Dim Amount As Integer = TextBox3.Text
 
             Using conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
@@ -293,7 +280,7 @@ Public Class Family_Schedule
                 cmd.Parameters.AddWithValue("@EndTime", DateTimePicker3.Text)
                 cmd.Parameters.AddWithValue("@AssignedTo", ComboBox1.SelectedItem.ToString())
                 cmd.Parameters.AddWithValue("@EventType", ComboBox3.SelectedItem.ToString())
-                cmd.Parameters.AddWithValue("@isBudgetRequired", CheckBox1.Checked)
+                cmd.Parameters.AddWithValue("@isBudgetRequired", ComboBox2.SelectedItem.ToString())
                 cmd.Parameters.AddWithValue("@Amount", TextBox3.Text)
                 cmd.Parameters.AddWithValue("@ID", ID)
                 cmd.ExecuteNonQuery()
@@ -334,7 +321,7 @@ Public Class Family_Schedule
                 DateTimePicker3.Text = selectedRow.Cells("EndTime").Value.ToString()
                 ComboBox1.Text = selectedRow.Cells("AssignedTo").Value.ToString()
                 ComboBox3.Text = selectedRow.Cells("EventType").Value.ToString()
-                CheckBox1.Checked = selectedRow.Cells("IsBudgetRequired").Value.ToString()
+                ComboBox2.Text = selectedRow.Cells("IsBudgetRequired").Value.ToString()
                 TextBox3.Text = selectedRow.Cells("Amount").Value.ToString()
 
                 ' Enable/disable the buttons based on the selected person  
@@ -379,18 +366,14 @@ Public Class Family_Schedule
         End Try
     End Sub
     Private Sub MonthCalendar1_DateChanged(sender As Object, e As DateRangeEventArgs) Handles MonthCalendar1.DateChanged
+        Dim selectedDate As Date = e.Start.Date
 
-        Dim selectedDate As Date = e.Start
-        Dim eventType As String = ComboBox3.Text.Trim()
-
-        If EventDates.ContainsKey(eventType) Then
-            If EventDates(eventType).Contains(selectedDate) Then
-                MessageBox.Show("There is a " & eventType & " on " & selectedDate.ToShortDateString(), "Event Found", MessageBoxButtons.OK, MessageBoxIcon.Information)
-            End If
+        If EventDictionary.ContainsKey(selectedDate) Then
+            Dim messages As String = String.Join(vbCrLf, EventDictionary(selectedDate))
+            MessageBox.Show("Events on " & selectedDate.ToLongDateString() & ":" & vbCrLf & messages)
         End If
 
-
-        ' Dim selectedDate As Date = e.Start
+        'Dim selectedDate As Date = e.Start
         Dim dt As DataTable = TryCast(Me.Tag, DataTable)
 
         ' Refresh the schedule data first
@@ -425,7 +408,8 @@ Public Class Family_Schedule
                 End Using
             End Using
         Catch ex As Exception
-            MessageBox.Show("Error retrieving birthdays: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            ' MessageBox.Show("Error retrieving birthdays: " & ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            'MessageBox.Show("Error saving Schedule to database: " & ex.Message & vbNewLine & ex.StackTrace, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
 
         ' Display result once
@@ -434,6 +418,14 @@ Public Class Family_Schedule
             MessageBox.Show(message, "Family Calendar")
         End If
 
+        ' Dim selectedDate As Date = e.Start
+
+        For Each item As ListViewItem In ListView1.Items
+            If item.SubItems(0).Text = selectedDate.ToShortDateString() Then
+                MessageBox.Show("There is a " & item.SubItems(1).Text & " on " & selectedDate.ToShortDateString(), "Event Reminder")
+                Exit Sub
+            End If
+        Next
     End Sub
     Private Sub ListView1_ItemDrag(sender As Object, e As ItemDragEventArgs) Handles ListView1.ItemDrag
         DoDragDrop(e.Item, DragDropEffects.Move)
@@ -450,84 +442,6 @@ Public Class Family_Schedule
         ' Example: You can now update the due date of a chore or appointment in DB
         MessageBox.Show("Item dropped on " & newDate.ToShortDateString() & ". Update DB logic here.")
     End Sub
-    'Private Sub LoadAllEvents()
-    '    ListView1.Items.Clear()
-    '    Dim dt As New DataTable()
-    '    Dim messageLines As New List(Of String)()
-
-    '    Using conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
-    '        conn.Open()
-    '        Dim query As String = ""
-    '        Dim cmd As OleDbCommand
-
-    '        If eventType = "Chores" Then
-    '            query = "SELECT AssignedTo, DueDate, Status FROM Chores ORDER BY DueDate"
-    '            cmd = New OleDbCommand(query, conn)
-    '        ElseIf eventType = "Birthdays" Then
-    '            query = "SELECT FirstName, LastName, DateOfBirth FROM PersonalDetails ORDER BY DateOfBirth"
-    '            cmd = New OleDbCommand(query, conn)
-    '        End If
-
-    '        Dim da As New OleDbDataAdapter(cmd)
-    '        da.Fill(dt)
-    '    End Using
-
-    '    For Each row As DataRow In dt.Rows
-    '        Dim item As New ListViewItem()
-
-    '        If eventType = "Chores" Then
-    '            Dim assignedTo As String = row("AssignedTo").ToString()
-    '            Dim dueDate As Date = Convert.ToDateTime(row("DueDate"))
-    '            Dim status As String = row("Status").ToString()
-
-    '            item.Text = assignedTo
-    '            item.SubItems.Add(dueDate.ToShortDateString())
-    '            item.SubItems.Add(status)
-
-    '            ' Optional coloring for overdue chores
-    '            If dueDate < Date.Today AndAlso status.ToLower() <> "completed" Then
-    '                item.ForeColor = Color.Blue
-    '            End If
-
-    '            ListView1.Items.Add(item)
-
-    '            ' Add to messagebox lines
-    '            messageLines.Add($"Assigned To: {assignedTo} | Due Date: {dueDate.ToShortDateString()} | Status: {status}")
-
-    '        ElseIf eventType = "Birthdays" Then
-    '            Dim firstName As String = row("FirstName").ToString()
-    '            Dim lastName As String = row("LastName").ToString()
-    '            Dim dob As Date = Convert.ToDateTime(row("DateOfBirth"))
-    '            Dim fullName As String = $"{firstName} {lastName}"
-
-    '            item.Text = fullName
-    '            item.SubItems.Add(dob.ToShortDateString())
-
-    '            ' Optional coloring for today's birthdays
-    '            If dob.Month = Date.Today.Month AndAlso dob.Day = Date.Today.Day Then
-    '                item.ForeColor = Color.DeepPink
-    '            Else
-    '                item.ForeColor = Color.Blue
-    '            End If
-
-    '            ListView1.Items.Add(item)
-
-    '            ' Add to messagebox lines
-    '            messageLines.Add($"Name: {firstName} {lastName} | Date of Birth: {dob.ToShortDateString()}")
-    '        End If
-
-    '    Next
-
-    '    ' Display all records in a messagebox
-    '    If messageLines.Count > 0 Then
-    '        Dim message As String = String.Join(Environment.NewLine, messageLines)
-    '        If eventType = "Chores" Then
-    '            MessageBox.Show("All Chores:" & Environment.NewLine & message, "All Chores", MessageBoxButtons.OK, MessageBoxIcon.Information)
-    '        Else
-    '            MessageBox.Show("All Birthdays:" & Environment.NewLine & message, "All Birthdays", MessageBoxButtons.OK, MessageBoxIcon.Information)
-    '        End If
-    '    End If
-    'End Sub
     Private Sub LoadAllEvents()
         ListView1.Items.Clear()
         Dim dt As New DataTable()
@@ -622,7 +536,7 @@ Public Class Family_Schedule
         If messageLines.Count > 0 Then
             Dim message As String = String.Join(Environment.NewLine, messageLines)
             Select Case eventType
-            
+
                 Case "School Trip"
                     MessageBox.Show("All School Trips:" & Environment.NewLine & message, "School Trip Dates", MessageBoxButtons.OK, MessageBoxIcon.Information)
                 Case "Doctors Visit"
@@ -631,13 +545,15 @@ Public Class Family_Schedule
         End If
     End Sub
     Private Sub ComboBox3_SelectedIndexChanged_1(sender As Object, e As EventArgs) Handles ComboBox3.SelectedIndexChanged
-        Dim userInput As String = ComboBox3.Text.Trim()
+        Dim selectedEvent As String = ComboBox3.SelectedItem.ToString()
 
-        If EventDates.ContainsKey(userInput) Then
-            MonthCalendar1.BoldedDates = EventDates(userInput).ToArray()
-        Else
-            MonthCalendar1.BoldedDates = {} ' Clear bolding
+        If selectedEvent = "Doctor's Visit" Then
+            LoadDoctorVisits()
+        ElseIf selectedEvent = "School Trip" Then
+            LoadSchoolTrips()
         End If
+
+        UpdateBoldedDates()
 
         eventType = ComboBox3.SelectedItem.ToString()
         LoadAllEvents()  ' <-- instead of LoadEventsByDate
@@ -651,7 +567,25 @@ Public Class Family_Schedule
             SetupChoresListView()
             LoadChores()
         End If
+        If ComboBox3.SelectedItem.ToString() = "Doctor's Visit" Then
+            SetupDoctorsVisitListView()
+            LoadDoctorsVisitData()
+        End If
+        If ComboBox3.SelectedItem.ToString() = "School Trip" Then
+            SetupSchoolTripListView()
+            LoadBudgetStartDates()
+        End If
         SubtractEventAmount()
+    End Sub
+    Private Sub AddEvent([date] As Date, description As String)
+        If Not EventDictionary.ContainsKey([date]) Then
+            EventDictionary([date]) = New List(Of String)
+        End If
+
+        If Not EventDictionary([date]).Contains(description) Then
+            EventDictionary([date]).Add(description)
+        End If
+
     End Sub
     Private Sub SetupListView()
         ListView1.Clear()
@@ -687,6 +621,39 @@ Public Class Family_Schedule
             Else
                 item.ForeColor = Color.Blue      ' Normal color for other birthdays
             End If
+
+            ListView1.Items.Add(item)
+        Next
+    End Sub
+    Private Sub SetupDoctorsVisitListView()
+        ListView1.Clear()
+        ListView1.View = View.Details
+        ListView1.FullRowSelect = True
+        ListView1.GridLines = True
+
+        ListView1.Columns.Add("Person", 120)
+        ListView1.Columns.Add("Date of Visit", 100)
+    End Sub
+    Private Sub LoadDoctorsVisitData()
+        ListView1.Items.Clear()
+        Dim dt As New DataTable()
+
+        Using conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
+            conn.Open()
+            ' Select only entries where Category is 'Doctor Visit'
+            Dim query As String = "SELECT Person, DateOfexpenses FROM Expense"
+            Dim cmd As New OleDbCommand(query, conn)
+            Dim da As New OleDbDataAdapter(cmd)
+            da.Fill(dt)
+        End Using
+
+        ' Add each doctor's visit record to the ListView
+        For Each row As DataRow In dt.Rows
+            Dim person As String = row("Person").ToString()
+            Dim visitDate As Date = Convert.ToDateTime(row("DateOfexpenses"))
+
+            Dim item As New ListViewItem(person)
+            item.SubItems.Add(visitDate.ToShortDateString()) ' Display visit date
 
             ListView1.Items.Add(item)
         Next
@@ -875,62 +842,138 @@ Public Class Family_Schedule
     End Sub
     Private Sub SubtractEventAmount()
         Dim amountUsed As Decimal
+        Dim selectedEvent As String = ComboBox3.SelectedItem?.ToString()
 
-        If Decimal.TryParse(TextBox3.Text, amountUsed) Then
-            If amountUsed <= budget Then
-                budget -= amountUsed
-                budgetlabel.Text = "Budget: R" & budget.ToString("N2")
+        ' Ensure the event type is valid
+        If selectedEvent = "Doctor's Visit" OrElse selectedEvent = "School Trip" OrElse selectedEvent = "Birthdays" Then
+            ' Check if the amount entered is numeric and valid
+            If Decimal.TryParse(TextBox3.Text, amountUsed) Then
+                If amountUsed <= budget Then
+                    budget -= amountUsed
+                    SaveUpdatedBudget(budget)
+                    Label12.Text = "Budget: R" & budget.ToString("N2")
+                Else
+                    MessageBox.Show("Amount exceeds current budget!", "Budget Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                End If
             Else
-                MessageBox.Show("Amount exceeds current budget!", "Budget Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                MessageBox.Show("Please enter a valid numeric amount.", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
             End If
-            'Else
-            'MessageBox.Show("Please enter a valid numeric amount.", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End If
     End Sub
-    Private Sub SaveEventChanges()
-        Dim eventName As String = eventType ' e.g., "School Trip" or "Doctors Visit"
-        Dim amountUsed As Decimal = Convert.ToDecimal(TextBox3.Text)
+    Private Sub LoadDoctorVisits()
+        Try
+            EventDictionary.Clear() ' Clear previous events if needed
+
+            Using conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
+                conn.Open()
+                Dim cmd As New OleDbCommand("SELECT DateOfexpenses, Person FROM Expense", conn)
+                Dim reader As OleDbDataReader = cmd.ExecuteReader()
+
+                While reader.Read()
+                    If Not IsDBNull(reader("DateOfexpenses")) AndAlso Not IsDBNull(reader("Person")) Then
+                        Dim visitDate As Date = CDate(reader("DateOfexpenses")).Date ' Remove time portion
+                        Dim personName As String = reader("Person").ToString()
+                        AddEvent(visitDate, "Doctor's Visit - " & personName)
+                    End If
+                End While
+            End Using
+        Catch ex As Exception
+            MessageBox.Show("Error loading Doctor's Visit: " & ex.Message)
+        End Try
+    End Sub
+    Private Sub LoadSchoolTrips()
+        Try
+            Using conn As New OleDbConnection(connectionString)
+                conn.Open()
+                Dim cmd As New OleDbCommand("SELECT StartDate FROM Budget", conn)
+                Dim reader As OleDbDataReader = cmd.ExecuteReader()
+
+                While reader.Read()
+                    If Not IsDBNull(reader("StartDate")) Then
+                        Dim tripDate As Date = CDate(reader("StartDate"))
+                        AddEvent(tripDate, "School Trip")
+                    End If
+                End While
+            End Using
+        Catch ex As Exception
+            MessageBox.Show("Error loading School Trips: " & ex.Message)
+        End Try
+    End Sub
+    Private Sub UpdateBoldedDates()
+        MonthCalendar1.RemoveAllBoldedDates()
+
+        For Each evtDate As Date In EventDictionary.Keys
+            MonthCalendar1.AddBoldedDate(evtDate)
+        Next
+
+        MonthCalendar1.UpdateBoldedDates()
+    End Sub
+    Private Sub LoadBudgetStartDates()
+        ListView1.Items.Clear()
+        Dim dt As New DataTable()
 
         Using conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
             conn.Open()
-
-            If eventName = "School Trip" Then
-                Dim cmd As New OleDbCommand("INSERT INTO Budget (startDate, Amount, EventName) VALUES (?, ?, ?)", conn)
-                cmd.Parameters.AddWithValue("?", Date.Now)
-                cmd.Parameters.AddWithValue("?", amountUsed)
-                cmd.Parameters.AddWithValue("?", eventName)
-                cmd.ExecuteNonQuery()
-
-            ElseIf eventName = "Doctors Visit" Then
-                Dim cmd As New OleDbCommand("INSERT INTO Expense (dateOfExpense, Amount, EventName) VALUES (?, ?, ?)", conn)
-                cmd.Parameters.AddWithValue("?", Date.Now)
-                cmd.Parameters.AddWithValue("?", amountUsed)
-                cmd.Parameters.AddWithValue("?", eventName)
-                cmd.ExecuteNonQuery()
-            End If
+            ' Only selecting StartDate from Budget table
+            Dim query As String = "SELECT StartDate FROM Budget ORDER BY StartDate DESC"
+            Dim cmd As New OleDbCommand(query, conn)
+            Dim da As New OleDbDataAdapter(cmd)
+            da.Fill(dt)
         End Using
 
-        hasUnsavedChanges = False
-        MessageBox.Show("Event saved and budget updated.", "Saved", MessageBoxButtons.OK, MessageBoxIcon.Information)
-
-        ' Reload budget after saving
-        'LoadCurrentBudget()
+        ' Display each StartDate in the ListView
+        For Each row As DataRow In dt.Rows
+            Dim startDate As Date = Convert.ToDateTime(row("StartDate"))
+            Dim item As New ListViewItem(startDate.ToShortDateString())
+            ListView1.Items.Add(item)
+        Next
     End Sub
+    Private Sub SetupSchoolTripListView()
+        ListView1.Clear()
+        ListView1.View = View.Details
+        ListView1.FullRowSelect = True
+        ListView1.GridLines = True
 
-    ' Declare event data at the class level
-    Private EventDates As New Dictionary(Of String, List(Of Date))
-    Private Sub FamilySchedule_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        ' Allow editable ComboBox (should be set in Designer too)
-        ComboBox3.DropDownStyle = ComboBoxStyle.DropDown
+        'ListView1.Columns.Add("Student", 120)
+        ListView1.Columns.Add("Trip Date", 100)
+    End Sub
+    Private Sub LoadBudgetAmount()
+        Try
+            Using conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
+                conn.Open()
 
-        ' Predefine event dates
-        EventDates("School Trips") = New List(Of Date) From {
-            #6/15/2025#, #7/10/2025#, #8/25/2025#
-        }
+                Dim cmd As New OleDbCommand("SELECT BudgetAmount FROM Budget", conn)
+                Dim reader As OleDbDataReader = cmd.ExecuteReader()
 
-        EventDates("Doctor's Visit") = New List(Of Date) From {
-            #6/18/2025#, #7/05/2025#, #8/22/2025#
-        }
+                If reader.Read() Then
+                    budget = Convert.ToDecimal(reader("BudgetAmount"))
+                    Label12.Text = "Budget: R" & budget.ToString("N2")
+                Else
+                    Label12.Text = "Budget: R0.00"
+                End If
+
+                reader.Close()
+            End Using
+        Catch ex As Exception
+            MessageBox.Show("Error loading budget amount: " & ex.Message, "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
+    End Sub
+    Private Sub SaveUpdatedBudget(updatedBudget As Decimal)
+        Try
+            Using conn As New OleDbConnection(HouseHoldManagment_Module.connectionString)
+                conn.Open()
+
+                ' IMPORTANT: Using correct field and primary key name from your table (BudgetAmou and ID)
+                Dim sql As String = "UPDATE Budget SET BudgetAmount = @NewBudget WHERE ID = (SELECT MAX(ID) FROM Budget)"
+                Dim cmd As New OleDbCommand(sql, conn)
+
+                cmd.Parameters.AddWithValue("@NewBudget", updatedBudget)
+
+                cmd.ExecuteNonQuery()
+            End Using
+        Catch ex As Exception
+            MessageBox.Show("Error saving updated budget: " & ex.Message, "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
     End Sub
 End Class
 
