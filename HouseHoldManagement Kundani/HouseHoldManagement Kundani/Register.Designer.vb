@@ -27,13 +27,17 @@ Partial Class Register
         Me.Label7 = New System.Windows.Forms.Label()
         Me.Panel2 = New System.Windows.Forms.Panel()
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.Label5 = New System.Windows.Forms.Label()
+        Me.TextBox3 = New System.Windows.Forms.TextBox()
+        Me.TextBox2 = New System.Windows.Forms.TextBox()
         Me.DateTimePicker1 = New System.Windows.Forms.DateTimePicker()
         Me.Label6 = New System.Windows.Forms.Label()
-        Me.TextBox2 = New System.Windows.Forms.TextBox()
-        Me.TextBox3 = New System.Windows.Forms.TextBox()
-        Me.Label5 = New System.Windows.Forms.Label()
-        Me.Label1 = New System.Windows.Forms.Label()
         Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.ComboBox2 = New System.Windows.Forms.ComboBox()
+        Me.Label9 = New System.Windows.Forms.Label()
+        Me.Label12 = New System.Windows.Forms.Label()
+        Me.Label11 = New System.Windows.Forms.Label()
         Me.Label10 = New System.Windows.Forms.Label()
         Me.TextBox7 = New System.Windows.Forms.TextBox()
         Me.Label8 = New System.Windows.Forms.Label()
@@ -45,10 +49,7 @@ Partial Class Register
         Me.Label3 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Button1 = New System.Windows.Forms.Button()
-        Me.Label11 = New System.Windows.Forms.Label()
-        Me.Label12 = New System.Windows.Forms.Label()
-        Me.Label9 = New System.Windows.Forms.Label()
-        Me.ComboBox2 = New System.Windows.Forms.ComboBox()
+        Me.StatusLabel = New System.Windows.Forms.Label()
         Me.Panel2.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel1.SuspendLayout()
@@ -99,6 +100,40 @@ Partial Class Register
         Me.PictureBox1.TabIndex = 10
         Me.PictureBox1.TabStop = False
         '
+        'Label1
+        '
+        Me.Label1.AutoSize = True
+        Me.Label1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.Label1.Location = New System.Drawing.Point(12, 192)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(60, 15)
+        Me.Label1.TabIndex = 0
+        Me.Label1.Text = "Username:"
+        '
+        'Label5
+        '
+        Me.Label5.AutoSize = True
+        Me.Label5.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.Label5.Location = New System.Drawing.Point(14, 222)
+        Me.Label5.Name = "Label5"
+        Me.Label5.Size = New System.Drawing.Size(58, 15)
+        Me.Label5.TabIndex = 4
+        Me.Label5.Text = "Password:"
+        '
+        'TextBox3
+        '
+        Me.TextBox3.Location = New System.Drawing.Point(81, 189)
+        Me.TextBox3.Name = "TextBox3"
+        Me.TextBox3.Size = New System.Drawing.Size(156, 20)
+        Me.TextBox3.TabIndex = 6
+        '
+        'TextBox2
+        '
+        Me.TextBox2.Location = New System.Drawing.Point(81, 220)
+        Me.TextBox2.Name = "TextBox2"
+        Me.TextBox2.Size = New System.Drawing.Size(156, 20)
+        Me.TextBox2.TabIndex = 5
+        '
         'DateTimePicker1
         '
         Me.DateTimePicker1.Location = New System.Drawing.Point(82, 216)
@@ -115,40 +150,6 @@ Partial Class Register
         Me.Label6.Size = New System.Drawing.Size(35, 15)
         Me.Label6.TabIndex = 5
         Me.Label6.Text = "Date:"
-        '
-        'TextBox2
-        '
-        Me.TextBox2.Location = New System.Drawing.Point(81, 220)
-        Me.TextBox2.Name = "TextBox2"
-        Me.TextBox2.Size = New System.Drawing.Size(156, 20)
-        Me.TextBox2.TabIndex = 5
-        '
-        'TextBox3
-        '
-        Me.TextBox3.Location = New System.Drawing.Point(81, 189)
-        Me.TextBox3.Name = "TextBox3"
-        Me.TextBox3.Size = New System.Drawing.Size(156, 20)
-        Me.TextBox3.TabIndex = 6
-        '
-        'Label5
-        '
-        Me.Label5.AutoSize = True
-        Me.Label5.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        Me.Label5.Location = New System.Drawing.Point(14, 222)
-        Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(58, 15)
-        Me.Label5.TabIndex = 4
-        Me.Label5.Text = "Password:"
-        '
-        'Label1
-        '
-        Me.Label1.AutoSize = True
-        Me.Label1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        Me.Label1.Location = New System.Drawing.Point(12, 192)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(60, 15)
-        Me.Label1.TabIndex = 0
-        Me.Label1.Text = "Username:"
         '
         'Panel1
         '
@@ -174,6 +175,45 @@ Partial Class Register
         Me.Panel1.Name = "Panel1"
         Me.Panel1.Size = New System.Drawing.Size(247, 247)
         Me.Panel1.TabIndex = 13
+        '
+        'ComboBox2
+        '
+        Me.ComboBox2.FormattingEnabled = True
+        Me.ComboBox2.Items.AddRange(New Object() {"Vegetarian", "Veganism", "Omnivore", "Foodie"})
+        Me.ComboBox2.Location = New System.Drawing.Point(82, 189)
+        Me.ComboBox2.Name = "ComboBox2"
+        Me.ComboBox2.Size = New System.Drawing.Size(156, 21)
+        Me.ComboBox2.TabIndex = 22
+        '
+        'Label9
+        '
+        Me.Label9.AutoSize = True
+        Me.Label9.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.Label9.Location = New System.Drawing.Point(12, 195)
+        Me.Label9.Name = "Label9"
+        Me.Label9.Size = New System.Drawing.Size(64, 15)
+        Me.Label9.TabIndex = 21
+        Me.Label9.Text = "Preference:"
+        '
+        'Label12
+        '
+        Me.Label12.AutoSize = True
+        Me.Label12.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.Label12.Location = New System.Drawing.Point(42, 75)
+        Me.Label12.Name = "Label12"
+        Me.Label12.Size = New System.Drawing.Size(31, 15)
+        Me.Label12.TabIndex = 20
+        Me.Label12.Text = "Age:"
+        '
+        'Label11
+        '
+        Me.Label11.AutoSize = True
+        Me.Label11.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.Label11.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label11.Location = New System.Drawing.Point(87, 74)
+        Me.Label11.Name = "Label11"
+        Me.Label11.Size = New System.Drawing.Size(2, 18)
+        Me.Label11.TabIndex = 19
         '
         'Label10
         '
@@ -270,50 +310,20 @@ Partial Class Register
         Me.Button1.TabIndex = 16
         Me.Button1.UseVisualStyleBackColor = True
         '
-        'Label11
+        'StatusLabel
         '
-        Me.Label11.AutoSize = True
-        Me.Label11.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        Me.Label11.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label11.Location = New System.Drawing.Point(87, 74)
-        Me.Label11.Name = "Label11"
-        Me.Label11.Size = New System.Drawing.Size(2, 18)
-        Me.Label11.TabIndex = 19
-        '
-        'Label12
-        '
-        Me.Label12.AutoSize = True
-        Me.Label12.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        Me.Label12.Location = New System.Drawing.Point(42, 75)
-        Me.Label12.Name = "Label12"
-        Me.Label12.Size = New System.Drawing.Size(31, 15)
-        Me.Label12.TabIndex = 20
-        Me.Label12.Text = "Age:"
-        '
-        'Label9
-        '
-        Me.Label9.AutoSize = True
-        Me.Label9.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        Me.Label9.Location = New System.Drawing.Point(12, 195)
-        Me.Label9.Name = "Label9"
-        Me.Label9.Size = New System.Drawing.Size(64, 15)
-        Me.Label9.TabIndex = 21
-        Me.Label9.Text = "Preference:"
-        '
-        'ComboBox2
-        '
-        Me.ComboBox2.FormattingEnabled = True
-        Me.ComboBox2.Items.AddRange(New Object() {"Vegetarian", "Veganism", "Omnivore", "Foodie"})
-        Me.ComboBox2.Location = New System.Drawing.Point(82, 189)
-        Me.ComboBox2.Name = "ComboBox2"
-        Me.ComboBox2.Size = New System.Drawing.Size(156, 21)
-        Me.ComboBox2.TabIndex = 22
+        Me.StatusLabel.AutoSize = True
+        Me.StatusLabel.Location = New System.Drawing.Point(0, 0)
+        Me.StatusLabel.Name = "StatusLabel"
+        Me.StatusLabel.Size = New System.Drawing.Size(0, 13)
+        Me.StatusLabel.TabIndex = 17
         '
         'Register
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(518, 346)
+        Me.Controls.Add(Me.StatusLabel)
         Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.Button2)
         Me.Controls.Add(Me.Label7)
@@ -358,4 +368,5 @@ Partial Class Register
     Friend WithEvents Label12 As Label
     Friend WithEvents Label9 As Label
     Friend WithEvents ComboBox2 As ComboBox
+    Friend WithEvents StatusLabel As Label
 End Class

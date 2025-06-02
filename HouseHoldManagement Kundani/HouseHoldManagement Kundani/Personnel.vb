@@ -1,6 +1,9 @@
 ﻿Imports System.IO
 Imports System.Data.OleDb
 Public Class Personnel
+
+    Private documentPaths As New Dictionary(Of String, String)()
+
     Dim connec As New OleDbConnection(HouseHoldManagment_Module.connectionString)
 
     ' Create a ToolTip object''
@@ -170,7 +173,7 @@ Public Class Personnel
         toolTip.InitialDelay = 500
         toolTip.ReshowDelay = 200
         toolTip.ShowAlways = True
-
+        CheckDatabaseConnection(StatusLabel)
         toolTip1.SetToolTip(BtnBack, "Back")
         'toolTip1.SetToolTip(BtnAddpicture, "Add a Picture")
         toolTip1.SetToolTip(BtnEdit, "Edit")
@@ -365,23 +368,20 @@ Public Class Personnel
                 'PictureBox1.ImageLocation = row.Cells("Photo").Value.ToString()
                 DateTimePicker1.Value = row.Cells("DateOfBirth").Value.ToString()
                 ComboBox4.SelectedItem = row.Cells("Dietary").Value.ToString()
+                ComboBox5.SelectedItem = row.Cells("FoodType").Value.ToString()
 
                 ' Try to load the image from the UNC path in FilePath
-                Dim filePath As String = row.Cells("Photo").Value.ToString()
-                If Not String.IsNullOrWhiteSpace(filePath) AndAlso File.Exists(filePath) Then
-                    PictureBox1.ImageLocation = filePath
-                    PictureBox1.Image = Image.FromFile(filePath)
-                Else
-                    PictureBox1.Image = Nothing
-                    MessageBox.Show("Image not found at " & filePath)
-                End If
+                Dim filePath As String = row.Cells("Photo").Value?.ToString()
+                'If Not String.IsNullOrWhiteSpace(filePath) AndAlso File.Exists(filePath) Then
+                PictureBox1.ImageLocation = filePath
+                PictureBox1.Image = Image.FromFile(filePath)
+                '    Else
+                '        PictureBox1.Image = Nothing
+                '        MessageBox.Show("Image not found at " & filePath)
+                '    End If
 
             End If
         End If
-
-
-
-
 
 #Region "DONGOLA"
 
@@ -396,9 +396,9 @@ Public Class Personnel
             ListBox1.Items.Clear()
 
             ' Add Chores heading
-            ListBox1.Items.Add("Chores:")
-            ListBox1.Items.Add("---------------")
 
+            ListBox1.Items.Add("---------------")
+            ListBox1.Items.Add("Chores:")
             ' Fetch chores from database
             Using conn As New OleDbConnection(connString)
                 Dim query As String = "SELECT Title FROM Chores WHERE AssignedTo = @AssignedTo"
@@ -414,8 +414,88 @@ Public Class Personnel
                     MessageBox.Show("Error fetching chores: " & ex.Message)
                 End Try
             End Using
+            ListBox1.Items.Add("---------------")
         End If
 #End Region
+
+#Region "Rasta"
+        If DataGridView1.SelectedRows.Count > 0 Then
+            ' Get selected row
+            Dim selectedRow As DataGridViewRow = DataGridView1.SelectedRows(0)
+            ' Get FirstName and LastName
+            Dim firstName As String = selectedRow.Cells("FirstName").Value.ToString()
+            Dim lastName As String = selectedRow.Cells("LastName").Value.ToString()
+            Dim fullName As String = $"{firstName} {lastName}"
+            ' Clear previous items in ListBox
+            'ListBox1.Items.Clear()
+
+            ' Add Chores heading
+
+            ListBox1.Items.Add("---------------")
+            ListBox1.Items.Add("Expense :")
+            ' Fetch chores from database
+            Using conn As New OleDbConnection(connString)
+                Dim query As String = "SELECT BillName, Amount FROM Expense WHERE Person = @Person"
+                Dim cmd As New OleDbCommand(query, conn)
+                cmd.Parameters.AddWithValue("@Person", fullName)
+                Try
+                    conn.Open()
+                    Dim reader As OleDbDataReader = cmd.ExecuteReader()
+                    While reader.Read()
+                        ListBox1.Items.Add(reader("BillName").ToString() & reader("Amount").ToString())
+                        'ListBox1.Items.Add("---------------")
+
+                    End While
+                Catch ex As Exception
+                    MessageBox.Show("Error fetching Expense: " & ex.Message)
+                End Try
+            End Using
+            ListBox1.Items.Add("---------------")
+        End If
+#End Region
+
+#Region "Murangi"
+
+        If DataGridView1.SelectedRows.Count > 0 Then
+            ' Get selected row
+            Dim selectedRow As DataGridViewRow = DataGridView1.SelectedRows(0)
+            Dim firstName As String = selectedRow.Cells("FirstName").Value.ToString()
+            Dim lastName As String = selectedRow.Cells("LastName").Value.ToString()
+            Dim fullName As String = $"{firstName} {lastName}"
+
+            ' Now load their documents
+            'ListBox1.Items.Clear()
+            'documentPaths.Clear()
+
+            ListBox1.Items.Add("---------------")
+            ListBox1.Items.Add("Documents:")
+
+            Using conn As New OleDbConnection(connString)
+                Dim query As String = "SELECT Category, FilePath FROM HouseholdDocument WHERE BelongsTo = @BelongsTo"
+                Using cmd As New OleDbCommand(query, conn)
+                    cmd.Parameters.AddWithValue("@BelongsTo", fullName)
+                    Try
+                        conn.Open()
+                        Using reader As OleDbDataReader = cmd.ExecuteReader()
+                            While reader.Read()
+                                Dim category As String = reader("Category").ToString()
+                                Dim filePath As String = reader("FilePath").ToString()
+
+                                ListBox1.Items.Add(category)
+                                documentPaths(category) = filePath
+                            End While
+                        End Using
+                    Catch ex As Exception
+                        MessageBox.Show("Error fetching documents: " & ex.Message)
+                    End Try
+                End Using
+            End Using
+
+            ListBox1.Items.Add("---------------")
+        End If
+
+#End Region
+
 
 
     End Sub
@@ -501,8 +581,23 @@ Public Class Personnel
     End Sub
 
     Private Sub ListBox1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ListBox1.SelectedIndexChanged
+        Dim selectedCategory As String = ListBox1.SelectedItem?.ToString()
 
+        If String.IsNullOrWhiteSpace(selectedCategory) OrElse selectedCategory = "Documents:" OrElse selectedCategory = "---------------" Then
+            Exit Sub
+        End If
+
+        If documentPaths.ContainsKey(selectedCategory) Then
+            Dim filePath As String = documentPaths(selectedCategory)
+
+            If IO.File.Exists(filePath) Then
+                Process.Start(filePath)
+            Else
+                MessageBox.Show("File not found: " & filePath)
+            End If
+        End If
     End Sub
+
 
     'DONGOLA
     Private connString As String = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=\\MUDAUMURANGI\Users\Murangi\Source\Repos\maurice67530\HouseholdManagementSystems\HMS.accdb"

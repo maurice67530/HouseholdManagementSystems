@@ -56,6 +56,7 @@ Partial Class Budget
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         Me.Button6 = New System.Windows.Forms.Button()
         Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
+        Me.StatusLabel = New System.Windows.Forms.Label()
         Me.Panel2.SuspendLayout()
         Me.Panel1.SuspendLayout()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -358,12 +359,22 @@ Partial Class Budget
         'Timer1
         '
         '
+        'StatusLabel
+        '
+        Me.StatusLabel.AutoSize = True
+        Me.StatusLabel.Location = New System.Drawing.Point(0, 0)
+        Me.StatusLabel.Name = "StatusLabel"
+        Me.StatusLabel.Size = New System.Drawing.Size(39, 13)
+        Me.StatusLabel.TabIndex = 51
+        Me.StatusLabel.Text = "Label2"
+        '
         'Budget
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.SystemColors.InactiveCaption
         Me.ClientSize = New System.Drawing.Size(568, 484)
+        Me.Controls.Add(Me.StatusLabel)
         Me.Controls.Add(Me.Button6)
         Me.Controls.Add(Me.Button5)
         Me.Controls.Add(Me.Label12)
@@ -419,4 +430,5 @@ Partial Class Budget
     Friend WithEvents ToolTip1 As ToolTip
     Friend WithEvents Button6 As Button
     Friend WithEvents Timer1 As Timer
+    Friend WithEvents StatusLabel As Label
 End Class

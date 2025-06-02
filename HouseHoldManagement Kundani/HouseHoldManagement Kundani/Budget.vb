@@ -46,7 +46,7 @@ Public Class Budget
         ToolTip1.SetToolTip(Button1, "Calculate")
         ToolTip1.SetToolTip(Button5, "Filter")
         ToolTip1.SetToolTip(Button6, "Sort")
-
+        CheckDatabaseConnection(StatusLabel)
 
     End Sub
 

@@ -30,10 +30,8 @@ Partial Class Expense
         Me.Button5 = New System.Windows.Forms.Button()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.ComboBox7 = New System.Windows.Forms.ComboBox()
-        Me.Label22 = New System.Windows.Forms.Label()
         Me.ComboBox6 = New System.Windows.Forms.ComboBox()
         Me.Label20 = New System.Windows.Forms.Label()
-        Me.TextBox9 = New System.Windows.Forms.TextBox()
         Me.TextBox8 = New System.Windows.Forms.TextBox()
         Me.Label18 = New System.Windows.Forms.Label()
         Me.TextBox2 = New System.Windows.Forms.TextBox()
@@ -47,6 +45,8 @@ Partial Class Expense
         Me.Label7 = New System.Windows.Forms.Label()
         Me.Label8 = New System.Windows.Forms.Label()
         Me.Label4 = New System.Windows.Forms.Label()
+        Me.Label22 = New System.Windows.Forms.Label()
+        Me.TextBox9 = New System.Windows.Forms.TextBox()
         Me.CheckBox1 = New System.Windows.Forms.CheckBox()
         Me.Label15 = New System.Windows.Forms.Label()
         Me.Label16 = New System.Windows.Forms.Label()
@@ -151,15 +151,6 @@ Partial Class Expense
         Me.ComboBox7.Size = New System.Drawing.Size(198, 24)
         Me.ComboBox7.TabIndex = 94
         '
-        'Label22
-        '
-        Me.Label22.AutoSize = True
-        Me.Label22.Location = New System.Drawing.Point(8, 138)
-        Me.Label22.Name = "Label22"
-        Me.Label22.Size = New System.Drawing.Size(54, 16)
-        Me.Label22.TabIndex = 93
-        Me.Label22.Text = "Search "
-        '
         'ComboBox6
         '
         Me.ComboBox6.FormattingEnabled = True
@@ -177,13 +168,6 @@ Partial Class Expense
         Me.Label20.Size = New System.Drawing.Size(36, 16)
         Me.Label20.TabIndex = 90
         Me.Label20.Text = "Paid"
-        '
-        'TextBox9
-        '
-        Me.TextBox9.Location = New System.Drawing.Point(122, 137)
-        Me.TextBox9.Name = "TextBox9"
-        Me.TextBox9.Size = New System.Drawing.Size(188, 22)
-        Me.TextBox9.TabIndex = 92
         '
         'TextBox8
         '
@@ -304,6 +288,22 @@ Partial Class Expense
         Me.Label4.Size = New System.Drawing.Size(33, 16)
         Me.Label4.TabIndex = 71
         Me.Label4.Text = "Tag"
+        '
+        'Label22
+        '
+        Me.Label22.AutoSize = True
+        Me.Label22.Location = New System.Drawing.Point(8, 138)
+        Me.Label22.Name = "Label22"
+        Me.Label22.Size = New System.Drawing.Size(54, 16)
+        Me.Label22.TabIndex = 93
+        Me.Label22.Text = "Search "
+        '
+        'TextBox9
+        '
+        Me.TextBox9.Location = New System.Drawing.Point(122, 137)
+        Me.TextBox9.Name = "TextBox9"
+        Me.TextBox9.Size = New System.Drawing.Size(188, 22)
+        Me.TextBox9.TabIndex = 92
         '
         'CheckBox1
         '
