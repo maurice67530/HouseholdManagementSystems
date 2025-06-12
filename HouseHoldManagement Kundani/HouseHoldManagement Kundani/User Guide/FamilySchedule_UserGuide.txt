@@ -1,0 +1,171 @@
+🗓️ Family Scheduler – User Guide
+
+
+
+1. Feature Name
+
+Family Scheduler
+
+
+2. What This Feature Does
+
+The Family Scheduler allows users to create, manage, and view family events such as chores, appointments, doctor visits, and school trips. It supports conflict detection, calendar integration, and filtering to help manage family responsibilities effectively.
+
+
+3. Who Should Use This
+
+Parents
+
+Family Members
+
+Household Admin
+
+
+4. Where to Find It
+
+Navigation Path: Main Menu → Family Schedule
+Form Name: FamilyScheduleForm
+
+
+5. How to Use It (Step-by-Step)
+
+✅ Step 1: Launch the Form
+
+From the main dashboard, click Family Schedule.
+
+✅ Step 2: Fill in the Details
+
+Title (TextBox): Enter the event title (e.g., “School Trip”).
+
+Notes (TextBox): Additional remarks (e.g., “Bring lunch and water”).
+
+DateOfEvent (DateTimePicker): Select the date.
+
+StartTime / EndTime (DateTimePickers): Enter start and end times.
+
+AssignedTo (ComboBox): Select family member responsible or attending.
+
+EventType (ComboBox): Choose from:
+
+Birthdays
+
+Chores
+
+Doctor’s Visit
+
+School Trip
+
+Meal
+
+Task
+
+Personal
+
+
+> 💡 Selecting Doctor’s Visit or School Trip will highlight the day on the calendar when the child is scheduled to attend.
+
+
+✅ Step 3: Save or Modify Event
+
+[Save]: Adds a new event to the database.
+
+[Update]: Changes the selected event.
+
+[Delete]: Removes the selected event from the list.
+
+
+✅ Step 4: Filter or Refresh
+
+[Filter Chores, Meal Plans, and Tasks]: Click this button to show only relevant items.
+
+Events like Chore, Meal, and Task will remain; others will be hidden.
+
+
+[Refresh]: Reloads the full list of scheduled events and resets filters.
+
+
+✅ Step 5: View Results
+
+Events appear in the DataGridView.
+
+Selected dates with scheduled events are bolded in the MonthCalendar.
+
+If a conflict exists (e.g., overlapping times), a warning appears:
+
+> “Conflict detected: ‘Laundry’ overlaps with ‘School Trip’.”
+
+
+6. Things to Note
+
+StartTime must be before EndTime.
+
+You can’t edit or delete completed tasks.
+
+Filtering only shows chores, meals, and tasks—use Refresh to return to full view.
+
+Birthdays and doctor visits are informational—conflict detection doesn’t block them but shows a warning if overlap occurs.
+
+
+7. Sample Data & Output
+
+Event Grid Example:
+
+Title	         Event Type	 Assigned To  Date	    Time
+
+“Laundry”	 Chore	         Marie	      2025-06-15    09:00–11:00
+“School Trip”	 School Trip	 David	      2025-06-15    08:00–03:00
+“Doctor’s Visit” Doctor’s Visit	 Ann	      2025-06-17    10:00–11:00
+
+
+📆 Calendar View:
+
+June 15 and 17 are bolded.
+
+Clicking June 15 shows conflict warning:
+
+> “Warning: Laundry overlaps with School Trip.”
+
+
+📤 Filter Button Output:
+
+Only “Laundry” remains in view when Filter is applied.
+
+Click Refresh to return to full list.
+
+
+8. Troubleshooting
+
+Issue	Cause	Solution
+
+Nothing shows on grid	Database not connected	Check connection string
+Event not saving	Required fields missing	Fill all required fields
+Time is invalid	EndTime is earlier than StartTime	Correct the time range
+Filtered too many events	Filter applied	Click Refresh
+Birthday not showing	Not assigned to anyone	Birthdays don’t require assignment
+
+
+9. Feature Owner
+
+Name: [Ndamulelo, Masindi]
+Role: Family Schedule Developer
+
+
+📁 File Naming Convention
+
+Save this document as:
+📄 FamilySchedule_UserGuide.docx
+
+
+🧠 Integration Tips
+
+Chores: Automatically inserted as events from the Chores Module.
+
+Meal Plan: Automatically adds meal times as calendar events.
+
+Tasks: Tasks with due dates create auto-reminders.
+
+Conflict Detection: Avoids overlapping chores and trips.
+
+Photo Gallery: Mark events for "Photo Day" using EventType.
+
+Print Schedule: Use Print button to create weekly plans.

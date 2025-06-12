@@ -1,0 +1,62 @@
+# 📌 Notifications System
+
+## 👤 Author(s)
+- [Malima Masindi, Nedzamba Ndamulelo] (Developer, Group 9)
+- GitHub: [Ndamu85]
+
+## 🧩 Description
+The *Notifications System* provides real-time alerts and reminders for household activities such as upcoming chores, expiring groceries, pending tasks, and upcoming events. This ensures users never miss important household responsibilities by centralizing all notifications in a manageable and filterable interface.
+
+## ⚙️ Technologies Used
+- Visual Basic .NET
+- Microsoft Access
+- Timer Control
+- MessageBox Alerts
+- DataGridView for display
+
+## 🔄 Functional Overview
+- *Notification Triggers*:
+  - Upcoming Expenses (Next 7 Days)
+  - Grocery Expiry (Soon-to-expire items)
+  - Overdue Tasks or Chores
+  - Upcoming Events (Family Schedule integration)
+- *Key Actions*:
+  - *Mark as Read*: Tag a notification as seen.
+  - *Clear*: Delete all or selected notifications.
+  - *Refresh*: Reload notifications from the database.
+  - *Sort/Filter*: Organize notifications by category, priority, or date.
+- *Integration*:
+  - Pulls data from Tasks, Chores, GroceryInventory, and FamilySchedule.
+  - Works with the *Dashboard* for alert summaries.
+
+## 🖼️ UI Overview
+- *Inputs and Controls*:
+  - ComboBox → Filter by Notification Type (Chores, Tasks, Grocery, Events)
+  - Button → Mark as Read, Clear All, Refresh, Sort
+  - DataGridView → Displays notification list
+  - Timer → Checks for alerts every 60 seconds
+- *Example UI Buttons*:
+  - ✅ *Mark as Read*
+  - 🔁 *Refresh*
+  - 🧹 *Clear Notifications*
+  - 🔽 *Sort by Date/Priority*
+
+## 💾 Database Integration
+- *Table Name*: Notifications
+- *Fields Used*:
+  - NotificationID (AutoNumber, Primary Key)
+  - Message (Text)
+  - NotificationType (Text: Grocery, Task, Chore, Event)
+  - DateCreated (Date/Time)
+  - IsRead (Yes/No)
+- *Relations*:
+  - Linked indirectly to GroceryInventory, Tasks, Chores, FamilySchedule for source data.
+
+## 🔧 Code Highlights
+
+```vbnet
+' Load unread notifications
+Private Sub LoadUnreadNotifications()
+    Dim query As String = "SELECT * FROM Notifications WHERE IsRead = False ORDER BY DateCreated DESC"
+    dgvNotifications.DataSource = GetDataTable(query)
+End Sub

@@ -1,0 +1,50 @@
+﻿📁 Document Library – User Guide
+🧩 1. Feature Name
+Document Library
+📝 2. What This Feature Does
+This feature allows users to store, organize, and preview household documents such as manuals, invoices, and reports. It helps centralize important files for easy access by all household members.
+👤 3. Who Should Use This
+Parents, family members, and household administrators.
+🗂️ 4. Where to Find It
+Main Menu → Document Library
+🛠️ 5. How to Use It (Step-by-Step)
+Step 1: Open the Document Library from the menu.
+
+Step 2: To upload a document:
+- Click 'Add Document'
+- Enter Title and Description
+- Choose File to Upload (PDF, DOCX, etc.)
+- Click 'Save'
+
+Step 3: To preview a document:
+- Select a document from the list
+- Click 'Preview' to open and view it
+
+Step 4: To delete a document:
+- Select the document
+- Click 'Delete'
+- Confirm the deletion
+⚠️ 6. Things to Note
+- Only supported file types can be uploaded (PDF, DOCX, XLSX).
+- Document title must be unique.
+- Large files may take time to upload.
+- Deleted documents cannot be recovered.
+📊 7. Sample Data & Output
+Sample Entry:
+- Title: Electric Bill March
+- Description: Power usage for March 2025
+- File: ElectricBill_March2025.pdf
+
+Expected Output:
+File appears in the document list with title, description, and preview/download options.
+🧰 8. Troubleshooting
+
+👨💻 9. Feature Owner
+Name: [Xiluva Makhubele, Mudau Murangi]
+Role: Developer – Document Library Module
+❓ Issue	                🔍 Cause	                    💡 Solution
+File not uploading	Unsupported format	    Ensure file is in PDF, DOCX, or XLSX format
+Preview not working	File corrupted or missing   Re-upload the correct document
+Document not listed	Missing required fields	    Check that title and file were filled before saving
+Delete button disabled	No document selected	    Select a document to enable deletion
+

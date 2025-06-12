@@ -1,0 +1,97 @@
+
+---
+
+# 📌 Family Schedule
+
+## 👤 Author(s)
+- [Nedzamba Ndamulelo, Masindi Malima] (Developer, Group 8)
+- GitHub: [Ndamu85]
+
+## 🧩 Description
+The *Family Schedule* feature is designed to centralize and coordinate all household events — including chores, doctor appointments, school trips, birthdays, meals, and personal tasks. This module helps avoid scheduling conflicts, ensures balanced responsibility, and allows for seamless integration with other household management features like the Chores System and Meal Planner.
+
+## ⚙️ Technologies Used
+- Visual Basic .NET (VB.NET)
+- Microsoft Access
+- MonthCalendar Control
+- DataGridView
+- Standard VB.NET Forms Controls (TextBoxes, ComboBoxes, Buttons, etc.)
+
+## 🔄 Functional Overview
+- *Add/View/Edit/Delete Events*: Manage all household events from one form.
+- *Event Types Supported*: Chores, Birthdays, School Trips, Doctor’s Visits, Meal Plans, Tasks.
+- *Filter Button*: Shows only tasks related to chores, meals, and tasks.
+- *Refresh Button*: Reloads the entire schedule from the database.
+- *Conflict Detection*: Warns users of overlapping events.
+- *Calendar Highlighting*: Bold dates with scheduled items and show tooltips or alerts.
+
+## 🖼️ UI Overview
+- *Inputs:*
+  - TextBox: Title, Notes
+  - DateTimePicker: DateOfEvent, StartTime, EndTime
+  - ComboBox: AssignedTo, EventType (Chore, Task, Personal, Birthday, Doctor’s Visit, School Trip)
+  - CheckBox: IsBudgetRequired (optional for budget-tracked events)
+- *Buttons:*
+  - Save
+  - Update
+  - Delete
+  - Filter
+  - Refresh
+- *Calendar View:*
+  - MonthCalendar: Highlights dates with events
+- *Event Table:*
+  - DataGridView: Displays all scheduled items in tabular format
+
+## 💾 Database Integration
+- *Table Name*: FamilySchedule
+- *Fields Used*:
+  - ScheduleID (AutoNumber, Primary Key)
+  - Title (Text)
+  - Notes (Memo)
+  - DateOfEvent (Date/Time)
+  - StartTime (Date/Time)
+  - EndTime (Date/Time)
+  - AssignedTo (Text - Foreign Key to Personnel table)
+  - EventType (Text)
+  - IsBudgetRequired (Yes/No)
+
+## 🔧 Code Highlights
+
+```vb.net
+' Filter to show only chores, tasks, and meal plans
+Private Sub btnFilter_Click(sender As Object, e As EventArgs) Handles btnFilter.Click
+    Dim filterQuery As String = "SELECT * FROM FamilySchedule WHERE EventType IN ('Chore', 'Task', 'Meal')"
+    LoadScheduleGrid(filterQuery)
+End Sub
+
+' Highlight School Trip or Doctor’s Visit in the calendar
+Private Sub calendar_DateChanged(sender As Object, e As DateRangeEventArgs) Handles calendar.DateChanged
+    Dim selectedDate As Date = e.Start
+    Dim events = GetEventsByDate(selectedDate)
+    For Each ev In events
+        If ev.EventType = "Doctor’s Visit" Or ev.EventType = "School Trip" Then
+            MessageBox.Show("Reminder: " & ev.Title & " is scheduled for today.", "Scheduled Event")
+        End If
+    Next
+End Sub
+
+📁 Folder Structure
+
+/Schedule/
+├── FamilyScheduleForm.vb
+├── FamilyScheduleForm.Designer.vb
+├── FamilyScheduleHandler.vb
+├── README.md
+
+❗ Known Issues or To-Dos
+
+🔧 Add multi-day event support (currently events are single-day only)
+
+⏰ Add recurring event capability (e.g., weekly chores)
+
+📧 Add email alert integration for upcoming events
+
+
+✅ Status
+
+Completed ✅

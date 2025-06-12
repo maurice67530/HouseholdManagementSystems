@@ -318,6 +318,9 @@
       <LastGenOutput>Settings.Designer.vb</LastGenOutput>
     </None>
     <None Include="App.config" />
+    <None Include="User Guide\Document Library.USERGUIDE" />
+    <None Include="User Guide\Login and Registration.USERGUIDE" />
+    <None Include="User Guide\PhotoGallery.UserGuide" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\icons8-task-96.png" />
@@ -354,6 +357,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="README.md\Chores.txt" />
+    <Content Include="README.md\PhotoGallery.txt" />
     <None Include="User Guide\Chores.userGuide" />
   </ItemGroup>
   <ItemGroup />

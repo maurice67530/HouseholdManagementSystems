@@ -1,0 +1,123 @@
+
+ 
+DocumentLibrary_UserGuide.docx
+
+ 
+ ## ⚙️ Technologies Used
+
+- Visual Basic .NET (Visual Studio 2015)
+
+- Microsoft Access (.accdb)
+
+- OleDb Data Provider
+
+- Windows Forms Controls: DataGridView, ComboBoxes, DateTimePicker, TextBoxes, Buttons
+
+---
+ 
+1. Feature Name
+ 
+Document Library
+ 
+ 
+---
+ 
+2. What This Feature Does
+ 
+The Document Library allows household members to upload, store, and preview important household documents such as utility bills, contracts, school files
+ and more. Documents can be categorized and accessed anytime, ensuring organized and secure storage of household files.
+ 
+ 
+---
+ 
+3. Who Should Use This
+ 
+All Household Members, Parents, or Admins responsible for managing documents.
+ 
+ 
+---
+ 
+4. Where to Find It
+ 
+Menu Location: Main Menu → Files → Document Library
+This opens the DocumentLibraryForm.
+ 
+ 
+---
+ 
+5. How to Use It (Step-by-Step)
+ 
+Step 1: Open the Document Library from the main menu.
+ 
+Step 2: To upload a document:
+ 
+Click Browse to select a file (PDF, DOCX, JPG, PNG).
+ 
+Fill in the following:
+ 
+Document Title: (e.g., "April Electricity Bill")
+ 
+Category: Choose from dropdown (e.g., Bills, School, Medical).
+ 
+Date Added: Automatically set or select manually.
+ 
+Description (optional): Add brief notes about the document.
+ 
+ 
+ 
+Step 3: Click Upload to save the document to the system.
+ 
+Step 4: The file will appear in the list below. Click Preview to view the document, or use Delete to remove it.
+ 
+ 
+---
+ 
+6. Things to Note
+ 
+Only supported file types (PDF, DOCX, JPG, PNG) can be uploaded.
+ 
+File size should not exceed 10MB.
+ 
+You must enter a Document Title and select a Category before uploading.
+ 
+Use the Search bar to quickly find documents by title or category.
+ 
+ 
+ 
+---
+ 
+7. Sample Data & Output
+ 
+Sample Upload Entry:
+ 
+Title: Water Bill – May 2025
+ 
+Category: Bills
+ 
+Date: 2025-06-01
+ 
+File: water_bill_may2025.pdf
+ 
+ 
+Expected Result:
+Document is listed under the "Bills" category, viewable by clicking Preview. The file is stored in the system and accessible to all household members.
+ 
+ 
+---
+ 
+8. Troubleshooting
+ 		 
+*Issue*	                        *Cause*	                                *Solution*
+"Upload button not working"	Missing title or category		Fill in all required fields
+
+"Unsupported file format"	File is not PDF, DOCX, JPG, or PNG	Upload a supported file format
+"Document not previewing"	File path error or corrupt file	        Re-upload or check file source
+"Nothing shows in list"	        No documents uploaded or wrong filter   Clear filters or upload new document
+
+ 
+---
+9.## 👤 Author(s)
+ Name: Mudau Murangi, Makhubele Xiluva
+Role: Developer – Document Library Module
+Credits: Kundani Training College
+- GitHub: 

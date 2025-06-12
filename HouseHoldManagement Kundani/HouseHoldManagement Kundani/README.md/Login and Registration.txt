@@ -1,0 +1,134 @@
+🔐 Login and Registration – User Guide
+ 
+## ⚙️ Technologies Used
+
+- Visual Basic .NET (Visual Studio 2015)
+
+- Microsoft Access (.accdb)
+
+- OleDb Data Provider
+
+- Windows Forms Controls: DataGridView, ComboBoxes, DateTimePicker, TextBoxes, Buttons
+
+ 
+---
+ 
+🧩 1. Feature Name
+ 
+Login and Registration
+ 
+ 
+---
+ 
+📝 2. What This Feature Does
+ 
+This feature enables users to securely create an account and log into the Household Management System. Registration links each user to a household, while login ensures only authorized users access household data.
+ 
+ 
+---
+ 
+👤 3. Who Should Use This
+ 
+All users of the Household Management System, including family members, parents, and household admins.
+ 
+ 
+---
+ 
+🗂️ 4. Where to Find It
+ 
+Menu Location: Launch Screen → Login Form or Register Form
+This appears automatically when the application starts.
+ 
+ 
+---
+ 
+🛠️ 5. How to Use It (Step-by-Step)
+ 
+Step 1: On application start, choose either Login or Register.
+ 
+To Register:
+ 
+Enter Full Name
+ 
+Enter Username
+ 
+Enter Password
+ 
+Confirm Password
+ 
+Select or Create Household Name
+ 
+Click Register
+ 
+ 
+To Login:
+ 
+Enter Username
+ 
+Enter Password
+ 
+Select Household (if multiple exist)
+ 
+Click Login
+ 
+ 
+Step 2: If the login or registration is successful, the user is redirected to the dashboard.
+ 
+ 
+---
+ 
+⚠️ 6. Things to Note
+ 
+Password must be at least 6 characters.
+ 
+Username must be unique.
+ 
+Confirm Password must match Password.
+ 
+Household selection is required.
+ 
+Incorrect credentials will show an error message.
+ 
+ 
+ 
+---
+ 
+📊 7. Sample Data & Output
+ 
+Sample Registration:
+ 
+Name: Sarah Lopez
+ 
+Username: sarahlopez
+ 
+Password: ********
+ 
+Household: LopezFamily
+ 
+ 
+Expected Output:
+User account created successfully. On next launch, Sarah can log in using her credentials.
+ 
+ 
+---
+ 
+🧰 8. Troubleshooting
+ 
+❓ Issue 🔍 Cause 💡 Solution
+ 
+Login failed Incorrect username or password Check credentials and try again
+Registration failed Username already exists Choose a different username
+Cannot proceed Household not selected Select or create a household
+Password mismatch Password and confirm don't match Re-enter matching passwords
+ 
+ 
+ 
+---
+ 
+## 👤 Author(s)
+
+- Makhubele XILUVA (Form Design & Logic)
+
+- [Mudau Murangi and Makhubele  Xiluva]
+
+- GitHub
