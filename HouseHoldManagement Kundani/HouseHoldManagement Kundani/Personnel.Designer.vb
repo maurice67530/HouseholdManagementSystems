@@ -195,9 +195,9 @@ Partial Class Personnel
         Me.BtnBack.BackColor = System.Drawing.SystemColors.ActiveCaption
         Me.BtnBack.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.BtnBack.Image = CType(resources.GetObject("BtnBack.Image"), System.Drawing.Image)
-        Me.BtnBack.Location = New System.Drawing.Point(12, 560)
+        Me.BtnBack.Location = New System.Drawing.Point(15, 560)
         Me.BtnBack.Name = "BtnBack"
-        Me.BtnBack.Size = New System.Drawing.Size(68, 39)
+        Me.BtnBack.Size = New System.Drawing.Size(68, 36)
         Me.BtnBack.TabIndex = 146
         Me.BtnBack.TextAlign = System.Drawing.ContentAlignment.BottomCenter
         Me.BtnBack.UseVisualStyleBackColor = False

@@ -168,3 +168,14 @@ Public Class Photo_Gallery
     Public Property Album As String
 
 End Class
+Public Class AboutUs
+    Public Property AppName As String
+    Public Property Title As String
+    Public Property Version As String
+    Public Property Purpose As String
+    Public Property Description As String
+    Public Property Contributors As List(Of String)
+    Public Property Logo As Image
+    Public Property ContactLinkText As String
+    Public Property ContactLinkUrl As String
+End Class
