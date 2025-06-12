@@ -1,0 +1,63 @@
+﻿1. Feature Name
+Photo Gallery
+
+2. What This Feature Does
+The Photo Gallery allows household members to upload, store, and view photos. It serves as a digital album to keep track of family events, important documents, or any visual content related to the household. Users can view, download, or delete photos as needed.
+
+3. Who Should Use This
+All Household Members, Admin, Chef, Finance
+
+4. Where to Find It
+Main Menu → Media → Photo Gallery
+
+5. How to Use It (Step-by-Step)
+Step 1: Open the application and navigate to Media > Photo Gallery
+
+Step 2: Click “Upload Photo”
+
+Choose File: Select a photo from your local device
+
+Title (optional): Add a description to the image
+
+Family Member (optional): Choose a category
+
+Step 3: Click “Upload”
+
+Step 4: The image will be saved to the system, and a confirmation message will appear. It will then be visible in the gallery grid with options to view, delete, or download.
+
+6. Things to Note
+Only image files (.jpg, .jpeg, .png, .gif) are allowed
+
+Maximum upload size: 5MB per image
+
+Deleting a photo is permanent
+
+Titles and categories are optional but useful for sorting
+
+7. Sample Data & Output
+
+Sample Upload Input:
+
+Date Added: Date 
+
+Description: family_picnic
+
+Album: Picnic at Central Park
+
+Family Member: Optional
+
+Expected Output:
+
+The photo appears in the gallery with a thumbnail, title, and a "View / Delete / Download" option
+
+8. Troubleshooting
+Issue	Cause	Solution
+"Upload failed"	File size exceeds 5MB	Resize or compress the image file
+"Invalid file type"	Unsupported file format	Use .jpg, .jpeg, .png, or .gif only
+"Nothing shows in gallery"	No photos uploaded	Upload at least one image
+
+9. Feature Owner
+Name: [Dongola Maano And Molaudzi Aousy]
+Role: Student Developer – Photo Gallery Module
+
+📁 File Name: PhotoGallery_UserGuide.docx

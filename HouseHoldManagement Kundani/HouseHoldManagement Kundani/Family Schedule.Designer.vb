@@ -35,6 +35,7 @@ Partial Class Family_Schedule
         Me.Label7 = New System.Windows.Forms.Label()
         Me.Label8 = New System.Windows.Forms.Label()
         Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.ComboBox2 = New System.Windows.Forms.ComboBox()
         Me.Label11 = New System.Windows.Forms.Label()
         Me.TextBox3 = New System.Windows.Forms.TextBox()
         Me.Label10 = New System.Windows.Forms.Label()
@@ -53,14 +54,15 @@ Partial Class Family_Schedule
         Me.btnUpdate = New System.Windows.Forms.Button()
         Me.btnDelete = New System.Windows.Forms.Button()
         Me.Panel3 = New System.Windows.Forms.Panel()
+        Me.Label12 = New System.Windows.Forms.Label()
         Me.btnFilte = New System.Windows.Forms.Button()
         Me.btnRefresh = New System.Windows.Forms.Button()
-        Me.ComboBox2 = New System.Windows.Forms.ComboBox()
-        Me.Label12 = New System.Windows.Forms.Label()
+        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel2.SuspendLayout()
         Me.Panel1.SuspendLayout()
         Me.Panel3.SuspendLayout()
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'DataGridView1
@@ -157,6 +159,7 @@ Partial Class Family_Schedule
         '
         Me.Panel1.BackColor = System.Drawing.SystemColors.ActiveCaption
         Me.Panel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.Panel1.Controls.Add(Me.PictureBox1)
         Me.Panel1.Controls.Add(Me.ComboBox2)
         Me.Panel1.Controls.Add(Me.Label11)
         Me.Panel1.Controls.Add(Me.TextBox3)
@@ -174,6 +177,15 @@ Partial Class Family_Schedule
         Me.Panel1.Name = "Panel1"
         Me.Panel1.Size = New System.Drawing.Size(319, 290)
         Me.Panel1.TabIndex = 18
+        '
+        'ComboBox2
+        '
+        Me.ComboBox2.FormattingEnabled = True
+        Me.ComboBox2.Items.AddRange(New Object() {"Yes", "No"})
+        Me.ComboBox2.Location = New System.Drawing.Point(102, 145)
+        Me.ComboBox2.Name = "ComboBox2"
+        Me.ComboBox2.Size = New System.Drawing.Size(149, 21)
+        Me.ComboBox2.TabIndex = 26
         '
         'Label11
         '
@@ -211,7 +223,7 @@ Partial Class Family_Schedule
         '
         'ListView1
         '
-        Me.ListView1.Location = New System.Drawing.Point(102, 169)
+        Me.ListView1.Location = New System.Drawing.Point(163, 169)
         Me.ListView1.Name = "ListView1"
         Me.ListView1.Size = New System.Drawing.Size(149, 111)
         Me.ListView1.TabIndex = 12
@@ -327,35 +339,6 @@ Partial Class Family_Schedule
         Me.Panel3.Size = New System.Drawing.Size(643, 50)
         Me.Panel3.TabIndex = 23
         '
-        'btnFilte
-        '
-        Me.btnFilte.BackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.btnFilte.Image = CType(resources.GetObject("btnFilte.Image"), System.Drawing.Image)
-        Me.btnFilte.Location = New System.Drawing.Point(437, 498)
-        Me.btnFilte.Name = "btnFilte"
-        Me.btnFilte.Size = New System.Drawing.Size(75, 44)
-        Me.btnFilte.TabIndex = 24
-        Me.btnFilte.UseVisualStyleBackColor = False
-        '
-        'btnRefresh
-        '
-        Me.btnRefresh.BackColor = System.Drawing.SystemColors.ActiveCaption
-        Me.btnRefresh.Image = CType(resources.GetObject("btnRefresh.Image"), System.Drawing.Image)
-        Me.btnRefresh.Location = New System.Drawing.Point(153, 498)
-        Me.btnRefresh.Name = "btnRefresh"
-        Me.btnRefresh.Size = New System.Drawing.Size(75, 44)
-        Me.btnRefresh.TabIndex = 25
-        Me.btnRefresh.UseVisualStyleBackColor = False
-        '
-        'ComboBox2
-        '
-        Me.ComboBox2.FormattingEnabled = True
-        Me.ComboBox2.Items.AddRange(New Object() {"Yes", "No"})
-        Me.ComboBox2.Location = New System.Drawing.Point(102, 145)
-        Me.ComboBox2.Name = "ComboBox2"
-        Me.ComboBox2.Size = New System.Drawing.Size(149, 21)
-        Me.ComboBox2.TabIndex = 26
-        '
         'Label12
         '
         Me.Label12.AutoSize = True
@@ -365,6 +348,32 @@ Partial Class Family_Schedule
         Me.Label12.Size = New System.Drawing.Size(56, 16)
         Me.Label12.TabIndex = 26
         Me.Label12.Text = "Label12"
+        '
+        'btnFilte
+        '
+        Me.btnFilte.BackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.btnFilte.Location = New System.Drawing.Point(437, 498)
+        Me.btnFilte.Name = "btnFilte"
+        Me.btnFilte.Size = New System.Drawing.Size(75, 44)
+        Me.btnFilte.TabIndex = 24
+        Me.btnFilte.UseVisualStyleBackColor = False
+        '
+        'btnRefresh
+        '
+        Me.btnRefresh.BackColor = System.Drawing.SystemColors.ActiveCaption
+        Me.btnRefresh.Location = New System.Drawing.Point(153, 498)
+        Me.btnRefresh.Name = "btnRefresh"
+        Me.btnRefresh.Size = New System.Drawing.Size(75, 44)
+        Me.btnRefresh.TabIndex = 25
+        Me.btnRefresh.UseVisualStyleBackColor = False
+        '
+        'PictureBox1
+        '
+        Me.PictureBox1.Location = New System.Drawing.Point(3, 169)
+        Me.PictureBox1.Name = "PictureBox1"
+        Me.PictureBox1.Size = New System.Drawing.Size(154, 111)
+        Me.PictureBox1.TabIndex = 27
+        Me.PictureBox1.TabStop = False
         '
         'Family_Schedule
         '
@@ -390,6 +399,7 @@ Partial Class Family_Schedule
         Me.Panel1.PerformLayout()
         Me.Panel3.ResumeLayout(False)
         Me.Panel3.PerformLayout()
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -428,4 +438,5 @@ Partial Class Family_Schedule
     Friend WithEvents Label10 As Label
     Friend WithEvents ComboBox2 As ComboBox
     Friend WithEvents Label12 As Label
+    Friend WithEvents PictureBox1 As PictureBox
 End Class

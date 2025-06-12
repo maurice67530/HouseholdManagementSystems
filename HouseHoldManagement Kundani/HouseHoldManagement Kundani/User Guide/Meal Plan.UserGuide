@@ -1,0 +1,147 @@
+﻿Meal Plan User Guide
+ 
+ 
+ 
+1. Feature Name
+ 
+Meal Plan
+ 
+ 
+
+ 
+2. What This Feature Does
+ 
+The Meal Plan feature allows users to create and manage daily or weekly meal plans for the household. It helps track meals by category (breakfast, lunch, dinner, snacks), ensures dietary preferences are respected, and automatically calculates total calories based on meal ingredients. This feature promotes organized, healthy, and inclusive meal preparation.
+ 
+ 
+
+ 
+3. Who Should Use This
+ 
+Parents
+ 
+Cooks
+ 
+Health-Conscious Family Members
+ 
+Admin
+ 
+ 
+ 
+ 
+4. Where to Find It
+ 
+Located in the Main Menu > Food & Health > Meal Plan
+ 
+Form name: MealPlanForm.vb
+ 
+ 
+Screenshot (optional placeholder):
+[Insert screenshot of the Meal Plan form]
+ 
+ 
+
+ 
+5. How to Use It (Step-by-Step)
+ 
+Step 1: Launch the Form
+ 
+From the main menu, select Food & Health > Meal Plan.
+ 
+ 
+Step 2: Fill in the Inputs
+ 
+Select Date: Pick the day the meal is planned for.
+ 
+Select Meal Type: Choose from options such as Breakfast, Lunch, Dinner, or Snack.
+ 
+Meal Name (TextBox): Enter the name of the meal (e.g., Grilled Chicken Salad).
+ 
+Ingredients (TextBox): List all ingredients, separated by commas.
+ 
+Calories per Ingredient (optional): If required, enter approximate calories.
+ 
+Person (ComboBox4): Select the person the meal is for to validate against dietary restrictions.
+ 
+ 
+Step 3: Click “Save”
+ 
+The system checks if the ingredients match the person’s dietary preferences.
+ 
+If valid, the meal is saved and added to the meal list.
+ 
+If invalid, a warning message is shown and the Save button is disabled.
+ 
+ 
+Step 4: View or Modify Meals
+ 
+Meals appear in a list or grid with meal details.
+ 
+Use “Edit” to change a meal or “Delete” to remove one.
+ 
+ 
+ 
+
+ 
+6. Things to Note
+ 
+Meals must respect the selected person’s dietary restrictions.
+ 
+Only valid dates can be selected (no past dates).
+ 
+Ingredients with allergens or restricted items will trigger a warning and prevent saving.
+ 
+Calorie totals are auto-calculated if data is provided.
+ 
+ 
+ 
+
+ 
+7. Sample Data & Output
+ 
+Sample Entry:
+ 
+Date: 2025-06-14
+ 
+Meal Type: Lunch
+ 
+Meal Name: Vegan Quinoa Bowl
+ 
+Ingredients: Quinoa, Chickpeas, Spinach, Olive Oil, Lemon Juice
+ 
+Calories per Ingredient: Approx. 120, 140, 20, 40, 10
+ 
+Person: Jane (Vegan)
+ 
+ 
+Expected Output:
+ 
+Meal is saved successfully.
+ 
+Total calories displayed: 330 kcal
+ 
+Appears in the meal list under Jane’s profile for June 14.
+ 
+ 
+Optional Screenshot: [Insert meal grid or confirmation message]
+ 
+ 
+
+ 
+8. Troubleshooting
+ 
+Issue	Cause	Solution
+ 
+"Save" button disabled	Invalid ingredient detected	Remove restricted ingredients or choose a different person
+Meal not showing	Wrong date or person selected	Check filters and reselect the correct date/person
+Calories not showing	Missing or incomplete calorie data	Enter calorie values or leave blank if unknown
+Form not opening	Navigation issue	Use Main Menu > Food & Health > Meal Plan
+ 
+ 
+
+ 
+9. Feature Owner
+ 
+Name: [Nethononda Mudzunga, Tharaga Mbuyelo, Muhanelwa Rinaye]
+Role: Meal Plan Developer / Student
+ 
