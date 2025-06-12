@@ -56,7 +56,7 @@ Public Class MealPlan
         ComboBox1.Items.AddRange(New String() {"<500", "500-1000", ">1000"})
         ComboBox2.Items.AddRange(New String() {"Daily", "Weekly", "Monthly"})
         CheckDatabaseConnection(StatusLabel)
-        lstMealSuggestions.Items.AddRange(New String() {"Noodles", "Chicken Curry", "Kota"})
+
         Dim tooltip As New ToolTip
         tooltip.SetToolTip(btnSave, "Save")
         tooltip.SetToolTip(btnEdit, "Edit")
@@ -268,67 +268,8 @@ Public Class MealPlan
             MessageBox.Show("Please select an meals to delete.", "deletetion error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
         End If
     End Sub
-    Public Function SuggestMeals() As List(Of String)
-        Dim suggestedMeals As New List(Of String)
-
-        Try
-            Using connect As New OleDbConnection(connectionString)
-
-            End Using
-            conn.Open()
-
-            ' Get all meal recipes
-            Dim mealQuery As String = "SELECT ItemName,Ingredients FROM Recipes"
-            Dim mealCommand As New OleDb.OleDbCommand(mealQuery, conn)
-            Dim mealReader As OleDb.OleDbDataReader = mealCommand.ExecuteReader()
-
-            While mealReader.Read()
-                Dim mealName As String = mealReader("ItemName").ToString()
-                Dim requiredIngredients As String() = mealReader("Ingredients").ToString().Split(",")
-
-                Dim allIngredientsAvailable As Boolean = True
-
-                ' Check if all required ingredients exist in GroceryInventory and are not expired
-                For Each ingredient In requiredIngredients
-                    Dim trimmedIngredient As String = ingredient.Trim()
-                    Dim checkQuery As String = "SELECT ExpiryDate FROM GroceryItem WHERE Category AND Quantity > 0"
-                    Dim checkCommand As New OleDb.OleDbCommand(checkQuery, conn)
-                    checkCommand.Parameters.AddWithValue("@Ingredients", trimmedIngredient)
-
-                    Dim expirationDate As Object = checkCommand.ExecuteScalar()
-
-                    ' Check if the ingredient exists and its expiration date
-                    If expirationDate Is Nothing Then
-                        allIngredientsAvailable = False
-                    Else
-                        ' Validate that the ingredient is not expired
-                        If Convert.ToDateTime(expirationDate) < DateTime.Now Then
-                            allIngredientsAvailable = False
-                        End If
-                    End If
-
-                    If Not allIngredientsAvailable Then
-                        Exit For
-                    End If
-                Next
-
-                ' If all ingredients are available and not expired, add the meal to suggested list
-                If allIngredientsAvailable Then
-                    suggestedMeals.Add(mealName)
-                End If
-            End While
-            mealReader.Close()
 
 
-
-        Catch ex As Exception
-            MsgBox("Error suggesting meals: " & ex.Message, MsgBoxStyle.Critical, "Database Error")
-        Finally
-            conn.Close()
-        End Try
-
-        Return suggestedMeals
-    End Function
 
     Private Sub btnSuggest_Click(sender As Object, e As EventArgs) Handles btnSuggest.Click
 
@@ -659,9 +600,9 @@ Public Class MealPlan
     End Sub
 
     Private Sub ComboBox3_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ComboBox3.SelectedIndexChanged
-        If ComboBox1.SelectedItem Is Nothing Then Exit Sub
+        If ComboBox3.SelectedItem Is Nothing Then Exit Sub
 
-        Dim selectedIngredient As String = ComboBox1.SelectedItem.ToString().Trim().ToLower()
+        Dim selectedIngredient As String = ComboBox3.SelectedItem.ToString().Trim().ToLower()
 
         Try
             Using conn As New OleDbConnection(connectionString)

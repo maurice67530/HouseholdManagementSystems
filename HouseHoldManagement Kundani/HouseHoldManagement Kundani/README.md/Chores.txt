@@ -1,0 +1,90 @@
+﻿Markdown
+ 
+ 
+# 📌 Chores Feature
+
+## 👤 Author(s)
+
+- Zwivhuya Mashavha (Form Design & Logic)
+
+- [Matsenene Mulanga, Badugela Rinae, Mashavha Zwivhuya]
+
+- GitHub: [raele2024]
+
+## 🧩 Description
+
+The Chores feature allows users to assign, manage, and track household chores. Each chore can be assigned to a specific family member along with a due date and a status like "Pending" or "Completed". This module promotes fair distribution of responsibilities and helps the household stay organized.
+
+## ⚙️ Technologies Used
+
+- Visual Basic .NET (Visual Studio 2015)
+
+- Microsoft Access (.accdb)
+
+- OleDb Data Provider
+
+- Windows Forms Controls: DataGridView, ComboBoxes, DateTimePicker, TextBoxes, Buttons
+
+## 🔄 Functional Overview
+
+- View all chores in a table
+
+- Add new chores
+
+- Edit or delete existing chores
+
+- Mark chores as completed
+
+- Assign chores to users stored in the `tblUsers` table
+
+- Chores are linked by `AssignedTo` (foreign key)
+
+## 🖼️ UI Overview
+
+**Inputs and Controls:**
+
+- `TextBox`: Enter chore name
+
+- `ComboBox`: Select person assigned 
+
+- `DateTimePicker`: Select due date
+
+- `ComboBox`: Select status (`Pending`, `Completed`)
+
+- `Buttons`: Add, Update, Delete, Clear
+
+- `DataGridView`: Displays all current chores
+ 
+
+
+## 💾 Database Integration
+
+**Tables Used:**
+
+### Table Name: Chores
+
+Columns:
+
+ChoreID (Primary Key)
+
+AssignedTo 
+
+ChoreName
+
+Description
+
+DueDate
+
+IsCompleted 
+
+
+Relations:
+
+Linked to Users via AssignedTo
+
+Triggers alerts in Notifications
+
+
+
+
+ 

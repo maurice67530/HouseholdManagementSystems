@@ -96,6 +96,12 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="About Us.Designer.vb">
+      <DependentUpon>About Us.vb</DependentUpon>
+    </Compile>
+    <Compile Include="About Us.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Budget.Designer.vb">
       <DependentUpon>Budget.vb</DependentUpon>
     </Compile>
@@ -229,6 +235,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="About Us.resx">
+      <DependentUpon>About Us.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Budget.resx">
       <DependentUpon>Budget.vb</DependentUpon>
     </EmbeddedResource>
@@ -343,6 +352,11 @@
   <ItemGroup>
     <None Include="Resources\WhatsApp Image 2025-05-07 at 09.58.32 %281%29.jpeg" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="README.md\Chores.txt" />
+    <None Include="User Guide\Chores.userGuide" />
+  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
