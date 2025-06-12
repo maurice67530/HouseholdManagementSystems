@@ -31,8 +31,6 @@ Technologies Used
   - `btnGoToTasks`, `btnGoToMealPlan`
   - `lblTaskCount`, `lblOverdueItems`
   - `txtSearchButtons`
-- Sample Screenshot:
-  *(Insert screenshot here if available)*
  Comboboxes, Textbox, Charts, Panels, Labels Picturebox, Listbox
 
 
