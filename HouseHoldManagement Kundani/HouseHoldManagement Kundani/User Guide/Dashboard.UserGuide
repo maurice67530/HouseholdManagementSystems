@@ -1,0 +1,76 @@
+﻿DASHBOARD
+
+1. Feature Name
+
+Dashboard
+
+
+2. What This Feature Does
+
+The Dashboard provides a central hub that displays real-time summaries of all major modules, including Tasks, Chores, Grocery Inventory, Meal Plan, and Notifications. It gives users an at-a-glance view of important updates, quick stats, and access buttons to other features.
+
+
+3. Who Should Use This
+
+Admin
+Family Member
+Parent
+Any household user for quick system overview
+
+
+4. Where to Find It
+
+Location: Automatically opens on login or via Main Menu → Dashboard
+Form Name: DashboardForm
+(Optional: insert a screenshot of the Dashboard here)
+Tip: Include the dashboard screen showing cards, labels, and buttons
+
+
+5. How to Use It (Step-by-Step)
+
+Step 1: Open the Dashboard
+Launch the application and log in. The dashboard loads automatically. You can also open it from the Main Menu.
+Step 2: View Summary Cards
+Check quick summaries like:
+Tasks Due Today
+Expired Groceries
+Unread Notifications
+Pending Chores
+Step 3: Navigate to Other Features
+Click the following buttons to jump to different modules:
+Go to Tasks
+Go to Meal Plan
+Go to Notifications
+Go to Chores, etc.
+Step 4: Read Alerts
+If there are low-stock items, overdue chores, or unread messages, the dashboard shows these in red or bold.
+
+
+6. Things to Note
+
+This form is read-only — no data entry is allowed here.
+It pulls data from multiple modules — if something doesn’t load, check if that module has data.
+Dashboard auto-refreshes when reopened.
+
+
+7. Sample Data & Output
+
+Example Output Displayed:
+Tasks Due Today: 3
+Expired Groceries: 2
+Unread Notifications: 5
+Go to Meal Plan → Opens MealPlanForm
+(Insert screenshot of the Dashboard showing UI elements and sample stats)
+
+
+8. Troubleshooting
+
+IssueCauseSolutionDashboard shows “0” everywhereNo data in connected modulesAdd tasks, groceries, notificationsButtons not respondingModule forms not linkedCheck form navigation codeExpired items not appearingWrong date format or logic bugCheck expiry field values in DB
+
+
+9. Feature Owner
+
+Name: [Muhanelwa Rinaye, Tharaga Mbuyelo, Nethononda Mudzunga]
+
+
+Role: Dashboard Developer
