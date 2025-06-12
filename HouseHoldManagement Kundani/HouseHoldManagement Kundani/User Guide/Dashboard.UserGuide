@@ -22,8 +22,6 @@ Any household user for quick system overview
 
 Location: Automatically opens on login or via Main Menu → Dashboard
 Form Name: DashboardForm
-(Optional: insert a screenshot of the Dashboard here)
-Tip: Include the dashboard screen showing cards, labels, and buttons
 
 
 5. How to Use It (Step-by-Step)
@@ -60,7 +58,6 @@ Tasks Due Today: 3
 Expired Groceries: 2
 Unread Notifications: 5
 Go to Meal Plan → Opens MealPlanForm
-(Insert screenshot of the Dashboard showing UI elements and sample stats)
 
 
 8. Troubleshooting
