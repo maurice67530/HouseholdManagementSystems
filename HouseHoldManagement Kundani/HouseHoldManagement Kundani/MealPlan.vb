@@ -552,7 +552,7 @@ Public Class MealPlan
             Dim familyScheduleForm As New Family_Schedule()
 
             ' Enable auto-filtering
-            familyScheduleForm.AutoFilterEnabled = True
+            'familyScheduleForm.AutoFilterEnabled = True
 
             ' Show the form
             familyScheduleForm.ShowDialog()
