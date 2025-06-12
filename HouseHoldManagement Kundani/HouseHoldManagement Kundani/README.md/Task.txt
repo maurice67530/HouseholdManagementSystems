@@ -1,0 +1,57 @@
+﻿# 📌 Tasks
+ 
+## 👤 Author(s)
+- Matsenene Mulanga, Badugela Rinae, Mashavha Zwivhuya (Developers)
+- Maurice67530
+ 
+## 🧩 Description
+The Tasks feature allows household members to create, assign, track, and complete one-time or ongoing tasks. This module helps users manage general to-do items that are not tied to recurring chores, making sure all household responsibilities are efficiently handled.
+ 
+## ⚙️ Technologies Used
+- Visual Basic .NET
+- Microsoft Access
+- OleDb Data Provider
+- Windows Forms Controls: DataGridView, ComboBoxes, DateTimePicker, TextBoxes, Buttons
+ 
+## 🔄 Functional Overview
+- Add new tasks with title, description, assign, due date, and priority.
+- Mark tasks as complete or pending.
+- Edit or delete tasks as needed.
+- Integrates with:
+  -Users Module for assigning tasks.
+  - Notifications Module for upcoming and overdue task alerts.
+  - Schedule Module for visualizing tasks on calendar.
+ 
+## 🖼️ UI Overview
+ 
+### Inputs Used:
+- TextBox: Task Title
+- RichTextBox: Task Description
+- ComboBox: Assigned User
+- ComboBox: Priority (Low, Medium, High)
+- DateTimePicker: Due Date
+- DateTimePicker: Start Time (Optional)
+ 
+### Buttons:
+- `Add Task`
+- `Edit Task`
+- `Delete Task`
+- `Mark as Completed`
+ 
+## 💾 Database Integration
+ 
+### Table Name: `Tasks`
+ 
+TaskID 
+ Title 
+ Description  
+AssignedTo  
+ Priority 
+ StartTime  
+ DueDate 
+ CreatedDate  
+ 
+### Relations:
+- `AssignedTo` linked to `Users.UserID` for user assignments.
+ 
+ 
