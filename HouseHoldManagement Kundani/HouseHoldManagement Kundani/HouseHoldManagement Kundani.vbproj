@@ -318,6 +318,7 @@
       <LastGenOutput>Settings.Designer.vb</LastGenOutput>
     </None>
     <None Include="App.config" />
+    <None Include="User Guide\FamilySchedule.UserGuide" />
     <None Include="User Guide\PhotoGallery.UserGuide" />
   </ItemGroup>
   <ItemGroup>
