@@ -1,0 +1,126 @@
+1. Feature Name
+
+Notification System
+
+
+2. What This Feature Does
+
+The Notification System automatically alerts users of important household updates, such as upcoming tasks, overdue chores, grocery expiries, and scheduled events. Notifications appear in a centralized dashboard, where users can mark them as read, clear them, or filter and sort based on event type or date.
+
+
+
+3. Who Should Use This
+
+Admins: To monitor household activities
+
+Parents: To track tasks, grocery inventory, or family events
+
+Family Members: To stay updated on their assigned chores and tasks
+
+
+
+4. Where to Find It
+
+Location: Main Menu → Notifications
+
+Form Name: NotificationsForm.vb
+
+
+(Optional Screenshot Placeholder)
+[Insert a screenshot showing the Notifications Form in the application]
+
+
+5. How to Use It (Step-by-Step)
+
+Step 1: Launch the Notifications Form
+
+Click on Notifications in the main menu to open the Notification System.
+
+Step 2: View Notifications
+
+All active notifications will be displayed in a DataGridView, showing:
+
+Message
+
+Type (Chore, Inventory, Task, Event)
+
+Date Created
+
+Read Status
+
+
+Step 3: Filter Notifications
+
+Use the EventType ComboBox to filter by:
+
+Chore
+Task 
+Inventory
+
+
+Click Filter Button to apply filters across MealPlans, Tasks, and Chores.
+
+Step 4: Sort or Refresh
+
+Click Sort Button to organize by type or date.
+
+Click Refresh Button to reload the latest notifications.
+
+
+Step 5: Mark as Read or Clear
+
+Select a notification in the grid and click Mark As Read to update its status.
+
+Use the Clear Button to remove selected or all notifications.
+
+
+6. Things to Note
+
+⚠️ Only future events and tasks within the next 7 days are notified.
+
+✅ You cannot mark a notification as read if none is selected.
+
+🧹 Clear Button permanently deletes selected rows.
+
+📅 Notifications check every 60 seconds using a Timer.
+
+
+
+7. Sample Data & Output
+
+Sample Notification:
+
+Message	Type	Date Created	Status
+
+"Grocery item 'Milk' expires soon"	Grocery	2025-05-27	Unread
+"Chore: Clean garage is overdue"	Chore	2025-05-26	Read
+
+
+Expected Output:
+
+After clicking Mark as Read, the selected row updates from Unread → Read and appears grayed out or moved (depending on implementation).
+
+(Optional Screenshot Placeholder)
+[Insert screenshot showing sample notifications]
+
+
+8. Troubleshooting
+
+Issue	Cause	Solution
+
+Nothing shows on the grid	Timer not triggered	Click Refresh manually
+Mark As Read not working	No row selected	Select a notification first
+Notifications not appearing	Event too far in the future	Must be within 7-day window
+
+
+9. Feature Owner
+
+Name: [Malima Masindi, Nedzamba Ndamulelo]
+Role: Developer – Group 9
+GitHub: [Ndamu85]
+
+
+📁 File Naming Convention:
+Save this as: Notifications_UserGuide.docx
+
+Let me know if you'd like a downloadable .docx version generated, or help compiling all the group guides into a final UserManual.pdf.
