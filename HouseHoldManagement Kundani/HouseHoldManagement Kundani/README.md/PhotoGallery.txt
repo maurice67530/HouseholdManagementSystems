@@ -1,0 +1,68 @@
+﻿📌 Photo Gallery
+ 
+👤 Author(s)
+- Dongola Maano (Form Design and logic)
+- [Dongola Maano and Molaudzi Aousy] 
+- GitHub Username: cruwza10
+ 
+🧩 Description
+The Photo Gallery feature allows users to store, view, and manage photos related to household memories, events, or specific activities. This feature enhances the overall user experience by providing a visual representation of household moments
+ 
+⚙️ Technologies Used
+- Visual Basic .NET (Visual Basic Studio 2015)
+- Microsoft Access (.accdb)
+- System.IO for file handling
+ 
+🔄 Functional Overview
+- Allows users to upload, store, and view photos
+- Organizes photos by date or event
+- Integrates with other modules for enhanced user experience
+ 
+🖼️ UI Overview
+The Photo Gallery UI includes:
+- A gallery view to display photos
+- Upload button to add new photos
+- Delete button to remove photos
+- Filtering options by date or event
+
+Controls:
+- TextBox: Enter Description, Photographer, Search Word 
+- ComboBox: Select person assigned 
+- DateTimePicker: Select due date 
+- ComboBox: Family Member, Album Name
+- Buttons: Save, Update, Delete, Add Photo, Sort, Filter, Search, Stop Image, Refresh
+- DataGridView: Displays all current chores
+
+ 
+ 
+💾 Database Integration
+- Table: Photos
+- Columns: PhotoID, FilePath, DateTaken, Description, Family Member, PhotoGraph, Album
+- Relations: Linked to other tables for event or activity tracking
+ 
+🔧 Code Highlights
+' Upload photo
+Private Sub UploadPhoto()
+    Dim filePath As String = OpenFileDialog1.FileName
+    If filePath <> "" Then
+        ' Save photo to database
+    End If
+End Sub
+ 
+' Display photos
+Private Sub LoadPhotos()
+    ' Retrieve photos from database and display in gallery
+End Sub
+ 
+📁 Folder Structure
+/PhotoGallery/
+PhotoGalleryForm.vb
+PhotoGalleryHandler.vb
+README.md
+ 
+❗ Known Issues or To-Dos
+- Known bugs: None
+- Possible future improvements: Add photo tagging or sharing functionality
+ 
+✅ Status
+`Completed ✅`
