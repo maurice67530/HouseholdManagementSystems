@@ -1,0 +1,53 @@
+﻿
+Dashboard
+ 
+ Author(s)
+
+- [Muhanelwa Rinaye,Tharaga Mbuyelo, Nethononda Mudzunga] (Nethononda Mudzunga) - [maurice67530]
+ 
+ Description
+
+The Dashboard serves as the central hub of the application, giving users quick access to all major features like Tasks, Chores, Grocery, Meal Planning, Notifications, Reports, and more. It was added to improve navigation, provide system overviews, and enhance user experience with a clean UI.
+ 
+Technologies Used
+
+- Visual Basic .NET  
+- Microsoft Access  
+ 
+ Functional Overview
+
+- Displays shortcut panels for core modules (e.g., Tasks, Chores, Meals, etc.)
+- Retrieves summary data like pending tasks, today's meals, and unread notifications
+- Integrates with all other modules via navigation buttons
+- Uses conditional formatting (e.g., red text if there are overdue items)
+ 
+ 
+  UI Overview
+
+- Navigation panels (e.g., Tasks, Chores, Grocery, Expiring Items, Expense, Family Schedule, Personnel)
+- Dashboard cards showing counts (e.g., "3 tasks due today", "2 expired items", "3 Overdue Chores)
+- Buttons for quick access
+- Example controls:
+  - `btnGoToTasks`, `btnGoToMealPlan`
+  - `lblTaskCount`, `lblOverdueItems`
+  - `txtSearchButtons`
+- Sample Screenshot:
+  *(Insert screenshot here if available)*
+ Comboboxes, Textbox, Charts, Panels, Labels Picturebox, Listbox
+
+
+Database Integration
+
+- Fetches summary data from:
+  - `Tasks` table
+  - `Chores` table
+  - `GroceryInventory` table
+  - `Notifications` table
+- No write/update, only reads data to display
+ 
+Code Highlights
+
+```vb
+' Example: Get total number of unread notifications
+Dim unreadCount As Integer = db.ExecuteScalar("SELECT COUNT(*) FROM Notifications WHERE IsRead = False")
+lblNotificationCount.Text = unreadCount.ToString()
