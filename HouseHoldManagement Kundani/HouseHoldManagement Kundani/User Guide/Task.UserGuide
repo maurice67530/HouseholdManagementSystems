@@ -1,0 +1,95 @@
+﻿TaskManagement_UserGuide
+ 
+1. Feature Name
+ 
+Task Management
+ 
+2. What This Feature Does
+ 
+The Task Management feature allows household members to create, assign, track, and complete various tasks. Each task can be described in detail, scheduled with a due date, and assigned to specific members. Users can monitor task progress and update statuses as needed.
+ 
+3. Who Should Use This
+ 
+Parents, Family Members, Admins
+ 
+4. Where to Find It
+ 
+From the main menu, navigate to "Tasks" to open the Task Management form.
+ 
+5. How to Use It (Step-by-Step)
+ 
+Step 1: Launch the Task Management form by clicking "Tasks" in the menu.
+Step 2: Fill in the following inputs:
+ 
+Task  – The title of the task.
+Description – Detailed explanation of the task.
+Assigned To – Select the member responsible for the task.
+Due Date – Deadline for the task.
+Frequency – Select how often the task occurs (One-time, Daily, Weekly, Monthly).
+Status – Choose from Pending, In Progress, or Completed.
+Priority: Select urgency level – Low, Medium, or High.
+
+Step 3: Use the appropriate buttons:
+ 
+Save – Save the new task.
+Edit – Update details of a selected task.
+Delete – Remove a task from the list.
+Sort – Sort tasks by date, priority, or status.
+Refresh – Reload the task list to view updates.
+DashBoard – open dashBoard form.
+
+Step 4: View the task list grid to monitor existing tasks and their progress.
+
+ 
+6. Things to Note
+ 
+Tasks must have valid start and end times.
+You cannot delete tasks marked as Completed.
+Recurring tasks require a frequency to be selected.
+Use the Conflict button to detect overlapping schedules.
+Use Highlight to visually manage priority tasks.
+
+
+7. Sample Data & Output
+ 
+Sample Task:
+ 
+Title: Take Out Trash
+Description: Take trash bins to the curb by 6:00 PM
+Assigned To: Khodi Rasta
+Due Date: 2025-04-17
+Frequency: Weekly
+Status: In Progress
+Recurring: Yes
+
+Expected Output:
+The task will appear in the DataGridView. If overdue or high-priority, it may be highlighted. When marked as done, the status updates immediately.
+ 
+8. Troubleshooting
+ 
+ 
+1. Issue:
+-Save not working
+
+Cause: 
+-Missing Fiels
+
+Solution:
+-Make sure all required fields are filled
+
+2. Issue:
+-Date error
+
+Cause:
+-Invalid date
+
+Solution:
+-Ensure date is valid
+
+9. Feature Owner
+ 
+Mashavha Zwivhuya – Developer
+ 
+📁 File Naming Convention
+ 
+TaskManagement.UserGuide

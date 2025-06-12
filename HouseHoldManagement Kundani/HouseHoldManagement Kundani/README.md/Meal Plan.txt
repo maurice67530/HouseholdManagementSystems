@@ -63,8 +63,7 @@ PictureBox: Displays selected meal image
 DataGridView: Displays saved meal plans
  
  
- Sample Screenshot Placeholder:
-(Add screenshot of your Meal Plan form here if available)
+
  
 Database Integration
  
@@ -112,9 +111,9 @@ End If
 Folder Structure
  
 /MealPlan/
-️️️ MealPlanForm.vb        ' Main form for meal planning UI
-️️️ MealPlanHandler.vb     ' Handles database and logic operations
-️️️ README.md              ' This documentation file
+- MealPlanForm.vb        ' Main form for meal planning UI
+- MealPlanHandler.vb     ' Handles database and logic operations
+- README.md              ' This documentation file
  
 Known Issues or To-Dos
  

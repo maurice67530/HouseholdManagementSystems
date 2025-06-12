@@ -1,77 +1,154 @@
-﻿Here's the copyable version of the Chores Module User Guide formatted for pasting directly into Microsoft Word or any other word processor:
+﻿
+Chores UserGuide
  
-🧹 User Guide: Chores Module – Household Management System
+1. Feature Name
+ -Chores Scheduler
  
-📘 Overview
+2. What This Feature Does
+- The Chores Scheduler helps users assign, update, and track household chores for each family member. It ensures fair distribution of tasks and keeps everyone informed of their responsibilities. Tasks can be prioritized and scheduled by date, and users can mark chores as completed when done.
  
-The Chores module is designed to help manage and assign daily household tasks to family members. Users can add, edit, delete, and view chores based on dates and assignees, with role-based access to ensure only authorized users can perform certain actions.
+3. Who Should Use This
  
-🧑‍💻 User Roles and Access
- 
-RolePermissionsAdminAdd, edit, delete, and view all choresParentAdd, edit, and view choresChildView and mark assigned chores as completed 
- 
-📥 Accessing the Chores Module
- 
-Log in to the application.
-From the Main Menu, click on Chores.
-The Chores Form will open, displaying the list of existing chores in a DataGridView.
+-Admin
+-Finance
+-Chef
+-Family Member (for viewing or completing tasks)
 
-✍️ Using the Chores Module
- 
-✅ Add a New Chore
- 
-Click Add New.
-Fill in the fields: 
 
-Chore Name
-Description
-Assigned To (select from dropdown)
-Due Date (choose from calendar)
-Priority (Low, Medium, High)
-Click Save to add the chore.
+4. Where to Find It
+ 
+-From the Main Menu, select Chores to open the Chores form.
 
-✏️ Edit a Chore
- 
-Select a chore from the list.
-Click Edit.
-Modify the details.
-Click Update to save changes.
 
-❌ Delete a Chore
+5. How to Use It (Step-by-Step)
  
-Select a chore from the list.
-Click Delete.
-Confirm the deletion.
+Step 1: Launch the form
+ 
+-Click on Chores from the Main Menu.
 
-✅ Mark a Chore as Completed
+Step 2: Fill in the inputs
  
-Select a chore assigned to you.
-Click Mark as Done.
-The status will update to Completed.
+-Title: Title of the task (e.g., "Clean Kitchen").
 
-🗂️ Filtering and Viewing Options
- 
-Filter by Date: Choose a specific date to view chores scheduled for that day.
-Filter by Assignee: Select a family member to view their assigned chores.
-Search: Use the search box to quickly find chores by name or description.
+-Description: Short details of the task.
 
-📅 Calendar Integration (if implemented)
- 
-Bold dates on the calendar indicate that chores are scheduled.
-Clicking on a bold date will display that day’s chores in the list.
+-Assigned To: Select a family member from the drop-down.
 
-⚠️ Validation and Error Messages
- 
-ScenarioMessage or BehaviorEmpty fields on Save"Please fill in all required fields."Duplicate chore entry"This chore already exists for the selected date."Unauthorized action"You do not have permission to perform this action." 
- 
-⚙️ Technical Notes (for Developers/Admins)
- 
-Chore data is stored in the Chores table of the Access database.
-The form uses OleDbConnection and OleDbDataAdapter to perform CRUD operations.
-Role-based access is enforced at form load and button-click events.
+-Start Time:Choose the time when chores will begin
 
-📞 Support
+-End Time:Choose the time when the chore will be completed
+
+-Frequency:Choose how often this chore repeat (Daily, Weekly and Monthly)
+
+-Status:Set the current progress of the chore (Not started, in progress and completed)
+
+-Recurring:Select YES if this is a repeating task otherwise choose NO
+
+-Due Date: Choose the scheduled date for completion.
+
+-Priority: Select urgency level – Low, Medium, or High.
+
+
+
+Step 3: Click the button
  
-If you experience any issues with the Chores module, contact the system administrator or use the support contact details provided in the main user guide.
-Let me know if you want help integrating this into your full application guide or converting it into a printable PDF.
+-Save to add a new chore.
+
+-Edit to update a chore.
+
+-Delete to remove a chore.
+
+-Sort: Organise chores by name, date or priority
+
+-Filter: Show chore by assigned person or status
+
+-Highlight: Visually mark urgent or overdue chores
+
+-Conflict: Check for scheduling conflicts
+
+-Refresh: Reload the form with current data 
+
+-Assign Chore: View chores per household member
+
+-Clear: Reset all input fields
+
+-Close: Exit the form
+
+-Auto Assignment: Evenly assign chore to members
+
+Mark as Done to indicate completion (only for assigned user).
+
+
+
+Step 4: What happens
  
+-The chore will be saved to the database and shown in the DataGridView.
+-Confirmation messages appear on successful save/update/delete.
+
+
+
+6. Things to Note
+ 
+-Only valid future dates can be selected for scheduling chores.
+
+
+
+7. Sample Data & Output
+ 
+Sample Input:
+ 
+Title: U koropa
+
+-Description: Floor
+
+-Assigned To: Khodi Rasta
+
+-Start Time: 12:00
+
+-End Time:13:00
+
+-Frequency:Daily
+
+-Status:Not Started
+
+-Recurring:Yes
+
+-Due Date: 2025-05-23
+
+-Priority: low
+
+Expected Output:
+ 
+Entry appears in the DataGridView with details  by priority.
+
+
+
+8. Troubleshooting
+ 
+1. Issue:
+-Save not working
+
+Cause: 
+-Missing Fiels
+
+Solution:
+-Make sure all required fields are filled
+
+2. Issue:
+-Date error
+
+Cause:
+-Invalid date
+
+Solution:
+-Ensure date is valid
+
+
+
+9. Feature Owners
+ 
+Name: Mashavha Zwivhuya, Mulanga Matsenene and Badugela Rinae
+Role: Developers
+📁 File Naming Convention
+ 
+Filename: Chores.UserGuide

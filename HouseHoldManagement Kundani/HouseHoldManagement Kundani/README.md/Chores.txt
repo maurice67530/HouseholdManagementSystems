@@ -1,6 +1,4 @@
-﻿Markdown
- 
- 
+﻿
 # 📌 Chores Feature
 
 ## 👤 Author(s)
@@ -9,13 +7,13 @@
 
 - [Matsenene Mulanga, Badugela Rinae, Mashavha Zwivhuya]
 
-- GitHub: [raele2024]
+- GitHub: Maurice67530
 
 ## 🧩 Description
 
 The Chores feature allows users to assign, manage, and track household chores. Each chore can be assigned to a specific family member along with a due date and a status like "Pending" or "Completed". This module promotes fair distribution of responsibilities and helps the household stay organized.
 
-## ⚙️ Technologies Used
+## ⚙ Technologies Used
 
 - Visual Basic .NET (Visual Studio 2015)
 
